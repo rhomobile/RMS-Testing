@@ -3001,7 +3001,8 @@ describe("anyChangedObjects test set : ", function(){
 		var objData = prdObj.createObject({"name":"Woodlands", "quantity":"20"});
 		console.log("CanModify : " + prdObj.canModify(objData.object));
 		expect(prdObj.canModify(objData.object)).toEqual(true);
-	});it("canModify method should return true for app property bag models ", function(){
+	});
+	it("canModify method should return true for app property bag models ", function(){
 		reset();
 		if(useNewOrm){
 			var Product = function(model){
@@ -4622,13 +4623,59 @@ describe("getBackendRefreshTime test set : ", function(){
 	});
 });
 describe("getBelongsTo test set : ", function(){
-	it("", function(){
+	it("Should get the associated or belongs to user model fixed schema", function(){
 		var Product = function(model){
 			model.fixed_schema = true;
 			model.setModelProperty("name", "string", "");
 			model.setModelProperty("quantity", "string", "");
 			model.setModelProperty("price", "string", "");
 			model.setModelProperty("availability", "string", "");
+			model.set("partition", "user");
+		};
+		var Item = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("itemName", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.setModelProperty("stockDetails", "string", "");
+			model.setBelongsTo("itemName", "Product"); // new ORM does not support belongs_to method.
+		}
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		expect(prdObj.fixed_schema).toEqual(true);
+		expect(prdObj.sync_type).toEqual("none");
+		expect(prdObj.partition).toEqual("user");
+		var itemObj = Rho.ORM.addModel('Item', Item);
+		expect(itemObj.getBelongsTo("itemName")).toEqual([ 'Product' ]);
+	});
+	it("Should return null when no model is belongs to the instance user model fixed schema.", function(){
+		var Product = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.setModelProperty("price", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.set("partition", "user");
+		};
+		var Item = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("itemName", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.setModelProperty("stockDetails", "string", "");
+		}
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		expect(prdObj.fixed_schema).toEqual(true);
+		expect(prdObj.sync_type).toEqual("none");
+		expect(prdObj.partition).toEqual("user");
+		var itemObj = Rho.ORM.addModel('Item', Item);
+		expect(itemObj.getBelongsTo("itemName")).toEqual(null);
+	});
+	it("Should get the associated or belongs to local model fixed schema", function(){
+		var Product = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.setModelProperty("price", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.set("partition", "local");
 		};
 		var Item = function(model){
 			model.fixed_schema = true;
@@ -4644,4 +4691,4411 @@ describe("getBelongsTo test set : ", function(){
 		var itemObj = Rho.ORM.addModel('Item', Item);
 		expect(itemObj.getBelongsTo("itemName")).toEqual([ 'Product' ]);
 	});
+	it("Should return null when no model is belongs to the instance user model fixed schema.", function(){
+		var Product = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.setModelProperty("price", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.set("partition", "local");
+		};
+		var Item = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("itemName", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.setModelProperty("stockDetails", "string", "");
+		}
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		expect(prdObj.fixed_schema).toEqual(true);
+		expect(prdObj.sync_type).toEqual("none");
+		expect(prdObj.partition).toEqual("local");
+		var itemObj = Rho.ORM.addModel('Item', Item);
+		expect(itemObj.getBelongsTo("itemName")).toEqual(null);
+	});
+	it("Should get the associated or belongs to app model fixed schema", function(){
+		var Product = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.setModelProperty("price", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.set("partition", "app");
+		};
+		var Item = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("itemName", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.setModelProperty("stockDetails", "string", "");
+			model.setBelongsTo("itemName", "Product"); // new ORM does not support belongs_to method.
+		}
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		expect(prdObj.fixed_schema).toEqual(true);
+		expect(prdObj.sync_type).toEqual("none");
+		expect(prdObj.partition).toEqual("app");
+		var itemObj = Rho.ORM.addModel('Item', Item);
+		expect(itemObj.getBelongsTo("itemName")).toEqual(['Product']);
+	});
+	it("Should return null when no model is belongs to the instance app model fixed schema.", function(){
+		var Product = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.setModelProperty("price", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.set("partition", "app");
+		};
+		var Item = function(model){
+			model.fixed_schema = true;
+			model.setModelProperty("itemName", "string", "");
+			model.setModelProperty("availability", "string", "");
+			model.setModelProperty("stockDetails", "string", "");
+		}
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		expect(prdObj.fixed_schema).toEqual(true);
+		expect(prdObj.sync_type).toEqual("none");
+		expect(prdObj.partition).toEqual("app");
+		var itemObj = Rho.ORM.addModel('Item', Item);
+		expect(itemObj.getBelongsTo("itemName")).toEqual(null);
+	});
 });
+describe("enable test set : ", function(){
+	it("should enable all the boolean properties with user model fixed schema", function(){
+		var result = {};
+		var cbTriggered = false;
+		var Product = function(model){
+			model.fixed_schema = true;
+			model.enable('pass_through');
+			model.enable('sync');
+			model.enable('loaded');
+			model.enable('freezed');
+			model.enable('full_update');
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.set('partition', 'user');
+		};
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		var cb = function(data){
+			console.log("getAllProperties : " + JSON.stringify(data));
+			result = data;
+			cbTriggered = true;
+		};
+		prdObj.getAllProperties(cb);
+		waitsFor(function(){
+			return cbTriggered;
+		}, "wait for getAllProperties callback trigger", 3000);
+		runs(function(){
+			expect(result.associations).toEqual("");
+			expect(result.blob_attribs).toEqual("");
+			expect(result.fixed_schema).toEqual("true");
+			expect(result.freezed).toEqual("true");
+			expect(result.full_update).toEqual("true");
+			expect(result.loaded).toEqual("true");
+			expect(result.model_name).toEqual("Product");
+			expect(result.partition).toEqual("user");
+			expect(result.pass_through).toEqual("true");
+			expect(result.sync_priority).toEqual("1000");
+			expect(result.sync_type).toEqual("incremental");
+		});
+	});
+	it("should enable all the boolean properties with local model fixed schema", function(){
+		var result = {};
+		var cbTriggered = false;
+		var Product = function(model){
+			model.fixed_schema = true;
+			model.enable('pass_through');
+			model.enable('sync');
+			model.enable('loaded');
+			model.enable('freezed');
+			model.enable('full_update');
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.set('partition', 'local');
+		};
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		var cb = function(data){
+			console.log("getAllProperties : " + JSON.stringify(data));
+			result = data;
+			cbTriggered = true;
+		};
+		prdObj.getAllProperties(cb);
+		waitsFor(function(){
+			return cbTriggered;
+		}, "wait for getAllProperties callback trigger", 3000);
+		runs(function(){
+			expect(result.associations).toEqual("");
+			expect(result.blob_attribs).toEqual("");
+			expect(result.fixed_schema).toEqual("true");
+			expect(result.freezed).toEqual("true");
+			expect(result.full_update).toEqual("true");
+			expect(result.loaded).toEqual("true");
+			expect(result.model_name).toEqual("Product");
+			expect(result.partition).toEqual("local");
+			expect(result.pass_through).toEqual("true");
+			expect(result.sync_priority).toEqual("1000");
+			expect(result.sync_type).toEqual("incremental");
+		});
+	});
+	it("should enable all the boolean properties with app model fixed schema", function(){
+		var result = {};
+		var cbTriggered = false;
+		var Product = function(model){
+			model.fixed_schema = true;
+			model.enable('pass_through');
+			model.enable('sync');
+			model.enable('loaded');
+			model.enable('freezed');
+			model.enable('full_update');
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.set('partition', 'app');
+		};
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		var cb = function(data){
+			console.log("getAllProperties : " + JSON.stringify(data));
+			result = data;
+			cbTriggered = true;
+		};
+		prdObj.getAllProperties(cb);
+		waitsFor(function(){
+			return cbTriggered;
+		}, "wait for getAllProperties callback trigger", 3000);
+		runs(function(){
+			expect(result.associations).toEqual("");
+			expect(result.blob_attribs).toEqual("");
+			expect(result.fixed_schema).toEqual("true");
+			expect(result.freezed).toEqual("true");
+			expect(result.full_update).toEqual("true");
+			expect(result.loaded).toEqual("true");
+			expect(result.model_name).toEqual("Product");
+			expect(result.partition).toEqual("app");
+			expect(result.pass_through).toEqual("true");
+			expect(result.sync_priority).toEqual("1000");
+			expect(result.sync_type).toEqual("incremental");
+		});
+	});
+	it("should enable all the boolean properties with user model property bag", function(){
+		var result = {};
+		var cbTriggered = false;
+		var Product = function(model){
+			model.enable('pass_through');
+			model.enable('sync');
+			model.enable('loaded');
+			model.enable('freezed');
+			model.enable('full_update');
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.set('partition', 'user');
+		};
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		var cb = function(data){
+			console.log("getAllProperties : " + JSON.stringify(data));
+			result = data;
+			cbTriggered = true;
+		};
+		prdObj.getAllProperties(cb);
+		waitsFor(function(){
+			return cbTriggered;
+		}, "wait for getAllProperties callback trigger", 3000);
+		runs(function(){
+			expect(result.associations).toEqual("");
+			expect(result.blob_attribs).toEqual("");
+			expect(result.fixed_schema).toEqual("false");
+			expect(result.freezed).toEqual("true");
+			expect(result.full_update).toEqual("true");
+			expect(result.loaded).toEqual("true");
+			expect(result.model_name).toEqual("Product");
+			expect(result.partition).toEqual("user");
+			expect(result.pass_through).toEqual("true");
+			expect(result.sync_priority).toEqual("1000");
+			expect(result.sync_type).toEqual("incremental");
+		});
+	});
+	it("should enable all the boolean properties with local model property bag", function(){
+		var result = {};
+		var cbTriggered = false;
+		var Product = function(model){
+			model.enable('pass_through');
+			model.enable('sync');
+			model.enable('loaded');
+			model.enable('freezed');
+			model.enable('full_update');
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.set('partition', 'local');
+		};
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		var cb = function(data){
+			console.log("getAllProperties : " + JSON.stringify(data));
+			result = data;
+			cbTriggered = true;
+		};
+		prdObj.getAllProperties(cb);
+		waitsFor(function(){
+			return cbTriggered;
+		}, "wait for getAllProperties callback trigger", 3000);
+		runs(function(){
+			expect(result.associations).toEqual("");
+			expect(result.blob_attribs).toEqual("");
+			expect(result.fixed_schema).toEqual("false");
+			expect(result.freezed).toEqual("true");
+			expect(result.full_update).toEqual("true");
+			expect(result.loaded).toEqual("true");
+			expect(result.model_name).toEqual("Product");
+			expect(result.partition).toEqual("local");
+			expect(result.pass_through).toEqual("true");
+			expect(result.sync_priority).toEqual("1000");
+			expect(result.sync_type).toEqual("incremental");
+		});
+	});
+	it("should enable all the boolean properties with app model property bag", function(){
+		var result = {};
+		var cbTriggered = false;
+		var Product = function(model){
+			model.enable('pass_through');
+			model.enable('sync');
+			model.enable('loaded');
+			model.enable('freezed');
+			model.enable('full_update');
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("quantity", "string", "");
+			model.set('partition', 'app');
+		};
+		var prdObj = Rho.ORM.addModel('Product', Product);
+		var cb = function(data){
+			console.log("getAllProperties : " + JSON.stringify(data));
+			result = data;
+			cbTriggered = true;
+		};
+		prdObj.getAllProperties(cb);
+		waitsFor(function(){
+			return cbTriggered;
+		}, "wait for getAllProperties callback trigger", 3000);
+		runs(function(){
+			expect(result.associations).toEqual("");
+			expect(result.blob_attribs).toEqual("");
+			expect(result.fixed_schema).toEqual("false");
+			expect(result.freezed).toEqual("true");
+			expect(result.full_update).toEqual("true");
+			expect(result.loaded).toEqual("true");
+			expect(result.model_name).toEqual("Product");
+			expect(result.partition).toEqual("app");
+			expect(result.pass_through).toEqual("true");
+			expect(result.sync_priority).toEqual("1000");
+			expect(result.sync_type).toEqual("incremental");
+		});
+	});
+});
+describe("deleteObjects test set : ", function(){
+	var userDB = Rho.ORMHelper.dbConnection('user');
+	var localDB = Rho.ORMHelper.dbConnection('local');
+	var appDB = Rho.ORMHelper.dbConnection('app');
+	describe("UserFs test : ", function(){
+		afterEach(function(){
+			userDB.executeSql("DELETE FROM Product");
+			userDB.executeSql("DELETE FROM SOURCES");
+			var partitions = Rho.ORM.getDbPartitions();
+		    $.each(partitions, function(index, db2){
+				db2.executeSql("DELETE FROM SOURCES");
+				db2.executeSql("DELETE FROM OBJECT_VALUES");
+				db2.executeSql("DELETE FROM CHANGED_VALUES");
+				if(db2.isTableExist('ProdDelUsFs'))
+					db2.executeSql("DELETE FROM ProdDelUsFs");
+				if(db2.isTableExist('ProdDelLoFs'))
+					db2.executeSql("DELETE FROM ProdDelLoFs");
+
+			});
+		});
+		it("Should delete all objects of the model when empty parameters are sent with method userFS.", function(){
+			runs(function(){
+				var ProdDelUsFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelUsFs", ProdDelUsFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({},[]);
+				expect(prdObj.getCount()).toEqual(0);
+			});
+		})
+		it("Should throw exception when null parameters are passed with the method userFS.", function(){
+			runs(function(){
+				var ProdDelUsFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelUsFs", ProdDelUsFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				try{
+					prdObj.deleteObjects();
+				} catch(err){
+					expect(err).toEqual("Wrong number of arguments: 0 instead of 2");
+				}
+				expect(prdObj.getCount()).toEqual(3);
+			});
+		})
+		it("Should only the simple matched condition passed as parameter with the method userFS.", function(){
+			runs(function(){
+				var ProdDelUsFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelUsFs", ProdDelUsFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ?"},['nike']);
+				expect(prdObj.getCount()).toEqual(2);
+			});
+		})
+		it("Should only the matched condition uses OR passed as parameter with the method userFS.", function(){
+			runs(function(){
+				var ProdDelUsFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelUsFs", ProdDelUsFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ? OR availability = ?"},['nike', 'yes']);
+				expect(prdObj.getCount()).toEqual(1);
+			});
+		})
+		it("Should only the matched condition uses AND passed as parameter with the method userFS.", function(){
+			runs(function(){
+				var ProdDelUsFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelUsFs", ProdDelUsFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ? AND availability = ?"},['nike', 'yes']);
+				expect(prdObj.getCount()).toEqual(2);
+			});
+		})
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter with the method userFS.", function(){
+			runs(function(){
+				var ProdDelUsFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelUsFs", ProdDelUsFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				try{
+					prdObj.deleteObjects({"conditions" :"nonexisting = ?"},['nike']);
+				} catch (err){
+					expect(err).toEqual("no such column: nonexisting");
+				}
+				expect(prdObj.getCount()).toEqual(3);
+			});
+		});
+	});
+	describe("localFs tests : ", function(){
+		afterEach(function(){
+			localDB.executeSql("DELETE FROM ProdDelLoFs");
+		});
+		it("Should delete all objects of the model when empty parameters are sent with method localFS.", function(){
+			if(localDB.isTableExist('ProdDelLoFs')){
+				localDB.executeSql("DELETE FROM ProdDelLoFs");
+			}
+			runs(function(){
+				var ProdDelLoFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "local");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelLoFs", ProdDelLoFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({},[]);
+				expect(prdObj.getCount()).toEqual(0);
+			});
+		})
+		it("Should throw exception when null parameters are passed with the method localFS.", function(){
+			runs(function(){
+				var ProdDelLoFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "local");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelLoFs", ProdDelLoFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				try{
+					prdObj.deleteObjects();
+				} catch(err){
+					expect(err).toEqual("Wrong number of arguments: 0 instead of 2");
+				}
+				expect(prdObj.getCount()).toEqual(3);
+			});
+		})
+		it("Should only the simple matched condition passed as parameter with the method localFS.", function(){
+			runs(function(){
+				var ProdDelLoFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "local");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelLoFs", ProdDelLoFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ?"},['nike']);
+				expect(prdObj.getCount()).toEqual(2);
+			});
+		})
+		it("Should only the matched condition uses OR passed as parameter with the method localFS.", function(){
+			runs(function(){
+				var ProdDelLoFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "local");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelLoFs", ProdDelLoFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ? OR availability = ?"},['nike', 'yes']);
+				expect(prdObj.getCount()).toEqual(1);
+			});
+		})
+		it("Should only the matched condition uses AND passed as parameter with the method localFS.", function(){
+			runs(function(){
+				var ProdDelLoFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "local");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelLoFs", ProdDelLoFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ? AND availability = ?"},['nike', 'yes']);
+				expect(prdObj.getCount()).toEqual(2);
+			});
+		})
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter with the method localFS.", function(){
+			runs(function(){
+				var ProdDelLoFs = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "local");
+				};
+				var prdObj = Rho.ORM.addModel("ProdDelLoFs", ProdDelLoFs);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				try{
+					prdObj.deleteObjects({"conditions" :"nonexisting = ?"},['nike']);
+				} catch (err){
+					expect(err).toEqual("no such column: nonexisting");
+				}
+				expect(prdObj.getCount()).toEqual(3);
+			});
+		});
+	});
+	describe("appFs tests : ", function(){
+		afterEach(function(){
+			appDB.executeSql("DELETE FROM ProductApp");
+		});
+		it("Should delete all objects of the model when empty parameters are sent with method appFs.", function(){
+
+			runs(function(){
+				var ProductApp = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "app");
+				};
+				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({},[]);
+				expect(prdObj.getCount()).toEqual(0);
+			});
+		})
+		it("Should throw exception when null parameters are passed with the method appFs.", function(){
+			runs(function(){
+				var ProductApp = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "app");
+				};
+				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				try{
+					prdObj.deleteObjects();
+				} catch(err){
+					expect(err).toEqual("Wrong number of arguments: 0 instead of 2");
+				}
+				expect(prdObj.getCount()).toEqual(3);
+			});
+		})
+		it("Should only the simple matched condition passed as parameter with the method appFs.", function(){
+			runs(function(){
+				var ProductApp = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "app");
+				};
+				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ?"},['nike']);
+				expect(prdObj.getCount()).toEqual(2);
+			});
+		})
+		it("Should only the matched condition uses OR passed as parameter with the method appFs.", function(){
+			runs(function(){
+				var ProductApp = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "app");
+				};
+				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ? OR availability = ?"},['nike', 'yes']);
+				expect(prdObj.getCount()).toEqual(1);
+			});
+		})
+		it("Should only the matched condition uses AND passed as parameter with the method appFs.", function(){
+			runs(function(){
+				var ProductApp = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "app");
+				};
+				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				prdObj.deleteObjects({"conditions" :"name = ? AND availability = ?"},['nike', 'yes']);
+				expect(prdObj.getCount()).toEqual(2);
+			});
+		})
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter with the method appFs.", function(){
+			runs(function(){
+				var ProductApp = function(model){
+					model.fixed_schema = true;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "app");
+				};
+				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				try{
+					prdObj.deleteObjects({"conditions" :"nonexisting = ?"},['nike']);
+				} catch (err){
+					expect(err).toEqual("no such column: nonexisting");
+				}
+				expect(prdObj.getCount()).toEqual(3);
+			});
+		});
+	});
+	describe("getObjects with Property bag: ", function(){
+		it("Should throw exception", function(){
+			userDB = Rho.ORMHelper.dbConnection('user');
+			userDB.executeSql("DELETE FROM OBJECT_VALUES");
+			runs(function(){
+				var CustoPb = function(model){
+					model.fixed_schema = false;
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "string", "");
+					model.setModelProperty("price", "string", "");
+					model.setModelProperty("availability", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("CustoPb", CustoPb);
+				var data = [{
+					"name":"nike",
+					"quantity":"20",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"Woodlands",
+					"quantity":"30",
+					"price":"2000",
+					"availability":"yes"
+				},{
+					"name":"reebok",
+					"quantity":"40",
+					"price":"2000",
+					"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				try{
+					prdObj.deleteObjects({"conditions" :"nonexisting = ?"},['nike']);
+				} catch (err){
+					expect(err).toEqual("no such table: CustoPb");
+				}
+				expect(prdObj.getCount()).toEqual(3);
+			});
+		});
+	});
+});
+describe("findObjects test set : ", function(){
+	describe("userFS tests: ", function(){
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		var reset = function(){
+			if(userDB.isTableExist('ProductUs'))
+				userDB.executeSql("DELETE FROM ProductUs");
+			};
+		it("Should be able to find all the objects which matches the simple condition in the WHERE clause with fixed schema(user)", function(){
+			var ProductUs = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "user");
+			};
+			var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+			var prdObj2 = Rho.ORM.getModel('ProductUs');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ?"},['nike'],['name','quantity'],[]);
+			var count = prdObj.findObjects("count",{"conditions" :"name = ?"},['nike'],['name','quantity'],[]);
+			console.log("result : " + JSON.stringify(res));
+			expect(res[0].object).toEqual(objData[0].object);
+			expect(res[0].name).toEqual('nike');
+			expect(res[0].quantity).toEqual('20');
+			expect(res[0].price).toEqual(null);
+			expect(count).toEqual(1);
+		});
+		it("Should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(user)",function(){
+			var ProductUs = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "user");
+			};
+			var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+			var prdObj2 = Rho.ORM.getModel('ProductUs');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
+			var count = prdObj.findObjects("count",{"conditions" :"name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
+			console.log("result : " + JSON.stringify(res));
+			expect(res.length).toEqual(3);
+			expect(res[0].name).toEqual("Nike");
+			expect(res[1].name).toEqual("Puma");
+			expect(res[2].name).toEqual("Woodlands");
+			expect(count).toEqual(3);
+			var res2 = prdObj.findObjects("all",{"conditions" :"name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'DESC']);
+			var count2 = prdObj.findObjects("count",{"conditions" :"name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'DESC']);
+			console.log("result : " + JSON.stringify(res));
+			expect(res2.length).toEqual(3);
+			expect(res2[0].name).toEqual("Woodlands");
+			expect(res2[1].name).toEqual("Puma");
+			expect(res2[2].name).toEqual("Nike");
+			expect(count2).toEqual(3);
+		});
+		it("Should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(user)",function(){
+			var ProductUs = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "user");
+			};
+			var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+			var prdObj2 = Rho.ORM.getModel('ProductUs');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ? AND availability = ?"},['Nike', 'yes'],['name','availability'],[]);
+			var count = prdObj.findObjects("count",{"conditions" :"name = ? AND availability = ?"},['Nike', 'yes'],['name','availability'],[]);
+			console.log("result : " + JSON.stringify(res));
+			expect(res.length).toEqual(1);
+			expect(res[0].name).toEqual("Nike");
+			expect(count).toEqual(1);
+		});
+		it("Should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(user).", function(){
+			var ProductUs = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "user");
+			};
+			var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+			var prdObj2 = Rho.ORM.getModel('ProductUs');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','price'],['name','ASC']);
+			var count = prdObj.findObjects("count",{"conditions" :"name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','price'],['name','ASC']);
+			console.log("result1 : " + JSON.stringify(res));
+			expect(res.length).toEqual(3);
+			expect(res[0].name).toEqual("Nike");
+			expect(res[1].name).toEqual("Puma");
+			expect(res[2].name).toEqual("Reebok");
+			expect(count).toEqual(3);
+			var res2 = prdObj.findObjects("all",{"conditions" :"name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','price'],['name','DESC']);
+			var count2 = prdObj.findObjects("all",{"conditions" :"name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','price'],['name','DESC']);
+			console.log("result2 : " + JSON.stringify(res2));
+			expect(res2.length).toEqual(3);
+			expect(res2[0].name).toEqual("Reebok");
+			expect(res2[1].name).toEqual("Puma");
+			expect(res2[2].name).toEqual("Nike");
+			expect(count).toEqual(3);
+		});
+		it("Should throw exception when null parameters are passed with fixed schema(user).",function(){
+			var ProductUs = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "user");
+			};
+			var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+			var prdObj2 = Rho.ORM.getModel('ProductUs');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects();
+			} catch(err){
+				expect(err).toEqual("Wrong number of arguments: 0 instead of 5");
+			}
+		});
+		it("Should find all the objects when empty parameters are passed with fixed schema(user).", function(){
+			var ProductUs = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "user");
+			};
+			var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+			var prdObj2 = Rho.ORM.getModel('ProductUs');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all", {},[],[],[]);
+			var count = prdObj.findObjects("count", {},[],[],[]);
+			console.log("Empty parameters : " + JSON.stringify(res));
+			expect(res.length).toEqual(4);
+			expect(count).toEqual(4);
+			//findObjects: Invalid Empty First Argument passed.
+		});
+		it("Should throw exception when first parameter is passed as empty with fixed schema(user)", function(){
+			var ProductUs = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "user");
+			};
+			var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+			var prdObj2 = Rho.ORM.getModel('ProductUs');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects("", {},[],[],[]);
+			} catch(err) {
+				expect(err).toEqual("findObjects: Invalid Empty First Argument passed.");
+			}
+		});
+		it("Should throw exception when wrong condition(non existing column) is sent as parameter with fixed schema(user)", function(){
+			var ProductUs = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "user");
+			};
+			var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+			var prdObj2 = Rho.ORM.getModel('ProductUs');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects("all", {"conditions":"nonexisting = ?"},['Nike'],[],[]);
+			} catch(err) {
+				expect(err).toEqual("no such column: nonexisting");
+			}
+		});
+	});
+	describe("localFS tests: ", function(){
+		var localDB = Rho.ORMHelper.dbConnection('local');
+		var reset = function(){
+			if(localDB.isTableExist('ProductLo'))
+				localDB.executeSql("DELETE FROM ProductLo");
+			};
+		it("Should be able to find all the objects which matches the simple condition in the WHERE clause with fixed schema(local)", function(){
+			var ProductLo = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "local");
+			};
+			var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
+			var prdObj2 = Rho.ORM.getModel('ProductLo');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ?"},['nike'],['name','quantity'],[]);
+			console.log("result : " + JSON.stringify(res));
+			expect(res[0].object).toEqual(objData[0].object);
+			expect(res[0].name).toEqual('nike');
+			expect(res[0].quantity).toEqual('20');
+			expect(res[0].price).toEqual(null);
+		});
+		it("Should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(local)",function(){
+			var ProductLo = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "local");
+			};
+			var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
+			var prdObj2 = Rho.ORM.getModel('ProductLo');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
+			console.log("result : " + JSON.stringify(res));
+			expect(res.length).toEqual(3);
+			expect(res[0].name).toEqual("Nike");
+			expect(res[1].name).toEqual("Puma");
+			expect(res[2].name).toEqual("Woodlands");
+			var res2 = prdObj.findObjects("all",{"conditions" :"name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'DESC']);
+			console.log("result : " + JSON.stringify(res));
+			expect(res2.length).toEqual(3);
+			expect(res2[0].name).toEqual("Woodlands");
+			expect(res2[1].name).toEqual("Puma");
+			expect(res2[2].name).toEqual("Nike");
+		});
+		it("Should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(local)",function(){
+			var ProductLo = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "local");
+			};
+			var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
+			var prdObj2 = Rho.ORM.getModel('ProductLo');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ? AND availability = ?"},['Nike', 'yes'],['name','availability'],[]);
+			console.log("result : " + JSON.stringify(res));
+			expect(res.length).toEqual(1);
+			expect(res[0].name).toEqual("Nike");
+		});
+		it("Should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(local).", function(){
+			var ProductLo = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "local");
+			};
+			var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
+			var prdObj2 = Rho.ORM.getModel('ProductLo');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','price'],['name','ASC']);
+			console.log("result1 : " + JSON.stringify(res));
+			expect(res.length).toEqual(3);
+			expect(res[0].name).toEqual("Nike");
+			expect(res[1].name).toEqual("Puma");
+			expect(res[2].name).toEqual("Reebok");
+			var res2 = prdObj.findObjects("all",{"conditions" :"name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','price'],['name','DESC']);
+			console.log("result2 : " + JSON.stringify(res2));
+			expect(res2.length).toEqual(3);
+			expect(res2[0].name).toEqual("Reebok");
+			expect(res2[1].name).toEqual("Puma");
+			expect(res2[2].name).toEqual("Nike");
+		});
+		it("Should throw exception when null parameters are passed with fixed schema(local).",function(){
+			var ProductLo = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "local");
+			};
+			var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
+			var prdObj2 = Rho.ORM.getModel('ProductLo');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects();
+			} catch(err){
+				expect(err).toEqual("Wrong number of arguments: 0 instead of 5");
+			}
+		});
+		it("Should find all the objects when empty parameters are passed with fixed schema(local).", function(){
+			var ProductLo = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "local");
+			};
+			var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
+			var prdObj2 = Rho.ORM.getModel('ProductLo');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all", {},[],[],[]);
+			console.log("Empty parameters : " + JSON.stringify(res));
+			expect(res.length).toEqual(4);
+			//findObjects: Invalid Empty First Argument passed.
+		});
+		it("Should throw exception when first parameter is passed as empty with fixed schema(local)", function(){
+			var ProductLo = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "local");
+			};
+			var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
+			var prdObj2 = Rho.ORM.getModel('ProductLo');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects("", {},[],[],[]);
+			} catch(err) {
+				expect(err).toEqual("findObjects: Invalid Empty First Argument passed.");
+			}
+		});
+		it("Should throw exception when wrong condition(non existing column) is sent as parameter with fixed schema(local)", function(){
+			var ProductLo = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "local");
+			};
+			var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
+			var prdObj2 = Rho.ORM.getModel('ProductLo');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects("all", {"conditions":"nonexisting = ?"},['Nike'],[],[]);
+			} catch(err) {
+				expect(err).toEqual("no such column: nonexisting");
+			}
+		});
+	});
+	describe("appFS tests: ", function(){
+		var appDB = Rho.ORMHelper.dbConnection('app');
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		var reset = function(){
+			userDB.executeSql("DELETE FROM SOURCES");
+			userDB.executeSql("DELETE FROM CHANGED_VALUES");
+			userDB.executeSql("DELETE FROM OBJECT_VALUES");
+			if(appDB.isTableExist('ProductApp'))
+				appDB.executeSql("DELETE FROM ProductApp");
+		};
+		it("Should be able to find all the objects which matches the simple condition in the WHERE clause with fixed schema(app)", function(){
+			var ProductApp = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "app");
+			};
+			var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+			var prdObj2 = Rho.ORM.getModel('ProductApp');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ?"},['nike'],['name','quantity'],[]);
+			console.log("result : " + JSON.stringify(res));
+			expect(res[0].object).toEqual(objData[0].object);
+			expect(res[0].name).toEqual('nike');
+			expect(res[0].quantity).toEqual('20');
+			expect(res[0].price).toEqual(null);
+		});
+		it("Should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(app)",function(){
+			var ProductApp = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "app");
+			};
+			var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+			var prdObj2 = Rho.ORM.getModel('ProductApp');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
+			console.log("result : " + JSON.stringify(res));
+			expect(res.length).toEqual(3);
+			expect(res[0].name).toEqual("Nike");
+			expect(res[1].name).toEqual("Puma");
+			expect(res[2].name).toEqual("Woodlands");
+			var res2 = prdObj.findObjects("all",{"conditions" :"name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'DESC']);
+			console.log("result : " + JSON.stringify(res));
+			expect(res2.length).toEqual(3);
+			expect(res2[0].name).toEqual("Woodlands");
+			expect(res2[1].name).toEqual("Puma");
+			expect(res2[2].name).toEqual("Nike");
+		});
+		it("Should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(app)",function(){
+			var ProductApp = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "app");
+			};
+			var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+			var prdObj2 = Rho.ORM.getModel('ProductApp');
+			prdObj2.deleteObjects({}, []);
+			var objData = [];
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				objData[i] = prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name = ? AND availability = ?"},['Nike', 'yes'],['name','availability'],[]);
+			console.log("result : " + JSON.stringify(res));
+			expect(res.length).toEqual(1);
+			expect(res[0].name).toEqual("Nike");
+		});
+		it("Should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(app).", function(){
+			var ProductApp = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "app");
+			};
+			var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+			var prdObj2 = Rho.ORM.getModel('ProductApp');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all",{"conditions" :"name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','price'],['name','ASC']);
+			console.log("result1 : " + JSON.stringify(res));
+			expect(res.length).toEqual(3);
+			expect(res[0].name).toEqual("Nike");
+			expect(res[1].name).toEqual("Puma");
+			expect(res[2].name).toEqual("Reebok");
+			var res2 = prdObj.findObjects("all",{"conditions" :"name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','price'],['name','DESC']);
+			console.log("result2 : " + JSON.stringify(res2));
+			expect(res2.length).toEqual(3);
+			expect(res2[0].name).toEqual("Reebok");
+			expect(res2[1].name).toEqual("Puma");
+			expect(res2[2].name).toEqual("Nike");
+		});
+		it("Should throw exception when null parameters are passed with fixed schema(app).",function(){
+			var ProductApp = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "app");
+			};
+			var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+			var prdObj2 = Rho.ORM.getModel('ProductApp');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects();
+			} catch(err){
+				expect(err).toEqual("Wrong number of arguments: 0 instead of 5");
+			}
+		});
+		it("Should find all the objects when empty parameters are passed with fixed schema(app).", function(){
+			var ProductApp = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "app");
+			};
+			var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+			var prdObj2 = Rho.ORM.getModel('ProductApp');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			var res = prdObj.findObjects("all", {},[],[],[]);
+			console.log("Empty parameters : " + JSON.stringify(res));
+			expect(res.length).toEqual(4);
+			//findObjects: Invalid Empty First Argument passed.
+		});
+		it("Should throw exception when first parameter is passed as empty with fixed schema(app)", function(){
+			var ProductApp = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "app");
+			};
+			var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+			var prdObj2 = Rho.ORM.getModel('ProductApp');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects("", {},[],[],[]);
+			} catch(err) {
+				expect(err).toEqual("findObjects: Invalid Empty First Argument passed.");
+			}
+		});
+		it("Should throw exception when wrong condition(non existing column) is sent as parameter with fixed schema(app)", function(){
+			var ProductApp = function(model){
+			 	model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.setModelProperty("price", "integer", "");
+				model.setModelProperty("availability", "string", "");
+				model.setModelProperty("partition", "app");
+			};
+			var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
+			var prdObj2 = Rho.ORM.getModel('ProductApp');
+			prdObj2.deleteObjects({}, []);
+			var data = [{
+			"name":"Nike",
+			"quantity":"20",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Woodlands",
+			"quantity":"30",
+			"price":"2000",
+			"availability":"yes"
+			},{
+			"name":"Reebok",
+			"quantity":"40",
+			"price":"1500",
+			"availability":"no"
+			},{
+			"name":"Puma",
+			"quantity":"30",
+			"price":"1500",
+			"availability":"no"
+			}];
+			for(var i in data){
+				prdObj.createObject(data[i]);
+			}
+			expect(prdObj.getCount()).toEqual(4);
+			try{
+				var res = prdObj.findObjects("all", {"conditions":"nonexisting = ?"},['Nike'],[],[]);
+			} catch(err) {
+				expect(err).toEqual("no such column: nonexisting");
+			}
+		});
+		it("Should throw exception when findObjects done with property bag:", function(){
+			reset();
+			runs(function(){
+				var ProductUsPB = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("quantity", "integer", "");
+					model.setModelProperty("price", "integer", "");
+					model.setModelProperty("availability", "string", "");
+					model.setModelProperty("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProductUsPB", ProductUsPB);
+				var data = [{
+				"name":"Nike",
+				"quantity":"20",
+				"price":"2000",
+				"availability":"yes"
+				},{
+				"name":"Woodlands",
+				"quantity":"30",
+				"price":"2000",
+				"availability":"yes"
+				},{
+				"name":"Reebok",
+				"quantity":"40",
+				"price":"1500",
+				"availability":"no"
+				},{
+				"name":"Puma",
+				"quantity":"30",
+				"price":"1500",
+				"availability":"no"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				try{
+					var res = prdObj.findObjects("all", {},[],[],[]);
+				} catch(err) {
+					expect(err).toEqual("column source_id is not unique");
+				}
+			});
+		});
+	});
+});
+describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
+	describe("userproperty bag test : ", function(){
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		var reset = function(){
+			userDB.executeSql("DELETE FROM SOURCES");
+			userDB.executeSql("DELETE FROM CHANGED_VALUES");
+			userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		}
+		it("Should delete all objects of the model when empty parameters are sent with userPB", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "user");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({}, {});
+			var res = userDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			console.log("Result : " + JSON.stringify(res));
+			expect(stObj.getCount()).toEqual(0);
+		});
+		it("Should throw exception when null parameters are passed in the method with with userPB", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "user");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			try{
+				stObj.deleteObjectsPropertyBagByCondHash();
+			}catch(err){
+				expect(err).toEqual("Wrong number of arguments: 0 instead of 2")
+			}
+			var res = userDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(3);
+		});
+		it("Should delete only the simple matched condition passed as parameter in the method with with userPB.", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "user");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({"name":"Arun"}, {});
+			var res = userDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(2);
+		});
+		it("Should delete only the simple matched multiple condition passed as parameter in method with userPB.", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "user");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({"name":"Arun","age":"30"}, {});
+			var res = userDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(2);
+		});
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with userPB.", function(){
+			reset();
+			var error = "";
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "user");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			try{
+				stObj.deleteObjectsPropertyBagByCondHash({"suresh":"Arun","dump":"30"}, {});
+			}catch(err){
+				error = err;
+			}
+			expect(stObj.getCount()).toEqual(3);
+			expect(error).toEqual("non existing column");
+		});
+	});
+	describe("local Property bag test : ", function(){
+		var localDB = Rho.ORMHelper.dbConnection('local');
+		var reset = function(){
+			localDB.executeSql("DELETE FROM SOURCES");
+			localDB.executeSql("DELETE FROM CHANGED_VALUES");
+			localDB.executeSql("DELETE FROM OBJECT_VALUES");
+		}
+		it("Should delete all objects of the model when empty parameters are sent with localPB", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "local");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({}, {});
+			var res = localDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			console.log("Result : " + JSON.stringify(res));
+			expect(stObj.getCount()).toEqual(0);
+		});
+		it("Should throw exception when null parameters are passed in the method with with localPB", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "local");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			try{
+				stObj.deleteObjectsPropertyBagByCondHash();
+			}catch(err){
+				expect(err).toEqual("Wrong number of arguments: 0 instead of 2")
+			}
+			var res = localDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(3);
+		});
+		it("Should delete only the simple matched condition passed as parameter in the method with with localPB.", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "local");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({"name":"Arun"}, {});
+			var res = localDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(2);
+		});
+		it("Should delete only the simple matched multiple condition passed as parameter in method with localPB.", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "local");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({"name":"Arun","age":"30"}, {});
+			var res = localDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(2);
+		});
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with localPB.", function(){
+			reset();
+			var error = "";
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "local");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			try{
+				stObj.deleteObjectsPropertyBagByCondHash({"suresh":"Arun","dump":"30"}, {});
+			}catch(err){
+				error = err;
+			}
+			expect(stObj.getCount()).toEqual(3);
+			expect(error).toEqual("non existing column");
+		});
+	});
+	describe("app property bag test : ", function(){
+		var appDB = Rho.ORMHelper.dbConnection('app');
+		var reset = function(){
+			appDB.executeSql("DELETE FROM SOURCES");
+			appDB.executeSql("DELETE FROM CHANGED_VALUES");
+			appDB.executeSql("DELETE FROM OBJECT_VALUES");
+		}
+		it("Should delete all objects of the model when empty parameters are sent with appPB", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "app");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({}, {});
+			var res = appDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			console.log("Result : " + JSON.stringify(res));
+			expect(stObj.getCount()).toEqual(0);
+		});
+		it("Should throw exception when null parameters are passed in the method with with appPB", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "app");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			try{
+				stObj.deleteObjectsPropertyBagByCondHash();
+			}catch(err){
+				expect(err).toEqual("Wrong number of arguments: 0 instead of 2")
+			}
+			var res = appDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(3);
+		});
+		it("Should delete only the simple matched condition passed as parameter in the method with with appPB.", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "app");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({"name":"Arun"}, {});
+			var res = appDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(2);
+		});
+		it("Should delete only the simple matched multiple condition passed as parameter in method with appPB.", function(){
+			reset();
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "app");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			stObj.deleteObjectsPropertyBagByCondHash({"name":"Arun","age":"30"}, {});
+			var res = appDB.executeSql("SELECT * FROM OBJECT_VALUES");
+			expect(stObj.getCount()).toEqual(2);
+		});
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with appPB.", function(){
+			reset();
+			var error = "";
+			var Students = function(model){
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("age", "string", "");
+				model.setModelProperty("department", "string", "");
+				model.setModelProperty("rank", "string", "");
+				model.set("partition", "app");
+			};
+			var stObj = Rho.ORM.addModel('Students', Students);
+			var data = [{
+				"name":"Arun",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"1"
+			},{
+				"name":"Vinod",
+				"age":"30",
+				"department":"Computer",
+				"rank":"3"
+			},{
+				"name":"Nadaf",
+				"age":"30",
+				"department":"Electronics",
+				"rank":"2"
+			}];
+			var myObj = [];
+			for(var i in data){
+				myObj[i] = stObj.createObject(data[i]);
+			}
+			expect(stObj.getCount()).toEqual(3);
+			try{
+				stObj.deleteObjectsPropertyBagByCondHash({"suresh":"Arun","dump":"30"}, {});
+			}catch(err){
+				error = err;
+			}
+			expect(stObj.getCount()).toEqual(3);
+			expect(error).toEqual("non existing column");
+		});
+	});
+});
+describe("findObjectsPropertyBagByCondHash test set : ", function(){
+	describe("userPB tests: ", function(){
+		beforeEach(function(){
+			userDB.executeSql("DELETE FROM SOURCES");
+			var partitions = Rho.ORM.getDbPartitions();
+		    $.each(partitions, function(index, db2){
+				db2.executeSql("DELETE FROM SOURCES");
+				db2.executeSql("DELETE FROM OBJECT_VALUES");
+				db2.executeSql("DELETE FROM CHANGED_VALUES");
+				if(db2.isTableExist('ProdFinUsPb'))
+					db2.executeSql("DELETE FROM ProdFinUsPb");
+				if(db2.isTableExist('ProdFinLoPb'))
+					db2.executeSql("DELETE FROM ProdFinLoPb");
+			});
+		});
+		it("Should find all the objects of the model when no parameter is passed with the method.", function(){
+			runs(function(){
+				userDB.executeSql("DELETE FROM OBJECT_VALUES");
+				var ProdFinUsPb = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdFinUsPb", ProdFinUsPb);
+				prdObj.deleteObjectsPropertyBagByCondHash({},{});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				var myObj = [];
+				for(var i in data){
+					myObj[i] = prdObj.createObject(data[i]);
+				}
+				console.log("myOBj : " + JSON.stringify(myObj));
+				console.log("table : " + JSON.stringify(userDB.executeSql("SELECT * FROM OBJECT_VALUES")));
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondHash("all", {},{},[]);
+				var count = prdObj.findObjectsPropertyBagByCondHash("count", {},{},[]);
+				expect(res.length).toEqual(12)
+				expect(count).toEqual(12);
+			});
+		});
+		it("Should find the objects matching to the condition passed with the method.", function(){
+			runs(function(){
+				var ProdFinUsPb = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdFinUsPb", ProdFinUsPb);
+				prdObj.deleteObjectsPropertyBagByCondHash({},{});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondHash("all", {"name":"Arun"},{},['name','age']);
+				var count = prdObj.findObjectsPropertyBagByCondHash("count", {"name":"Arun"},{},['name','age']);
+				expect(res.length).toEqual(1)
+				expect(res[0].name).toEqual("Arun");
+				expect(res[0].age).toEqual("30");
+				expect(count).toEqual(1);
+			});
+		});
+		it("Should find the selective object parameters depeding on the setAttr parameter passed with the method.", function(){
+			runs(function(){
+				var ProdFinUsPb = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdFinUsPb", ProdFinUsPb);
+				prdObj.deleteObjectsPropertyBagByCondHash({},{});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondHash("all", {"name":"Arun"},{},['name','age']);
+				var count = prdObj.findObjectsPropertyBagByCondHash("count", {"name":"Arun"},{},['name','age']);
+				expect(res.length).toEqual(1)
+				expect(res[0].name).toEqual("Arun");
+				expect(res[0].age).toEqual("30");
+				expect(res[0].department).toEqual(null);
+				expect(count).toEqual(1);
+			});
+		});
+		it("Should throw exception when no parameter passed with the method.", function(){
+			runs(function(){
+				var ProdFinUsPb = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "user");
+				};
+				var prdObj = Rho.ORM.addModel("ProdFinUsPb", ProdFinUsPb);
+				prdObj.deleteObjectsPropertyBagByCondHash({},{});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondHash();
+					var count = prdObj.findObjectsPropertyBagByCondHash();
+				}catch(err){
+					error = err;
+				}
+				expect(error).toEqual("Wrong number of arguments: 0 instead of 4");
+			});
+		});
+	});
+});
+describe("findObjectsPropertyBagByCondArray test sets : ", function(){
+	userDB = Rho.ORMHelper.dbConnection('user');
+	localDB = Rho.ORMHelper.dbConnection('local');
+	appDB = Rho.ORMHelper.dbConnection('app');
+	describe("userFs", function(){
+		it("should find all objects when empty paramter is passed with the userFS.", function(){
+			runs(function(){
+				var ProductFinArrUsFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrUsFs", ProductFinArrUsFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "", [], {}, []);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "", [], {}, []);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "", [], {}, []);
+				expect(res.length).toEqual(3);
+				expect(resCount).toEqual(3);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching simple condition passed with the userFs.", function(){
+			runs(function(){
+				var ProductFinArrUsFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrUsFs", ProductFinArrUsFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ?", ['Nadaf'], {}, ['name']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ?", ['Nadaf'], {}, ['name']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ?", ['Nadaf'], {}, ['name']);
+				expect(res.length).toEqual(1);
+				expect(resCount).toEqual(1);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching condition with OR passed with the userFs.", function(){
+			runs(function(){
+				var ProductFinArrUsFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrUsFs", ProductFinArrUsFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				expect(res.length).toEqual(2);
+				expect(resCount).toEqual(2);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching condition with AND passed with the userFs.", function(){
+			runs(function(){
+				var ProductFinArrUsFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrUsFs", ProductFinArrUsFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				expect(res.length).toEqual(1);
+				expect(resCount).toEqual(1);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should throw exception when no parameter is passed with the userFs", function(){
+			runs(function(){
+				var ProductFinArrUsFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrUsFs", ProductFinArrUsFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray();
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("Wrong number of arguments: 0 instead of 5");
+			});
+		});
+		it("Should throw exception when no first parameter with the userFs.", function(){
+			runs(function(){
+				var ProductFinArrUsFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrUsFs", ProductFinArrUsFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray("", "", [], {}, []);
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("findObjectsPropertyBagByCondArray: Invalid Empty First Argument passed.");
+			});
+		});
+		it("Should throw exception when condition is passed as nonexisting column with the userFs.", function(){
+			runs(function(){
+				var ProductFinArrUsFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrUsFs", ProductFinArrUsFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, []);
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("no such column: nonexisting");
+			});
+		});
+	});
+	describe("localFs", function(){
+		it("should find all objects when empty paramter is passed with the localFs.", function(){
+			runs(function(){
+				var ProductFinArrLoFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "local");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrLoFs", ProductFinArrLoFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "", [], {}, []);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "", [], {}, []);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "", [], {}, []);
+				expect(res.length).toEqual(3);
+				expect(resCount).toEqual(3);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching simple condition passed with the localFs.", function(){
+			runs(function(){
+				var ProductFinArrLoFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "local");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrLoFs", ProductFinArrLoFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ?", ['Nadaf'], {}, ['name']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ?", ['Nadaf'], {}, ['name']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ?", ['Nadaf'], {}, ['name']);
+				expect(res.length).toEqual(1);
+				expect(resCount).toEqual(1);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching condition with OR passed with the localFs.", function(){
+			runs(function(){
+				var ProductFinArrLoFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "local");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrLoFs", ProductFinArrLoFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				expect(res.length).toEqual(2);
+				expect(resCount).toEqual(2);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching condition with AND passed with the localFs.", function(){
+			runs(function(){
+				var ProductFinArrLoFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "local");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrLoFs", ProductFinArrLoFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				expect(res.length).toEqual(1);
+				expect(resCount).toEqual(1);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should throw exception when no parameter is passed with the localFs", function(){
+			runs(function(){
+				var ProductFinArrLoFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "local");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrLoFs", ProductFinArrLoFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray();
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("Wrong number of arguments: 0 instead of 5");
+			});
+		});
+		it("Should throw exception when no first parameter with the localFs.", function(){
+			runs(function(){
+				var ProductFinArrLoFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "local");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrLoFs", ProductFinArrLoFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray("", "", [], {}, []);
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("findObjectsPropertyBagByCondArray: Invalid Empty First Argument passed.");
+			});
+		});
+		it("Should throw exception when condition is passed as nonexisting column with the localFs.", function(){
+			runs(function(){
+				var ProductFinArrLoFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "local");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrLoFs", ProductFinArrLoFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, []);
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("no such column: nonexisting");
+			});
+		});
+	});
+	describe("appFs", function(){
+		it("should find all objects when empty paramter is passed with the appFs.", function(){
+			runs(function(){
+				var ProductFinArrAppFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "app");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrAppFs", ProductFinArrAppFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "", [], {}, []);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "", [], {}, []);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "", [], {}, []);
+				expect(res.length).toEqual(3);
+				expect(resCount).toEqual(3);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching simple condition passed with the appFs.", function(){
+			runs(function(){
+				var ProductFinArrAppFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "app");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrAppFs", ProductFinArrAppFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ?", ['Nadaf'], {}, ['name']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ?", ['Nadaf'], {}, ['name']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ?", ['Nadaf'], {}, ['name']);
+				expect(res.length).toEqual(1);
+				expect(resCount).toEqual(1);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching condition with OR passed with the appFs.", function(){
+			runs(function(){
+				var ProductFinArrAppFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "app");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrAppFs", ProductFinArrAppFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ? OR department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				expect(res.length).toEqual(2);
+				expect(resCount).toEqual(2);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should find all the matching condition with AND passed with the appFs.", function(){
+			runs(function(){
+				var ProductFinArrAppFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "app");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrAppFs", ProductFinArrAppFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var res = prdObj.findObjectsPropertyBagByCondArray("all", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resCount = prdObj.findObjectsPropertyBagByCondArray("count", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				var resFirst = prdObj.findObjectsPropertyBagByCondArray("first", "name = ? AND department = ?", ['Nadaf', 'Electronics'], {}, ['name', 'department']);
+				expect(res.length).toEqual(1);
+				expect(resCount).toEqual(1);
+				expect(resFirst.length).toEqual(1);
+			});
+		});
+		it("Should throw exception when no parameter is passed with the appFs", function(){
+			runs(function(){
+				var ProductFinArrAppFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "app");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrAppFs", ProductFinArrAppFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray();
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("Wrong number of arguments: 0 instead of 5");
+			});
+		});
+		it("Should throw exception when no first parameter with the appFs.", function(){
+			runs(function(){
+				var ProductFinArrAppFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "app");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrAppFs", ProductFinArrAppFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray("", "", [], {}, []);
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("findObjectsPropertyBagByCondArray: Invalid Empty First Argument passed.");
+			});
+		});
+		it("Should throw exception when condition is passed as nonexisting column with the appFs.", function(){
+			runs(function(){
+				var ProductFinArrAppFs = function(model){
+					model.setModelProperty("name", "string", "");
+					model.setModelProperty("age", "string", "");
+					model.setModelProperty("department", "string", "");
+					model.setModelProperty("rank", "string", "");
+					model.set("partition", "app");
+				}
+				var prdObj = Rho.ORM.addModel("ProductFinArrAppFs", ProductFinArrAppFs);
+				prdObj.deleteObjectsPropertyBagByCondHash({}, {});
+				var data = [{
+					"name":"Arun",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"1"
+				},{
+					"name":"Vinod",
+					"age":"30",
+					"department":"Computer",
+					"rank":"3"
+				},{
+					"name":"Nadaf",
+					"age":"30",
+					"department":"Electronics",
+					"rank":"2"
+				}];
+				for(var i in data){
+					prdObj.createObject(data[i]);
+				}
+				expect(prdObj.getCount()).toEqual(3);
+				var error = "";
+				try{
+					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, []);
+				} catch(err){
+					error = err;
+				}
+				expect(error).toEqual("no such column: nonexisting");
+			});
+		});
+	});
+});
+describe("getModelProperty test set : ", function(){
+	// afterEach(function(){
+	// 	var partitions = Rho.ORM.getDbPartitions();
+	//     $.each(partitions, function(index, db2){
+	// 		db2.executeSql("DELETE FROM SOURCES");
+	// 		db2.executeSql("DELETE FROM OBJECT_VALUES");
+	// 		db2.executeSql("DELETE FROM CHANGED_VALUES");
+	// 		if(db2.isTableExist("Person")){
+	// 			console.log("Found Person !");
+	// 			db2.executeSql("DROP TABLE Person");
+	// 		}
+	//   	});
+	// });
+	it("Should get value of string property using getModelProperty userFS", function(){
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'user');
+			}
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var createRes = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			var res = perObj.getModelProperty('name');
+			var res1 = perObj.getModelProperty('age');
+			var res2 = perObj.getModelProperty('male');
+			var res3 = perObj.getModelProperty('height');
+			expect(res.name).toEqual("name");
+			expect(res.type).toEqual("String");
+			expect(res.option).toEqual("");
+			expect(res1.name).toEqual("age");
+			expect(res1.type).toEqual("Integer");
+			expect(res1.option).toEqual("");
+			expect(res2.name).toEqual("male");
+			expect(res2.type).toEqual("boolean");
+			expect(res2.option).toEqual("");
+			expect(res3.name).toEqual("height");
+			expect(res3.type).toEqual("Float");
+			expect(res3.option).toEqual("");
+		});
+	});
+	it("Should get value of string property using getModelProperty localFS", function(){
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'local');
+			}
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var createRes = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			var res = perObj.getModelProperty('name');
+			var res1 = perObj.getModelProperty('age');
+			var res2 = perObj.getModelProperty('male');
+			var res3 = perObj.getModelProperty('height');
+			expect(res.name).toEqual("name");
+			expect(res.type).toEqual("String");
+			expect(res.option).toEqual("");
+			expect(res1.name).toEqual("age");
+			expect(res1.type).toEqual("Integer");
+			expect(res1.option).toEqual("");
+			expect(res2.name).toEqual("male");
+			expect(res2.type).toEqual("boolean");
+			expect(res2.option).toEqual("");
+			expect(res3.name).toEqual("height");
+			expect(res3.type).toEqual("Float");
+			expect(res3.option).toEqual("");
+		});
+	});
+	it("Should get value of string property using getModelProperty appFS", function(){
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'app');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var createRes = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			var res = perObj.getModelProperty('name');
+			var res1 = perObj.getModelProperty('age');
+			var res2 = perObj.getModelProperty('male');
+			var res3 = perObj.getModelProperty('height');
+			expect(res.name).toEqual("name");
+			expect(res.type).toEqual("String");
+			expect(res.option).toEqual("");
+			expect(res1.name).toEqual("age");
+			expect(res1.type).toEqual("Integer");
+			expect(res1.option).toEqual("");
+			expect(res2.name).toEqual("male");
+			expect(res2.type).toEqual("boolean");
+			expect(res2.option).toEqual("");
+			expect(res3.name).toEqual("height");
+			expect(res3.type).toEqual("Float");
+			expect(res3.option).toEqual("");
+		});
+	});
+	it("Should get value of string property using getModelProperty userPB", function(){
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'user');
+			}
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var createRes = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			var res = perObj.getModelProperty('name');
+			var res1 = perObj.getModelProperty('age');
+			var res2 = perObj.getModelProperty('male');
+			var res3 = perObj.getModelProperty('height');
+			expect(res.name).toEqual("name");
+			expect(res.type).toEqual("String");
+			expect(res.option).toEqual("");
+			expect(res1.name).toEqual("age");
+			expect(res1.type).toEqual("Integer");
+			expect(res1.option).toEqual("");
+			expect(res2.name).toEqual("male");
+			expect(res2.type).toEqual("boolean");
+			expect(res2.option).toEqual("");
+			expect(res3.name).toEqual("height");
+			expect(res3.type).toEqual("Float");
+			expect(res3.option).toEqual("");
+		});
+	});
+	it("Should get value of string property using getModelProperty localPB", function(){
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'local');
+			}
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var createRes = perObj.createObject({"name": "Arun", "age": 30, "male": true, "height": 170.5});
+			var res = perObj.getModelProperty('name');
+			var res1 = perObj.getModelProperty('age');
+			var res2 = perObj.getModelProperty('male');
+			var res3 = perObj.getModelProperty('height');
+			expect(res.name).toEqual("name");
+			expect(res.type).toEqual("String");
+			expect(res.option).toEqual("");
+			expect(res1.name).toEqual("age");
+			expect(res1.type).toEqual("Integer");
+			expect(res1.option).toEqual("");
+			expect(res2.name).toEqual("male");
+			expect(res2.type).toEqual("boolean");
+			expect(res2.option).toEqual("");
+			expect(res3.name).toEqual("height");
+			expect(res3.type).toEqual("Float");
+			expect(res3.option).toEqual("");
+			var resFs = perObj.findObjects("all",{},[],[],[]);
+		});
+	});
+	it("Should get value of string property using getModelProperty appPB", function(){
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'app');
+			}
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var createRes = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			var res = perObj.getModelProperty('name');
+			var res1 = perObj.getModelProperty('age');
+			var res2 = perObj.getModelProperty('male');
+			var res3 = perObj.getModelProperty('height');
+			expect(res.name).toEqual("name");
+			expect(res.type).toEqual("String");
+			expect(res.option).toEqual("");
+			expect(res1.name).toEqual("age");
+			expect(res1.type).toEqual("Integer");
+			expect(res1.option).toEqual("");
+			expect(res2.name).toEqual("male");
+			expect(res2.type).toEqual("boolean");
+			expect(res2.option).toEqual("");
+			expect(res3.name).toEqual("height");
+			expect(res3.type).toEqual("Float");
+			expect(res3.option).toEqual("");
+		});
+	});
+});
+describe("hasChanges test set : ", function(){
+	it("should return true after modifying the object with the method hasChanges userFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'user');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Nadaf"});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			var res = perObj.hasChanges(objData.object);
+			expect(res).toEqual(true);
+		});
+	});
+	it("should return true after modifying the object with the method hasChanges localFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('local');
+		userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'local');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,objData, {"name":"Nadaf"});
+			var res = perObj.hasChanges(objData.object);
+			expect(res).toEqual(true);
+
+		});
+	});
+	it("should return true after modifying the object with the method hasChanges appFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('app');
+		if(userDB.isTableExist('Person'))
+			userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'app');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,objData, {"name":"Nadaf"});
+			console.log(objData.object);
+			var result = perObj.findObjects("all", {}, [], [], []);
+			console.log(JSON.stringify(result));
+			var res = perObj.hasChanges(objData.object);
+			expect(res).toEqual(true);
+		});
+	});
+	it("should return true after modifying the object with the method hasChanges userPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'user');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun"}, {"name":"Nadaf"});
+			var res = perObj.hasChanges(objData.object);
+			expect(res).toEqual(true);
+		});
+	});
+	it("should return true after modifying the object with the method hasChanges localPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('local');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'local');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun"}, {"name":"Nadaf"});
+			var res = perObj.hasChanges(objData.object);
+			expect(res).toEqual(true);
+		});
+	});
+	it("should return true after modifying the object with the method hasChanges appPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('app');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'app');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun"}, {"name":"Nadaf"});
+			var res = perObj.hasChanges(objData.object);
+			expect(res).toEqual(true);
+		});
+	});
+});
+describe("updateObject test set : ", function(){
+	it("should update an existing record with the new values in userFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		if(userDB.isTableExist('Person'))
+			userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'user');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Nadaf", "age":40, "male":true, "height":180.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Nadaf");
+			expect(resObj[0].age).toEqual("40");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("180.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+	it("should update an existing object with the same values in userFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		if(userDB.isTableExist('Person'))
+			userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'user');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Arun", "age":30, "male":true, "height":170.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Arun");
+			expect(resObj[0].age).toEqual("30");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("170.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+	it("should update an existing record with the new values in localFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('local');
+		if(userDB.isTableExist('Person'))
+			userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'local');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Nadaf", "age":40, "male":true, "height":180.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Nadaf");
+			expect(resObj[0].age).toEqual("40");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("180.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+	it("should update an existing object with the same values in localFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('local');
+		if(userDB.isTableExist('Person'))
+			userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'local');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Arun", "age":30, "male":true, "height":170.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Arun");
+			expect(resObj[0].age).toEqual("30");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("170.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+
+	it("should update an existing record with the new values in appFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('app');
+		if(userDB.isTableExist('Person'))
+			userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'app');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Nadaf", "age":40, "male":true, "height":180.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Nadaf");
+			expect(resObj[0].age).toEqual("40");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("180.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+	it("should update an existing object with the same values in appFS", function(){
+		var userDB = Rho.ORMHelper.dbConnection('app');
+		if(userDB.isTableExist('Person'))
+			userDB.executeSql("DELETE FROM Person");
+		runs(function(){
+			var Person = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'app');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Arun", "age":30, "male":true, "height":170.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Arun");
+			expect(resObj[0].age).toEqual("30");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("170.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+
+	it("should update an existing record with the new values in userPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'user');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Nadaf", "age":40, "male":true, "height":180.5});
+			var resObj = perObj.findObjectsPropertyBagByCondArray("all","", [], {}, []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Nadaf");
+			expect(resObj[0].age).toEqual("40");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("180.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+	it("should update an existing object with the same values in userPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('user');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'user');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Arun", "age":30, "male":true, "height":170.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Arun");
+			expect(resObj[0].age).toEqual("30");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("170.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+
+	it("should update an existing record with the new values in localPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('local');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'local');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Nadaf", "age":40, "male":true, "height":180.5});
+			var resObj = perObj.findObjectsPropertyBagByCondArray("all","", [], {}, []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Nadaf");
+			expect(resObj[0].age).toEqual("40");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("180.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+	it("should update an existing object with the same values in localPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('local');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'local');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Arun", "age":30, "male":true, "height":170.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Arun");
+			expect(resObj[0].age).toEqual("30");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("170.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+	it("should update an existing record with the new values in appPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('app');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'app');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Nadaf", "age":40, "male":true, "height":180.5});
+			var resObj = perObj.findObjectsPropertyBagByCondArray("all","", [], {}, []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Nadaf");
+			expect(resObj[0].age).toEqual("40");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("180.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+	it("should update an existing object with the same values in appPB", function(){
+		var userDB = Rho.ORMHelper.dbConnection('app');
+		userDB.executeSql("DELETE FROM SOURCES");
+		userDB.executeSql("DELETE FROM CLIENT_INFO");
+		userDB.executeSql("DELETE FROM OBJECT_VALUES");
+		runs(function(){
+			var Person = function(model){
+				model.setModelProperty("name", "String", "");
+				model.setModelProperty("age", "Integer", "");
+				model.setModelProperty("male", "boolean", "");
+				model.setModelProperty("height", "Float", "");
+				model.set('partition', 'app');
+			};
+			var perObj = Rho.ORM.addModel("Person", Person);
+			var objData = perObj.createObject({"name":"Arun", "age": 30, "male":true, "height":170.5});
+			perObj.updateObject(objData.object,{"name":"Arun", "age": 30, "male":true, "height":170.5}, {"name":"Arun", "age":30, "male":true, "height":170.5});
+			var resObj = perObj.findObjects("all", {}, [], [], []);
+			console.log("resObj : " + JSON.stringify(resObj));
+			expect(resObj[0].name).toEqual("Arun");
+			expect(resObj[0].age).toEqual("30");
+			expect(resObj[0].male).toEqual("true");
+			expect(resObj[0].height).toEqual("170.500000");// float converts to string with six digits after decimal point.
+			expect(resObj[0].object).toEqual(objData.object);
+		});
+	});
+});
+
+
+
+
+
