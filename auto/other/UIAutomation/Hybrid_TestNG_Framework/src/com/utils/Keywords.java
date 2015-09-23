@@ -2984,10 +2984,21 @@ public class Keywords {
 								
 							}
 						}
+						
+						else if(keyValue[0].contains("rho_callback")) {
+							if(keyValue[1].toLowerCase().contains("1")) {
+								result[i]="Pass";
+								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
+							}
+							else {
+								result[i]="Fail";
+								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
+							}
+						}
 
 						else {
 							result[i]="Fail";
-							log(keyValue[0]+" Value is "+keyValue[1]+" New value");
+							log(keyValue[0]+" Value is "+keyValue[1]+" New value Fail");
 						}
 						
 					}
