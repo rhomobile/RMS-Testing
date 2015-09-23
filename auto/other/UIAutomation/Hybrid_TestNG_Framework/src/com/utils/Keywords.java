@@ -2984,10 +2984,21 @@ public class Keywords {
 								
 							}
 						}
+						
+						else if(keyValue[0].contains("rho_callback")) {
+							if(keyValue[1].toLowerCase().contains("1")) {
+								result[i]="Pass";
+								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
+							}
+							else {
+								result[i]="Fail";
+								log(keyValue[0]+" Value is "+keyValue[1]+" and Result is "+result[i]);
+							}
+						}
 
 						else {
 							result[i]="Fail";
-							log(keyValue[0]+" Value is "+keyValue[1]+" New value");
+							log(keyValue[0]+" Value is "+keyValue[1]+" New value Fail");
 						}
 						
 					}
@@ -4558,8 +4569,15 @@ public class Keywords {
 		}
 		
 	}   
-	
-	
+	public void TaponGetStartparams(Hashtable<String,String> getvalue){
+		String wmsize=executeCommandLine("adb shell wm size");
+		String[] wh = wmsize.split(":");
+		wh[1] = wh[1].replace(" ", "");
+		String[] widthheight = wh[1].split("x");
+		int height = (Integer.parseInt(widthheight[1])/2)-160;
+		int width = (Integer.parseInt(widthheight[0])/2)-150;
+		mobdriv.getAdbConnection().tap(width, height);
+	}
 }
 
 
