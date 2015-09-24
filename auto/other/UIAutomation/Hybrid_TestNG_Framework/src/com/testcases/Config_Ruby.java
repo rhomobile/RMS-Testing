@@ -46,7 +46,9 @@ public class Config_Ruby {
 			app= Keywords.getInstance();				
 			app.setLogger(log);	
 			int cleardata_flag = 1;
-			launch=app.Init_Selendroid(cleardata_flag);
+			String AutName = "Ruby_AUT_Name";
+			String AutId = "Ruby_AUT_ID";
+			launch=app.Init_Selendroid(AutName, AutId, cleardata_flag);
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;

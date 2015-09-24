@@ -3520,6 +3520,19 @@ public class Keywords {
 	public String CheckUITextContains(Hashtable<String,String> getvalue,String arg1){
 		try{
 			log("Entered CheckUITextContains function");
+			if(arg1.contains("stoplistening")) {
+				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS android.intent.action.VIEW", "android.intent.action.VIEW Failed");
+				if(result.contains("android.intent.action.VIEW Failed")) {
+					log("Text is Present");
+					log("Exiting from CheckUITextContains function");
+					return "Pass";
+				}
+				else {
+					log("Text is not Present");
+					log("Exiting from CheckUITextContains function");
+					return "Fail";
+				}
+			}
 			String toCheck=null;
 			String result=null;
 			toCheck=arg1+" Success";
