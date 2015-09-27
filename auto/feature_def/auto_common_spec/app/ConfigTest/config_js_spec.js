@@ -1,23 +1,53 @@
+var config = {
+	_config_path : undefined,
+	getDefaultConfigPath : function(){
+		return config._config_path;
+	},
+	setDefaultConfigPath : function(data){
+		if (config._config_path == undefined){
+			config._config_path = data;
+		}
+	}
+};
 describe('Rho.Config module', function() {
+	//Don't call this set anywhere else. Test may behave abnormally.
+	config.setDefaultConfigPath(Rho.Config.configPath);
 	
     beforeEach(function() {
-
+		Rho.Config.configPath = config.getDefaultConfigPath();
+		Rho.Config.loadFromFile();
     });
 
     afterEach(function() {
 
     });
-    if(isWindowsPhone8Platform() || isApplePlatform()) {
-
+    //Made the test common for android and ios. Duplicate test with android condition is not required.
+    //if(isWindowsPhone8Platform() || isApplePlatform()) {
     	it("Should return default rhoconfig path", function() {
 	    	var defaultConfigPath = Rho.Config.configPath;
-	    	expect(defaultConfigPath).toEqual('rho/apps/rhoconfig.txt'); 
+	    	if(isApplePlatform())
+	    		expect(defaultConfigPath).toMatch(/Library\/Caches\/Private Documents\/apps\/rhoconfig.txt/);
+	    	if(isAndroidPlatform())
+	    		expect(defaultConfigPath).toMatch(/\/rhodata\/apps\/rhoconfig.txt/);
 	    });
 
+    	it("isPropertyExists method should return true if start_path property exists in rhoconfig file ", function() {
+	    	var returnVal = Rho.Config.isPropertyExists("start_path");
+	    	expect(returnVal).toEqual(true);
+	    });
+
+	   	it("isPropertyExists method should return true if MinSeverity property exists in rhoconfig file", function() {
+	    	var returnVal = Rho.Config.isPropertyExists("MinSeverity");
+	    	expect(returnVal).toEqual(true);
+	    });
+
+
+
 	    it("Should set rhoconfig to different path in device", function() {
-	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	var custom_config_path = Rho.Application.modelFolderPath("ConfigTest")+"rhoconfig.txt";
+	    	Rho.Config.configPath = custom_config_path;
 	    	var newConfigPath = Rho.Config.configPath;
-	    	expect(newConfigPath).toEqual('rho/apps/app/ConfigTest/rhoconfig.txt');
+	    	expect(newConfigPath).toEqual(custom_config_path);
 	    	Rho.Config.loadFromFile();
 	    	var result = Rho.Config.getPropertyString("start_path")
 			expect(result).toEqual('/app/ConfigTest/specRunner.html');
@@ -26,22 +56,12 @@ describe('Rho.Config module', function() {
 	    
 	    
 	    it("Should not behave abnormally on setting invalid rhoconfig path", function() {
-	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
-	    	var defaultConfigPath = Rho.Config.configPath;
 	    	Rho.Config.configPath = "/app//Invalid!@#rhoconfig.txt";
 	    	var newConfigPath = Rho.Config.configPath;
 	    	expect(newConfigPath).toEqual("/app//Invalid!@#rhoconfig.txt");
 	    });
-
-	    it("isPropertyExists method should return true if start_path property exists in rhoconfig file ", function() {
-	    	var returnVal = Rho.Config.isPropertyExists("start_path");
-	    	expect(returnVal).toEqual(true);
-	    });
 	     
-	    it("isPropertyExists method should return true if MinSeverity property exists in rhoconfig file", function() {
-	    	var returnVal = Rho.Config.isPropertyExists("MinSeverity");
-	    	expect(returnVal).toEqual(true);
-	    });
+
 
 	    //disable_loading_indication should be commented in rhoconfig.txt file
 	    it("isPropertyExists method should return false if disable_loading_indication property is commented in rhoconfig file", function() {
@@ -61,18 +81,18 @@ describe('Rho.Config module', function() {
 	    });
 
 	    it("loadFromFile method should load default rhoconfig file after setting to different rhoconfig path", function() {
-	    	Rho.Config.configPath = 'rho/apps/rhoconfig.txt';
-	    	Rho.Config.loadFromFile();
 	    	var returnStr = Rho.Config.getPropertyString('start_path');
 	    	var returnInt = Rho.Config.getPropertyInt('MinSeverity');
-	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	var custom_config_path = Rho.Application.modelFolderPath("ConfigTest")+"/rhoconfig.txt";
+	    	Rho.Config.configPath = custom_config_path;
 	    	Rho.Config.loadFromFile();
 	    	expect(Rho.Config.getPropertyString('start_path')).not.toEqual(returnStr);
 	    	expect(Rho.Config.getPropertyInt('MinSeverity')).not.toEqual(returnInt);
 	    });
 	    
 	    it("removeProperty should remove logserver property when multiple logserver property exists in rhoconfig", function() {
-	    	Rho.Config.configPath = "rho/apps/app/ConfigTest/rhoconfig.txt";
+	    	var custom_config_path = Rho.Application.modelFolderPath("ConfigTest")+"/rhoconfig.txt";
+	    	Rho.Config.configPath = custom_config_path;
 	    	Rho.Config.loadFromFile();
 	    	if(Rho.Config.isPropertyExists("logserver")) {
 	    		Rho.Config.removeProperty("logserver", false);
@@ -85,16 +105,17 @@ describe('Rho.Config module', function() {
 	    }); 
 	    
 	    it("Should set rhoconfig to default path and checking the original start path", function() {
-	    	Rho.Config.configPath = "rho/apps/rhoconfig.txt";
-	    	Rho.Config.loadFromFile();
 	    	var newConfigPath = Rho.Config.configPath;
-	    	var actual = Rho.Config.getPropertyString("start_path")
-	    	expect(newConfigPath).toEqual('rho/apps/rhoconfig.txt');
+	    	var actual = Rho.Config.getPropertyString("start_path");
+	    	if(isApplePlatform())
+	    		expect(config.getDefaultConfigPath()).toMatch(/Library\/Caches\/Private Documents\/apps\/rhoconfig.txt/);
+	    	if(isAndroidPlatform())
+	    		expect(config.getDefaultConfigPath()).toMatch(/\/rhodata\/apps\/rhoconfig.txt/);
 	    	expect(actual).toEqual("/app/index.html");
 	    });
 
-    }
-   
+    //}
+/*   
 	  if(isAndroidPlatform()) {
 
     	it("Should return default rhoconfig path", function() {
@@ -182,10 +203,14 @@ describe('Rho.Config module', function() {
 	    });
 
     }
-   
+*/   
 	   
 
 	describe("Get default using getPropertyString method", function () {
+	    beforeEach(function() {
+			Rho.Config.configPath = config.getDefaultConfigPath();
+			Rho.Config.loadFromFile();
+		});
 		for (var i = 0; i < config_get_property.length; i++) {
 	        (function (idx) {
 
@@ -197,11 +222,7 @@ describe('Rho.Config module', function() {
 
 	            if (isTestApplicable(suitablePlatforms)) {
 	                it(testName+"getPropertyString method", function () {
-	                	Rho.Config.configPath = "/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt";
-	        	    	Rho.Config.loadFromFile();
-	                	var newConfigPath = Rho.Config.configPath;
-	                	var actual = Rho.Config.getPropertyString(propertyName)
-						expect(newConfigPath).toEqual('/data/data/com.rhomobile.auto_common_spec/rhodata/apps/rhoconfig.txt');
+	                	var actual = Rho.Config.getPropertyString(propertyName);
 	                	expect(actual).toEqual(expectedValue);
 	                });
 	            }
