@@ -299,7 +299,11 @@ describe("Application JS API", function () {
 		it("Property 'appsBundleFolder'", function () {
 			var path = Rho.Application.appsBundleFolder
 			//TODO: Need to add a check auto_common_spec should be the last in the path
-			expect(path).toMatch(/auto_common_spec/);
+			//expect(path).toMatch(/auto_common_spec/);
+            if(isApplePlatform())
+                expect(path).toMatch(/Library\/Caches\/Private Documents\/apps/);
+            else
+                expect(path).toMatch(/auto_common_spec/);
 			expect(Rho.RhoFile.isDir(path)).toBeTruthy();
     	});
 
@@ -349,7 +353,11 @@ describe("Application JS API", function () {
 
     	it("Property \"userFolder\"", function () {
     		var path = Rho.Application.userFolder;
-    		expect(path).toMatch(/auto_common_spec/);
+    		//expect(path).toMatch(/auto_common_spec/);
+            if(isApplePlatform())
+                expect(path).toMatch(/Documents\/apps/);
+            else
+                expect(path).toMatch(/auto_common_spec/);
     		expect(Rho.RhoFile.isDir(path)).toBeTruthy();
     	});
 
