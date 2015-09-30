@@ -2710,12 +2710,14 @@ public class Keywords {
 				return "Pass";
 			 }
 			else if(content.contains("signalStrength")){
-				String tem = content.substring(19,22);
-				Integer signalvalue = Integer.valueOf(tem);
+				//String tem = content.substring(19,22);
+				String[] tem = content.split(":");
+				tem[2] = tem[2].replace(" ", "");
+				Integer signalvalue = Integer.valueOf(tem[2]);
 				if(signalvalue > 50){
-				log("signal value is correct");				
-				log("Exiting from checkValue function");
-				return "Pass";
+					log("signal value is correct");				
+					log("Exiting from checkValue function");
+					return "Pass";
 				}
 				else{
 				log("signal value is incorrect");	
