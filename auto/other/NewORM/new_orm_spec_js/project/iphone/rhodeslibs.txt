@@ -1,0 +1,9 @@
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libCoreAPI.a
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libRhoconnect-client.a
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libDevelopment.a
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libAudioCapture.a
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libBarcode.a
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libSignature.a
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libIndicators.a
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libHardwareKeys.a
+/Users/raghavendrakamble/ARUN/GIT/RMS-Testing/auto/feature_def/new_orm_spec_js/project/iphone/build/rhorunner.build/Release-iphoneos/rhorunner.build/libSensor.a

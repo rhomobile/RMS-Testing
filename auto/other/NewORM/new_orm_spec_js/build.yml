@@ -1,0 +1,22 @@
+name: "new_orm_spec_js"
+app_type: "rhoelements"
+applog: "RhoLogSpec.txt"
+version: 1.1
+vendor: "rhomobile"
+build: "debug"
+iphone:
+  configuration: "Release"
+  sdk: "iphoneos8.3"
+  provisionprofile: 
+  codesignidentity: "iPhone Developer"
+  entitlements: 
+  BundleIdentifier: "com.newormspecjs"
+  BundleURLScheme: "newormspecjs"
+android:
+  version: "4.4.2"
+wp:
+  productid: "b5499381-42a8-0130-78de-3caec51bd50e"
+extensions:
+  - json
+  - rhoconnect-client
+  - development
