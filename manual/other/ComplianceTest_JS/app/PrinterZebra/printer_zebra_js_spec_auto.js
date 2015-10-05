@@ -956,7 +956,7 @@ describe('Printer Zebra', function() {
         var formats = [
             ['connectionType', 'string'],
             ['deviceAddress', 'string'],
-            ['id', 'string'],
+            ['ID', 'string'],
             ['deviceName', 'string'],
             ['printerType', 'string'],
             ['isConnected', 'boolean']

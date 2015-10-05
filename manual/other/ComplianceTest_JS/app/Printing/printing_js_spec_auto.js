@@ -767,7 +767,7 @@ describe('Printing Generic', function() {
     describe("Getting properties of the connected printer", function() {
         
         var offIter = 0;
-        var formats = [['connectionType', 'string'],['deviceAddress', 'string'],['id', 'string'], ['deviceName', 'string'], ['printerType', 'string'], ['isConnected', 'boolean']];
+        var formats = [['connectionType', 'string'],['deviceAddress', 'string'],['ID', 'string'], ['deviceName', 'string'], ['printerType', 'string'], ['isConnected', 'boolean']];
         
         for (var i = 0; i < formats.length; i++) {
             var property = formats[i][0];
