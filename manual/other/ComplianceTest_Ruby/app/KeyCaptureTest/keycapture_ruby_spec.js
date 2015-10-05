@@ -128,21 +128,21 @@ describe("KeyCapture Test", function() {
 		it("VT200-0609 | call captureKey with different callback for 2 different keys |", function() {
 
 			displayObjective(jasmine.getEnv().currentSpec.description);
-			dispTestCaseRunning("Press " +hardwareKeysTest.testKey18.description+", Press numeric key " +hardwareKeysTest.testKey21.description);
-			dispExpectedResult("2 different Callback should fire after pressing " +hardwareKeysTest.testKey18.description+" and " +hardwareKeysTest.testKey21.description+ " Key" + hardwareKeysTest.testKey11.description + "should not dispatch and other should dispatch" );
+			dispTestCaseRunning("Press " +hardwareKeysTest.testKey18.description+", Press numeric key " +hardwareKeysTest.testKey14.description);
+			dispExpectedResult("2 different Callback should fire after pressing " +hardwareKeysTest.testKey18.description+" and " +hardwareKeysTest.testKey14.description+ " Key" + hardwareKeysTest.testKey18.description + "should not dispatch and other should dispatch" );
 
 			_result.waitToRunTest();
 
 			runs(function(){
-				Ruby.call('KeyCaptureTest','capturekey?keystring='+hardwareKeysTest.testKey21.string+'&truth=yes&call=yes');
-				Ruby.call('KeyCaptureTest','capturekey_method?keystring='+hardwareKeysTest.testKey18.string+'&call=yes');
+				Ruby.call('KeyCaptureTest','capturekey?keystring='+hardwareKeysTest.testKey18.string+'&truth=yes&call=yes');
+				Ruby.call('KeyCaptureTest','capturekey_method?keystring='+hardwareKeysTest.testKey14.string+'&call=yes');
 			});
 
 			_result.waitForResponse();
 
 			runs(function(){
-				Ruby.call('KeyCaptureTest','capturekey?keystring='+hardwareKeysTest.testKey21.string+'&truth=yes');
-				Ruby.call('KeyCaptureTest','capturekey_method?keystring='+hardwareKeysTest.testKey18.string+'&truth=yes');
+				Ruby.call('KeyCaptureTest','capturekey?keystring='+hardwareKeysTest.testKey18.string+'&truth=yes');
+				Ruby.call('KeyCaptureTest','capturekey_method?keystring='+hardwareKeysTest.testKey14.string+'&truth=yes');
 			});
 
 		});
