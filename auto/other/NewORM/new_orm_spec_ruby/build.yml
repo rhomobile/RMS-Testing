@@ -1,0 +1,32 @@
+sdkversion: "5.2.0"
+name: "new_orm_spec_ruby"
+version: "1.0"
+vendor: "rhomobile"
+build: "debug"
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator8.2"
+  provisionprofile: 
+  codesignidentity: "iPhone Developer"
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.newormspecruby"
+  BundleURLScheme: "newormspecruby"
+  production:
+    ipa_itunesartwork_image: "./production/iTunesArtwork.png"
+wp8:
+  productid: "cb82a880-2a08-0133-2c51-60f81db167a0"
+android:
+  version: "2.3.3"
+  logcatFilter: "APP:I StrictMode:I DEBUG:I *:E"
+wm: 
+win32:
+  deployqt: "1"
+  deploymsvc: "1"
+extensions:
+  - rhoconnect-client
+rhobundle:
+  exclude_items:
+    - thumb.db
+app_type: "rhoelements"
+capabilities: 
