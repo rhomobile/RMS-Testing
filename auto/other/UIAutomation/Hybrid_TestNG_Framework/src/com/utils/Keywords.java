@@ -2254,11 +2254,11 @@ public class Keywords {
 							eleScreenshot = fullImg.getSubimage(0, 50, width, 120);*/
 					else if(ModuleName.contains("Tabbar")) {
 						mobdriv.switchTo().window("NATIVE_APP");
-			    		if(mobdriv.findElementByXPath("//TabWidget").isDisplayed()) {
-				    		Dimension dim = mobdriv.findElementByXPath("//TabWidget").getSize();
+			    		if(element("tabbar_xpath").isDisplayed()) {
+				    		Dimension dim = element("tabbar_xpath").getSize();
 				    		System.out.println(dim.height);
 				    		System.out.println(dim.width);
-				    		Point t = mobdriv.findElementByXPath("//TabWidget").getLocation();
+				    		Point t = element("tabbar_xpath").getLocation();
 				    		System.out.println(t.getX());
 				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
@@ -2267,11 +2267,11 @@ public class Keywords {
 					}
 					else if(ModuleName.contains("SignalIndicator")) {
 						mobdriv.switchTo().window("NATIVE_APP");
-			    		if(mobdriv.findElementByXPath("//SignalIndicatorsView").isDisplayed()) {
-				    		Dimension dim = mobdriv.findElementByXPath("//SignalIndicatorsView").getSize();
+			    		if(element("signalview_xpath").isDisplayed()) {
+				    		Dimension dim = element("signalview_xpath").getSize();
 				    		System.out.println(dim.height);
 				    		System.out.println(dim.width);
-				    		Point t = mobdriv.findElementByXPath("//SignalIndicatorsView").getLocation();
+				    		Point t = element("signalview_xpath").getLocation();
 				    		System.out.println(t.getX());
 				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
@@ -2280,11 +2280,11 @@ public class Keywords {
 					}
 					else if(ModuleName.contains("BatteryIndicator")) {
 						mobdriv.switchTo().window("NATIVE_APP");
-			    		if(mobdriv.findElementByXPath("//BatteryView").isDisplayed()) {
-				    		Dimension dim = mobdriv.findElementByXPath("//BatteryView").getSize();
+			    		if(element("batteryview_xpath").isDisplayed()) {
+				    		Dimension dim = element("batteryview_xpath").getSize();
 				    		System.out.println(dim.height);
 				    		System.out.println(dim.width);
-				    		Point t = mobdriv.findElementByXPath("//BatteryView").getLocation();
+				    		Point t = element("batteryview_xpath").getLocation();
 				    		System.out.println(t.getX());
 				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
@@ -2293,11 +2293,11 @@ public class Keywords {
 					}
 					else if(ModuleName.contains("Toolbar")&&!(screenshot_id.contains("Options")||screenshot_id.contains("Fullscreen")||screenshot_id.contains("Sync"))) {
 						mobdriv.switchTo().window("NATIVE_APP");
-			    		if(mobdriv.findElementByXPath("//LinearLayout").isDisplayed()) {
-				    		Dimension dim = mobdriv.findElementByXPath("//LinearLayout").getSize();
+			    		if(element("toobarview_xpath").isDisplayed()) {
+				    		Dimension dim = element("toobarview_xpath").getSize();
 				    		System.out.println(dim.height);
 				    		System.out.println(dim.width);
-				    		Point t = mobdriv.findElementByXPath("//LinearLayout").getLocation();
+				    		Point t = element("toobarview_xpath").getLocation();
 				    		System.out.println(t.getX());
 				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
@@ -2600,12 +2600,12 @@ public class Keywords {
 					Scanner scanner = new Scanner(tmp);
 					if(scanner.hasNextDouble()) {
 						Double value_double = Double.valueOf(tmp);
-						if(ModuleName.contains("SignalIndicator")&&value_double>10.0) {
+						if(ModuleName.contains("SignalIndicator")&&value_double>20.0) {
 							log("Partial Match found with reference image "+value_double);				
 							log("Exiting from validate_Screenshot function");
 							return "Pass";
 						}
-						else if(ModuleName.contains("BatteryIndicator")&&value_double>10.0) {
+						else if(ModuleName.contains("BatteryIndicator")&&value_double>20.0) {
 							log("Partial Match found with reference image "+value_double);				
 							log("Exiting from validate_Screenshot function");
 							return "Pass";
@@ -3590,12 +3590,25 @@ public class Keywords {
 			if(arg1.contains("stoplistening")) {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS android.intent.action.VIEW", "android.intent.action.VIEW Failed");
 				if(result.contains("android.intent.action.VIEW Failed")) {
-					log("Text is Present");
+					log("Text is not Present");
 					log("Exiting from CheckUITextContains function");
 					return "Pass";
 				}
 				else {
+					log("Text is Present");
+					log("Exiting from CheckUITextContains function");
+					return "Fail";
+				}
+			}
+			if(arg1.contains("hidepopup")) {
+				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS This_is_a_pop_up_for_hide", "This_is_a_pop_up_for_hide Failed");
+				if(result.contains("Fail")) {
 					log("Text is not Present");
+					log("Exiting from CheckUITextContains function");
+					return "Pass";
+				}
+				else {
+					log("Text is Present");
 					log("Exiting from CheckUITextContains function");
 					return "Fail";
 				}
@@ -4708,6 +4721,9 @@ public class Keywords {
 			log("Entered validate_isIconDisplayed function");	
 			String[] tmp = objname.split(",");
 			mobdriv.switchTo().window("NATIVE_APP");
+			if(tmp[0].contains("tabbar_xpath")&&tmp[1].contains("false")) {
+				mobdriv.findElementByXPath("//TabWidget").isDisplayed();
+			}
     		if(element(tmp[0]).isDisplayed() && tmp[1].contains("true")) {
     			mobdriv.switchTo().window("WEBVIEW");
 	    		return "Pass";
@@ -4726,6 +4742,11 @@ public class Keywords {
 		}
 		catch(Exception ex){
 			log("reason :"+ex.getMessage());
+			String[] tmp = objname.split(",");
+			if(tmp[0].contains("tabbar_xpath")&&tmp[1].contains("false")) {
+				mobdriv.switchTo().window("WEBVIEW");
+				return "Pass";
+			}
 			mobdriv.switchTo().window("WEBVIEW");
 			log("Exiting from validate_Iconposition function");
 			return "Fail";

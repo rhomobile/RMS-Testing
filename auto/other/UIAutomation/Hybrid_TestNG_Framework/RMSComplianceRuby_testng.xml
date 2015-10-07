@@ -1,0 +1,69 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="RUBYTesting">
+<test name="Application_Ruby">
+		<classes>
+			<class name="com.testcases.Application_Ruby" ></class> 
+		</classes>
+	</test>
+	<test name="BatteryIndicator_Ruby">
+		<classes>
+			<class name="com.testcases.BatteryIndicator_Ruby" ></class> 
+		</classes>
+	</test>
+	<test name="Config_Ruby">
+		<classes>
+			<class name="com.testcases.Config_Ruby" ></class> 
+		</classes>
+	</test>
+	<test name="Intent_Ruby">
+		<classes>
+			<class name="com.testcases.Intent_Ruby" ></class> 
+		</classes>
+	</test>
+	<test name="Keycapture_Ruby">
+		<classes>
+			<class name="com.testcases.Keycapture_Ruby" ></class> 
+		</classes>
+	</test>	
+	<test name="Network_Ruby">
+		<classes>
+			<class name="com.testcases.Network_Ruby" ></class> 
+		</classes>
+	</test>	
+	<test name="Notification_Ruby">
+		<classes>
+			<class name="com.testcases.Notification_Ruby" ></class> 
+		</classes>
+	</test>	
+	<test name="SignalIndicator_Ruby">
+		<classes>
+			<class name="com.testcases.SignalIndicator_Ruby" ></class> 
+		</classes>
+	</test>	
+	<test name="Signature_Ruby">
+		<classes>
+			<class name="com.testcases.Signature_Ruby" ></class> 
+		</classes>
+	</test>
+	<test name="System_Ruby">
+		<classes>
+			<class name="com.testcases.System_Ruby" ></class> 
+		</classes>
+	</test>	
+	<test name="Tabbar_Ruby">
+		<classes>
+			<class name="com.testcases.Tabbar_Ruby" ></class> 
+		</classes>
+	</test>	
+	<test name="Toolbar_Ruby">
+		<classes>
+			<class name="com.testcases.Toolbar_Ruby" ></class> 
+		</classes>
+	</test>
+	<test name="Webview_Ruby">
+		<classes>
+			<class name="com.testcases.Webview_Ruby" ></class> 
+		</classes>
+	</test>	
+	
+</suite>
