@@ -1,0 +1,37 @@
+sdkversion: "5.2.0"
+name: "AndroidJNI_Ruby"
+version: 1.0
+vendor: "rhomobile"
+build: "debug"
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator8.2"
+  provisionprofile: 
+  codesignidentity: "iPhone Developer"
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.androidjniruby"
+  BundleURLScheme: "androidjniruby"
+  production:
+    ipa_itunesartwork_image: "./production/iTunesArtwork.png"
+wp8:
+  productid: "92f37f80-1e33-0133-a045-44d987e6c93f"
+android:
+#manifest_template: 'AndroidManifest.erb'
+  version: "4.4.2"
+# Note: in order to simplify debugging only app messages and system channels with priority informative and higher, and any errors are enabled by default
+  logcatFilter: "APP:I StrictMode:I DEBUG:I *:E"
+  tarSdkVer: "18"
+  capabilities:
+wm: 
+#sdk: "MC3000c50b (ARMV4I)"
+#sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
+win32:
+  deployqt: 1
+  deploymsvc: 1
+extensions:
+  - rhoconnect-client
+  - dummy
+rhobundle:
+  exclude_items:
+    - thumb.db

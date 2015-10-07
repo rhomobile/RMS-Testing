@@ -1,0 +1,32 @@
+sdkversion: "5.2.0"
+name: "Asset_NonAsset"
+version: "1.0"
+vendor: "rhomobile"
+build: "debug"
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator8.2"
+  provisionprofile: 
+  codesignidentity: "iPhone Developer"
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.assetnonassetjs"
+  BundleURLScheme: "assetnonassetjs"
+  production:
+    ipa_itunesartwork_image: "./production/iTunesArtwork.png"
+wp8:
+  productid: "4f7f47c0-31d7-0133-9538-548564b7d7a8"
+android:
+  version: "2.3.3"
+  logcatFilter: "APP:I StrictMode:I DEBUG:I *:E"
+wm: 
+win32:
+  deployqt: "1"
+  deploymsvc: "1"
+extensions:
+  - rhoconnect-client
+rhobundle:
+  exclude_items:
+    - thumb.db
+app_type: "rhoelements"
+capabilities: 

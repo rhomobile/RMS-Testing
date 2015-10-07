@@ -1,0 +1,9 @@
+ext/platform/android/generated/src/com/rho/dummy/DummyBase.java
+ext/platform/android/generated/src/com/rho/dummy/DummyFactorySingleton.java
+ext/platform/android/generated/src/com/rho/dummy/DummySingletonBase.java
+ext/platform/android/generated/src/com/rho/dummy/IDummy.java
+ext/platform/android/generated/src/com/rho/dummy/IDummyFactory.java
+ext/platform/android/generated/src/com/rho/dummy/IDummySingleton.java
+ext/platform/android/src/com/rho/dummy/Dummy.java
+ext/platform/android/src/com/rho/dummy/DummyFactory.java
+ext/platform/android/src/com/rho/dummy/DummySingleton.java
