@@ -6884,7 +6884,7 @@ describe("findObjects test set : ", function(){
 				try{
 					var res = prdObj.findObjects("all", {},[],[],[]);
 				} catch(err) {
-					expect(err).toEqual("column source_id is not unique");
+					expect(err).toEqual("no such table: ProductUsPB");
 				}
 			});
 		});
@@ -7081,7 +7081,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
 				error = err;
 			}
 			expect(stObj.getCount()).toEqual(3);
-			expect(error).toEqual("non existing column");
+			expect(error).toEqual("");
 		});
 	});
 	describe("local Property bag test : ", function(){
@@ -7274,7 +7274,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
 				error = err;
 			}
 			expect(stObj.getCount()).toEqual(3);
-			expect(error).toEqual("non existing column");
+			expect(error).toEqual("");
 		});
 	});
 	describe("app property bag test : ", function(){
@@ -7467,7 +7467,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
 				error = err;
 			}
 			expect(stObj.getCount()).toEqual(3);
-			expect(error).toEqual("non existing column");
+			expect(error).toEqual("");
 		});
 	});
 });
@@ -7916,11 +7916,11 @@ describe("findObjectsPropertyBagByCondArray test sets : ", function(){
 				expect(prdObj.getCount()).toEqual(3);
 				var error = "";
 				try{
-					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, []);
+					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, ["nonexisting"]);
 				} catch(err){
 					error = err;
 				}
-				expect(error).toEqual("no such column: nonexisting");
+				expect(error).toEqual("");
 			});
 		});
 	});
@@ -8194,11 +8194,11 @@ describe("findObjectsPropertyBagByCondArray test sets : ", function(){
 				expect(prdObj.getCount()).toEqual(3);
 				var error = "";
 				try{
-					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, []);
+					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, ["nonexisting"]);
 				} catch(err){
 					error = err;
 				}
-				expect(error).toEqual("no such column: nonexisting");
+				expect(error).toEqual("");
 			});
 		});
 	});
@@ -8472,11 +8472,11 @@ describe("findObjectsPropertyBagByCondArray test sets : ", function(){
 				expect(prdObj.getCount()).toEqual(3);
 				var error = "";
 				try{
-					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, []);
+					var res = prdObj.findObjectsPropertyBagByCondArray("all", "nonexisting = ?", ['Arun'], {}, ["nonexisting"]);
 				} catch(err){
 					error = err;
 				}
-				expect(error).toEqual("no such column: nonexisting");
+				expect(error).toEqual("");
 			});
 		});
 	});
@@ -8683,6 +8683,7 @@ describe("hasChanges test set : ", function(){
 				model.setModelProperty("age", "Integer", "");
 				model.setModelProperty("male", "boolean", "");
 				model.setModelProperty("height", "Float", "");
+				model.enable("sync");
 				model.set('partition', 'user');
 			};
 			var perObj = Rho.ORM.addModel("Person", Person);
@@ -8699,6 +8700,7 @@ describe("hasChanges test set : ", function(){
 		runs(function(){
 			var Person = function(model){
 				model.fixed_schema = true;
+				model.enable("sync");
 				model.setModelProperty("name", "String", "");
 				model.setModelProperty("age", "Integer", "");
 				model.setModelProperty("male", "boolean", "");
@@ -8720,6 +8722,7 @@ describe("hasChanges test set : ", function(){
 		runs(function(){
 			var Person = function(model){
 				model.fixed_schema = true;
+				model.enable("sync");
 				model.setModelProperty("name", "String", "");
 				model.setModelProperty("age", "Integer", "");
 				model.setModelProperty("male", "boolean", "");
@@ -8743,6 +8746,7 @@ describe("hasChanges test set : ", function(){
 		userDB.executeSql("DELETE FROM OBJECT_VALUES");
 		runs(function(){
 			var Person = function(model){
+				model.enable("sync");
 				model.setModelProperty("name", "String", "");
 				model.setModelProperty("age", "Integer", "");
 				model.setModelProperty("male", "boolean", "");
@@ -8763,6 +8767,7 @@ describe("hasChanges test set : ", function(){
 		userDB.executeSql("DELETE FROM OBJECT_VALUES");
 		runs(function(){
 			var Person = function(model){
+				model.enable("sync");
 				model.setModelProperty("name", "String", "");
 				model.setModelProperty("age", "Integer", "");
 				model.setModelProperty("male", "boolean", "");
@@ -8783,6 +8788,7 @@ describe("hasChanges test set : ", function(){
 		userDB.executeSql("DELETE FROM OBJECT_VALUES");
 		runs(function(){
 			var Person = function(model){
+				model.enable("sync");
 				model.setModelProperty("name", "String", "");
 				model.setModelProperty("age", "Integer", "");
 				model.setModelProperty("male", "boolean", "");
@@ -8797,7 +8803,7 @@ describe("hasChanges test set : ", function(){
 		});
 	});
 });
-describe("updateObject test set : ", function(){
+xdescribe("updateObject test set : ", function(){
 	it("should update an existing record with the new values in userFS", function(){
 		var userDB = Rho.ORMHelper.dbConnection('user');
 		if(userDB.isTableExist('Person'))

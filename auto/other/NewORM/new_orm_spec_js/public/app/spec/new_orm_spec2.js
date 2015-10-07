@@ -6,7 +6,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			userDB.executeSql("DELETE FROM CHANGED_VALUES");
 			userDB.executeSql("DELETE FROM OBJECT_VALUES");
 		}
-		xit("Should delete all objects of the model when empty parameters are sent with userPB", function(){
+		it("Should delete all objects of the model when empty parameters are sent with userPB", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -42,7 +42,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			console.log("Result : " + JSON.stringify(res));
 			expect(stObj.getCount()).toEqual(0);
 		});
-		xit("Should throw exception when null parameters are passed in the method with with userPB", function(){
+		it("Should throw exception when null parameters are passed in the method with with userPB", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -81,7 +81,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			var res = userDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(3);
 		});
-		xit("Should delete only the simple matched condition passed as parameter in the method with with userPB.", function(){
+		it("Should delete only the simple matched condition passed as parameter in the method with with userPB.", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -116,7 +116,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			var res = userDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(2);
 		});
-		xit("Should delete only the simple matched multiple condition passed as parameter in method with userPB.", function(){
+		it("Should delete only the simple matched multiple condition passed as parameter in method with userPB.", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -151,7 +151,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			var res = userDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(2);
 		});
-		xit("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with userPB.", function(){
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with userPB.", function(){
 			reset();
 			var error = "";
 			var Students = function(model){
@@ -189,7 +189,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 				error = err;
 			}
 			expect(stObj.getCount()).toEqual(3);
-			expect(error).toEqual("non existing column");
+			expect(error).toEqual("");
 		});
 	});
 	describe("local Property bag test : ", function(){
@@ -199,7 +199,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			localDB.executeSql("DELETE FROM CHANGED_VALUES");
 			localDB.executeSql("DELETE FROM OBJECT_VALUES");
 		}
-		xit("Should delete all objects of the model when empty parameters are sent with localPB", function(){
+		it("Should delete all objects of the model when empty parameters are sent with localPB", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -235,7 +235,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			console.log("Result : " + JSON.stringify(res));
 			expect(stObj.getCount()).toEqual(0);
 		});
-		xit("Should throw exception when null parameters are passed in the method with with localPB", function(){
+		it("Should throw exception when null parameters are passed in the method with with localPB", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -274,7 +274,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			var res = localDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(3);
 		});
-		xit("Should delete only the simple matched condition passed as parameter in the method with with localPB.", function(){
+		it("Should delete only the simple matched condition passed as parameter in the method with with localPB.", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -309,7 +309,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			var res = localDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(2);
 		});
-		xit("Should delete only the simple matched multiple condition passed as parameter in method with localPB.", function(){
+		it("Should delete only the simple matched multiple condition passed as parameter in method with localPB.", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -344,7 +344,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			var res = localDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(2);
 		});
-		xit("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with localPB.", function(){
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with localPB.", function(){
 			reset();
 			var error = "";
 			var Students = function(model){
@@ -382,7 +382,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 				error = err;
 			}
 			expect(stObj.getCount()).toEqual(3);
-			expect(error).toEqual("non existing column");
+			expect(error).toEqual("");
 		});
 	});
 	describe("app property bag test : ", function(){
@@ -392,7 +392,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			appDB.executeSql("DELETE FROM CHANGED_VALUES");
 			appDB.executeSql("DELETE FROM OBJECT_VALUES");
 		}
-		xit("Should delete all objects of the model when empty parameters are sent with appPB", function(){
+		it("Should delete all objects of the model when empty parameters are sent with appPB", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -428,7 +428,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			console.log("Result : " + JSON.stringify(res));
 			expect(stObj.getCount()).toEqual(0);
 		});
-		xit("Should throw exception when null parameters are passed in the method with with appPB", function(){
+		it("Should throw exception when null parameters are passed in the method with with appPB", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -462,12 +462,12 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			try{
 				stObj.deleteObjectsPropertyBagByCondArray();
 			}catch(err){
-				expect(err).toEqual("Wrong number of arguments: 0 instead of 2")
+				expect(err).toEqual("Wrong number of arguments: 0 instead of 4")
 			}
 			var res = appDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(3);
 		});
-		xit("Should delete only the simple matched condition passed as parameter in the method with with appPB.", function(){
+		it("Should delete only the simple matched condition passed as parameter in the method with with appPB.", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -502,7 +502,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			var res = appDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(2);
 		});
-		xit("Should delete only the simple matched multiple condition passed as parameter in method with appPB.", function(){
+		it("Should delete only the simple matched multiple condition passed as parameter in method with appPB.", function(){
 			reset();
 			var Students = function(model){
 				model.setModelProperty("name", "string", "");
@@ -537,7 +537,7 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			var res = appDB.executeSql("SELECT * FROM OBJECT_VALUES");
 			expect(stObj.getCount()).toEqual(2);
 		});
-		xit("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with appPB.", function(){
+		it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with appPB.", function(){
 			reset();
 			var error = "";
 			var Students = function(model){
@@ -570,12 +570,12 @@ describe("deleteObjectsPropertyBagByCondArray test set : ", function(){
 			}
 			expect(stObj.getCount()).toEqual(3);
 			try{
-				stObj.deleteObjectsPropertyBagByCondArray("nonexisting = ?", ["Arun"], {}, []);
+				stObj.deleteObjectsPropertyBagByCondArray("nonexisting = ?", ["Arun"], {}, ["nonexisting"]);
 			}catch(err){
 				error = err;
 			}
 			expect(stObj.getCount()).toEqual(3);
-			expect(error).toEqual("non existing column");
+			expect(error).toEqual("");
 		});
 	});
 });
@@ -601,7 +601,7 @@ describe("Enumerate  and clear test set : ", function(){
 			}
 	  	});
 	  };
-	xit("should enumerate all the models with the application with fixed schema", function(){
+	it("should enumerate all the models with the application with fixed schema", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -638,7 +638,7 @@ describe("Enumerate  and clear test set : ", function(){
 		});
 	});
 	
-	xit("should enumerate all the models with the application with property bag.", function(){
+	it("should enumerate all the models with the application with property bag.", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -671,7 +671,7 @@ describe("Enumerate  and clear test set : ", function(){
 		});
 	});
 
-	xit("should clear all the created fixed schema models with the application.", function(){
+	it("should clear all the created fixed schema models with the application.", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -705,7 +705,7 @@ describe("Enumerate  and clear test set : ", function(){
 		});
 	});
 	
-	xit("should clear all the property bag models with the application.", function(){
+	it("should clear all the property bag models with the application.", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -746,7 +746,7 @@ describe("getProperties test set : ", function(){
 	var reset = function() {
 	    Rho.NewORMModel.clear();
 	  };
-	xit("should get all properties of the model : userFs", function(){
+	it("should get all properties of the model : userFs", function(){
 		runs(function(){
 			var Product1 = function(model){
 				model.fixed_schema = true;
@@ -776,7 +776,7 @@ describe("getProperties test set : ", function(){
 			var res = prdObj1.getProperties(['partition','associations', 'blob_attribs', 'fixed_schema', 'freezed', 'full_update', 'loaded', 'model_name', 'pass_through', 'schema_version', 'sync_priority', 'sync_type'], propCBUserFs);
 		});
 	});
-	xit("should get all properties of the model : localFs", function(){
+	it("should get all properties of the model : localFs", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -807,7 +807,7 @@ describe("getProperties test set : ", function(){
 			var res = prdObj1.getProperties(['partition','associations', 'blob_attribs', 'fixed_schema', 'freezed', 'full_update', 'loaded', 'model_name', 'pass_through', 'schema_version', 'sync_priority', 'sync_type'], propCBlocalFs);
 		});
 	});
-	xit("should get all properties of the model : appFs", function(){
+	it("should get all properties of the model : appFs", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -838,7 +838,7 @@ describe("getProperties test set : ", function(){
 			var res = prdObj1.getProperties(['partition','associations', 'blob_attribs', 'fixed_schema', 'freezed', 'full_update', 'loaded', 'model_name', 'pass_through', 'schema_version', 'sync_priority', 'sync_type'], propCBAppFs);
 		});
 	});
-	xit("should get all properties of the model : userPb", function(){
+	it("should get all properties of the model : userPb", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -869,7 +869,7 @@ describe("getProperties test set : ", function(){
 			var res = prdObj1.getProperties(['partition','associations', 'blob_attribs', 'fixed_schema', 'freezed', 'full_update', 'loaded', 'model_name', 'pass_through', 'schema_version', 'sync_priority', 'sync_type'], propCB);
 		});
 	});
-	xit("should get all properties of the model : localPb", function(){
+	it("should get all properties of the model : localPb", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -900,7 +900,7 @@ describe("getProperties test set : ", function(){
 			var res = prdObj1.getProperties(['partition','associations', 'blob_attribs', 'fixed_schema', 'freezed', 'full_update', 'loaded', 'model_name', 'pass_through', 'schema_version', 'sync_priority', 'sync_type'], propCBLocalPb);
 		});
 	});
-	xit("should get all properties of the model : appPb", function(){
+	it("should get all properties of the model : appPb", function(){
 		reset();
 		var result;
 		var cbTriggered = false;
@@ -941,7 +941,7 @@ describe("getProperties test set : ", function(){
 			expect(result.pass_through).toEqual("");
 		});
 	});
-	xit("should return empty object when no parameters are passed with getProperties.", function(){
+	it("should return empty object when no parameters are passed with getProperties.", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -966,7 +966,7 @@ describe("setProperties test set : ", function(){
 	var reset = function() {
 	    Rho.NewORMModel.clear();
 	  };
-	xit("should get all properties of the model : userFs", function(){
+	it("should get all properties of the model : userFs", function(){
 		runs(function(){
 			var Product1 = function(model){
 				model.fixed_schema = true;
@@ -1004,7 +1004,7 @@ describe("setProperties test set : ", function(){
 		});
 	});
 	
-	xit("should get all properties of the model : userPb", function(){
+	it("should get all properties of the model : userPb", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -1042,7 +1042,7 @@ describe("setProperties test set : ", function(){
 			var res = prdObj1.getProperties(['partition','associations', 'blob_attribs', 'fixed_schema', 'freezed', 'full_update', 'loaded', 'model_name', 'pass_through', 'schema_version', 'sync_priority', 'sync_type'], propCB);
 		});
 	});
-	xit("should throw an exception when no parameters are passed with setProperties.", function(){
+	it("should throw an exception when no parameters are passed with setProperties.", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -1067,7 +1067,7 @@ describe("getProperty and setProperty test set : ", function(){
 	var reset = function() {
 	    Rho.NewORMModel.clear();
 	  };
-	xit("should set and get individual property of the model : userFs", function(){
+	it("should set and get individual property of the model : userFs", function(){
 		runs(function(){
 			var Product1 = function(model){
 				model.fixed_schema = true;
@@ -1097,7 +1097,7 @@ describe("getProperty and setProperty test set : ", function(){
 		});
 	});
 	
-	xit("should get all properties of the model : userPb", function(){
+	it("should get all properties of the model : userPb", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -1129,7 +1129,7 @@ describe("getProperty and setProperty test set : ", function(){
 		});
 	});
 
-	xit("should throw an exception when no parameters are passed with setProperty.", function(){
+	it("should throw an exception when no parameters are passed with setProperty.", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -1156,30 +1156,28 @@ describe("ValidateFreezed Attribute test set :", function(){
 		userDB.executeSql("DELETE FROM OBJECT_VALUES");
 		userDB.executeSql("DELETE FROM Product1");
 	}
-	xit("should throw an error when a new record is tried to added for a freezed model property bag", function(){
+	it("should throw an error when a new record is tried to added for a freezed model property bag", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
-				model.fixed_schema = false;
 				model.setModelProperty("name", "string", "");
 				model.setModelProperty("quantity", "string", "");
 				model.setModelProperty("price", "string", "");
-				model.set("partition", "user")
+				model.set("partition", "user");
+				model.set("freezed", "true");
 			};
 			var prdObj = Rho.ORM.addModel('Product1', Product1);
 			prdObj.createObject({"name":"Nike", "quantity":"20", "price":"2000"});
-			prdObj.setProperty('freezed', 'true');
 			var error = "";
 			try{
-				prdObj.setModelProperty("new", "string", "");
-				prdObj.createObject({"name":"Woodlands", "quantity":"20", "price":"2000"});
+				prdObj.createObject({"name":"Woodlands", "quantity":"20", "price":"2000", "new":"newentry"});
 			}catch(err){
 				error = err
 			}
-			expect(error).toEqual("Argument error");
+			expect(error).toEqual("Non-exist property : new. For model: Product1");
 		});
 	});
-	xit("should throw an error when a new record is tried to added for a freezed model fixed schemma1", function(){
+	it("should throw an error when a new record is tried to added for a freezed model fixed schemma1", function(){
 		reset();
 		runs(function(){
 			var Product1 = function(model){
@@ -1191,48 +1189,17 @@ describe("ValidateFreezed Attribute test set :", function(){
 				model.set("freezed", "true");
 			};
 			var prdObj = Rho.ORM.addModel('Product1', Product1);
+			prdObj.freezed = true;
 			prdObj.createObject({"name":"Nike", "quantity":"20", "price":"2000"});
 			prdObj.setProperty('freezed', 'true');
 			var error = "";
 			try{
-				prdObj.setModelProperty("new", "string", "");
-				prdObj.createObject({"name":"Woodlands", "quantity":"20", "price":"2000"});
+				prdObj.createObject({"name":"Woodlands", "quantity":"20", "price":"2000", "new":"newentry"});
 			}catch(err){
 				error = err
+				alert(err);
 			}
-			expect(error).toEqual("Argument error");
-		});
-	});
-
-	xit("should throw an error when a new record is tried to added for a freezed model fixed schemma2", function(){
-		reset();
-		runs(function(){
-			var Product1 = function(model){
-				model.fixed_schema = true;
-				model.setModelProperty("name", "string", "");
-				model.setModelProperty("quantity", "string", "");
-				model.setModelProperty("price", "string", "");
-				model.set("partition", "user");
-				model.set("freezed", "true");
-			};
-			var prdObj = Rho.ORM.addModel('Product1', Product1);
-			prdObj.createObject({"name":"Nike", "quantity":"20", "price":"2000"});
-			var count = prdObj.getCount();
-			//expect(count).toEqual(2);
-		});
-		runs(function(){
-			var myObj = new Rho.NewORMModel('Product1')
-			myObj.saveObject("12345", {"name":"Nike", "quantity":"20", "price":"2000"});
-			// var error = "";
-			// var prdObj = Rho.ORM.getModel("Product1");
-			// try{
-			// 	prdObj.setModelProperty("new", "string", "");
-			// 	prdObj.createObject({"name":"Woodlands", "quantity":"20", "price":"2000"});
-			// }catch(err){
-			// 	error = err
-			// }
-			console.log("Count : " + myObj.getCount());
-			//expect(error).toEqual("Argument error");
+			expect(error).toEqual("Non-exist property : new. For model: Product1");
 		});
 	});
 });
