@@ -4497,7 +4497,8 @@ describe("getBackendRefreshTime test set : ", function(){
 		var stObj = Rho.ORM.addModel("Student", Student);
 		var objData = stObj.createObject({"id":"001", "department":"Electronics", "name":"Arun", "age":29, "percentage":95});
 		console.log("Refresh time : " + stObj.getBackendRefreshTime());
-		expect(stObj.getBackendRefreshTime()).toEqual('1970-01-01 05:30:00 +0530');
+		var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+		expect(date).toContain(stObj.getBackendRefreshTime());
 	});
 	it("Should get the default value of time stamp for a non sync model with fixed schema.", function(){
 		var result = {};
@@ -4514,7 +4515,8 @@ describe("getBackendRefreshTime test set : ", function(){
 		var stObj = Rho.ORM.addModel("Student", Student);
 		var objData = stObj.createObject({"id":"001", "department":"Electronics", "name":"Arun", "age":29, "percentage":95});
 		console.log("Refresh time : " + stObj.getBackendRefreshTime());
-		expect(stObj.getBackendRefreshTime()).toEqual('1970-01-01 05:30:00 +0530');
+		var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+		expect(date).toContain(stObj.getBackendRefreshTime());
 	});
 	it("Should get the default value of time stamp for a local model with fixed schema.", function(){
 		var result = {};
@@ -4531,7 +4533,8 @@ describe("getBackendRefreshTime test set : ", function(){
 		var stObj = Rho.ORM.addModel("Student", Student);
 		var objData = stObj.createObject({"id":"001", "department":"Electronics", "name":"Arun", "age":29, "percentage":95});
 		console.log("Refresh time : " + stObj.getBackendRefreshTime());
-		expect(stObj.getBackendRefreshTime()).toEqual('1970-01-01 05:30:00 +0530');
+		var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+		expect(date).toContain(stObj.getBackendRefreshTime());
 	});
 	it("Should get the default value of time stamp for a app model with fixed schema.", function(){
 		var result = {};
@@ -4548,7 +4551,8 @@ describe("getBackendRefreshTime test set : ", function(){
 		var stObj = Rho.ORM.addModel("Student", Student);
 		var objData = stObj.createObject({"id":"001", "department":"Electronics", "name":"Arun", "age":29, "percentage":95});
 		console.log("Refresh time : " + stObj.getBackendRefreshTime());
-		expect(stObj.getBackendRefreshTime()).toEqual('1970-01-01 05:30:00 +0530');
+		var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+		expect(date).toContain(stObj.getBackendRefreshTime());
 	});
 
 
@@ -4568,7 +4572,8 @@ describe("getBackendRefreshTime test set : ", function(){
 		var stObj = Rho.ORM.addModel("Student", Student);
 		var objData = stObj.createObject({"id":"001", "department":"Electronics", "name":"Arun", "age":29, "percentage":95});
 		console.log("Refresh time : " + stObj.getBackendRefreshTime());
-		expect(stObj.getBackendRefreshTime()).toEqual('1970-01-01 05:30:00 +0530');
+		var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+		expect(date).toContain(stObj.getBackendRefreshTime());
 	});
 	it("Should get the default value of time stamp for a non sync model with property bag.", function(){
 		var result = {};
@@ -4585,7 +4590,8 @@ describe("getBackendRefreshTime test set : ", function(){
 		var stObj = Rho.ORM.addModel("Student", Student);
 		var objData = stObj.createObject({"id":"001", "department":"Electronics", "name":"Arun", "age":29, "percentage":95});
 		console.log("Refresh time : " + stObj.getBackendRefreshTime());
-		expect(stObj.getBackendRefreshTime()).toEqual('1970-01-01 05:30:00 +0530');
+		var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+		expect(date).toContain(stObj.getBackendRefreshTime());
 	});
 	it("Should get the default value of time stamp for a local model with property bag.", function(){
 		var result = {};
@@ -4602,7 +4608,8 @@ describe("getBackendRefreshTime test set : ", function(){
 		var stObj = Rho.ORM.addModel("Student", Student);
 		var objData = stObj.createObject({"id":"001", "department":"Electronics", "name":"Arun", "age":29, "percentage":95});
 		console.log("Refresh time : " + stObj.getBackendRefreshTime());
-		expect(stObj.getBackendRefreshTime()).toEqual('1970-01-01 05:30:00 +0530');
+		var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+		expect(date).toContain(stObj.getBackendRefreshTime());
 	});
 	it("Should get the default value of time stamp for a app model with property bag.", function(){
 		var result = {};
@@ -4619,7 +4626,8 @@ describe("getBackendRefreshTime test set : ", function(){
 		var stObj = Rho.ORM.addModel("Student", Student);
 		var objData = stObj.createObject({"id":"001", "department":"Electronics", "name":"Arun", "age":29, "percentage":95});
 		console.log("Refresh time : " + stObj.getBackendRefreshTime());
-		expect(stObj.getBackendRefreshTime()).toEqual('1970-01-01 05:30:00 +0530');
+		var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+		expect(date).toContain(stObj.getBackendRefreshTime());
 	});
 });
 describe("getBelongsTo test set : ", function(){
