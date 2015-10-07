@@ -2610,7 +2610,7 @@ public class Keywords {
 							log("Exiting from validate_Screenshot function");
 							return "Pass";
 						}
-						else if(value_double>40.0) {
+						else if(value_double>30.0) {
 							log("Partial Match found with reference image "+value_double);				
 							log("Exiting from validate_Screenshot function");
 							return "Pass";
