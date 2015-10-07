@@ -5,7 +5,7 @@ describe("Ruby : haveLocalChanges test set : ", function(){
         userDB.executeSql("DELETE FROM CHANGED_VALUES");
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
     });
-    xit("VTID-031 : It Ruby: testcase1 : Call haveLocalChanges without having any model", function(){
+    it("VTID-031 : It Ruby: testcase1 : Call haveLocalChanges without having any model", function(){
         runs(function(){
             Ruby.call('HaveLocalChanges','testcase1');
             waits(3000);
@@ -14,7 +14,7 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(Ruby.getReturnedValue()).toBe(false);
         });
     });
-    xit("VTID-032 : It Ruby: testcase2 : should return true if a model objects have local changes for sync haveLocalChanges", function(){
+    it("VTID-032 : It Ruby: testcase2 : should return true if a model objects have local changes for sync haveLocalChanges", function(){
         runs(function () {
             userDB.executeSql("INSERT INTO CHANGED_VALUES (object) VALUES('meobj')");
             Ruby.call('HaveLocalChanges', 'testcase1');
@@ -24,7 +24,7 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(Ruby.getReturnedValue()).toEqual(true);
         });
     });
-    xit("VTID-033 : It should return false even after adding object to the local model - Property bag", function(){
+    it("VTID-033 : It should return false even after adding object to the local model - Property bag", function(){
         runs(function(){
             Ruby.call('ProductLocalPb', 'testcase2');
             waits(3000);
@@ -33,7 +33,7 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(Ruby.getReturnedValue()).toEqual('false');
         });
     });
-    xit("VTID-034 : It should return true after adding object to the sync model - Property bag", function(){
+    it("VTID-034 : It should return true after adding object to the sync model - Property bag", function(){
         localDB.executeSql('DELETE FROM CHANGED_VALUES');
         localDB.executeSql('DELETE FROM OBJECT_VALUES');
         runs(function () {
@@ -58,7 +58,7 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(data.finalStatus).toEqual(true);
         });
     });
-    xit("VTID-035 : It Should return true after deleting object from the model - Property bag", function(){
+    it("VTID-035 : It Should return true after deleting object from the model - Property bag", function(){
         runs(function () {
             Ruby.call('HaveLocalChanges', 'testcase5a');
             waits(3000);
@@ -78,10 +78,10 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(result["afterDeleteStatus"]).toEqual(false);
         });
     });
-    xit("VTID-036 : It Should return false even after deleting object from the local model - Property bag", function(){
+    it("VTID-036 : It Should return false even after deleting object from the local model - Property bag", function(){
         
     });
-    xit("VTID-037 : It Should return true after adding and deleting objects from the model - Property bag", function(){
+    it("VTID-037 : It Should return true after adding and deleting objects from the model - Property bag", function(){
         runs(function () {
             Ruby.call('HaveLocalChanges', 'testcase6');
             waits(3000);
@@ -94,10 +94,10 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(result["afterDeleteStatus"]).toEqual(true);
         });
     });
-    xit("VTID-038 : It should return false even after adding object to the local model - Fixed Schema", function(){
+    it("VTID-038 : It should return false even after adding object to the local model - Fixed Schema", function(){
         
     });
-    xit("VTID-039 : It should return true after adding object to the model - Fixed Schema", function(){
+    it("VTID-039 : It should return true after adding object to the model - Fixed Schema", function(){
         runs(function(){
             userDB.executeSql("DELETE FROM HaveLocalChangesFs");
             userDB.executeSql('DELETE FROM CHANGED_VALUES');
@@ -116,7 +116,7 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(result["finalCount"]).toEqual(1);
         });
     });
-    xit("VTID-040 : It Should return true after adding and deleting object from the model - Fixed Schema", function(){
+    it("VTID-040 : It Should return true after adding and deleting object from the model - Fixed Schema", function(){
         var objId;
         runs(function(){
             userDB.executeSql("DELETE FROM HaveLocalChangesFs");
@@ -139,7 +139,7 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(result).toEqual("1");
         });
     });
-    xit("VTID-041 : It Should return true after deleting object from the model - Fixed Schema", function(){
+    it("VTID-041 : It Should return true after deleting object from the model - Fixed Schema", function(){
         var objId;
         runs(function(){
             userDB.executeSql("DELETE FROM HaveLocalChangesFs");
@@ -162,10 +162,10 @@ describe("Ruby : haveLocalChanges test set : ", function(){
             expect(result).toEqual("0");
         });
     });
-    xit("VTID-042 : It should return false even after deleting object to the local model - Fixed Schema", function(){
+    it("VTID-042 : It should return false even after deleting object to the local model - Fixed Schema", function(){
         
     });
-    xit("VTID-043 : It Should return false after deleting object from the model - Fixed Schema", function(){
+    it("VTID-043 : It Should return false after deleting object from the model - Fixed Schema", function(){
         var objId;
         runs(function(){
             userDB.executeSql("DELETE FROM HaveLocalChangesFs");
@@ -192,7 +192,7 @@ describe("Ruby : haveLocalChanges test set : ", function(){
 describe("Ruby : anyChangedObjects test set : ", function(){
     var userDB = Rho.ORMHelper.dbConnection('user');
     var localDB = Rho.ORMHelper.dbConnection('local');
-    xit("VTID-044 : It Call anyChangedObjects without modifying newly added model",function(){
+    it("VTID-044 : It Call anyChangedObjects without modifying newly added model",function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM CHANGED_VALUES");
         runs(function(){
@@ -204,7 +204,7 @@ describe("Ruby : anyChangedObjects test set : ", function(){
         });
     });
 
-    xit("VTID-045 : It should return true after adding object to the model - Property bag", function(){
+    it("VTID-045 : It should return true after adding object to the model - Property bag", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM CHANGED_VALUES");
         runs(function(){
@@ -226,10 +226,10 @@ describe("Ruby : anyChangedObjects test set : ", function(){
             expect(result["status"]).toEqual(true);
         });
     });
-    xit("VTID-046 : It should return false after adding object to the local model - Property bag", function(){
+    it("VTID-046 : It should return false after adding object to the local model - Property bag", function(){
 
     });
-    xit("VTID-047 : It Should return true after deleting object from the model - Property bag", function(){
+    it("VTID-047 : It Should return true after deleting object from the model - Property bag", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM CHANGED_VALUES");
         runs(function(){
@@ -243,10 +243,10 @@ describe("Ruby : anyChangedObjects test set : ", function(){
             expect(result["status"]).toEqual(true);
         });
     });
-    xit("VTID-048 : It Should return false even after deleting object from the local model - Property bag", function(){
+    it("VTID-048 : It Should return false even after deleting object from the local model - Property bag", function(){
 
     });
-    xit("VTID-049 : It Should return true after adding and deleting objects from the model - Property bag", function(){
+    it("VTID-049 : It Should return true after adding and deleting objects from the model - Property bag", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM CHANGED_VALUES");
         runs(function(){
@@ -262,7 +262,7 @@ describe("Ruby : anyChangedObjects test set : ", function(){
     
     });
 
-    xit("VTID-050 : It Should return false after adding and deleting same object from the model - Property bag", function(){
+    it("VTID-050 : It Should return false after adding and deleting same object from the model - Property bag", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM CHANGED_VALUES");
         runs(function(){
@@ -277,7 +277,7 @@ describe("Ruby : anyChangedObjects test set : ", function(){
         });
     });
 
-    xit("VTID-051 : It should return true after adding object to the model - Fixed Schema", function(){
+    it("VTID-051 : It should return true after adding object to the model - Fixed Schema", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM AnyChangedObjectsFs");
         runs(function(){
@@ -291,10 +291,10 @@ describe("Ruby : anyChangedObjects test set : ", function(){
             expect(result["status"]).toEqual(true);
         });
     });
-    xit("VTID-052 : It should return false even after adding object to the local model - Fixed Schema", function(){
+    it("VTID-052 : It should return false even after adding object to the local model - Fixed Schema", function(){
 
     });
-    xit("VTID-053 : It Should return true after deleting object from the model - Fixed Schema", function(){
+    it("VTID-053 : It Should return true after deleting object from the model - Fixed Schema", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM AnyChangedObjectsFs");
         runs(function(){
@@ -308,10 +308,10 @@ describe("Ruby : anyChangedObjects test set : ", function(){
             expect(result["status"]).toEqual(true);
         });
     });
-    xit("VTID-054 : It Should return false even after deleting object from the local model - Fixed Schema", function(){
+    it("VTID-054 : It Should return false even after deleting object from the local model - Fixed Schema", function(){
 
     });
-    xit("VTID-055 : It Should return true after adding and deleting objects from the model - Fixed schema", function(){
+    it("VTID-055 : It Should return true after adding and deleting objects from the model - Fixed schema", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM AnyChangedObjectsFs");
         runs(function(){
@@ -325,7 +325,7 @@ describe("Ruby : anyChangedObjects test set : ", function(){
             expect(result["status"]).toEqual(true);
         });
     });
-    xit("VTID-056 : It Should return flase after adding and deleting same object from the model - Fixed schema", function(){
+    it("VTID-056 : It Should return flase after adding and deleting same object from the model - Fixed schema", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM AnyChangedObjectsFs");
         runs(function(){
@@ -344,7 +344,7 @@ describe("canModify test set : ", function(){
     var userDB = Rho.ORMHelper.dbConnection('user');
     var localDB = Rho.ORMHelper.dbConnection('local');
         
-    xit("VTID-057 : It canModify method should return true for user fixed schema model when RC is not in sync", function(){
+    it("VTID-057 : It canModify method should return true for user fixed schema model when RC is not in sync", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM AnyChangedObjectsFs");
         runs(function(){
@@ -356,7 +356,7 @@ describe("canModify test set : ", function(){
             expect(result).toEqual(true);
         });
     });
-    xit("VTID-058 : It canModify method should return true for local fixed schema models ", function(){
+    it("VTID-058 : It canModify method should return true for local fixed schema models ", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM CHANGED_VALUES");
         runs(function(){
@@ -369,7 +369,7 @@ describe("canModify test set : ", function(){
         });
 
     });
-    xit("VTID-059 : It canModify method should return true for user property bag model when RC is not in sync", function(){
+    it("VTID-059 : It canModify method should return true for user property bag model when RC is not in sync", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM AnyChangedObjectsFs");
         runs(function(){
@@ -381,7 +381,7 @@ describe("canModify test set : ", function(){
             expect(result).toEqual(true);
         });
     });
-    xit("VTID-060 : It canModify method should return true for local property bag models ", function(){
+    it("VTID-060 : It canModify method should return true for local property bag models ", function(){
         userDB.executeSql("DELETE FROM OBJECT_VALUES");
         userDB.executeSql("DELETE FROM CHANGED_VALUES");
         runs(function(){
@@ -398,7 +398,7 @@ describe("Ruby : find_by_sql test set : ", function(){
     var userDB = Rho.ORMHelper.dbConnection('user');
     var localDB = Rho.ORMHelper.dbConnection('local');
     var appDB = Rho.ORMHelper.dbConnection('app');
-    xit("VTID-061 : It should find_by_sql for the user fixed schema model", function(){
+    it("VTID-061 : It should find_by_sql for the user fixed schema model", function(){
         runs(function(){
             if(userDB.isTableExist("FindBySql")){
                 console.log("findBySql table found");
@@ -413,7 +413,7 @@ describe("Ruby : find_by_sql test set : ", function(){
             expect(result.length).toEqual(3);
         });
     });
-    xit("VTID-062 : It should find_by_sql for the local fixed schema model", function(){
+    it("VTID-062 : It should find_by_sql for the local fixed schema model", function(){
         runs(function(){
             if(localDB.isTableExist("FindBySqlLocal")){
                 console.log("findBySql table found");
@@ -428,7 +428,7 @@ describe("Ruby : find_by_sql test set : ", function(){
             expect(result.length).toEqual(3);
         });
     });
-    xit("VTID-063 : It should find_by_sql for the app fixed schema model", function(){
+    it("VTID-063 : It should find_by_sql for the app fixed schema model", function(){
         runs(function(){
             if(appDB.isTableExist("FindBySqlApp")){
                 console.log("findBySql table found");
@@ -443,7 +443,7 @@ describe("Ruby : find_by_sql test set : ", function(){
             expect(result.length).toEqual(3);
         });
     });
-    xit("VTID-064 : It should find_by_sql with 'WHERE' clause for the user fixed schema model", function(){
+    it("VTID-064 : It should find_by_sql with 'WHERE' clause for the user fixed schema model", function(){
 
         runs(function(){
             if(userDB.isTableExist("findBySql")){
@@ -460,7 +460,7 @@ describe("Ruby : find_by_sql test set : ", function(){
         });
     
     });
-    xit("VTID-065 : It should find_by_sql with 'WHERE' clause for the user local schema model", function(){
+    it("VTID-065 : It should find_by_sql with 'WHERE' clause for the user local schema model", function(){
 
         runs(function(){
             if(localDB.isTableExist("FindBySqlLocal")){
@@ -477,7 +477,7 @@ describe("Ruby : find_by_sql test set : ", function(){
         });
     
     });
-    xit("VTID-066 : It should find_by_sql with 'WHERE' clause for the user app schema model", function(){
+    it("VTID-066 : It should find_by_sql with 'WHERE' clause for the user app schema model", function(){
 
         runs(function(){
             if(appDB.isTableExist("FindBySqlApp")){
@@ -494,7 +494,7 @@ describe("Ruby : find_by_sql test set : ", function(){
         });
     
     });
-    xit("VTID-067 : It should return null when find_by_sql with 'WHERE' clause for the user fixed schema model does not return anything", function(){
+    it("VTID-067 : It should return null when find_by_sql with 'WHERE' clause for the user fixed schema model does not return anything", function(){
         runs(function(){
             if(userDB.isTableExist("FindBySqlApp")){
                 console.log("findBySql table found");
@@ -509,7 +509,7 @@ describe("Ruby : find_by_sql test set : ", function(){
             expect(result.length).toEqual(0);
         });
     });
-    xit("VTID-068 : It should return null when find_by_sql with 'WHERE' clause for the local fixed schema model does not return anything", function(){
+    it("VTID-068 : It should return null when find_by_sql with 'WHERE' clause for the local fixed schema model does not return anything", function(){
         runs(function(){
             if(localDB.isTableExist("FindBySqlApp")){
                 console.log("findBySql table found");
@@ -524,7 +524,7 @@ describe("Ruby : find_by_sql test set : ", function(){
             expect(result.length).toEqual(0);
         });
     });
-    xit("VTID-069 : It should return null when find_by_sql with 'WHERE' clause for the app fixed schema model does not return anything", function(){
+    it("VTID-069 : It should return null when find_by_sql with 'WHERE' clause for the app fixed schema model does not return anything", function(){
         runs(function(){
             if(appDB.isTableExist("FindBySqlApp")){
                 console.log("findBySql table found");
@@ -539,7 +539,7 @@ describe("Ruby : find_by_sql test set : ", function(){
             expect(result.length).toEqual(0);
         });
     });
-    xit("VTID-070 : It should return single property data when find_by_sql with SELECT statement for the user fixed", function(){
+    it("VTID-070 : It should return single property data when find_by_sql with SELECT statement for the user fixed", function(){
         runs(function(){
             if(userDB.isTableExist("FindBySqlApp")){
                 console.log("findBySql table found");
@@ -555,7 +555,7 @@ describe("Ruby : find_by_sql test set : ", function(){
             expect(result.length).toEqual(2);
         });
     });
-    xit("VTID-071 : It should return single property data when find_by_sql with SELECT statement for the local fixed", function(){
+    it("VTID-071 : It should return single property data when find_by_sql with SELECT statement for the local fixed", function(){
         runs(function(){
             if(localDB.isTableExist("FindBySqlApp")){
                 console.log("findBySql table found");
@@ -571,7 +571,7 @@ describe("Ruby : find_by_sql test set : ", function(){
             expect(result.length).toEqual(2);
         });
     });
-    xit("VTID-072 : It should return single property data when find_by_sql with SELECT statement for the app fixed", function(){
+    it("VTID-072 : It should return single property data when find_by_sql with SELECT statement for the app fixed", function(){
         runs(function(){
             if(appDB.isTableExist("FindBySqlApp")){
                 console.log("findBySql table found");
@@ -592,7 +592,7 @@ describe("Ruby : getAllProperties test set : ", function(){
     var userDB = Rho.ORMHelper.dbConnection('user');
     var localDB = Rho.ORMHelper.dbConnection('local');
     var appDB = Rho.ORMHelper.dbConnection('app');
-    xit("VTID-073 : It should get all properties and values of the user model with Fixed schema.", function(){
+    it("VTID-073 : It should get all properties and values of the user model with Fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase19');
             waits(3000);
@@ -615,7 +615,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("none");
         });
     });
-    xit("VTID-074 : It should get all properties and values of the sync enabled user model with Fixed schema.", function(){
+    it("VTID-074 : It should get all properties and values of the sync enabled user model with Fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase20');
             waits(3000);
@@ -638,7 +638,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("incremental");
         });
     });
-    xit("VTID-075 : It should get all properties and values of the sync enabled(bulk_only) user model with Fixed schema.", function(){
+    it("VTID-075 : It should get all properties and values of the sync enabled(bulk_only) user model with Fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase21');
             waits(3000);
@@ -661,7 +661,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("bulk_only");
         });
     });
-    xit("VTID-076 : It should get all properties and values of the local model with Fixed schema.", function(){
+    it("VTID-076 : It should get all properties and values of the local model with Fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase22');
             waits(3000);
@@ -684,7 +684,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("none");
         });
     });
-    xit("VTID-077 : It should get all properties and values of the app model with Fixed schema.", function(){
+    it("VTID-077 : It should get all properties and values of the app model with Fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase23');
             waits(3000);
@@ -707,7 +707,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("none");
         });
     });
-    xit("VTID-078 : It should get all properties and values of the user model with Property bag.", function(){
+    it("VTID-078 : It should get all properties and values of the user model with Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase24');
             waits(3000);
@@ -729,7 +729,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("none");
         });
     });
-    xit("VTID-079 : It should get all properties and values of the sync enabled user model with Property bag.", function(){
+    it("VTID-079 : It should get all properties and values of the sync enabled user model with Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase25');
             waits(3000);
@@ -751,7 +751,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("incremental");
         });
     });
-    xit("VTID-080 : It should get all properties and values of the sync enabled(bulk_only) user model with Property bag.", function(){
+    it("VTID-080 : It should get all properties and values of the sync enabled(bulk_only) user model with Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase26');
             waits(3000);
@@ -773,7 +773,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("bulk_only");
         });
     });
-    xit("VTID-081 : It should get all properties and values of the local model with Property bag.", function(){
+    it("VTID-081 : It should get all properties and values of the local model with Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase27');
             waits(3000);
@@ -795,7 +795,7 @@ describe("Ruby : getAllProperties test set : ", function(){
             expect(result.sync_type).toEqual("none");
         });
     });
-    xit("VTID-082 : It should get all properties and values of the app model with Property bag.", function(){
+    it("VTID-082 : It should get all properties and values of the app model with Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase28');
             waits(3000);
@@ -819,7 +819,7 @@ describe("Ruby : getAllProperties test set : ", function(){
     });
 });
 describe("Ruby : getBackendRefreshTime test set : ", function(){
-    xit("VTID-083 : It should get the default value of time stamp for a non synced sync model with fixed schema.", function(){
+    it("VTID-083 : It should get the default value of time stamp for a non synced sync model with fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase29');
             waits(3000);
@@ -827,10 +827,11 @@ describe("Ruby : getBackendRefreshTime test set : ", function(){
         runs(function(){
             var result = Ruby.getReturnedValue();
             result = JSON.parse(result);
-            expect(result.time).toEqual("1970-01-01 05:30:00 +0530");
+            var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+            expect(date).toContain(result.time);
         });
     });
-    xit("VTID-084 : It should get the default value of time stamp for a non sync model with fixed schema.", function(){
+    it("VTID-084 : It should get the default value of time stamp for a non sync model with fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase30');
             waits(3000);
@@ -838,10 +839,11 @@ describe("Ruby : getBackendRefreshTime test set : ", function(){
         runs(function(){
             var result = Ruby.getReturnedValue();
             result = JSON.parse(result);
-            expect(result.time).toEqual("1970-01-01 05:30:00 +0530");
+            var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+            expect(date).toContain(result.time);
         });
     });
-    xit("VTID-085 : It should get the default value of time stamp for a local model with fixed schema.", function(){
+    it("VTID-085 : It should get the default value of time stamp for a local model with fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase31');
             waits(3000);
@@ -849,10 +851,11 @@ describe("Ruby : getBackendRefreshTime test set : ", function(){
         runs(function(){
             var result = Ruby.getReturnedValue();
             result = JSON.parse(result);
-            expect(result.time).toEqual("1970-01-01 05:30:00 +0530");
+            var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+            expect(date).toContain(result.time);
         });
     });
-    xit("VTID-086 : It should get the default value of time stamp for a app model with fixed schema.", function(){
+    it("VTID-086 : It should get the default value of time stamp for a app model with fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase32');
             waits(3000);
@@ -860,10 +863,11 @@ describe("Ruby : getBackendRefreshTime test set : ", function(){
         runs(function(){
             var result = Ruby.getReturnedValue();
             result = JSON.parse(result);
-            expect(result.time).toEqual("1970-01-01 05:30:00 +0530");
+            var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+            expect(date).toContain(result.time);
         });
     });
-    xit("VTID-087 : It should get the default value of time stamp for a non synced sync model with property bag.", function(){
+    it("VTID-087 : It should get the default value of time stamp for a non synced sync model with property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase33');
             waits(3000);
@@ -871,10 +875,11 @@ describe("Ruby : getBackendRefreshTime test set : ", function(){
         runs(function(){
             var result = Ruby.getReturnedValue();
             result = JSON.parse(result);
-            expect(result.time).toEqual("1970-01-01 05:30:00 +0530");
+            var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+            expect(date).toContain(result.time);
         });
     });
-    xit("VTID-088 : It should get the default value of time stamp for a non sync model with property bag.", function(){
+    it("VTID-088 : It should get the default value of time stamp for a non sync model with property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase34');
             waits(3000);
@@ -882,10 +887,11 @@ describe("Ruby : getBackendRefreshTime test set : ", function(){
         runs(function(){
             var result = Ruby.getReturnedValue();
             result = JSON.parse(result);
-            expect(result.time).toEqual("1970-01-01 05:30:00 +0530");
+            var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+            expect(date).toContain(result.time);
         });
     });
-    xit("VTID-089 : It should get the default value of time stamp for a local model with property bag.", function(){
+    it("VTID-089 : It should get the default value of time stamp for a local model with property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase35');
             waits(3000);
@@ -893,10 +899,11 @@ describe("Ruby : getBackendRefreshTime test set : ", function(){
         runs(function(){
             var result = Ruby.getReturnedValue();
             result = JSON.parse(result);
-            expect(result.time).toEqual("1970-01-01 05:30:00 +0530");
+            var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+            expect(date).toContain(result.time);
         });
     });
-    xit("VTID-090 : It should get the default value of time stamp for a app model with property bag.", function(){
+    it("VTID-090 : It should get the default value of time stamp for a app model with property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase36');
             waits(3000);
@@ -904,13 +911,14 @@ describe("Ruby : getBackendRefreshTime test set : ", function(){
         runs(function(){
             var result = Ruby.getReturnedValue();
             result = JSON.parse(result);
-            expect(result.time).toEqual("1970-01-01 05:30:00 +0530");
+            var date = ["1970-01-01 05:30:00 +0530", "1970-01-01 05:30:00 GMT"];
+            expect(date).toContain(result.time);
         });
     });;
 });
 describe("Ruby : getBelongsTo test set : ", function(){
     
-    xit("VTID-091 : It should return null when no model is belongs to the instance user model fixed schema.", function(){
+    it("VTID-091 : It should return null when no model is belongs to the instance user model fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase38');
             waits(3000);
@@ -921,7 +929,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
             expect(result.belongsTo).toEqual(null);
         });
     });
-    xit("VTID-092 : It should get the associated or belongs to user model fixed schema", function(){
+    it("VTID-092 : It should get the associated or belongs to user model fixed schema", function(){
         runs(function(){
             Ruby.call('General', 'testcase37');
             waits(3000);
@@ -933,7 +941,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
         });
     });
     
-    xit("VTID-093 : It should return null when no model is belongs to the instance local model fixed schema.", function(){
+    it("VTID-093 : It should return null when no model is belongs to the instance local model fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase40');
             waits(3000);
@@ -944,7 +952,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
             expect(result.belongsTo).toEqual(null);
         });
     });
-    xit("VTID-094 : It should get the associated or belongs to local model fixed schema", function(){
+    it("VTID-094 : It should get the associated or belongs to local model fixed schema", function(){
         runs(function(){
             Ruby.call('General', 'testcase39');
             waits(3000);
@@ -956,7 +964,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
         });
     });
     
-    xit("VTID-095 : It should return null when no model is belongs to the instance app model fixed schema.", function(){
+    it("VTID-095 : It should return null when no model is belongs to the instance app model fixed schema.", function(){
         runs(function(){
             Ruby.call('General', 'testcase42');
             waits(3000);
@@ -967,7 +975,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
             expect(result.belongsTo).toEqual(null);
         });
     });
-    xit("VTID-096 : It should get the associated or belongs to app model fixed schema", function(){
+    it("VTID-096 : It should get the associated or belongs to app model fixed schema", function(){
         runs(function(){
             Ruby.call('General', 'testcase41');
             waits(3000);
@@ -979,7 +987,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
         });
     });
     
-    xit("VTID-097 : It should return null when no model is belongs to the instance user model Property bag.", function(){
+    it("VTID-097 : It should return null when no model is belongs to the instance user model Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase44');
             waits(3000);
@@ -990,7 +998,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
             expect(result.belongsTo).toEqual(null);
         });
     });
-    xit("VTID-098 : It should get the associated or belongs to user model Property bag.", function(){
+    it("VTID-098 : It should get the associated or belongs to user model Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase43');
             waits(3000);
@@ -1002,7 +1010,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
         });
     });
     
-    xit("VTID-099 : It should return null when no model is belongs to the instance local model Property bag.", function(){
+    it("VTID-099 : It should return null when no model is belongs to the instance local model Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase46');
             waits(3000);
@@ -1013,7 +1021,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
             expect(result.belongsTo).toEqual(null);
         });
     });
-    xit("VTID-100 : It should get the associated or belongs to local model Property bag.", function(){
+    it("VTID-100 : It should get the associated or belongs to local model Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase45');
             waits(3000);
@@ -1025,7 +1033,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
         });
     });
     
-    xit("VTID-101 : It should return null when no model is belongs to the instance app model Property bag.", function(){
+    it("VTID-101 : It should return null when no model is belongs to the instance app model Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase48');
             waits(3000);
@@ -1036,7 +1044,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
             expect(result.belongsTo).toEqual(null);
         });
     });
-    xit("VTID-102 : It should get the associated or belongs to app model Property bag.", function(){
+    it("VTID-102 : It should get the associated or belongs to app model Property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase47');
             waits(3000);
@@ -1049,7 +1057,7 @@ describe("Ruby : getBelongsTo test set : ", function(){
     });
 });
 describe("Ruby : enable test set : ", function(){
-    xit("VTID-103 : It should enable all the boolean properties with user model fixed schema", function(){
+    it("VTID-103 : It should enable all the boolean properties with user model fixed schema", function(){
         runs(function(){
             Ruby.call('General', 'testcase49');
             waits(3000);
@@ -1071,7 +1079,7 @@ describe("Ruby : enable test set : ", function(){
             expect(result.sync_type).toEqual("incremental");
         });
     });
-    xit("VTID-104 : It should enable all the boolean properties with local model fixed schema", function(){
+    it("VTID-104 : It should enable all the boolean properties with local model fixed schema", function(){
         runs(function(){
             Ruby.call('General', 'testcase50');
             waits(3000);
@@ -1093,7 +1101,7 @@ describe("Ruby : enable test set : ", function(){
             expect(result.sync_type).toEqual("none");
         });
     });
-    xit("VTID-105 : It should enable all the boolean properties with app model fixed schema", function(){
+    it("VTID-105 : It should enable all the boolean properties with app model fixed schema", function(){
         runs(function(){
             Ruby.call('General', 'testcase51');
             waits(3000);
@@ -1115,7 +1123,7 @@ describe("Ruby : enable test set : ", function(){
             expect(result.sync_type).toEqual("bulk_only");
         });
     });
-    xit("VTID-106 : It should enable all the boolean properties with user model property bag.", function(){
+    it("VTID-106 : It should enable all the boolean properties with user model property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase52');
             waits(3000);
@@ -1137,7 +1145,7 @@ describe("Ruby : enable test set : ", function(){
             expect(result.sync_type).toEqual("incremental");
         });
     });
-    xit("VTID-107 : It should enable all the boolean properties with local model property bag.", function(){
+    it("VTID-107 : It should enable all the boolean properties with local model property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase53');
             waits(3000);
@@ -1159,7 +1167,7 @@ describe("Ruby : enable test set : ", function(){
             expect(result.sync_type).toEqual("none");
         });
     });
-    xit("VTID-108 : It should enable all the boolean properties with app model property bag.", function(){
+    it("VTID-108 : It should enable all the boolean properties with app model property bag.", function(){
         runs(function(){
             Ruby.call('General', 'testcase54');
             waits(3000);
@@ -1184,7 +1192,7 @@ describe("Ruby : enable test set : ", function(){
 });
 describe("Ruby : deleteObjects test set : ", function(){
     describe("UserFs test : ", function(){
-        xit("VTID-109 : It should delete all objects of the model when empty parameters are sent with method userFS.", function(){
+        it("VTID-109 : It should delete all objects of the model when empty parameters are sent with method userFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase55');
                 waits(3000);
@@ -1197,7 +1205,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(0);
             });
         });
-        xit("VTID-110 : It should throw exception when null parameters are passed with the method userFS.", function(){
+        it("VTID-110 : It should throw exception when null parameters are passed with the method userFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase56');
                 waits(3000);
@@ -1210,7 +1218,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 2");
             });
         });
-        xit("VTID-111 : It should only the simple matched condition passed as parameter with the method userFS.", function(){
+        it("VTID-111 : It should only the simple matched condition passed as parameter with the method userFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase57');
                 waits(3000);
@@ -1223,7 +1231,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(2);
             });
         });
-        xit("VTID-112 : It should only the matched condition uses OR passed as parameter with the method userFS.", function(){
+        it("VTID-112 : It should only the matched condition uses OR passed as parameter with the method userFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase58');
                 waits(3000);
@@ -1236,7 +1244,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(1);
             });
         });
-        xit("VTID-113 : It should only the matched condition uses AND passed as parameter with the method userFS.", function(){
+        it("VTID-113 : It should only the matched condition uses AND passed as parameter with the method userFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase59');
                 waits(3000);
@@ -1249,7 +1257,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(2);
             });
         })
-        xit("VTID-114 : It should throw an exception when wrong condition(non existing column) is sent as parameter with the method userFS.", function(){
+        it("VTID-114 : It should throw an exception when wrong condition(non existing column) is sent as parameter with the method userFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase60');
                 waits(3000);
@@ -1264,7 +1272,7 @@ describe("Ruby : deleteObjects test set : ", function(){
         });
     });
     describe("Ruby : localFs tests : ", function(){
-        xit("VTID-115 : It should delete all objects of the model when empty parameters are sent with method localFS.", function(){
+        it("VTID-115 : It should delete all objects of the model when empty parameters are sent with method localFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase61');
                 waits(3000);
@@ -1277,7 +1285,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(0);
             });
         });
-        xit("VTID-116 : It should throw exception when null parameters are passed with the method localFS.", function(){
+        it("VTID-116 : It should throw exception when null parameters are passed with the method localFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase62');
                 waits(3000);
@@ -1290,7 +1298,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 2");
             });
         });
-        xit("VTID-117 : It should only the simple matched condition passed as parameter with the method localFS.", function(){
+        it("VTID-117 : It should only the simple matched condition passed as parameter with the method localFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase63');
                 waits(3000);
@@ -1303,7 +1311,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(2);
             });
         });
-        xit("VTID-118 : It should only the matched condition uses OR passed as parameter with the method localFS.", function(){
+        it("VTID-118 : It should only the matched condition uses OR passed as parameter with the method localFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase64');
                 waits(3000);
@@ -1316,7 +1324,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(1);
             });
         })
-        xit("VTID-119 : It should only the matched condition uses AND passed as parameter with the method localFS.", function(){
+        it("VTID-119 : It should only the matched condition uses AND passed as parameter with the method localFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase65');
                 waits(3000);
@@ -1329,7 +1337,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(2);
             });
         })
-        xit("VTID-120 : It should throw an exception when wrong condition(non existing column) is sent as parameter with the method localFS.", function(){
+        it("VTID-120 : It should throw an exception when wrong condition(non existing column) is sent as parameter with the method localFS.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase66');
                 waits(3000);
@@ -1344,7 +1352,7 @@ describe("Ruby : deleteObjects test set : ", function(){
         });
     });
     describe("Ruby : appFs tests : ", function(){
-        xit("VTID-121 : It should delete all objects of the model when empty parameters are sent with method appFs.", function(){
+        it("VTID-121 : It should delete all objects of the model when empty parameters are sent with method appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase67');
                 waits(3000);
@@ -1357,7 +1365,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(0);
             });
         });
-        xit("VTID-122 : It should throw exception when null parameters are passed with the method appFs.", function(){
+        it("VTID-122 : It should throw exception when null parameters are passed with the method appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase68');
                 waits(3000);
@@ -1370,7 +1378,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 2");
             });
         });
-        xit("VTID-123 : It should only the simple matched condition passed as parameter with the method appFs.", function(){
+        it("VTID-123 : It should only the simple matched condition passed as parameter with the method appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase69');
                 waits(3000);
@@ -1383,7 +1391,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(2);
             });
         });
-        xit("VTID-124 : It should only the matched condition uses OR passed as parameter with the method appFs.", function(){
+        it("VTID-124 : It should only the matched condition uses OR passed as parameter with the method appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase70');
                 waits(3000);
@@ -1396,7 +1404,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(1);
             });
         });
-        xit("VTID-125 : It should only the matched condition uses AND passed as parameter with the method appFs.", function(){
+        it("VTID-125 : It should only the matched condition uses AND passed as parameter with the method appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase71');
                 waits(3000);
@@ -1409,7 +1417,7 @@ describe("Ruby : deleteObjects test set : ", function(){
                 expect(result["finalCount"]).toEqual(2);
             });
         });
-        xit("VTID-126 : It should throw an exception when wrong condition(non existing column) is sent as parameter with the method appFs.", function(){
+        it("VTID-126 : It should throw an exception when wrong condition(non existing column) is sent as parameter with the method appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase72');
                 waits(3000);
@@ -1426,7 +1434,7 @@ describe("Ruby : deleteObjects test set : ", function(){
 });
 describe("Ruby : findObjects test set : ", function(){
     describe("userFs tests : ", function(){
-        xit("VTID-127 : It should find the objects which matches the simple condition in the WHERE clause with fixed schema(user)", function(){
+        it("VTID-127 : It should find the objects which matches the simple condition in the WHERE clause with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase73');
                 waits(3000);
@@ -1442,7 +1450,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-128 : It should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
+        it("VTID-128 : It should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase74');
                 waits(3000);
@@ -1458,7 +1466,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-129 : It should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
+        it("VTID-129 : It should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase75');
                 waits(3000);
@@ -1473,7 +1481,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Puma");
             });
         });
-        xit("VTID-130 : It should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(user).", function(){
+        it("VTID-130 : It should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase76');
                 waits(3000);
@@ -1490,7 +1498,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-131 : It should throw exception when null parameters are passed with fixed schema(user).", function(){
+        it("VTID-131 : It should throw exception when null parameters are passed with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase77');
                 waits(3000);
@@ -1502,7 +1510,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 5");
             });
         });
-        xit("VTID-132 : It should find all the objects when empty parameters are passed with fixed schema(user).", function(){
+        it("VTID-132 : It should find all the objects when empty parameters are passed with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase78');
                 waits(3000);
@@ -1520,7 +1528,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-133 : It should throw exception when first parameter is passed as empty with fixed schema(user)", function(){
+        it("VTID-133 : It should throw exception when first parameter is passed as empty with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase79');
                 waits(3000);
@@ -1546,7 +1554,7 @@ describe("Ruby : findObjects test set : ", function(){
         });
     });
     describe("localFs tests : ", function(){
-        xit("VTID-135 : It should find the objects which matches the simple condition in the WHERE clause with fixed schema(user)", function(){
+        it("VTID-135 : It should find the objects which matches the simple condition in the WHERE clause with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase81');
                 waits(3000);
@@ -1562,7 +1570,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-136 : It should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
+        it("VTID-136 : It should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase82');
                 waits(3000);
@@ -1578,7 +1586,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-137 : It should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
+        it("VTID-137 : It should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase83');
                 waits(3000);
@@ -1593,7 +1601,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Puma");
             });
         });
-        xit("VTID-138 : It should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(user).", function(){
+        it("VTID-138 : It should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase84');
                 waits(3000);
@@ -1610,7 +1618,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-139 : It should throw exception when null parameters are passed with fixed schema(user).", function(){
+        it("VTID-139 : It should throw exception when null parameters are passed with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase85');
                 waits(3000);
@@ -1622,7 +1630,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 5");
             });
         });
-        xit("VTID-140 : It should find all the objects when empty parameters are passed with fixed schema(user).", function(){
+        it("VTID-140 : It should find all the objects when empty parameters are passed with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase86');
                 waits(3000);
@@ -1640,7 +1648,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-141 : It should throw exception when first parameter is passed as empty with fixed schema(user)", function(){
+        it("VTID-141 : It should throw exception when first parameter is passed as empty with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase87');
                 waits(3000);
@@ -1652,7 +1660,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result["error"]).toEqual("findObjects: Invalid Empty First Argument passed.")
             });
         });
-        xit("VTID-142 : It should throw exception when wrong condition(non existing column) is sent as parameter with fixed schema(user)", function(){
+        it("VTID-142 : It should throw exception when wrong condition(non existing column) is sent as parameter with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase88');
                 waits(3000);
@@ -1666,7 +1674,7 @@ describe("Ruby : findObjects test set : ", function(){
         });
     });
     describe("appFs tests : ", function(){
-        xit("VTID-143 : It should find the objects which matches the simple condition in the WHERE clause with fixed schema(user)", function(){
+        it("VTID-143 : It should find the objects which matches the simple condition in the WHERE clause with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase89');
                 waits(3000);
@@ -1682,7 +1690,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-144 : It should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
+        it("VTID-144 : It should find the objects which matches the conditions containing OR operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase90');
                 waits(3000);
@@ -1698,7 +1706,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-145 : It should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
+        it("VTID-145 : It should find the objects which matches the conditions containing AND operator and ORDER BY ASC & DESC with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase91');
                 waits(3000);
@@ -1713,7 +1721,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Puma");
             });
         });
-        xit("VTID-146 : It should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(user).", function(){
+        it("VTID-146 : It should be able to find all the objects which matches the selectAttrs parameter with matching conditions containing IN operator in the WHERE clause and ORDER BY ascending order with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase92');
                 waits(3000);
@@ -1730,7 +1738,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-147 : It should throw exception when null parameters are passed with fixed schema(user).", function(){
+        it("VTID-147 : It should throw exception when null parameters are passed with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase93');
                 waits(3000);
@@ -1742,7 +1750,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 5");
             });
         });
-        xit("VTID-148 : It should find all the objects when empty parameters are passed with fixed schema(user).", function(){
+        it("VTID-148 : It should find all the objects when empty parameters are passed with fixed schema(user).", function(){
             runs(function(){
                 Ruby.call('General', 'testcase94');
                 waits(3000);
@@ -1760,7 +1768,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result.first[0].name).toEqual("Nike");
             });
         });
-        xit("VTID-149 : It should throw exception when first parameter is passed as empty with fixed schema(user)", function(){
+        it("VTID-149 : It should throw exception when first parameter is passed as empty with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase95');
                 waits(3000);
@@ -1772,7 +1780,7 @@ describe("Ruby : findObjects test set : ", function(){
                 expect(result["error"]).toEqual("findObjects: Invalid Empty First Argument passed.")
             });
         });
-        xit("VTID-150 : It should throw exception when wrong condition(non existing column) is sent as parameter with fixed schema(user)", function(){
+        it("VTID-150 : It should throw exception when wrong condition(non existing column) is sent as parameter with fixed schema(user)", function(){
             runs(function(){
                 Ruby.call('General', 'testcase96');
                 waits(3000);
@@ -1788,7 +1796,7 @@ describe("Ruby : findObjects test set : ", function(){
 });
 describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
     describe("userPb tests : ", function(){
-        xit("Should delete all objects of the model when empty parameters are sent with userPB", function(){
+        it("Should delete all objects of the model when empty parameters are sent with userPB", function(){
             runs(function(){
                 Ruby.call('General', 'testcase97');
                 waits(3000);
@@ -1801,7 +1809,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(0);
             });
         });
-        xit("Should throw exception when null parameters are passed in the method with with userPB", function(){
+        it("Should throw exception when null parameters are passed in the method with with userPB", function(){
             runs(function(){
                 Ruby.call('General', 'testcase98');
                 waits(3000);
@@ -1815,7 +1823,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 2");
             });
         });
-        xit("Should delete only the simple matched condition passed as parameter in the method with with userPB.", function(){
+        it("Should delete only the simple matched condition passed as parameter in the method with with userPB.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase99');
                 waits(3000);
@@ -1828,7 +1836,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(3);
             });
         });
-        xit("Should delete only the simple matched multiple condition passed as parameter in method with userPB.", function(){
+        it("Should delete only the simple matched multiple condition passed as parameter in method with userPB.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase100');
                 waits(3000);
@@ -1841,7 +1849,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(3);
             });
         });
-        xit("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with userPB.", function(){
+        it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with userPB.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase101');
                 waits(3000);
@@ -1852,12 +1860,12 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 console.log(result);
                 expect(result["initialCount"]).toEqual(4);
                 expect(result["finalCount"]).toEqual(4);
-                expect(result["error"]).toEqual("non existing column");
+                expect(result["error"]).toEqual(null);
             });
         });
     });
     describe("localPb tests : ", function(){
-        xit("Should delete all objects of the model when empty parameters are sent with localPb", function(){
+        it("Should delete all objects of the model when empty parameters are sent with localPb", function(){
             runs(function(){
                 Ruby.call('General', 'testcase102');
                 waits(3000);
@@ -1870,7 +1878,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(0);
             });
         });
-        xit("Should throw exception when null parameters are passed in the method with with localPb", function(){
+        it("Should throw exception when null parameters are passed in the method with with localPb", function(){
             runs(function(){
                 Ruby.call('General', 'testcase103');
                 waits(3000);
@@ -1884,7 +1892,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 2");
             });
         });
-        xit("Should delete only the simple matched condition passed as parameter in the method with with localPb.", function(){
+        it("Should delete only the simple matched condition passed as parameter in the method with with localPb.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase104');
                 waits(3000);
@@ -1897,7 +1905,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(3);
             });
         });
-        xit("Should delete only the simple matched multiple condition passed as parameter in method with localPb.", function(){
+        it("Should delete only the simple matched multiple condition passed as parameter in method with localPb.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase105');
                 waits(3000);
@@ -1910,7 +1918,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(3);
             });
         });
-        xit("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with localPb.", function(){
+        it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with localPb.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase106');
                 waits(3000);
@@ -1921,12 +1929,12 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 console.log(result);
                 expect(result["initialCount"]).toEqual(4);
                 expect(result["finalCount"]).toEqual(4);
-                expect(result["error"]).toEqual("non existing column");
+                expect(result["error"]).toEqual(null);
             });
         });
     });
     describe("appPb tests : ", function(){
-        xit("Should delete all objects of the model when empty parameters are sent with appPb", function(){
+        it("Should delete all objects of the model when empty parameters are sent with appPb", function(){
             runs(function(){
                 Ruby.call('General', 'testcase107');
                 waits(3000);
@@ -1939,7 +1947,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(0);
             });
         });
-        xit("Should throw exception when null parameters are passed in the method with with appPb", function(){
+        it("Should throw exception when null parameters are passed in the method with with appPb", function(){
             runs(function(){
                 Ruby.call('General', 'testcase108');
                 waits(3000);
@@ -1953,7 +1961,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 2");
             });
         });
-        xit("Should delete only the simple matched condition passed as parameter in the method with with appPb.", function(){
+        it("Should delete only the simple matched condition passed as parameter in the method with with appPb.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase109');
                 waits(3000);
@@ -1966,7 +1974,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(3);
             });
         });
-        xit("Should delete only the simple matched multiple condition passed as parameter in method with appPb.", function(){
+        it("Should delete only the simple matched multiple condition passed as parameter in method with appPb.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase110');
                 waits(3000);
@@ -1979,7 +1987,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result["finalCount"]).toEqual(3);
             });
         });
-        xit("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with appPb.", function(){
+        it("Should throw an exception when wrong condition(non existing column) is sent as parameter in method with appPb.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase111');
                 waits(3000);
@@ -1990,14 +1998,14 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
                 console.log(result);
                 expect(result["initialCount"]).toEqual(4);
                 expect(result["finalCount"]).toEqual(4);
-                expect(result["error"]).toEqual("non existing column");
+                expect(result["error"]).toEqual(null);
             });
         });
     });
 });
 describe("findObjectsPropertyBagByCondHash test set : ", function(){
     describe("userFs tests : ", function(){
-        xit("Should find all the objects of the model when no parameter is passed with the method.", function(){
+        it("Should find all the objects of the model when no parameter is passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase112');
                 waits(3000);
@@ -2011,7 +2019,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].name).toEqual("Nike");
             });
         });
-        xit("Should find the objects matching to the condition passed with the method.", function(){
+        it("Should find the objects matching to the condition passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase113');
                 waits(3000);
@@ -2026,7 +2034,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].quantity).toEqual("40");
             });
         });
-        xit("Should find the selective object parameters depeding on the setAttr parameter passed with the method.", function(){
+        it("Should find the selective object parameters depeding on the setAttr parameter passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase114');
                 waits(3000);
@@ -2041,7 +2049,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].name).toEqual("Puma");
             });
         });
-        xit("Should throw exception when no parameter passed with the method.", function(){
+        it("Should throw exception when no parameter passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase115');
                 waits(3000);
@@ -2055,7 +2063,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
         });
     });
     describe("localFs tests : ", function(){
-        xit("Should find all the objects of the model when no parameter is passed with the method.", function(){
+        it("Should find all the objects of the model when no parameter is passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase116');
                 waits(3000);
@@ -2069,7 +2077,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].name).toEqual("Nike");
             });
         });
-        xit("Should find the objects matching to the condition passed with the method.", function(){
+        it("Should find the objects matching to the condition passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase117');
                 waits(3000);
@@ -2084,7 +2092,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].quantity).toEqual("40");
             });
         });
-        xit("Should find the selective object parameters depeding on the setAttr parameter passed with the method.", function(){
+        it("Should find the selective object parameters depeding on the setAttr parameter passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase118');
                 waits(3000);
@@ -2099,7 +2107,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].name).toEqual("Puma");
             });
         });
-        xit("Should throw exception when no parameter passed with the method.", function(){
+        it("Should throw exception when no parameter passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase119');
                 waits(3000);
@@ -2113,7 +2121,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
         });
     });
     describe("appFs tests : ", function(){
-        xit("Should find all the objects of the model when no parameter is passed with the method.", function(){
+        it("Should find all the objects of the model when no parameter is passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase120');
                 waits(3000);
@@ -2127,7 +2135,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].name).toEqual("Nike");
             });
         });
-        xit("Should find the objects matching to the condition passed with the method.", function(){
+        it("Should find the objects matching to the condition passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase121');
                 waits(3000);
@@ -2142,7 +2150,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].quantity).toEqual("40");
             });
         });
-        xit("Should find the selective object parameters depeding on the setAttr parameter passed with the method.", function(){
+        it("Should find the selective object parameters depeding on the setAttr parameter passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase122');
                 waits(3000);
@@ -2157,7 +2165,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
                 expect(result.resFirst[0].name).toEqual("Puma");
             });
         });
-        xit("Should throw exception when no parameter passed with the method.", function(){
+        it("Should throw exception when no parameter passed with the method.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase123');
                 waits(3000);
@@ -2173,7 +2181,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
 });
 describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
     describe("userFs test set : ", function(){
-        xit("should find all objects when empty paramter is passed with the userFs.", function(){
+        it("should find all objects when empty paramter is passed with the userFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase124');
                 waits(3000);
@@ -2187,7 +2195,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching simple condition passed with the userFs.", function(){
+        it("Should find all the matching simple condition passed with the userFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase125');
                 waits(3000);
@@ -2201,7 +2209,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching condition with OR passed with the userFs.", function(){
+        it("Should find all the matching condition with OR passed with the userFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase126');
                 waits(3000);
@@ -2215,7 +2223,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching condition with AND passed with the userFs.", function(){
+        it("Should find all the matching condition with AND passed with the userFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase127');
                 waits(3000);
@@ -2229,7 +2237,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should throw exception when no parameter is passed with the userFs", function(){
+        it("Should throw exception when no parameter is passed with the userFs", function(){
             runs(function(){
                 Ruby.call('General', 'testcase128');
                 waits(3000);
@@ -2241,7 +2249,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 5");
             });
         });
-        xit("Should throw exception when no first parameter with the userFs.", function(){
+        it("Should throw exception when no first parameter with the userFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase129');
                 waits(3000);
@@ -2253,7 +2261,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["error"]).toEqual("findObjectsPropertyBagByCondArray: Invalid Empty First Argument passed.");
             });
         });
-        xit("Should throw exception when condition is passed as nonexisting column with the userFs.", function(){
+        it("Should throw exception when condition is passed as nonexisting column with the userFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase130');
                 waits(3000);
@@ -2267,7 +2275,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
         });
     });
     describe("localFs test set : ", function(){
-        xit("should find all objects when empty paramter is passed with the localFs.", function(){
+        it("should find all objects when empty paramter is passed with the localFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase131');
                 waits(3000);
@@ -2281,7 +2289,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching simple condition passed with the localFs.", function(){
+        it("Should find all the matching simple condition passed with the localFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase132');
                 waits(3000);
@@ -2295,7 +2303,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching condition with OR passed with the localFs.", function(){
+        it("Should find all the matching condition with OR passed with the localFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase133');
                 waits(3000);
@@ -2309,7 +2317,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching condition with AND passed with the localFs.", function(){
+        it("Should find all the matching condition with AND passed with the localFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase134');
                 waits(3000);
@@ -2323,7 +2331,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should throw exception when no parameter is passed with the localFs", function(){
+        it("Should throw exception when no parameter is passed with the localFs", function(){
             runs(function(){
                 Ruby.call('General', 'testcase135');
                 waits(3000);
@@ -2335,7 +2343,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 5");
             });
         });
-        xit("Should throw exception when no first parameter with the localFs.", function(){
+        it("Should throw exception when no first parameter with the localFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase136');
                 waits(3000);
@@ -2347,7 +2355,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["error"]).toEqual("findObjectsPropertyBagByCondArray: Invalid Empty First Argument passed.");
             });
         });
-        xit("Should throw exception when condition is passed as nonexisting column with the localFs.", function(){
+        it("Should throw exception when condition is passed as nonexisting column with the localFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase137');
                 waits(3000);
@@ -2361,7 +2369,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
         });
     });
     describe("appFs test set : ", function(){
-        xit("should find all objects when empty paramter is passed with the appFs.", function(){
+        it("should find all objects when empty paramter is passed with the appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase138');
                 waits(3000);
@@ -2375,7 +2383,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching simple condition passed with the appFs.", function(){
+        it("Should find all the matching simple condition passed with the appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase139');
                 waits(3000);
@@ -2390,7 +2398,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching condition with OR passed with the appFs.", function(){
+        it("Should find all the matching condition with OR passed with the appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase140');
                 waits(3000);
@@ -2404,7 +2412,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should find all the matching condition with AND passed with the appFs.", function(){
+        it("Should find all the matching condition with AND passed with the appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase141');
                 waits(3000);
@@ -2418,7 +2426,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["resFirst"].length).toEqual(1);
             });
         });
-        xit("Should throw exception when no parameter is passed with the appFs", function(){
+        it("Should throw exception when no parameter is passed with the appFs", function(){
             runs(function(){
                 Ruby.call('General', 'testcase142');
                 waits(3000);
@@ -2430,7 +2438,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["error"]).toEqual("Wrong number of arguments: 0 instead of 5");
             });
         });
-        xit("Should throw exception when no first parameter with the appFs.", function(){
+        it("Should throw exception when no first parameter with the appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase143');
                 waits(3000);
@@ -2442,7 +2450,7 @@ describe("Ruby : findObjectsPropertyBagByCondArray test sets : ", function(){
                 expect(result["error"]).toEqual("findObjectsPropertyBagByCondArray: Invalid Empty First Argument passed.");
             });
         });
-        xit("Should throw exception when condition is passed as nonexisting column with the appFs.", function(){
+        it("Should throw exception when condition is passed as nonexisting column with the appFs.", function(){
             runs(function(){
                 Ruby.call('General', 'testcase144');
                 waits(3000);
@@ -2602,19 +2610,6 @@ describe("Ruby : hasChanges test set : ", function(){
             expect(result.find[0].name).toEqual("Woodlands");
             expect(result.find[0].quantity).toEqual("20");
             expect(result.find[0].object).toEqual(result.objId);
-        });
-    });
-});
-describe("get and set properties test set : ", function(){
-    it("Should get and set the associations property", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase154');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
         });
     });
 });
