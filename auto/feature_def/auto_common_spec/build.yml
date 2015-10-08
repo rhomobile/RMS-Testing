@@ -14,7 +14,7 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.autocommonspec
   BundleURLScheme: autocommonspec
-  extensions: ["nativeBridgeTest", "barcode", "sensor", "screenorientation", "audiocapture", "mediacapture"]
+  extensions: ["nativeBridgeTest", "barcode", "sensor", "screenorientation", "audiocapture", "mediacapture", "appEvents"]
 wp8:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
   extensions: ["mediacapture"]
