@@ -286,7 +286,7 @@ describe('Printer Zebra', function() {
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
-            }, 5000);
+            }, 7000);
         });
 
         waitsFor(function(){
@@ -311,7 +311,7 @@ describe('Printer Zebra', function() {
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
-            }, 5000);
+            }, 8000);
         });
 
         waitsFor(function(){
@@ -357,7 +357,7 @@ describe('Printer Zebra', function() {
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
-            }, 5000);
+            }, 7000);
         });
 
         waitsFor(function(){
@@ -651,7 +651,7 @@ describe('Printer Zebra', function() {
                 
                 setTimeout(function() {
                     testResult = Ruby.getReturnedValue();
-                }, 5000);
+                }, 7000);
 
             });
 

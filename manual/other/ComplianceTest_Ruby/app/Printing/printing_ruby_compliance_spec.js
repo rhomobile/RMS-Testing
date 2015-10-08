@@ -257,7 +257,7 @@ describe('Printing Generic', function() {
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
-            }, 5000);
+            }, 8000);
             
         });
 
@@ -282,7 +282,7 @@ describe('Printing Generic', function() {
             
             setTimeout(function() {
                 testResult = Ruby.getReturnedValue();
-            }, 5000);
+            }, 8000);
             
         });
 
@@ -350,7 +350,7 @@ describe('Printing Generic', function() {
                 
                 setTimeout(function() {
                     testResult = Ruby.getReturnedValue();
-                }, 5000);
+                }, 7000);
                 
             });
 
@@ -380,7 +380,7 @@ describe('Printing Generic', function() {
                 
                 setTimeout(function() {
                     testResult = Ruby.getReturnedValue();
-                }, 5000);
+                }, 7000);
                 
             });
 
@@ -435,7 +435,7 @@ describe('Printing Generic', function() {
                 
                 setTimeout(function() {
                     testResult = Ruby.getReturnedValue();
-                }, 5000);
+                }, 7000);
 
             });
 
@@ -473,9 +473,8 @@ describe('Printing Generic', function() {
                 displayResult("Output: ", Ruby.getReturnedValue()+"<br/>");
             });
             _result.waitForResponse();
-        });        
+        });
 
-    });   
+    });
     
-	
 });
