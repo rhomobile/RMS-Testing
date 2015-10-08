@@ -2003,7 +2003,7 @@ describe("deleteObjectsPropertyBagByCondHash test set : ", function(){
         });
     });
 });
-describe("findObjectsPropertyBagByCondHash test set : ", function(){
+xdescribe("findObjectsPropertyBagByCondHash test set : ", function(){
     describe("userFs tests : ", function(){
         it("Should find all the objects of the model when no parameter is passed with the method.", function(){
             runs(function(){
