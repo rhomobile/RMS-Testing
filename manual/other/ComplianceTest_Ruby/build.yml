@@ -25,6 +25,7 @@ iphone:
    - screenorientation
    - signature
    - sensor
+   - rhoconnect-client
 wp8:
   productid: "da37e740-9d27-0131-ad03-0023241f0ea9"
   extensions:
@@ -46,6 +47,7 @@ android:
    - screenorientation
    - signature
    - sensor
+   - rhoconnect-client
 wm:
   ajax_api_bridge: false
   extensions:
@@ -60,3 +62,4 @@ wm:
    - screenorientation
    - signature
    - sensor
+   - rhoconnect-client
