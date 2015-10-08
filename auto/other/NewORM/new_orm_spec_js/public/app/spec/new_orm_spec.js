@@ -1472,7 +1472,7 @@ describe("DatabaseFullResetEx test set : ", function(){
 		expect(clientId).toEqual("10");
 	});
 
-	it("should delete array of propertybag local, user models and client_info using databaseFullResetEx",function(){
+	xit("should delete array of propertybag local, user models and client_info using databaseFullResetEx",function(){
 		userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(10)");
 		if (useNewOrm) {
 			var Product = function(model){
@@ -1636,7 +1636,7 @@ describe("DatabaseFullResetEx test set : ", function(){
 		expect(db_product_local).toEqual([]);
 		expect(clientId).toEqual("10");
 	});
-	it("should delete array of Fixed schema local models, client models and client_info using databaseFullResetEx",function(){
+	xit("should delete array of Fixed schema local models, client models and client_info using databaseFullResetEx",function(){
 		userDB.executeSql("INSERT INTO CLIENT_INFO (client_id) VALUES(10)");
 		if (useNewOrm) {
 			var Product = function(model){
