@@ -2857,9 +2857,11 @@ public class Keywords {
 			}else if(arg1.toLowerCase().equals("unlock")) {
 				log("unlocking screen");
 				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e UNLOCK_DEVICE True", "Im in UNLOCKER");
-				Thread.sleep(1000);
+				String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+				//Thread.sleep(1000);
 				if(result.contains("Im in UNLOCKER")){
-					result=executeCommandLine("adb shell input keyevent 82");
+					if(DeviceName.contains("razorg"))
+						result=executeCommandLine("adb shell input keyevent 82");
 					return "pass";
 				}
 				else
