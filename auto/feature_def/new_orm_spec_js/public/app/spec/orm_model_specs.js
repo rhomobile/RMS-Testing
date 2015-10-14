@@ -53,7 +53,9 @@ describe("Model Object", function() {
   });
 
   it('returns vars', function() {
+    console.log("Test 1");
     expect(specHelpers.cleanVars(object)).toEqual({'key': 'value'});
+    console.log("Test 1");
   });
 
   it('retrieves object id', function() {
@@ -410,6 +412,8 @@ describe("Model Object", function() {
     var record = model.create({"name":"Zoolo","industry":"Tech"});
     record.updateAttributes({"name":"Zoolo2"});
     var res = model.find("first",{conditions:{"name":"Zoolo2"}});
+    console.log("Test : ");
+    console.log(res.has('name') + " : " + res.has('industry'));
     expect(res.get("name")).toEqual("Zoolo2");
   });
 

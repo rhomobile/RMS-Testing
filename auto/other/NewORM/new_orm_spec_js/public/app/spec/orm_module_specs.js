@@ -43,11 +43,11 @@ describe("ORM Module Specs", function() {
     Rho.ORM.clear();
   });
 
-  xit('Check Rho.ORM exist or not | Should return a function',function() {
+  it('Check Rho.ORM exist or not | Should return a function',function() {
     expect(typeof(Rho.ORM)).toEqual('function');
   });
 
-  xit('Should create model',function() {
+  it('Should create model',function() {
     if(useNewOrm) {
       var Product = function(model) {
         model.enable("sync");
@@ -76,7 +76,7 @@ describe("ORM Module Specs", function() {
     expect(source.partition).toEqual('local');
   });
 
-  xit('Call Rho.ORM.addModel, passing model name as numerical string',function(){
+  it('Call Rho.ORM.addModel, passing model name as numerical string',function(){
     if(useNewOrm) {
         var Product = function(model) {
           model.enable("sync");
@@ -99,7 +99,7 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('123456');
   });
 
-  xit('set enable as sync at the time of creating model',function() {
+  it('set enable as sync at the time of creating model',function() {
     if(useNewOrm) {
       var Product = function(model) {
         model.enable("sync");
@@ -123,7 +123,7 @@ describe("ORM Module Specs", function() {
     expect(source.partition).toEqual('user');
   });
 
-  xit('set enable as propertyBag at the time of creating model',function(){
+  it('set enable as propertyBag at the time of creating model',function(){
     if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = false;
@@ -152,7 +152,7 @@ describe("ORM Module Specs", function() {
       expect(source.schema).toBeUndefined();
   });
 
-  xit('set enable as fixedSchema at the time of creating model',function(){
+  it('set enable as fixedSchema at the time of creating model',function(){
     if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = true;
@@ -186,7 +186,7 @@ describe("ORM Module Specs", function() {
     }
   });
 
-  xit('Set sync and set propertyBag at the time of creating model',function() {
+  it('Set sync and set propertyBag at the time of creating model',function() {
     if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = false;
@@ -213,7 +213,7 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  xit('Set sync and set fixedSchema at the time of creating model',function(){
+  it('Set sync and set fixedSchema at the time of creating model',function(){
     if(useNewOrm) {
       var Product = function(model) {
         model.enable("sync");
@@ -238,7 +238,7 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  xit('Create a Model with property("name","string")',function() {
+  it('Create a Model with property("name","string")',function() {
     if(useNewOrm) {
       var Product = function(model){
         model.setModelProperty("name","string", "");
@@ -757,7 +757,7 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  xit('Create a model with sync_priority as 1',function(){
+  it('Create a model with sync_priority as 1',function(){
     if(useNewOrm) {
       var Product = function(model){
         model.enable("sync");
@@ -782,7 +782,7 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  xit('Create a model with in app Partition',function(){
+  it('Create a model with in app Partition',function(){
     if(useNewOrm) {
       var Product = function(model){
         model.enable("sync");
@@ -807,7 +807,7 @@ describe("ORM Module Specs", function() {
     expect(source.model_name).toEqual('Product');
   });
 
-  xit('Create a model with schema_version, 1.0',function() {
+  it('Create a model with schema_version, 1.0',function() {
     if(useNewOrm) {
       var Product = function(model){
         model.fixed_schema = true;
@@ -842,7 +842,7 @@ describe("ORM Module Specs", function() {
     expect(res[0].schema_version).toEqual('1.0');
   });
 
-  xit('Get a model by its name after it has been added', function() {
+  it('Get a model by its name after it has been added', function() {
     if(useNewOrm) {
       var Product = function(model) {
         model.enable("sync");
@@ -868,7 +868,7 @@ describe("ORM Module Specs", function() {
       expect(Rho.ORM.getModel('Product')).toBe(model);
   });
 
-  xit('should add fixed schema model with table', function() {
+  it('should add fixed schema model with table', function() {
     if(useNewOrm) {
       var Product = function(model) {
         model.fixed_schema = true;
@@ -904,7 +904,7 @@ describe("ORM Module Specs", function() {
   });
 
   //Freezing a propertyBag model not supported with current release
-  // xit('Create a model with freezed, true | Should\'nt add new column',function(){
+  // it('Create a model with freezed, true | Should\'nt add new column',function(){
   //   var error = '';
   //   expect(Rho.ORM.getModel('Product')).toBeUndefined();
 

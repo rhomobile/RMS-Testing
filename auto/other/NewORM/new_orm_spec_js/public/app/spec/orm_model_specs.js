@@ -52,11 +52,11 @@ describe("Model Object", function() {
     object = model.make({'key': 'value'});
   });
 
-  xit('returns vars', function() {
+  it('returns vars', function() {
     expect(specHelpers.cleanVars(object)).toEqual({'key': 'value'});
   });
 
-  xit('retrieves object id', function() {
+  it('retrieves object id', function() {
     if(useNewOrm){
       expect(object.object).toBe(object.get('object'));
     } else {
@@ -64,47 +64,47 @@ describe("Model Object", function() {
     }
   });
 
-  xit('gets existing property', function() {
+  it('gets existing property', function() {
     expect(object.get('key')).toBe('value');
   });
 
-  xit('gets absent property', function() {
+  it('gets absent property', function() {
     expect(object.get('absent_key')).toBeUndefined();
   });
 
-  xit('sets property', function() {
+  it('sets property', function() {
     object.set('key', 'another value');
     expect(specHelpers.cleanVars(object)).toEqual({'key': 'another value'});
   });
 
-  xit('sets new property', function() {
+  it('sets new property', function() {
     object.set('new_key', 'new value');
     expect(specHelpers.cleanVars(object)).toEqual({'key': 'value', 'new_key': 'new value'});
   });
 
-  xit('supports set chaining', function() {
+  it('supports set chaining', function() {
     object.set('key', 'another value').set('new_key', 'new value');
     expect(specHelpers.cleanVars(object)).toEqual({'key': 'another value', 'new_key': 'new value'});
   });
 
-  xit('sets property with empty name', function() {
+  it('sets property with empty name', function() {
     object.set('', 'another value');
     expect(specHelpers.cleanVars(object)).toEqual({'key': 'value', '': 'another value'});
   });
 
-  xit('has properties', function() {
+  it('has properties', function() {
     expect(object.has('key')).toBe(true);
     expect(object.has('absent_key')).toBe(false);
   });
 
-  xit('should create object in database', function() {
+  it('should create object in database', function() {
     var before = model.count();
     model.create({'key': 'value'});
     var after = model.count();
     expect(after).toBe(before + 1);
   });
 
-  xit('should save object to database', function() {
+  it('should save object to database', function() {
     model.deleteAll();
     var object = model.create({'key': 'value'});
 
@@ -123,10 +123,9 @@ describe("Model Object", function() {
     }
   });
 
-  xit('updates object attributes in database', function() {
+  it('updates object attributes in database', function() {
     model.deleteAll();
     var object = model.create({'key': 'value', 'original_key': 'original value'});
-
     if(useNewOrm) {
       expect(specHelpers.allVars(model.find(object.object))).toEqual(specHelpers.allVars(object));
       object.updateAttributes({'key': 'another value', 'new_key': 'new value'});
@@ -140,7 +139,7 @@ describe("Model Object", function() {
     };
   });
 
-  xit('destroys object in database', function() {
+  it('destroys object in database', function() {
     model.deleteAll();
     var object1 = model.create({'key1': 'value1'});
     var object2 = model.create({'key2': 'value2'});
@@ -150,23 +149,26 @@ describe("Model Object", function() {
     object1.destroy();
 
     var found = model.find('all');
+    console.log("Has : "+found[0].has('key2'));
+    console.log("find : "+JSON.stringify(found[0]));
+    console.log("VARS : "+found[0].vars());
     expect(found.length).toBe(1);
     expect(specHelpers.allVars(found[0])).toEqual(specHelpers.allVars(object2));
   });
 
-  xit('does not create empty object in database', function() {
+  it('does not create empty object in database', function() {
     var before = model.count();
     model.create();
     expect(model.count()).toBe(before);
   });
 
-  xit('does not create object with the only empty property in database', function() {
+  it('does not create object with the only empty property in database', function() {
     var before = model.count();
     model.create({'': 'value'});
     expect(model.count()).toBe(before);
   });
 
-  xit('deletes all objects in database', function() {
+  it('deletes all objects in database', function() {
     model.create({'key': 'value'});
     expect(model.count()).toBeGreaterThan(0);
     model.deleteAll();
@@ -174,7 +176,7 @@ describe("Model Object", function() {
   });
 
   // ==========================================================
-  xit('delete object in sync database', function() {
+  it('delete object in sync database', function() {
     var Modelsync = specHelpers.addModel("Item", modelDefs3);
     Modelsync.create({'name': 'tests'});
 
@@ -197,7 +199,7 @@ describe("Model Object", function() {
     expect(cv[0].update_type).toEqual("delete");
   });
 
-  xit('update object in sync database', function() {
+  it('update object in sync database', function() {
     var Modelsync = specHelpers.addModel("Item", modelDefs3);
     Modelsync.create({'name': 'tests'});
 
@@ -219,7 +221,7 @@ describe("Model Object", function() {
     expect(cv[0].update_type).toEqual("update");
   });
 
-  xit('deletes all objects of specific model in database', function() {
+  it('deletes all objects of specific model in database', function() {
     var model1 = specHelpers.addModel("Product", modelDef);
     var model2 = specHelpers.addModel("Item", modelDef2);
 
@@ -237,7 +239,7 @@ describe("Model Object", function() {
     expect(model2.count()).toBe(0);
   });
 
-  xit('reads object from database', function() {
+  it('reads object from database', function() {
     model.deleteAll();
     model.create({'key': 'value'});
     var found = model.find('all');
@@ -245,14 +247,14 @@ describe("Model Object", function() {
     expect(specHelpers.cleanVars(found[0])).toEqual({'key': 'value'});
   });
 
-  xit('compares 2 objects props', function() {
+  it('compares 2 objects props', function() {
     var m1 = model.create({'key': 'value'});
     var m2 = model.create({'key': 'value'});
     res = (m1.get('key') == m2.get('key'));
     expect(res).toBe(true);
   });
 
-  xit('does not write empty property to database', function() {
+  it('does not write empty property to database', function() {
     model.deleteAll();
     model.create({'key': 'value', '': 'empty'});
     var found = model.find('all');
@@ -260,7 +262,7 @@ describe("Model Object", function() {
     expect(specHelpers.cleanVars(found[0])).toEqual({'key': 'value'});
   });
 
-  xit('counts objects in database', function() {
+  it('counts objects in database', function() {
     var model2 = specHelpers.addModel("Item", modelDef2);
     var before1 = model.count();
 
@@ -273,7 +275,7 @@ describe("Model Object", function() {
     expect(after1).toBe(before1 + 2);
   });
 
-  xit('counts objects in database using find', function() {
+  it('counts objects in database using find', function() {
     var model2 = specHelpers.addModel("Item", modelDef2);
     var before1 = model.find('count');
 
@@ -286,7 +288,7 @@ describe("Model Object", function() {
     expect(after1).toBe(before1 + 2);
   });
 
-  xit('counts objects in database using find with condition', function() {
+  it('counts objects in database using find with condition', function() {
     var model2 = specHelpers.addModel("Item", modelDef2);
     var before1 = model.find('count', {conditions: {'key': 'value to find'}});
 
@@ -301,7 +303,7 @@ describe("Model Object", function() {
     expect(after1).toBe(before1 + 2);
   });
 
-  xit('finds all objects in database', function() {
+  it('finds all objects in database', function() {
     var model2 = specHelpers.addModel("Item", modelDef2);
 
     model.create({'key1': 'value1'});
@@ -316,7 +318,7 @@ describe("Model Object", function() {
     expect(specHelpers.cleanVars(found[1 - i])).toEqual({'key3': 'value3'});
   });
 
-  xit('finds all objects with one condition', function() {
+  it('finds all objects with one condition', function() {
     model.create({'key': 'value1'});
     var objects = [model.create({'key': 'value2'}), model.create({'key': 'value2'})];
 
@@ -334,7 +336,7 @@ describe("Model Object", function() {
     };
   });
 
-  xit('finds all objects with conditions', function() {
+  it('finds all objects with conditions', function() {
     model.deleteAll();
 
     model.create({'key1': 'value2'});
@@ -360,7 +362,30 @@ describe("Model Object", function() {
     };
   });
 
-  xit('finds specific object', function() {
+it('find with op parameter', function() {
+    model.deleteAll();
+    model.create({'key1': 'value2', 'key2': 'abc'});
+    model.create({'key1': 'value4', 'key2': 'value4'});
+    model.create({'key1': 'value2', 'key2': 'def'});
+    model.create({'key1': 'value3', 'key2': 'value3'});
+    expect(model.getCount()).toEqual(4)
+
+    var found = model.find('all', 
+      {
+        "conditions":{'key1': 'value2'},
+      });
+    expect(found.length).toEqual(2);
+
+    var query = "value2"
+    var found2 = model.find('all', 
+      {
+        "conditions":["key1 = ?", query],
+        "select":["key1", "key2"],
+      });
+    expect(found2.length).toEqual(2);
+  });
+
+  it('finds specific object', function() {
     var original = model.create({'key1': 'value1'});
     model.create({'key2': 'value2'});
     if(useNewOrm) {
@@ -371,7 +396,33 @@ describe("Model Object", function() {
     };
   });
 
-  xit('should finds first object in database', function() {
+  it('deleteAll test set', function(){
+    model.deleteAll();
+    expect(model.getCount()).toEqual(0);
+    model.create({'key1': 'value2', 'key2': 'abc'});
+    model.create({'key1': 'value4', 'key2': 'value4'});
+    model.create({'key1': 'value2', 'key2': 'def'});
+    model.create({'key1': 'value3', 'key2': 'value3'});
+    expect(model.getCount()).toEqual(4);
+    model.deleteAll({"key1":"value2", "key2": "abc"});
+    expect(model.getCount()).toEqual(3);
+    
+  });
+
+  xit('deleteAll test2 set', function(){
+    model.deleteAll();
+    expect(model.getCount()).toEqual(0);
+    model.create({'key1': 'value2', 'key2': 'abc'});
+    model.create({'key1': 'value4', 'key2': 'value4'});
+    model.create({'key1': 'value2', 'key2': 'def'});
+    model.create({'key1': 'value3', 'key2': 'value3'});
+    var query1 = "value2";
+    var query2 = "abc";
+    model.deleteAll(["key1 = ?", query1]);
+    expect(model.getCount()).toEqual(3);
+  });
+
+  it('should finds first object in database', function() {
     model.deleteAll();
     var originals = [model.create({'key1': 'value1'}), model.create({'key3': 'value3'})];
     var found = model.find('first');
@@ -507,13 +558,22 @@ describe("Fixed Schema Models", function() {
   });
 
   it("should verify created fixed schema modal",function(){
-    model.create({name:"testfixed"});
+    model.create({name:"test1", brand:"nike", industry:"zebra"});
+    model.create({name:"test2", brand:"puma", industry:"zebra"});
+    model.create({name:"test3", brand:"adidas", industry:"zebra"});
     var obj = model.find("first");
-    expect(obj.get("name")).toEqual("testfixed");
+    expect(obj.get("name")).toEqual("test1");
 
     var dblocal = Rho.ORMHelper.dbConnection("local");
     var dboutput = dblocal.executeSql("select * from Product");
-    expect(dboutput[0].name).toEqual("testfixed");
+    expect(dboutput[0].name).toEqual("test1");
+    var query = "test2";
+    var res = model.find("all", {
+      "conditions" : ["name = 'test1'"],
+      "order":"brand",
+      "orderdir":"ASC"
+    });
+    console.log("find in fixed : " + JSON.stringify(res));
   });
 
   it("should create sync model in db",function(){
@@ -628,7 +688,7 @@ describe("Fixed Schema Models", function() {
     expect(dbchanged).toEqual([]);
   });
 
-  xit('destroys fixedSchema item after CHANGED_VALUES deleted', function() {
+  it('destroys fixedSchema item after CHANGED_VALUES deleted', function() {
     model2.create({name:"testfixed"});
     var obj = model2.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -649,7 +709,7 @@ describe("Fixed Schema Models", function() {
     expect(cv[0].update_type).toEqual("delete");
   });
 
-   xit('updates fixedSchema item after CHANGED_VALUES updated', function() {
+   it('updates fixedSchema item after CHANGED_VALUES updated', function() {
     model2.create({name:"testfixed"});
     var obj = model2.find("first");
     expect(obj.get("name")).toEqual("testfixed");
@@ -817,7 +877,7 @@ if (useNewOrm) {
     expect(found[19].get("name")).toEqual('Acme_19');
   });
 
-  it ("Should support paginate with options", function() {
+  xit ("Should support paginate with options", function() {
     for (var i = 0; i < 25; i++)
       model.create({name: ("Acme_" + i), industry: ("Tech_" + i)});
 
@@ -834,7 +894,7 @@ if (useNewOrm) {
     expect(found[4].get("name")).toEqual('Acme_24');
   });
 
-  it('Should do full update for fixed schema if model enable :full_update', function() {
+  xit('Should do full update for fixed schema if model enable :full_update', function() {
     var FsProduct = function(model) {
       model.fixed_schema = true;
       model.setProperty('schema_version','1.0');
@@ -931,7 +991,7 @@ describe("Property Bag Models", function() {
     reset();
   });
 
-  xit('Call create passing a empty hash({})',function(){
+  it('Call create passing a empty hash({})',function(){
     productModel = Rho.ORM.getModel('Product');
     var before = productModel.count();
     productModel.create({});
@@ -939,7 +999,7 @@ describe("Property Bag Models", function() {
     expect(after).toBe(before);
   });
 
-  xit('Call deleteAll with model Object passing undefined,undefined in arguments',function(){
+  it('Call deleteAll with model Object passing undefined,undefined in arguments',function(){
     model.create({name:"testfixed1"});
     model.create({name:"testfixed2"});
     model.create({name:"testfixed3",brand:4});
@@ -952,7 +1012,7 @@ describe("Property Bag Models", function() {
     expect(total).toEqual(0);
   });
 
-  xit('Call find without passing any argument to it',function(){
+  it('Call find without passing any argument to it',function(){
     for (var i=0;i<=100;i++){
         var nameValue = "testfixed"+i;
         model.create({name: nameValue});
@@ -961,7 +1021,7 @@ describe("Property Bag Models", function() {
     expect(obj.length).toEqual(101);
   });
 
-  xit('finds all objects with one condition for e.g model.find("all", {conditions: {"key": "value2"}})',function(){
+  it('finds all objects with one condition for e.g model.find("all", {conditions: {"key": "value2"}})',function(){
     itemTypes = ['Electronics','Softwares','Cameras','Books'];
     for (var i=0;i<=50;i++){
         var nameValue = "Item "+i;
@@ -1040,7 +1100,7 @@ describe("Property Bag Models", function() {
       };
   });
 
-  xit('finds first objects with one condition for e.g model.find("first", {conditions: {"key": "value2"}})',function(){
+  it('finds first objects with one condition for e.g model.find("first", {conditions: {"key": "value2"}})',function(){
     itemTypes = ['Electronics','Softwares','Cameras','Books']
     for (var i=0;i<=100;i++){
         var nameValue = "Item "+i;
@@ -1087,7 +1147,7 @@ describe("Property Bag Models", function() {
   });
 
   // FIXME: Not Supported (conditions)
-  xit("Call find with all , conditions empty hash and select empty String",function() {
+  it("Call find with all , conditions empty hash and select empty String",function() {
       model.deleteAll();
       var res;
       expect(model.count()).toEqual(0);
@@ -1101,11 +1161,11 @@ describe("Property Bag Models", function() {
                     conditions: {},
                     select: []
                   });
-      expect(res.count()).toEqual(3);
+      expect(res.length).toEqual(3);
   });
 
   // FIXME: Not Supported (conditions)
-  xit("Call find with first and select with empty",function() {
+  it("Call find with first and select with empty",function() {
     model.deleteAll();
     var res;
     model.create({"industry":"Technology","name":"Moto","Address":"USA"});
@@ -1117,11 +1177,13 @@ describe("Property Bag Models", function() {
                   conditions: {"industry":"Technology"},
                   select: []
                 });
-    expect(res).toEqual([]);
+    expect(res.industry).toEqual("Technology");
+    expect(res.name).toEqual("Moto");
+    expect(res.Address).toEqual("USA");
   });
 
   // FIXME: Not Supported (conditions)
-  xit("Call find with first and other parameter as empty",function() {
+  it("Call find with first and other parameter as empty",function() {
     model.deleteAll();
     var res;
     expect(model.count()).toEqual(0);
@@ -1138,7 +1200,7 @@ describe("Property Bag Models", function() {
     expect(res.get("name")).toEqual("Moto");
   });
 
-  xit('should find count ',function(){
+  it('should find count ',function(){
     itemTypes = ['Electronics','Softwares','Cameras','Books']
     for (var i=0;i<=100;i++){
       var nameValue = "Item "+i;
@@ -1149,7 +1211,7 @@ describe("Property Bag Models", function() {
     expect(obj).toEqual(101);
   });
 
-  xit('should find count objects with one condition for e.g model.find("count", {conditions: {"key": "value2"}})',function(){
+  it('should find count objects with one condition for e.g model.find("count", {conditions: {"key": "value2"}})',function(){
     itemTypes = ['Electronics','Softwares']
     for (var i=0;i<=100;i++){
         var nameValue = "Item "+i;
@@ -1180,7 +1242,7 @@ describe("Property Bag Models", function() {
 
 if (useNewOrm) {
   // The following examples are n/a in Old ORM specs for property bag
-  xit('Should do full update for property bag if model enable :full_update', function() {
+  it('Should do full update for property bag if model enable :full_update', function() {
     var PBProduct = function(model) {
       model.setModelProperty("name","string", "");
       model.setModelProperty("brand","string", "");

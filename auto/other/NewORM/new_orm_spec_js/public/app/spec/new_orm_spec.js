@@ -7649,7 +7649,7 @@ describe("findObjectsPropertyBagByCondHash test set : ", function(){
 		});
 	});
 });
-describe("findObjectsPropertyBagByCondArray test sets : ", function(){
+xdescribe("findObjectsPropertyBagByCondArray test sets : ", function(){
 	userDB = Rho.ORMHelper.dbConnection('user');
 	localDB = Rho.ORMHelper.dbConnection('local');
 	appDB = Rho.ORMHelper.dbConnection('app');
