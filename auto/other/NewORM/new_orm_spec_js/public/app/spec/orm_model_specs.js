@@ -409,7 +409,7 @@ it('find with op parameter', function() {
     
   });
 
-  xit('deleteAll test2 set', function(){
+  it('deleteAll test2 set', function(){
     model.deleteAll();
     expect(model.getCount()).toEqual(0);
     model.create({'key1': 'value2', 'key2': 'abc'});
@@ -418,7 +418,7 @@ it('find with op parameter', function() {
     model.create({'key1': 'value3', 'key2': 'value3'});
     var query1 = "value2";
     var query2 = "abc";
-    model.deleteAll(["key1 = ?", query1]);
+    model.deleteAll(["key1 = ?", query1], ['key1']);
     expect(model.getCount()).toEqual(3);
   });
 
@@ -1156,12 +1156,10 @@ describe("Property Bag Models", function() {
       model.create({"industry":"Technology","name":"Aeroprise","Address":"Bangalore"});
       model.create({"industry":"Accounting","name":"PWC","Address":"Russia"});
       expect(model.count()).toEqual(3);
-      res = model.find("all",
-                  {
-                    conditions: {},
-                    select: []
-                  });
+      res = model.find("all");
+      console.log("findwithall : " + JSON.stringify(res));
       expect(res.length).toEqual(3);
+      model.deleteAll();
   });
 
   // FIXME: Not Supported (conditions)

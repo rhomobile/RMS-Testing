@@ -1241,9 +1241,159 @@ describe("new constructor test set :", function(){
 			console.log("result : " + JSON.stringify(res));
 			expect(res.length).toEqual(1);
 			expect(res[0].partition).toEqual("user");
-
 		});
 	});
 });
+describe("save Object Test cases : ", function(){
+	
+	var localDB = Rho.ORMHelper.dbConnection('local');
+  	var userDB  = Rho.ORMHelper.dbConnection('user');
+  	var appDB  = Rho.ORMHelper.dbConnection('app');
+	var reset = function() {
+	    var partitions = Rho.ORM.getDbPartitions();
+	    $.each(partitions, function(index, db2){
+			db2.executeSql("DELETE FROM SOURCES");
+			db2.executeSql("DELETE FROM OBJECT_VALUES");
+			db2.executeSql("DELETE FROM CHANGED_VALUES");
+			if(db2.isTableExist("EmployeeApp")){
+				console.log("Found EmployeeApp !");
+				db2.executeSql("DELETE FROM EmployeeApp");
+			}
+	  	});
+	  };
+	beforeEach(function(){
+		reset();
+	});
+	
+	it("should save an existing model with new values : userFs", function(){
+		var EmployeeApp = function(model){
+		 	model.fixed_schema = true;
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("salary", "integer", "");
+			model.setModelProperty("age", "integer", "");
+			model.setModelProperty("department", "string", "");
+			model.setModelProperty("partition", "user");
+		};
+		var emplObj = Rho.ORM.addModel("EmployeeApp", EmployeeApp);
+		var objData = emplObj.createObject({"name":"Shaun", "salary": 1000, "age": 30, "department":"sales"});
+		emplObj.saveObject(objData.object,{"name":"Fred", "salary": 4000, "age": 45, "department":"marketing"});
+		var resObj = emplObj.findObjects("all", {}, [], [], []);
+		console.log("resObj : " + JSON.stringify(resObj));
+		expect(resObj.length).toEqual(1);
+		expect(resObj[0].name).toEqual("Fred");
+		expect(resObj[0].salary).toEqual("4000");
+		expect(resObj[0].age).toEqual("45");
+		expect(resObj[0].department).toEqual("marketing");
+		expect(resObj[0].object).toEqual(objData.object);
+	});
+
+	it("should save an existing model with new values : localFs", function(){
+		var EmployeeApp = function(model){
+		 	model.fixed_schema = true;
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("salary", "integer", "");
+			model.setModelProperty("age", "integer", "");
+			model.setModelProperty("department", "string", "");
+			model.setModelProperty("partition", "local");
+		};
+		var emplObj = Rho.ORM.addModel("EmployeeApp", EmployeeApp);
+		var objData = emplObj.createObject({"name":"Shaun", "salary": 1000, "age": 30, "department":"sales"});
+		emplObj.saveObject(objData.object,{"name":"Fred", "salary": 4000, "age": 45, "department":"marketing"});
+		var resObj = emplObj.findObjects("all", {}, [], [], []);
+		console.log("resObj : " + JSON.stringify(resObj));
+		expect(resObj[0].name).toEqual("Fred");
+		expect(resObj[0].salary).toEqual("4000");
+		expect(resObj[0].age).toEqual("45");
+		expect(resObj[0].department).toEqual("marketing");
+		expect(resObj[0].object).toEqual(objData.object);
+	});
+
+	it("should save an existing model with new values : appFs", function(){
+		var EmployeeApp = function(model){
+		 	model.fixed_schema = true;
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("salary", "integer", "");
+			model.setModelProperty("age", "integer", "");
+			model.setModelProperty("department", "string", "");
+			model.setModelProperty("partition", "app");
+		};
+		var emplObj = Rho.ORM.addModel("EmployeeApp", EmployeeApp);
+		var objData = emplObj.createObject({"name":"Shaun", "salary": 1000, "age": 30, "department":"sales"});
+		emplObj.saveObject(objData.object,{"name":"Fred", "salary": 4000, "age": 45, "department":"marketing"});
+		var resObj = emplObj.findObjects("all", {}, [], [], []);
+		console.log("resObj : " + JSON.stringify(resObj));
+		expect(resObj[0].name).toEqual("Fred");
+		expect(resObj[0].salary).toEqual("4000");
+		expect(resObj[0].age).toEqual("45");
+		expect(resObj[0].department).toEqual("marketing");
+		expect(resObj[0].object).toEqual(objData.object);
+	});
+	
+	it("should save an existing model with new values : userPB", function(){
+		var EmployeeApp = function(model){
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("salary", "integer", "");
+			model.setModelProperty("age", "integer", "");
+			model.setModelProperty("department", "string", "");
+			model.setModelProperty("partition", "user");
+		};
+		var emplObj = Rho.ORM.addModel("EmployeeApp", EmployeeApp);
+		var objData = emplObj.createObject({"name":"Shaun", "salary": 1000, "age": 30, "department":"sales"});
+		emplObj.saveObject(objData.object,{"name":"Fred", "salary": 4000, "age": 45, "department":"marketing"});
+		var resObj = emplObj.findObjects("all", {}, [], [], []);
+		console.log("resObj : " + JSON.stringify(resObj));
+		expect(resObj[0].name).toEqual("Fred");
+		expect(resObj[0].salary).toEqual("4000");
+		expect(resObj[0].age).toEqual("45");
+		expect(resObj[0].department).toEqual("marketing");
+		expect(resObj[0].object).toEqual(objData.object);
+	});
+	
+	it("should save an existing model with new values : localPB", function(){
+		var EmployeeApp = function(model){
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("salary", "integer", "");
+			model.setModelProperty("age", "integer", "");
+			model.setModelProperty("department", "string", "");
+			model.setModelProperty("partition", "local");
+		};
+		var emplObj = Rho.ORM.addModel("EmployeeApp", EmployeeApp);
+		var objData = emplObj.createObject({"name":"Shaun", "salary": 1000, "age": 30, "department":"sales"});
+		emplObj.saveObject(objData.object,{"name":"Fred", "salary": 4000, "age": 45, "department":"marketing"});
+		var resObj = emplObj.findObjects("all", {}, [], [], []);
+		console.log("resObj : " + JSON.stringify(resObj));
+		expect(resObj[0].name).toEqual("Fred");
+		expect(resObj[0].salary).toEqual("4000");
+		expect(resObj[0].age).toEqual("45");
+		expect(resObj[0].department).toEqual("marketing");
+		expect(resObj[0].object).toEqual(objData.object);
+	});
+
+	it("should save an existing model with new values : appPB", function(){
+		var EmployeeApp = function(model){
+			model.setModelProperty("name", "string", "");
+			model.setModelProperty("salary", "integer", "");
+			model.setModelProperty("age", "integer", "");
+			model.setModelProperty("department", "string", "");
+			model.setModelProperty("partition", "app");
+		};
+		var emplObj = Rho.ORM.addModel("EmployeeApp", EmployeeApp);
+		var objData = emplObj.createObject({"name":"Shaun", "salary": 1000, "age": 30, "department":"sales"});
+		emplObj.saveObject(objData.object,{"name":"Fred", "salary": 4000, "age": 45, "department":"marketing"});
+		var resObj = emplObj.findObjects("all", {}, [], [], []);
+		console.log("resObj : " + JSON.stringify(resObj));
+		expect(resObj[0].name).toEqual("Fred");
+		expect(resObj[0].salary).toEqual("4000");
+		expect(resObj[0].age).toEqual("45");
+		expect(resObj[0].department).toEqual("marketing");
+		expect(resObj[0].object).toEqual(objData.object);
+	});
+});
+	
+						
+						
+						
+						
+
 
 
