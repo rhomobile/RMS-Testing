@@ -404,7 +404,7 @@ it('find with op parameter', function() {
     model.create({'key1': 'value2', 'key2': 'def'});
     model.create({'key1': 'value3', 'key2': 'value3'});
     expect(model.getCount()).toEqual(4);
-    model.deleteAll({"key1":"value2", "key2": "abc"});
+    model.delete_all({"conditions":{"key1":"value2", "key2": "abc"}});
     expect(model.getCount()).toEqual(3);
     
   });
@@ -418,8 +418,8 @@ it('find with op parameter', function() {
     model.create({'key1': 'value3', 'key2': 'value3'});
     var query1 = "value2";
     var query2 = "abc";
-    model.deleteAll(["key1 = ?", query1], ['key1']);
-    expect(model.getCount()).toEqual(3);
+    model.delete_all({"conditions":["key1 = ?", query1]});
+    expect(model.getCount()).toEqual(2);
   });
 
   it('should finds first object in database', function() {
@@ -757,11 +757,11 @@ if (useNewOrm) {
      model.create({name:"testfixed2"});
      model.create({name:"testfixed3",brand:4});
      model.create({name:"testfixed4",brand:2});
-     var total = model.count();
+     var total = model.getCount();
      expect(total).toEqual(4);
 
-     model.deleteAll({name:"testfixed1"});
-     total = model.count();
+     model.delete_all({"conditions":{name:"testfixed1"}});
+     total = model.getCount();
      expect(total).toEqual(3);
   });
 

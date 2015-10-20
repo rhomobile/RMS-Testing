@@ -4890,10 +4890,16 @@ describe("getProperty and setProperty test set : ", function(){
 describe("find test set : ", function(){
 	describe("userFS tests: ", function(){
 		var userDB = Rho.ORMHelper.dbConnection('user');
-		var reset = function(){
+		beforeEach(function(){
+			var partitions = Rho.ORM.getDbPartitions();
+		    $.each(partitions, function(index, db2){
+				db2.executeSql("DELETE FROM SOURCES");
+				db2.executeSql("DELETE FROM OBJECT_VALUES");
+				db2.executeSql("DELETE FROM CHANGED_VALUES");
 				if(userDB.isTableExist('ProductUs'))
-					userDB.executeSql("DELETE FROM ProductUs");
-			};
+					userDB.executeSql("DROP TABLE ProductUs");
+		  	});
+		});
 		it("Should be able to find all the objects with no condition fixed schema(user)", function(){
 			runs(function(){
 				var ProductUs = function(model){
@@ -4905,7 +4911,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "user");
 				};
 				var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"nike",
 				"quantity":"20",
@@ -4948,7 +4954,7 @@ describe("find test set : ", function(){
 		it("should be able to find all the objects with simple condition Array",function(){
 			runs(function(){
 				var ProductUs = function(model){
-				 	//model.fixed_schema = true;
+					model.fixed_schema = true;
 					model.setModelProperty("name", "string", "");
 					model.setModelProperty("quantity", "integer", "");
 					model.setModelProperty("price", "integer", "");
@@ -4956,7 +4962,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "user");
 				};
 				var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -4991,7 +4997,7 @@ describe("find test set : ", function(){
 		it("should be able to find all the objects with simple condition Hash",function(){
 			runs(function(){
 				var ProductUs = function(model){
-				 	//model.fixed_schema = true;
+					model.fixed_schema = true;
 					model.setModelProperty("name", "string", "");
 					model.setModelProperty("quantity", "integer", "");
 					model.setModelProperty("price", "integer", "");
@@ -4999,7 +5005,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "user");
 				};
 				var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5041,8 +5047,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "user");
 				};
 				var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
-				var prdObj2 = Rho.ORM.getModel('ProductUs');
-				prdObj2.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5079,6 +5084,16 @@ describe("find test set : ", function(){
 				if(localDB.isTableExist('ProductLo'))
 					localDB.executeSql("DELETE FROM ProductLo");
 			};
+		beforeEach(function(){
+			var partitions = Rho.ORM.getDbPartitions();
+		    $.each(partitions, function(index, db2){
+				db2.executeSql("DELETE FROM SOURCES");
+				db2.executeSql("DELETE FROM OBJECT_VALUES");
+				db2.executeSql("DELETE FROM CHANGED_VALUES");
+				if(localDB.isTableExist('ProductLo'))
+					localDB.executeSql("DROP TABLE ProductLo");
+		  	});
+		});
 		it("Should be able to find all the objects with no condition fixed schema(local)", function(){
 			runs(function(){
 				var ProductLo = function(model){
@@ -5090,7 +5105,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "local");
 				};
 				var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"nike",
 				"quantity":"20",
@@ -5133,7 +5148,7 @@ describe("find test set : ", function(){
 		it("should be able to find all the objects with simple condition Array",function(){
 			runs(function(){
 				var ProductLo = function(model){
-				 	//model.fixed_schema = true;
+					model.fixed_schema = true;
 					model.setModelProperty("name", "string", "");
 					model.setModelProperty("quantity", "integer", "");
 					model.setModelProperty("price", "integer", "");
@@ -5141,7 +5156,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "local");
 				};
 				var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5176,7 +5191,7 @@ describe("find test set : ", function(){
 		it("should be able to find all the objects with simple condition Hash",function(){
 			runs(function(){
 				var ProductLo = function(model){
-				 	//model.fixed_schema = true;
+					model.fixed_schema = true;
 					model.setModelProperty("name", "string", "");
 					model.setModelProperty("quantity", "integer", "");
 					model.setModelProperty("price", "integer", "");
@@ -5184,7 +5199,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "local");
 				};
 				var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5226,8 +5241,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "local");
 				};
 				var prdObj = Rho.ORM.addModel("ProductLo", ProductLo);
-				var prdObj2 = Rho.ORM.getModel('ProductLo');
-				prdObj2.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5264,6 +5278,16 @@ describe("find test set : ", function(){
 				if(appDB.isTableExist('ProductApp'))
 					appDB.executeSql("DELETE FROM ProductApp");
 			};
+		beforeEach(function(){
+			var partitions = Rho.ORM.getDbPartitions();
+		    $.each(partitions, function(index, db2){
+				db2.executeSql("DELETE FROM SOURCES");
+				db2.executeSql("DELETE FROM OBJECT_VALUES");
+				db2.executeSql("DELETE FROM CHANGED_VALUES");
+				if(appDB.isTableExist('ProductApp'))
+					appDB.executeSql("DELETE FROM ProductApp");
+		  	});
+		});
 		it("Should be able to find all the objects with no condition fixed schema(app)", function(){
 			runs(function(){
 				var ProductApp = function(model){
@@ -5275,7 +5299,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "app");
 				};
 				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"nike",
 				"quantity":"20",
@@ -5318,7 +5342,7 @@ describe("find test set : ", function(){
 		it("should be able to find all the objects with simple condition Array",function(){
 			runs(function(){
 				var ProductApp = function(model){
-				 	//model.fixed_schema = true;
+				 	model.fixed_schema = true;
 					model.setModelProperty("name", "string", "");
 					model.setModelProperty("quantity", "integer", "");
 					model.setModelProperty("price", "integer", "");
@@ -5326,7 +5350,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "app");
 				};
 				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5361,7 +5385,7 @@ describe("find test set : ", function(){
 		it("should be able to find all the objects with simple condition Hash",function(){
 			runs(function(){
 				var ProductApp = function(model){
-				 	//model.fixed_schema = true;
+				 	model.fixed_schema = true;
 					model.setModelProperty("name", "string", "");
 					model.setModelProperty("quantity", "integer", "");
 					model.setModelProperty("price", "integer", "");
@@ -5369,7 +5393,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "app");
 				};
 				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
-				prdObj.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5411,8 +5435,7 @@ describe("find test set : ", function(){
 					model.setModelProperty("partition", "app");
 				};
 				var prdObj = Rho.ORM.addModel("ProductApp", ProductApp);
-				var prdObj2 = Rho.ORM.getModel('ProductApp');
-				prdObj2.deleteAll();
+				prdObj.delete_all();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5460,9 +5483,18 @@ describe("find test set : ", function(){
 			model.setModelProperty("partition", "user");
 		};
 		var prdObj = Rho.ORM.addModel("ProductUs", ProductUs);
+		beforeEach(function(){
+			var partitions = Rho.ORM.getDbPartitions();
+		    $.each(partitions, function(index, db2){
+				db2.executeSql("DELETE FROM SOURCES");
+				db2.executeSql("DELETE FROM OBJECT_VALUES");
+				db2.executeSql("DELETE FROM CHANGED_VALUES");
+				if(appDB.isTableExist('ProductUs'))
+					appDB.executeSql("DELETE FROM ProductUs");
+		  	});
+		});
 		it("Should be able to find all the objects with no condition fixed schema(user)", function(){
 			runs(function(){
-				prdObj.deleteAll();
 				var data = [{
 				"name":"nike",
 				"quantity":"20",
@@ -5504,7 +5536,6 @@ describe("find test set : ", function(){
 		});
 		it("should be able to find all the objects with simple condition Array",function(){
 			runs(function(){
-				prdObj.deleteAll();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5538,7 +5569,6 @@ describe("find test set : ", function(){
 
 		it("should be able to find all the objects with simple condition Hash",function(){
 			runs(function(){
-				prdObj.deleteAll();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5569,9 +5599,8 @@ describe("find test set : ", function(){
 			});
 		});
 		
-		it("find with null parameter should return all the recrods in fixed schema(user).",function(){
+		it("find with null parameter should return all the recrods in Property bag(user).",function(){
 			runs(function(){
-				prdObj.deleteAll();
 				var data = [{
 				"name":"Nike",
 				"quantity":"20",
@@ -5632,7 +5661,7 @@ describe("Paginate tests: ", function(){
 	describe("UserFs Test : ", function(){
 		var appDB = Rho.ORMHelper.dbConnection('app');
 		var userDB = Rho.ORMHelper.dbConnection('user');
-		var reset = function(){
+		beforeEach(function(){
 			userDB.executeSql("DELETE FROM SOURCES");
 			userDB.executeSql("DELETE FROM CHANGED_VALUES");
 			userDB.executeSql("DELETE FROM OBJECT_VALUES");
@@ -5640,7 +5669,7 @@ describe("Paginate tests: ", function(){
 				userDB.executeSql("DROP TABLE myNewProduct");
 			if(userDB.isTableExist('bhaktaModel'))
 				userDB.executeSql("DROP TABLE bhaktaModel");
-		};
+		});
 
 		it("Paginate FS with page and per_page parameter", function(){
 			var myNewProduct = function(model){
@@ -5780,12 +5809,11 @@ describe("Paginate tests: ", function(){
 			prdObj.create({"name":"Puma", "quantity":100});
 			prdObj.create({"name":"Woodlands", "quantity":110});
 			prdObj.create({"name":"Woodlands", "quantity":120});
-			var res = prdObj.paginate({"page":0, "per_page":5, "conditions":{"name":"Nike"}});
+			var res = prdObj.paginate({"page":0, "per_page":3, "conditions":{"name":"Nike"}});
 			console.log("orderdir : " + JSON.stringify(res));
-			expect(res.length).toEqual(5);
+			expect(res.length).toEqual(3);
 			expect(res[0].name).toEqual("Nike");
 			expect(res[0].quantity).toEqual("10");
-			expect(res[4].quantity).toEqual("50");
 		});
 	});
 	describe("UserPB Test : ", function(){
@@ -5885,12 +5913,11 @@ describe("Paginate tests: ", function(){
 			prdObj.create({"name":"Puma", "quantity":100});
 			prdObj.create({"name":"Woodlands", "quantity":110});
 			prdObj.create({"name":"Woodlands", "quantity":120});
-			var res = prdObj.paginate({"page":0, "per_page":5, "conditions":["name = 'Nike'"]});
+			var res = prdObj.paginate({"page":0, "per_page":3, "conditions":["name = 'Nike'"]});
 			console.log("orderdir : " + JSON.stringify(res));
-			expect(res.length).toEqual(5);
+			expect(res.length).toEqual(3);
 			expect(res[0].name).toEqual("Nike");
 			expect(res[0].quantity).toEqual("10");
-			expect(res[4].quantity).toEqual("50");
 		});
 		it("Paginate PB with conditions - Hash", function(){
 			prdObj.create({"name":"Nike", "quantity":10});
@@ -5905,12 +5932,11 @@ describe("Paginate tests: ", function(){
 			prdObj.create({"name":"Puma", "quantity":100});
 			prdObj.create({"name":"Woodlands", "quantity":110});
 			prdObj.create({"name":"Woodlands", "quantity":120});
-			var res = prdObj.paginate({"page":0, "per_page":5, "conditions":{"name":"Nike"}});
+			var res = prdObj.paginate({"page":0, "per_page":3, "conditions":{"name":"Nike"}});
 			console.log("pass : " + JSON.stringify(res));
-			expect(res.length).toEqual(5);
+			expect(res.length).toEqual(3);
 			expect(res[0].name).toEqual("Nike");
 			expect(res[0].quantity).toEqual("10");
-			expect(res[4].quantity).toEqual("50");
 		});
 	});
 });
@@ -5964,7 +5990,7 @@ describe("delete_all test set : ", function(){
 			prdObj.create({"name":"Woodlands", "quantity":"10"});
 			prdObj.create({"name":"Woodlands", "quantity":"20"});
 			prdObj.create({"name":"Woodlands", "quantity":"30"});
-			prdObj.delete_all({"name":"Nike"});
+			prdObj.delete_all({"conditions":{"name":"Nike"}});
 			expect(prdObj.getCount()).toEqual(6);
 		});
 		it("delete_all matched conditions - Array", function(){
@@ -5977,7 +6003,7 @@ describe("delete_all test set : ", function(){
 			prdObj.create({"name":"Woodlands", "quantity":"10"});
 			prdObj.create({"name":"Woodlands", "quantity":"20"});
 			prdObj.create({"name":"Woodlands", "quantity":"30"});
-			prdObj.delete_all(["name='Nike'"]);
+			prdObj.delete_all({"conditions":["name='Nike'"]});
 			expect(prdObj.getCount()).toEqual(6);
 		});
 		it("delete_all matched conditions - Array with quests", function(){
@@ -5990,7 +6016,7 @@ describe("delete_all test set : ", function(){
 			prdObj.create({"name":"Woodlands", "quantity":"10"});
 			prdObj.create({"name":"Woodlands", "quantity":"20"});
 			prdObj.create({"name":"Woodlands", "quantity":"30"});
-			prdObj.delete_all(["name=?","Nike"]);
+			prdObj.delete_all({"conditions":["name=?","Nike"]});
 			expect(prdObj.getCount()).toEqual(6);
 		});
 	});
@@ -6038,7 +6064,7 @@ describe("delete_all test set : ", function(){
 			prdObj.create({"name":"Woodlands", "quantity":"10"});
 			prdObj.create({"name":"Woodlands", "quantity":"20"});
 			prdObj.create({"name":"Woodlands", "quantity":"30"});
-			prdObj.delete_all({"name":"Nike"});
+			prdObj.delete_all({"conditions":{"name":"Nike"}});
 			expect(prdObj.getCount()).toEqual(6);
 		});
 		it("delete_all matched conditions - Array", function(){
@@ -6051,7 +6077,7 @@ describe("delete_all test set : ", function(){
 			prdObj.create({"name":"Woodlands", "quantity":"10"});
 			prdObj.create({"name":"Woodlands", "quantity":"20"});
 			prdObj.create({"name":"Woodlands", "quantity":"30"});
-			prdObj.delete_all(["name='Nike'"]);
+			prdObj.delete_all({"conditions":["name='Nike'"]});
 			expect(prdObj.getCount()).toEqual(6);
 		});
 		it("delete_all matched conditions - Array with quests", function(){
@@ -6064,7 +6090,7 @@ describe("delete_all test set : ", function(){
 			prdObj.create({"name":"Woodlands", "quantity":"10"});
 			prdObj.create({"name":"Woodlands", "quantity":"20"});
 			prdObj.create({"name":"Woodlands", "quantity":"30"});
-			prdObj.delete_all(["name=?","Nike"]);
+			prdObj.delete_all({"conditions":["name=?","Nike"]});
 			expect(prdObj.getCount()).toEqual(6);
 		});
 	});
