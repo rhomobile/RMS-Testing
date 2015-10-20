@@ -5501,7 +5501,7 @@ describe("find test set : ", function(){
 				"price":"2000",
 				"availability":"yes"
 				},{
-				"name":"Woodlands",
+				"name":"woodlands",
 				"quantity":"30",
 				"price":"2000",
 				"availability":"yes"
@@ -5509,23 +5509,23 @@ describe("find test set : ", function(){
 				"name":"reebok",
 				"quantity":"40",
 				"price":"1500",
-				"availability":"no"
+				"availability":"yes"
 				},{
-				"name":"Puma",
+				"name":"puma",
 				"quantity":"30",
 				"price":"1500",
-				"availability":"no"
+				"availability":"yes"
 				}];
 				for(var i in data){
 					prdObj.createObject(data[i]);
 				}
 				expect(prdObj.getCount()).toEqual(4);
-				var res = prdObj.find("all");
+				var res = prdObj.find("all", {"conditions":['availability="yes"'] ,"order":['name'], "orderdir":['DESC']});
 				var count = prdObj.find("count");
 				var first = prdObj.find("first");
 				console.log("find Result : " + JSON.stringify(first));
-				expect(res[0].name).toEqual('nike');
-				expect(res[0].quantity).toEqual('20');
+				expect(res[0].name).toEqual('woodlands');
+				expect(res[0].quantity).toEqual('30');
 				expect(res[0].price).toEqual("2000");
 				expect(count).toEqual(4);
 				expect(first.name).toEqual("nike");
@@ -5642,7 +5642,6 @@ describe("Push Changes tests: ", function(){
 		if(appDB.isTableExist('ProductApp'))
 			appDB.executeSql("DELETE FROM ProductApp");
 	};
-
 	it("Push changes FS", function(){
 		var myNewProduct = function(model){
 			model.setModelProperty("name", "string", "");
@@ -5758,6 +5757,35 @@ describe("Paginate tests: ", function(){
 			expect(res[0].quantity).toEqual("120");
 			expect(res[4].quantity).toEqual("80");
 		});
+		it("Paginate FS with order and orderdir with condition hash", function(){
+			var myNewProduct = function(model){
+				model.fixed_schema = true;
+				model.setModelProperty("name", "string", "");
+				model.setModelProperty("quantity", "integer", "");
+				model.set("partition", "user");
+				model.enable("sync");
+			}
+			var prdObj = Rho.ORM.addModel('myNewProduct', myNewProduct);
+			prdObj.deleteAll();
+			prdObj.create({"name":"Nike", "quantity":10});
+			prdObj.create({"name":"Nike", "quantity":20});
+			prdObj.create({"name":"Nike", "quantity":30});
+			prdObj.create({"name":"Nike", "quantity":40});
+			prdObj.create({"name":"Nike", "quantity":50});
+			prdObj.create({"name":"Puma", "quantity":60});
+			prdObj.create({"name":"Puma", "quantity":70});
+			prdObj.create({"name":"Puma", "quantity":80});
+			prdObj.create({"name":"Puma", "quantity":90});
+			prdObj.create({"name":"Puma", "quantity":100});
+			prdObj.create({"name":"Woodlands", "quantity":110});
+			prdObj.create({"name":"Woodlands", "quantity":120});
+			var res = prdObj.paginate({"page":0, "per_page":5, "conditions":{"name":"Nike"}, "order":["quantity"], "orderdir":["DESC"]});
+			console.log("orderdir : " + JSON.stringify(res));
+			expect(res.length).toEqual(5);
+			expect(res[0].name).toEqual("Nike");
+			expect(res[0].quantity).toEqual("50");
+			expect(res[4].quantity).toEqual("10");
+		});
 		it("Paginate FS with conditions - Array", function(){
 			var myNewProduct = function(model){
 				model.fixed_schema = true;
@@ -5825,8 +5853,6 @@ describe("Paginate tests: ", function(){
 			userDB.executeSql("DELETE FROM OBJECT_VALUES");
 			if(userDB.isTableExist('myNewProduct'))
 				userDB.executeSql("DROP TABLE myNewProduct");
-			if(userDB.isTableExist('bhaktaModel'))
-				userDB.executeSql("DROP TABLE bhaktaModel");
 		};
 		var myNewProduct = function(model){
 				model.setModelProperty("name", "string", "");
@@ -5893,12 +5919,11 @@ describe("Paginate tests: ", function(){
 			prdObj.create({"name":"Puma", "quantity":100});
 			prdObj.create({"name":"Woodlands", "quantity":110});
 			prdObj.create({"name":"Woodlands", "quantity":120});
-			var res = prdObj.paginate({"page":0, "per_page":5, "select":["name", "quantity"], "order":["quantity"], "orderdir":["DESC"]});
-			console.log("Puma : " + JSON.stringify(res));
+			var res = prdObj.paginate({"page":0, "per_page":5, "conditions":["name='Nike'"], "select":["name", "quantity"], "order":["quantity"], "orderdir":["DESC"]});
 			expect(res.length).toEqual(5);
 			expect(res[0].name).toEqual("Nike");
-			expect(res[0].quantity).toEqual("90");
-			expect(res[4].quantity).toEqual("50");
+			expect(res[0].quantity).toEqual("50");
+			expect(res[4].quantity).toEqual("10");
 		});
 		it("Paginate PB with conditions - Array", function(){
 			prdObj.create({"name":"Nike", "quantity":10});
@@ -5934,7 +5959,7 @@ describe("Paginate tests: ", function(){
 			prdObj.create({"name":"Woodlands", "quantity":120});
 			var res = prdObj.paginate({"page":0, "per_page":3, "conditions":{"name":"Nike"}});
 			console.log("pass : " + JSON.stringify(res));
-			expect(res.length).toEqual(3);
+			expect(res.length).toEqual(5);
 			expect(res[0].name).toEqual("Nike");
 			expect(res[0].quantity).toEqual("10");
 		});
