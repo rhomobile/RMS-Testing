@@ -18,7 +18,7 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync")
-		objData = ProductUserPb.createObject(data)
+		objData = ProductUserPb.create(data)
 		result = {}
 		result["initialCount"] = ProductUserPb.getCount()
 		result["initialClientId"] = Rho::NewORM.getClientId()
@@ -47,13 +47,13 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync")
-		objData = ProductUserPb.createObject(data1)
+		objData = ProductUserPb.create(data1)
 		data2 = {}
 		data2["name"] = "woodlands"
 		data2["quantity"] = "30"
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalPb.createObject(data2)
+		objData2 = ProductLocalPb.create(data2)
 		result = {}
 		result["initialUserCount"] = ProductUserPb.getCount()
 		result["initialLocalCount"] = ProductLocalPb.getCount()
@@ -81,13 +81,13 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync")
-		objData = ProductUserPb.createObject(data1)
+		objData = ProductUserPb.create(data1)
 		data2 = {}
 		data2["name"] = "woodlands"
 		data2["quantity"] = "30"
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalPb.createObject(data2)
+		objData2 = ProductLocalPb.create(data2)
 		result = {}
 		result["initialUserCount"] = ProductUserPb.getCount()
 		result["initialLocalCount"] = ProductLocalPb.getCount()
@@ -112,7 +112,7 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync")
-		objData = ProductUserFs.createObject(data)
+		objData = ProductUserFs.create(data)
 		result = {}
 		result["initialCount"] = ProductUserFs.getCount()
 		result["initialClientId"] = Rho::NewORM.getClientId()
@@ -141,13 +141,13 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync")
-		objData = ProductUserFs.createObject(data1)
+		objData = ProductUserFs.create(data1)
 		data2 = {}
 		data2["name"] = "woodlands"
 		data2["quantity"] = "30"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalFs.createObject(data2)
+		objData2 = ProductLocalFs.create(data2)
 		result = {}
 		result["initialUserCount"] = ProductUserFs.getCount()
 		result["initialLocalCount"] = ProductLocalFs.getCount()
@@ -175,13 +175,13 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync")
-		objData = ProductUserFs.createObject(data1)
+		objData = ProductUserFs.create(data1)
 		data2 = {}
 		data2["name"] = "woodlands"
 		data2["quantity"] = "30"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalFs.createObject(data2)
+		objData2 = ProductLocalFs.create(data2)
 		result = {}
 		result["initialUserCount"] = ProductUserFs.getCount()
 		result["initialLocalCount"] = ProductLocalFs.getCount()
@@ -216,10 +216,10 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync");
-		objData1 = ProductUserPb.createObject(data1)
+		objData1 = ProductUserPb.create(data1)
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalPb.createObject(data2)
+		objData2 = ProductLocalPb.create(data2)
 		result = {}
 		result["initialLocalCount"] = ProductLocalPb.getCount()
 		result["initialUserCount"] = ProductUserPb.getCount()
@@ -252,11 +252,11 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync");
-		objData1 = ProductUserFs.createObject(data1)
+		objData1 = ProductUserFs.create(data1)
 		objData = objData1.to_s
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalFs.createObject(data2)
+		objData2 = ProductLocalFs.create(data2)
 		result = {}
 		result["initialLocalCount"] = ProductLocalFs.getCount()
 		result["initialUserCount"] = ProductUserFs.getCount()
@@ -288,10 +288,10 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync");
-		objData1 = ProductUserPb.createObject(data1)
+		objData1 = ProductUserPb.create(data1)
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalPb.createObject(data2)
+		objData2 = ProductLocalPb.create(data2)
 		result = {}
 		result["initialLocalCount"] = ProductLocalPb.getCount()
 		result["initialUserCount"] = ProductUserPb.getCount()
@@ -323,10 +323,10 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync");
-		objData1 = ProductUserFs.createObject(data1)
+		objData1 = ProductUserFs.create(data1)
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalFs.createObject(data2)
+		objData2 = ProductLocalFs.create(data2)
 		result = {}
 		result["initialLocalCount"] = ProductLocalFs.getCount()
 		result["initialUserCount"] = ProductUserFs.getCount()
@@ -360,17 +360,17 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync");
-		objData1 = ProductUserFs.createObject(data1)
+		objData1 = ProductUserFs.create(data1)
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync");
-		objData1a = ProductUserPb.createObject(data1)
+		objData1a = ProductUserPb.create(data1)
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalFs.createObject(data2)
+		objData2 = ProductLocalFs.create(data2)
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
-		objData2a = ProductLocalPb.createObject(data2)
+		objData2a = ProductLocalPb.create(data2)
 		result = {}
 		result["initialLocalFsCount"] = ProductLocalFs.getCount()
 		result["initialUserFsCount"] = ProductUserFs.getCount()
@@ -408,17 +408,17 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync");
-		objData1 = ProductUserFs.createObject(data1)
+		objData1 = ProductUserFs.create(data1)
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync");
-		objData1a = ProductUserPb.createObject(data1)
+		objData1a = ProductUserPb.create(data1)
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalFs.createObject(data2)
+		objData2 = ProductLocalFs.create(data2)
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
-		objData2a = ProductLocalPb.createObject(data2)
+		objData2a = ProductLocalPb.create(data2)
 		result = {}
 		result["initialLocalFsCount"] = ProductLocalFs.getCount()
 		result["initialUserFsCount"] = ProductUserFs.getCount()
@@ -454,10 +454,10 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync");
-		objData1 = ProductUserPb.createObject(data1)
+		objData1 = ProductUserPb.create(data1)
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalPb.createObject(data2)
+		objData2 = ProductLocalPb.create(data2)
 		result = {}
 		result["initialLocalCount"] = ProductLocalPb.getCount()
 		result["initialUserCount"] = ProductUserPb.getCount()
@@ -489,10 +489,10 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync");
-		objData1 = ProductUserFs.createObject(data1)
+		objData1 = ProductUserFs.create(data1)
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		objData2 = ProductLocalFs.createObject(data2)
+		objData2 = ProductLocalFs.create(data2)
 		result = {}
 		result["initialLocalCount"] = ProductLocalFs.getCount()
 		result["initialUserCount"] = ProductUserFs.getCount()
@@ -524,11 +524,11 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable("sync");
-		objData1 = ProductUserFs.createObject(data1)
+		objData1 = ProductUserFs.create(data1)
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.enable("sync")
-		objData2 = ProductUserPb.createObject(data2)
+		objData2 = ProductUserPb.create(data2)
 		result = {}
 		result["initialUserFsCount"] = ProductUserFs.getCount()
 		result["initialUserPbCount"] = ProductUserPb.getCount()
@@ -561,11 +561,11 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set("partition", "user")
-		ProductUserPb.createObject(data)
+		ProductUserPb.create(data)
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("partition", "user")
-		ProductUserFs.createObject(data)
+		ProductUserFs.create(data)
 		Rho::NewORM.databaseLocalReset();
 		result = {}
 		result["userFsCount"] = ProductUserFs.getCount()
@@ -590,11 +590,11 @@ class GeneralController < Rho::RhoController
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
 		ProductLocalFs.set("partition", "local")
-		ProductLocalFs.createObject(data)
+		ProductLocalFs.create(data)
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
 		ProductLocalPb.set("partition", "local")
-		ProductLocalPb.createObject(data)
+		ProductLocalPb.create(data)
 		Rho::NewORM.databaseLocalReset();
 		result = {}
 		result["localFsCount"] = ProductLocalFs.getCount()
@@ -622,19 +622,19 @@ class GeneralController < Rho::RhoController
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
 		ProductLocalFs.set("partition", "local")
-		ProductLocalFs.createObject(data)
+		ProductLocalFs.create(data)
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
 		ProductLocalPb.set("partition", "local")
-		ProductLocalPb.createObject(data)
+		ProductLocalPb.create(data)
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set("partition", "user")
-		ProductUserPb.createObject(data)
+		ProductUserPb.create(data)
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("partition", "user")
-		ProductUserFs.createObject(data)
+		ProductUserFs.create(data)
 		Rho::NewORM.databaseLocalReset();
 		result = {}
 		result["localFsCount"] = ProductLocalFs.getCount()
@@ -680,7 +680,7 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("partition", "user")
 		ProductUserFs.set("sync_type", "none")
-		ProductUserFs.createObject(data)
+		ProductUserFs.create(data)
 		ProductUserFs.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase20
@@ -694,7 +694,7 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("partition", "user")
 		ProductUserFs.set("sync_type", "incremental")
-		ProductUserFs.createObject(data)
+		ProductUserFs.create(data)
 		ProductUserFs.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase21
@@ -708,7 +708,7 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("partition", "user")
 		ProductUserFs.set("sync_type", "bulk_only")
-		ProductUserFs.createObject(data)
+		ProductUserFs.create(data)
 		ProductUserFs.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase22
@@ -720,7 +720,7 @@ class GeneralController < Rho::RhoController
 		data["quantity"] = "20"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		ProductLocalFs.createObject(data)
+		ProductLocalFs.create(data)
 		ProductLocalFs.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase23
@@ -732,7 +732,7 @@ class GeneralController < Rho::RhoController
 		ProductAppFs.set('sync_type', 'none')
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
-		ProductAppFs.createObject(data)
+		ProductAppFs.create(data)
 		ProductAppFs.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase24
@@ -745,7 +745,7 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set("sync_type", "none")
-		ProductUserPb.createObject(data)
+		ProductUserPb.create(data)
 		ProductUserPb.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase25
@@ -758,7 +758,7 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set("sync_type", "incremental")
-		ProductUserPb.createObject(data)
+		ProductUserPb.create(data)
 		ProductUserPb.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase26
@@ -771,7 +771,7 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set("sync_type", "bulk_only")
-		ProductUserPb.createObject(data)
+		ProductUserPb.create(data)
 		ProductUserPb.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase27
@@ -784,7 +784,7 @@ class GeneralController < Rho::RhoController
 		ProductLocalPb.setModelProperty("name", "string", "")
 		ProductLocalPb.setModelProperty("quantity", "string", "")
 		ProductLocalPb.set("sync_type", "none")
-		ProductLocalPb.createObject(data)
+		ProductLocalPb.create(data)
 		ProductLocalPb.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase28
@@ -798,7 +798,7 @@ class GeneralController < Rho::RhoController
 		ProductAppPb.setModelProperty("quantity", "string", "")
 		ProductAppPb.set("partition", "app")
 		ProductAppPb.set("sync_type", "none")
-		ProductAppPb.createObject(data)
+		ProductAppPb.create(data)
 		ProductAppPb.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase29
@@ -811,7 +811,7 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("sync_type", "incremental")
-		ProductUserFs.createObject(data)
+		ProductUserFs.create(data)
 		result = {}
 		result["time"] = ProductUserFs.getBackendRefreshTime()
 		result = result.to_json
@@ -820,7 +820,7 @@ class GeneralController < Rho::RhoController
 		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
 	end
 	def testcase30
-		Rho::WebView.executeJavascript('console.log("Am test19");')
+		Rho::WebView.executeJavascript('console.log("Am test30");')
 		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
 		db.executeSql("DELETE FROM ProductUserFs")
 		data = {}
@@ -829,7 +829,7 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("sync_type", "none")
-		ProductUserFs.createObject(data)
+		ProductUserFs.create(data)
 		result = {}
 		result["time"] = ProductUserFs.getBackendRefreshTime()
 		result = result.to_json
@@ -847,7 +847,7 @@ class GeneralController < Rho::RhoController
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
 		ProductLocalFs.set("partition", "local")
-		ProductLocalFs.createObject(data)
+		ProductLocalFs.create(data)
 		result = {}
 		result["time"] = ProductLocalFs.getBackendRefreshTime()
 		result = result.to_json
@@ -865,7 +865,7 @@ class GeneralController < Rho::RhoController
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
 		ProductAppFs.set("partition", "app")
-		ProductAppFs.createObject(data)
+		ProductAppFs.create(data)
 		result = {}
 		result["time"] = ProductAppFs.getBackendRefreshTime()
 		result = result.to_json
@@ -884,7 +884,7 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set('partition', 'user')
 		ProductUserPb.set('sync_type', 'incremental')
-		ProductUserPb.createObject(data)
+		ProductUserPb.create(data)
 		result = {}
 		result["time"] = ProductUserPb.getBackendRefreshTime()
 		result = result.to_json
@@ -903,7 +903,7 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set('partition', 'user')
 		ProductUserPb.set('sync_type', 'none')
-		ProductUserPb.createObject(data)
+		ProductUserPb.create(data)
 		result = {}
 		result["time"] = ProductUserPb.getBackendRefreshTime()
 		result = result.to_json
@@ -922,7 +922,7 @@ class GeneralController < Rho::RhoController
 		ProductLocalPb.setModelProperty("quantity", "string", "")
 		ProductLocalPb.set('partition', 'app')
 		ProductLocalPb.set('sync_type', 'none')
-		ProductLocalPb.createObject(data)
+		ProductLocalPb.create(data)
 		result = {}
 		result["time"] = ProductLocalPb.getBackendRefreshTime()
 		result = result.to_json
@@ -939,7 +939,7 @@ class GeneralController < Rho::RhoController
 		data["quantity"] = "20"
 		ProductAppPb.setModelProperty("name", "string", "")
 		ProductAppPb.setModelProperty("quantity", "string", "")
-		ProductAppPb.createObject(data)
+		ProductAppPb.create(data)
 		result = {}
 		result["time"] = ProductAppPb.getBackendRefreshTime()
 		result = result.to_json
@@ -951,8 +951,8 @@ class GeneralController < Rho::RhoController
 	def testcase37
 		Rho::WebView.executeJavascript('console.log("Am test37");')
 		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		Rho::NewORMModel.clear();
 		db.executeSql("DELETE FROM ProductUserFs")
-		db.executeSql("DELETE FROM ItemFs")
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("partition", "user")
@@ -973,7 +973,7 @@ class GeneralController < Rho::RhoController
 		Rho::WebView.executeJavascript('console.log("Am test38");')
 		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
 		db.executeSql("DELETE FROM ProductUserFs")
-		
+		Rho::NewORMModel.clear();
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("partition", "user")
@@ -987,7 +987,6 @@ class GeneralController < Rho::RhoController
 		finalResult = result.to_s
 		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
 		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
-		db.executeSql("DELETE FROM ItemFs")
 	end
 
 	def testcase39
@@ -1077,7 +1076,6 @@ class GeneralController < Rho::RhoController
 		Rho::WebView.executeJavascript('console.log("Am test43");')
 		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
 		db.executeSql("DELETE FROM OBJECT_VALUES")
-		db.executeSql("DELETE FROM ItemFs")
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set("partition", "user")
@@ -1099,7 +1097,6 @@ class GeneralController < Rho::RhoController
 		Rho::WebView.executeJavascript('console.log("Am test44");')
 		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
 		db.executeSql("DELETE FROM OBJECT_VALUES")
-		db.executeSql("DELETE FROM ItemFs")
 		ProductUserPb.setModelProperty("name", "string", "")
 		ProductUserPb.setModelProperty("quantity", "string", "")
 		ProductUserPb.set("partition", "user")
@@ -1211,12 +1208,13 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.enable('sync');
 		ProductUserFs.set("sync_type", "incremental")
+		ProductUserFs.set("sync_priority", "1000")
 		ProductUserFs.enable('pass_through');
 		ProductUserFs.enable('loaded');
 		ProductUserFs.enable('freezed');
 		ProductUserFs.enable('full_update');
 		ProductUserFs.set('partition', 'user');
-		ProductUserFs.createObject(data)
+		ProductUserFs.create(data)
 		ProductUserFs.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase50
@@ -1230,12 +1228,13 @@ class GeneralController < Rho::RhoController
 		ProductLocalFs.setModelProperty("quantity", "string", "")
 		ProductLocalFs.enable('sync');
 		ProductLocalFs.set("sync_type", "none")
+		ProductLocalFs.set("sync_priority", "1000")
 		ProductLocalFs.enable('pass_through');
 		ProductLocalFs.enable('loaded');
 		ProductLocalFs.enable('freezed');
 		ProductLocalFs.enable('full_update');
 		ProductLocalFs.set('partition', 'local');
-		ProductLocalFs.createObject(data)
+		ProductLocalFs.create(data)
 		ProductLocalFs.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase51
@@ -1249,12 +1248,13 @@ class GeneralController < Rho::RhoController
 		ProductAppFs.setModelProperty("quantity", "string", "")
 		ProductAppFs.enable('sync');
 		ProductAppFs.set("sync_type", "bulk_only")
+		ProductAppFs.set("sync_priority", "1000")
 		ProductAppFs.enable('pass_through');
 		ProductAppFs.enable('loaded');
 		ProductAppFs.enable('freezed');
 		ProductAppFs.enable('full_update');
 		ProductAppFs.set('partition', 'app');
-		ProductAppFs.createObject(data)
+		ProductAppFs.create(data)
 		ProductAppFs.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase52
@@ -1273,7 +1273,7 @@ class GeneralController < Rho::RhoController
 		ProductUserPb.enable('freezed');
 		ProductUserPb.enable('full_update');
 		ProductUserPb.set('partition', 'user');
-		ProductUserPb.createObject(data)
+		ProductUserPb.create(data)
 		ProductUserPb.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase53
@@ -1292,7 +1292,7 @@ class GeneralController < Rho::RhoController
 		ProductLocalPb.enable('freezed');
 		ProductLocalPb.enable('full_update');
 		ProductLocalPb.set('partition', 'local');
-		ProductLocalPb.createObject(data)
+		ProductLocalPb.create(data)
 		ProductLocalPb.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 	def testcase54
@@ -1311,7 +1311,7 @@ class GeneralController < Rho::RhoController
 		ProductAppPb.enable('freezed');
 		ProductAppPb.enable('full_update');
 		ProductAppPb.set('partition', 'app');
-		ProductAppPb.createObject(data)
+		ProductAppPb.create(data)
 		ProductAppPb.getAllProperties(url_for(:action => :_getAllPropCb))
 	end
 
@@ -1330,9 +1330,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
 		result = {}
 		result["initCount"] = ProductUserFs.getCount()
 		ProductUserFs.deleteObjects({},[])
@@ -1357,9 +1357,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
 		result = {}
 		result["initCount"] = ProductUserFs.getCount()
 		begin
@@ -1388,9 +1388,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
 		result = {}
 		result["initCount"] = ProductUserFs.getCount()
 		ProductUserFs.deleteObjects({:conditions => "name = ?"}, ['Nike'])
@@ -1415,9 +1415,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
 		result = {}
 		result["initCount"] = ProductUserFs.getCount()
 		ProductUserFs.deleteObjects({:conditions => "name = ? OR quantity = ?"}, ['Nike', '20'])
@@ -1442,9 +1442,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
 		result = {}
 		result["initCount"] = ProductUserFs.getCount()
 		ProductUserFs.deleteObjects({:conditions => "name = ? AND quantity = ?"}, ['Nike', '20'])
@@ -1469,9 +1469,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
 		result = {}
 		result["initCount"] = ProductUserFs.getCount()
 		begin
@@ -1500,9 +1500,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
 		result = {}
 		result["initCount"] = ProductLocalFs.getCount()
 		ProductLocalFs.deleteObjects({},[])
@@ -1527,9 +1527,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
 		result = {}
 		result["initCount"] = ProductLocalFs.getCount()
 		begin
@@ -1558,9 +1558,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
 		result = {}
 		result["initCount"] = ProductLocalFs.getCount()
 		ProductLocalFs.deleteObjects({:conditions => "name = ?"}, ['Nike'])
@@ -1585,9 +1585,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
 		result = {}
 		result["initCount"] = ProductLocalFs.getCount()
 		ProductLocalFs.deleteObjects({:conditions => "name = ? OR quantity = ?"}, ['Nike', '20'])
@@ -1612,9 +1612,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
 		result = {}
 		result["initCount"] = ProductLocalFs.getCount()
 		ProductLocalFs.deleteObjects({:conditions => "name = ? AND quantity = ?"}, ['Nike', '20'])
@@ -1639,9 +1639,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
 		result = {}
 		result["initCount"] = ProductLocalFs.getCount()
 		begin
@@ -1670,9 +1670,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
 		result = {}
 		result["initCount"] = ProductAppFs.getCount()
 		ProductAppFs.deleteObjects({},[])
@@ -1697,9 +1697,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
 		result = {}
 		result["initCount"] = ProductAppFs.getCount()
 		begin
@@ -1728,9 +1728,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
 		result = {}
 		result["initCount"] = ProductAppFs.getCount()
 		ProductAppFs.deleteObjects({:conditions => "name = ?"}, ['Nike'])
@@ -1755,9 +1755,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
 		result = {}
 		result["initCount"] = ProductAppFs.getCount()
 		ProductAppFs.deleteObjects({:conditions => "name = ? OR quantity = ?"}, ['Nike', '20'])
@@ -1782,9 +1782,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
 		result = {}
 		result["initCount"] = ProductAppFs.getCount()
 		ProductAppFs.deleteObjects({:conditions => "name = ? AND quantity = ?"}, ['Nike', '20'])
@@ -1809,9 +1809,9 @@ class GeneralController < Rho::RhoController
 		data2["quantity"] = "40"
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
 		result = {}
 		result["initCount"] = ProductAppFs.getCount()
 		begin
@@ -1842,10 +1842,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
-		ProductUserFs.createObject(data3)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
+		ProductUserFs.create(data3)
 		res = ProductUserFs.findObjects("all",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
 		resCount = ProductUserFs.findObjects("count",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
 		resFirst = ProductUserFs.findObjects("first",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
@@ -1874,10 +1874,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
-		ProductUserFs.createObject(data3)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
+		ProductUserFs.create(data3)
 		res = ProductUserFs.findObjects("all",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
 		resCount = ProductUserFs.findObjects("count",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
 		resFirst = ProductUserFs.findObjects("first",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
@@ -1906,10 +1906,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
-		ProductUserFs.createObject(data3)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
+		ProductUserFs.create(data3)
 		res = ProductUserFs.findObjects("all",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
 		resCount = ProductUserFs.findObjects("count",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
 		resFirst = ProductUserFs.findObjects("first",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
@@ -1938,10 +1938,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
-		ProductUserFs.createObject(data3)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
+		ProductUserFs.create(data3)
 		res = ProductUserFs.findObjects("all",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
 		resCount = ProductUserFs.findObjects("count",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
 		resFirst = ProductUserFs.findObjects("first",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
@@ -1970,10 +1970,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
-		ProductUserFs.createObject(data3)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
+		ProductUserFs.create(data3)
 		error = ""
 		begin
 			res = ProductUserFs.findObjects();
@@ -2003,10 +2003,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
-		ProductUserFs.createObject(data3)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
+		ProductUserFs.create(data3)
 		res = ProductUserFs.findObjects("all",{},[],[],[]);
 		resCount = ProductUserFs.findObjects("count",{},[],[],[]);
 		resFirst = ProductUserFs.findObjects("first",{},[],[],[]);
@@ -2035,10 +2035,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
-		ProductUserFs.createObject(data3)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
+		ProductUserFs.create(data3)
 		error = ""
 		begin
 			res = ProductUserFs.findObjects("", {},[],[],[]);;
@@ -2068,10 +2068,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserFs.createObject(data)
-		ProductUserFs.createObject(data1)
-		ProductUserFs.createObject(data2)
-		ProductUserFs.createObject(data3)
+		ProductUserFs.create(data)
+		ProductUserFs.create(data1)
+		ProductUserFs.create(data2)
+		ProductUserFs.create(data3)
 		error = ""
 		begin
 			res = ProductUserFs.findObjects("all", {:conditions => "nonexisting = ?"},['Nike'],[],[])
@@ -2101,10 +2101,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
-		ProductLocalFs.createObject(data3)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
+		ProductLocalFs.create(data3)
 		res = ProductLocalFs.findObjects("all",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
 		resCount = ProductLocalFs.findObjects("count",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
 		resFirst = ProductLocalFs.findObjects("first",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
@@ -2133,10 +2133,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
-		ProductLocalFs.createObject(data3)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
+		ProductLocalFs.create(data3)
 		res = ProductLocalFs.findObjects("all",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
 		resCount = ProductLocalFs.findObjects("count",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
 		resFirst = ProductLocalFs.findObjects("first",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
@@ -2165,10 +2165,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
-		ProductLocalFs.createObject(data3)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
+		ProductLocalFs.create(data3)
 		res = ProductLocalFs.findObjects("all",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
 		resCount = ProductLocalFs.findObjects("count",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
 		resFirst = ProductLocalFs.findObjects("first",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
@@ -2197,10 +2197,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
-		ProductLocalFs.createObject(data3)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
+		ProductLocalFs.create(data3)
 		res = ProductLocalFs.findObjects("all",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
 		resCount = ProductLocalFs.findObjects("count",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
 		resFirst = ProductLocalFs.findObjects("first",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
@@ -2229,10 +2229,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
-		ProductLocalFs.createObject(data3)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
+		ProductLocalFs.create(data3)
 		error = ""
 		begin
 			res = ProductLocalFs.findObjects();
@@ -2262,10 +2262,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
-		ProductLocalFs.createObject(data3)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
+		ProductLocalFs.create(data3)
 		res = ProductLocalFs.findObjects("all",{},[],[],[]);
 		resCount = ProductLocalFs.findObjects("count",{},[],[],[]);
 		resFirst = ProductLocalFs.findObjects("first",{},[],[],[]);
@@ -2294,10 +2294,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
-		ProductLocalFs.createObject(data3)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
+		ProductLocalFs.create(data3)
 		error = ""
 		begin
 			res = ProductLocalFs.findObjects("", {},[],[],[]);;
@@ -2327,10 +2327,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalFs.createObject(data)
-		ProductLocalFs.createObject(data1)
-		ProductLocalFs.createObject(data2)
-		ProductLocalFs.createObject(data3)
+		ProductLocalFs.create(data)
+		ProductLocalFs.create(data1)
+		ProductLocalFs.create(data2)
+		ProductLocalFs.create(data3)
 		error = ""
 		begin
 			res = ProductLocalFs.findObjects("all", {:conditions => "nonexisting = ?"},['Nike'],[],[])
@@ -2361,10 +2361,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
-		ProductAppFs.createObject(data3)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
+		ProductAppFs.create(data3)
 		res = ProductAppFs.findObjects("all",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
 		resCount = ProductAppFs.findObjects("count",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
 		resFirst = ProductAppFs.findObjects("first",{:conditions => "name = ?"},['Nike'],['name','quantity'],['name', 'ASC']);
@@ -2393,10 +2393,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
-		ProductAppFs.createObject(data3)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
+		ProductAppFs.create(data3)
 		res = ProductAppFs.findObjects("all",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
 		resCount = ProductAppFs.findObjects("count",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
 		resFirst = ProductAppFs.findObjects("first",{:conditions => "name = ? OR quantity = ?"},['Nike', '30'],['name','quantity'],['name', 'ASC']);
@@ -2425,10 +2425,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
-		ProductAppFs.createObject(data3)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
+		ProductAppFs.create(data3)
 		res = ProductAppFs.findObjects("all",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
 		resCount = ProductAppFs.findObjects("count",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
 		resFirst = ProductAppFs.findObjects("first",{:conditions =>"name = ? AND quantity = ?"},['Puma', '40'],['name','quantity'],[]);
@@ -2457,10 +2457,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
-		ProductAppFs.createObject(data3)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
+		ProductAppFs.create(data3)
 		res = ProductAppFs.findObjects("all",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
 		resCount = ProductAppFs.findObjects("count",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
 		resFirst = ProductAppFs.findObjects("first",{:conditions => "name IN (?, ?, ?)"},['Nike', 'Reebok', 'Puma'],['name','quantity'],['name','ASC']);
@@ -2489,10 +2489,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
-		ProductAppFs.createObject(data3)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
+		ProductAppFs.create(data3)
 		error = ""
 		begin
 			res = ProductAppFs.findObjects();
@@ -2522,10 +2522,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
-		ProductAppFs.createObject(data3)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
+		ProductAppFs.create(data3)
 		res = ProductAppFs.findObjects("all",{},[],[],[]);
 		resCount = ProductAppFs.findObjects("count",{},[],[],[]);
 		resFirst = ProductAppFs.findObjects("first",{},[],[],[]);
@@ -2554,10 +2554,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
-		ProductAppFs.createObject(data3)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
+		ProductAppFs.create(data3)
 		error = ""
 		begin
 			res = ProductAppFs.findObjects("", {},[],[],[]);;
@@ -2587,10 +2587,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppFs.createObject(data)
-		ProductAppFs.createObject(data1)
-		ProductAppFs.createObject(data2)
-		ProductAppFs.createObject(data3)
+		ProductAppFs.create(data)
+		ProductAppFs.create(data1)
+		ProductAppFs.create(data2)
+		ProductAppFs.create(data3)
 		error = ""
 		begin
 			res = ProductAppFs.findObjects("all", {:conditions => "nonexisting = ?"},['Nike'],[],[])
@@ -2623,10 +2623,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductUserPb.getCount();
 		ProductUserPb.deleteObjectsPropertyBagByCondHash({}, {})
@@ -2655,10 +2655,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductUserPb.getCount();
 		error = ""
@@ -2693,10 +2693,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductUserPb.getCount();
 		ProductUserPb.deleteObjectsPropertyBagByCondHash({:name=>"Nike"}, {})
@@ -2725,10 +2725,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductUserPb.getCount();
 		ProductUserPb.deleteObjectsPropertyBagByCondHash({:name=>"Puma", :quantity=>"40"}, {})
@@ -2757,10 +2757,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductUserPb.getCount();
 		begin
@@ -2794,10 +2794,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductLocalPb.getCount();
 		ProductLocalPb.deleteObjectsPropertyBagByCondHash({}, {})
@@ -2826,10 +2826,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductLocalPb.getCount();
 		error = ""
@@ -2864,10 +2864,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductLocalPb.getCount();
 		ProductLocalPb.deleteObjectsPropertyBagByCondHash({:name=>"Nike"}, {})
@@ -2896,10 +2896,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductLocalPb.getCount();
 		ProductLocalPb.deleteObjectsPropertyBagByCondHash({:name=>"Puma", :quantity=>"40"}, {})
@@ -2928,10 +2928,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductLocalPb.getCount();
 		begin
@@ -2965,10 +2965,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductAppPb.getCount();
 		ProductAppPb.deleteObjectsPropertyBagByCondHash({}, {})
@@ -2997,10 +2997,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductAppPb.getCount();
 		error = ""
@@ -3036,10 +3036,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductAppPb.getCount();
 		ProductAppPb.deleteObjectsPropertyBagByCondHash({:name=>"Nike"}, {})
@@ -3069,10 +3069,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductAppPb.getCount();
 		ProductAppPb.deleteObjectsPropertyBagByCondHash({:name=>"Puma", :quantity=>"40"}, {})
@@ -3102,10 +3102,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		result["initialCount"] = ProductAppPb.getCount();
 		begin
@@ -3143,10 +3143,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		resAll = ProductUserPb.findObjectsPropertyBagByCondHash("all", {},{},[])
 		resCount = ProductUserPb.findObjectsPropertyBagByCondHash("count", {},{},[])
@@ -3181,10 +3181,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		resAll = ProductUserPb.findObjectsPropertyBagByCondHash("all", {:name => "Puma"},{},['name','quantity'])
 		resCount = ProductUserPb.findObjectsPropertyBagByCondHash("count", {:name => "Puma"},{},['name','quantity'])
@@ -3216,10 +3216,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		resAll = ProductUserPb.findObjectsPropertyBagByCondHash("all", {:name => "Puma"},{},['name'])
 		resCount = ProductUserPb.findObjectsPropertyBagByCondHash("count", {:name => "Puma"},{},['name'])
@@ -3251,10 +3251,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -3293,10 +3293,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		resAll = ProductLocalPb.findObjectsPropertyBagByCondHash("all", {},{},[])
 		resCount = ProductLocalPb.findObjectsPropertyBagByCondHash("count", {},{},[])
@@ -3331,10 +3331,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		resAll = ProductLocalPb.findObjectsPropertyBagByCondHash("all", {:name => "Puma"},{},['name','quantity'])
 		resCount = ProductLocalPb.findObjectsPropertyBagByCondHash("count", {:name => "Puma"},{},['name','quantity'])
@@ -3366,10 +3366,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		resAll = ProductLocalPb.findObjectsPropertyBagByCondHash("all", {:name => "Puma"},{},['name'])
 		resCount = ProductLocalPb.findObjectsPropertyBagByCondHash("count", {:name => "Puma"},{},['name'])
@@ -3401,10 +3401,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -3443,10 +3443,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		resAll = ProductAppPb.findObjectsPropertyBagByCondHash("all", {},{},[])
 		resCount = ProductAppPb.findObjectsPropertyBagByCondHash("count", {},{},[])
@@ -3481,10 +3481,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		resAll = ProductAppPb.findObjectsPropertyBagByCondHash("all", {:name => "Puma"},{},['name','quantity'])
 		resCount = ProductAppPb.findObjectsPropertyBagByCondHash("count", {:name => "Puma"},{},['name','quantity'])
@@ -3516,10 +3516,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		resAll = ProductAppPb.findObjectsPropertyBagByCondHash("all", {:name => "Puma"},{},['name'])
 		resCount = ProductAppPb.findObjectsPropertyBagByCondHash("count", {:name => "Puma"},{},['name'])
@@ -3551,10 +3551,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -3593,10 +3593,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		resAll = ProductUserPb.findObjectsPropertyBagByCondArray("all", "", [], {},[])
 		resCount = ProductUserPb.findObjectsPropertyBagByCondArray("count", "", [], {},[])
@@ -3631,10 +3631,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		resAll = ProductUserPb.findObjectsPropertyBagByCondArray("all", "name = ?",['Puma'],{},['name'])
 		resCount = ProductUserPb.findObjectsPropertyBagByCondArray("count", "name = ?", ['Puma'], {},['name','quantity'])
@@ -3666,10 +3666,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		resAll = ProductUserPb.findObjectsPropertyBagByCondArray("all", "name = ? OR quantity = ?",['Nike','40'],{},['name','quantity'])
 		resCount = ProductUserPb.findObjectsPropertyBagByCondArray("count", "name = ? OR quantity = ?",['Nike','40'],{},['name','quantity'])
@@ -3702,10 +3702,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		result = {}
 		resAll = ProductUserPb.findObjectsPropertyBagByCondArray("all", "name = ? AND quantity = ?",['Reebok','40'],{},['name','quantity'])
 		resCount = ProductUserPb.findObjectsPropertyBagByCondArray("count", "name = ? AND quantity = ?",['Reebok','40'],{},['name','quantity'])
@@ -3738,10 +3738,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -3775,10 +3775,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -3812,10 +3812,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductUserPb.createObject(data)
-		ProductUserPb.createObject(data1)
-		ProductUserPb.createObject(data2)
-		ProductUserPb.createObject(data3)
+		ProductUserPb.create(data)
+		ProductUserPb.create(data1)
+		ProductUserPb.create(data2)
+		ProductUserPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -3852,10 +3852,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		resAll = ProductLocalPb.findObjectsPropertyBagByCondArray("all", "", [], {},[])
 		resCount = ProductLocalPb.findObjectsPropertyBagByCondArray("count", "", [], {},[])
@@ -3890,10 +3890,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		resAll = ProductLocalPb.findObjectsPropertyBagByCondArray("all", "name = ?",['Puma'],{},['name'])
 		resCount = ProductLocalPb.findObjectsPropertyBagByCondArray("count", "name = ?", ['Puma'], {},['name','quantity'])
@@ -3925,10 +3925,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		resAll = ProductLocalPb.findObjectsPropertyBagByCondArray("all", "name = ? OR quantity = ?",['Nike','40'],{},['name','quantity'])
 		resCount = ProductLocalPb.findObjectsPropertyBagByCondArray("count", "name = ? OR quantity = ?",['Nike','40'],{},['name','quantity'])
@@ -3961,10 +3961,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		result = {}
 		resAll = ProductLocalPb.findObjectsPropertyBagByCondArray("all", "name = ? AND quantity = ?",['Reebok','40'],{},['name','quantity'])
 		resCount = ProductLocalPb.findObjectsPropertyBagByCondArray("count", "name = ? AND quantity = ?",['Reebok','40'],{},['name','quantity'])
@@ -3997,10 +3997,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -4034,10 +4034,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -4071,10 +4071,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductLocalPb.createObject(data)
-		ProductLocalPb.createObject(data1)
-		ProductLocalPb.createObject(data2)
-		ProductLocalPb.createObject(data3)
+		ProductLocalPb.create(data)
+		ProductLocalPb.create(data1)
+		ProductLocalPb.create(data2)
+		ProductLocalPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -4111,10 +4111,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		resAll = ProductAppPb.findObjectsPropertyBagByCondArray("all", "", [], {},[])
 		resCount = ProductAppPb.findObjectsPropertyBagByCondArray("count", "", [], {},[])
@@ -4149,10 +4149,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		resAll = ProductAppPb.findObjectsPropertyBagByCondArray("all", "name = ?",['Puma'],{},['name'])
 		resCount = ProductAppPb.findObjectsPropertyBagByCondArray("count", "name = ?", ['Puma'], {},['name','quantity'])
@@ -4184,10 +4184,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		resAll = ProductAppPb.findObjectsPropertyBagByCondArray("all", "name = ? OR quantity = ?",['Nike','40'],{},['name','quantity'])
 		resCount = ProductAppPb.findObjectsPropertyBagByCondArray("count", "name = ? OR quantity = ?",['Nike','40'],{},['name','quantity'])
@@ -4220,10 +4220,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		result = {}
 		resAll = ProductAppPb.findObjectsPropertyBagByCondArray("all", "name = ? AND quantity = ?",['Reebok','40'],{},['name','quantity'])
 		resCount = ProductAppPb.findObjectsPropertyBagByCondArray("count", "name = ? AND quantity = ?",['Reebok','40'],{},['name','quantity'])
@@ -4256,10 +4256,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -4293,10 +4293,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -4330,10 +4330,10 @@ class GeneralController < Rho::RhoController
 		data3 = {}
 		data3["name"] = "Puma"
 		data3["quantity"] = "40"
-		ProductAppPb.createObject(data)
-		ProductAppPb.createObject(data1)
-		ProductAppPb.createObject(data2)
-		ProductAppPb.createObject(data3)
+		ProductAppPb.create(data)
+		ProductAppPb.create(data1)
+		ProductAppPb.create(data2)
+		ProductAppPb.create(data3)
 		error = ""
 		result = {}
 		begin
@@ -4454,14 +4454,14 @@ class GeneralController < Rho::RhoController
 		ProductUserFs.setModelProperty("name", "string", "")
 		ProductUserFs.setModelProperty("quantity", "string", "")
 		ProductUserFs.set("partition", "user")
-		objData = ProductUserFs.createObject(data1)
+		objData = ProductUserFs.create(data1)
 		db.executeSql("DELETE FROM CHANGED_VALUES")
 		objData1 = objData.to_json
 		objId = objData["object"].to_s
 		result = {}
 		result["beforeChange"] = ProductUserFs.hasChanges(objData["object"])
-		ProductUserFs.updateObject(objId, {:name => "Nike"}, {:name => "Woodlands"})
-		result["find"] = ProductUserFs.findObjects("all", {}, [], [], [])
+		objData.update_attributes({:name => "Woodlands"})
+		result["find"] = ProductUserFs.find("all")
 		result["objId"] = objData["object"]
 		result["hasChange"] = ProductUserFs.hasChanges(objData["object"])
 		result = result.to_json
@@ -4479,14 +4479,14 @@ class GeneralController < Rho::RhoController
 		ProductLocalFs.setModelProperty("name", "string", "")
 		ProductLocalFs.setModelProperty("quantity", "string", "")
 		ProductLocalFs.set("partition", "local")
-		objData = ProductLocalFs.createObject(data1)
+		objData = ProductLocalFs.create(data1)
 		db.executeSql("DELETE FROM CHANGED_VALUES")
 		objData1 = objData.to_json
 		objId = objData["object"].to_s
 		result = {}
 		result["beforeChange"] = ProductLocalFs.hasChanges(objData["object"])
-		ProductLocalFs.updateObject(objId, {:name => "Nike"}, {:name => "Woodlands"})
-		result["find"] = ProductLocalFs.findObjects("all", {}, [], [], [])
+		objData.update_attributes({:name => "Woodlands"})
+		result["find"] = ProductLocalFs.find("all")
 		result["objId"] = objData["object"]
 		result["hasChange"] = ProductLocalFs.hasChanges(objData["object"])
 		result = result.to_json
@@ -4504,14 +4504,14 @@ class GeneralController < Rho::RhoController
 		ProductAppFs.setModelProperty("name", "string", "")
 		ProductAppFs.setModelProperty("quantity", "string", "")
 		ProductAppFs.set("partition", "app")
-		objData = ProductAppFs.createObject(data1)
+		objData = ProductAppFs.create(data1)
 		db.executeSql("DELETE FROM CHANGED_VALUES")
 		objData1 = objData.to_json
 		objId = objData["object"].to_s
 		result = {}
 		result["beforeChange"] = ProductAppFs.hasChanges(objData["object"])
-		ProductAppFs.updateObject(objId, {:name => "Nike"}, {:name => "Woodlands"})
-		result["find"] = ProductAppFs.findObjects("all", {}, [], [], [])
+		objData.update_attributes({:name => "Woodlands"})
+		result["find"] = ProductAppFs.find("all")
 		result["objId"] = objData["object"]
 		result["hasChange"] = ProductAppFs.hasChanges(objData["object"])
 		result = result.to_json
@@ -4520,7 +4520,1119 @@ class GeneralController < Rho::RhoController
 		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
 	end
 
+	def testcase154
+		Rho::WebView.executeJavascript("console.log('Am test 154')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		ProductUserFs.set("partition", "user")
+		ProductUserFs.set("sync_type", "none")
+		objData = ProductUserFs.create(data)
+		result = {}
+		result["associations"] = ProductUserFs.associations
+		result["fixed_schema"] = ProductUserFs.fixed_schema
+		result["freezed"] = ProductUserFs.freezed
+		result["loaded"] = ProductUserFs.loaded
+		result["model_name"] = ProductUserFs.model_name
+		result["partition"] = ProductUserFs.partition
+		result["source_id"] = ProductUserFs.source_id
+		result["sync_priority"] = ProductUserFs.sync_priority
+		result["sync_type"] = ProductUserFs.sync_type
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
 
+	def testcase155
+		Rho::WebView.executeJavascript("console.log('Am test 155')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		ProductUserFs.associations = ""
+		ProductUserFs.fixed_schema = true
+		ProductUserFs.freezed = true
+		ProductUserFs.loaded = true
+		ProductUserFs.model_name = "ProductUserFs"
+		ProductUserFs.partition = "user"
+		ProductUserFs.sync_priority = 2000
+		ProductUserFs.sync_type = "incremental"
+		objData = ProductUserFs.create(data)
+		result = {}
+		result["associations"] = ProductUserFs.associations
+		result["fixed_schema"] = ProductUserFs.fixed_schema
+		result["freezed"] = ProductUserFs.freezed
+		result["loaded"] = ProductUserFs.loaded
+		result["model_name"] = ProductUserFs.model_name
+		result["partition"] = ProductUserFs.partition
+		result["source_id"] = ProductUserFs.source_id
+		result["sync_priority"] = ProductUserFs.sync_priority
+		result["sync_type"] = ProductUserFs.sync_type
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase156
+		Rho::WebView.executeJavascript("console.log('Am test 156')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('local'), 'local')
+		db.executeSql("DELETE FROM ProductLocalFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductLocalFs.setModelProperty("name", "string", "")
+		ProductLocalFs.setModelProperty("quantity", "string", "")
+		ProductLocalFs.set("partition", "local")
+		objData = ProductLocalFs.create(data)
+		result = {}
+		result["associations"] = ProductLocalFs.associations
+		result["fixed_schema"] = ProductLocalFs.fixed_schema
+		result["freezed"] = ProductLocalFs.freezed
+		result["loaded"] = ProductLocalFs.loaded
+		result["model_name"] = ProductLocalFs.model_name
+		result["partition"] = ProductLocalFs.partition
+		result["source_id"] = ProductLocalFs.source_id
+		result["sync_priority"] = ProductLocalFs.sync_priority
+		result["sync_type"] = ProductLocalFs.sync_type
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase157
+		Rho::WebView.executeJavascript("console.log('Am test 157')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('local'), 'local')
+		db.executeSql("DELETE FROM ProductLocalFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductLocalFs.setModelProperty("name", "string", "")
+		ProductLocalFs.setModelProperty("quantity", "string", "")
+		ProductLocalFs.associations = ""
+		ProductLocalFs.fixed_schema = true
+		ProductLocalFs.freezed = true
+		ProductLocalFs.loaded = true
+		ProductLocalFs.model_name = "ProductLocalFs"
+		ProductLocalFs.partition = "local"
+		ProductLocalFs.sync_priority = 2000
+		ProductLocalFs.sync_type = "none"
+		objData = ProductLocalFs.create(data)
+		result = {}
+		result["associations"] = ProductLocalFs.associations
+		result["fixed_schema"] = ProductLocalFs.fixed_schema
+		result["freezed"] = ProductLocalFs.freezed
+		result["loaded"] = ProductLocalFs.loaded
+		result["model_name"] = ProductLocalFs.model_name
+		result["partition"] = ProductLocalFs.partition
+		result["source_id"] = ProductLocalFs.source_id
+		result["sync_priority"] = ProductLocalFs.sync_priority
+		result["sync_type"] = ProductLocalFs.sync_type
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase158
+		Rho::WebView.executeJavascript("console.log('Am test 158')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('app'), 'app')
+		db.executeSql("DELETE FROM ProductAppFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductAppFs.setModelProperty("name", "string", "")
+		ProductAppFs.setModelProperty("quantity", "string", "")
+		ProductAppFs.set("partition", "app")
+		ProductAppFs.set("sync_type", "none")
+		objData = ProductAppFs.create(data)
+		result = {}
+		result["associations"] = ProductAppFs.associations
+		result["fixed_schema"] = ProductAppFs.fixed_schema
+		result["freezed"] = ProductAppFs.freezed
+		result["loaded"] = ProductAppFs.loaded
+		result["model_name"] = ProductAppFs.model_name
+		result["partition"] = ProductAppFs.partition
+		result["source_id"] = ProductAppFs.source_id
+		result["sync_priority"] = ProductAppFs.sync_priority
+		result["sync_type"] = ProductAppFs.sync_type
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase159
+		Rho::WebView.executeJavascript("console.log('Am test 159')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('app'), 'app')
+		db.executeSql("DELETE FROM ProductAppFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductAppFs.setModelProperty("name", "string", "")
+		ProductAppFs.setModelProperty("quantity", "string", "")
+		ProductAppFs.associations = ""
+		ProductAppFs.fixed_schema = true
+		ProductAppFs.freezed = true
+		ProductAppFs.loaded = true
+		ProductAppFs.model_name = "ProductAppFs"
+		ProductAppFs.partition = "app"
+		ProductAppFs.sync_priority = 2000
+		ProductAppFs.sync_type = "none"
+		objData = ProductAppFs.create(data)
+		result = {}
+		result["associations"] = ProductAppFs.associations
+		result["fixed_schema"] = ProductAppFs.fixed_schema
+		result["freezed"] = ProductAppFs.freezed
+		result["loaded"] = ProductAppFs.loaded
+		result["model_name"] = ProductAppFs.model_name
+		result["partition"] = ProductAppFs.partition
+		result["source_id"] = ProductAppFs.source_id
+		result["sync_priority"] = ProductAppFs.sync_priority
+		result["sync_type"] = ProductAppFs.sync_type
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase160
+		Rho::WebView.executeJavascript("console.log('Am test 159')")
+		Rho::NewORMModel.clear();
+
+		@obj = Rho::NewORMModel.new('myNewModel')
+		@obj.setModelProperty("name", "string", "")
+		@obj.setModelProperty("quantity", "string", "")
+		@obj.setProperties({
+			:partion => "user"
+			});
+		@obj.enable("sync")
+
+		@obj.initModel()
+		result = {}
+		result["enumerate"] = Rho::NewORMModel.enumerate();
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase161
+		Rho::WebView.executeJavascript("console.log('Am test 161')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		ProductUserFs.create(data);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		ProductUserFs.delete_all()
+		result["finalCount"] = ProductUserFs.getCount()
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase162
+		Rho::WebView.executeJavascript("console.log('Am test 162')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		ProductUserFs.create(data);
+		ProductUserFs.create(data1);
+		ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		ProductUserFs.delete_all(:conditions => {:name => "Nike"})
+		result["finalCount"] = ProductUserFs.getCount()
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase163
+		Rho::WebView.executeJavascript("console.log('Am test 163')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		ProductUserFs.create(data);
+		ProductUserFs.create(data1);
+		ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		ProductUserFs.delete_all(:conditions => ["name = 'Nike'"])
+		result["finalCount"] = ProductUserFs.getCount()
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase164
+		Rho::WebView.executeJavascript("console.log('Am test 164')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData1 = ProductUserFs.create(data);
+		objData2 = ProductUserFs.create(data1);
+		objData3 = ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		objData2.destroy();
+		result["finalCount"] = ProductUserFs.getCount()
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase165
+		Rho::WebView.executeJavascript("console.log('Am test 165')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData1 = ProductUserFs.create(data);
+		objData2 = ProductUserFs.create(data1);
+		objData3 = ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		result["findResult"] = ProductUserFs.find('all')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase166
+		Rho::WebView.executeJavascript("console.log('Am test 166')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData1 = ProductUserFs.create(data);
+		objData2 = ProductUserFs.create(data1);
+		objData3 = ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		result["findResult"] = ProductUserFs.find('count')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase167
+		Rho::WebView.executeJavascript("console.log('Am test 167')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData1 = ProductUserFs.create(data);
+		objData2 = ProductUserFs.create(data1);
+		objData3 = ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		result["findResult"] = ProductUserFs.find('all', {:conditions=>{:name=>'Nike'}})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase168
+		Rho::WebView.executeJavascript("console.log('Am test 168')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData1 = ProductUserFs.create(data);
+		objData2 = ProductUserFs.create(data1);
+		objData3 = ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		result["findResult"] = ProductUserFs.find('all', {:conditions=>["name='Nike'"]})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase169
+		Rho::WebView.executeJavascript("console.log('Am test 169')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData1 = ProductUserFs.create(data);
+		objData2 = ProductUserFs.create(data1);
+		objData3 = ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		result["findResult"] = ProductUserFs.find('all', {:conditions=>["name=?", "Nike"]})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase170
+		Rho::WebView.executeJavascript("console.log('Am test 170')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		data1 = {}
+		data1["name"] = "Puma"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData1 = ProductUserFs.create(data);
+		objData2 = ProductUserFs.create(data1);
+		objData3 = ProductUserFs.create(data2);
+		result = {}
+		result["initialCount"] = ProductUserFs.getCount()
+		result["findResult"] = ProductUserFs.find('all', {:order=>"name", :orderdir=>"DESC"})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase171
+		Rho::WebView.executeJavascript("console.log('Am test 171')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData = ProductUserFs.create(data)
+		result = {}
+		result["initialValue"] = ProductUserFs.find('all')
+		objData.update_attributes({:name=>"Woodlands", :quantity=>"30"})
+		result["finalValue"] = ProductUserFs.find('all')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase172
+		Rho::WebView.executeJavascript("console.log('Am test 172')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData = ProductUserFs.create(data)
+		result = {}
+		result["initialValue"] = ProductUserFs.find('all')
+		objData.update_attributes({:name=>"Woodlands"})
+		result["finalValue"] = ProductUserFs.find('all')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase173
+		Rho::WebView.executeJavascript("console.log('Am test 173')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserPb.setModelProperty("name", "string", "")
+		ProductUserPb.setModelProperty("quantity", "string", "")
+		objData = ProductUserPb.create(data)
+		result = {}
+		result["initialValue"] = ProductUserPb.find('all')
+		objData.update_attributes({:name=>"Woodlands", :quantity=>"30"})
+		result["finalValue"] = ProductUserPb.find('all')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase174
+		Rho::WebView.executeJavascript("console.log('Am test 174')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserPb.setModelProperty("name", "string", "")
+		ProductUserPb.setModelProperty("quantity", "string", "")
+		objData = ProductUserPb.create(data)
+		result = {}
+		result["initialValue"] = ProductUserPb.find('all')
+		objData.update_attributes({:name=>"Woodlands"})
+		result["finalValue"] = ProductUserPb.find('all')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase175
+		Rho::WebView.executeJavascript("console.log('Am test 175')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData = ProductUserFs.create(data)
+		result = {}
+		result["name"] = objData.get('name')
+		result["quantity"] = objData.get('quantity')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase176
+		Rho::WebView.executeJavascript("console.log('Am test 176')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserPb.setModelProperty("name", "string", "")
+		ProductUserPb.setModelProperty("quantity", "string", "")
+		objData = ProductUserPb.create(data)
+		result = {}
+		result["name"] = objData.get('name')
+		result["quantity"] = objData.get('quantity')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase177
+		Rho::WebView.executeJavascript("console.log('Am test 177')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserFs.setModelProperty("name", "string", "")
+		ProductUserFs.setModelProperty("quantity", "string", "")
+		objData = ProductUserFs.create(data)
+		objData1 = ProductUserFs.find('first')
+		result = {}
+		objData1.set('name', 'Woodlands')
+		objData1.set('quantity', '30')
+		result["name"] = objData1.get('name')
+		result["quantity"] = objData1.get('quantity')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase178
+		Rho::WebView.executeJavascript("console.log('Am test 178')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "20"
+		ProductUserPb.setModelProperty("name", "string", "")
+		ProductUserPb.setModelProperty("quantity", "string", "")
+		objData = ProductUserPb.create(data)
+		objData1 = ProductUserPb.find('first')
+		result = {}
+		objData1.set('name', 'Woodlands')
+		objData1.set('quantity', '30')
+		result["name"] = objData1.get('name')
+		result["quantity"] = objData1.get('quantity')
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase179
+		Rho::WebView.executeJavascript("console.log('Am test 179')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserFs.create(data)
+		objData1 = ProductUserFs.create(data1)
+		objData2 = ProductUserFs.create(data2)
+		objData3 = ProductUserFs.create(data3)
+		objData4 = ProductUserFs.create(data4)
+		objData5 = ProductUserFs.create(data5)
+		objData6 = ProductUserFs.create(data6)
+		result = {}
+		result["page"] = ProductUserFs.paginate({:page=> 0, :per_page=> 5})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase180
+		Rho::WebView.executeJavascript("console.log('Am test 180')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserFs.create(data)
+		objData1 = ProductUserFs.create(data1)
+		objData2 = ProductUserFs.create(data2)
+		objData3 = ProductUserFs.create(data3)
+		objData4 = ProductUserFs.create(data4)
+		objData5 = ProductUserFs.create(data5)
+		objData6 = ProductUserFs.create(data6)
+		result = {}
+		result["page"] = ProductUserFs.paginate({:page=> 0, :per_page=> 3, :select=>['name']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase181
+		Rho::WebView.executeJavascript("console.log('Am test 181')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserFs.create(data)
+		objData1 = ProductUserFs.create(data1)
+		objData2 = ProductUserFs.create(data2)
+		objData3 = ProductUserFs.create(data3)
+		objData4 = ProductUserFs.create(data4)
+		objData5 = ProductUserFs.create(data5)
+		objData6 = ProductUserFs.create(data6)
+		result = {}
+		result["page"] = ProductUserFs.paginate({:page=> 0, :per_page=> 5, :order=> ['name'], :orderdir=> ['DESC']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase182
+		Rho::WebView.executeJavascript("console.log('Am test 182')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserFs.create(data)
+		objData1 = ProductUserFs.create(data1)
+		objData2 = ProductUserFs.create(data2)
+		objData3 = ProductUserFs.create(data3)
+		objData4 = ProductUserFs.create(data4)
+		objData5 = ProductUserFs.create(data5)
+		objData6 = ProductUserFs.create(data6)
+		result = {}
+		result["page"] = ProductUserFs.paginate({:page=> 0, :per_page=> 3, :conditions=>{:name=>'Nike'}, :order=>['quantity'], :orderdir=>['DESC']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase183
+		Rho::WebView.executeJavascript("console.log('Am test 183')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserFs.create(data)
+		objData1 = ProductUserFs.create(data1)
+		objData2 = ProductUserFs.create(data2)
+		objData3 = ProductUserFs.create(data3)
+		objData4 = ProductUserFs.create(data4)
+		objData5 = ProductUserFs.create(data5)
+		objData6 = ProductUserFs.create(data6)
+		result = {}
+		result["page"] = ProductUserFs.paginate({:page=> 0, :per_page=> 3, :conditions=>['name="Woodlands"']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase184
+		Rho::WebView.executeJavascript("console.log('Am test 184')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM ProductUserFs")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserFs.create(data)
+		objData1 = ProductUserFs.create(data1)
+		objData2 = ProductUserFs.create(data2)
+		objData3 = ProductUserFs.create(data3)
+		objData4 = ProductUserFs.create(data4)
+		objData5 = ProductUserFs.create(data5)
+		objData6 = ProductUserFs.create(data6)
+		result = {}
+		result["page"] = ProductUserFs.paginate({:page=> 0, :per_page=> 3, :conditions=>['name=?', 'Woodlands'], :order=>['quantity'], :orderdir=>['DESC']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase185
+		Rho::WebView.executeJavascript("console.log('Am test 185')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserPb.create(data)
+		objData1 = ProductUserPb.create(data1)
+		objData2 = ProductUserPb.create(data2)
+		objData3 = ProductUserPb.create(data3)
+		objData4 = ProductUserPb.create(data4)
+		objData5 = ProductUserPb.create(data5)
+		objData6 = ProductUserPb.create(data6)
+		result = {}
+		result["page"] = ProductUserPb.paginate({:page=> 0, :per_page=> 5})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase186
+		Rho::WebView.executeJavascript("console.log('Am test 186')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserPb.create(data)
+		objData1 = ProductUserPb.create(data1)
+		objData2 = ProductUserPb.create(data2)
+		objData3 = ProductUserPb.create(data3)
+		objData4 = ProductUserPb.create(data4)
+		objData5 = ProductUserPb.create(data5)
+		objData6 = ProductUserPb.create(data6)
+		result = {}
+		result["page"] = ProductUserPb.paginate({:page=> 0, :per_page=> 3, :select=>['name']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase187
+		Rho::WebView.executeJavascript("console.log('Am test 187')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserPb.create(data)
+		objData1 = ProductUserPb.create(data1)
+		objData2 = ProductUserPb.create(data2)
+		objData3 = ProductUserPb.create(data3)
+		objData4 = ProductUserPb.create(data4)
+		objData5 = ProductUserPb.create(data5)
+		objData6 = ProductUserPb.create(data6)
+		result = {}
+		result["page"] = ProductUserPb.paginate({:page=> 0, :per_page=>20, :order=> ['name'], :orderdir=> ['DESC']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase188
+		Rho::WebView.executeJavascript("console.log('Am test 188')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserPb.create(data)
+		objData1 = ProductUserPb.create(data1)
+		objData2 = ProductUserPb.create(data2)
+		objData3 = ProductUserPb.create(data3)
+		objData4 = ProductUserPb.create(data4)
+		objData5 = ProductUserPb.create(data5)
+		objData6 = ProductUserPb.create(data6)
+		result = {}
+		result["page"] = ProductUserPb.paginate({:page=> 0, :per_page=> 3, :conditions=>{:name=>'Nike'}, :order=>['quantity'], :orderdir=>['DESC']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase189
+		Rho::WebView.executeJavascript("console.log('Am test 189')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserPb.create(data)
+		objData1 = ProductUserPb.create(data1)
+		objData2 = ProductUserPb.create(data2)
+		objData3 = ProductUserPb.create(data3)
+		objData4 = ProductUserPb.create(data4)
+		objData5 = ProductUserPb.create(data5)
+		objData6 = ProductUserPb.create(data6)
+		result = {}
+		result["page"] = ProductUserPb.paginate({:page=> 0, :per_page=> 3, :conditions=>['name="Woodlands"']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
+
+	def testcase190
+		Rho::WebView.executeJavascript("console.log('Am test 190')")
+		db = Rho::Database.new(Rho::Application.databaseFilePath('user'), 'user')
+		db.executeSql("DELETE FROM OBJECT_VALUES")
+		data = {}
+		data["name"] = "Nike"
+		data["quantity"] = "10"
+		data1 = {}
+		data1["name"] = "Nike"
+		data1["quantity"] = "20"
+		data2 = {}
+		data2["name"] = "Nike"
+		data2["quantity"] = "30"
+		data3 = {}
+		data3["name"] = "Puma"
+		data3["quantity"] = "10"
+		data4 = {}
+		data4["name"] = "Puma"
+		data4["quantity"] = "20"
+		data5 = {}
+		data5["name"] = "Woodlands"
+		data5["quantity"] = "10"
+		data6 = {}
+		data6["name"] = "Woodlands"
+		data6["quantity"] = "20"
+		objData1 = ProductUserPb.create(data)
+		objData1 = ProductUserPb.create(data1)
+		objData2 = ProductUserPb.create(data2)
+		objData3 = ProductUserPb.create(data3)
+		objData4 = ProductUserPb.create(data4)
+		objData5 = ProductUserPb.create(data5)
+		objData6 = ProductUserPb.create(data6)
+		result = {}
+		result["page"] = ProductUserPb.paginate({:page=> 0, :per_page=> 3, :conditions=>['name=?', 'Woodlands'], :order=>['quantity'], :orderdir=>['DESC']})
+		result = result.to_json
+		finalResult = result.to_s
+		Rho::WebView.executeJavascript('console.log(JSON.stringify('+ finalResult +'))')
+		Rho::WebView.executeJavascript('Ruby.sendValueToJS(JSON.stringify('+ result +'))')
+	end
 
 	def testcasea
 		autoId = Rho::NewORM.generateId()

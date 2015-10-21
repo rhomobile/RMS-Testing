@@ -588,236 +588,6 @@ describe("Ruby : find_by_sql test set : ", function(){
         });
     });
 });
-describe("Ruby : getAllProperties test set : ", function(){
-    var userDB = Rho.ORMHelper.dbConnection('user');
-    var localDB = Rho.ORMHelper.dbConnection('local');
-    var appDB = Rho.ORMHelper.dbConnection('app');
-    it("VTID-073 : It should get all properties and values of the user model with Fixed schema.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase19');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("true");
-            expect(result.freezed).toEqual("true");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductUserFs");
-            expect(result.partition).toEqual("user");
-            expect(result.pass_through).toEqual("");
-            expect(result.schema_version).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("none");
-        });
-    });
-    it("VTID-074 : It should get all properties and values of the sync enabled user model with Fixed schema.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase20');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("true");
-            expect(result.freezed).toEqual("true");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductUserFs");
-            expect(result.partition).toEqual("user");
-            expect(result.pass_through).toEqual("");
-            expect(result.schema_version).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("incremental");
-        });
-    });
-    it("VTID-075 : It should get all properties and values of the sync enabled(bulk_only) user model with Fixed schema.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase21');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("true");
-            expect(result.freezed).toEqual("true");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductUserFs");
-            expect(result.partition).toEqual("user");
-            expect(result.pass_through).toEqual("");
-            expect(result.schema_version).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("bulk_only");
-        });
-    });
-    it("VTID-076 : It should get all properties and values of the local model with Fixed schema.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase22');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("true");
-            expect(result.freezed).toEqual("true");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductLocalFs");
-            expect(result.partition).toEqual("local");
-            expect(result.pass_through).toEqual("");
-            expect(result.schema_version).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("none");
-        });
-    });
-    it("VTID-077 : It should get all properties and values of the app model with Fixed schema.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase23');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("true");
-            expect(result.freezed).toEqual("true");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductAppFs");
-            expect(result.partition).toEqual("app");
-            expect(result.pass_through).toEqual("");
-            expect(result.schema_version).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("none");
-        });
-    });
-    it("VTID-078 : It should get all properties and values of the user model with Property bag.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase24');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("false");
-            expect(result.freezed).toEqual("false");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductUserPb");
-            expect(result.partition).toEqual("user");
-            expect(result.pass_through).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("none");
-        });
-    });
-    it("VTID-079 : It should get all properties and values of the sync enabled user model with Property bag.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase25');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("false");
-            expect(result.freezed).toEqual("false");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductUserPb");
-            expect(result.partition).toEqual("user");
-            expect(result.pass_through).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("incremental");
-        });
-    });
-    it("VTID-080 : It should get all properties and values of the sync enabled(bulk_only) user model with Property bag.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase26');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("false");
-            expect(result.freezed).toEqual("false");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductUserPb");
-            expect(result.partition).toEqual("user");
-            expect(result.pass_through).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("bulk_only");
-        });
-    });
-    it("VTID-081 : It should get all properties and values of the local model with Property bag.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase27');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("false");
-            expect(result.freezed).toEqual("false");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductLocalPb");
-            expect(result.partition).toEqual("local");
-            expect(result.pass_through).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("none");
-        });
-    });
-    it("VTID-082 : It should get all properties and values of the app model with Property bag.", function(){
-        runs(function(){
-            Ruby.call('General', 'testcase28');
-            waits(3000);
-        });
-        runs(function(){
-            var result = Ruby.getReturnedValue();
-            result = JSON.parse(result);
-            console.log(result);
-            expect(result.associations).toEqual("");
-            expect(result.blob_attribs).toEqual("");
-            expect(result.fixed_schema).toEqual("false");
-            expect(result.freezed).toEqual("false");
-            expect(result.full_update).toEqual("");
-            expect(result.loaded).toEqual("true");
-            expect(result.model_name).toEqual("ProductAppPb");
-            expect(result.partition).toEqual("app");
-            expect(result.pass_through).toEqual("");
-            expect(result.sync_priority).toEqual("1000");
-            expect(result.sync_type).toEqual("none");
-        });
-    });
-});
 describe("Ruby : getBackendRefreshTime test set : ", function(){
     it("VTID-083 : It should get the default value of time stamp for a non synced sync model with fixed schema.", function(){
         runs(function(){
@@ -2610,6 +2380,142 @@ describe("Ruby : hasChanges test set : ", function(){
             expect(result.find[0].name).toEqual("Woodlands");
             expect(result.find[0].quantity).toEqual("20");
             expect(result.find[0].object).toEqual(result.objId);
+        });
+    });
+});
+describe("get and set properties test set : ", function(){
+    it("Should get all the property of the newORMModel object with userFS", function(){
+        runs(function(){
+            Ruby.call('General', 'testcase154');
+            waits(3000);
+        });
+        runs(function(){
+            var result = Ruby.getReturnedValue();
+            result = JSON.parse(result);
+            console.log(result);
+            expect(result.associations).toEqual("");
+            expect(result.fixed_schema).toEqual(true);
+            expect(result.freezed).toEqual(true);
+            expect(result.loaded).toEqual(true);
+            expect(result.model_name).toEqual("ProductUserFs");
+            expect(result.partition).toEqual("user");
+            expect(typeof(result.source_id)).toEqual("number");
+            expect(result.sync_priority).toEqual(1000);
+            expect(result.sync_type).toEqual("incremental");
+        });
+    });
+    it("Should set all the property of the newORMModel object with userFS", function(){
+        runs(function(){
+            Ruby.call('General', 'testcase155');
+            waits(3000);
+        });
+        runs(function(){
+            var result = Ruby.getReturnedValue();
+            result = JSON.parse(result);
+            console.log(result);
+            expect(result.associations).toEqual("");
+            expect(result.fixed_schema).toEqual(true);
+            expect(result.freezed).toEqual(true);
+            expect(result.loaded).toEqual(true);
+            expect(result.model_name).toEqual("ProductUserFs");
+            expect(result.partition).toEqual("user");
+            expect(typeof(result.source_id)).toEqual("number");
+            expect(result.sync_priority).toEqual(2000);
+            expect(result.sync_type).toEqual("incremental");
+        });
+    });
+    it("Should get all the property of the newORMModel object with localFS", function(){
+        runs(function(){
+            Ruby.call('General', 'testcase156');
+            waits(3000);
+        });
+        runs(function(){
+            var result = Ruby.getReturnedValue();
+            result = JSON.parse(result);
+            console.log(result);
+            expect(result.associations).toEqual("");
+            expect(result.fixed_schema).toEqual(true);
+            expect(result.freezed).toEqual(true);
+            expect(result.loaded).toEqual(true);
+            expect(result.model_name).toEqual("ProductLocalFs");
+            expect(result.partition).toEqual("local");
+            expect(typeof(result.source_id)).toEqual("number");
+            expect(result.sync_priority).toEqual(1000);
+            expect(result.sync_type).toEqual("none");
+        });
+    });
+    it("Should set all the property of the newORMModel object with localFS", function(){
+        runs(function(){
+            Ruby.call('General', 'testcase157');
+            waits(3000);
+        });
+        runs(function(){
+            var result = Ruby.getReturnedValue();
+            result = JSON.parse(result);
+            console.log(result);
+            expect(result.associations).toEqual("");
+            expect(result.fixed_schema).toEqual(true);
+            expect(result.freezed).toEqual(true);
+            expect(result.loaded).toEqual(true);
+            expect(result.model_name).toEqual("ProductLocalFs");
+            expect(result.partition).toEqual("local");
+            expect(typeof(result.source_id)).toEqual("number");
+            expect(result.sync_priority).toEqual(2000);
+            expect(result.sync_type).toEqual("none");
+        });
+    });
+    it("Should get all the property of the newORMModel object with appFS", function(){
+        runs(function(){
+            Ruby.call('General', 'testcase158');
+            waits(3000);
+        });
+        runs(function(){
+            var result = Ruby.getReturnedValue();
+            result = JSON.parse(result);
+            console.log(result);
+            expect(result.associations).toEqual("");
+            expect(result.fixed_schema).toEqual(true);
+            expect(result.freezed).toEqual(true);
+            expect(result.loaded).toEqual(true);
+            expect(result.model_name).toEqual("ProductAppFs");
+            expect(result.partition).toEqual("app");
+            expect(typeof(result.source_id)).toEqual("number");
+            expect(result.sync_priority).toEqual(1000);
+            expect(result.sync_type).toEqual("bulk_only"); // default for app partion "bulk_only"
+        });
+    });
+    it("Should set all the property of the newORMModel object with appFS", function(){
+        runs(function(){
+            Ruby.call('General', 'testcase159');
+            waits(3000);
+        });
+        runs(function(){
+            var result = Ruby.getReturnedValue();
+            result = JSON.parse(result);
+            console.log(result);
+            expect(result.associations).toEqual("");
+            expect(result.fixed_schema).toEqual(true);
+            expect(result.freezed).toEqual(true);
+            expect(result.loaded).toEqual(true);
+            expect(result.model_name).toEqual("ProductAppFs");
+            expect(result.partition).toEqual("app");
+            expect(typeof(result.source_id)).toEqual("number");
+            expect(result.sync_priority).toEqual(2000);
+            expect(result.sync_type).toEqual("none");
+        });
+    });
+});
+describe("Ruby : Enumerate and clear test set : ", function(){
+    it("Enumerate all the models available with the appliation", function(){
+        runs(function(){
+            Ruby.call('General', 'testcase160');
+            waits(3000);
+        });
+        runs(function(){
+            var result = Ruby.getReturnedValue();
+            result = JSON.parse(result);
+            console.log(result);
+            expect(result.enumerate.length).toEqual(1);
         });
     });
 });
