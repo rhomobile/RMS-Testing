@@ -2182,10 +2182,11 @@ public class Keywords {
 			            	count=1;
 			            	selecteditem = elementweb.getText();
 			            	select.selectByVisibleText(selecteditem);
+			            	break;
 			        }
 			    }
 			    
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 			if(count==1){
 				log("Successfull in selecting clicking the category");
 				return "pass";
@@ -2291,18 +2292,34 @@ public class Keywords {
 			    		}
 			    		mobdriv.switchTo().window("WEBVIEW");
 					}
-					else if(ModuleName.contains("Toolbar")&&!(screenshot_id.contains("Options")||screenshot_id.contains("Fullscreen")||screenshot_id.contains("Sync"))) {
+					else if(ModuleName.contains("Toolbar")&&!(screenshot_id.contains("Options")||screenshot_id.contains("Fullscreen")||screenshot_id.contains("Sync")||screenshot_id.contains("refresh")||screenshot_id.contains("home"))) {
 						mobdriv.switchTo().window("NATIVE_APP");
-			    		if(element("toobarview_xpath").isDisplayed()) {
+						String xPathToolbar = null;
+						if(validate_App_Launched_Device(getvalue, "com.symbol.enterprisebrowser")=="Pass")
+							xPathToolbar = "EBtoobarview_xpath";
+						else 
+							xPathToolbar = "toobarview_xpath";
+			    		if(element(xPathToolbar).isDisplayed()) {
 				    		Dimension dim = element("toobarview_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
-				    		Point t = element("toobarview_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
+				    		//System.out.println(dim.height);
+				    		//System.out.println(dim.width);
+				    		Point t = element(xPathToolbar).getLocation();
+				    		//System.out.println(t.getX());
+				    		//System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
-			    		//mobdriv.switchTo().window("WEBVIEW");
+			    		
+					}
+					else if(ModuleName.contains("Notification")) {
+		    			String result=executeCommandLine("adb shell uiautomator runtest MAAF_MCD.jar -c com.motorola.maaf.MaaFw -e GETEBBOUNDS True","Before Formating BOUNDS ARE Rect");
+		    			result = result.replace("Before Formating BOUNDS ARE Rect", "");
+		    			result = result.replace("(", "");
+		    			result = result.replace(")", "");
+		    			result = result.replace("-", ",");
+		    			result = result.replace(" ", "");
+		    			String[] split_result = result.split(",");
+		    			eleScreenshot = fullImg.getSubimage(Integer.valueOf(split_result[0]), Integer.valueOf(split_result[1]), Integer.valueOf(split_result[2]), Integer.valueOf(split_result[3])-Integer.valueOf(split_result[1]));
+		    			
 					}
 					else
 						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
@@ -3770,6 +3787,89 @@ public class Keywords {
 	}	
 	
 	/**
+	 * Swipe Notification bar.TextView class using UI automator
+	 * @author Vinod Shankar 
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String SwipeNotification(Hashtable<String,String> getvalue,String arg1){
+		try{
+			log("Entered SwipeNotification function");
+			boolean res;
+			int i=0;
+			mobdriv.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			int loopcount=500/5;
+			String toCheck=null;
+			String result=null;
+			result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e SWIPE_NOTIFICATION True","numtests");
+			while(i<loopcount){
+				toCheck=arg1+" Success";
+				String strValidate = toCheck.replace("_", " ");
+				result=null;
+				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS "+arg1,strValidate);
+				if(result.contains(strValidate))
+					res=true;
+				else
+					res=false;
+				
+				if(res==true){
+					break;
+				}
+				Thread.sleep(5000);
+				i++;
+
+				if(i==loopcount){
+					log("Text is not Present");
+					mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+					log("Exiting from SwipeNotification function");
+					return "Fail";
+				}
+			}
+			if(!result.equals("Fail"))
+				return "Pass";
+			else{
+				log("Exiting SwipeNotification function");
+				return "Fail";
+			}
+				
+			
+			
+			
+		}catch(Exception ex){
+			log("Button not found. reason :"+ex.getMessage());
+			log("Exiting from SwipeNotificationAndTap function");
+			return "Fail";
+		}
+	}
+	/**
+	 * TapNotification
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String TapNotification(Hashtable<String,String> getvalue,String arg1){
+		try{
+			log("Entered TapNotification function");
+			String toCheck=arg1+" Success";
+			String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e TAP_TXT_CONTAINS "+arg1,toCheck);
+			if(!result.equals("Fail")){
+				log("Exiting TapNotification function");
+				return "Pass";
+			}else
+			{
+				log("Exiting TapNotification function");
+				return "Fail";
+			}
+		}
+		catch(Exception ex){
+			log("Button not found. reason :"+ex.getMessage());
+			log("Exiting from TapNotification function");
+			return "Fail";
+		}
+	}
+		
+	/**
 	 * Swipe Notification bar and tap on Text in android.widget.TextView class using UI automator
 	 * @author Vinod Shankar 
 	 * @param getvalue
@@ -4623,6 +4723,7 @@ public class Keywords {
 	           			for(int j = 0; j<XMLtagArrayList.length;j++) {
 	           				argsplit[2] = argsplit[2].replace(argsplit[2], "  "+argsplit[2]);
 	           			}
+	           			argsplit[2] = argsplit[2].replace("endl", "\n");
 	           			if(!argsplit[2].contains(line))
 	           				line = line.replaceAll(".+", argsplit[2]);
 	           			flag = 1;
