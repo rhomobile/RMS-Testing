@@ -47,7 +47,7 @@ public class Rhodes_AsyncHTTP {
 			app.setLogger(log);	
 			String AutName = "Rhodes_AUT_Name";
 			String AutId = "Rhodes_AUT_ID";
-			launch=app.Init_Selendroid(AutName, AutId);
+			res1=app.Init_Selendroid(AutName, AutId);
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;

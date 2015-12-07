@@ -1,0 +1,54 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="EBManualCommonSpecTesting">
+<test name="EBManual_Application_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Application_JS" ></class> 
+		</classes>
+	</test>
+	<test name="EBManual_Intent_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Intent_JS" ></class> 
+		</classes>
+	</test>
+	<test name="EBManual_Keycapture_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Keycapture_JS" ></class> 
+		</classes>
+	</test>
+	<test name="EBManual_Network_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Network_JS" ></class> 
+		</classes>
+	</test>	
+	<test name="EBManual_Notification_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Notification_JS" ></class> 
+		</classes>
+	</test>	
+	<test name="EBManual_Signature_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Signature_JS" ></class> 
+		</classes>
+	</test>	
+	<test name="EBManual_System_JS">
+		<classes>
+			<class name="com.testcases.EBManual_System_JS" ></class> 
+		</classes>
+	</test>	
+	<test name="EBManual_Tabbar_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Tabbar_JS" ></class> 
+		</classes>
+	</test>	
+	<test name="EBManual_Toolbar_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Toolbar_JS" ></class> 
+		</classes>
+	</test>
+	<test name="EBManual_Webview_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Webview_JS" ></class> 
+		</classes>
+	</test>	
+	
+</suite>

@@ -48,7 +48,7 @@ public class Webview_Ruby {
 			int cleardata_flag = 1;
 			String AutName = "Ruby_AUT_Name";
 			String AutId = "Ruby_AUT_ID";
-			launch=app.Init_Selendroid(AutName, AutId, cleardata_flag);	
+			res1=app.Init_Selendroid(AutName, AutId, cleardata_flag);	
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;

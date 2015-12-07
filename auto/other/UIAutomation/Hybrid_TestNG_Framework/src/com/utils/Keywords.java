@@ -1,10 +1,8 @@
 package com.utils;
 
 import static io.selendroid.client.waiter.TestWaiter.waitForElement;
-import io.selendroid.client.SelendroidDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.selendroid.client.TouchActionBuilder;
-import io.selendroid.common.SelendroidCapabilities;
-import io.selendroid.standalone.SelendroidConfiguration;
 import io.selendroid.standalone.SelendroidLauncher;
 
 import java.awt.image.BufferedImage;
@@ -19,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -33,6 +32,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
@@ -47,11 +47,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.HasTouchScreen;
+import org.openqa.selenium.interactions.TouchScreen;
 import org.openqa.selenium.interactions.touch.TouchActions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteTouchScreen;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+
 
 
 
@@ -64,7 +71,8 @@ public class Keywords {
 	public static Properties OR=null;
 	public static Properties Config= null;  
 	public WebDriver driver= null;
-	public SelendroidDriver mobdriv = null;
+	//public SelendroidDriver mobdriv = null;
+	public AndroidDriver mobdriv = null;
 	public SelendroidLauncher launch=null;
 	static Keywords k1;
 	HashMap<String,WebDriver> map;
@@ -198,7 +206,7 @@ public class Keywords {
 								arg1=Teststep.split("\\(")[1].replace(")","");
 								//calling the func if contains arguments
 								//Step_Result=executeKeyword(func_name,getvalue,arg1);
-								if(func_name.contains("TakeScreenshot")||func_name.contains("TakeNativeScreenshot")) {
+								if(func_name.contains("TakeScreenshot")||func_name.contains("UIAutomatorScreenshot")) {
 									Step_Result=executeKeyword(func_name,getvalue,arg1,ModuleName);
 								}
 								else {
@@ -1244,10 +1252,10 @@ public class Keywords {
 		return "pass";
 	}
 
-	public SelendroidLauncher Init_Selendroid() throws Exception{
+	public String Init_Selendroid() throws Exception{
 		try{
 			log("Executing Init_Selendroid function");
-			SelendroidConfiguration config = new SelendroidConfiguration();
+			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
 			config.setSelendroidServerPort(8081);
 			
@@ -1258,7 +1266,8 @@ public class Keywords {
 			//15125521650120
 			//143435225D0005
 			capa.setSerial(Config.getProperty("AUT_SerialNumber"));
-			mobdriv = new SelendroidDriver(capa);
+			//mobdriv = new SelendroidDriver(capa);
+			mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capa);
 			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			mobdriv.switchTo().window("WEBVIEW");
 			//Thread.sleep(5000);
@@ -1270,7 +1279,27 @@ public class Keywords {
 		}catch(Throwable t){
 			log("Failed to start selendroid : "+t.getMessage());
 			return null;
+		}*/
+			File app = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.setCapability(CapabilityType.BROWSER_NAME, ""); //Name of mobile web browser to automate. Should be an empty string if automating an app instead.
+			capabilities.setCapability(CapabilityType.VERSION, "4.4.2");
+			capabilities.setCapability("deviceName", "Galaxy nexus");
+			capabilities.setCapability("app", app.getAbsolutePath());
+			capabilities.setCapability("automationName", "selendroid");
+			capabilities.setCapability("appPackage", Config.getProperty("autID"));
+			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			mobdriv.switchTo().window("WEBVIEW_0");
+			log("Exiting Init_Selendroid function");
+			return "Pass";
+		}catch(Throwable t){
+			log("Failed to start selendroid : "+t.getMessage());
+			return "Fail";
 		}
+			
 
 	}
 	
@@ -1281,10 +1310,10 @@ public class Keywords {
 	 * @return
 	 * @throws Exception
 	 */
-	public SelendroidLauncher Init_Selendroid(int nocleardata_flag) throws Exception{
+	public String Init_Selendroid(int nocleardata_flag) throws Exception{
 		try{
 			log("Executing Init_Selendroid function");
-			SelendroidConfiguration config = new SelendroidConfiguration();
+			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
 			config.setSelendroidServerPort(8081);
 			if(nocleardata_flag == 1) {
@@ -1296,7 +1325,8 @@ public class Keywords {
 			//1512 5521650120
 			//143435225D0005
 			capa.setSerial(Config.getProperty("AUT_SerialNumber"));
-			mobdriv = new SelendroidDriver(capa);
+			//mobdriv = new SelendroidDriver(capa);
+			mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capa);
 			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			mobdriv.switchTo().window("WEBVIEW");
 			//Thread.sleep(5000);
@@ -1308,6 +1338,28 @@ public class Keywords {
 		}catch(Throwable t){
 			log("Failed to start selendroid : "+t.getMessage());
 			return null;
+		}*/
+			File app = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.setCapability(CapabilityType.BROWSER_NAME, ""); //Name of mobile web browser to automate. Should be an empty string if automating an app instead.
+			capabilities.setCapability(CapabilityType.VERSION, "4.4.2");
+			capabilities.setCapability("deviceName", "Galaxy nexus");
+			capabilities.setCapability("app", app.getAbsolutePath());
+			capabilities.setCapability("automationName", "selendroid");
+			if(nocleardata_flag == 1) {
+				capabilities.setCapability("noReset", true);
+			}
+			capabilities.setCapability("appPackage", Config.getProperty("autID"));
+			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			mobdriv.switchTo().window("WEBVIEW_0");
+			log("Exiting Init_Selendroid function");
+			return "Pass";
+		}catch(Throwable t){
+			log("Failed to start selendroid : "+t.getMessage());
+			return "Fail";
 		}
 
 	}
@@ -1320,10 +1372,10 @@ public class Keywords {
 	 * @return
 	 * @throws Exception
 	 */
-	public SelendroidLauncher Init_Selendroid(String autName, String autID) throws Exception{
+	public String Init_Selendroid(String autName, String autID) throws Exception{
 		try{
 			log("Executing Init_Selendroid function");
-			SelendroidConfiguration config = new SelendroidConfiguration();
+			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
 			config.setSelendroidServerPort(8081);
 			SelendroidLauncher launch= new SelendroidLauncher(config);
@@ -1332,7 +1384,8 @@ public class Keywords {
 			//1512 5521650120
 			//143435225D0005
 			capa.setSerial(Config.getProperty("AUT_SerialNumber"));
-			mobdriv = new SelendroidDriver(capa);
+			//mobdriv = new SelendroidDriver(capa);
+			mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capa);
 			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			mobdriv.switchTo().window("WEBVIEW");
 			//Thread.sleep(5000);
@@ -1344,14 +1397,33 @@ public class Keywords {
 		}catch(Throwable t){
 			log("Failed to start selendroid : "+t.getMessage());
 			return null;
+		}*/
+			File app = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.setCapability(CapabilityType.BROWSER_NAME, ""); //Name of mobile web browser to automate. Should be an empty string if automating an app instead.
+			capabilities.setCapability(CapabilityType.VERSION, "4.4.2");
+			capabilities.setCapability("deviceName", "Galaxy nexus");
+			capabilities.setCapability("app", app.getAbsolutePath());
+			capabilities.setCapability("automationName", "selendroid");
+			capabilities.setCapability("appPackage", Config.getProperty("autID"));
+			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			mobdriv.switchTo().window("WEBVIEW_0");
+			log("Exiting Init_Selendroid function");
+			return "Pass";
+		}catch(Throwable t){
+			log("Failed to start selendroid : "+t.getMessage());
+			return "Fail";
 		}
 
 	}
 	
-	public SelendroidLauncher Init_Selendroid(String autName, String autID, int nocleardata_flag) throws Exception{
+	public String Init_Selendroid(String autName, String autID, int nocleardata_flag) throws Exception{
 		try{
 			log("Executing Init_Selendroid function");
-			SelendroidConfiguration config = new SelendroidConfiguration();
+			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
 			config.setSelendroidServerPort(8081);
 			if(nocleardata_flag == 1) {
@@ -1365,16 +1437,31 @@ public class Keywords {
 			capa.setSerial(Config.getProperty("AUT_SerialNumber"));
 			mobdriv = new SelendroidDriver(capa);
 			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-			mobdriv.switchTo().window("WEBVIEW");
+			mobdriv.switchTo().window("WEBVIEW");*/
 			//Thread.sleep(5000);
 			//String result=executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\MAAF_MCD.jar"+" /data/local/tmp","32360");
 			//log("Result of Copying MCD_MAAF.jar is: "+result);
+			File app = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.setCapability(CapabilityType.BROWSER_NAME, ""); //Name of mobile web browser to automate. Should be an empty string if automating an app instead.
+			capabilities.setCapability(CapabilityType.VERSION, "4.4.2");
+			capabilities.setCapability("deviceName", "Galaxy nexus");
+			capabilities.setCapability("app", app.getAbsolutePath());
+			capabilities.setCapability("automationName", "selendroid");
+			if(nocleardata_flag == 1) {
+				capabilities.setCapability("noReset", true);
+			}
+			capabilities.setCapability("appPackage", Config.getProperty("autID"));
+			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			mobdriv.switchTo().window("WEBVIEW_0");
 			log("Exiting Init_Selendroid function");
-			
-			return launch;
+			return "Pass";
 		}catch(Throwable t){
 			log("Failed to start selendroid : "+t.getMessage());
-			return null;
+			return "Fail";
 		}
 
 	}
@@ -1396,43 +1483,15 @@ public class Keywords {
 	    System.out.println("Appium server stop");
 	}
 
-
-	
-	
-	public SelendroidLauncher Init_Appium() throws Exception{
-		try{
-			log("Executing Init_Appium function");
-			SelendroidConfiguration config = new SelendroidConfiguration();
-			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
-			config.setSelendroidServerPort(8081);
-			SelendroidLauncher launch= new SelendroidLauncher(config);
-			launch.launchSelendroid();
-			startAppiumServer();
-
-			SelendroidCapabilities capa = SelendroidCapabilities.device(Config.getProperty("AUT_ID"));
-			//15125521650120
-			//143435225D0005
-			capa.setSerial(Config.getProperty("AUT_SerialNumber"));
-			mobdriv = new SelendroidDriver(capa);
-			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-			mobdriv.switchTo().window("WEBVIEW");
-			//Thread.sleep(5000);
-			//String result=executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\MAAF_MCD.jar"+" /data/local/tmp","32360");
-			//log("Result of Copying MCD_MAAF.jar is: "+result);
-			log("Exiting Init_Selendroid function");
-			
-			return launch;
-		}catch(Throwable t){
-			log("Failed to start selendroid : "+t.getMessage());
-			return null;
-		}
-
-	}
-
 	public void quitSelendroid(SelendroidLauncher launch) {
-		mobdriv.quit();
-		launch.stopSelendroid();
-		browser_Quit();
+		try{
+			mobdriv.quit();
+			//launch.stopSelendroid();
+			browser_Quit();
+		}catch(Exception ex){
+			mobdriv.quit();
+		}
+		log("Completed quitSelendroid function");
 	}
 
 	public String browser_Quit()
@@ -1727,6 +1786,12 @@ public class Keywords {
 
 			String toCheck=arg1+" Success";
 			log("Started Executing Validate_App_launched_Device function");
+			String res = CheckUIButtonExists(getvalue, "Always");
+			if(res.contains("Pass"))
+			{
+				ClickUITextView(getvalue, "Email");
+				ClickUIButtonText(getvalue, "Always");
+			}
 			String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e COMPARE_APP_PKG "+arg1,toCheck);
 			if(!result.equals("Fail")){
 
@@ -1942,6 +2007,12 @@ public class Keywords {
 					log("Exiting validate_AppMinimized function");
 					return "Pass";
 				}
+				else if(validate_App_Launched_Device(getvalue, "com.symbol.enterprisebrowser") != "Pass")
+				{
+					log("Not in Enterprise browser screen");
+					log("Exiting validate_AppMinimized function");
+					return "Pass";
+				}
 				else {
 					log("Not in Homescreen or Apps screen");
 					log("Exiting validate_AppMinimized function");
@@ -2047,7 +2118,8 @@ public class Keywords {
 		log("Entering the function Press_Key");
 		try{
 			if(key.equalsIgnoreCase("Home")){
-				mobdriv.getAdbConnection().sendKeyEvent(3);
+				//mobdriv.sendKeyEvent(3);
+				executeCommandLine("adb shell input keyevent 3", "");
 				log("pressed on the home key");
 				log("Exiting the function Press_Key");
 				log("home works");
@@ -2056,7 +2128,8 @@ public class Keywords {
 
 			}
 			if(key.equalsIgnoreCase("Back")){
-				mobdriv.getAdbConnection().sendKeyEvent(4);
+				//mobdriv.sendKeyEvent(4);
+				executeCommandLine("adb shell input keyevent 4", "");
 				log("pressed on the back key");
 				log("Exiting the function Press_Key");
 				log("Back works");
@@ -2143,7 +2216,7 @@ public class Keywords {
 	public String link_Click(Hashtable<String,String> getvalue,String linkName){
 		try{
 			log("Executing link_click function");
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 			WebElement pages = element(linkName);
 			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -50, 0);
 			flick.perform();
@@ -2152,12 +2225,26 @@ public class Keywords {
 
 		}catch(Exception ex){
 			reportError("Fail to click on -"+linkName+" reason :"+ex.getMessage());
+			System.err.println("link_Click Exception::"+ex);
 			return null;
 		}
 
 
 	}
 		
+	public class AppiumTouchActionExtension extends AndroidDriver implements HasTouchScreen {
+		public RemoteTouchScreen touch;
+		public AppiumTouchActionExtension(URL remoteAddress, Capabilities desiredCapabilities) {
+			super(remoteAddress, desiredCapabilities);
+			touch = new RemoteTouchScreen(getExecuteMethod());
+		}
+
+		@Override
+		public TouchScreen getTouch() {
+			// TODO Auto-generated method stub
+			return touch;
+		}
+	}
 	/**
 	 * Select test from combo box to run
 	 * @author Vinod Shankar
@@ -2300,7 +2387,7 @@ public class Keywords {
 						else 
 							xPathToolbar = "toobarview_xpath";
 			    		if(element(xPathToolbar).isDisplayed()) {
-				    		Dimension dim = element("toobarview_xpath").getSize();
+				    		Dimension dim = element(xPathToolbar).getSize();
 				    		//System.out.println(dim.height);
 				    		//System.out.println(dim.width);
 				    		Point t = element(xPathToolbar).getLocation();
@@ -2320,6 +2407,91 @@ public class Keywords {
 		    			String[] split_result = result.split(",");
 		    			eleScreenshot = fullImg.getSubimage(Integer.valueOf(split_result[0]), Integer.valueOf(split_result[1]), Integer.valueOf(split_result[2]), Integer.valueOf(split_result[3])-Integer.valueOf(split_result[1]));
 		    			
+					}
+					else if(ModuleName.contains("ControlAppearance")) {
+						mobdriv.switchTo().window("NATIVE_APP");
+			    		if(element("BackButton_xpath").isDisplayed()) {
+				    		Dimension dim = element("BackButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("BackButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else if(element("ForwardButton_xpath").isDisplayed()){
+				    		Dimension dim = element("ForwardButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("ForwardButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else if(element("GoButton_xpath").isDisplayed()){
+				    		Dimension dim = element("GoButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("GoButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else if(element("HomeButton_xpath").isDisplayed()){
+				    		Dimension dim = element("HomeButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("HomeButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else if(element("MinimizeButton_xpath").isDisplayed()){
+				    		Dimension dim = element("MinimizeButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("MinimizeButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else if(element("QuitButton_xpath").isDisplayed()){
+				    		Dimension dim = element("MinimizeButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("MinimizeButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else if(element("ReloadButton_xpath").isDisplayed()){
+				    		Dimension dim = element("ReloadButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("ReloadButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else if(element("SipButton_xpath").isDisplayed()){
+				    		Dimension dim = element("SipButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("SipButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else if(element("ZoomtextButton_xpath").isDisplayed()){
+				    		Dimension dim = element("ZoomtextButton_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("ZoomtextButton_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+			    		mobdriv.switchTo().window("WEBVIEW");
 					}
 					else
 						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
@@ -2670,14 +2842,19 @@ public class Keywords {
 	public String DrawSignature(Hashtable<String,String> getvalue, String objname){
 		try{
 			log("Executing DrawSignature function");
-			Thread.sleep(1000);
-			WebElement signaturearea= element(objname);
-			io.selendroid.client.TouchAction drawsignature = new TouchActionBuilder().pointerDown(signaturearea).pointerMove(200, 600).pointerUp().build();
-			drawsignature.perform(mobdriv);
-			Thread.sleep(1000);
+			//WebElement signaturearea= element(objname);
+			if(element(objname).isDisplayed()) {
+	    		Dimension dim = element(objname).getSize();
+	    		Point t = element(objname).getLocation();
+	    		int y = t.getY()+70;
+	    		executeCommandLine("adb shell input swipe "+t.getX()+" "+y+" "+dim.width+" "+y, "");
+	    	}
+			//io.selendroid.client.TouchAction drawsignature = new TouchActionBuilder().pointerDown(signaturearea).pointerMove(200, 600).pointerUp().build();
+			//drawsignature.perform(mobdriv);
 			return "Pass";					
 			
 		}catch(Exception ex){
+			System.out.println(ex.getMessage());
 			log("function failed reason :"+ex.getMessage());
 			log("Exiting from DrawSignature function");
 			return "Fail";
@@ -2685,7 +2862,8 @@ public class Keywords {
 		
 				
 	}
-	
+
+
 	/**
 	 * Switch app to native or webview
 	 * @author Vinod Shankar
@@ -3055,7 +3233,7 @@ public class Keywords {
 							String[] widthheight = wh[1].split("x");
 							if(isInteger(widthheight[0], 10)) {
 								int width = Integer.parseInt(widthheight[0]);
-								if(value_int == width) {
+								if(value_int == width||width > value_int) {
 									result[i]="Pass";
 									log(keyValue[0]+" Value is "+value_int +" and Result is "+result[i]);
 								}
@@ -3481,6 +3659,237 @@ public class Keywords {
 							result = "Fail";
 						}
 					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("device_owner_email")||objName.contains("deviceOwnerEmail"))) {
+						if(Sysproperty[i].contains("rhosilver@gmail.com")) {
+							log(objName+" is returned in property");
+						    result= "Pass";
+						}
+						else {
+							log(objName+" is not returned in property");
+						    result = "Fail";
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("device_owner_name")||objName.contains("deviceOwnerName")) {
+						if(Sysproperty[i].contains("rhosilver")) {
+							log(objName+" is returned in property");
+						    result= "Pass";
+						}
+						else {
+							log(objName+" is not returned in property");
+						    result = "Fail";
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("has_calendar")||objName.contains("hasCalendar"))) {
+						if(Sysproperty[i].contains("true")) {
+							log(objName+" is returned in property");
+						    result= "Pass";
+						}
+						else {
+							log(objName+" is not returned in property");
+						    result = "Fail";
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("has_camera")||objName.contains("hasCamera"))) {
+						if(Sysproperty[i].contains("true")) {
+							log(objName+" is returned in property");
+						    result= "Pass";
+						}
+						else {
+							log(objName+" is not returned in property");
+						    result = "Fail";
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("isEmulator")||objName.contains("isRhoSimulator")||objName.contains("is_rho_simulator"))) {
+						String adbdevices = executeCommandLine("adb devices");
+						if(Sysproperty[i].contains("false") && adbdevices.contains("device")) {
+							log(objName+" is returned in property");
+						    result= "Pass";
+						}
+						else {
+							log(objName+" is not returned in property");
+						    result = "Fail";
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(Sysproperty[i].contains("hasWifiNetwork")||Sysproperty[i].contains("has_wifi_network"))) {
+						String wifinetwork = executeCommandLine("adb shell getprop dhcp.wlan0.result");
+						if(Sysproperty[i].contains("true")&&wifinetwork.contains("ok")) {
+							result = "Pass";
+							log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
+						}
+						else if(Sysproperty[i].contains("false")&&!wifinetwork.contains("ok")) {
+							result ="Pass";
+							log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
+						}
+						else {
+							result ="Fail";
+							log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("hasTouchscreen")||objName.contains("has_touchscreen")) {
+						String touchscreen = executeCommandLine("adb shell getprop sys.touch.capacitive_key_state");
+						String touchscreen1 = executeCommandLine("adb shell getprop ro.system.hastouch_fw");
+						if(Sysproperty[i].contains("true")&&(touchscreen.contains("true")||touchscreen1.contains("true"))) {
+							result= "Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else if(Sysproperty[i].contains("false")&&touchscreen.contains("false")) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+							
+						}
+						else if(Sysproperty[i].contains("true")&&(touchscreen.contains("")||touchscreen1.contains(""))) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+						    result = "Fail";
+						    log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("isMotorolaDevice")||objName.contains("isSymbolDevice")||objName.contains("is_motorola_device")||objName.contains("is_symbol_device"))) {
+						String manufacturer = executeCommandLine("adb shell getprop ro.product.manufacturer");
+						if(Sysproperty[i].contains("true")&&(manufacturer.contains("Zebra Technologies")||manufacturer.contains("Motorola")||manufacturer.contains("Symbol"))) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else if(Sysproperty[i].contains("false")&&(!manufacturer.contains("Zebra Technologies")||!manufacturer.contains("Motorola")||!manufacturer.contains("Symbol"))) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+						    result = "Fail";
+						    log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("oeminfo")||objName.contains("oem_info"))) {
+						String oeminfo = executeCommandLine("adb shell getprop ro.product.device");
+						if(Sysproperty[i].contains(oeminfo)) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+							 result = "Fail";
+							    log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("uuid")) {
+						String uuidvalue1 = executeCommandLine("adb shell getprop ro.hardware.uuid");
+						String uuidvalue2 = executeCommandLine("adb shell getprop persist.sys.uuid");
+						if(Sysproperty[i].toLowerCase().contains(uuidvalue1.toLowerCase())||Sysproperty[i].toLowerCase().contains(uuidvalue2.toLowerCase())) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+							 result = "Fail";
+							    log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("osVersion")||objName.contains("os_version"))) {
+						String osversion = executeCommandLine("adb shell getprop ro.build.version.release");
+						if(Sysproperty[i].contains(osversion)) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+							 result = "Fail";
+							 log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("phoneId")||objName.contains("phone_id"))) {
+						String[] keyValue = Sysproperty[i].split(":");
+						if(Sysproperty[i].toLowerCase().contains("12334562ssd")||keyValue[1].length()>5) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+							 result = "Fail";
+							 log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("locale")) {
+						String locale = executeCommandLine("adb shell getprop ro.product.locale.language");
+						if(Sysproperty[i].contains(locale)) {
+							 result="Pass";
+							 log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+							 result = "Fail";
+							 log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("hasSqlite")||objName.contains("has_sqlite"))) {
+						if(Sysproperty[i].contains("true")) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+							 result = "Fail";
+							 log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("screenOrientation")||objName.contains("screen_orientation"))) {
+						String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
+						if(Sysproperty[i].toLowerCase().contains(currentOrientation.toLowerCase())) {
+							result="Pass";
+							log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+						else {
+							 result = "Fail";
+							 log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("real_screen_height")||objName.contains("screen_height")||objName.contains("screenHeight")||objName.contains("realScreenHeight"))) {
+						String wmsize=executeCommandLine("adb shell wm size");
+						int value_int;
+						String keyValue[] = Sysproperty[i].split(":");
+						keyValue[1] = keyValue[1].replace("\"", "");
+						keyValue[1] = keyValue[1].replace(" ", "");
+						value_int = Integer.parseInt(keyValue[1]); 
+						String[] wh = wmsize.split(":");
+						wh[1] = wh[1].replace(" ", "");
+						String[] widthheight = wh[1].split("x");
+						if(isInteger(widthheight[1], 10)) {
+							int height = Integer.parseInt(widthheight[1]);
+							if(value_int == height|| height > value_int) {
+								result="Pass";
+								log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+							}
+							else {
+								result="Fail";
+								log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+							}
+						}
+						else {
+							 result = "Fail";
+							 log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("real_screen_width")||objName.contains("screen_width")||objName.contains("screenWidth")||objName.contains("realScreenWidth"))) {
+						String wmsize=executeCommandLine("adb shell wm size");
+						int value_int;
+						String keyValue[] = Sysproperty[i].split(":");
+						keyValue[1] = keyValue[1].replace("\"", "");
+						keyValue[1] = keyValue[1].replace(" ", "");
+						value_int = Integer.parseInt(keyValue[1]); 
+						String[] wh = wmsize.split(":");
+						wh[1] = wh[1].replace(" ", "");
+						String[] widthheight = wh[1].split("x");
+						if(isInteger(widthheight[0], 10)) {
+							int width = Integer.parseInt(widthheight[0]);
+							if(value_int == width||width > value_int) {
+								result="Pass";
+								log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+							}
+							else {
+								result="Fail";
+								log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+							}
+						}
+						else {
+							 result = "Fail";
+							 log(objName+"value is"+Sysproperty[i]+" returned in property and result is" +result);
+						}
+					}
 					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("deviceName")){
 						String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 						String Product=executeCommandLine("adb shell getprop ro.build.product");
@@ -3521,8 +3930,9 @@ public class Keywords {
 							log(objName+" is not set in the device");
 							result = "Pass";
 							}
-					}else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("freeServerPort")){
+					}else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&(objName.contains("freeServerPort")||objName.contains("free_server_port")||objName.contains("localServerPort")||objName.contains("local_server_port"))){
 						String[] keyValue = Sysproperty[i].split(":");
+						keyValue[1] = keyValue[1].replace("\"", "");
 						keyValue[keyValue.length-1] = keyValue[keyValue.length-1].replace(" ", "");
 						if(isInteger(keyValue[keyValue.length-1], 10)) {
 							int value_int = Integer.parseInt(keyValue[keyValue.length-1]); 
@@ -3538,7 +3948,7 @@ public class Keywords {
 							log(objName+" is not returned in property");
 							result = "Fail";
 						}
-					}else if(objName.contains("webviewFramework")) {
+					}else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("webviewFramework")) {
 						String osversion = executeCommandLine("adb shell getprop ro.build.version.release");
 						if(Sysproperty[i].contains("WEBKIT/GOOGLE/"+osversion)) {
 							result="Pass";
@@ -3549,7 +3959,55 @@ public class Keywords {
 							log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
 						}
 					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("ppiX")){
+						String[] keyValue = Sysproperty[i].split(":");
+						keyValue[1] = keyValue[1].replace("\"", "");
+						Scanner scanner = new Scanner(keyValue[1]);
+						if(scanner.hasNextDouble()) {
+							Double value_double = Double.valueOf(keyValue[1]);
+							if(Sysproperty[i].contains("ppiX")||Sysproperty[i].contains("ppi_x")) {
+								String density=executeCommandLine("adb shell wm density");
+								String[] wh = density.split(":");
+								wh[1] = wh[1].replace(" ", "");
+								if(isInteger(wh[1], 10)) {
+									int pixel = Integer.parseInt(wh[1]);
+									if(value_double > pixel/2) {
+										result="Pass";
+										log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
+									}
+									else {
+										result="Fail";
+										log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
+									}
+								}
+							}
+						}
+					}
+					else if(Sysproperty[i].toLowerCase().contains(objName.toLowerCase())&&objName.contains("ppiY")){
+						String[] keyValue = Sysproperty[i].split(":");
+						keyValue[1] = keyValue[1].replace("\"", "");
+						Scanner scanner = new Scanner(keyValue[1]);
+						if(scanner.hasNextDouble()) {
+							Double value_double = Double.valueOf(keyValue[1]);
+							if(Sysproperty[i].contains("ppiY")||Sysproperty[i].contains("ppi_y")) {
+								String density=executeCommandLine("adb shell wm density");
+								String[] wh = density.split(":");
+								wh[1] = wh[1].replace(" ", "");
+								if(isInteger(wh[1], 10)) {
+									int pixel = Integer.parseInt(wh[1]);
+									if(value_double > pixel/2) {
+										result="Pass";
+										log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
+									}
+									else {
+										result="Fail";
+										log(objName+" Value is "+Sysproperty[i]+" and Result is "+result);
+									}
+								}
+							}
+					   }
 					
+				   }
 				}
 				return result;
 				
@@ -3562,39 +4020,9 @@ public class Keywords {
 		}
 		
 	}
-	
-	
-	/**
-	 * Check UI button exists in android.widget.Button class using UI automator by passing full text
-	 * @author Vinod Shankar 
-	 * @param getvalue
-	 * @param arg1
-	 * @return
-	 */
-	public String CheckUIButtonExists(Hashtable<String,String> getvalue,String arg1){
-		try{
-			log("Entered CheckUIButtonExists function");
-			String toCheck=null;
-			String result=null;
-			toCheck=arg1+" Exists";
-			String strValidate = toCheck.replace("_", " ");
-			result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_BTN "+arg1,strValidate);
-			if(result.contains(strValidate)) {
-				log("Button is Present");
-				log("Exiting from CheckUIButtonExists function");
-				return "Pass";
-			}
-			else {
-				log("Button is not Present");
-				log("Exiting from CheckUIButtonExists function");
-				return "Fail";
-			}
-		}catch(Exception ex){
-			log("Button not found. reason :"+ex.getMessage());
-			log("Exiting from CheckUIButtonExists function");
-			return "Fail";
-		}
-	}	
+
+
+
 	
 	/**
 	 * Check UI Text exists in android.widget.TextView class using UI automator by paasing partial text
@@ -3632,10 +4060,45 @@ public class Keywords {
 					return "Fail";
 				}
 			}
+			if(arg1.contains("PersistenceCheckPower")) {
+				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS Powered_Up", "Powered_Up Failed");
+				if(result.contains("Fail")) {
+					log("Text is not Present");
+					log("Exiting from CheckUITextContains function");
+					return "Pass";
+				}
+				else {
+					log("Text is Present");
+					log("Exiting from CheckUITextContains function");
+					return "Fail";
+				}
+			}
+			if(arg1.contains("PersistenceCheckTimer")) {
+				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS timeout_triggered", "timeout_triggered Failed");
+				if(result.contains("Fail")) {
+					log("Text is not Present");
+					log("Exiting from CheckUITextContains function");
+					return "Pass";
+				}
+				else {
+					log("Text is Present");
+					log("Exiting from CheckUITextContains function");
+					return "Fail";
+				}
+			}
 			String toCheck=null;
 			String result=null;
 			toCheck=arg1+" Success";
 			String strValidate = toCheck.replace("_", " ");
+			if(strValidate.contains("MAAFCO")||strValidate.contains("MAAFDQ")||strValidate.contains("MAAFPD")||strValidate.contains("MAAFCM")||strValidate.contains("MAAFHN")||strValidate.contains("MAAFUS")||strValidate.contains("MAAFSQ"))
+			{
+				strValidate = strValidate.replace("MAAFUS", "_");
+				strValidate = strValidate.replace("MAAFCO", ":");
+				strValidate = strValidate.replace("MAAFSQ", "'");
+				strValidate = strValidate.replace("MAAFDQ", "\"");
+				strValidate = strValidate.replace("MAAFPD", ".");
+				strValidate = strValidate.replace("MAAFCM", ",");
+			}
 			result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS "+arg1,strValidate);
 			if(result.contains(strValidate)) {
 				log("Text is Present");
@@ -3666,7 +4129,6 @@ public class Keywords {
 			log("Entered ClickUIButtonText function");
 			boolean res;
 			int i=0;
-			mobdriv.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			int loopcount=500/5;
 			String toCheck=null;
 			String result=null;
@@ -3687,7 +4149,6 @@ public class Keywords {
 
 				if(i==loopcount){
 					log("Button is not Present");
-					mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 					log("Exiting from ClickUIButtonText function");
 					return "Fail";
 				}
@@ -3939,6 +4400,54 @@ public class Keywords {
 	}
 	
 	/**
+	 * Swipe Notification bar and pass if the app is not present in the notification bar
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String SwipeNotificationAndVerify(Hashtable<String,String> getvalue,String arg1){
+		try{
+			log("Entered SwipeNotificationAndVerify function");
+			boolean res;
+			int i=0;
+			mobdriv.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			int loopcount=2;
+			String toCheck=null;
+			String result=null;
+			result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e SWIPE_NOTIFICATION True","numtests");
+			while(i<loopcount){
+				toCheck=arg1+" Success";
+				String strValidate = toCheck.replace("_", " ");
+				result=null;
+				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS "+arg1,strValidate);
+				if(result.contains(strValidate))
+					res=true;
+				else
+					res=false;
+				
+				if(res==true){
+					break;
+				}
+				Thread.sleep(1000);
+				i++;
+			}
+			if(i==loopcount){
+				log("Text is not Present");
+				log("Exiting from SwipeNotificationAndVerify function");
+				return "Pass";
+			}else{
+				log("Text is Present");
+				log("Exiting from SwipeNotificationAndVerify function");
+				return "Fail";					
+			}
+		}catch(Exception ex){
+			log("Button not found. reason :"+ex.getMessage());
+			log("Exiting from SwipeNotificationAndVerify function");
+			return "Fail";
+		}
+	}
+	
+	/**
 	 * Check Hardware Specific Menu using UI automator
 	 * @author Vinod Shankar 
 	 * @param getvalue
@@ -3947,7 +4456,7 @@ public class Keywords {
 	 */
 	public String press_Menu(Hashtable<String,String> getvalue,String arg1){
 		try{
-			log("Entered CheckUIButtonExists function");
+			log("Entered press_Menu function");
 			String result=null;
 			String toCheck="Pressed Menu";
 			if(arg1.toLowerCase().contains("menu")) {
@@ -4092,6 +4601,618 @@ public class Keywords {
 				log("pass");
 				
 			}
+			else if(Keyvalue.equalsIgnoreCase("ENTER"))
+			{
+				log("Entered Enterkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 66", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("CTRL"))
+			{
+				log("Entered CTRLkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 113", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("ESC"))
+			{
+				log("Entered ESCkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 111", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("BACK"))
+			{
+				log("Entered BACKkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 67", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("TAB"))
+			{
+				log("Entered TABkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 61", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("SPACE"))
+			{
+				log("Entered SPACEkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 62", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("SHIFT"))
+			{
+				log("Entered Shiftkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 59", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("UpArrow"))
+			{
+				log("Entered UpArrowkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 19", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("DownArrow"))
+			{
+				log("Entered DownArrowkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 20", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("LeftArrow"))
+			{
+				log("Entered LeftArrowkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 21", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("RightArrow"))
+			{
+				log("Entered RightArrowkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 22", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F1"))
+			{
+				log("Entered F1key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 131", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F2"))
+			{
+				log("Entered F2key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 132", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F3"))
+			{
+				log("Entered F3key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 133", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F4"))
+			{
+				log("Entered F4key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 134", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F5"))
+			{
+				log("Entered F5key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 135", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F6"))
+			{
+				log("Entered F6key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 136", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F7"))
+			{
+				log("Entered F7key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 137", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F8"))
+			{
+				log("Entered F8key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 138", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F9"))
+			{
+				log("Entered F9key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 139", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F10"))
+			{
+				log("Entered F10key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 140", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F11"))
+			{
+				log("Entered F11key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 141", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("F12"))
+			{
+				log("Entered F12key");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 142", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("Alt"))
+			{
+				log("Entered Altkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 57", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("Equals"))
+			{
+				log("Entered Equalskey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 161", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("Plus"))
+			{
+				log("Entered Pluskey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 157", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("Minus"))
+			{
+				log("Entered Minuskey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 156", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("Multiply"))
+			{
+				log("Entered Multiplykey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 155", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("Divide"))
+			{
+				log("Entered Dividekey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 154", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("DecimalPoint"))
+			{
+				log("Entered DecimalPointkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 56", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("Star"))
+			{
+				log("Entered Starkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 17", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("Menu"))
+			{
+				log("Entered Starkey");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 82", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("0"))
+			{
+				log("Entered 0");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 7", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("1"))
+			{
+				log("Entered 1");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 8", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("2"))
+			{
+				log("Entered 2");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 9", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("3"))
+			{
+				log("Entered 3");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 10", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("4"))
+			{
+				log("Entered 4");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 11", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("5"))
+			{
+				log("Entered 5");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 12", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("6"))
+			{
+				log("Entered 6");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 13", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("7"))
+			{
+				log("Entered 7");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 14", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("8"))
+			{
+				log("Entered 8");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 15", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("9"))
+			{
+				log("Entered 9");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 16", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("a"))
+			{
+				log("Entered a");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 29", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("b"))
+			{
+				log("Entered b");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 30", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("c"))
+			{
+				log("Entered c");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 31", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("d"))
+			{
+				log("Entered d");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 32", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("e"))
+			{
+				log("Entered e");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 33", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("f"))
+			{
+				log("Entered f");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 34", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("g"))
+			{
+				log("Entered g");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 35", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("h"))
+			{
+				log("Entered h");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 36", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("i"))
+			{
+				log("Entered i");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 37", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("j"))
+			{
+				log("Entered j");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 38", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("k"))
+			{
+				log("Entered k");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 39", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("l"))
+			{
+				log("Entered l");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 40", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("m"))
+			{
+				log("Entered m");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 41", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("n"))
+			{
+				log("Entered n");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 42", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("o"))
+			{
+				log("Entered o");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 43", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("p"))
+			{
+				log("Entered p");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 44", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("q"))
+			{
+				log("Entered q");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 45", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("r"))
+			{
+				log("Entered r");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 46", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("s"))
+			{
+				log("Entered s");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 47", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("t"))
+			{
+				log("Entered t");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 48", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("u"))
+			{
+				log("Entered u");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 49", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("v"))
+			{
+				log("Entered v");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 50", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("w"))
+			{
+				log("Entered w");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 51", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("x"))
+			{
+				log("Entered x");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 52", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("y"))
+			{
+				log("Entered y");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 53", "");
+				result="pass";
+				log("pass");
+				
+			}
+			else if(Keyvalue.equalsIgnoreCase("z"))
+			{
+				log("Entered z");
+				//new Actions(mobdriv).sendKeys("104").perform();
+				result=executeCommandLine("adb shell input keyevent 54", "");
+				result="pass";
+				log("pass");
+				
+			}
 			return "pass";
 		}
 		
@@ -4218,15 +5339,21 @@ public class Keywords {
 			Dimension dim = mobdriv.manage().window().getSize();
 			if(validate_App_Launched_Device(getvalue, "com.symbol.enterprisebrowser")=="Pass") {
 				WebElement pages = element(arg1);
-				TouchActions flick = new TouchActions(mobdriv).flick(pages, -100, 0, 0);
+				TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -100, 0);
 				flick.perform();
-				mobdriv.getAdbConnection().tap(dim.width-100, dim.height);
+				int x = dim.width-120;
+				int y = dim.height-60;
+				executeCommandLine("adb shell input tap "+x+" "+y, "");
+				//mobdriv.getAdbConnection().tap(dim.width-100, dim.height);
 				
 			}else {
 				WebElement pages = element(arg1);
-				TouchActions flick = new TouchActions(mobdriv).flick(pages, -100, 0, 0);
+				TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -100, 0);
 				flick.perform();
-				mobdriv.getAdbConnection().tap(dim.width-100, dim.height+100);
+				int x = dim.width-120;
+				int y = dim.height+100;
+				executeCommandLine("adb shell input tap "+x+" "+y, "");
+				//mobdriv.getAdbConnection().tap(dim.width-100, dim.height+100);
 			}
 				
 			
@@ -4280,13 +5407,17 @@ public class Keywords {
 	public String validate_Page(Hashtable<String,String> getvalue,String objname){
 		try{
 			log("Entered validate_Page function");
-			String content = element("loadpage_xpath").getText();			
-			if(content.contains(objname)){
-				log(objname+" Testcase Text found");				
+			String[] args = null;
+			args = objname.split(",");
+			String pagexpath = args[0];
+			String pagetext = args[1];
+			String content = element(pagexpath).getText();			
+			if(content.contains(pagetext)){
+				log(pagetext+ " Testcase Text found");				
 				log("Exiting from validate_Page function");
 				return "Pass";
 			}else{
-				log(objname+ " Testcase Text not found");
+				log(pagetext+ " Testcase Text not found");
 				log("Exiting from validate_Page function");				
 				return "Fail";
 			}				
@@ -4297,8 +5428,6 @@ public class Keywords {
 			log("Exiting from validate_Page function");
 			return "Fail";
 		}
-		
-				
 	}
 
 	/**
@@ -4772,7 +5901,8 @@ public class Keywords {
 		String[] widthheight = wh[1].split("x");
 		int height = (Integer.parseInt(widthheight[1])/2)-160;
 		int width = (Integer.parseInt(widthheight[0])/2)-150;
-		mobdriv.getAdbConnection().tap(width, height);
+		executeCommandLine("adb shell input tap "+width+" "+height, "");
+		//mobdriv.getAdbConnection().tap(width, height);
 	}
 	
 	public String validate_Iconposition(Hashtable<String,String> getvalue,String objname){
@@ -4852,6 +5982,436 @@ public class Keywords {
 			}
 			mobdriv.switchTo().window("WEBVIEW");
 			log("Exiting from validate_Iconposition function");
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * To check whether text is present in the element
+	 * @author Ashik
+	 * @param getvalue
+	 * @param element_identifier
+	 * @return
+	 */
+	public String isTextPresent(Hashtable<String,String> getvalue,String element_identifier){
+		try{
+			log("Entered isTextPresent function");
+			String content = element(element_identifier).getText();			
+			if(content != null && !content.isEmpty()){
+				log(element_identifier+" has some text");				
+				log("Exiting from isTextPresent function");
+				return "Pass";
+			}else{
+				log(element_identifier+ " does not have any text");
+				log("Exiting from isTextPresent function");				
+				return "Fail";
+			}
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from isTextPresent function");
+			return "Fail";
+		}
+				
+	}
+	
+	/**
+	 * To validate Log
+	 * @author Chaithra M
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String validate_Logdisplayed(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_Log function");
+		    String result = executeCommandLine("adb shell uiautomator runtest MAAF_MCD.jar -c com.motorola.maaf.MaaFw -e GETLIST True",objname);
+			//result = result.replace("endl"," ");
+			if(result.contains(objname)){
+				log("Log displayed");				
+				log("Exiting from validate_Logdisplayed function");
+				return "Pass";
+			}else{
+				log(" log not found");
+				log("Exiting from validate_Logdisplayed function");				
+				return "Fail";
+			}				
+									
+			
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from validate_Logdisplayed function");
+			return "Fail";
+		}
+		
+				
+	}
+	
+	/**
+	 * Validate Screen Rotation
+	 * @author Chaithra M
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String validate_ScreenRotate(Hashtable<String,String> getvalue, String arg1){
+		try{
+			log("Started Executing Rotate_Screen function");
+			String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
+			if(arg1.toLowerCase().equals("true")){
+				if(currentOrientation=="PORTRAIT"){
+				     ((Rotatable) mobdriv).rotate(ScreenOrientation.LANDSCAPE);
+				}
+				else{
+					((Rotatable) mobdriv).rotate(ScreenOrientation.PORTRAIT);
+				}
+				String OrientationafterRotate = (((Rotatable) mobdriv).getOrientation()).toString();
+				if(currentOrientation.equals(OrientationafterRotate)){
+					log("cannot rotate");
+					return "Fail";    
+					}
+				else{
+					log("can rotate");
+					return "Pass";
+				    }              
+			}
+			else if(arg1.toLowerCase().equals("false")) {
+				if(currentOrientation=="PORTRAIT"){
+				     ((Rotatable) mobdriv).rotate(ScreenOrientation.LANDSCAPE);
+				}
+				else{
+					((Rotatable) mobdriv).rotate(ScreenOrientation.PORTRAIT);
+				}
+				String OrientationafterRotate = (((Rotatable) mobdriv).getOrientation()).toString();
+				if(currentOrientation.equals(OrientationafterRotate)){
+				log("cannot rotate");
+				return "pass";    
+				}
+			else{
+				log("Screen is rotating, hence fail");
+				return "Fail";
+			    }
+		    }
+			else{
+				log("wrong argument");
+				return "Fail";
+			}
+		}catch(Exception ex){
+			log("Exiting from Rotate_Screen function"+ ex.getMessage());
+			return "Fail";
+		}
+		
+	}
+	
+	/**
+	 * Check UI button exists in android.widget.Button class using UI automator by passing full text
+	 * @author Vinod Shankar 
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String CheckUIButtonExists(Hashtable<String,String> getvalue,String arg1){
+		try{
+			log("Entered CheckUIButtonExists function");
+			String toCheck=null;
+			String result=null;
+			toCheck=arg1+" Exists";
+			String strValidate = toCheck.replace("_", " ");
+			result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_BTN "+arg1,strValidate);
+			if(result.contains(strValidate)) {
+				log("Button is Present");
+				log("Exiting from CheckUIButtonExists function");
+				return "Pass";
+			}
+			else {
+				log("Button is not Present");
+				log("Exiting from CheckUIButtonExists function");
+				return "Fail";
+			}
+		}catch(Exception ex){
+			log("Button not found. reason :"+ex.getMessage());
+			log("Exiting from CheckUIButtonExists function");
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * To validate_Result_notDisplayed
+	 * @author Vinod Shankar 
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	public String validate_Result_notDisplayed(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_Result_notDisplayed function");
+			String content = element("results_xpath").getText();
+			if(!content.contains(objname)){
+				log(objname+" Text not found");				
+				log("Exiting from validate_Result_notDisplayed function");
+				return "Pass";
+			}else{
+				log(objname+ " Text found");
+				log("Exiting from validate_Result_notDisplayed function");				
+				return "Fail";
+			}				
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from validate_Result_notDisplayed function");
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * Click on Camera Native button in android.widget.Button class using UI automator by passing index
+	 * @author Vinod Shankar 
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String ClickCameraNativeButton(Hashtable<String,String> getvalue,String arg1){
+		try{
+			log("Entered ClickCameraNativeButton function");
+			boolean res;
+			int i=0;
+			int loopcount=500/5;
+			String toCheck=null;
+			String result=null;
+			while(i<loopcount){
+				toCheck="checkButtonExistsOnInstance  Exists";
+				String strValidate = toCheck.replace("_", " ");
+				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_BTN_INSTANCE "+arg1,strValidate);
+				if(result.contains(strValidate))
+					res=true;
+				else
+					res=false;
+				
+				if(res==true){
+					break;
+				}
+				Thread.sleep(1000);
+				i++;
+
+				if(i==loopcount){
+					log("Button is not Present");
+					mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+					log("Exiting from ClickCameraNativeButton function");
+					return "Fail";
+				}
+			}
+			if(!result.equals("Fail")){
+				toCheck="tapBtnInstance Success";
+				result=null;
+				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e TAP_BTN_INSTANCE "+arg1,toCheck);
+				if(!result.equals("Fail")){
+					log("Exiting ClickCameraNativeButton function");
+					return "Pass";
+				}else
+				{
+					log("Exiting ClickCameraNativeButton function");
+					return "Fail";
+				}
+			}
+			else
+			{
+				log("Button not present");
+				log("Exiting ClickCameraNativeButton function");
+				return "Fail";
+			}
+			
+			
+		}catch(Exception ex){
+			log("Button not found. reason :"+ex.getMessage());
+			log("Exiting from ClickUIButtonText function");
+			return "Fail";
+		}
+	}	
+	
+	/**
+	 * Click on Camera system button in android.widget.ImageView class using UI automator by passing index
+	 * @author Vinod Shankar 
+	 * @param getvalue
+	 * @return
+	 */
+	public String ClickCameraSystemButton(Hashtable<String,String> getvalue){
+		try{
+			log("Entered ClickCameraSystemButton function");
+			String toCheck=null;
+			String result=null;
+			toCheck="Success...";
+			result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e TAP_IMGVIEW_INDEX 2",toCheck);
+			if(!result.equals("Fail")){
+				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e TAP_IMGBTN_CONTDES Review_done",toCheck);
+				if(!result.equals("Fail")){
+					log("Exiting ClickCameraSystemButton function");
+					return "Pass";
+				}
+				else
+				{
+					log("Exiting ClickCameraSystemButton function");
+					return "Fail";
+				}
+			}else
+			{
+				log("Exiting ClickCameraSystemButton function");
+				return "Fail";
+			}
+			
+		}catch(Exception ex){
+			log("Button not found. reason :"+ex.getMessage());
+			log("Exiting from ClickCameraSystemButton function");
+			return "Fail";
+		}
+	}	
+	
+	public String validate_fullscreen(Hashtable<String,String> getvalue,String objname){
+		try{
+			log("Entered validate_fullscreen function");	
+			String[] tmp = objname.split(",");
+			mobdriv.switchTo().window("NATIVE_APP");
+    		if(element(tmp[0]).isDisplayed()) {
+	    		Point t = element(tmp[0]).getLocation();
+	    		mobdriv.switchTo().window("WEBVIEW");
+	    		if(t.getX() == 0 && t.getY() == 0 && tmp[1].contains("true"))
+	    			return "Pass";
+	    		else if(t.getX() == 0 && t.getY() > 0 && tmp[1].contains("false")) 
+	    			return "Pass";
+	    		else {
+	    			log(tmp[0]+ " not correctly displayed");
+	    			return "Fail";
+	    		}
+    		}
+    		else{	
+    			mobdriv.switchTo().window("WEBVIEW");
+				log(tmp[0]+ " Testcase Text not found");
+				log("Exiting from validate_fullscreen function");				
+				return "Fail";
+    		}	
+    		
+		}
+		catch(Exception ex){
+			log("reason :"+ex.getMessage());
+			mobdriv.switchTo().window("WEBVIEW");
+			log("Exiting from validate_fullscreen function");
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * To long_press press webelement
+	 * @author Vinod Shankar
+	 * @param getvalue
+	 * @param linkName
+	 * @return
+	 */
+	public String long_press(Hashtable<String,String> getvalue,String linkName){
+		try{
+			log("Executing long_press function");
+			WebElement pages = element(linkName);
+			TouchActions longpress = new TouchActions(mobdriv).longPress(pages);
+			longpress.perform();
+			return "pass";
+
+		}catch(Exception ex){
+			reportError("Fail to long press on -"+linkName+" reason :"+ex.getMessage());
+			return "fail";
+		}
+
+
+	}
+	
+	
+	/**
+	 * Take screenshot
+	 * @author Vinod Shankar
+	 * @param getvalue
+	 * @param screenshot_id
+	 * @return
+	 */
+	public String UIAutomatorScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
+		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+		    try{  
+		    	executeCommandLine("adb shell screencap -p /sdcard/Android/data/com.symbol.enterprisebrowser/"+screenshot_id+".png","");
+		    	executeCommandLine("adb pull /sdcard/Android/data/com.symbol.enterprisebrowser/"+screenshot_id+".png "+System.getProperty("user.dir")+"\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+screenshot_id+".png", "");
+		    	File screenshot = new File(System.getProperty("user.dir")+"\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+screenshot_id+".png");
+			    BufferedImage  fullImg = ImageIO.read(new File(System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+screenshot_id+".png"));
+			    BufferedImage eleScreenshot = null;
+			    int width = fullImg.getWidth();
+			    int height = fullImg.getHeight();
+				if(ModuleName.contains("Notification")) {
+	    			String result=executeCommandLine("adb shell uiautomator runtest MAAF_MCD.jar -c com.motorola.maaf.MaaFw -e GETEBBOUNDS True","Before Formating BOUNDS ARE Rect");
+	    			result = result.replace("Before Formating BOUNDS ARE Rect", "");
+	    			result = result.replace("(", "");
+	    			result = result.replace(")", "");
+	    			result = result.replace("-", ",");
+	    			result = result.replace(" ", "");
+	    			String[] split_result = result.split(",");
+	    			eleScreenshot = fullImg.getSubimage(Integer.valueOf(split_result[0]), Integer.valueOf(split_result[1]), Integer.valueOf(split_result[2]), Integer.valueOf(split_result[3])-Integer.valueOf(split_result[1]));
+	    		}
+				else {
+					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
+				}
+			    
+			    ImageIO.write(eleScreenshot, "png", screenshot);
+			    executeCommandLine("adb shell rm /sdcard/Android/data/com.symbol.enterprisebrowser/"+screenshot_id+".png","");
+			    return("pass");
+		    }
+		catch (IOException e) {
+			e.printStackTrace();
+			return "fail";
+		}
+    }
+	
+	/**
+	 * validate screenorientation 
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String validate_screenOrientation(Hashtable<String,String> getvalue,String arg1){
+		try{
+			String result=null;
+			result=executeCommandLine("adb shell dumpsys display  | grep 'mOverrideDisplayInfo'");
+		      if(result.contains(arg1)){
+		    	  log("Rotated correctly");
+		          return "Pass";
+		      }
+		      else{
+		    	  log("did not rotate correctly");
+		          return "Fail"; 
+		      }
+				
+		}catch(Exception ex){
+			log("Text not found. reason :"+ex.getMessage());
+			log("Exiting from validate_screenOrientation function");
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * Check if a file exists
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String validate_FileExists(Hashtable<String,String> getvalue,String arg1){
+		try{
+			String result=null;
+			result=executeCommandLine("adb shell [ -f "+arg1+" ] && echo 'found'");
+
+		      if(result.contains("found")){
+		    	  log("File exists");
+		          return "Pass";
+		      }
+		      else{
+		    	  log("File does not exist");
+		          return "Fail"; 
+		      }
+				
+		}catch(Exception ex){
+			log("Text not found. reason :"+ex.getMessage());
+			log("Exiting from validate_FileExists function");
 			return "Fail";
 		}
 	}

@@ -47,7 +47,7 @@ public class RE22_Generic {
 			app.setLogger(log);	
 			String AutName = "RE22_AUT_Name";
 			String AutId = "RE22_AUT_ID";
-			launch=app.Init_Selendroid(AutName, AutId);
+			res1=app.Init_Selendroid(AutName, AutId);
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;

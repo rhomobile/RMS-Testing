@@ -46,7 +46,7 @@ public class Config_JS {
 			app= Keywords.getInstance();				
 			app.setLogger(log);	
 			int cleardata_flag = 1;
-			launch=app.Init_Selendroid(cleardata_flag);
+			res1=app.Init_Selendroid(cleardata_flag);
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;

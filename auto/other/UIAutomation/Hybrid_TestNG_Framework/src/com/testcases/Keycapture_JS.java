@@ -45,7 +45,7 @@ public class Keycapture_JS {
 		{	
 			app= Keywords.getInstance();				
 			app.setLogger(log);	
-			launch=app.Init_Selendroid();
+			res1=app.Init_Selendroid();
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;

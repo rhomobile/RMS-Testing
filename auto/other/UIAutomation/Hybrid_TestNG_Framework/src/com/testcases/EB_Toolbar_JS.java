@@ -47,7 +47,7 @@ public class EB_Toolbar_JS {
 			app.setLogger(log);	
 			String AutName = "EB_AUT_Name";
 			String AutId = "EB_AUT_ID";
-			launch=app.Init_Selendroid(AutName, AutId, 1);
+			res1=app.Init_Selendroid(AutName, AutId, 1);
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;

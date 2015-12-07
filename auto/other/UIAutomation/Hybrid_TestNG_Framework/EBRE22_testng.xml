@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="EBRE22Testing">
+<test name="EBRE22_ControlAppearance">
+		<classes>
+			<class name="com.testcases.EBRE22_ControlAppearance" ></class> 
+		</classes>
+	</test>
+	<test name="EBRE22_DeviceApplication">
+		<classes>
+			<class name="com.testcases.EBRE22_DeviceApplication" ></class> 
+		</classes>
+	</test>
+	<test name="EBRE22_FileManagement">
+		<classes>
+			<class name="com.testcases.EBRE22_FileManagement" ></class> 
+		</classes>
+	</test>
+	<test name="EBRE22_Network">
+		<classes>
+			<class name="com.testcases.EBRE22_Network" ></class> 
+		</classes>
+	</test>	
+	<test name="EBRE22_Signature">
+		<classes>
+			<class name="com.testcases.EBRE22_Signature" ></class> 
+		</classes>
+	</test>	
+	
+	
+</suite>

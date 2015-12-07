@@ -47,7 +47,7 @@ public class SignalIndicator_Ruby {
 			app.setLogger(log);	
 			String AutName = "Ruby_AUT_Name";
 			String AutId = "Ruby_AUT_ID";
-			launch=app.Init_Selendroid(AutName, AutId);
+			res1=app.Init_Selendroid(AutName, AutId);
 			//app.OpenBrowser();
 			res=app.start(data,ModuleName);
 			res1=app.reporterror;

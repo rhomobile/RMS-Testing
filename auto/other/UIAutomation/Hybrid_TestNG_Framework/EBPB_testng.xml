@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="EBPBTesting">
+<test name="EBPB_ControlAppearance">
+		<classes>
+			<class name="com.testcases.EBPB_ControlAppearance" ></class> 
+		</classes>
+	</test>
+	<test name="EBPB_DeviceApplication">
+		<classes>
+			<class name="com.testcases.EBPB_DeviceApplication" ></class> 
+		</classes>
+	</test>
+	<test name="EBPB_FileManagement">
+		<classes>
+			<class name="com.testcases.EBPB_FileManagement" ></class> 
+		</classes>
+	</test>
+	
+	
+</suite>
