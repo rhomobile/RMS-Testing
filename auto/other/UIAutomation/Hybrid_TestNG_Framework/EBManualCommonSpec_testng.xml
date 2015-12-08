@@ -5,6 +5,16 @@
 			<class name="com.testcases.EBManual_Application_JS" ></class> 
 		</classes>
 	</test>
+	<test name="EBManual_Camera_Front_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Camera_Front_JS" ></class> 
+		</classes>
+	</test>
+	<test name="EBManual_Camera_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Camera_JS" ></class> 
+		</classes>
+	</test>
 	<test name="EBManual_Intent_JS">
 		<classes>
 			<class name="com.testcases.EBManual_Intent_JS" ></class> 

@@ -4060,6 +4060,20 @@ public class Keywords {
 					return "Fail";
 				}
 			}
+			if(arg1.contains("voidConnection")) {
+				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS Establishing_Connection", "Establishing_Connection Failed");
+				if(result.contains("Fail")) {
+				log("Text is not Present");
+				log("Exiting from CheckUITextContains function");
+				return "Pass";
+				}
+				else {
+				log("Text is Present");
+				log("Exiting from CheckUITextContains function");
+				return "Fail";
+				}
+				}
+
 			if(arg1.contains("PersistenceCheckPower")) {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS Powered_Up", "Powered_Up Failed");
 				if(result.contains("Fail")) {
@@ -5835,6 +5849,8 @@ public class Keywords {
 			File f1 = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
 			if(f1.exists()) {
 				String argsplit [] = arg1.split(",");
+				if(argsplit[2].contains("semicolon"))
+					argsplit[2] = argsplit[2].replaceAll("semicolon", ";");
 				String XmlNest = argsplit[0];
 	            String ConfigTagToAdd = argsplit[1];
 	            String XMLtagArrayList [] = XmlNest.split("/");
@@ -5852,10 +5868,21 @@ public class Keywords {
 	           			for(int j = 0; j<XMLtagArrayList.length;j++) {
 	           				argsplit[2] = argsplit[2].replace(argsplit[2], "  "+argsplit[2]);
 	           			}
-	           			argsplit[2] = argsplit[2].replace("endl", "\n");
-	           			if(!argsplit[2].contains(line))
-	           				line = line.replaceAll(".+", argsplit[2]);
+	           			String test[] = argsplit[2].split("endl");
+	           			//argsplit[2] = argsplit[2].replace("endl", "\n");
+	           			for(int x =0;x<test.length;x++) {
+	           				if(!test[x].contains(line)) {
+	           					line = line.replaceAll(".+", test[x]);
+	           				}
+	           				lines.add(line);
+	           				if(x<test.length-1)
+           						line = br.readLine();
+	           			}
+	           			
+	           			/*if(!argsplit[2].contains(line))
+	           				line = line.replaceAll(".+", argsplit[2]);*/
 	           			flag = 1;
+	           			continue;
 	           		}
 	           		else if(line.contains("</"+XMLtagArrayList[i]) && XMLtagArrayList.length == i+1 && flag ==0) {
 	           			String space = null;
@@ -6415,6 +6442,63 @@ public class Keywords {
 			return "Fail";
 		}
 	}
+	
+	public String EnterData(Hashtable<String,String> getvalue,String objname){
+        try{
+               log("EnterPassword function");    
+               String[] tmp = objname.split(",");
+               String result = sendData(tmp[0], tmp[1]);
+               return result;
+        }
+        catch(Exception ex){
+               log("reason :"+ex.getMessage());
+               return "Fail";
+        }
+	}
+	
+	/**
+	 * Select imager from the dropdown - for imager module
+	 * @author Ashik
+	 * @param getvalue
+	 * @param imagerObj
+	 * @return
+	 */
+	public String SelectImager(Hashtable<String,String> getvalue,String imagerObj){
+		log("Entering the SelectImager function");
+		try{
+			 int count=0;
+			 WebElement dropdown = element("imager_xpath");
+			 Select select = new Select(dropdown);
+			 String selecteditem = null;
+			 //Get Imager type from OR.properties to select the imager 
+			 String obj=OR.getProperty(imagerObj);
+			 //Get full testspec description and slect the perticular test
+			 List<WebElement> options = select.getOptions();
+			    for (WebElement elementweb : options) {
+			            if(elementweb.getText().contains(obj)) {
+			            	count=1;
+			            	selecteditem = elementweb.getText();
+			            	select.selectByVisibleText(selecteditem);
+			            	break;
+			        }
+			    }			 
+			if(count==1){
+				select.selectByVisibleText(selecteditem);
+				log("Successfull in selecting the imager: "+imagerObj);
+				return "Pass";
+			}
+			else{
+				log("Not able to select on the imager or"+ imagerObj + " - imager not found");
+				return "Fail";
+			}
+		}
+		catch(Exception e){
+			log("Exiting the SelectImager select function"+e.getMessage());
+			e.printStackTrace();
+			return "Fail";
+		}
+	}
+
 	
 }
 

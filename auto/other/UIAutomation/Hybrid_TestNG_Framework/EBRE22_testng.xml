@@ -1,6 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="EBRE22Testing">
-<test name="EBRE22_ControlAppearance">
+<test name="EBRE22_Battery">
+		<classes>
+			<class name="com.testcases.EBRE22_Battery" ></class> 
+		</classes>
+	</test>
+	<test name="EBRE22_ControlAppearance">
 		<classes>
 			<class name="com.testcases.EBRE22_ControlAppearance" ></class> 
 		</classes>
@@ -15,9 +20,19 @@
 			<class name="com.testcases.EBRE22_FileManagement" ></class> 
 		</classes>
 	</test>
+	<test name="EBRE22_Imager">
+		<classes>
+			<class name="com.testcases.EBRE22_Imager" ></class> 
+		</classes>
+	</test>
 	<test name="EBRE22_Network">
 		<classes>
 			<class name="com.testcases.EBRE22_Network" ></class> 
+		</classes>
+	</test>	
+	<test name="EBRE22_Signal">
+		<classes>
+			<class name="com.testcases.EBRE22_Signal" ></class> 
 		</classes>
 	</test>	
 	<test name="EBRE22_Signature">

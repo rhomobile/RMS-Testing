@@ -1,5 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="EBPBTesting">
+<test name="EBPB_Battery">
+		<classes>
+			<class name="com.testcases.EBPB_Battery" ></class> 
+		</classes>
+	</test>
 <test name="EBPB_ControlAppearance">
 		<classes>
 			<class name="com.testcases.EBPB_ControlAppearance" ></class> 
@@ -13,6 +18,26 @@
 	<test name="EBPB_FileManagement">
 		<classes>
 			<class name="com.testcases.EBPB_FileManagement" ></class> 
+		</classes>
+	</test>
+	<test name="EBPB_Imager">
+		<classes>
+			<class name="com.testcases.EBPB_Imager" ></class> 
+		</classes>
+	</test>
+	<test name="EBPB_Signal">
+		<classes>
+			<class name="com.testcases.EBPB_Signal" ></class> 
+		</classes>
+	</test>
+	<test name="EBPB_Signature">
+		<classes>
+			<class name="com.testcases.EBPB_Signature" ></class> 
+		</classes>
+	</test>
+	<test name="EBManual_Configxml_JS">
+		<classes>
+			<class name="com.testcases.EBManual_Configxml_JS" ></class> 
 		</classes>
 	</test>
 	
