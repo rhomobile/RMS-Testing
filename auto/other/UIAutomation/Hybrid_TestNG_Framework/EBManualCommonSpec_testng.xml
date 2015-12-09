@@ -5,6 +5,11 @@
 			<class name="com.testcases.EBManual_Application_JS" ></class> 
 		</classes>
 	</test>
+	<test name="EBManual_BatteryIndicator_JS">
+		<classes>
+			<class name="com.testcases.EBManual_BatteryIndicator_JS" ></class> 
+		</classes>
+	</test>
 	<test name="EBManual_Camera_Front_JS">
 		<classes>
 			<class name="com.testcases.EBManual_Camera_Front_JS" ></class> 
@@ -35,6 +40,11 @@
 			<class name="com.testcases.EBManual_Notification_JS" ></class> 
 		</classes>
 	</test>	
+	<test name="EBManual_SignalIndicator_JS">
+		<classes>
+			<class name="com.testcases.EBManual_SignalIndicator_JS" ></class> 
+		</classes>
+	</test>
 	<test name="EBManual_Signature_JS">
 		<classes>
 			<class name="com.testcases.EBManual_Signature_JS" ></class> 

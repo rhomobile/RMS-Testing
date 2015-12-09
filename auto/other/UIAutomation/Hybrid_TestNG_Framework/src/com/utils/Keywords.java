@@ -1453,6 +1453,7 @@ public class Keywords {
 			}
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			capabilities.setCapability("newCommandTimeout", 60 * 5);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
@@ -4158,7 +4159,7 @@ public class Keywords {
 				if(res==true){
 					break;
 				}
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 				i++;
 
 				if(i==loopcount){
@@ -4223,7 +4224,7 @@ public class Keywords {
 				if(res==true){
 					break;
 				}
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 				i++;
 
 				if(i==loopcount){
@@ -4291,7 +4292,7 @@ public class Keywords {
 				if(res==true){
 					break;
 				}
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 				i++;
 
 				if(i==loopcount){
@@ -4374,7 +4375,7 @@ public class Keywords {
 				if(res==true){
 					break;
 				}
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 				i++;
 
 				if(i==loopcount){
