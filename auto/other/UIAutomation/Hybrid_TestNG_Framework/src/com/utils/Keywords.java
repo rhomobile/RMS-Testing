@@ -2398,17 +2398,23 @@ public class Keywords {
 			    		}
 			    		
 					}
-					else if(ModuleName.contains("Notification")) {
-		    			String result=executeCommandLine("adb shell uiautomator runtest MAAF_MCD.jar -c com.motorola.maaf.MaaFw -e GETEBBOUNDS True","Before Formating BOUNDS ARE Rect");
-		    			result = result.replace("Before Formating BOUNDS ARE Rect", "");
-		    			result = result.replace("(", "");
-		    			result = result.replace(")", "");
-		    			result = result.replace("-", ",");
-		    			result = result.replace(" ", "");
-		    			String[] split_result = result.split(",");
-		    			eleScreenshot = fullImg.getSubimage(Integer.valueOf(split_result[0]), Integer.valueOf(split_result[1]), Integer.valueOf(split_result[2]), Integer.valueOf(split_result[3])-Integer.valueOf(split_result[1]));
-		    			
-					}
+					else if(ModuleName.contains("EBRE22_Signature")||ModuleName.contains("EBPB_Signature")) {
+						mobdriv.switchTo().window("NATIVE_APP");
+						if(element("signatureArea_xpath").isDisplayed()) {
+				    		Dimension dim = element("signatureArea_xpath").getSize();
+				    		System.out.println(dim.height);
+				    		System.out.println(dim.width);
+				    		Point t = element("signatureArea_xpath").getLocation();
+				    		System.out.println(t.getX());
+				    		System.out.println(t.getY());
+				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
+			    		}
+						else {
+							mobdriv.switchTo().window("WEBVIEW");
+							eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
+						}
+						mobdriv.switchTo().window("WEBVIEW");
+			    	}
 					else if(ModuleName.contains("ControlAppearance")) {
 						mobdriv.switchTo().window("NATIVE_APP");
 			    		if(element("BackButton_xpath").isDisplayed()) {
@@ -5958,6 +5964,18 @@ public class Keywords {
 	    			else 
 	    				return "Fail";
 	    		}
+	    		else if(tmp[1].contains("height")){
+	    			if(Integer.parseInt(tmp[2]) == dim.height)
+	    				return "Pass";
+	    			else 
+	    				return "Fail";
+	    		}
+	    		else if(tmp[1].contains("width")){
+	    			if(Integer.parseInt(tmp[2]) == dim.width)
+	    				return "Pass";
+	    			else 
+	    				return "Fail";
+	    		} 
 	    		else
 	    			return "Fail";
     		}
