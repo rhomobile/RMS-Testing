@@ -2323,7 +2323,8 @@ public class Keywords {
 	 * @return
 	 */
 	public String TakeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
-		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+		   	//String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+			String DeviceName=Config.getProperty("Device_Name");
 		    try{  
 		    	File screenshot = ((TakesScreenshot)mobdriv).getScreenshotAs(OutputType.FILE);
 			    BufferedImage  fullImg = ImageIO.read(screenshot);
@@ -2332,24 +2333,20 @@ public class Keywords {
 			    int height = fullImg.getHeight();
 			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
 				if(currentOrientation=="PORTRAIT"){
-					if(screenshot_id.contains("VT366_0108"))
+					/*if(screenshot_id.contains("VT366_0108"))
 						eleScreenshot = fullImg.getSubimage(0, (height/2)+150, width, height-(height/2)-150);
 					else if(screenshot_id.contains("VT200_0985")||screenshot_id.contains("VT200_0986"))
-						eleScreenshot = fullImg.getSubimage(0, 50, width, 120);
+						eleScreenshot = fullImg.getSubimage(0, 50, width, 120);*/
 					/*else if(screenshot_id.equals("VT200_0596"))
 						if(validate_App_Launched_Device(getvalue, "com.symbol.enterprisebrowser")=="Pass")
 							eleScreenshot = fullImg.getSubimage(0, 50, width, 60);
 						else
 							eleScreenshot = fullImg.getSubimage(0, 50, width, 120);*/
-					else if(ModuleName.contains("Tabbar")) {
+					if(ModuleName.contains("Tabbar")) {
 						mobdriv.switchTo().window("NATIVE_APP");
 			    		if(element("tabbar_xpath").isDisplayed()) {
 				    		Dimension dim = element("tabbar_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("tabbar_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 			    		mobdriv.switchTo().window("WEBVIEW");
@@ -2358,11 +2355,7 @@ public class Keywords {
 						mobdriv.switchTo().window("NATIVE_APP");
 			    		if(element("signalview_xpath").isDisplayed()) {
 				    		Dimension dim = element("signalview_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("signalview_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 			    		mobdriv.switchTo().window("WEBVIEW");
@@ -2371,11 +2364,7 @@ public class Keywords {
 						mobdriv.switchTo().window("NATIVE_APP");
 			    		if(element("batteryview_xpath").isDisplayed()) {
 				    		Dimension dim = element("batteryview_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("batteryview_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 			    		mobdriv.switchTo().window("WEBVIEW");
@@ -2389,11 +2378,7 @@ public class Keywords {
 							xPathToolbar = "toobarview_xpath";
 			    		if(element(xPathToolbar).isDisplayed()) {
 				    		Dimension dim = element(xPathToolbar).getSize();
-				    		//System.out.println(dim.height);
-				    		//System.out.println(dim.width);
 				    		Point t = element(xPathToolbar).getLocation();
-				    		//System.out.println(t.getX());
-				    		//System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 			    		
@@ -2402,11 +2387,7 @@ public class Keywords {
 						mobdriv.switchTo().window("NATIVE_APP");
 						if(element("signatureArea_xpath").isDisplayed()) {
 				    		Dimension dim = element("signatureArea_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("signatureArea_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else {
@@ -2419,89 +2400,57 @@ public class Keywords {
 						mobdriv.switchTo().window("NATIVE_APP");
 			    		if(element("BackButton_xpath").isDisplayed()) {
 				    		Dimension dim = element("BackButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("BackButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else if(element("ForwardButton_xpath").isDisplayed()){
 				    		Dimension dim = element("ForwardButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("ForwardButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else if(element("GoButton_xpath").isDisplayed()){
 				    		Dimension dim = element("GoButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("GoButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else if(element("HomeButton_xpath").isDisplayed()){
 				    		Dimension dim = element("HomeButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("HomeButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else if(element("MinimizeButton_xpath").isDisplayed()){
 				    		Dimension dim = element("MinimizeButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("MinimizeButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else if(element("QuitButton_xpath").isDisplayed()){
 				    		Dimension dim = element("MinimizeButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("MinimizeButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else if(element("ReloadButton_xpath").isDisplayed()){
 				    		Dimension dim = element("ReloadButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("ReloadButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else if(element("SipButton_xpath").isDisplayed()){
 				    		Dimension dim = element("SipButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("SipButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 						else if(element("ZoomtextButton_xpath").isDisplayed()){
 				    		Dimension dim = element("ZoomtextButton_xpath").getSize();
-				    		System.out.println(dim.height);
-				    		System.out.println(dim.width);
 				    		Point t = element("ZoomtextButton_xpath").getLocation();
-				    		System.out.println(t.getX());
-				    		System.out.println(t.getY());
 				    		eleScreenshot = fullImg.getSubimage(t.getX(), t.getY(), dim.width,dim.height);
 			    		}
 			    		mobdriv.switchTo().window("WEBVIEW");
 					}
-					else
-						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
+					else{
+						if(validate_App_Launched_Device(getvalue, "com.symbol.enterprisebrowser")=="Pass")
+							eleScreenshot = fullImg.getSubimage(0, 0, width, height);
+						else
+							eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
+					}
 						
 				}
 				else {
@@ -2773,7 +2722,8 @@ public class Keywords {
 	public String validate_Screenshot(Hashtable<String,String> getvalue,String objname,String ModuleName){
 		try{
 			log("Entered validate_Screenshot function");
-			String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+			//String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+			String DeviceName=Config.getProperty("Device_Name");
 		    String imagefile =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+objname+".png";
 		    String refimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Reference\\"+ModuleName+"\\"+objname+".png";
 		    
