@@ -4284,7 +4284,8 @@ public class Keywords {
 		try{
 			log("Entered TapNotification function");
 			String toCheck=arg1+" Success";
-			String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e TAP_TXT_CONTAINS "+arg1,toCheck);
+			String strValidate= toCheck.replace("_", " ");
+			String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e TAP_TXT_CONTAINS "+arg1,strValidate);
 			if(!result.equals("Fail")){
 				log("Exiting TapNotification function");
 				return "Pass";
