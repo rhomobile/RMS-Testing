@@ -245,6 +245,9 @@ public class Keywords {
 										if(func_name.contains("validate_Screenshot")) {
 											Expected_Teststep_Result=executeKeyword(func_name,getvalue,arg1,ModuleName);
 										}
+										else if(func_name.contains("validate_keyCaptured")) {
+											Expected_Teststep_Result=executeKeyword(func_name,getvalue,arg1,ModuleName);
+										} 
 										else {
 											Expected_Teststep_Result=executeKeyword(func_name,getvalue,arg1);
 										}
@@ -5195,23 +5198,27 @@ public class Keywords {
 		
 	}
 				
-	 /**
+
+	/**
 	 * Function to Validate Keys Captured
 	 * @author Prashanth
 	 * @param getvalue
 	 * @param Key_expected
 	 * @return
 	 */
-	public String validate_keyCaptured(Hashtable<String,String> getvalue,String Key_expected) {
+	public String validate_keyCaptured(Hashtable<String,String> getvalue,String Key_expected, String ModuleName) {
 		String result= "";
 		String Key1_actual;
 		String Key2_actual;
+		String Key3_actual;
 		try{
 			log("Entered validate_keyCaptured function");
 			Key1_actual= element("clbkdata_id").getText();
 			Key2_actual= element("clbkdata2_id").getText();
+			Key3_actual= element("results_xpath").getText();
 			log(Key1_actual);
 			log(Key2_actual);
+			if(ModuleName.contains("Keycapture")) {
 			if((Key1_actual.equals(Key_expected))||(Key2_actual.equals(Key_expected)))
 			{
 				log("Actual Value matches Expected");
@@ -5227,6 +5234,41 @@ public class Keywords {
 				log("Exiting from validate_keyCaptured function");
 				return "pass";
 			}
+			else
+			{
+				log("Actual Value does not match Expected");
+				result="fail";
+				log(result);
+				log("Exiting from validate_keyCaptured function");
+				return "fail";
+			}
+			}
+			else if(ModuleName.contains("Keyhandling")) {
+			if(Key3_actual.equals(Key_expected))
+			{
+				log("Actual Value matches Expected");
+				result="pass";
+				log(result);
+				log("Exiting from validate_keyCaptured function");
+				return "pass";
+			}
+			else if(Key_expected.equals("null")&&Key3_actual.equals("")) {
+				log("Actual Value matches Expected");
+				result="pass";
+				log(result);
+				log("Exiting from validate_keyCaptured function");
+				return "pass";
+			}
+			else
+			{
+				log("Actual Value does not match Expected");
+				result="fail";
+				log(result);
+				log("Exiting from validate_keyCaptured function");
+				return "fail";
+			}
+			}
+			
 			else
 			{
 				log("Actual Value does not match Expected");
@@ -6467,6 +6509,70 @@ public class Keywords {
 			e.printStackTrace();
 			return "Fail";
 		}
+	}
+	
+	/**
+	 * Function to Click on TextBox
+	 * @author Prashanth
+	 * @param getvalue
+	 * @param Textbox_identifier
+	 * @return
+	 */
+	
+	public String textBoxClick(Hashtable<String,String> getvalue,String Textbox_identifier){
+		try{
+			log("Executing SendData function");
+			element(Textbox_identifier).click();  
+		}
+		catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return null;
+		}
+		log("Exiting Senddata function");
+		return "pass";
+	}    
+	
+	/**
+	 * Function to Validate TextBox Data
+	 * @author Prashanth
+	 * @param getvalue
+	 * @param Expected
+	 * @return
+	 */
+	
+	public String validate_textBoxData(Hashtable<String,String> getvalue,String Textbox_identifier) {
+		String result= "";
+		String Tmp;
+		String Textboxdata;
+		try{
+			log("Entered validate_textBoxData function");
+			String[] temp = Textbox_identifier.split(",");
+			Tmp=getAttribute(temp[0],"value");
+			Textboxdata=Tmp.trim();
+			log(Textboxdata);
+			if(Textboxdata.equals(temp[1])||temp[1].equals("null"))
+			{
+				log("Actual Value matches Expected");
+				result="pass";
+				log(result);
+				log("Exiting from validate_textBoxData function");
+				return "pass";
+			}
+			else
+			{
+				log("Actual Value does not match Expected");
+				result="fail";
+				log(result);
+				log("Exiting from validate_textBoxData function");
+				return "fail";
+			}
+			}
+							
+		catch(Exception ex){
+			log("Exiting from validate_textBoxData function");
+			return "fail";
+		}
+	
 	}
 
 	
