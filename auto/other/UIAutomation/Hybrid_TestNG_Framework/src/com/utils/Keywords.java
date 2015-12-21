@@ -5213,12 +5213,11 @@ public class Keywords {
 		String Key3_actual;
 		try{
 			log("Entered validate_keyCaptured function");
-			Key1_actual= element("clbkdata_id").getText();
-			Key2_actual= element("clbkdata2_id").getText();
-			Key3_actual= element("results_xpath").getText();
-			log(Key1_actual);
-			log(Key2_actual);
 			if(ModuleName.contains("Keycapture")) {
+				Key1_actual= element("clbkdata_id").getText();
+				Key2_actual= element("clbkdata2_id").getText();
+				log(Key1_actual);
+				log(Key2_actual);
 			if((Key1_actual.equals(Key_expected))||(Key2_actual.equals(Key_expected)))
 			{
 				log("Actual Value matches Expected");
@@ -5244,6 +5243,8 @@ public class Keywords {
 			}
 			}
 			else if(ModuleName.contains("Keyhandling")) {
+				Key3_actual= element("results_xpath").getText();
+				log(Key3_actual);
 			if(Key3_actual.equals(Key_expected))
 			{
 				log("Actual Value matches Expected");
@@ -6522,6 +6523,9 @@ public class Keywords {
 	public String textBoxClick(Hashtable<String,String> getvalue,String Textbox_identifier){
 		try{
 			log("Executing SendData function");
+			WebElement pages = element(Textbox_identifier);
+			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -120, 0);
+			flick.perform();
 			element(Textbox_identifier).click();  
 		}
 		catch(Exception ex){
