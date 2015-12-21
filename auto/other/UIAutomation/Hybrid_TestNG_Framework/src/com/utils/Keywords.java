@@ -5832,9 +5832,29 @@ public class Keywords {
 		}
 	}
 	
+	public String PullBkpConfigxml(Hashtable<String,String> getvalue){
+		try{
+			executeCommandLine("adb pull "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml "+ System.getProperty("user.dir")+ "\\src\\com\\input\\BkpConfig.xml");
+			return "Pass";
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+	}
+	
 	public String PushConfigxml(Hashtable<String,String> getvalue){
 		try{
 			executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml");
+			return "Pass";
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+	}
+	
+	public String PushBkpConfigxml(Hashtable<String,String> getvalue){
+		try{
+			executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\BkpConfig.xml "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml");
 			return "Pass";
 		}catch(Exception ex){
 			reportError("Fail-"+ex.getMessage());
