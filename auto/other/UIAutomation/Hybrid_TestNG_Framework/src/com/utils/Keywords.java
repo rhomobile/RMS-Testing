@@ -6090,6 +6090,8 @@ public class Keywords {
 					}
 				else{
 					log("can rotate");
+						if(OrientationafterRotate != "PORTRAIT")
+							((Rotatable) mobdriv).rotate(ScreenOrientation.PORTRAIT);
 					return "Pass";
 				    }              
 			}
@@ -6107,6 +6109,8 @@ public class Keywords {
 				}
 			else{
 				log("Screen is rotating, hence fail");
+				if(OrientationafterRotate != "PORTRAIT")
+					((Rotatable) mobdriv).rotate(ScreenOrientation.PORTRAIT);
 				return "Fail";
 			    }
 		    }
@@ -6347,7 +6351,8 @@ public class Keywords {
 	 * @return
 	 */
 	public String UIAutomatorScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
-		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+		   	//String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
+			String DeviceName=Config.getProperty("Device_Name");
 		    try{  
 		    	executeCommandLine("adb shell screencap -p /sdcard/Android/data/com.symbol.enterprisebrowser/"+screenshot_id+".png","");
 		    	executeCommandLine("adb pull /sdcard/Android/data/com.symbol.enterprisebrowser/"+screenshot_id+".png "+System.getProperty("user.dir")+"\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+screenshot_id+".png", "");
