@@ -82,6 +82,9 @@ public class Keywords {
 	public String downloadvalue=null;
 	public String reporterror;
 	public String randomnum=null;
+	public String EBDeviceconfig_Path = "/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml";
+	public String EBconfig_Path = System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml";
+	public String EBBkpconfig_Path = System.getProperty("user.dir")+ "\\src\\com\\input\\BkpConfig.xml";
 	private static Process process;
 	private static String APPIUMSERVERSTART = "node C:/Program Files (x86)/Appium/"; 
 	//This is a constructor 
@@ -1456,10 +1459,10 @@ public class Keywords {
 			}
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
-			capabilities.setCapability("newCommandTimeout", 60 * 5);
+			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			//mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			mobdriv.switchTo().window("WEBVIEW_0");
 			log("Exiting Init_Selendroid function");
 			return "Pass";
@@ -1996,9 +1999,14 @@ public class Keywords {
 	public String validate_AppMinimized(Hashtable<String,String> getvalue, String arg1){
 		try{
 			log("Started Executing validate_AppMinimized function");
-
-			String homeScreen=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTDES Apps","Success");
-			if(arg1.toLowerCase().equals("appsscreen")||arg1.toLowerCase().equals("homescreen")){
+			if((validate_App_Launched_Device(getvalue, arg1) != "Pass")&&!(arg1.toLowerCase().equals("appsscreen")||arg1.toLowerCase().equals("homescreen")))
+			{
+				log("Not in "+arg1+" screen");
+				log("Exiting validate_AppMinimized function");
+				return "Pass";
+			}
+			else if(arg1.toLowerCase().equals("appsscreen")||arg1.toLowerCase().equals("homescreen")){
+				String homeScreen=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTDES Apps","Success");
 				String appscreen=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTDES Widgets","Success");
 				if(!appscreen.equals("Fail")){
 				log("In Appscreen");
@@ -2008,12 +2016,6 @@ public class Keywords {
 				else if(homeScreen.contains("Success"))
 				{
 					log("In Home screen");
-					log("Exiting validate_AppMinimized function");
-					return "Pass";
-				}
-				else if(validate_App_Launched_Device(getvalue, "com.symbol.enterprisebrowser") != "Pass")
-				{
-					log("Not in Enterprise browser screen");
 					log("Exiting validate_AppMinimized function");
 					return "Pass";
 				}
@@ -2471,52 +2473,7 @@ public class Keywords {
 		}
     }
 	
-	/**
-	 * Take Native screenshot. This function is written due to problem while taking screen capture in native screen like signature area with default width and height.
-	 * @author Vinod Shankar
-	 * @param getvalue
-	 * @param screenshot_id
-	 * @return
-	 */
-	/*public String TakeNativeScreenshot(Hashtable<String,String> getvalue, String screenshot_id,String ModuleName) {
 
-		   	String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
-		    try{         
-			    File screenshot = ((TakesScreenshot)mobdriv).getScreenshotAs(OutputType.FILE);
-			    BufferedImage  fullImg = ImageIO.read(screenshot);
-			    //Dimension dim = mobdriv.manage().window().getSize();
-			    BufferedImage eleScreenshot = null;
-			    /*String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
-				if(currentOrientation=="PORTRAIT"){
-					eleScreenshot= fullImg.getSubimage(0, 50, dim.width, dim.height-50);
-				}
-				else {
-					eleScreenshot= fullImg.getSubimage(0, 0, dim.height-100, dim.width);
-				}*/
-			    /*int width = fullImg.getWidth();
-			    int height = fullImg.getHeight();
-			    String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
-				if(currentOrientation=="PORTRAIT"){
-					if(!screenshot_id.contains("VT366_0108"))
-						eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
-					else
-						eleScreenshot = fullImg.getSubimage(0, (height/2)+150, width, height-(height/2)-150);
-				}
-				else {
-					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
-				}			    
-			    ImageIO.write(eleScreenshot, "png", screenshot);
-			    String outputDirName =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\";
-			    FileUtils.copyFile(screenshot, new File(outputDirName  + File.separator +screenshot_id+".png"));
-			    return("pass");
-		    }
-		catch (IOException ex) {
-			log("function failed reason :"+ex.getMessage());
-			log("Exiting from Take Signature screenshot function");
-			return "fail";
-		}
-    }*/
-	
 	/**
 	 * WiFi turn off and on
 	 * @author Vinod Shankar
@@ -2914,17 +2871,17 @@ public class Keywords {
 			log("Entered checkValue function");
 			String content = element(objName).getText();
 			//log(essidcontent);
-			if(content.contains("ard")){
+			if(content.contains(OR.getProperty("wifi_name"))){
 				log("essid value is correct");				
 				log("Exiting from checkValue function");
 				return "Pass";
 			 }
-			else if(content.contains("10.233.")){
+			else if(content.contains(OR.getProperty("ip_address"))){
 				log("ipaddress value is correct");				
 				log("Exiting from checkValue function");
 				return "Pass";
 			 }
-			else if(content.contains("0.0.")){
+			else if(content.contains(OR.getProperty("noip_address"))){
 				log("wlan profile has been disabled");				
 				log("Exiting from checkValue function");
 				return "Pass";
@@ -2934,7 +2891,9 @@ public class Keywords {
 				String[] tem = content.split(":");
 				tem[2] = tem[2].replace(" ", "");
 				Integer signalvalue = Integer.valueOf(tem[2]);
-				if(signalvalue > 50){
+				String minSignalvalue = OR.getProperty("min_signalvalue");
+				Integer value = Integer.parseInt(minSignalvalue);
+				if(signalvalue > value){
 					log("signal value is correct");				
 					log("Exiting from checkValue function");
 					return "Pass";
@@ -5389,22 +5348,22 @@ public class Keywords {
 	 */
 	public String validate_doesNotContain(Hashtable<String,String> getvalue,String objname){
 		try{
-			log("Entered validate_Result function");
+			log("Entered validate_doesNotContain function");
 			String content = element("results_xpath").getText();			
 			if(content.contains(objname)){
 				log(objname+" Testcase Text found");				
-				log("Exiting from validate_Result function");
+				log("Exiting from validate_doesNotContain function");
 				return "Fail";
 			}else{
 				log(objname+ " Testcase Text not found");
-				log("Exiting from validate_Result function");				
+				log("Exiting from validate_doesNotContain function");				
 				return "Pass";
 			}				
 									
 			
 		}catch(Exception ex){
 			log("function failed reason :"+ex.getMessage());
-			log("Exiting from validate_Result function");
+			log("Exiting from validate_doesNotContain function");
 			return "Fail";
 		}
 		
@@ -5824,7 +5783,7 @@ public class Keywords {
 	
 	public String PullConfigxml(Hashtable<String,String> getvalue){
 		try{
-			executeCommandLine("adb pull "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
+			executeCommandLine("adb pull "+EBDeviceconfig_Path+" "+ EBconfig_Path);
 			return "Pass";
 		}catch(Exception ex){
 			reportError("Fail-"+ex.getMessage());
@@ -5834,7 +5793,7 @@ public class Keywords {
 	
 	public String PullBkpConfigxml(Hashtable<String,String> getvalue){
 		try{
-			executeCommandLine("adb pull "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml "+ System.getProperty("user.dir")+ "\\src\\com\\input\\BkpConfig.xml");
+			executeCommandLine("adb pull "+EBDeviceconfig_Path+" "+ EBBkpconfig_Path);
 			return "Pass";
 		}catch(Exception ex){
 			reportError("Fail-"+ex.getMessage());
@@ -5844,7 +5803,7 @@ public class Keywords {
 	
 	public String PushConfigxml(Hashtable<String,String> getvalue){
 		try{
-			executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml");
+			executeCommandLine("adb push "+EBconfig_Path+" "+EBDeviceconfig_Path);
 			return "Pass";
 		}catch(Exception ex){
 			reportError("Fail-"+ex.getMessage());
@@ -5854,7 +5813,7 @@ public class Keywords {
 	
 	public String PushBkpConfigxml(Hashtable<String,String> getvalue){
 		try{
-			executeCommandLine("adb push "+ System.getProperty("user.dir")+ "\\src\\com\\input\\BkpConfig.xml "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Config.xml");
+			executeCommandLine("adb push "+EBBkpconfig_Path+" "+EBDeviceconfig_Path);
 			return "Pass";
 		}catch(Exception ex){
 			reportError("Fail-"+ex.getMessage());
@@ -5867,7 +5826,7 @@ public class Keywords {
 			log("Executing ChangeConfigxml function");	
 			String line = null;
 			List<String> lines = new ArrayList<String>();
-			File f1 = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml");
+			File f1 = new File(EBconfig_Path);
 			if(f1.exists()) {
 				String argsplit [] = arg1.split(",");
 				if(argsplit[2].contains("semicolon"))
@@ -6408,7 +6367,7 @@ public class Keywords {
 	    			eleScreenshot = fullImg.getSubimage(Integer.valueOf(split_result[0]), Integer.valueOf(split_result[1]), Integer.valueOf(split_result[2]), Integer.valueOf(split_result[3])-Integer.valueOf(split_result[1]));
 	    		}
 				else {
-					eleScreenshot = fullImg.getSubimage(0, 0, width-50, height);
+					eleScreenshot = fullImg.getSubimage(0, 50, width, height-50);
 				}
 			    
 			    ImageIO.write(eleScreenshot, "png", screenshot);
