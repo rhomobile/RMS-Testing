@@ -4019,6 +4019,45 @@ public class Keywords {
 					return "Fail";
 				}
 			}
+			if(arg1.contains("alarmtriggered")) {
+				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS Alarm_Triggered", "Alarm_Triggered Failed");
+				if(result.contains("Fail")) {
+				log("Text is not Present");
+				log("Exiting from CheckUITextContains function");
+				return "Pass";
+				}
+				else {
+				log("Text is Present");
+				log("Exiting from CheckUITextContains function");
+				return "Fail";
+				}
+			}	
+			if(arg1.contains("filereceived")) {
+				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS File_Received", "File_Received Failed");
+				if(result.contains("Fail")) {
+				log("Text is not Present");
+				log("Exiting from CheckUITextContains function");
+				return "Pass";
+				}
+				else {
+				log("Text is Present");
+				log("Exiting from CheckUITextContains function");
+				return "Fail";
+				}
+			}
+			if(arg1.contains("filesentnot")) {
+				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS FileSent", "FileSent Failed");
+				if(result.contains("Fail")) {
+				log("Text is not Present");
+				log("Exiting from CheckUITextContains function");
+				return "Pass";
+				}
+				else {
+				log("Text is Present");
+				log("Exiting from CheckUITextContains function");
+				return "Fail";
+				}
+			}
 			String toCheck=null;
 			String result=null;
 			toCheck=arg1+" Success";
@@ -6422,7 +6461,7 @@ public class Keywords {
 	public String validate_FileExists(Hashtable<String,String> getvalue,String arg1){
 		try{
 			String result=null;
-			result=executeCommandLine("adb shell [ -f "+arg1+" ] && echo 'found'");
+			result=executeCommandLine("adb shell \"[ -f "+arg1+" ] && echo 'found'\"");
 
 		      if(result.contains("found")){
 		    	  log("File exists");
@@ -6561,6 +6600,34 @@ public class Keywords {
 			return "fail";
 		}
 	
+	}
+	
+	/**
+	 * To check whether an element is empty
+	 * @author Ashik
+	 * @param getvalue
+	 * @param element_identifier
+	 * @return
+	 */
+	public String isTextNotPresent(Hashtable<String,String> getvalue,String element_identifier){
+		try{
+			log("Entered isTextPresent function");
+			String content = element(element_identifier).getText();			
+			if(content == null || content.isEmpty()){
+				log(element_identifier+" does not have any text");				
+				log("Exiting from isTextPresent function");
+				return "Pass";
+			}else{
+				log(element_identifier+ " has some text");
+				log("Exiting from isTextPresent function");				
+				return "Fail";
+			}
+		}catch(Exception ex){
+			log("function failed reason :"+ex.getMessage());
+			log("Exiting from isTextPresent function");
+			return "Fail";
+		}
+				
 	}
 
 	

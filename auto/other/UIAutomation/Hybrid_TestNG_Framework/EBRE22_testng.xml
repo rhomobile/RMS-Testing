@@ -1,5 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="EBRE22Testing">
+<test name="EBRE22_APD">
+		<classes>
+			<class name="com.testcases.EBRE22_APD" ></class> 
+		</classes>
+	</test>
 <test name="EBRE22_Battery">
 		<classes>
 			<class name="com.testcases.EBRE22_Battery" ></class> 

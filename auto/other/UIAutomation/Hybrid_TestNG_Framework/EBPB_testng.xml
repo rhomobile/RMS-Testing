@@ -1,5 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="EBPBTesting">
+<test name="EBPB_APD">
+		<classes>
+			<class name="com.testcases.EBPB_APD" ></class> 
+		</classes>
+	</test>
 <test name="EBPB_Battery">
 		<classes>
 			<class name="com.testcases.EBPB_Battery" ></class> 
@@ -23,6 +28,16 @@
 	<test name="EBPB_EMML11">
 		<classes>
 			<class name="com.testcases.EBPB_EMML11" ></class> 
+		</classes>
+	</test>
+	<test name="EBPB_EMMLProfiles">
+		<classes>
+			<class name="com.testcases.EBPB_EMMLProfiles" ></class> 
+		</classes>
+	</test>
+	<test name="EBPB_Generic">
+		<classes>
+			<class name="com.testcases.EBPB_Generic" ></class> 
 		</classes>
 	</test>
 	<test name="EBPB_FileManagement">
