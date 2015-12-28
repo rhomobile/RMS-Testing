@@ -25,6 +25,11 @@
 			<class name="com.testcases.EBRE22_FileManagement" ></class> 
 		</classes>
 	</test>
+	<test name="EBRE22_Gesture">
+		<classes>
+			<class name="com.testcases.EBRE22_Gesture" ></class> 
+		</classes>
+	</test>		
 	<test name="EBRE22_Imager">
 		<classes>
 			<class name="com.testcases.EBRE22_Imager" ></class> 
