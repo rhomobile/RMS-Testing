@@ -1462,7 +1462,7 @@ public class Keywords {
 			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-			//mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			mobdriv.switchTo().window("WEBVIEW_0");
 			log("Exiting Init_Selendroid function");
 			return "Pass";
@@ -2129,7 +2129,7 @@ public class Keywords {
 				log("pressed on the home key");
 				log("Exiting the function Press_Key");
 				log("home works");
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				return "pass";
 
 			}
@@ -2139,7 +2139,7 @@ public class Keywords {
 				log("pressed on the back key");
 				log("Exiting the function Press_Key");
 				log("Back works");
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				return "pass";
 			}
 			else{
@@ -6393,8 +6393,8 @@ public class Keywords {
 		   	//String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 			String DeviceName=Config.getProperty("Device_Name");
 		    try{  
-		    	executeCommandLine("adb shell screencap -p /sdcard/Android/data/com.symbol.enterprisebrowser/"+screenshot_id+".png","");
-		    	executeCommandLine("adb pull /sdcard/Android/data/com.symbol.enterprisebrowser/"+screenshot_id+".png "+System.getProperty("user.dir")+"\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+screenshot_id+".png", "");
+		    	executeCommandLine("adb shell screencap -p /sdcard/Android/"+screenshot_id+".png","");
+		    	executeCommandLine("adb pull /sdcard/Android/"+screenshot_id+".png "+System.getProperty("user.dir")+"\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+screenshot_id+".png", "");
 		    	File screenshot = new File(System.getProperty("user.dir")+"\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+screenshot_id+".png");
 			    BufferedImage  fullImg = ImageIO.read(new File(System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+screenshot_id+".png"));
 			    BufferedImage eleScreenshot = null;
@@ -6415,7 +6415,7 @@ public class Keywords {
 				}
 			    
 			    ImageIO.write(eleScreenshot, "png", screenshot);
-			    executeCommandLine("adb shell rm /sdcard/Android/data/com.symbol.enterprisebrowser/"+screenshot_id+".png","");
+			    executeCommandLine("adb shell rm /sdcard/"+screenshot_id+".png","");
 			    return("pass");
 		    }
 		catch (IOException e) {
@@ -6628,6 +6628,161 @@ public class Keywords {
 			return "Fail";
 		}
 				
+	}
+	
+	/**
+	 * Draw a gesture 
+	 * @author Chaithra
+	 * @param getvalue
+	 * @param arg1
+	 * @return
+	 */
+	public String DrawGesture(Hashtable<String,String> getvalue,String arg1){
+		try{
+			if(arg1.equals("right-left")){
+				double value1 = 0;
+				double value2 = 0;
+				double value3 = 0;
+				double value4 = 0;
+				String wmsize=executeCommandLine("adb shell wm size");
+				String[] wh = wmsize.split(":");
+				wh[1] = wh[1].replace(" ", "");
+				String[] widthheight = wh[1].split("x");
+				if(isInteger(widthheight[1], 10)) {
+					int height = Integer.parseInt(widthheight[1]);
+					value2 = .5 * height;
+					value4 = .5 * height;
+				}
+				if(isInteger(widthheight[0], 10)) {
+					int width = Integer.parseInt(widthheight[0]);
+					value1 = .1 * width;
+					value3 = .9 * width;
+				
+				}
+				executeCommandLine("adb shell input swipe "+value3+" "+value4+" "+value1+" "+value2);
+		    	  log("Gesture drawn successfully");
+		          return "Pass";
+		}
+			else if(arg1.equals("top-bottom")){
+				double value1 = 0;
+				double value2 = 0;
+				double value3 = 0;
+				double value4 = 0;
+				String wmsize=executeCommandLine("adb shell wm size");
+				String[] wh = wmsize.split(":");
+				wh[1] = wh[1].replace(" ", "");
+				String[] widthheight = wh[1].split("x");
+				if(isInteger(widthheight[1], 10)) {
+					int height = Integer.parseInt(widthheight[1]);
+					value2 = .1 * height;
+					value4 = .9 * height;
+				}
+				if(isInteger(widthheight[0], 10)) {
+					int width = Integer.parseInt(widthheight[0]);
+					value1 = .5 * width;
+					value3 = .5 * width;
+					value3 = value3 + 10;
+				
+				}
+			
+				executeCommandLine("adb shell input swipe "+value1+" "+value2+" "+value3+" "+value4);
+		    	  log("Gesture drawn successfully");
+		          return "Pass";
+		} 
+			else if(arg1.equals("bottom-top")){
+				double value1 = 0;
+				double value2 = 0;
+				double value3 = 0;
+				double value4 = 0;
+				String wmsize=executeCommandLine("adb shell wm size");
+				String[] wh = wmsize.split(":");
+				wh[1] = wh[1].replace(" ", "");
+				String[] widthheight = wh[1].split("x");
+				if(isInteger(widthheight[1], 10)) {
+					int height = Integer.parseInt(widthheight[1]);
+					value2 = .1 * height;
+					value4 = .9 * height;
+				}
+				if(isInteger(widthheight[0], 10)) {
+					int width = Integer.parseInt(widthheight[0]);
+					value1 = .5 * width;
+					value3 = .5 * width;
+					value3 = value3 + 10;
+				
+				}
+			
+				executeCommandLine("adb shell input swipe "+value3+" "+value4+" "+value1+" "+value2);
+		    	  log("Gesture drawn successfully");
+		          return "Pass";
+		} 
+			
+			else if(arg1.equals("linear_default")){
+				double value1 = 0;
+				double value2 = 0;
+				double value3 = 0;
+				double value4 = 0;
+				String wmsize=executeCommandLine("adb shell wm size");
+				String[] wh = wmsize.split(":");
+				wh[1] = wh[1].replace(" ", "");
+				String[] widthheight = wh[1].split("x");
+				if(isInteger(widthheight[1], 10)) {
+					int height = Integer.parseInt(widthheight[1]);
+					value2 = .5 * height;
+					value4 = .5 * height;
+				}
+				if(isInteger(widthheight[0], 10)) {
+					int width = Integer.parseInt(widthheight[0]);
+					value1 = .1 * width;
+					value3 = .9 * width;
+				
+				}
+			
+				executeCommandLine("adb shell input swipe "+value1+" "+value2+" "+value3+" "+value4);
+		    	  log("Gesture drawn successfully");
+		          return "Pass";
+		}
+			else if(arg1.contains("hold_default_centre")){
+				String[] args = arg1.split(",");
+				double value1 = 0;
+				double value2 = 0;
+				double value3 = 0;
+				double value4 = 0;
+				String wmsize=executeCommandLine("adb shell wm size");
+				String[] wh = wmsize.split(":");
+				wh[1] = wh[1].replace(" ", "");
+				String[] widthheight = wh[1].split("x");
+				if(isInteger(widthheight[1], 10)) {
+					int height = Integer.parseInt(widthheight[1]);
+					value2 = .5 * height;
+					value4 = .5 * height;
+				}
+				if(isInteger(widthheight[0], 10)) {
+					int width = Integer.parseInt(widthheight[0]);
+					value1 = .5 * width;
+					value3 = .5 * width;
+				
+				}
+			
+				executeCommandLine("adb shell input swipe "+value1+" "+value2+" "+value3+" "+value4+" "+args[1]);
+		    	  log("Gesture drawn successfully");
+		          return "Pass";
+		}
+			String[] args = arg1.split(",");
+			if(args[0].equals("hold")){
+				executeCommandLine("adb shell input swipe "+args[1]+" "+args[2]+" "+args[1]+" "+args[2]+" "+args[3]);
+		    	  log("Gesture drawn successfully");
+		          return "Pass";
+			}
+			executeCommandLine("adb shell input swipe "+args[0]+" "+args[1]+" "+args[2]+" "+args[3]);
+		    	  log("Gesture drawn successfully");
+		          return "Pass";
+		   
+				
+		}catch(Exception ex){
+			log("Cannot Draw gesture :"+ex.getMessage());
+			log("Exiting from DrawGesture function");
+			return "Fail";
+		}
 	}
 
 	
