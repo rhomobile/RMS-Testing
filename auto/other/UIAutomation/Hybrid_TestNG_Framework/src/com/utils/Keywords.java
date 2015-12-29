@@ -1260,7 +1260,7 @@ public class Keywords {
 
 	public String Init_Selendroid() throws Exception{
 		try{
-			log("Executing Init_Selendroid function");
+			log("Executing Init_Selendroid function without any arguments");
 			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
 			config.setSelendroidServerPort(8081);
@@ -1295,6 +1295,7 @@ public class Keywords {
 			capabilities.setCapability("automationName", "selendroid");
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
@@ -1318,7 +1319,7 @@ public class Keywords {
 	 */
 	public String Init_Selendroid(int nocleardata_flag) throws Exception{
 		try{
-			log("Executing Init_Selendroid function");
+			log("Executing Init_Selendroid function with clear data value");
 			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
 			config.setSelendroidServerPort(8081);
@@ -1357,6 +1358,7 @@ public class Keywords {
 			}
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
@@ -1380,7 +1382,7 @@ public class Keywords {
 	 */
 	public String Init_Selendroid(String autName, String autID) throws Exception{
 		try{
-			log("Executing Init_Selendroid function");
+			log("Executing Init_Selendroid function with differnt apks");
 			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
 			config.setSelendroidServerPort(8081);
@@ -1413,6 +1415,7 @@ public class Keywords {
 			capabilities.setCapability("automationName", "selendroid");
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
@@ -1428,7 +1431,7 @@ public class Keywords {
 	
 	public String Init_Selendroid(String autName, String autID, int nocleardata_flag) throws Exception{
 		try{
-			log("Executing Init_Selendroid function");
+			log("Executing Init_Selendroid function with differnt APK's and clear data");
 			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
 			config.setSelendroidServerPort(8081);
@@ -1474,21 +1477,6 @@ public class Keywords {
 	}
 	
 	
-	public static void startAppiumServer() throws IOException, InterruptedException {
-	    Runtime runtime = Runtime.getRuntime();
-	    process = runtime.exec(APPIUMSERVERSTART);
-	    Thread.sleep(5000);
-	    if (process != null) {
-	        System.out.println("Appium server started");
-	    }
-	}
-
-	public static void stopAppiumServer() throws IOException {
-	    if (process != null) {
-	        process.destroy();
-	    }
-	    System.out.println("Appium server stop");
-	}
 
 	public void quitSelendroid(SelendroidLauncher launch) {
 		try{
@@ -1630,6 +1618,7 @@ public class Keywords {
 		}
 
 	}
+	
 	/**
 	 * This function will check if the given app is not installed on the device based
 	 * app bundle id passed from the test case
@@ -1659,7 +1648,6 @@ public class Keywords {
 	}
 	
 	public String executeCommandLine(String command,String messageToValidate) {
-
 		log("Started executeCommandLine function"); 
 		Process p;
 		try {
@@ -1689,7 +1677,7 @@ public class Keywords {
 	}
 	
 	/**
-	 * Execute command line with no comparison string in the parameter
+	 * Execute command line with no comparison string in the parameter. It will just return the result of the command execution.
 	 * @author Vinod Shankar 
 	 * @param command
 	 * @return
@@ -1834,7 +1822,6 @@ public class Keywords {
 				}
 				
 			}
-
 
 		}catch(Exception ex){
 			log("Exiting from Validate_App_launched_Device function: "+ex.getMessage());
@@ -2121,13 +2108,11 @@ public class Keywords {
 	// The caller can be in any page of appgallery
 	/****************To click on the Hardware home key/Back key starts*********************************************/
 	public String press_Key(Hashtable<String,String> getvalue,String key){
-		log("Entering the function Press_Key");
 		try{
 			if(key.equalsIgnoreCase("Home")){
 				//mobdriv.sendKeyEvent(3);
 				executeCommandLine("adb shell input keyevent 3", "");
 				log("pressed on the home key");
-				log("Exiting the function Press_Key");
 				log("home works");
 				Thread.sleep(1000);
 				return "pass";
@@ -2137,13 +2122,11 @@ public class Keywords {
 				//mobdriv.sendKeyEvent(4);
 				executeCommandLine("adb shell input keyevent 4", "");
 				log("pressed on the back key");
-				log("Exiting the function Press_Key");
 				log("Back works");
 				Thread.sleep(1000);
 				return "pass";
 			}
 			else{
-				log("Exiting the function Press_Key");
 				log("Could not click on the key");
 				return "fail";
 			}
@@ -2151,7 +2134,6 @@ public class Keywords {
 		}
 		catch(Exception e){
 			log("Exiting the function Press_Key");
-
 			e.printStackTrace();
 			return "fail";
 		}
@@ -2167,23 +2149,30 @@ public class Keywords {
 	 * @return
 	 */
 	public String validate_PageTitle(Hashtable<String,String> getvalue,String pagetitle){
-		log("Entering the function Validate_PageTitle");
 		try{
 			//WebElement pagetitle3 = driver.findElement(By.xpath(OR.getProperty("page_title_xpath")));
 			String getpagetitle=mobdriv.getTitle();
 			System.out.println(getpagetitle);
 			int res=getpagetitle.length();
 			if(res>0){
+				if(pagetitle.contains("badlinkpage")) {
+					if(getpagetitle.equalsIgnoreCase(pagetitle)){
+						log("The page title found is correct which should not be");
+						return "fail";
+					}
+					else {
+						log("The page title found is incorrect hence passing");
+						return "pass";
+					}
+				}	
 				//WebElement newpagetitle3 = element("main_page_title_id");
 				log("The title of the page is *********************************: "+getpagetitle);
 				if(getpagetitle.equalsIgnoreCase(pagetitle)){
 					log("The page title found is correct");
-					log("Exiting the function Validate_PageTitle");
 					return "pass";
 				}
 				else {
 					log("The page title found is incorrect");
-					log("Exiting the function Validate_PageTitle");
 					return "fail";
 				}
 					
@@ -2221,18 +2210,18 @@ public class Keywords {
 	 */
 	public String link_Click(Hashtable<String,String> getvalue,String linkName){
 		try{
-			log("Executing link_click function");
+			
 			//Thread.sleep(1000);
 			WebElement pages = element(linkName);
 			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -50, 0);
 			flick.perform();
 			Click(linkName);
-			return "pass";
+			log(linkName+ " clicked successfully");
+			return "Pass";
 
 		}catch(Exception ex){
 			reportError("Fail to click on -"+linkName+" reason :"+ex.getMessage());
-			System.err.println("link_Click Exception::"+ex);
-			return null;
+			return "Fail";
 		}
 
 
@@ -2251,15 +2240,16 @@ public class Keywords {
 			return touch;
 		}
 	}
+	
 	/**
 	 * Select test from combo box to run
+	 * Select VTID in speccontrol_class combo box
 	 * @author Vinod Shankar
 	 * @param getvalue
 	 * @param specificOption
 	 * @return
 	 */
 	public String SelectTestToRun(Hashtable<String,String> getvalue,String specificOption){
-		log("Entering the click_category function");
 		int count=0;
 		try{
 						
@@ -2305,17 +2295,16 @@ public class Keywords {
 	 */
 	public String ClickRunTest(Hashtable<String,String> getvalue,String buttonXpath){
 		try{
-			log("Click on Run Test");
 			WebElement pages = element(buttonXpath);
 			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -50, 0);
 			flick.perform();
 			Click(buttonXpath);
+			log(buttonXpath+ " Button clicked Successfully");
 			return("pass");
 		}
 		
 		catch(Exception e){
 			log("Exiting the ClickRunTest function"+e.getMessage());
-			e.printStackTrace();
 			return "fail";
 		}
 	}
@@ -2483,7 +2472,6 @@ public class Keywords {
 	 */
 	public String wifi_Mode(Hashtable<String,String> getvalue, String arg1){
 		try{
-			log("Started Executing wifi on/off function");
 			String result="";
 			String wifi_status="";
 			wifi_status=executeCommandLine("adb shell dumpsys wifi","");
@@ -2517,10 +2505,8 @@ public class Keywords {
 				return "Fail";
 			} 
 			if(result.toLowerCase().contains("fail")){
-				log("Exiting from WiFi_Mode function");
 				return "fail";                    			
 			}else{
-				log("Exiting from WiFi_Mode function");
 				return "pass";
 			}
 		}catch(Exception ex){
@@ -2539,22 +2525,18 @@ public class Keywords {
 	 */
 	public String validate_Text_Exists(Hashtable<String,String> getvalue,String objname){
 		try{
-			log("Entered validate_Text_Exists function");		
 			String content = element("goalscontainer_class").getText();			
 			if(content.contains(objname)){
 				log(objname+" Testcase Text found");				
-				log("Exiting from validate_TextField_Exists function");
 				return "Pass";
 			}else{
 				log(objname+ " Testcase Text not found");
-				log("Exiting from validate_TextField_Exists function");				
 				return "Fail";
 			}				
 									
 			
 		}catch(Exception ex){
 			log("Text not found -"+objname+" reason :"+ex.getMessage());
-			log("Exiting from validate_Text_Exists function");
 			return "Fail";
 		}
 		
@@ -2570,22 +2552,18 @@ public class Keywords {
 	 */
 	public String validate_AsyncResult_Exists(Hashtable<String,String> getvalue,String objname){
 		try{
-			log("Entered validate_AsyncResult_Exists function");		
 			String content = element("async_result_xpath").getText();			
 			if(content.contains(objname)){
 				log(objname+" Testcase Text found");				
-				log("Exiting from validate_AsyncResult_Exists function");
 				return "Pass";
 			}else{
 				log(objname+ " Testcase Text not found");
-				log("Exiting from validate_AsyncResult_Exists function");				
 				return "Fail";
 			}				
 									
 			
 		}catch(Exception ex){
 			log("Text not found -"+objname+" reason :"+ex.getMessage());
-			log("Exiting from validate_AsyncResult_Exists function");
 			return "Fail";
 		}
 		
@@ -2613,6 +2591,7 @@ public class Keywords {
             if(imgOneHt!=imgTwoHt ||(imgOneWt!=imgTwoWt)){
                 System.out.println(" size are not equal ");
                 isTrue = false;
+                return isTrue;
             }
 
             for(int x =0; x < imgOneWt; x++ ){ //replace the loop, if needed
@@ -2625,7 +2604,7 @@ public class Keywords {
                 }
             }
         }catch (IOException e) {
-                        e.printStackTrace();
+        	e.printStackTrace();
         }
         return isTrue;
     }
@@ -2679,23 +2658,19 @@ public class Keywords {
 	 * @param objname
 	 * @return
 	 */
+	@SuppressWarnings("resource")
 	public String validate_Screenshot(Hashtable<String,String> getvalue,String objname,String ModuleName){
 		try{
-			log("Entered validate_Screenshot function");
 			//String DeviceName=executeCommandLine("adb shell getprop ro.product.name");
 			String DeviceName=Config.getProperty("Device_Name");
 		    String imagefile =System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\"+ModuleName+"\\"+objname+".png";
-		    String refimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Reference\\"+ModuleName+"\\"+objname+".png";
+		    String refimagefile = System.getProperty("user.dir")+ "\\test-output\\Reference\\"+DeviceName+"\\"+ModuleName+"\\"+objname+".png";
 		    
-			//String diffresult=executeCommandLine("compare -channel red -metric PSNR E:\\TC75\\VT200_445.png E:\\TC75\\VT200_446.png E:\\TC75\\diff.png", "image diff");
-		    //String diffresult=executeCommandLine("compare -channel red -metric PSNR E:\\TC75\\VT200_445.png E:\\TC75\\VT200_446.png E:\\TC75\\diff.png", "image diff");
-		    File imgfile = new File(imagefile);
+			File imgfile = new File(imagefile);
 	        File reffile = new File(refimagefile);
 	        if(reffile.exists()) {
 	        	if(compareTwoImages(imgfile, reffile)){
-					//String diffresult=executeCommandLine("compare -channel red -metric PSNR "+refimagefile+" "+imagefile+" "+diffimagefile);
 					log("Match found with reference image");				
-					log("Exiting from validate_Screenshot function");
 					return "Pass";
 				}else{
 					//String diffresult=
@@ -2707,41 +2682,83 @@ public class Keywords {
 					if(scanner.hasNextDouble()) {
 						Double value_double = Double.valueOf(tmp);
 						if(ModuleName.contains("SignalIndicator")&&value_double>20.0) {
-							log("Partial Match found with reference image "+value_double);				
-							log("Exiting from validate_Screenshot function");
+							log("Partial Match found with reference image "+value_double);		
+							executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
 							return "Pass";
 						}
 						else if(ModuleName.contains("BatteryIndicator")&&value_double>20.0) {
-							log("Partial Match found with reference image "+value_double);				
-							log("Exiting from validate_Screenshot function");
+							log("Partial Match found with reference image "+value_double);	
+							executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
 							return "Pass";
 						}
 						else if(value_double>30.0) {
-							log("Partial Match found with reference image "+value_double);				
-							log("Exiting from validate_Screenshot function");
+							log("Partial Match found with reference image "+value_double);	
+							executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
 							return "Pass";
 						}	
-						else
+						else {
 							log("Match not found, Difference score is"+value_double);
+							executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
+						}
 						
 					}
-					executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
+					
 					log("Match not found, Difference image is"+diffimagefile);
-					log("Exiting from validate_Screenshot function");				
 					return "Fail";
 				}	
 	        }
 	        else {
-	        	log("No reference file to compare");
-				log("Exiting from validate_Screenshot function");				
+	        	String[] reference_folder = {"MC40", "TC70", "TC75", "TC55", "TC8000"};
+	        	for(int i=0;i<reference_folder.length;i++) {
+	        		refimagefile = System.getProperty("user.dir")+ "\\test-output\\Reference\\"+reference_folder[i]+"\\"+ModuleName+"\\"+objname+".png";
+	        		reffile = new File(refimagefile);
+	        		if(reffile.exists()) {
+	    	        	if(compareTwoImages(imgfile, reffile)){
+	    					log("Match found with reference image");				
+	    					return "Pass";
+	    				}else{
+	    					CreateNewDir(System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Difference");
+	    					CreateNewDir(System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Difference\\"+ModuleName);
+	    					String diffimagefile = System.getProperty("user.dir")+ "\\test-output\\"+DeviceName+"\\Difference\\"+ModuleName+"\\"+objname+".png";
+	    					String tmp = PercentCompare(refimagefile, imagefile, diffimagefile);
+	    					Scanner scanner = new Scanner(tmp);
+	    					if(scanner.hasNextDouble()) {
+	    						Double value_double = Double.valueOf(tmp);
+	    						if(ModuleName.contains("SignalIndicator")&&value_double>20.0) {
+	    							log("Partial Match found with reference image "+value_double);	
+	    							executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
+	    							return "Pass";
+	    						}
+	    						else if(ModuleName.contains("BatteryIndicator")&&value_double>20.0) {
+	    							log("Partial Match found with reference image "+value_double);	
+	    							executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
+	    							return "Pass";
+	    						}
+	    						else if(value_double>30.0) {
+	    							log("Partial Match found with reference image "+value_double);	
+	    							executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
+	    							return "Pass";
+	    						}	
+	    						else {
+	    							executeCommandLine("compare -channel red -metric PSNR "+imagefile+" "+refimagefile+" "+diffimagefile);
+	    							log("Match not found, Difference score is"+value_double);
+	    						}
+	    						
+	    						
+	    					}
+	    					log("Match not found, Difference image is"+diffimagefile);
+	    				}	
+	    	        }
+	        	}
+	        	
+	        	log("Comparision of 2 "+imagefile+" "+refimagefile+" images Failed");
 				return "Fail";
 	        }
 	        
 									
 			
 		}catch(Exception ex){
-			log("Text not found -"+objname+" reason :"+ex.getMessage());
-			log("Exiting from validate_Screenshot function");
+			log("Failed -"+objname+" reason :"+ex.getMessage());
 			return "Fail";
 		}
 		
@@ -2758,13 +2775,13 @@ public class Keywords {
 	 */
 	public String DrawSignature(Hashtable<String,String> getvalue, String objname){
 		try{
-			log("Executing DrawSignature function");
 			//WebElement signaturearea= element(objname);
 			if(element(objname).isDisplayed()) {
 	    		Dimension dim = element(objname).getSize();
 	    		Point t = element(objname).getLocation();
 	    		int y = t.getY()+70;
 	    		executeCommandLine("adb shell input swipe "+t.getX()+" "+y+" "+dim.width+" "+y, "");
+	    		log("Signature drawn successfully");
 	    	}
 			//io.selendroid.client.TouchAction drawsignature = new TouchActionBuilder().pointerDown(signaturearea).pointerMove(200, 600).pointerUp().build();
 			//drawsignature.perform(mobdriv);
@@ -2790,8 +2807,8 @@ public class Keywords {
 	 */
 	public String SwitchApp(Hashtable<String,String> getvalue,String objname){
 		try{
-			log("Executing switchapp function");
 			mobdriv.switchTo().window(objname);
+			log("Successfully switched to "+objname);
 			return "Pass";
 		}catch(Exception ex){
 			log("function failed reason :"+ex.getMessage());
@@ -2801,7 +2818,7 @@ public class Keywords {
 	}
 
 	/**
-	 * To validate Result
+	 * To validate Result in results_xpath
 	 * @author Vinod Shankar 
 	 * @param getvalue
 	 * @param objname
@@ -2809,22 +2826,18 @@ public class Keywords {
 	 */
 	public String validate_Result(Hashtable<String,String> getvalue,String objname){
 		try{
-			log("Entered validate_Result function");
 			String content = element("results_xpath").getText();			
 			if(content.contains(objname)){
-				log(objname+" Testcase Text found");				
-				log("Exiting from validate_Result function");
+				log(objname+" Text found in "+content);				
 				return "Pass";
 			}else{
-				log(objname+ " Testcase Text not found");
-				log("Exiting from validate_Result function");				
+				log(objname+" Text not found in "+content);
 				return "Fail";
 			}				
 									
 			
 		}catch(Exception ex){
 			log("function failed reason :"+ex.getMessage());
-			log("Exiting from validate_Result function");
 			return "Fail";
 		}
 		
@@ -2832,7 +2845,7 @@ public class Keywords {
 	}
 	
 	/**
-	 * Click native icon function
+	 * Click native icon function, This function executes without scrolling to the element
 	 * @author Vinod Shankar
 	 * @param getvalue
 	 * @param objname
@@ -2840,21 +2853,19 @@ public class Keywords {
 	 */
 	public String ClickNativeIcon(Hashtable<String,String> getvalue, String objname){
 		try{
-			log("Executing ClickNativeIcon function");
 			 WebElement nativebutton = element(objname);
 			 if(nativebutton.isDisplayed()) {
 				 nativebutton.click();
-				 log("Exiting from ClickNativeIcon function");
+				 log(nativebutton + "Clicked successfully");
 				 return("pass");
 			 }
 			 else {
-				 log("Exiting from ClickNativeIcon function");
+				 log(nativebutton + "Clicked Failed");
 				 return "Fail";
 			 }
 			 
 		}catch(Exception ex){
 			log("function failed reason :"+ex.getMessage());
-			log("Exiting from ClickNativeIcon function");
 			return "Fail";
 		}
 	}
@@ -2868,22 +2879,18 @@ public class Keywords {
 	 */
 	public String checkCallbackValues(Hashtable<String,String> getvalue,String objName){
 		try{
-			log("Entered checkValue function");
 			String content = element(objName).getText();
 			//log(essidcontent);
 			if(content.contains(OR.getProperty("wifi_name"))){
 				log("essid value is correct");				
-				log("Exiting from checkValue function");
 				return "Pass";
 			 }
 			else if(content.contains(OR.getProperty("ip_address"))){
 				log("ipaddress value is correct");				
-				log("Exiting from checkValue function");
 				return "Pass";
 			 }
 			else if(content.contains(OR.getProperty("noip_address"))){
 				log("wlan profile has been disabled");				
-				log("Exiting from checkValue function");
 				return "Pass";
 			 }
 			else if(content.contains("signalStrength")){
@@ -2895,25 +2902,21 @@ public class Keywords {
 				Integer value = Integer.parseInt(minSignalvalue);
 				if(signalvalue > value){
 					log("signal value is correct");				
-					log("Exiting from checkValue function");
 					return "Pass";
 				}
 				else{
 				log("signal value is incorrect");	
-				log("Exiting from checkValue function");
 					return "Fail";	
 				}
 			 }
 			else{
 				log(objName+" not found in callback");
-				log("Exiting from checkValue function");				
 				return "Fail";
 			}	
 									
 			
 		}catch(Exception ex){
 			log("calback not found. reason :"+ex.getMessage());
-			log("Exiting from validate_essidValue function");
 			return "Fail";
 		}
 	}
@@ -2929,21 +2932,17 @@ public class Keywords {
 	public String validate_Button_Exists(Hashtable<String,String> getvalue,String buttonname){
 		try{
 			
-			log("Entered validate_Button_Exists function");
-		    boolean res=isElementPresent(buttonname);
+			boolean res=isElementPresent(buttonname);
 			if(res==true){
-				log("Button found");
-				log("Exiting from validate_Button_Exists function");
+				log(buttonname+ "Button found");
 				return "Pass";				
 			}else{
 				log(buttonname+" Button not found");
-				log("Exiting from validate_Button_Exists function");
 				return "Fail";				
 			}
 			
 		}catch(Exception ex){
 			log("Button not found -"+buttonname+" reason :"+ex.getMessage());
-			log("Exiting from validate_Button_Exists function");
 			return "Fail";
 		}
 		
@@ -2958,7 +2957,6 @@ public class Keywords {
 	 */
 	public String Lock_UnlockScreen(Hashtable<String,String> getvalue, String arg1){
 		try{
-			log("Started Executing Lock_UnlockScreen function");
 			String result="";
 			if(arg1.toLowerCase().equals("lock")){
 				log("locking screen");
@@ -3001,7 +2999,6 @@ public class Keywords {
 	 */
 	public String Rotate_Screen(Hashtable<String,String> getvalue, String arg1){
 		try{
-			log("Started Executing Rotate_Screen function");
 			String currentOrientation = (((Rotatable) mobdriv).getOrientation()).toString();
 			if(arg1.toLowerCase().equals("potrait")&&currentOrientation=="LANDSCAPE"){
 				((Rotatable) mobdriv).rotate(ScreenOrientation.PORTRAIT);
@@ -3032,14 +3029,14 @@ public class Keywords {
 	 */
 	public String ScrollPage(Hashtable<String,String> getvalue, String objname){
 		try{
-			log("Started Executing ScrollPage function");
 			WebElement pages = element(objname);
 			TouchActions flick = new TouchActions(mobdriv).flick(pages, -10, 0, 0);
 			flick.perform();
+			log("Scroll Page down is success");
 			return "pass";  
 		}
 		catch(Exception ex){
-			log("Exiting from ScrollPage function"+ ex.getMessage());
+			log("Failed to scroll, Exiting from ScrollPage function"+ ex.getMessage());
 			return "Fail";
 		}
 	}
@@ -3053,14 +3050,14 @@ public class Keywords {
 	 */
 	public String ScrollUp_Page(Hashtable<String,String> getvalue, String objname){
 		try{
-			log("Started Executing ScrollPage function");
 			WebElement pages = element(objname);
 			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -30, 0);
 			flick.perform();
+			log("Scroll Page up is success");
 			return "pass";  
 		}
 		catch(Exception ex){
-			log("Exiting from ScrollUp_Page function"+ ex.getMessage());
+			log("Failed to ScrollUp_Page "+ ex.getMessage());
 			return "Fail";
 		}
 	}
@@ -3086,7 +3083,6 @@ public class Keywords {
 	 */
 	public String validate_SystemProperties(Hashtable<String,String> getvalue,String objName){
 		try{
-			log("Entered validate_SystemProperties function");
 			String content = element("results_xpath").getText();
 			String[] Sysproperty = null;
 			if(objName.contains("getallproperties")) {
@@ -3934,7 +3930,6 @@ public class Keywords {
 
 		}catch(Exception ex){
 			log("calback not found. reason :"+ex.getMessage());
-			log("Exiting from validate_SystemProperties function");
 			return "Fail";
 		}
 		
@@ -3952,12 +3947,10 @@ public class Keywords {
 	 */
 	public String CheckUITextContains(Hashtable<String,String> getvalue,String arg1){
 		try{
-			log("Entered CheckUITextContains function");
 			if(arg1.contains("stoplistening")) {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS android.intent.action.VIEW", "android.intent.action.VIEW Failed");
 				if(result.contains("android.intent.action.VIEW Failed")) {
 					log("Text is not Present");
-					log("Exiting from CheckUITextContains function");
 					return "Pass";
 				}
 				else {
@@ -3970,12 +3963,10 @@ public class Keywords {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS This_is_a_pop_up_for_hide", "This_is_a_pop_up_for_hide Failed");
 				if(result.contains("Fail")) {
 					log("Text is not Present");
-					log("Exiting from CheckUITextContains function");
 					return "Pass";
 				}
 				else {
 					log("Text is Present");
-					log("Exiting from CheckUITextContains function");
 					return "Fail";
 				}
 			}
@@ -3983,12 +3974,10 @@ public class Keywords {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS Establishing_Connection", "Establishing_Connection Failed");
 				if(result.contains("Fail")) {
 				log("Text is not Present");
-				log("Exiting from CheckUITextContains function");
 				return "Pass";
 				}
 				else {
 				log("Text is Present");
-				log("Exiting from CheckUITextContains function");
 				return "Fail";
 				}
 				}
@@ -3997,12 +3986,10 @@ public class Keywords {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS Powered_Up", "Powered_Up Failed");
 				if(result.contains("Fail")) {
 					log("Text is not Present");
-					log("Exiting from CheckUITextContains function");
 					return "Pass";
 				}
 				else {
 					log("Text is Present");
-					log("Exiting from CheckUITextContains function");
 					return "Fail";
 				}
 			}
@@ -4010,12 +3997,10 @@ public class Keywords {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS timeout_triggered", "timeout_triggered Failed");
 				if(result.contains("Fail")) {
 					log("Text is not Present");
-					log("Exiting from CheckUITextContains function");
 					return "Pass";
 				}
 				else {
 					log("Text is Present");
-					log("Exiting from CheckUITextContains function");
 					return "Fail";
 				}
 			}
@@ -4023,12 +4008,10 @@ public class Keywords {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS Alarm_Triggered", "Alarm_Triggered Failed");
 				if(result.contains("Fail")) {
 				log("Text is not Present");
-				log("Exiting from CheckUITextContains function");
 				return "Pass";
 				}
 				else {
 				log("Text is Present");
-				log("Exiting from CheckUITextContains function");
 				return "Fail";
 				}
 			}	
@@ -4036,7 +4019,6 @@ public class Keywords {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS File_Received", "File_Received Failed");
 				if(result.contains("Fail")) {
 				log("Text is not Present");
-				log("Exiting from CheckUITextContains function");
 				return "Pass";
 				}
 				else {
@@ -4049,12 +4031,10 @@ public class Keywords {
 				String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS FileSent", "FileSent Failed");
 				if(result.contains("Fail")) {
 				log("Text is not Present");
-				log("Exiting from CheckUITextContains function");
 				return "Pass";
 				}
 				else {
 				log("Text is Present");
-				log("Exiting from CheckUITextContains function");
 				return "Fail";
 				}
 			}
@@ -4074,17 +4054,14 @@ public class Keywords {
 			result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e EXISTS_TXT_CONTAINS "+arg1,strValidate);
 			if(result.contains(strValidate)) {
 				log("Text is Present");
-				log("Exiting from CheckUITextContains function");
 				return "Pass";
 			}
 			else {
 				log("Text is not Present");
-				log("Exiting from CheckUITextContains function");
 				return "Fail";
 			}
 		}catch(Exception ex){
 			log("Text not found. reason :"+ex.getMessage());
-			log("Exiting from CheckUITextContains function");
 			return "Fail";
 		}
 	}
@@ -6536,7 +6513,8 @@ public class Keywords {
 	}
 	
 	/**
-	 * Function to Click on TextBox
+	 * Function to Click on TextBox in page
+	 * Function calling from DSL : textBoxClick(keytxtInput_id);
 	 * @author Prashanth
 	 * @param getvalue
 	 * @param Textbox_identifier
@@ -6545,22 +6523,22 @@ public class Keywords {
 	
 	public String textBoxClick(Hashtable<String,String> getvalue,String Textbox_identifier){
 		try{
-			log("Executing SendData function");
 			WebElement pages = element(Textbox_identifier);
 			TouchActions flick = new TouchActions(mobdriv).flick(pages, 0, -120, 0);
 			flick.perform();
 			element(Textbox_identifier).click();  
 		}
 		catch(Exception ex){
-			reportError("Fail-"+ex.getMessage());
-			return null;
+			reportError("Failed to click "+Textbox_identifier+" -"+ex.getMessage());
+			return "Fail";
 		}
-		log("Exiting Senddata function");
+		log(Textbox_identifier + "text box clicked successfully");
 		return "pass";
 	}    
 	
 	/**
-	 * Function to Validate TextBox Data
+	 * Function to Validate Text Box Data entered in html page 
+	 * Function calling from DSL : validate_textBoxData=keytxtInput_id,6
 	 * @author Prashanth
 	 * @param getvalue
 	 * @param Expected
@@ -6568,36 +6546,26 @@ public class Keywords {
 	 */
 	
 	public String validate_textBoxData(Hashtable<String,String> getvalue,String Textbox_identifier) {
-		String result= "";
 		String Tmp;
 		String Textboxdata;
 		try{
-			log("Entered validate_textBoxData function");
 			String[] temp = Textbox_identifier.split(",");
 			Tmp=getAttribute(temp[0],"value");
 			Textboxdata=Tmp.trim();
 			log(Textboxdata);
-			if(Textboxdata.equals(temp[1])||temp[1].equals("null"))
-			{
-				log("Actual Value matches Expected");
-				result="pass";
-				log(result);
-				log("Exiting from validate_textBoxData function");
-				return "pass";
+			if(Textboxdata.equals(temp[1])||temp[1].equals("null")) {
+				log(Textboxdata+ " value matches with Expected "+temp[1]+" value");
+				return "Pass";
 			}
-			else
-			{
-				log("Actual Value does not match Expected");
-				result="fail";
-				log(result);
-				log("Exiting from validate_textBoxData function");
-				return "fail";
+			else {
+				log(Textboxdata+ " value matches with Expected "+temp[1]+" value");
+				return "Fail";
 			}
-			}
+		}
 							
 		catch(Exception ex){
-			log("Exiting from validate_textBoxData function");
-			return "fail";
+			log("Exiting from validate_textBoxData function. Reason: "+ex.getMessage());
+			return "Fail";
 		}
 	
 	}
@@ -6631,10 +6599,11 @@ public class Keywords {
 	}
 	
 	/**
-	 * Draw a gesture 
+	 * DrawGesture function to draw gesture using android adb command
+	 * Different ways of function calling from DSL: DrawGesture(10,200,150,200);, DrawGesture(linear_default);, DrawGesture(hold,200,900,6000);
 	 * @author Chaithra
 	 * @param getvalue
-	 * @param arg1
+	 * @param arg1 
 	 * @return
 	 */
 	public String DrawGesture(Hashtable<String,String> getvalue,String arg1){
@@ -6660,9 +6629,9 @@ public class Keywords {
 				
 				}
 				executeCommandLine("adb shell input swipe "+value3+" "+value4+" "+value1+" "+value2);
-		    	  log("Gesture drawn successfully");
-		          return "Pass";
-		}
+				log("Gesture right-left drawn successfully");
+				return "Pass";
+			}
 			else if(arg1.equals("top-bottom")){
 				double value1 = 0;
 				double value2 = 0;
@@ -6682,13 +6651,12 @@ public class Keywords {
 					value1 = .5 * width;
 					value3 = .5 * width;
 					value3 = value3 + 10;
-				
 				}
 			
 				executeCommandLine("adb shell input swipe "+value1+" "+value2+" "+value3+" "+value4);
-		    	  log("Gesture drawn successfully");
-		          return "Pass";
-		} 
+		    	log("Gesture top-bottom drawn successfully");
+		        return "Pass";
+			} 
 			else if(arg1.equals("bottom-top")){
 				double value1 = 0;
 				double value2 = 0;
@@ -6708,13 +6676,11 @@ public class Keywords {
 					value1 = .5 * width;
 					value3 = .5 * width;
 					value3 = value3 + 10;
-				
 				}
-			
 				executeCommandLine("adb shell input swipe "+value3+" "+value4+" "+value1+" "+value2);
-		    	  log("Gesture drawn successfully");
-		          return "Pass";
-		} 
+		    	log("Gesture bottom-top drawn successfully");
+		        return "Pass";
+			} 
 			
 			else if(arg1.equals("linear_default")){
 				double value1 = 0;
@@ -6734,13 +6700,12 @@ public class Keywords {
 					int width = Integer.parseInt(widthheight[0]);
 					value1 = .1 * width;
 					value3 = .9 * width;
-				
 				}
 			
 				executeCommandLine("adb shell input swipe "+value1+" "+value2+" "+value3+" "+value4);
-		    	  log("Gesture drawn successfully");
-		          return "Pass";
-		}
+		    	log("Gesture linear_default drawn successfully");
+		        return "Pass";
+			}
 			else if(arg1.contains("hold_default_centre")){
 				String[] args = arg1.split(",");
 				double value1 = 0;
@@ -6760,31 +6725,31 @@ public class Keywords {
 					int width = Integer.parseInt(widthheight[0]);
 					value1 = .5 * width;
 					value3 = .5 * width;
-				
 				}
-			
 				executeCommandLine("adb shell input swipe "+value1+" "+value2+" "+value3+" "+value4+" "+args[1]);
-		    	  log("Gesture drawn successfully");
-		          return "Pass";
-		}
+		    	log("Gesture hold_default_centre drawn successfully");
+		        return "Pass";
+			}
+			
 			String[] args = arg1.split(",");
 			if(args[0].equals("hold")){
 				executeCommandLine("adb shell input swipe "+args[1]+" "+args[2]+" "+args[1]+" "+args[2]+" "+args[3]);
-		    	  log("Gesture drawn successfully");
-		          return "Pass";
+				log("Gesture hold drawn successfully");
+		        return "Pass";
 			}
-			executeCommandLine("adb shell input swipe "+args[0]+" "+args[1]+" "+args[2]+" "+args[3]);
-		    	  log("Gesture drawn successfully");
-		          return "Pass";
-		   
+			else {
+				executeCommandLine("adb shell input swipe "+args[0]+" "+args[1]+" "+args[2]+" "+args[3]);
+			    log("Gesture linear drawn successfully");
+			    return "Pass";
+			}
 				
-		}catch(Exception ex){
+		}
+		catch(Exception ex){
 			log("Cannot Draw gesture :"+ex.getMessage());
 			log("Exiting from DrawGesture function");
 			return "Fail";
 		}
 	}
-
 	
 }
 
