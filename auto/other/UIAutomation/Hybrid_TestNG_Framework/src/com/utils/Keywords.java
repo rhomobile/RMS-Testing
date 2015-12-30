@@ -6392,7 +6392,7 @@ public class Keywords {
 				}
 			    
 			    ImageIO.write(eleScreenshot, "png", screenshot);
-			    executeCommandLine("adb shell rm /sdcard/"+screenshot_id+".png","");
+			    executeCommandLine("adb shell rm /sdcard/Android/"+screenshot_id+".png","");
 			    return("pass");
 		    }
 		catch (IOException e) {
