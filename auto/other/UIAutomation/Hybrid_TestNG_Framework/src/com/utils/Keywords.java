@@ -1319,7 +1319,7 @@ public class Keywords {
 	 */
 	public String Init_Selendroid(int nocleardata_flag) throws Exception{
 		try{
-			log("Executing Init_Selendroid function with clear data value");
+			log("Executing Init_Selendroid function with clear data value "+nocleardata_flag);
 			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty("AUT_Name"));
 			config.setSelendroidServerPort(8081);
@@ -1382,7 +1382,7 @@ public class Keywords {
 	 */
 	public String Init_Selendroid(String autName, String autID) throws Exception{
 		try{
-			log("Executing Init_Selendroid function with differnt apks");
+			log("Executing Init_Selendroid function with apks");
 			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
 			config.setSelendroidServerPort(8081);
@@ -1431,7 +1431,7 @@ public class Keywords {
 	
 	public String Init_Selendroid(String autName, String autID, int nocleardata_flag) throws Exception{
 		try{
-			log("Executing Init_Selendroid function with differnt APK's and clear data");
+			log("Executing Init_Selendroid function with APK as parameter and clear data value with "+nocleardata_flag);
 			/*SelendroidConfiguration config = new SelendroidConfiguration();
 			config.addSupportedApp(System.getProperty("user.dir")+ "\\src\\com\\input\\"+Config.getProperty(autName));
 			config.setSelendroidServerPort(8081);
