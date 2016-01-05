@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 
 
+
 import com.utils.Constants;
 import com.utils.Keywords;
 import com.utils.TestUtil;
@@ -58,6 +59,11 @@ public class EBDriverScript {
 		{	
 			app= Keywords.getInstance();				
 			app.setLogger(log);	
+			if(data.get("matchedRow").equals(String.valueOf(2))) {
+				app.stopAppiumServer();
+				Thread.sleep(5000);
+				app.startAppiumServer();
+			}
 			String AutName = "EB_AUT_Name";
 			String AutId = "EB_AUT_ID";
 			res1=app.Init_Selendroid(AutName, AutId,1);
@@ -128,6 +134,7 @@ public class EBDriverScript {
 		for(int cNum=0;cNum<cols;cNum++){
 			table.put(readExcel.getCellData(Constants.Xls_Sheetname, cNum, 1),readExcel.getCellData(Constants.Xls_Sheetname, cNum, actualRow));
 		}
+		table.put("matchedRow", String.valueOf(actualRow));
 		System.out.println("GetData matching row : " + actualRow);
 		return table;
 	}

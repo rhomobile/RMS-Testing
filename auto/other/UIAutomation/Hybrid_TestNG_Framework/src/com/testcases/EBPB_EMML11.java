@@ -44,7 +44,12 @@ public class EBPB_EMML11 {
 		try
 		{	
 			app= Keywords.getInstance();				
-			app.setLogger(log);	
+			app.setLogger(log);
+			if(data.get("matchedRow").equals(String.valueOf(2))) {
+				app.stopAppiumServer();
+				Thread.sleep(5000);
+				app.startAppiumServer();
+			}
 			String AutName = "EB_AUT_Name";
 			String AutId = "EB_AUT_ID";
 			res1=app.Init_Selendroid(AutName, AutId, 1);
@@ -115,6 +120,7 @@ public class EBPB_EMML11 {
 		table=new Hashtable<String,String>();
 			for(int cNum=0;cNum<cols;cNum++){
 				table.put(readExcel.getCellData(Constants.Xls_Sheetname, cNum, colStartRowNum),readExcel.getCellData(Constants.Xls_Sheetname, cNum, rNum));
+				table.put("matchedRow", String.valueOf(rNum));
 				//System.out.print(xls.getCellData("Test Data", cNum, rNum)+" - ");
 			}
 			data[rNum-rowStartRowNum][0]=table;

@@ -86,7 +86,7 @@ public class Keywords {
 	public String EBconfig_Path = System.getProperty("user.dir")+ "\\src\\com\\input\\Config.xml";
 	public String EBBkpconfig_Path = System.getProperty("user.dir")+ "\\src\\com\\input\\BkpConfig.xml";
 	private static Process process;
-	private static String APPIUMSERVERSTART = "node C:/Program Files (x86)/Appium/"; 
+	private static String APPIUMSERVERSTART = "\"C:/Program Files (x86)/Appium/node.exe\" --max-old-space-size=8192 \"C:/Program Files (x86)/Appium/node_modules/appium/lib/server/main.js\"";
 	//This is a constructor 
 	public Keywords() throws IOException{
 		try {        
@@ -1518,6 +1518,23 @@ public class Keywords {
 		}
 		log("Completed browser_Quit function");
 		return "pass";
+	}
+	
+	public void startAppiumServer() throws IOException, InterruptedException {
+	    Runtime runtime = Runtime.getRuntime();
+	    process = runtime.exec(APPIUMSERVERSTART);
+	    Thread.sleep(30000);
+	    System.out.println(process.isAlive());
+	    if (process != null) {
+	        System.out.println("Appium server started");
+	    }
+	}
+
+	public void stopAppiumServer() throws IOException {
+	    if (process != null) {
+	        process.destroy();
+	    }
+	    System.out.println("Appium server stop");
 	}
 
 
