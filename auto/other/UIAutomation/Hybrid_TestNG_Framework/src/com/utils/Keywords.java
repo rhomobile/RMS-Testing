@@ -1295,6 +1295,7 @@ public class Keywords {
 			capabilities.setCapability("automationName", "selendroid");
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			capabilities.setCapability("udid", Config.getProperty("AUT_SerialNumber"));
 			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -1358,6 +1359,7 @@ public class Keywords {
 			}
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			capabilities.setCapability("udid", Config.getProperty("AUT_SerialNumber"));
 			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -1415,6 +1417,7 @@ public class Keywords {
 			capabilities.setCapability("automationName", "selendroid");
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			capabilities.setCapability("udid", Config.getProperty("AUT_SerialNumber"));
 			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -1462,6 +1465,7 @@ public class Keywords {
 			}
 			capabilities.setCapability("appPackage", Config.getProperty("autID"));
 			capabilities.setCapability("appActivity", Config.getProperty("AUT_ACT"));
+			capabilities.setCapability("udid", Config.getProperty("AUT_SerialNumber"));
 			capabilities.setCapability("newCommandTimeout", 60 * 10);
 			//mobdriv = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 			mobdriv = new AppiumTouchActionExtension(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -2708,9 +2712,10 @@ public class Keywords {
 				}	
 	        }
 	        else {
-	        	String[] reference_folder = {"MC40", "TC70", "TC75", "TC55", "TC8000"};
-	        	for(int i=0;i<reference_folder.length;i++) {
-	        		refimagefile = System.getProperty("user.dir")+ "\\test-output\\Reference\\"+reference_folder[i]+"\\"+ModuleName+"\\"+objname+".png";
+	        	String devicelist = Config.getProperty("Screenshot_Reference");
+	        	String[] Screenshot_Reference = devicelist.split(",");
+	        	for(int i=0;i<Screenshot_Reference.length;i++) {
+	        		refimagefile = System.getProperty("user.dir")+ "\\test-output\\Reference\\"+Screenshot_Reference[i]+"\\"+ModuleName+"\\"+objname+".png";
 	        		reffile = new File(refimagefile);
 	        		if(reffile.exists()) {
 	    	        	if(compareTwoImages(imgfile, reffile)){
