@@ -5297,7 +5297,7 @@ public class Keywords {
 			log("Entered validate_TextMsgBody function");
 			String[] param = arg1.split(",");
 			String toCheck="Success";
-			String result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e COMPARE_EDITTXT_INSTANCE "+param[0]+":"+param[1],toCheck);
+			String result=executeCommandLine("adb shell uiautomator runtest MAAF_MCD.jar -c com.motorola.maaf.MaaFw -e COMPARE_EDITTXT_INSTANCE "+param[0]+":"+param[1],toCheck);
 			if(result.contains(toCheck)) 
 				return "pass";
 			else {
