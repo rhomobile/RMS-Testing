@@ -29,6 +29,11 @@
 		<classes>
 			<class name="com.testcases.EBRE22_Gesture" ></class> 
 		</classes>
+	</test>	
+	<test name="EBRE22_Generic">
+		<classes>
+			<class name="com.testcases.EBRE22_Generic" ></class> 
+		</classes>
 	</test>		
 	<test name="EBRE22_Imager">
 		<classes>
