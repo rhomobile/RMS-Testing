@@ -6231,7 +6231,6 @@ public class Keywords {
 	 */
 	public String ClickCameraNativeButton(Hashtable<String,String> getvalue,String arg1){
 		try{
-			log("Entered ClickCameraNativeButton function");
 			boolean res;
 			int i=0;
 			int loopcount=500/5;
@@ -6253,9 +6252,8 @@ public class Keywords {
 				i++;
 
 				if(i==loopcount){
-					log("Button is not Present");
+					log(arg1+" Button is not Present");
 					mobdriv.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-					log("Exiting from ClickCameraNativeButton function");
 					return "Fail";
 				}
 			}
@@ -6264,25 +6262,23 @@ public class Keywords {
 				result=null;
 				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e TAP_BTN_INSTANCE "+arg1,toCheck);
 				if(!result.equals("Fail")){
-					log("Exiting ClickCameraNativeButton function");
+					log(arg1+" Clicked Camera Native Button");
 					return "Pass";
 				}else
 				{
-					log("Exiting ClickCameraNativeButton function");
+					log(arg1+" Failed to Click Camera Native Button");
 					return "Fail";
 				}
 			}
 			else
 			{
-				log("Button not present");
-				log("Exiting ClickCameraNativeButton function");
+				log(arg1+" Button not present");
 				return "Fail";
 			}
 			
 			
 		}catch(Exception ex){
 			log("Button not found. reason :"+ex.getMessage());
-			log("Exiting from ClickUIButtonText function");
 			return "Fail";
 		}
 	}	
@@ -6295,7 +6291,6 @@ public class Keywords {
 	 */
 	public String ClickCameraSystemButton(Hashtable<String,String> getvalue){
 		try{
-			log("Entered ClickCameraSystemButton function");
 			String toCheck=null;
 			String result=null;
 			toCheck="Success...";
@@ -6303,39 +6298,48 @@ public class Keywords {
 			if(!result.equals("Fail")){
 				result=executeCommandLine("adb shell uiautomator runtest MaaFw.jar -c com.symbol.maaf.MaaFw -e TAP_IMGBTN_CONTDES Review_done",toCheck);
 				if(!result.equals("Fail")){
-					log("Exiting ClickCameraSystemButton function");
+					log("Clicked Camera system button successfully");
 					return "Pass";
 				}
 				else
 				{
-					log("Exiting ClickCameraSystemButton function");
+					log("Failed to Click Done in Camera system");
 					return "Fail";
 				}
 			}else
 			{
-				log("Exiting ClickCameraSystemButton function");
+				log("Failed to Click Camera system button successfully");
 				return "Fail";
 			}
 			
 		}catch(Exception ex){
 			log("Button not found. reason :"+ex.getMessage());
-			log("Exiting from ClickCameraSystemButton function");
 			return "Fail";
 		}
 	}	
 	
+	/**
+	 * To validate current app is in Fullscreen or not.
+	 * @author Vinod Shankar 
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
 	public String validate_fullscreen(Hashtable<String,String> getvalue,String objname){
 		try{
-			log("Entered validate_fullscreen function");	
 			String[] tmp = objname.split(",");
 			mobdriv.switchTo().window("NATIVE_APP");
     		if(element(tmp[0]).isDisplayed()) {
 	    		Point t = element(tmp[0]).getLocation();
 	    		mobdriv.switchTo().window("WEBVIEW");
-	    		if(t.getX() == 0 && t.getY() == 0 && tmp[1].contains("true"))
+	    		if(t.getX() == 0 && t.getY() == 0 && tmp[1].contains("true")) {
+	    			log("App is in fullscreen mode");
 	    			return "Pass";
-	    		else if(t.getX() == 0 && t.getY() > 0 && tmp[1].contains("false")) 
+	    		}
+	    		else if(t.getX() == 0 && t.getY() > 0 && tmp[1].contains("false")) {
+	    			log("App is not in fullscreen mode");
 	    			return "Pass";
+	    		}
 	    		else {
 	    			log(tmp[0]+ " not correctly displayed");
 	    			return "Fail";
@@ -6343,8 +6347,7 @@ public class Keywords {
     		}
     		else{	
     			mobdriv.switchTo().window("WEBVIEW");
-				log(tmp[0]+ " Testcase Text not found");
-				log("Exiting from validate_fullscreen function");				
+				log(tmp[0]+ " Text not found");
 				return "Fail";
     		}	
     		
@@ -6352,13 +6355,12 @@ public class Keywords {
 		catch(Exception ex){
 			log("reason :"+ex.getMessage());
 			mobdriv.switchTo().window("WEBVIEW");
-			log("Exiting from validate_fullscreen function");
 			return "Fail";
 		}
 	}
 	
 	/**
-	 * To long_press press webelement
+	 * To long press webelement
 	 * @author Vinod Shankar
 	 * @param getvalue
 	 * @param linkName
@@ -6366,7 +6368,6 @@ public class Keywords {
 	 */
 	public String long_press(Hashtable<String,String> getvalue,String linkName){
 		try{
-			log("Executing long_press function");
 			WebElement pages = element(linkName);
 			TouchActions longpress = new TouchActions(mobdriv).longPress(pages);
 			longpress.perform();
@@ -6382,7 +6383,8 @@ public class Keywords {
 	
 	
 	/**
-	 * Take screenshot
+	 * Take screenshot using Android ADB commands. 
+	 * This function only used for taking screenshot of outside application screen.  
 	 * @author Vinod Shankar
 	 * @param getvalue
 	 * @param screenshot_id
@@ -6424,7 +6426,8 @@ public class Keywords {
     }
 	
 	/**
-	 * validate screenorientation 
+	 * To validate Current screen orientation,
+	 * rotation0 = Potrait, rotation1=Landscape, rotation2=upsidedown, rotation3=Righthanded
 	 * @author Chaithra
 	 * @param getvalue
 	 * @param arg1
@@ -6435,23 +6438,22 @@ public class Keywords {
 			String result=null;
 			result=executeCommandLine("adb shell dumpsys display  | grep 'mOverrideDisplayInfo'");
 		      if(result.contains(arg1)){
-		    	  log("Rotated correctly");
+		    	  log("Screen rotated successfully with specified orientation");
 		          return "Pass";
 		      }
 		      else{
-		    	  log("did not rotate correctly");
+		    	  log("Screen has different orientation "+result);
 		          return "Fail"; 
 		      }
 				
 		}catch(Exception ex){
 			log("Text not found. reason :"+ex.getMessage());
-			log("Exiting from validate_screenOrientation function");
 			return "Fail";
 		}
 	}
 	
 	/**
-	 * Check if a file exists
+	 * Check file exists or not in the specified path on device.
 	 * @author Chaithra
 	 * @param getvalue
 	 * @param arg1
@@ -6463,24 +6465,30 @@ public class Keywords {
 			result=executeCommandLine("adb shell \"[ -f "+arg1+" ] && echo 'found'\"");
 
 		      if(result.contains("found")){
-		    	  log("File exists");
+		    	  log(arg1+" File Found");
 		          return "Pass";
 		      }
 		      else{
-		    	  log("File does not exist");
+		    	  log(arg1+" File not Found");
 		          return "Fail"; 
 		      }
 				
 		}catch(Exception ex){
 			log("Text not found. reason :"+ex.getMessage());
-			log("Exiting from validate_FileExists function");
 			return "Fail";
 		}
 	}
 	
+	/**
+	 * To Enter Data in input box field.
+	 * @author Devaraj
+	 * @param getvalue
+	 * @param objname
+	 * @return
+	 */
+	
 	public String EnterData(Hashtable<String,String> getvalue,String objname){
         try{
-               log("EnterPassword function");    
                String[] tmp = objname.split(",");
                String result = sendData(tmp[0], tmp[1]);
                return result;
@@ -6493,13 +6501,13 @@ public class Keywords {
 	
 	/**
 	 * Select imager from the dropdown - for imager module
+	 * This is for selecting imager from imager_xpath dropdown
 	 * @author Ashik
 	 * @param getvalue
 	 * @param imagerObj
 	 * @return
 	 */
 	public String SelectImager(Hashtable<String,String> getvalue,String imagerObj){
-		log("Entering the SelectImager function");
 		try{
 			 int count=0;
 			 WebElement dropdown = element("imager_xpath");
@@ -6519,11 +6527,11 @@ public class Keywords {
 			    }			 
 			if(count==1){
 				select.selectByVisibleText(selecteditem);
-				log("Successfull in selecting the imager: "+imagerObj);
+				log("Successfull in selecting the imager: "+obj);
 				return "Pass";
 			}
 			else{
-				log("Not able to select on the imager or"+ imagerObj + " - imager not found");
+				log("Not able to select on the imager or"+ obj + " - imager not found");
 				return "Fail";
 			}
 		}
@@ -6593,7 +6601,8 @@ public class Keywords {
 	}
 	
 	/**
-	 * To check whether an element is empty
+	 * To check whether an HTML element is empty or not
+	 * From DSL call isTextNotPresent(element_identifier)
 	 * @author Ashik
 	 * @param getvalue
 	 * @param element_identifier
@@ -6601,20 +6610,16 @@ public class Keywords {
 	 */
 	public String isTextNotPresent(Hashtable<String,String> getvalue,String element_identifier){
 		try{
-			log("Entered isTextPresent function");
 			String content = element(element_identifier).getText();			
 			if(content == null || content.isEmpty()){
-				log(element_identifier+" does not have any text");				
-				log("Exiting from isTextPresent function");
+				log(element_identifier+" does not have any text displayed");				
 				return "Pass";
 			}else{
-				log(element_identifier+ " has some text");
-				log("Exiting from isTextPresent function");				
+				log(element_identifier+ " has some text : "+content);
 				return "Fail";
 			}
 		}catch(Exception ex){
-			log("function failed reason :"+ex.getMessage());
-			log("Exiting from isTextPresent function");
+			log("isTextNotPresent function failed reason :"+ex.getMessage());
 			return "Fail";
 		}
 				
