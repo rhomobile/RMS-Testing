@@ -6778,6 +6778,157 @@ public class Keywords {
 		}
 	}
 	
+
+	/**
+		 * pullLogtxt function to pull log.txt file from device
+		 * @author Prashanth
+		 * @param getvalue 
+		 * @return
+		 */
+	
+	
+	public String pullLogtxt(Hashtable<String,String> getvalue){
+		try{
+			executeCommandLine("adb pull "+"/sdcard/Android/data/com.symbol.enterprisebrowser/Log.txt "+ System.getProperty("user.dir")+ "\\src\\com\\input\\Log.txt");
+			return "Pass";
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * deleteFile function to delete any file from device
+	 * @author Prashanth
+	 * @param getvalue 
+	 * @param arg1
+	 * @return
+	 */
+
+	
+	public String deleteFile(Hashtable<String,String> getvalue,String arg1){
+		try{
+			executeCommandLine("adb shell rm "+arg1);
+			return "Pass";
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+	}
+	
+	/**
+	 * validate_LogFileContains function to check existance of error,warning and information messages in log.txt
+	 * @author Prashanth
+	 * @param getvalue 
+	 * @param arg1
+	 * @return
+	 */
+	
+	public String validate_LogFileContains(Hashtable<String,String> getvalue, String arg1){
+		try{
+			String line = null;
+			File f1 = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\Log.txt");
+			if(f1.exists()) {
+				FileReader fr = new FileReader(f1);
+	            BufferedReader br = new BufferedReader(fr);
+	            while ((line = br.readLine()) != null) {
+	            	if(line.startsWith(arg1)){
+					log("Log file contains " +arg1);
+					fr.close();
+		            br.close();
+					return "pass";
+					}
+					
+	            }
+	            fr.close();
+	            br.close();
+	            log("Log file does not contain " +arg1);
+	            return "fail";
+				}
+			else {
+				log("Log file doesnt exists");	
+				return "Fail";
+			}
+
+
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+		
+	}
+	
+	/**
+	 * validate_LogFileNotContains function to check nonexistance of error,warning and information messages in log.txt
+	 * @author Prashanth
+	 * @param getvalue 
+	 * @param arg1
+	 * @return
+	 */
+	
+	public String validate_LogFileNotContains(Hashtable<String,String> getvalue, String arg1){
+		try{
+			String line = null;
+			File f1 = new File(System.getProperty("user.dir")+ "\\src\\com\\input\\Log.txt");
+			if(f1.exists()) {
+				FileReader fr = new FileReader(f1);
+	            BufferedReader br = new BufferedReader(fr);
+	            while ((line = br.readLine()) != null) {
+	            	if(!line.startsWith(arg1)){
+					log("Log file does not contain " +arg1);
+					fr.close();
+		            br.close();
+					return "pass";
+					}
+					
+	            }
+	            fr.close();
+	            br.close();
+	            log("Log file contains " +arg1);
+	            return "fail"; 
+				}
+			else {
+				log("Log.txt doesnt exists");	
+				return "Fail";
+			}
+
+
+		}catch(Exception ex){
+			reportError("Fail-"+ex.getMessage());
+			return "Fail";
+		}
+		
+	}
+	
+	/**
+	 * validate_FileNotExists function to check The nonexistance of any file in the device
+	 * @author Prashanth
+	 * @param getvalue 
+	 * @param arg1
+	 * @return
+	 */
+	
+	public String validate_FileNotExists(Hashtable<String,String> getvalue,String arg1){
+		try{
+			String result=null;
+			result=executeCommandLine("adb shell \"[ -f "+arg1+" ] && echo 'found'\"");
+
+		      if(result.contains("found")){
+		    	  log("File exists");
+		          return "Fail";
+		      }
+		      else{
+		    	  log("File does not exist");
+		          return "Pass"; 
+		      }
+				
+		}catch(Exception ex){
+			log("Text not found. reason :"+ex.getMessage());
+			log("Exiting from validate_FileExists function");
+			return "Fail";
+		}
+	}	
+	
 }
 
 
