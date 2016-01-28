@@ -1,0 +1,31 @@
+<html>
+<script type="text/javascript">
+alert('hiii');
+	function storageEventHandler(e){
+      alert("key " + e.key);
+      alert("oldValue " + e.oldValue);
+      alert("newValue " + e.newValue);
+      alert("url " + e.url);
+ }
+window.addEventListener("storage", function(){alert('hii');}, false);
+localStorage.setItem('foo', 'bar');
+document.write(localStorage.getItem('foo'));
+alert(localStorage.getItem('foo'));
+ </script>
+
+<script>
+    function storageEventHandler(e){
+        alert('localStorage event fired')
+    }
+    window.addEventListener('storage', storageEventHandler, false);
+    localStorage.setItem('foo', 'bar');
+    alert('ok')
+</script>
+
+
+    <body>
+    Test
+    </body>
+
+
+ </html>

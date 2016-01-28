@@ -1,0 +1,4536 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0051)http://192.168.7.139/MWM/MCxxTM/Dashboard/Dashboard -->	
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+</title>
+<!-- Common CSS File -->
+<link rel="stylesheet" type="text/css" href="./Dashboard_files/min.css">
+
+<title>
+</title>
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<script type="text/javascript">
+
+		function doKey(jsonO) { application.quit();}
+        var scrolling = false;
+
+        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+		keyCapture.keyEvent = 'doKey(%json)';
+</script>
+</head>
+<body>
+	<div id="header">
+		<div id="blackbar"></div>
+		<div class="first active">
+			<img class="sprite-menu_list menu_img">
+		</div>
+		<div class="second" onclick="alert(&#39;clicked&#39;)">
+			<img class="sprite-menu_people menu_img">
+		</div>
+		<div class="third" onclick="alert(&#39;clicked&#39;)">
+			<img class="sprite-menu_inbox menu_img">
+		</div>
+		<div class="fourth" onclick="alert(&#39;clicked&#39;)">
+			<img class="sprite-menu_options menu_img_options">
+		</div>
+		<div class="shadowbottom"></div>
+	</div>
+	<div class="spacer"></div>
+	<p class="light center">
+		<em>Store </em>
+		<img class="sprite-busy" id="busyicon" style="float: right; display: none; ">
+	</p>
+	<ul id="thelist" style="position:relative; float:left;">
+		<div class="task_set" id="All" onclick="doclick(&#39;All_tasks&#39;,&#39;All_users&#39;,&#39;9990&#39;, &#39;All&#39;);" style="height: 199px; ">
+			<p class="title"> All</p>
+			<div id="Allbar" class="progressbar" style="margin-bottom: 20px; display: none; ">
+				<div class="blue" style="width: 0%; "></div>
+				<div class="teal" style="width: 0%; "></div>
+				<div class="grey" style="width: 98%; "></div>
+			</div>
+			<div class="summery_box" style="display: none; ">
+				<img class="sprite-icon_people" />
+				<span class="count" id="All_uc">1</span>
+				<img class="seperator sprite-line" />
+				<img class="sprite-icon_tasks" />
+				<span class="count" id="All_tc">321</span>
+			</div>
+			<div class="more" style="display: block; " id="9990_tasks_options">
+				<div class="totaltasks">
+					<img class="sprite-icon_bluecheck bluecheck"> <span class="completed">0</span>
+					<span class="taskcount">2</span>
+					<img class="sprite-icon_tealtasks tealtasks"/>
+				</div>
+				<div class="btn_manage" onclick="manageset(&#39;All&#39;);">
+					<span>Manage Set</span>
+				</div>
+				<div class="checkboxes">
+					<div id="showtasks" class="checkbox brown" onclick="toggleUsersAndGroups(&#39;tasks&#39;,&#39;All_tasks&#39;,&#39;9990&#39;,&#39;All&#39;)">
+						<img class="sprite-icon_checkbox box" attr="checked" />
+						<img class="task_icon sprite-icon_tasklist_black" />
+						<span class="task_count">321</span>
+					</div>
+					<div id="showpeople" class="checkbox" onclick="toggleUsersAndGroups(&#39;users&#39;,&#39;All_users&#39;,&#39;9990&#39;,&#39;All&#39;)">
+						<img class="sprite-checkbox_empty box" attr="checked" />
+						<img class="people_icon sprite-icon_people" />
+						<span class="people_count">1</span>
+					</div>
+					<input type="hidden" class="IsTaskShown" value="true">
+					<input type="hidden" class="IsUserShown" value="false">
+				</div>
+			</div>
+		</div>
+<!-- hidden to check if tag is open or not -->
+		<input type="hidden" id="9990_tasks_show" value="false">
+<div id="All_tasks">
+<input type="hidden" id="9990_tasks_show" value="true">
+<div class="task_detail backroom_task" id="task_9990705" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=705&#39;)">
+<div class="top">
+<span class="task_title">large dynamic attributes with title</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">30</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<input type="hidden" id="ipt_count_for_user_tasks" value="">
+<input type="hidden" id="ct_count_for_user_tasks" value="">
+<input type="hidden" id="ot_count_for_user_tasks" value="">
+<input type="hidden" id="All_count_for_user_tasks" value="1">
+<input type="hidden" id="9990_has_more_tasks" value="yes">
+<input type="hidden" id="9990_tasks_show" value="true">
+<div class="task_detail backroom_task" id="task_9990607" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=607&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_607" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990606" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=606&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_606" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990605" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=605&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_605" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990604" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=604&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_604" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990603" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=603&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_603" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990602" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=602&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_602" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990601" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=601&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_601" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990600" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=600&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_600" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990599" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=599&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_599" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990598" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=598&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_598" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990597" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=597&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_597" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990596" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=596&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_596" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990595" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=595&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_595" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990594" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=594&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_594" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990593" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=593&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_593" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990592" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=592&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_592" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990591" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=591&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_591" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990590" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=590&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_590" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990589" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=589&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_589" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990588" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=588&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_588" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990587" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=587&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_587" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990586" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=586&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_586" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990585" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=585&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_585" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990584" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=584&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_584" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990583" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=583&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_583" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990582" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=582&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_582" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990581" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=581&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_581" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990580" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=580&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_580" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990579" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=579&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_579" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990578" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=578&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_578" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990577" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=577&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_577" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990576" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=576&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_576" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990575" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=575&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_575" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990574" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=574&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_574" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990573" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=573&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_573" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990572" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=572&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_572" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990571" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=571&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_571" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990570" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=570&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_570" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990569" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=569&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_569" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990568" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=568&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_568" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990567" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=567&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_567" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990566" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=566&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_566" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990565" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=565&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_565" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990564" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=564&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_564" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990563" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=563&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_563" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990562" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=562&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_562" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990561" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=561&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_561" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990560" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=560&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_560" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990559" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=559&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_559" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990558" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=558&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_558" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990557" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=557&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_557" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990556" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=556&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_556" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990555" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=555&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_555" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990554" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=554&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_554" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990553" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=553&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_553" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990552" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=552&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_552" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990551" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=551&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_551" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990550" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=550&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_550" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990549" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=549&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_549" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990548" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=548&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_548" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990547" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=547&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_547" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990546" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=546&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_546" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990545" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=545&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_545" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990544" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=544&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_544" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990543" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=543&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_543" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990542" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=542&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_542" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990541" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=541&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_541" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990540" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=540&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_540" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990539" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=539&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_539" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990538" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=538&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_538" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990537" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=537&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_537" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990536" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=536&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_536" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990535" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=535&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_535" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990534" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=534&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_534" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990533" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=533&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_533" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990532" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=532&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_532" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990531" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=531&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_531" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990530" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=530&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_530" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990529" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=529&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_529" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990528" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=528&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_528" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990527" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=527&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_527" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990526" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=526&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_526" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990525" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=525&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_525" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990524" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=524&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_524" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990523" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=523&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_523" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990522" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=522&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_522" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990521" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=521&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_521" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990520" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=520&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_520" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990519" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=519&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_519" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990518" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=518&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_518" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990517" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=517&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_517" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990516" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=516&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_516" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990515" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=515&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_515" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990514" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=514&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_514" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990513" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=513&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_513" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990512" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=512&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_512" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990511" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=511&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_511" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990510" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=510&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_510" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990509" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=509&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_509" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990508" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=508&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_508" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990507" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=507&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_507" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990506" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=506&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_506" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990505" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=505&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_505" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990504" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=504&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_504" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990503" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=503&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_503" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990502" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=502&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_502" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990501" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=501&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_501" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990500" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=500&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_500" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990499" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=499&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_499" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990498" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=498&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_498" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990497" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=497&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_497" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990496" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=496&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_496" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990495" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=495&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_495" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990494" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=494&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_494" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990493" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=493&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_493" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990492" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=492&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_492" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990491" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=491&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_491" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990490" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=490&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_490" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990489" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=489&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_489" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990488" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=488&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_488" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990487" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=487&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_487" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990486" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=486&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_486" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990485" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=485&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_485" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990484" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=484&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_484" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990483" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=483&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_483" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990482" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=482&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_482" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990481" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=481&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_481" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990480" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=480&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_480" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990479" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=479&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_479" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990478" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=478&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_478" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990477" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=477&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_477" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990476" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=476&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_476" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990475" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=475&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_475" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990474" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=474&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_474" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990473" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=473&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_473" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990472" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=472&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_472" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990471" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=471&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_471" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990470" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=470&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_470" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990469" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=469&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_469" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990468" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=468&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_468" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990467" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=467&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_467" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990466" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=466&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_466" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990465" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=465&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_465" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990464" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=464&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_464" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990463" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=463&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_463" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990462" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=462&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_462" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990461" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=461&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_461" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990460" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=460&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_460" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990459" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=459&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_459" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990458" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=458&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_458" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990457" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=457&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_457" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990456" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=456&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_456" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990455" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=455&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_455" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990454" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=454&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_454" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990453" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=453&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_453" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990452" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=452&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_452" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990451" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=451&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_451" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990450" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=450&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_450" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990449" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=449&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_449" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990448" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=448&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_448" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990447" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=447&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_447" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990446" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=446&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_446" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990445" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=445&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_445" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990444" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=444&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_444" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990443" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=443&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_443" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990442" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=442&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_442" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990441" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=441&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_441" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990440" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=440&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_440" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990439" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=439&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_439" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990438" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=438&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_438" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990437" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=437&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_437" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990436" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=436&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_436" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990435" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=435&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_435" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990434" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=434&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_434" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990433" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=433&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_433" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990432" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=432&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_432" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990431" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=431&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_431" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990430" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=430&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_430" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990429" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=429&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_429" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990428" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=428&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_428" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990427" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=427&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_427" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990426" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=426&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_426" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990425" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=425&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_425" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990424" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=424&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_424" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990423" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=423&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_423" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990422" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=422&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_422" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990421" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=421&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_421" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990420" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=420&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_420" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990419" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=419&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_419" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990418" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=418&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_418" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990417" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=417&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_417" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990416" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=416&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_416" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990415" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=415&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_415" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990414" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=414&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_414" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990413" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=413&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_413" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990412" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=412&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_412" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990411" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=411&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_411" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990410" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=410&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_410" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990409" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=409&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_409" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:40</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990408" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=408&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_408" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:39</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990407" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=407&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_407" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:39</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990406" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=406&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_406" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:39</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990405" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=405&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_405" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:39</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990704" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=704&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_704" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990703" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=703&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_703" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990702" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=702&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_702" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990701" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=701&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_701" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990700" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=700&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_700" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990699" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=699&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_699" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990698" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=698&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_698" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990697" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=697&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_697" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990696" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=696&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_696" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990695" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=695&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_695" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990694" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=694&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_694" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990693" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=693&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_693" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990692" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=692&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_692" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990691" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=691&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_691" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990690" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=690&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_690" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990689" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=689&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_689" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990688" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=688&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_688" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990687" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=687&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_687" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990686" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=686&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_686" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990685" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=685&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_685" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990684" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=684&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_684" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990683" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=683&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_683" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990682" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=682&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_682" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990681" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=681&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_681" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990680" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=680&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_680" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990679" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=679&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_679" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990678" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=678&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_678" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990677" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=677&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_677" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990676" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=676&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_676" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990675" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=675&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_675" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990674" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=674&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_674" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990673" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=673&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_673" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990672" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=672&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_672" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990671" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=671&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_671" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990670" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=670&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_670" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990669" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=669&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_669" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990668" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=668&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_668" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990667" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=667&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_667" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990666" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=666&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_666" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990665" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=665&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_665" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990664" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=664&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_664" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990663" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=663&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_663" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990662" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=662&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_662" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990661" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=661&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_661" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990660" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=660&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_660" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990659" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=659&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_659" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990658" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=658&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_658" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990657" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=657&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_657" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990656" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=656&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_656" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990655" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=655&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_655" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990654" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=654&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_654" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990653" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=653&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_653" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990652" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=652&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_652" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990651" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=651&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_651" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990650" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=650&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_650" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990649" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=649&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_649" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990648" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=648&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_648" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990647" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=647&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_647" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990646" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=646&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_646" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990645" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=645&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_645" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990644" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=644&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_644" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990643" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=643&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_643" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990642" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=642&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_642" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990641" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=641&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_641" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990640" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=640&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_640" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990639" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=639&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_639" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990638" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=638&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_638" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990637" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=637&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_637" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990636" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=636&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_636" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990635" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=635&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_635" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990634" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=634&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_634" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990633" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=633&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_633" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990632" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=632&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_632" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990631" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=631&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_631" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990630" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=630&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_630" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990629" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=629&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_629" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990628" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=628&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_628" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990627" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=627&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_627" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990626" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=626&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_626" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990625" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=625&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_625" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990624" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=624&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_624" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990623" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=623&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_623" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990622" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=622&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_622" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990621" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=621&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_621" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990620" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=620&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_620" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990619" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=619&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_619" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990618" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=618&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_618" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990617" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=617&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_617" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990616" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=616&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_616" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990615" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=615&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_615" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990614" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=614&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_614" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990613" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=613&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_613" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990612" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=612&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_612" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990611" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=611&#39;)">
+<div class="top">
+<img id="task_statusImage_9990_611" class="icon sprite-miniicon_offered">
+<span class="task_title">test_tmd</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">10,14-09 13:41</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990393" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=393&#39;)">
+<div class="top">
+<span class="task_title">LARGE DYNAMIC ATTRIBUTES WITH TITLE1</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">1111:,14-09 11:26</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990395" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=395&#39;)">
+<div class="top">
+<span class="task_title">Work Help Request</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">14-09 11:59</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990402" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=402&#39;)">
+<div class="top">
+<span class="task_title">Scan To Test 1</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">14-09 12:46</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990404" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=404&#39;)">
+<div class="top">
+<span class="task_title">large dynamic attributes with title</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">30,14-09 13:31</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990389" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=389&#39;)">
+<div class="top">
+<span class="task_title">large dynamic attributes with title</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">30,14-09 11:13</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990387" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=387&#39;)">
+<div class="top">
+<span class="task_title">large dynamic attributes with title</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">30,14-09 10:44</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990399" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=399&#39;)">
+<div class="top">
+<span class="task_title">large dynamic attributes with title</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">30,14-09 11:46</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990391" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=391&#39;)">
+<div class="top">
+<span class="task_title">Work Help Request</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">14-09 11:44</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990392" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=392&#39;)">
+<div class="top">
+<span class="task_title">Work Help Request</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">14-09 11:44</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990390" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=390&#39;)">
+<div class="top">
+<span class="task_title">Work Help Request</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">14-09 11:44</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990388" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=388&#39;)">
+<div class="top">
+<span class="task_title">Work Help Request</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">14-09 11:24</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990401" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=401&#39;)">
+<div class="top">
+<span class="task_title">Customer Assistance</span>
+<span class="priority">High </span>
+</div>
+<div class="details">
+<span class="subtitle">Time:12:10,Origin:2</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990394" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=394&#39;)">
+<div class="top">
+<span class="task_title">LARGE DYNAMIC ATTRIBUTES WITH TITLE1</span>
+<span class="priority">Medium </span>
+</div>
+<div class="details">
+<span class="subtitle">1111:,14-09 11:29</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<div class="task_detail backroom_task" id="task_9990386" onclick="doclick(&#39;/MWM/MCxxTM/Dashboard/TaskDetails?taskId=386&#39;)">
+<div class="top">
+<span class="task_title">large dynamic attributes with title</span>
+<span class="priority">Medium</span>
+</div>
+<div class="details">
+<span class="subtitle">30,14-09 10:42</span>
+<span class="assigned_people">
+<img class="sprite-icon_people_small">
+<span>0</span>
+</span>
+</div>
+</div>
+<input type="hidden" id="ipt_count_for_user_tasks" value="">
+<input type="hidden" id="ct_count_for_user_tasks" value="">
+<input type="hidden" id="ot_count_for_user_tasks" value="">
+<input type="hidden" id="All_count_for_user_tasks" value="311">
+<input type="hidden" id="9990_has_more_tasks" value="">
+</div>
+<div id="All_users">
+</div>
+<div class="task_set" id="scheduled" onclick="doclick(&#39;scheduled_tasks&#39;,&#39;scheduled_users&#39;,&#39;9991&#39;,&#39;scheduled&#39;); ">
+<p class="title"> Scheduled</p>
+<div class="summery_box">
+<img class="sprite-icon_refresh">
+<span class="count" id="Scheduled_tc">0</span>
+</div>
+<div class="more" style="display:none;" id="9991_tasks_options">
+<div class="totaltasks"> <img class="sprite-icon_bluecheck bluecheck"> <span class="completed">0</span>
+<span class="taskcount">0</span> <img class="sprite-icon_tealtasks tealtasks">
+</div>
+<div class="btn_manage" onclick="manageset(&#39;scheduled&#39;);">
+<span>Manage Set</span>
+</div>
+<div class="checkboxes">
+<div id="showtasks" class="checkbox brown" onclick="toggleUsersAndGroups(&#39;tasks&#39;,&#39;scheduled_tasks&#39;,&#39;9991&#39;,&#39;scheduled&#39;)">
+<img class="sprite-icon_checkbox box" attr="checked">
+<img class="task_icon sprite-icon_tasklist_black">
+<span class="task_count">0</span>
+</div>
+<div id="showpeople" class="checkbox" onclick="toggleUsersAndGroups(&#39;users&#39;,&#39;scheduled_users&#39;,&#39;9991&#39;,&#39;scheduled&#39;)">
+<img class="sprite-checkbox_empty box" attr="checked">
+<img class="people_icon sprite-icon_people">
+<span class="people_count">0</span>
+</div>
+<input type="hidden" class="IsTaskShown" value="true">
+<input type="hidden" class="IsUserShown" value="false">
+</div>
+</div>
+</div>
+<!-- hidden to check if tag is open or not -->
+<input type="hidden" id="9991_tasks_show" value="true">
+<div id="scheduled_tasks">
+</div>
+<div id="scheduled_users">
+</div>
+<div class="task_set" id="Escalated" onclick="doclick(&#39;Escalated_tasks&#39;,&#39;Escalated_users&#39;,&#39;9992&#39;,&#39;Escalated&#39;);">
+<p class="title"> Escalated</p>
+<div class="summery_box">
+<img class="sprite-icon_people">
+<span class="count" id="Escalated_uc">0</span>
+<img class="seperator sprite-line">
+<img class="sprite-icon_tasks">
+<span class="count" id="Escalated_tc">0</span>
+</div>
+<div class="more" style="display:none;" id="9992_tasks_options">
+<div class="totaltasks"> <img class="sprite-icon_bluecheck bluecheck"> <span class="completed">0</span>
+<span class="taskcount">0</span> <img class="sprite-icon_tealtasks tealtasks">
+</div>
+	<div class="btn_manage" onclick="manageset(&#39;Escalated&#39;);">
+		<span>Manage Set</span>
+	</div>
+	<div class="checkboxes">
+		<div id="showtasks" class="checkbox brown" onclick="toggleUsersAndGroups(&#39;tasks&#39;,&#39;Escalated_tasks&#39;,&#39;9992&#39;,&#39;Escalated&#39;)">
+			<img class="sprite-icon_checkbox box" attr="checked">
+			<img class="task_icon sprite-icon_tasklist_black">
+			<span class="task_count">0</span>
+		</div>
+		<div id="showpeople" class="checkbox" onclick="toggleUsersAndGroups(&#39;users&#39;,&#39;Escalated_users&#39;,&#39;9992&#39;,&#39;Escalated&#39;)">
+			<img class="sprite-checkbox_empty box" attr="checked">
+			<img class="people_icon sprite-icon_people">
+			<span class="people_count">0</span>
+		</div>
+		<input type="hidden" class="IsTaskShown" value="true">
+		<input type="hidden" class="IsUserShown" value="false">
+	</div>
+</div>
+</ul>
+</body>
+<!-- Common Java Script -->
+<script src="./Dashboard_files/asl.js" type="text/javascript">
+</script>
+<script src="./Dashboard_files/npapi.js" type="text/javascript">
+</script>
+<script src="./Dashboard_files/alert.js" type="text/javascript">
+</script>
+<script src="./Dashboard_files/title.js" type="text/javascript">
+</script>
+<script type="text/javascript" src="./Dashboard_files/jquery-latest.js">
+</script>
+</html>

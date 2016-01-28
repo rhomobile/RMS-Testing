@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<script type="text/javascript" src="http://127.0.0.1:83/Application/www/sapp/src/asl.js"></script>
+<script>
+      
+      function Navigatetohiddenpage() 
+      {
+          location.href='CandA_Hidden1.html';
+
+      }
+      
+      function onQuit()
+      {
+       application.quit(); 
+      }
+
+ </script>
+</head>
+<body onload="setTimeout('Navigatetohiddenpage()',3000)">
+ Visible Page
+<P><INPUT TYPE="button" VALUE="Back" ONCLICK="location.href='./ControlAppearance.html'"></P>
+<input type=button value="Quit" onclick='onQuit()'> 
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿<html>
+<head>
+    <title>PB 3.0 Navigate page</title>
+   <script language="javascript">
+   function LoadScript()
+	{
+  	var hu;
+  	bat.innerHTML = "Hello";
+
+    
+  	hu = window.location.search.substring(1);
+  	bat.innerHTML = "Result ="+hu;
+  
+	}
+
+</script>
+   
+</head>
+
+<body onload="LoadScript()">
+<br><br><br><br><br>
+<div id="bat">Results should appear here</div>
+<form id="frmFileManagement" action="">
+<h3>Successfully navigated to this page</h3>
+<h4><a href="./INDEX.HTML">Index page</a></h4>
+
+</form>
+</body>
+</html>
+
+
+

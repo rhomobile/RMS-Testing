@@ -1,0 +1,14 @@
+
+<html><body>
+<form action="test.html">
+<div style="padding:10px">
+<span class="label">Label: </span>
+<input id="test" type="text" value="" placeholder="placeholder" >
+<input type="submit" value="Go"> 
+</div> 
+</form>
+<script type="text/javascript">
+setFocus('test'); function setFocus(id){window.setTimeout("_setFocus('"+id+"')",100);} function _setFocus(id){var element=document.getElementById(id);if(element && element.focus){element.focus();}}
+</script>
+</body>
+</html>

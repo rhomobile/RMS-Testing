@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+
+ <text x="0" y="15" fill="red">I love SVG</text>
+	 
+  <a xlink:href="rotatetext.svg" >
+    <text x="20" y="200" fill="red">Next test Rotate a text</text>
+  </a>
+</svg>

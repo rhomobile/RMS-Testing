@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function getElements()
+{
+var x=document.getElementsByName("x");
+alert(x.length);
+}
+</script>
+</head>
+<body>
+
+Cats:
+<input name="x" type="radio" value="Cats">
+Dogs:
+<input name="x" type="radio" value="Dogs">
+
+<input type="button" onclick="getElements()" value="How many elements named 'x'?">
+
+</body>
+</html>
+

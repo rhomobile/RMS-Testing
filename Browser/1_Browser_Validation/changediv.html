@@ -1,0 +1,34 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="jquery.json-2.3.min.js"></script>
+<script type="text/javascript" >
+	function div1()
+	{
+		$("#div1 span.result").text(JSON.stringify("Div 1"));
+	}
+	function div2()
+	{
+		$("#div2 span.result").text(JSON.stringify("Div 2"));
+	}
+	function div3()
+	{
+		$("#div3 span.result").text(JSON.stringify("Div 3"));
+	}
+</script>
+</head>
+<body><br /><br /><br /><br />
+	<div>
+        <button onClick='div1()'>Add to Div1</button> 
+		<div id="div1"><span class="result"></span></div>
+	</div><br /><br />
+	<div>
+        <button onClick='div2()'>Add to Div2</button> 
+		<div id="div2"><span class="result"></span></div>
+	</div><br /><br />
+	<div>
+        <button onClick='div3()'>Add to Div3</button> 
+		<div id="div3"><span class="result"></span></div>
+	</div><br /><br />
+</body>
+</html>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+
+        <ellipse cx="240" cy="50" rx="220" ry="30" style="fill:yellow" />
+  <ellipse cx="220" cy="50" rx="190" ry="20" style="fill:white" />
+	   
+  <a xlink:href="line.svg" >
+    <text x="20" y="200" fill="red">Next test line</text>
+  </a>
+</svg>

@@ -1,0 +1,336 @@
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: tahoma;
+}
+
+/* page title */
+.pageTitle {
+    display: none;
+}
+
+/* toolbar */
+.toolbar {
+    width: 100%;
+    height: 30px;
+    background: black;
+    border-bottom: 1px solid gray;
+}
+
+div[data-role="header"] {
+    width: 100%;
+    height: 30px;
+    background: black;
+    border-bottom: 1px solid gray;
+}
+
+div[data-role="header"] h1 {
+    color: #d3d3d3;
+    font-size: 22px;
+    display: inline;
+    margin-left: 10px;
+}
+
+.toolbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+div[data-role="header"] a {
+    margin-top: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 1px 4px 1px 4px;
+    border: 1px solid;
+}
+
+div[data-role="header"] a {
+    color: white;
+    background-color: #797979;
+    border-color: #aaa;
+}
+
+div[data-role="header"] a:hover,
+div[data-role="header"] a:focus {
+    background-color: #999;
+    border-color: #ccc;
+}
+
+div[data-role="header"] a.ui-btn-right {
+    float: right;
+    margin-right: 4px;
+}
+
+div[data-role="header"] a.ui-btn-left {
+    float: left;
+    margin-left: 4px;
+}
+
+.toolbar .leftItem, .toolbar .rightItem {
+    margin-top: 6px;
+}
+
+.toolbar .leftItem {
+    float: left;
+    width: 40px;
+    margin-left: 5px;
+}
+
+.toolbar .rightItem {
+    float: right;
+    text-align: right;
+    width: 40px;
+    margin-right: 5px;
+}
+
+.toolbar .noButton {
+    display: none;
+}
+
+/* content */
+.content {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.content h2.groupTitle {
+    width: inherit;
+    margin: 0;
+    padding: 4px;
+    margin: 0;
+    font-size: 10px;
+    color: white;
+    background-color: black;
+}
+
+/* Lists */
+.content ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+div[data-role="content"] ul[data-role="listview"] {
+    margin: 3px 0 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+.content ul li {
+    list-style-type: none;
+    height: 30px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+div[data-role="content"] ul[data-role="listview"] li {
+    list-style-type: none;
+    height: 30px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.content ul li a span.title {
+    margin: 0 5px 0 5px;
+    padding: 0;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 30px;
+    height: 30px;
+    display: block;
+}
+
+.content ul li a {
+    text-decoration: none;
+    display: block;
+    color: black;
+    height: 30px;
+    line-height: 30px;
+}
+
+div[data-role="content"] ul[data-role="listview"] li a {
+    margin: 0 5px 0 5px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: bold;
+
+    text-decoration: none;
+    display: block;
+    color: black;
+    height: 30px;
+    line-height: 30px;
+}
+
+div[data-role="content"] ul[data-role="listview"] li:hover,
+div[data-role="content"] ul[data-role="listview"] li:focus {
+    background-color: #ccc;
+}
+
+.content ul li a span.disclosure_indicator {
+    display: none;
+    height: 0;
+    visibility: hidden;
+}
+
+.content ul li div {
+    width: 45%;
+    line-height: 30px;
+    margin: 0 5px;
+}
+
+.content ul li div.itemLabel {
+    float: left;
+    font-weight: bold;
+}
+
+.content ul li div.itemValue {
+    float: right;
+    text-align: right;
+}
+
+ul[data-role="listview"] li div.itemLabel,
+ul[data-role="listview"] li div.itemValue {
+    display: block;
+}
+
+ul[data-role="listview"] li div.itemValue {
+    position: absolute;
+    right: 10px;
+    margin-top: -1.1em;
+    font-weight: bold;
+}
+
+
+div[data-role="fieldcontain"] {
+    margin-bottom: 6px;
+}
+
+div[data-role="fieldcontain"] input,
+div[data-role="fieldcontain"] select,
+div[data-role="fieldcontain"] textarea {
+    position: absolute;
+    right: 10px;
+    width: 60%;
+}
+
+div[data-role="content"] div.error-message {
+    color: red;
+    font-weight: bold;
+    margin: 6px;
+}
+
+
+div[data-role="content"] form {
+    padding: 6px;
+}
+/* Settings */
+
+.content ul.settings li {
+    height: 60px;
+}
+
+.content ul.settings li div {
+    line-height: 60px;
+    margin: 0;
+}
+
+.content ul.settings li span.clientID {
+    font-size: 60%;
+    float: right;
+    display: block;
+    height: 20px;
+}
+
+.content ul.settings li.alertMessage {
+    text-align: center;
+}
+
+.content ul.settings li.alertMessage span.message {
+    color: red;
+    line-height: 60px;
+}
+
+.content ul.settings li div.itemLabel span.title {
+    padding-top: 5px;
+}
+
+/* reset */
+.content .reset {
+    padding: 10px;
+}
+
+/* forms */
+.content form {
+    margin: 0;
+    padding: 0;
+}
+
+.content form h4 {
+    background-color: black;
+    color: white;
+    display: block;
+    padding: 5px;
+    margin: 0;
+}
+
+.content form ul {
+    margin: 0;
+    padding: 0;
+}
+
+.content form ul li {
+    height: 40px;
+}
+
+.content form ul li.textarea {
+    height: 110px;
+}
+
+.content form ul li label {
+    float: left;
+    margin: 10px 0 0 5px;
+    width: 40%;
+
+}
+
+.content form ul li input {
+    float: right;
+    margin: 10px 5px 0 0;
+    width: 40%;
+}
+
+.content form ul li input[type="checkbox"] {
+    float: right;
+    margin: 10px 10px 0 0;
+    width: 15px;
+}
+
+.content form ul li input[type="radio"] {
+    float: right;
+    margin: 10px 10px 0 0;
+    width: 15px;
+}
+
+.content form select,
+.content form textarea {
+    float: right;
+    margin: 10px;
+}
+
+.content form input[type="submit"] {
+    float: right;
+    width: 50px;
+    margin: 10px 10px 0 0;
+}

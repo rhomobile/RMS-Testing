@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+
+      <a xlink:href="http://www.w3schools.com/svg/" target="_blank">
+    <text x="0" y="15" fill="red">I love SVG</text>
+  </a>
+	 
+  <a xlink:href="definestroke.svg" >
+    <text x="20" y="200" fill="red">Next Defines the color of a line, text or outline (stroke)</text>
+  </a>
+</svg>

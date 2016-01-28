@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://iestelle.com/wordcampsf/#slide1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+ 
+   
+    <!--[if gte IE 9]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <![endif]--> 
+    <!--[if lt IE 9]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
+    <![endif]--> 
+    <meta charset="utf-8">
+    <title>Features of CSS3: Creating Snow</title>
+    <link href="./Features of CSS3  Creating Snow_files/css" rel="stylesheet" type="text/css">
+    
+<link rel="stylesheet" media="print" href="print.css">  
+<link rel="stylesheet" href="screen.css">  
+<link rel="stylesheet" href="effects.css">
+<link rel="stylesheet" href="religion.css">
+</head> 
+<body> 
+
+  
+  <div id="info">
+    <p><a href="http://standardista.com/">http://iestelle.com/wordcampsf</a> · <a href="http://www.twitter.com/estellevw">@estellevw</a> ·Press <span class="key">→</span> key to advance.
+    </p>
+  </div>
+  
+  <div id="presentation">
+     <div id="flakes">
+  	 <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+   <div id="presentation-counter">1</div>
+      
+   <div id="slides">
+   
+    
+    
+   
+    
+    <div class="slide intro current">
+     <header>
+      <h1 style="line-height:1.1;">Making it snow <br>
+(in the summer)<br>
+without JavaScript<br>
+(or clouds)</h1>
+            <p>Estelle Weyl</p>
+            <p>http://iestelle.com/wordcampsf<br><a href="http://standardista.com/">www.standardista.com</a> · <a href="http://twitter.com/estellevw">@estellevw</a></p>  
+     </header>
+    <span class="counter">1</span></div> 
+    
+     
+    
+
+    
+   
+<div class="slide transparent future"> 
+     <header><h1>CSS3 Features Displaying now?</h1></header> 
+     <section class="content"> 
+     <ul>
+     	<li><span class="imp">linear gradients</span></li>
+     	<li><span class="imp">opacity </span></li>
+        <li><span class="imp">RGBA colors</span>
+     <a href="http://www.sitepoint.com/books/htmlcss1/" style="float: right; margin-right: 20px; border:none"><img src="./Features of CSS3  Creating Snow_files/3dcover-flat.png" alt="HTML5 &amp; CSS3 for the Real World" style="border:none;"></a></li>
+     	<li><span class="imp">border-radius</span></li>
+        <li><span class="imp">CSS3selectors</span></li>
+		<li><span class="imp">transforms</span></li>
+		<li><span class="imp">transitions</span></li>
+		<li><span class="imp">animations</span></li>
+        
+     </ul>
+     <p class="notes">Opacity is from CSS2</p>
+     </section>
+<span class="counter">2</span></div>
+  
+  
+  
+  
+ 
+
+<div class="slide far-future">
+	<header><h1>Structural Selectors</h1></header>
+    <section class="content">
+<pre contenteditable="" class="columns2">:nth-child() 
+
+:nth-last-child() 
+
+:nth-of-type() 
+
+:nth-last-of-type() 
+
+:first-child 
+
+:last-child 
+
+:first-of-type 
+
+:last-of-type 
+
+:only-child 
+
+:only-of-type 
+
+:root
+
+:empty
+
+:not(:empty) 
+</pre>
+<ul class="icons" style="float: left; margin-right: 40px;">
+         <li class="chrome">Chrome</li>
+         <li class="safari">Safari</li>
+         <li class="firefox">Firefox</li>
+         <li class="opera">Opera</li>
+         <li class="ie new">IE 9</li>
+        
+     </ul>
+<ul style="list-style:none">
+	<li><a href="http://dev.w3.org/csswg/selectors3/">W3C working specification</a></li>
+	<li><a href="http://www.standardista.com/css3/css3-selector-browser-support">Browser support chart</a></li>
+</ul>
+</section>
+<span class="counter">3</span></div> 
+  
+  
+  
+  
+<div class="slide distant-slide">
+    <section class="content">
+	<header style="float:right; padding-bottom: 40px;"><h1>Structural <br>
+Selectors</h1></header>
+<pre contenteditable="" style="margin-top: 0; float: left;">tr:<b>first-child</b>,
+tr:<b>last-child</b> {
+  font-weight: bold;
+}
+tr:<b>nth-child</b>(<b>even</b>) {
+  background-color: #CCC;
+}
+tr:nth-child(<b>3</b>) {
+  color: #CCC;
+}
+tr:<b>first-of-type</b>,
+tr:<b>last-of-type</b>{
+  text-decoration:line-through;
+}
+tr:<b>nth-of-type</b>(<b>odd</b>) {
+  background-color: #FFF;
+}
+tr:nth-of-type(<b>4n</b>) {
+  color: #E2007A;
+}
+tr:nth-of-type(<b>3n-1</b>) {
+  font-style: italic;
+}
+
+</pre>
+<table class="selectors" cellpadding="1" cellspacing="0" border="0" style="float: right;">
+<tbody>
+<tr><td>Row 1</td></tr>
+<tr><td>Row 2</td></tr>
+<tr><td>Row 3</td></tr>
+<tr><td>Row 4</td></tr>
+<tr><td>Row 5</td></tr>
+<tr><td>Row 6</td></tr>
+<tr><td>Row 7</td></tr>
+<tr><td>Row 8</td></tr>
+<tr><td>Row 9</td></tr>
+<tr><td>Row 10</td></tr>
+</tbody>
+</table>
+
+    </section>
+<span class="counter">4</span></div> 
+
+
+  <div class="slide distant-slide">
+	<header><h1>Snowflake pseudo-Randomness</h1></header>
+    <section class="content">
+<pre contenteditable="">&lt;div id="flakes"&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/i&gt;...</pre>   
+<pre contenteditable="" style="overflow: hidden; white-space:pre">i:nth-of-type(5n)    { height:30px; width:30px;}
+i:nth-of-type(5n+1)  { height:24px; width:24px;}
+i:nth-of-type(5n+2)  { height:10px; width:10px;}...
+
+i:nth-of-type(3n)    { animation-delay: 2.3s;}
+i:nth-of-type(3n+1)  { animation-delay: 1.5s;}
+i:nth-of-type(3n+2)  { animation-delay: 3.4s;}
+
+i:nth-of-type(7n)    { opacity: 0.5;}
+i:nth-of-type(7n+1)  { opacity: 0.8;}
+i:nth-of-type(7n+2)  { opacity: 0.3;} ...
+
+<span style="white-space:nowrap">i:nth-of-type(11n)   { animation-timing-function: ease-in-out;}</span>
+i:nth-of-type(11n+1) { animation-timing-function: ease-out;}
+i:nth-of-type(11n+2) { animation-timing-function: ease;}
+<span style="white-space:nowrap">i:nth-of-type(11n+5) { animation-timing-function: cubic-bezier(0.2, 0.3, 0.8, 0.9);}</span></pre>
+    </section>
+<span class="counter">5</span></div> 
+
+
+
+
+
+
+
+
+  <div class="slide distant-slide">
+	<header style="margin-bottom: -10px;"><h1>Attribute Selectors</h1></header>
+    <section class="content">
+<pre contenteditable="" style="float:left; width: 45%; margin: 0 20px 0 0;">input[placeholder] { 
+<b class="notes">/* matches any input with a placeholder */</b>}
+input[type=email] {
+<b class="notes">/* exact match */</b>}
+abbr[title~=unicorn] { 
+<b class="notes">/* matches unicorn but not unicorns */</b>}
+abbr[title|=en] { 
+<b class="notes">/* matches en-us and en-uk */</b>}
+a[href^=mailto] { 
+<b class="notes">/* starts with */</b>}
+a[href$=pdf]{ 
+<b class="notes">/* ends in */</b>}
+abbr[title*=unicorn] { 
+<b class="notes">/* matches unicorn and unicorns */</b>}
+</pre>
+<pre contenteditable="" style="float:left; width: 40%; margin-top:0;">E:[att] <b class="notes">/* have the attribute at all */</b>
+
+E:[att=val] <b class="notes">/* exact */</b>
+
+E:[att~=val] <b class="notes">/* val is a space separated word */</b>
+
+E:[att|=val] <b class="notes">/* with a dash */</b>
+
+E:[att^=val] <b class="notes">/* begins with val */</b>
+
+E:[att$=val]  <b class="notes">/* ends with val */</b>
+
+E:[att*=val]  <b class="notes">/* val is anywhere as a substring */</b>
+.</pre>
+<pre contenteditable="" style="clear:both">@media print{
+  abbr[title]:after { 
+    content: "(" attr(title) ")";
+  }
+  a[href^=http]:after { 
+    content: "(" attr(href) ")";
+  }
+}</pre>
+    </section>
+<span class="counter">6</span></div> 
+  
+
+  <div class="slide distant-slide">
+	<header><h1>More CSS3 Selectors</h1></header>
+    <section class="content">
+<ul class="columns2">
+<li>E::before</li>	
+<li>E::after</li>	
+<li></li>
+<li>
+E:enabled</li>	
+<li>
+E:disabled</li>	
+<li>	
+E:checked</li>
+<li>input:valid</li>
+<li>input:invalid</li>
+<li>input:optional </li>
+<li>input:required	</li>
+<li>::selection</li>
+<li>
+E:target</li>
+<li>E:not(s)</li>	
+<li> </li>		
+<li>
+	</li>	
+<li>
+E &gt; F	Child</li>	
+<li>
+E + F	Adjacent sibling</li>	
+<li>
+E ~ F   sibling</li>
+<li>	
+</li></ul>
+    </section>
+<span class="counter">7</span></div> 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+<div class="slide distant-slide" id="simplingrad"> 
+     <header><h1>The simplest Linear Gradient</h1></header> 
+     <section class="content"> <div id="lineargradient1"><div class="gradientline"></div></div>
+     <pre contenteditable="" style="width: 45%">background-image: 
+    <u></u>linear-gradient( 
+    #3A67AB, 
+    #E8F6FF);</pre>
+     <pre contenteditable="" style="width: 45%">background-image: 
+    <u></u>linear-gradient(top, 
+    #3A67AB 0%, 
+    #E8F6FF 100%);</pre>
+    <pre contenteditable="" style="width: 45%">background-image: 
+    <u></u>linear-gradient(270deg, 
+    #3A67AB 0%, 
+    #E8F6FF 100%);</pre>
+    <p style="clear:both">prefix with <span onclick="vendorPrefix(&#39;w&#39;, &#39;simplingrad&#39;)">-webkit-</span>, <span onclick="vendorPrefix(&#39;m&#39;, &#39;simplingrad&#39;)">-moz-</span>, <span onclick="vendorPrefix(&#39;ms&#39;, &#39;simplingrad&#39;)">-ms-</span> <span onclick="vendorPrefix(&#39;r&#39;, &#39;simplingrad&#39;)"> &amp; </span> <span onclick="vendorPrefix(&#39;o&#39;, &#39;simplingrad&#39;)">-o-</span></p>
+     </section>
+     <span class="counter">8</span></div>
+    
+ <div class="slide distant-slide" id="complexgrad"> 
+     <header><h1>Angled Linear Gradient with Color Stops</h1></header> 
+     <section class="content"> <div class="snowflakedemo"><div class="gradientline" style="-webkit-transform: rotate(45deg);"></div></div>
+     <pre contenteditable="" style="width: 48%; margin-top:0px; float:left">background-image:
+  linear-gradient(180deg, 
+     rgba(255,255,255,0) 40%, 
+     #ffffff 40%, 
+     #ffffff 60%, 
+     rgba(255,255,255,0) 60%),
+  linear-gradient(90deg,  
+     rgba(255,255,255,0) 40%, 
+     #ffffff 40%, 
+     #ffffff 60%, 
+     rgba(255,255,255,0) 60%),
+  linear-gradient(45deg,  
+     rgba(255,255,255,0) 43%, 
+     #ffffff 43%, 
+     #ffffff 57%, 
+     rgba(255,255,255,0) 57%),
+  linear-gradient(135deg,  
+     rgba(255,255,255,0) 43%, 
+     #ffffff 43%, 
+     #ffffff 57%, 
+     rgba(255,255,255,0) 57%);</pre>
+     <p style="width: 300px; float:right; font-family:Arial, Helvetica, sans-serif; font-size:18px"><span onclick="vendorPrefix(&#39;w&#39;, &#39;complexgrad&#39;)">-webkit-</span> | <span onclick="vendorPrefix(&#39;m&#39;, &#39;complexgrad&#39;)">-moz-</span> | <span onclick="vendorPrefix(&#39;ms&#39;, &#39;complexgrad&#39;)">-ms-</span>  <span onclick="vendorPrefix(&#39;r&#39;, &#39;complexgrad&#39;)"> || </span> <span onclick="vendorPrefix(&#39;o&#39;, &#39;complexgrad&#39;)">-o-</span></p>
+    <p style="width: 300px; float:right; font-size:24px" class="notes">transparent = rgba(0,0,0,0) not rgba(255,255,255,0)</p>
+    
+     
+     </section>
+     <span class="counter">9</span></div>
+    
+    
+     
+  <div class="slide distant-slide">
+          <header> <h1>Gradients</h1></header>
+
+          <section>
+          
+            <pre contenteditable="" style="float: left">background: -webkit-linear-gradient(<br>  <span id="linearangle">90</span>deg, <br>  violet <span id="zerostop">0</span>%,<br>  steelblue <span id="firststop">33</span>%,<br>  plum <span id="secondstop">66</span>%,<br>  magenta <span id="laststop">100</span>%);</pre>
+            <pre contenteditable="" style="float: left; margin-left: 20px;"><input id="lineargradientsangle" type="range" min="1" max="360" value="90" onchange="linearchangeGradients(event)"> Angle
+<input id="zerostopvalue" type="range" min="-10" max="100" value="0" onchange="linearchangeGradients(event)"> Starting point
+<input id="firststopvalue" type="range" min="0" max="100" value="33" onchange="linearchangeGradients(event)"> First stop
+<input id="secondstopvalue" type="range" min="0" max="100" value="66" onchange="linearchangeGradients(event)"> Second stop
+<input id="laststopvalue" type="range" min="0" max="110" value="100" onchange="linearchangeGradients(event)"> Ending Point</pre>
+            <div id="gradients-linear-example" class="example" style="clear: both; background:-webkit-linear-gradient(90deg, violet 0%, steelblue 33%, plum 66%, magenta 100%)"></div>
+
+<pre contenteditable="" style="float: left">background: radial-gradient(<span id="rgleft">4</span>% <span id="rgtop">12</span>%,<br> <span id="rgshape">circle</span><br> farthest-side,<br> #4697AB, <br> #F7F9FA,<br> #C344C7 <span id="rgstop">40</span>%);</pre>
+
+<pre contenteditable="" style="float: left; margin-left: 20px;"><input type="radio" name="rgshape" checked="" value="circle" id="rgcircle" onchange="changeGradients(event)"> Circle <input type="radio" name="rgshape" value="ellipse" onchange="changeGradients(event)"> Ellipse
+<input id="rglefti" type="range" min="-50" max="150" value="12" onchange="changeGradients(event)"> L/R
+<input id="rgtopi" type="range" min="-50" max="150" value="4" onchange="changeGradients(event)"> T/B
+<input id="rgcl" type="range" min="0" max="100" value="40" onchange="changeGradients(event)"> colorstop </pre>
+            <div id="rdialgradientsample" class="example"></div>
+
+            <script defer="">
+			function linearchangeGradients() {
+                var angle = document.getElementById('lineargradientsangle').value;
+                var zerostop = document.getElementById('zerostopvalue').value;
+                var firststop = document.getElementById('firststopvalue').value;
+				var secondstop = document.getElementById('secondstopvalue').value;
+				var laststop = document.getElementById('laststopvalue').value;
+
+                document.getElementById('gradients-linear-example').style.background = 
+                    '-webkit-linear-gradient(' + angle + 'deg, violet '+zerostop+'%, steelblue '+ firststop +'%, plum ' + secondstop + '%, magenta '+ laststop +'%)';
+				
+
+                document.getElementById('linearangle').textContent = angle;
+				document.getElementById('zerostop').textContent = zerostop;
+                document.getElementById('firststop').textContent = firststop;
+                document.getElementById('secondstop').textContent = secondstop;
+                document.getElementById('laststop').textContent = laststop;
+              }
+			  
+			  
+              function changeGradients() {
+                var rgtop = document.getElementById('rgtopi').value;
+                var rgleft = document.getElementById('rglefti').value;
+                var rgcs = document.getElementById('rgcl').value;
+				
+                var rgshape = document.getElementById('rgcircle').checked ?'circle': 'ellipse';
+                document.getElementById('rdialgradientsample').style.background = 
+                    '-webkit-radial-gradient('+rgleft+'% ' + rgtop + '%,'+rgshape+' farthest-side, #4697AB, #F7F9FA, #C344C7 '+rgcs+'%)';
+
+                document.getElementById('rgtop').textContent = rgtop;
+                document.getElementById('rgleft').textContent = rgleft;
+                document.getElementById('rgstop').textContent = rgcs;
+                document.getElementById('rgshape').textContent = rgshape;
+              }
+            </script>
+          </section>
+        <span class="counter"></span><span class="counter">10</span></div>
+        
+        
+    
+          
+        
+        
+        
+        
+        
+        
+        
+     
+      <div class="slide distant-slide"> 
+     <header><h1>Gradients</h1></header> 
+     <section class="content">
+     <div class="greenbean grad"></div>
+     <div class="metal grad"></div>  
+     <div class="classic grad"></div> 
+     <div class="inverse1 grad"></div>  
+     <div class="bradybunch grad"></div>  
+     <div class="tiltdavid grad"></div>  
+     <div class="retro67 grad"></div>   
+     <div class="blurry grad"></div>
+     <div class="circlestripes grad"></div>       
+        </section>
+        <span class="counter"></span><span class="counter">11</span></div>
+        
+        
+        
+     
+      <div class="slide distant-slide"> 
+     <header><h1>Tips on Gradient</h1></header> 
+     <section class="content"> 
+     <ul>
+     	<li>vendor-prefix ‘linear-gradient’ and ‘radial-gradient’ </li>
+     	<li>keyword ‘transparent’ = rgba(0,0,0,0) so fades to grey</li>
+     	<li>create effects with color stops at same location</li>
+        <li>create effects by adding multiple gradients, playing with position and size</li>
+        <li>learn from others: <a href="http://leaverou.me/css3patterns/">Lea Verou's Gradients</a>, <a href="http://www.standardista.com/cssgradients">Estelle Weyl's Gradients</a>, and <a href="http://www.standardista.com/CSS3gradients/flags.html">Estelle's Flags</a></li>
+        <li>Use tools: <a href="http://westciv.com/tools/gradientsnustyle/">John Allsopp's tool</a>, <a href="http://gradients.glrzad.com/">Damian Galarza's tool</a>, <a href="http://www.colorzilla.com/gradient-editor/">Colorzilla</a></li>
+     </ul> 
+     <ul class="icons" style="margin:0">
+         <li class="chrome">Chrome 3* <br>Chrome 10</li>
+         <li class="safari">Safari 4* <br>Safari 5.1</li>
+         <li class="firefox">Firefox 3.6<br>&nbsp;</li>
+         <li class="opera new">Opera 11.1<br>&nbsp;</li>
+         <li class="ie new">Internet Explorer 10</li>
+        
+     </ul><p style="margin-top: 0">Prefixed -webkit-, -moz-, -ms-, -o-</p>
+     <footer><p>* legacy syntax</p></footer>
+     </section>
+     <span class="counter">12</span></div>
+        
+    
+
+    
+    
+<div class="slide distant-slide"> 
+     <header><h1>Opacity</h1></header> 
+     <section class="content"> 
+     <ul class="icons" style="clear: both; float:right; width: 120px;">
+         <li class="chrome">Chrome 1</li>
+         <li class="safari">Safari 1.2</li>
+         <li class="firefox">Firefox 0.9</li>
+         <li class="opera">Opera 9</li>
+         <li class="ie new">IE 4* / IE 9</li>
+     </ul>
+     <div class="opacity" style="width: 400px;">
+     
+         <div style="opacity:1;">
+         <i></i><pre contenteditable="">opacity: 1;</pre>
+         
+         </div>
+         
+          <div style="opacity:0.75;">
+         <i></i><pre contenteditable="">opacity: 0.75;</pre>
+         
+         </div>
+         
+          <div style="opacity:0.5;">
+         <i></i><pre contenteditable="">opacity: 0.5;</pre>
+         
+         </div>
+         
+          <div style="opacity:0.25;">
+         <i></i><pre contenteditable="">opacity: 0.25;</pre>
+         
+         </div>
+         
+          <div style="opacity:0;">
+         <i></i><pre contenteditable="">opacity: 0;</pre>
+         
+         </div>
+     </div>
+     
+     
+     
+     </section>
+<span class="counter">13</span></div>
+  
+     
+<div class="slide distant-slide"> 
+<header><h1>AlphaTransparency</h1></header> 
+<section class="content"> 
+	 <div class="alphatransparency">
+     		<div style="background-color: rgba(58, 103, 171, 1);"></div>
+     		<div style="background-color: rgba(58, 103, 171, 0.75);"></div>
+     		<div style="background-color: rgba(58, 103, 171, 0.5);"></div>
+     		<div style="background-color: rgba(58, 103, 171, 0.25);"></div>
+     		<div style="background-color: rgba(58, 103, 171, 0);"></div>
+    </div>     
+         
+     <div class="rgba opacity">
+         <div style="color: rgba(0, 0, 0, 1); height:100px;">
+         <pre contenteditable="">color: rgba(0, 0, 0, 1);<br>background-color: rgba(58, 103, 171, 1);</pre>
+         <i></i>
+         </div>
+         
+          <div style="color: rgba(0, 0, 0, 0.75); height:100px;" "="">
+         <pre contenteditable="">color: rgba(0, 0, 0, 0.75);<br>background-color: rgba(58, 103, 171, 0.75);</pre>
+         <i></i>
+         </div>
+         
+          <div style="color: rgba(0, 0, 0, 0.5); height:100px;" "="">
+         <pre contenteditable="">color: rgba(0, 0, 0, 0.5;<br>background-color: rgba(58, 103, 171, 0.5);</pre>
+         <i></i>
+         </div>
+         
+         <div style="color: rgba(0, 0, 0, 0.25); height:100px;" "="">
+         <pre contenteditable="">color: rgba(0, 0, 0, 0.25);<br>background-color: rgba(58, 103, 171, 0.25);</pre>
+         <i></i>
+         </div>
+         
+          <div style="color: rgba(0, 0, 0, 0); height:100px;" "="">
+         <pre contenteditable="">color: rgba(0, 0, 0, 0)<br>background-color: rgba(58, 103, 171, 0);</pre>
+         <i></i>
+         </div>
+     </div>
+     <ul class="icons" style="clear: both;">
+         <li class="chrome">Chrome 1</li>
+         <li class="safari">Safari 1.2</li>
+         <li class="firefox">Firefox 0.9</li>
+         <li class="opera">Opera 9</li>
+         <li class="ie new">IE 9</li>
+     </ul>
+</section>
+<span class="counter">14</span></div>
+
+  
+  
+  
+  
+   <div class="slide distant-slide" id="css-color">
+         
+          <header> <h1>HSLA</h1></header>
+          <section>
+        <pre contenteditable="">color:<b>hsla</b>(
+   <span class="hsl-value" id="hsl-h-value">328,</span> 	<input id="hsl-h" type="range" min="0" max="360" value="328" onchange="changeHSL()"> H <div id="hslah"><i style="background: hsla(0, 100%, 44%, 1.00)"></i><i style="background: hsla(1, 100%, 44%, 1.00)"></i><i style="background: hsla(2, 100%, 44%, 1.00)"></i><i style="background: hsla(3, 100%, 44%, 1.00)"></i><i style="background: hsla(4, 100%, 44%, 1.00)"></i><i style="background: hsla(5, 100%, 44%, 1.00)"></i><i style="background: hsla(6, 100%, 44%, 1.00)"></i><i style="background: hsla(7, 100%, 44%, 1.00)"></i><i style="background: hsla(8, 100%, 44%, 1.00)"></i><i style="background: hsla(9, 100%, 44%, 1.00)"></i><i style="background: hsla(10, 100%, 44%, 1.00)"></i><i style="background: hsla(11, 100%, 44%, 1.00)"></i><i style="background: hsla(12, 100%, 44%, 1.00)"></i><i style="background: hsla(13, 100%, 44%, 1.00)"></i><i style="background: hsla(14, 100%, 44%, 1.00)"></i><i style="background: hsla(15, 100%, 44%, 1.00)"></i><i style="background: hsla(16, 100%, 44%, 1.00)"></i><i style="background: hsla(17, 100%, 44%, 1.00)"></i><i style="background: hsla(18, 100%, 44%, 1.00)"></i><i style="background: hsla(19, 100%, 44%, 1.00)"></i><i style="background: hsla(20, 100%, 44%, 1.00)"></i><i style="background: hsla(21, 100%, 44%, 1.00)"></i><i style="background: hsla(22, 100%, 44%, 1.00)"></i><i style="background: hsla(23, 100%, 44%, 1.00)"></i><i style="background: hsla(24, 100%, 44%, 1.00)"></i><i style="background: hsla(25, 100%, 44%, 1.00)"></i><i style="background: hsla(26, 100%, 44%, 1.00)"></i><i style="background: hsla(27, 100%, 44%, 1.00)"></i><i style="background: hsla(28, 100%, 44%, 1.00)"></i><i style="background: hsla(29, 100%, 44%, 1.00)"></i><i style="background: hsla(30, 100%, 44%, 1.00)"></i><i style="background: hsla(31, 100%, 44%, 1.00)"></i><i style="background: hsla(32, 100%, 44%, 1.00)"></i><i style="background: hsla(33, 100%, 44%, 1.00)"></i><i style="background: hsla(34, 100%, 44%, 1.00)"></i><i style="background: hsla(35, 100%, 44%, 1.00)"></i><i style="background: hsla(36, 100%, 44%, 1.00)"></i><i style="background: hsla(37, 100%, 44%, 1.00)"></i><i style="background: hsla(38, 100%, 44%, 1.00)"></i><i style="background: hsla(39, 100%, 44%, 1.00)"></i><i style="background: hsla(40, 100%, 44%, 1.00)"></i><i style="background: hsla(41, 100%, 44%, 1.00)"></i><i style="background: hsla(42, 100%, 44%, 1.00)"></i><i style="background: hsla(43, 100%, 44%, 1.00)"></i><i style="background: hsla(44, 100%, 44%, 1.00)"></i><i style="background: hsla(45, 100%, 44%, 1.00)"></i><i style="background: hsla(46, 100%, 44%, 1.00)"></i><i style="background: hsla(47, 100%, 44%, 1.00)"></i><i style="background: hsla(48, 100%, 44%, 1.00)"></i><i style="background: hsla(49, 100%, 44%, 1.00)"></i><i style="background: hsla(50, 100%, 44%, 1.00)"></i><i style="background: hsla(51, 100%, 44%, 1.00)"></i><i style="background: hsla(52, 100%, 44%, 1.00)"></i><i style="background: hsla(53, 100%, 44%, 1.00)"></i><i style="background: hsla(54, 100%, 44%, 1.00)"></i><i style="background: hsla(55, 100%, 44%, 1.00)"></i><i style="background: hsla(56, 100%, 44%, 1.00)"></i><i style="background: hsla(57, 100%, 44%, 1.00)"></i><i style="background: hsla(58, 100%, 44%, 1.00)"></i><i style="background: hsla(59, 100%, 44%, 1.00)"></i><i style="background: hsla(60, 100%, 44%, 1.00)"></i><i style="background: hsla(61, 100%, 44%, 1.00)"></i><i style="background: hsla(62, 100%, 44%, 1.00)"></i><i style="background: hsla(63, 100%, 44%, 1.00)"></i><i style="background: hsla(64, 100%, 44%, 1.00)"></i><i style="background: hsla(65, 100%, 44%, 1.00)"></i><i style="background: hsla(66, 100%, 44%, 1.00)"></i><i style="background: hsla(67, 100%, 44%, 1.00)"></i><i style="background: hsla(68, 100%, 44%, 1.00)"></i><i style="background: hsla(69, 100%, 44%, 1.00)"></i><i style="background: hsla(70, 100%, 44%, 1.00)"></i><i style="background: hsla(71, 100%, 44%, 1.00)"></i><i style="background: hsla(72, 100%, 44%, 1.00)"></i><i style="background: hsla(73, 100%, 44%, 1.00)"></i><i style="background: hsla(74, 100%, 44%, 1.00)"></i><i style="background: hsla(75, 100%, 44%, 1.00)"></i><i style="background: hsla(76, 100%, 44%, 1.00)"></i><i style="background: hsla(77, 100%, 44%, 1.00)"></i><i style="background: hsla(78, 100%, 44%, 1.00)"></i><i style="background: hsla(79, 100%, 44%, 1.00)"></i><i style="background: hsla(80, 100%, 44%, 1.00)"></i><i style="background: hsla(81, 100%, 44%, 1.00)"></i><i style="background: hsla(82, 100%, 44%, 1.00)"></i><i style="background: hsla(83, 100%, 44%, 1.00)"></i><i style="background: hsla(84, 100%, 44%, 1.00)"></i><i style="background: hsla(85, 100%, 44%, 1.00)"></i><i style="background: hsla(86, 100%, 44%, 1.00)"></i><i style="background: hsla(87, 100%, 44%, 1.00)"></i><i style="background: hsla(88, 100%, 44%, 1.00)"></i><i style="background: hsla(89, 100%, 44%, 1.00)"></i><i style="background: hsla(90, 100%, 44%, 1.00)"></i><i style="background: hsla(91, 100%, 44%, 1.00)"></i><i style="background: hsla(92, 100%, 44%, 1.00)"></i><i style="background: hsla(93, 100%, 44%, 1.00)"></i><i style="background: hsla(94, 100%, 44%, 1.00)"></i><i style="background: hsla(95, 100%, 44%, 1.00)"></i><i style="background: hsla(96, 100%, 44%, 1.00)"></i><i style="background: hsla(97, 100%, 44%, 1.00)"></i><i style="background: hsla(98, 100%, 44%, 1.00)"></i><i style="background: hsla(99, 100%, 44%, 1.00)"></i><i style="background: hsla(100, 100%, 44%, 1.00)"></i><i style="background: hsla(101, 100%, 44%, 1.00)"></i><i style="background: hsla(102, 100%, 44%, 1.00)"></i><i style="background: hsla(103, 100%, 44%, 1.00)"></i><i style="background: hsla(104, 100%, 44%, 1.00)"></i><i style="background: hsla(105, 100%, 44%, 1.00)"></i><i style="background: hsla(106, 100%, 44%, 1.00)"></i><i style="background: hsla(107, 100%, 44%, 1.00)"></i><i style="background: hsla(108, 100%, 44%, 1.00)"></i><i style="background: hsla(109, 100%, 44%, 1.00)"></i><i style="background: hsla(110, 100%, 44%, 1.00)"></i><i style="background: hsla(111, 100%, 44%, 1.00)"></i><i style="background: hsla(112, 100%, 44%, 1.00)"></i><i style="background: hsla(113, 100%, 44%, 1.00)"></i><i style="background: hsla(114, 100%, 44%, 1.00)"></i><i style="background: hsla(115, 100%, 44%, 1.00)"></i><i style="background: hsla(116, 100%, 44%, 1.00)"></i><i style="background: hsla(117, 100%, 44%, 1.00)"></i><i style="background: hsla(118, 100%, 44%, 1.00)"></i><i style="background: hsla(119, 100%, 44%, 1.00)"></i><i style="background: hsla(120, 100%, 44%, 1.00)"></i><i style="background: hsla(121, 100%, 44%, 1.00)"></i><i style="background: hsla(122, 100%, 44%, 1.00)"></i><i style="background: hsla(123, 100%, 44%, 1.00)"></i><i style="background: hsla(124, 100%, 44%, 1.00)"></i><i style="background: hsla(125, 100%, 44%, 1.00)"></i><i style="background: hsla(126, 100%, 44%, 1.00)"></i><i style="background: hsla(127, 100%, 44%, 1.00)"></i><i style="background: hsla(128, 100%, 44%, 1.00)"></i><i style="background: hsla(129, 100%, 44%, 1.00)"></i><i style="background: hsla(130, 100%, 44%, 1.00)"></i><i style="background: hsla(131, 100%, 44%, 1.00)"></i><i style="background: hsla(132, 100%, 44%, 1.00)"></i><i style="background: hsla(133, 100%, 44%, 1.00)"></i><i style="background: hsla(134, 100%, 44%, 1.00)"></i><i style="background: hsla(135, 100%, 44%, 1.00)"></i><i style="background: hsla(136, 100%, 44%, 1.00)"></i><i style="background: hsla(137, 100%, 44%, 1.00)"></i><i style="background: hsla(138, 100%, 44%, 1.00)"></i><i style="background: hsla(139, 100%, 44%, 1.00)"></i><i style="background: hsla(140, 100%, 44%, 1.00)"></i><i style="background: hsla(141, 100%, 44%, 1.00)"></i><i style="background: hsla(142, 100%, 44%, 1.00)"></i><i style="background: hsla(143, 100%, 44%, 1.00)"></i><i style="background: hsla(144, 100%, 44%, 1.00)"></i><i style="background: hsla(145, 100%, 44%, 1.00)"></i><i style="background: hsla(146, 100%, 44%, 1.00)"></i><i style="background: hsla(147, 100%, 44%, 1.00)"></i><i style="background: hsla(148, 100%, 44%, 1.00)"></i><i style="background: hsla(149, 100%, 44%, 1.00)"></i><i style="background: hsla(150, 100%, 44%, 1.00)"></i><i style="background: hsla(151, 100%, 44%, 1.00)"></i><i style="background: hsla(152, 100%, 44%, 1.00)"></i><i style="background: hsla(153, 100%, 44%, 1.00)"></i><i style="background: hsla(154, 100%, 44%, 1.00)"></i><i style="background: hsla(155, 100%, 44%, 1.00)"></i><i style="background: hsla(156, 100%, 44%, 1.00)"></i><i style="background: hsla(157, 100%, 44%, 1.00)"></i><i style="background: hsla(158, 100%, 44%, 1.00)"></i><i style="background: hsla(159, 100%, 44%, 1.00)"></i><i style="background: hsla(160, 100%, 44%, 1.00)"></i><i style="background: hsla(161, 100%, 44%, 1.00)"></i><i style="background: hsla(162, 100%, 44%, 1.00)"></i><i style="background: hsla(163, 100%, 44%, 1.00)"></i><i style="background: hsla(164, 100%, 44%, 1.00)"></i><i style="background: hsla(165, 100%, 44%, 1.00)"></i><i style="background: hsla(166, 100%, 44%, 1.00)"></i><i style="background: hsla(167, 100%, 44%, 1.00)"></i><i style="background: hsla(168, 100%, 44%, 1.00)"></i><i style="background: hsla(169, 100%, 44%, 1.00)"></i><i style="background: hsla(170, 100%, 44%, 1.00)"></i><i style="background: hsla(171, 100%, 44%, 1.00)"></i><i style="background: hsla(172, 100%, 44%, 1.00)"></i><i style="background: hsla(173, 100%, 44%, 1.00)"></i><i style="background: hsla(174, 100%, 44%, 1.00)"></i><i style="background: hsla(175, 100%, 44%, 1.00)"></i><i style="background: hsla(176, 100%, 44%, 1.00)"></i><i style="background: hsla(177, 100%, 44%, 1.00)"></i><i style="background: hsla(178, 100%, 44%, 1.00)"></i><i style="background: hsla(179, 100%, 44%, 1.00)"></i><i style="background: hsla(180, 100%, 44%, 1.00)"></i><i style="background: hsla(181, 100%, 44%, 1.00)"></i><i style="background: hsla(182, 100%, 44%, 1.00)"></i><i style="background: hsla(183, 100%, 44%, 1.00)"></i><i style="background: hsla(184, 100%, 44%, 1.00)"></i><i style="background: hsla(185, 100%, 44%, 1.00)"></i><i style="background: hsla(186, 100%, 44%, 1.00)"></i><i style="background: hsla(187, 100%, 44%, 1.00)"></i><i style="background: hsla(188, 100%, 44%, 1.00)"></i><i style="background: hsla(189, 100%, 44%, 1.00)"></i><i style="background: hsla(190, 100%, 44%, 1.00)"></i><i style="background: hsla(191, 100%, 44%, 1.00)"></i><i style="background: hsla(192, 100%, 44%, 1.00)"></i><i style="background: hsla(193, 100%, 44%, 1.00)"></i><i style="background: hsla(194, 100%, 44%, 1.00)"></i><i style="background: hsla(195, 100%, 44%, 1.00)"></i><i style="background: hsla(196, 100%, 44%, 1.00)"></i><i style="background: hsla(197, 100%, 44%, 1.00)"></i><i style="background: hsla(198, 100%, 44%, 1.00)"></i><i style="background: hsla(199, 100%, 44%, 1.00)"></i><i style="background: hsla(200, 100%, 44%, 1.00)"></i><i style="background: hsla(201, 100%, 44%, 1.00)"></i><i style="background: hsla(202, 100%, 44%, 1.00)"></i><i style="background: hsla(203, 100%, 44%, 1.00)"></i><i style="background: hsla(204, 100%, 44%, 1.00)"></i><i style="background: hsla(205, 100%, 44%, 1.00)"></i><i style="background: hsla(206, 100%, 44%, 1.00)"></i><i style="background: hsla(207, 100%, 44%, 1.00)"></i><i style="background: hsla(208, 100%, 44%, 1.00)"></i><i style="background: hsla(209, 100%, 44%, 1.00)"></i><i style="background: hsla(210, 100%, 44%, 1.00)"></i><i style="background: hsla(211, 100%, 44%, 1.00)"></i><i style="background: hsla(212, 100%, 44%, 1.00)"></i><i style="background: hsla(213, 100%, 44%, 1.00)"></i><i style="background: hsla(214, 100%, 44%, 1.00)"></i><i style="background: hsla(215, 100%, 44%, 1.00)"></i><i style="background: hsla(216, 100%, 44%, 1.00)"></i><i style="background: hsla(217, 100%, 44%, 1.00)"></i><i style="background: hsla(218, 100%, 44%, 1.00)"></i><i style="background: hsla(219, 100%, 44%, 1.00)"></i><i style="background: hsla(220, 100%, 44%, 1.00)"></i><i style="background: hsla(221, 100%, 44%, 1.00)"></i><i style="background: hsla(222, 100%, 44%, 1.00)"></i><i style="background: hsla(223, 100%, 44%, 1.00)"></i><i style="background: hsla(224, 100%, 44%, 1.00)"></i><i style="background: hsla(225, 100%, 44%, 1.00)"></i><i style="background: hsla(226, 100%, 44%, 1.00)"></i><i style="background: hsla(227, 100%, 44%, 1.00)"></i><i style="background: hsla(228, 100%, 44%, 1.00)"></i><i style="background: hsla(229, 100%, 44%, 1.00)"></i><i style="background: hsla(230, 100%, 44%, 1.00)"></i><i style="background: hsla(231, 100%, 44%, 1.00)"></i><i style="background: hsla(232, 100%, 44%, 1.00)"></i><i style="background: hsla(233, 100%, 44%, 1.00)"></i><i style="background: hsla(234, 100%, 44%, 1.00)"></i><i style="background: hsla(235, 100%, 44%, 1.00)"></i><i style="background: hsla(236, 100%, 44%, 1.00)"></i><i style="background: hsla(237, 100%, 44%, 1.00)"></i><i style="background: hsla(238, 100%, 44%, 1.00)"></i><i style="background: hsla(239, 100%, 44%, 1.00)"></i><i style="background: hsla(240, 100%, 44%, 1.00)"></i><i style="background: hsla(241, 100%, 44%, 1.00)"></i><i style="background: hsla(242, 100%, 44%, 1.00)"></i><i style="background: hsla(243, 100%, 44%, 1.00)"></i><i style="background: hsla(244, 100%, 44%, 1.00)"></i><i style="background: hsla(245, 100%, 44%, 1.00)"></i><i style="background: hsla(246, 100%, 44%, 1.00)"></i><i style="background: hsla(247, 100%, 44%, 1.00)"></i><i style="background: hsla(248, 100%, 44%, 1.00)"></i><i style="background: hsla(249, 100%, 44%, 1.00)"></i><i style="background: hsla(250, 100%, 44%, 1.00)"></i><i style="background: hsla(251, 100%, 44%, 1.00)"></i><i style="background: hsla(252, 100%, 44%, 1.00)"></i><i style="background: hsla(253, 100%, 44%, 1.00)"></i><i style="background: hsla(254, 100%, 44%, 1.00)"></i><i style="background: hsla(255, 100%, 44%, 1.00)"></i><i style="background: hsla(256, 100%, 44%, 1.00)"></i><i style="background: hsla(257, 100%, 44%, 1.00)"></i><i style="background: hsla(258, 100%, 44%, 1.00)"></i><i style="background: hsla(259, 100%, 44%, 1.00)"></i><i style="background: hsla(260, 100%, 44%, 1.00)"></i><i style="background: hsla(261, 100%, 44%, 1.00)"></i><i style="background: hsla(262, 100%, 44%, 1.00)"></i><i style="background: hsla(263, 100%, 44%, 1.00)"></i><i style="background: hsla(264, 100%, 44%, 1.00)"></i><i style="background: hsla(265, 100%, 44%, 1.00)"></i><i style="background: hsla(266, 100%, 44%, 1.00)"></i><i style="background: hsla(267, 100%, 44%, 1.00)"></i><i style="background: hsla(268, 100%, 44%, 1.00)"></i><i style="background: hsla(269, 100%, 44%, 1.00)"></i><i style="background: hsla(270, 100%, 44%, 1.00)"></i><i style="background: hsla(271, 100%, 44%, 1.00)"></i><i style="background: hsla(272, 100%, 44%, 1.00)"></i><i style="background: hsla(273, 100%, 44%, 1.00)"></i><i style="background: hsla(274, 100%, 44%, 1.00)"></i><i style="background: hsla(275, 100%, 44%, 1.00)"></i><i style="background: hsla(276, 100%, 44%, 1.00)"></i><i style="background: hsla(277, 100%, 44%, 1.00)"></i><i style="background: hsla(278, 100%, 44%, 1.00)"></i><i style="background: hsla(279, 100%, 44%, 1.00)"></i><i style="background: hsla(280, 100%, 44%, 1.00)"></i><i style="background: hsla(281, 100%, 44%, 1.00)"></i><i style="background: hsla(282, 100%, 44%, 1.00)"></i><i style="background: hsla(283, 100%, 44%, 1.00)"></i><i style="background: hsla(284, 100%, 44%, 1.00)"></i><i style="background: hsla(285, 100%, 44%, 1.00)"></i><i style="background: hsla(286, 100%, 44%, 1.00)"></i><i style="background: hsla(287, 100%, 44%, 1.00)"></i><i style="background: hsla(288, 100%, 44%, 1.00)"></i><i style="background: hsla(289, 100%, 44%, 1.00)"></i><i style="background: hsla(290, 100%, 44%, 1.00)"></i><i style="background: hsla(291, 100%, 44%, 1.00)"></i><i style="background: hsla(292, 100%, 44%, 1.00)"></i><i style="background: hsla(293, 100%, 44%, 1.00)"></i><i style="background: hsla(294, 100%, 44%, 1.00)"></i><i style="background: hsla(295, 100%, 44%, 1.00)"></i><i style="background: hsla(296, 100%, 44%, 1.00)"></i><i style="background: hsla(297, 100%, 44%, 1.00)"></i><i style="background: hsla(298, 100%, 44%, 1.00)"></i><i style="background: hsla(299, 100%, 44%, 1.00)"></i><i style="background: hsla(300, 100%, 44%, 1.00)"></i><i style="background: hsla(301, 100%, 44%, 1.00)"></i><i style="background: hsla(302, 100%, 44%, 1.00)"></i><i style="background: hsla(303, 100%, 44%, 1.00)"></i><i style="background: hsla(304, 100%, 44%, 1.00)"></i><i style="background: hsla(305, 100%, 44%, 1.00)"></i><i style="background: hsla(306, 100%, 44%, 1.00)"></i><i style="background: hsla(307, 100%, 44%, 1.00)"></i><i style="background: hsla(308, 100%, 44%, 1.00)"></i><i style="background: hsla(309, 100%, 44%, 1.00)"></i><i style="background: hsla(310, 100%, 44%, 1.00)"></i><i style="background: hsla(311, 100%, 44%, 1.00)"></i><i style="background: hsla(312, 100%, 44%, 1.00)"></i><i style="background: hsla(313, 100%, 44%, 1.00)"></i><i style="background: hsla(314, 100%, 44%, 1.00)"></i><i style="background: hsla(315, 100%, 44%, 1.00)"></i><i style="background: hsla(316, 100%, 44%, 1.00)"></i><i style="background: hsla(317, 100%, 44%, 1.00)"></i><i style="background: hsla(318, 100%, 44%, 1.00)"></i><i style="background: hsla(319, 100%, 44%, 1.00)"></i><i style="background: hsla(320, 100%, 44%, 1.00)"></i><i style="background: hsla(321, 100%, 44%, 1.00)"></i><i style="background: hsla(322, 100%, 44%, 1.00)"></i><i style="background: hsla(323, 100%, 44%, 1.00)"></i><i style="background: hsla(324, 100%, 44%, 1.00)"></i><i style="background: hsla(325, 100%, 44%, 1.00)"></i><i style="background: hsla(326, 100%, 44%, 1.00)"></i><i style="background: hsla(327, 100%, 44%, 1.00)"></i><i style="background: hsla(328, 100%, 44%, 1.00)"></i><i style="background: hsla(329, 100%, 44%, 1.00)"></i><i style="background: hsla(330, 100%, 44%, 1.00)"></i><i style="background: hsla(331, 100%, 44%, 1.00)"></i><i style="background: hsla(332, 100%, 44%, 1.00)"></i><i style="background: hsla(333, 100%, 44%, 1.00)"></i><i style="background: hsla(334, 100%, 44%, 1.00)"></i><i style="background: hsla(335, 100%, 44%, 1.00)"></i><i style="background: hsla(336, 100%, 44%, 1.00)"></i><i style="background: hsla(337, 100%, 44%, 1.00)"></i><i style="background: hsla(338, 100%, 44%, 1.00)"></i><i style="background: hsla(339, 100%, 44%, 1.00)"></i><i style="background: hsla(340, 100%, 44%, 1.00)"></i><i style="background: hsla(341, 100%, 44%, 1.00)"></i><i style="background: hsla(342, 100%, 44%, 1.00)"></i><i style="background: hsla(343, 100%, 44%, 1.00)"></i><i style="background: hsla(344, 100%, 44%, 1.00)"></i><i style="background: hsla(345, 100%, 44%, 1.00)"></i><i style="background: hsla(346, 100%, 44%, 1.00)"></i><i style="background: hsla(347, 100%, 44%, 1.00)"></i><i style="background: hsla(348, 100%, 44%, 1.00)"></i><i style="background: hsla(349, 100%, 44%, 1.00)"></i><i style="background: hsla(350, 100%, 44%, 1.00)"></i><i style="background: hsla(351, 100%, 44%, 1.00)"></i><i style="background: hsla(352, 100%, 44%, 1.00)"></i><i style="background: hsla(353, 100%, 44%, 1.00)"></i><i style="background: hsla(354, 100%, 44%, 1.00)"></i><i style="background: hsla(355, 100%, 44%, 1.00)"></i><i style="background: hsla(356, 100%, 44%, 1.00)"></i><i style="background: hsla(357, 100%, 44%, 1.00)"></i><i style="background: hsla(358, 100%, 44%, 1.00)"></i><i style="background: hsla(359, 100%, 44%, 1.00)"></i><i style="background: hsla(360, 100%, 44%, 1.00)"></i></div>
+   <span class="hsl-value" id="hsl-s-value">100%,</span> 	<input id="hsl-s" type="range" min="0" max="100" value="100" onchange="changeHSL()"> S <div id="hslas" style="background-image: -webkit-linear-gradient(0deg, rgb(112, 112, 112) 0%, rgb(225, 0, 120) 100%); background-position: initial initial; background-repeat: initial initial;"></div>
+   <span class="hsl-value" id="hsl-l-value">44%,</span> 	<input id="hsl-l" type="range" min="0" max="100" value="44" onchange="changeHSL()"> L <div id="hslal" style="background-image: -webkit-linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(255, 0, 136) 50%, rgb(255, 255, 255) 100%); background-position: initial initial; background-repeat: initial initial;"></div>
+   <span class="hsl-value" id="hsl-a-value">1.00</span> 	<input id="hsl-a" type="range" min="0" max="100" value="100" onchange="changeHSL()"> A <div id="hslaa" style="background-image: -webkit-linear-gradient(0deg, rgba(225, 0, 120, 0) 0%, rgb(225, 0, 120) 100%); background-position: initial initial; background-repeat: initial initial;"></div>
+);        </pre>
+
+            <div id="hsl-example" class="example" style="color: rgb(225, 0, 120);">
+              HSLA Colors
+            </div>
+
+            <script defer="">
+			  function createHSLA(h, s, l, a){
+                var h = h || document.getElementById('hsl-h').value * 1.0;
+                var s = s || document.getElementById('hsl-s').value * 1.0;
+                var l = l || document.getElementById('hsl-l').value * 1.0;
+                var a = a ||(document.getElementById('hsl-a').value / 100).toFixed(2);
+				var hslapicker = "";
+				for(var i=0; i <=360; i++){
+					hslapicker+= '<i style="background: hsla(' + i + ', ' + s + '%, ' + l + '%, ' + a +')"></i>';
+			    }
+			//	hslapicker+= '<i style="background: hsla(' + h + ', ' + s + '%, ' + l + '%, ' + a +')" class="big"></i>'
+				document.getElementById('hslah').innerHTML = hslapicker;
+				
+				document.getElementById('hslas').style.background = 
+                    '-webkit-linear-gradient(0deg, hsl('+h+', 0%, '+ l +'%) 0%, hsl('+h+', 100%, '+ l +'%) 100%)';
+				document.getElementById('hslal').style.background = 
+                    '-webkit-linear-gradient(0deg, hsla('+h+', '+ s +'%, 0%, 1) 0%, hsla('+h+', '+ s +'%, 50%, 1) 50%,  hsla('+h+', '+ s +'%, 100%, 1) 100%)';
+				document.getElementById('hslaa').style.background = 
+                    '-webkit-linear-gradient(0deg, hsla('+h+', '+ s +'%, '+l+'%, 0) 0%, hsla('+h+', '+ s +'%, '+l+'%, 1) 100%)';
+			  }
+			  
+              function changeHSL() {
+                var h = document.getElementById('hsl-h').value * 1.0;
+                var s = document.getElementById('hsl-s').value * 1.0;
+                var l = document.getElementById('hsl-l').value * 1.0;
+                var a = (document.getElementById('hsl-a').value / 100).toFixed(2);
+                var el = document.getElementById('hsl-example');
+
+                el.style.color = 'hsla(' + h + ', ' + s + '%, ' + l + '%, ' + a + ')';
+
+                document.getElementById('hsl-h-value').textContent = h + ',';
+                document.getElementById('hsl-s-value').textContent = s + '%,';
+                document.getElementById('hsl-l-value').textContent = l + '%,';
+                document.getElementById('hsl-a-value').textContent = a + '';
+				createHSLA(h, s, l, a);
+              }
+
+              changeHSL();
+			  createHSLA();
+            </script>
+          </section>
+        <span class="counter"></span><span class="counter">15</span></div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+     
+<div class="slide distant-slide"> 
+<header><h1>Uses for AlphaTransparency</h1></header> 
+<section class="content">
+<ul>
+<li>
+<pre contenteditable="">box-shadow: (inset) left top blur spread color;
+text-shadow: left top blur spread color;
+</pre>
+</li>
+<li class="angled" style="padding-right: 10px;"><span style="text-shadow: 0 21px 1px  rgba(0,0,0,0.3);">Transparent Shadows</span>
+<pre contenteditable="" style="box-shadow: -10px 10px rgba(0,0,0,0.3); margin-left: 20px;">.trans { box-shadow: -10px 10px rgba(0,0,0,0.3);
+         text-shadow: 0 21px 1px rgba(0,0,0,0.3);}</pre></li>
+<li class="angled" style="padding-right: 10px;"><span style="text-shadow: 0 21px 1px  #666">Solid Shadows</span>
+
+<pre contenteditable="" style="box-shadow:  -10px 10px  #999; margin-left: 20px;" "="">.solid { box-shadow: -10px 10px #999;
+         text-shadow: 0 21px 1px #999;}</pre></li>
+</ul>
+</section>
+<span class="counter">16</span></div>
+     
+
+ 
+<div class="slide distant-slide"> 
+<header><h1>border-radius</h1></header> 
+<section class="content"> 
+<p>Border on slides, code &amp; showflakes</p>
+<div class="opacity radius">
+	<div>
+    <i style="border-radius: 0"></i> <pre contenteditable="">border-radius: 0;</pre> <b></b>
+    </div>
+    <div>
+    <i style="border-radius: 20px"></i><pre contenteditable="">border-radius: 20px;</pre><b style="border-radius: 20px"></b>
+    </div>
+    <div>
+    <i style="-webkit-border-radius: 40px; border-radius: 50%"></i><pre contenteditable="">border-radius: 50%;</pre><b style="-webkit-border-radius: 40px; border-radius: 50%"></b>
+    </div>
+</div>
+ <ul class="icons" style="clear: both;">
+         <li class="chrome">Chrome / Chrome 4</li>
+         <li class="safari">Safari 3 / Safari 5</li>
+         <li class="firefox">Firefox 1 / Firefox 4</li>
+         <li class="opera">  <br> Opera 10.5</li>
+         <li class="ie new">  <br> IE 9</li>
+     </ul>
+     <p class="note">% works correctly since Safari 5.1 and FF 4.0</p>
+</section>
+<span class="counter">17</span></div>
+     
+     
+ 
+<div class="slide distant-slide"> 
+<header><h1>border-radius</h1></header> 
+<section class="content">
+<div class="opacity radius">
+	<div><pre contenteditable="">.circle {border-radius: 50%;}</pre> <b style="-webkit-border-radius: 50px; border-radius: 50%;"></b></div>
+	<div><pre contenteditable="">.oval { border-radius: 50%;}</pre> <b style="-webkit-border-radius: 250px / 100px; border-radius: 50%; width: 200px;"></b></div> 
+	<div><pre contenteditable="">.different { border-radius: 10px 30px;}</pre> <b style="border-radius: 10px 30px; "></b></div> 
+	<div><pre contenteditable="">.elliptical { border-radius: 10px / 30px;}</pre> <b style="border-radius: 10px / 30px;"></b></div>   
+ </div>
+  <p><b>%</b> does not work right in Safari 5. Use <b>em</b> instead</p>
+</section>
+<span class="counter">18</span></div>
+
+ 
+<div class="slide distant-slide" id="gencontentlink"> 
+<header><h1>tranforms</h1></header> 
+<section class="content transform">
+<b></b>
+<ul>
+<li>translate <pre contenteditable="">transform: translate(-80px, 200px);</pre></li>
+<li>rotate <pre contenteditable="">transform: rotate(15deg);</pre></li>
+<li>scale <pre contenteditable="">transform: scale(2, 1.5);</pre></li>
+<li>skew <pre contenteditable="">transform: skewX(8deg);</pre></li>
+<li>multiple transforms <pre contenteditable="">transform: translate(-80px, 200px) 
+  rotate(-15deg) scale(2, 1.5) skewX(8deg);</pre></li>
+</ul>
+</section>
+<span class="counter">19</span></div>
+     
+<div class="slide distant-slide"> 
+    <header>
+    	<h1>Transforms used</h1>
+    </header> 
+    <section class="content"> 
+        <ul class="imp">
+            <li>transform: <em>translate</em>(200px, 0) 	<i class="translate show"></i></li>
+            <li>transform: <em>rotate</em>(360deg) 		<i class="rotate show"></i></li>
+            <li>transform: <em>scale</em>(1.5) 		<i class="scale show"></i></li>
+            <li><em>transform-origin</em>: -20px -20px		<i class="rotate origin show"></i></li>
+        </ul>
+         <ul class="icons" style="clear: both;">
+         <li class="chrome">Chrome</li>
+         <li class="safari">Safari</li>
+         <li class="firefox">Firefox 3.5</li>
+         <li class="opera">Opera 10.5</li>
+         <li class="ie new">IE 9</li>
+         <li class="txt">  &nbsp; all with vendor prefix</li>
+     </ul>
+    </section>
+<span class="counter">20</span></div>
+     
+        
+ 
+<div class="slide distant-slide"> 
+<header><h1>transforms</h1></header> 
+<section class="content">
+<li>Vendor prefix all of 'em</li>
+<li>Take advantage of transform-origin</li>
+<li>Multiple values are SPACE separated (no commas)</li>
+<li><a href="http://westciv.com/tools/3Dtransforms/index.html">3D transforms</a> are hardware accelerated</li>
+<li>Play with <a href="http://westciv.com/tools/transforms/index.html">Westciv's Transform Tool</a></li> 
+<li><a href="http://meyerweb.com/eric/tools/matrix/">Matrix</a> is another syntax</li>
+<li>More about <a href="http://www.standardista.com/css3/css3-transform-property-and-the-various-transform-functions">transforms</a></li>
+</section>
+
+<span class="counter">21</span></div>
+     
+    
+<div class="slide distant-slide"> 
+<header><h1>transitions</h1></header> 
+<section class="content"> 
+<p>Enables the transition of properties from one state to the next over a defined length of time</p>
+<ul>
+<li><em>transition-property:</em> properties (or 'all') that transition</li>
+<li><em>transition-duration:</em> s or ms it takes to transition</li>
+<li><em>transition-timing-function:</em> bezier curve of transition</li>
+<li><em>transition-delay:</em> s or ms before transition starts</li>
+<li><em>transition:</em> shorthand for 4  transition properties</li>
+</ul>
+<ul class="icons" style="clear: both;">
+         <li class="chrome">Chrome</li>
+         <li class="safari">Safari</li>
+         <li class="firefox">Firefox 4</li>
+         <li class="opera">Opera 10.5</li>
+         <li class="ie new">IE 10</li>
+         <li class="txt">  &nbsp; all with vendor prefix</li>
+     </ul>
+</section>
+<span class="counter">22</span></div>  
+ 
+ 
+<div class="slide distant-slide"> 
+<header><h1>transitions</h1></header> 
+<section class="content"> 
+<pre contenteditable="" class="fakelink">code {
+   color: #000000;
+   font-size: 100%;
+   background-color: rgba(255,255,255,0.4);
+   transition: all 0.5s ease-in 50ms;
+}
+code:hover {
+   color: #E2007A;
+   font-size: 120%;
+   background-color: rgba(255,255,255,0.8);
+}
+</pre>
+<pre contenteditable="">code {
+   transition: color, font-size, background-color 0.5s ease-in 50ms;
+}</pre>
+</section>
+<span class="counter">23</span></div>
+
+
+
+
+<!-- ###################################################################   
+
+	    Animations
+
+     ################################################################### -->
+  
+     
+    
+<div class="slide normal distant-slide"> 
+ <header>
+    <h1>Animation Essentials</h1>
+ </header> 
+ <section class="content"> 
+     <ul class="imp">
+        <li>@keyframes</li>
+        <li>animation-name</li>
+        <li>animation-duration</li>
+        <li>animation-timing-function</li>
+        <li>animation-iteration-count</li>
+        <li>animation-direction</li>
+        <li>animation-play-state</li>
+        <li>animation-delay</li>
+        <li>animation-fill-mode</li>
+        <li>animation (shorthand)</li>
+      </ul>
+ </section>
+<span class="counter">24</span></div>
+     
+     
+    
+
+    
+<div class="slide distant-slide"> <i id="keyframe1"></i>
+     <header><h1>Keyframes</h1></header> 
+     <section class="content"> 
+     <pre contenteditable=""><b>@keyframes</b> <b>falling</b> {
+    <b>from</b> {
+      top: -40px;
+    }
+    <b>to</b> {
+      top: 1000px;
+    }
+}</pre>
+    <pre contenteditable="">@keyframes falling {
+    <b>0%</b> {
+      top: -40px;
+    }
+    <b>100%</b> {
+      top: 1000px;
+    }
+}</pre>
+<div <p="" class="notes">Don't forget the <b class="imp" style="border-bottom:double 3px;">%</b><p></p>
+	<p class="notes">Don't forget the <b class="imp">100%</b></p>
+    <p class="notes">Don't quote the animation name</p>
+     </div></section>
+<span class="counter">25</span></div>  
+     
+     
+    
+
+    
+    
+<div class="slide distant-slide"> 
+	<i id="keyframe2"></i>
+    <header>
+    	<h1>Granular animation control</h1>
+    </header> 
+    <section class="content"> 
+    <pre contenteditable="">@keyframes falling {
+
+    <b>0%</b> {
+      top: -40px;
+    }
+    
+    <b>10%</b> {
+      top: 400px;
+    }
+    
+    <b>90%</b> {
+      top: 560px;
+    }
+
+    <b>100%</b> {
+      top: 1000px;
+    }
+
+}
+</pre>
+</section>
+<span class="counter">26</span></div> 
+    
+     
+    
+
+    
+    
+<div class="slide distant-slide">
+	<i id="keyframe7"></i>
+     <header>
+     	<h1>Multiple properties <br> Duplicate Keyframes</h1>
+     </header> 
+     <section class="content"> 
+     <pre contenteditable="">@keyframes <b>fallingAndDimming</b> {
+
+   0% {
+      <b>top:</b> -40px;
+      <b>opacity:</b> 1;
+    }
+    
+    45%, 55% {
+      <b>opacity:</b> 0.5;
+    }
+
+    100% {
+      <b>top:</b> 800px;
+      <b>opacity:</b> 1
+    }
+
+}
+	</pre>
+     </section>
+<span class="counter">27</span></div> 
+     
+    
+
+    
+
+
+    
+     
+<div class="slide distant-slide" id="acsst"> 
+    <i id="keyframe5"></i>
+    <header>
+    	<h1>Animating Transforms</h1><p style="margin: 0;"> &amp; vendor prefixes</p>
+    </header> 
+    <section class="content"> 
+    <pre contenteditable="">@<u></u>keyframes falling {
+
+  0%{
+    <u></u>transform: 
+         <b>translateY(0)
+rotate(0deg)
+scale(0.9, 0.9);</b>	
+  }
+
+  100% {
+    <u></u>transform:
+         <b>translateY(1000px)
+rotate(360deg)
+scale(1.1, 1.1);</b>
+  }
+
+}
+</pre>
+<p style="text-align:center"><span onclick="vendorPrefix(&#39;w&#39;, &#39;acsst&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;acsst&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;acsst&#39;)">-moz-</span> </p>
+
+</section>
+<span class="counter">28</span></div> 
+      
+     
+
+    
+
+    
+ <div class="slide intro distant-slide"> 
+<header>
+	<h1>But nothing is animated yet!</h1>
+    <p>We've only declared the keyframes</p>
+</header> 
+
+<span class="counter">29</span></div>   
+    
+     
+    
+
+    
+ <div class="slide distant-slide" id="basecss"> 
+<i style="-webkit-animation:none;"></i>
+     <header>
+     	<h1>base CSS</h1>
+     </header> 
+     <section class="content"> 
+	<pre contenteditable=""><b>.snowflake </b>{
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+ background-image:
+  <u></u>linear-gradient(180deg, rgba(255,255,255,0) 40%, #fff 40%, #fff 60%, rgba(255,255,255,0) 60%),
+  <u></u>linear-gradient(90deg,  rgba(255,255,255,0) 40%, #fff 40%, #fff 60%, rgba(255,255,255,0) 60%),
+  <u></u>linear-gradient(45deg,  rgba(255,255,255,0) 43%, #fff 43%, #fff 57%, rgba(255,255,255,0) 57%),
+  <u></u>linear-gradient(135deg,  rgba(255,255,255,0) 43%, #fff 43%, #fff 57%, rgba(255,255,255,0) 57%);
+  border-radius: 50%;
+  <b>-webkit-transform-origin: left -20px;</b>
+  <b>-moz-transform-origin: left -20px;</b>
+}</pre>
+<p style="text-align:center"><span onclick="vendorPrefix(&#39;w&#39;, &#39;basecss&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;basecss&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;basecss&#39;)">-moz-</span> </p>
+</section>
+<span class="counter">30</span></div>   
+     
+     
+    
+
+    
+ 
+<div class="slide distant-slide"> 
+  	<i style="-webkit-animation:none;-webkit-animation: falling 2s;-moz-animation:none;-moz-animation: falling 2s;"></i>
+    <header>
+    	<h1>Minimum Required:<br>
+ ‘animation-name’ &amp; <br>
+‘animation-duration’</h1>
+    </header> 
+    <section class="content"> 
+	<pre contenteditable="">.snowflake { <input type="range" value="3" min="1" max="15" step="1" id="speedrange" onchange="changeDuration();">
+  ...
+  -webkit-transform-origin: left -20px;
+   <b>-webkit-animation-name: falling; </b>
+  <b>-webkit-animation-duration: <span class="changer">3</span>s;</b>
+  
+  -moz-transform-origin: left -20px;
+   <b>-moz-animation-name: falling; </b>
+  <b>-moz-animation-duration: <span class="changer">3</span>s;</b>
+}
+</pre>
+</section>
+<script defer="">
+ function changeDuration(){
+	 var speed = document.getElementById('speedrange').value;
+	 document.getElementById('animationduration').style.webkitAnimationDuration = speed + 's';
+	 var seconds = document.querySelectorAll("#animdur span.changer");
+	 for(var i = 0, j = seconds.length; i < j; i++){
+		 seconds[i].innerHTML = speed;
+	 }
+ }
+</script>
+<span class="counter">31</span></div>        
+    
+     
+    
+
+    
+ <div class="slide distant-slide" id="animtf"> 
+  	<i id="animationtimingfunc"></i> 
+    <header>
+    	<h1>‘animation-timing-function’</h1>
+    </header> 
+    <section class="content"> 
+    <pre contenteditable="">.snowflake { <select onchange="changeTimingFunction(event)"><option value="ease">ease</option><option value="ease-in">ease-in</option><option value="ease-out">ease-out</option><option value="ease-in-out" selected="">ease-in-out</option><option value="step-start">step-start</option><option value="step-end">step-end</option><option value="steps(5, start)">steps(5, start)</option></select>
+   …
+  <u></u>transform-origin: left -20px;
+  <u></u>animation-name: falling; 
+  <u></u>animation-duration: 3s;
+  <b>-webkit-animation-timing-function: <span class="changer">ease-in-out</span>;</b>
+  <b>-moz-animation-timing-function: <span class="changer">ease-in-out</span>;</b>
+}</pre>
+
+<pre contenteditable=""><strong>ease</strong>
+linear
+ease-in 
+ease-out 
+ease-in-out  
+step-start <span class="notes">/* same as steps(1, start) */</span>
+step-end <span class="notes">/* same as steps(1, end) */</span>
+steps( X, start|<strong>end</strong>) <span class="notes">/* X = # of steps + when change of value occurs */</span>
+cubic-bezier(x1, y1, x2, y2)</pre>
+<p style="text-align:center"><span onclick="vendorPrefix(&#39;w&#39;, &#39;animtf&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;animtf&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;animtf&#39;)">-moz-</span> </p>
+</section>
+
+<script defer="">
+ function changeTimingFunction(event){
+	 var speed = event.target.value;
+	 console.log(speed)
+	 var seconds = document.querySelectorAll("#animtf span.changer");
+	 for(var i = 0, j = seconds.length; i < j; i++){
+		 seconds[i].innerHTML = speed;
+	 }
+	 document.getElementById('animationtimingfunc').style.webkitAnimationTimingFunction = speed;
+ }
+</script>
+    <span class="counter">32</span></div>   
+    
+     
+    
+
+    
+ <div class="slide distant-slide" id="animic"> 
+  	<i></i>
+    <header>
+    	<h1>‘animation-iteration-count’</h1>
+    </header> 
+    <section class="content"> 
+    <pre contenteditable="">.snowflake {
+   …
+  <u></u>transform-origin: left -20px;
+  <u></u>animation-name: falling; 
+  <u></u>animation-duration: 3s;
+  <u></u>animation-timing-function: ease-in-out;
+  <b>-webkit-animation-iteration-count: infinite;</b>
+  <b>-moz-animation-iteration-count: infinite;</b>
+}</pre>
+<p>‘infinte’ or number. Default is ‘1’.</p>
+<pre contenteditable=""><b>-webkit-animation-iteration-count: 3;</b>
+<b>-moz-animation-iteration-count: 3;</b></pre>
+<p style="text-align:center"><span onclick="vendorPrefix(&#39;w&#39;, &#39;animic&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;animic&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;animic&#39;)">-moz-</span> </p>
+
+</section>
+<span class="counter">33</span></div>   
+    
+     
+    
+
+    
+ <div class="slide distant-slide" id="animdelay"> <i id="animationdelayi"></i>
+    <header>
+    	<h1>‘animation-delay’</h1>
+    </header> 
+    <section class="content"> 
+    <pre contenteditable="">.snowflake { <input type="range" value="2" min="-3" max="7" step="0.1" id="delayrange" onchange="changeDelay();">
+  …
+  <u></u>transform-origin: left -20px;
+  <u></u>animation-name: falling; 
+  <u></u>animation-duration: 3s;
+  <u></u>animation-timing-function: ease-in-out;
+  <u></u>animation-iteration-count:infinite;
+  <b>-webkit-animation-delay: <span class="changer">2</span>s;</b>
+  <b>-moz-animation-delay: <span class="changer">2</span>s;</b>
+}</pre>
+<p style="text-align:center"><span onclick="vendorPrefix(&#39;w&#39;, &#39;animdelay&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;animdelay&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;animdelay&#39;)">-moz-</span> </p>
+
+</section><script defer="">
+ function changeDelay(){
+	 var speed = (document.getElementById('delayrange').value * 1).toFixed(1);
+	 document.getElementById('animationdelayi').style.webkitAnimationDelay = speed + 's';
+	 var seconds = document.querySelectorAll("#animdelay span.changer");
+	 for(var i = 0, j = seconds.length; i < j; i++){
+		 seconds[i].innerHTML = speed;
+	 }
+ }
+</script>
+<span class="counter">34</span></div>    
+        
+     
+    
+
+    
+     
+<div class="slide distant-slide" id="animdir"> <i></i>
+  
+    <header>
+    	<h1>‘animation-direction’</h1>
+    </header> 
+    <section class="content"> 
+    <pre contenteditable="">.snowflake {
+  …
+  <u></u>transform-origin: left -20px;
+  <u></u>animation-name: falling; 
+  <u></u>animation-duration: 3s;
+  <u></u>animation-timing-function: ease-in-out;
+  <u></u>animation-iteration-count:infinite;
+  <u></u>animation-delay: 2s;
+  <b>-webkit-animation-direction: normal;</b>
+  <b>-moz-animation-direction: normal;</b>
+}</pre>
+<p>Two possible values: normal | alternate;</p>
+<pre contenteditable=""><b>-webkit-animation-direction: alternate;</b>
+<b>-moz-animation-direction: alternate;</b></pre>
+<p style="text-align:center"><span onclick="vendorPrefix(&#39;w&#39;, &#39;animdir&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;animdir&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;animdir&#39;)">-moz-</span> </p>
+
+</section>
+<span class="counter">35</span></div>   
+     
+     
+    
+
+    
+    
+<div class="slide distant-slide" id="animsh"> 
+    <header>
+    	<h1>‘animation’ (shorthand)</h1>
+    </header> 
+    <section class="content"> 
+    <pre contenteditable="">.snowflake {
+  …
+  <u></u>animation-name: falling; 
+  <u></u>animation-duration: 3s;
+  <u></u>animation-timing-function: ease-in-out;
+  <u></u>animation-iteration-count:infinite;
+  <u></u>animation-delay: 2s;
+  <del><u></u>animation-direction: normal;</del>
+}</pre>
+<p>. . . can also be written as . . .
+</p><pre contenteditable="">.snowflake {
+  ...
+  <b>-webkit-animation: falling 3s ease-in-out 2s infinite</b>;
+  <b>-moz-animation: falling 3s ease-in-out 2s infinite</b>;
+}</pre>
+<p style="text-align:center"><span onclick="vendorPrefix(&#39;w&#39;, &#39;animsh&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;animsh&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;animsh&#39;)">-moz-</span> </p>
+
+</section>
+<span class="counter">36</span></div>
+     
+    
+    
+<div class="slide distant-slide" id="animfm"> <i></i>
+<header><h1>‘animation-fill-mode’</h1></header> 
+<section class="content"> 
+<pre contenteditable="">values: none | forwards | backwards | both</pre>
+<pre contenteditable="">.snowflake {
+  <u></u>animation-name: falling; 
+  <u></u>animation-duration: 3s;
+  <u></u>animation-timing-function: ease-in-out;
+  <u></u>animation-iteration-count: 3;
+  <u></u>animation-delay: 2s;
+ <b> -webkit-animation-fill-mode: forwards;</b>
+ <b> -moz-animation-fill-mode: forwards;</b>
+}</pre>
+<p>. . . or . . .<span style="float: right; font-size: 80%"><span onclick="vendorPrefix(&#39;w&#39;, &#39;animfm&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;animfm&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;animfm&#39;)">-moz-</span> </span></p>
+<p></p>
+<pre contenteditable="">.snowflake {
+ -webkit-animation: falling 3s ease-in-out 2s 3  <b>forwards</b>;
+ -moz-animation: falling 3s ease-in-out 2s 3  <b>forwards</b>;
+}</pre>
+
+</section>
+<span class="counter">37</span></div>
+
+    
+<div class="slide distant-slide" id="animfm2"> <i></i>
+<header><h1>‘animation-fill-mode: backwards’</h1></header> 
+<section class="content"> 
+<pre contenteditable="">.snowflake {
+  <u></u>animation-name: falling; 
+  <u></u>animation-duration: 3s;
+  <u></u>animation-timing-function: ease-in-out;
+  <u></u>animation-iteration-count: 3;
+  <u></u>animation-delay: 2s;
+ <b> -webkit-animation-fill-mode: backwards;</b>
+ <b> -moz-animation-fill-mode: backwards;</b>
+}</pre>
+<p>. . . or . . .<span style="float: right; font-size: 80%"><span onclick="vendorPrefix(&#39;w&#39;, &#39;animfm2&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;animfm2&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;animfm2&#39;)">-moz-</span> </span></p>
+<p></p>
+<pre contenteditable="">.snowflake {
+ -webkit-animation: falling 3s ease-in-out 2s 3  <b>backwards</b>;
+ -moz-animation: falling 3s ease-in-out 2s 3  <b>backwards</b>;
+}</pre>
+
+</section>
+<span class="counter">38</span></div>
+    
+ 
+ 
+ <div class="slide distant-slide" id="animfm3"> <i></i>
+<header><h1>‘animation-fill-mode: both’</h1></header> 
+<section class="content"> 
+<pre contenteditable="">.snowflake {
+  <u></u>animation-name: falling; 
+  <u></u>animation-duration: 3s;
+  <u></u>animation-timing-function: ease-in-out;
+  <u></u>animation-iteration-count: 3;
+  <u></u>animation-delay: 2s;
+ <b> -webkit-animation-fill-mode: both;</b>
+ <b> -moz-animation-fill-mode: both;</b>
+}</pre>
+<p>. . . or . . .<span style="float: right; font-size: 80%"><span onclick="vendorPrefix(&#39;w&#39;, &#39;animfm3&#39;)">-webkit-</span><span onclick="vendorPrefix(&#39;r&#39;, &#39;animfm3&#39;)"> | </span> <span onclick="vendorPrefix(&#39;m&#39;, &#39;animfm3&#39;)">-moz-</span> </span></p>
+<p></p>
+<pre contenteditable="">.snowflake {
+ -webkit-animation: falling 3s ease-in-out 2s 3  <b>both</b>;
+ -moz-animation: falling 3s ease-in-out 2s 3  <b>both</b>;
+}</pre>
+
+</section>
+<span class="counter">39</span></div>    
+   
+    
+     
+    
+
+    
+ 
+<div class="slide distant-slide">
+<i id="paused"></i>
+<header><h1>STOP: ‘animation-play-state’</h1></header> 
+<section class="content"> 
+<pre contenteditable="">animation-play-state: paused | <b>running</b></pre>
+<pre contenteditable="">.snowflake<b>:hover</b> {
+  <b>-webkit-</b>animation-play-state: <b>paused</b>;
+  <b>-moz-</b>animation-play-state: <b>paused</b>;
+  }</pre>
+</section>
+<span class="counter">40</span></div>
+    
+   
+   <div class="slide intro distant-slide"> 
+     <header><h1>Thank you</h1></header>
+     <section class="content"> 
+     <a href="http://www.sitepoint.com/books/htmlcss1/" style="float: right; margin-right: 20px; border:none"><img src="./Features of CSS3  Creating Snow_files/3dcover-flat.png" alt="HTML5 &amp; CSS3 for the Real World" style="border:none;"></a>
+            <p>Estelle Weyl</p>
+            <p><a href="http://standardista.com/">www.standardista.com</a></p>
+            <p><a href="http://twitter.com/estellevw">@estellevw</a></p>     
+     </section>
+    <span class="counter">41</span></div>   
+   </div>
+   
+  </div>
+ 
+ 
+<!-- ###################################################################   
+
+	    END
+
+     ################################################################### --> 
+<script>
+function vendorPrefix(prefix, id){
+	  var prefixTxt = 'cat';
+		switch (prefix){
+			case 'w':
+				prefixTxt = '-webkit-';
+			break;
+			case 'm':
+				prefixTxt = '-moz-';
+			break;
+			case 'ms':
+				prefixTxt = '-ms-';
+			break;	
+			case 'o':
+				prefixTxt = '-o-';
+			break;
+			case 'r':
+				prefixTxt = '';
+			break;
+		};
+	  var spans = document.getElementById(id).querySelectorAll('u');
+	  for(var i = 0, j = spans.length; i < j; i++ ){
+	  	spans[i].innerHTML = prefixTxt;
+	  }
+			
+	}
+	
+	
+  (function() {
+  var doc = document;
+  var disableBuilds = true;
+
+  var ctr = 0;
+  var spaces = /\s+/, a1 = [''];
+
+  var toArray = function(list) {
+    return Array.prototype.slice.call(list || [], 0);
+  };
+
+  var byId = function(id) {
+    if (typeof id == 'string') { return doc.getElementById(id); }
+    return id;
+  };
+
+  var query = function(query, root) {
+    if (!query) { return []; }
+    if (typeof query != 'string') { return toArray(query); }
+    if (typeof root == 'string') {
+      root = byId(root);
+      if(!root){ return []; }
+    }
+
+    root = root || document;
+    var rootIsDoc = (root.nodeType == 9);
+    var doc = rootIsDoc ? root : (root.ownerDocument || document);
+
+    // rewrite the query to be ID rooted
+    if (!rootIsDoc || ('>~+'.indexOf(query.charAt(0)) >= 0)) {
+      root.id = root.id || ('qUnique' + (ctr++));
+      query = '#' + root.id + ' ' + query;
+    }
+    // don't choke on something like ".yada.yada >"
+    if ('>~+'.indexOf(query.slice(-1)) >= 0) { query += ' *'; }
+
+    return toArray(doc.querySelectorAll(query));
+  };
+
+  var strToArray = function(s) {
+    if (typeof s == 'string' || s instanceof String) {
+      if (s.indexOf(' ') < 0) {
+        a1[0] = s;
+        return a1;
+      } else {
+        return s.split(spaces);
+      }
+    }
+    return s;
+  };
+
+  var addClass = function(node, classStr) {
+    classStr = strToArray(classStr);
+    var cls = ' ' + node.className + ' ';
+    for (var i = 0, len = classStr.length, c; i < len; ++i) {
+      c = classStr[i];
+      if (c && cls.indexOf(' ' + c + ' ') < 0) {
+        cls += c + ' ';
+      }
+    }
+    node.className = cls.trim();
+  };
+
+  var removeClass = function(node, classStr) {
+    var cls;
+    if (classStr !== undefined) {
+      classStr = strToArray(classStr);
+      cls = ' ' + node.className + ' ';
+      for (var i = 0, len = classStr.length; i < len; ++i) {
+        cls = cls.replace(' ' + classStr[i] + ' ', ' ');
+      }
+      cls = cls.trim();
+    } else {
+      cls = '';
+    }
+    if (node.className != cls) {
+      node.className = cls;
+    }
+  };
+
+  var toggleClass = function(node, classStr) {
+    var cls = ' ' + node.className + ' ';
+    if (cls.indexOf(' ' + classStr.trim() + ' ') >= 0) {
+      removeClass(node, classStr);
+    } else {
+      addClass(node, classStr);
+    }
+  };
+
+  var ua = navigator.userAgent;
+  var isFF = parseFloat(ua.split('Firefox/')[1]) || undefined;
+  var isWK = parseFloat(ua.split('WebKit/')[1]) || undefined;
+  var isOpera = parseFloat(ua.split('Opera/')[1]) || undefined;
+
+  var canTransition = (function() {
+  var ver = parseFloat(ua.split('Version/')[1]) || undefined;
+  // test to determine if this browser can handle CSS transitions.
+  var cachedCanTransition = 
+    (isWK || (isFF && isFF > 3.6 ) || (isOpera && ver >= 10.5));
+    return function() { return cachedCanTransition; }
+  })();
+
+  //
+  // Slide class
+  //
+  var Slide = function(node, idx) {
+    this._node = node;
+    if (idx >= 0) {
+      this._count = idx + 1;
+    }
+    if (this._node) {
+      addClass(this._node, 'slide distant-slide');
+    }
+    this._makeCounter();
+    this._makeBuildList();
+  };
+
+  Slide.prototype = {
+    _node: null,
+    _count: 0,
+    _buildList: [],
+    _visited: false,
+    _currentState: '',
+    _states: [ 'distant-slide', 'far-past',
+               'past', 'current', 'future',
+               'far-future', 'distant-slide' ],
+    setState: function(state) {
+      if (typeof state != 'string') {
+        state = this._states[state];
+      }
+      if (state == 'current' && !this._visited) {
+        this._visited = true;
+        this._makeBuildList();
+      }
+      removeClass(this._node, this._states);
+      addClass(this._node, state);
+      this._currentState = state;
+
+      // delay first auto run. Really wish this were in CSS.
+      /*
+      this._runAutos();
+      */
+      var _t = this;
+      setTimeout(function(){ _t._runAutos(); } , 400);
+    },
+    _makeCounter: function() {
+      if(!this._count || !this._node) { return; }
+      var c = doc.createElement('span');
+      c.innerHTML = this._count;
+      c.className = 'counter';
+      this._node.appendChild(c);
+    },
+    _makeBuildList: function() {
+      this._buildList = [];
+      if (disableBuilds) { return; }
+      if (this._node) {
+        this._buildList = query('[data-build] > *', this._node);
+      }
+      this._buildList.forEach(function(el) {
+        addClass(el, 'to-build');
+      });
+    },
+    _runAutos: function() {
+      if (this._currentState != 'current') {
+        return;
+      }
+      // find the next auto, slice it out of the list, and run it
+      var idx = -1;
+      this._buildList.some(function(n, i) {
+        if (n.hasAttribute('data-auto')) {
+          idx = i;
+          return true;
+        }
+        return false;
+      });
+      if (idx >= 0) {
+        var elem = this._buildList.splice(idx, 1)[0];
+        var transitionEnd = isWK ? 'webkitTransitionEnd' : (isFF ? 'mozTransitionEnd' : 'oTransitionEnd');
+        var _t = this;
+        if (canTransition()) {
+          var l = function(evt) {
+            elem.parentNode.removeEventListener(transitionEnd, l, false);
+            _t._runAutos();
+          };
+          elem.parentNode.addEventListener(transitionEnd, l, false);
+          removeClass(elem, 'to-build');
+        } else {
+          setTimeout(function() {
+            removeClass(elem, 'to-build');
+            _t._runAutos();
+          }, 400);
+        }
+      }
+    },
+    buildNext: function() {
+      if (!this._buildList.length) {
+        return false;
+      }
+      removeClass(this._buildList.shift(), 'to-build');
+      return true;
+    },
+  };
+
+  //
+  // SlideShow class
+  //
+  var SlideShow = function(slides) {
+    this._slides = (slides || []).map(function(el, idx) {
+      return new Slide(el, idx);
+    });
+
+    var h = window.location.hash;
+    try {
+      this.current = parseInt(h.split('#slide')[1], 10);
+    }catch (e) { /* squeltch */ }
+    this.current = isNaN(this.current) ? 1 : this.current;
+    var _t = this;
+    doc.addEventListener('keydown', 
+        function(e) { _t.handleKeys(e); }, false);
+    doc.addEventListener('mousewheel', 
+        function(e) { _t.handleWheel(e); }, false);
+    doc.addEventListener('DOMMouseScroll', 
+        function(e) { _t.handleWheel(e); }, false);
+    doc.addEventListener('touchstart', 
+        function(e) { _t.handleTouchStart(e); }, false);
+    doc.addEventListener('touchend', 
+        function(e) { _t.handleTouchEnd(e); }, false);
+    window.addEventListener('popstate',
+        function(e) { _t.go(e.state); }, false);
+    this._update();
+  };
+
+  SlideShow.prototype = {
+    _slides: [],
+    _update: function(dontPush) {
+      document.querySelector('#presentation-counter').innerText = this.current;
+      if (history.pushState) {
+        if (!dontPush) {
+          history.pushState(this.current, 'Slide ' + this.current, '#slide' + this.current);
+        }
+      } else {
+        window.location.hash = 'slide' + this.current;
+      }
+      for (var x = this.current-1; x < this.current + 7; x++) {
+        if (this._slides[x-4]) {
+          this._slides[x-4].setState(Math.max(0, x-this.current));
+        }
+      }
+    },
+
+    current: 0,
+    next: function() {
+      if (!this._slides[this.current-1].buildNext()) {
+        this.current = Math.min(this.current + 1, this._slides.length);
+        this._update();
+      }
+    },
+    prev: function() {
+      this.current = Math.max(this.current-1, 1);
+      this._update();
+    },
+    go: function(num) {
+      if (!num) return;
+      if (history.pushState && this.current != num) {
+        history.replaceState(this.current, 'Slide ' + this.current, '#slide' + this.current);
+      }
+      this.current = num;
+      this._update(true);
+    },
+
+    _notesOn: false,
+    showNotes: function() {
+      var isOn = this._notesOn = !this._notesOn;
+	  console.log(isOn);
+      query('.notes').forEach(function(el) {
+        el.style.display = (isOn) ? 'inline-block' : 'none';
+	    console.log(isOn);
+      });
+    },
+    switch3D: function() {
+      toggleClass(document.body, 'three-d');
+    },
+    handleWheel: function(e) {
+      var delta = 0;
+      if (e.wheelDelta) {
+        delta = e.wheelDelta/120;
+        if (isOpera) {
+          delta = -delta;
+        }
+      } else if (e.detail) {
+        delta = -e.detail/3;
+      }
+
+      if (delta > 0 ) {
+        this.prev();
+        return;
+      }
+      if (delta < 0 ) {
+        this.next();
+        return;
+      }
+    },
+    handleKeys: function(e) {
+      
+      if (/^(input|textarea)$/i.test(e.target.nodeName)) return;
+      
+      switch (e.keyCode) {
+        case 37: // left arrow
+          this.prev(); break;
+        case 39: // right arrow
+        case 32: // space
+          this.next(); break;
+        case 50: // 2
+          this.showNotes(); break;
+        case 51: // 3
+          this.switch3D(); break;
+      }
+    },
+    _touchStartX: 0,
+    handleTouchStart: function(e) {
+      this._touchStartX = e.touches[0].pageX;
+    },
+    handleTouchEnd: function(e) {
+      var delta = this._touchStartX - e.changedTouches[0].pageX;
+      var SWIPE_SIZE = 150;
+      if (delta > SWIPE_SIZE) {
+        this.next();
+      } else if (delta< -SWIPE_SIZE) {
+         this.prev();
+       }
+    },
+  };
+
+  // Initialize
+  var slideshow = new SlideShow(query('.slide'));
+})();
+
+
+  </script>
+  <!--[if lt IE 9]>
+  <script 
+  src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({ mode: "overlay" });</script>
+  <![endif]--> 
+ 
+   
+
+</body></html>

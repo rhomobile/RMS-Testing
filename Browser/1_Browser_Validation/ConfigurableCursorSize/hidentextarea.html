@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title >Text Area with no Carat</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <style type="text/css">
+        .textarea-wrapper {
+            position:relative;
+        }
+        .textarea-wrapper textarea {
+            background-color:white;
+        }
+        .textarea-wrapper, .textarea-wrapper textarea {
+            width:500px;
+            height:500px;
+        }
+        .textarea-wrapper textarea.hidden {
+            color:red;
+            opacity:0.00;
+            filter:alpha(opacity=00);
+            position:absolute;
+            top:0px;
+            left:0px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(
+            function() {
+                $("textarea").addClass("-real-textarea");
+                $(".textarea-wrapper").append("<textarea class=\"hidden\"></textarea>");
+                $(".textarea-wrapper textarea.hidden").keyup(
+                    function() {
+                        $(".textarea-wrapper textarea.-real-textarea").val($(this).val());
+                    }
+                );
+                $(".textarea-wrapper textarea.-real-textarea").focus(
+                    function() {
+                        $(this).parent().find("textarea.hidden").focus();
+                    }
+                );
+            }
+        );
+    </script>
+</head>
+<body>
+<br/>
+<br/>
+<br/>
+<br/>
+    <div class="textarea-wrapper">
+        <textarea></textarea>
+    </div>
+
+</body>
+</html>

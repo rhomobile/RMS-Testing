@@ -1,0 +1,2 @@
+<StartPage value="file://%INSTALLDIR%\HTML\Newlyadded\index.html" name="Menu"/>
+192.168.6.32

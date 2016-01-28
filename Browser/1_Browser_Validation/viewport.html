@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="nojs">
+<head>
+	<title>plain form</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=800,minimum-scale=1.0,maximum-scale=1.0">
+	<style>
+	body {
+		padding:	0;
+		margin:		0;
+		font-family:sans-serif;
+		font-size:	16px;
+		background:	#ccc;
+		-webkit-text-size-adjust: none;
+	}
+	div {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: 	border-box;
+		-o-box-sizing: 		border-box;
+		box-sizing: 		border-box;
+		display:			inline-block;
+	    width:              100%;
+		background:	#fff;
+		border:		1px solid #444;
+	}
+	div:not(:last-child) {
+		border-bottom:	0;
+	}
+	input {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: 	border-box;
+		-o-box-sizing: 		border-box;
+		box-sizing: 		border-box;
+
+		display:			inline-block;
+	    width:              100%;
+	    height:             inherit;
+	    margin:             0;
+	    padding:        	.7em .4em .7em 7em;
+	    text-align:			right;
+	    font-size:          1em;
+	    background:         transparent;
+	    border:				0;
+
+	    -webkit-tap-highlight-color: rgba(0,0,0,0);
+	    outline:			0;
+	    -webkit-border-radius:  0px;
+	    -webkit-appearance: textfield;
+	    -moz-appearance:    textfield;
+	    resize:         none;
+
+	    z-index:		0;
+	}
+
+	label {
+		position:		absolute;
+		width:			6.5em;
+		margin:			0;
+	    padding:        .7em .2em .7em .4em;
+	    font-weight:    bold;
+	    text-overflow:	ellipsis;
+	    white-space: 	nowrap;
+	    overflow:		hidden;
+	    z-index:		1;
+	}
+	</style>
+</head>
+
+<body>
+<br />
+<br />
+<br />
+	<div>
+		<label>Test label</label>
+		<input type="text" name="input1" placeholder="Enter Some Text1">
+	</div>
+	<div>
+		<label>Test label</label>
+		<input type="text" name="input1" placeholder="Enter Some Text2">
+	</div>
+
+</body>
+</html>

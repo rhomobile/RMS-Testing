@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+</script>
+<script>
+$('.button').click(function() {
+    $.ajax({
+        url: "http://10.233.85.82/vinod/2_HTML5_Validation/html5-offline-cache/",
+        context: document.body,
+        success: function(s,x){
+
+            $('html[manifest=appmanifest.php]').attr('content', '');
+                $(this).html(s);
+        }
+    }); 
+});
+</script>
+</head>
+<body>
+
+<button>Click</button>
+
+</body>
+</html>

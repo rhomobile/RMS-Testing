@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css">
+<script src="jquery-1.7.1.min.js"></script>
+<script src="jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:83/Application/www/sapp/src/asl.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="pageone">
+<script>
+$('#pageone').on( "pageshow", function( event, ui ) {
+setTimeout(function() {
+	document.location.hash = "#pagetwo"
+	}, 5000);
+  });
+</script>
+  <div data-role="header">
+    <h1>Barcode</h1>
+  </div>
+
+  <div data-role="content">
+    <p>Welcome!</p>
+  </div>
+
+  <div data-role="footer">
+    <h1>RhoMobile Suits</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="pagetwo">
+<script>
+$('#pagetwo').on( "pageshow", function( event, ui ) {
+	setTimeout(function() {
+	document.location.hash = "#pagethree";
+	}, 5000);
+  });
+</script>
+  <div data-role="header">
+    <h1>Signature</h1>
+  </div>
+
+  <div data-role="content">
+    <p>I am in my 2nd HOME</p>
+
+  </div>
+
+  <div data-role="footer">
+    <h1>RhoMobile Suits</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="pagethree">
+<script>
+$('#pagethree').on( "pageshow", function( event, ui ) {
+setTimeout(function() {
+	document.location.hash = "#pageone";
+	}, 5000);
+});
+</script>
+  <div data-role="header">
+    <h1>APD</h1>
+  </div>
+
+  <div data-role="content">
+    <p>I am in my 3rd HOME</p>
+  </div>
+
+  <div data-role="footer">
+    <h1>RhoMobile Suits</h1>
+  </div>
+</div> 
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <text x="10" y="20" style="fill:red;">Several lines: 
+    <tspan x="10" y="45">First line</tspan> 
+    <tspan x="10" y="70">Second line</tspan> 
+  </text>
+	 
+  <a xlink:href="textaslink.svg" >
+    <text x="20" y="200" fill="red">Next text as link</text>
+  </a>
+</svg>

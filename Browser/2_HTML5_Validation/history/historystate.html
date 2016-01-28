@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>History state URL test</title>
+    </head>
+    <body>
+        <article>
+            <section class="buttons">
+                <input type="button" id="restore" value="restore"/>
+                <input type="button" id="test0" value="test0"/>
+                <input type="button" id="test1" value="test1"/>
+                <input type="button" id="test2" value="test2"/>
+                <input type="button" id="test3" value="test3"/>
+                <input type="button" id="other" value="other"/>
+            </section>
+        </article>
+        <script>
+if (history.pushState) {
+   alert("Push State is available");
+}
+
+if (typeof history.pushState === "function") {
+   alert("Push State function is available");
+}
+
+            (function (history)
+            {
+                "use strict";
+
+                var href = window.location.href;
+
+                var restore = document.getElementById("restore");
+                restore.setAttribute("value", "Restore");
+                var test0 = document.getElementById("test0");
+                test0.setAttribute("value", "Test 0: unspecified");
+                var test1 = document.getElementById("test1");
+                test1.setAttribute("value", "Test 1: \"\"");
+                var test2 = document.getElementById("test2");
+                test2.setAttribute("value", "Test 2: null");
+                var test3 = document.getElementById("test3");
+                test3.setAttribute("value", "Test 3: undefined");
+                var other = document.getElementById("other");
+                other.setAttribute("value", "Other");
+
+                restore.addEventListener("click", function restore()
+                {
+                    history.pushState(null, "Restore", href);
+                }, false);
+
+                test0.addEventListener("click", function test0()
+                {
+                    history.pushState(null, "Test 0");
+                }, false);
+
+                test1.addEventListener("click", function test1()
+                {
+                    history.pushState(null, "Test 1", "");
+                }, false);
+
+                test2.addEventListener("click", function test2()
+                {
+                    history.pushState(null, "Test 2", null);
+                }, false);
+
+                test3.addEventListener("click", function test3()
+                {
+                    history.pushState(null, "Test 3", (void 0));
+                }, false);
+
+                other.addEventListener("click", function other()
+                {
+                    history.pushState(null, "Other", window.prompt("Enter URL:", ""));
+                }, false);
+            }(window.history));
+        </script>
+    </body>
+</html>

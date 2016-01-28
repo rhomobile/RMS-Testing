@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024 * 1024);
+var msg;
+try{
+db.transaction(function (tx) {
+  tx.executeSql("CREATE TABLE IF NOT EXISTS [MattTest] ([Foo] VARCHAR(32) PRIMARY KEY ASC, [Bar] VARCHAR(20), [Will] VARCHAR(100), [Smith] VARCHAR(100))", []);
+		var i=0;
+        for(i=0; i<50; i++){
+
+            tx.executeSql("INSERT INTO [MattTest] (Foo, Bar, Will, Smith) VALUES (?,?,?,?)", ['Foo' + i, 'Bar', 'Now this is the story all about how My life got flipped turned upside down', 'And Id like to take a minute just sit right there Ill tell you how I became the prince of a town called Bel Air']);}
+  msg = '<p>Log message created and row inserted.</p>';
+  document.querySelector('#status').innerHTML =  msg;
+});
+}
+catch(err){
+
+}
+db.transaction(function (tx) {
+ tx.executeSql('SELECT * FROM MattTest', [], function (tx, results) {
+   var len1 = results.rows.length, i;
+   msg = "<p>Found rows: " + len1 + "</p>";
+   document.querySelector('#status').innerHTML +=  msg;
+   for (i = 0; i < len1; i++){
+     msg = "<p><b>" + results.rows.item(i).Will + "</b></p>";
+     document.querySelector('#status').innerHTML +=  msg;
+   }
+
+ }, null);
+});
+</script>
+</head>
+<body>
+<div id="status" name="status">Status Message</div>
+</body>
+</html>

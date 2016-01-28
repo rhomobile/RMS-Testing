@@ -1,0 +1,89 @@
+*{
+	/* On a production site, use a real reset instead of this! */
+	margin:0;
+	padding:0;  
+}            
+    
+body{
+	background:#f5f5f5;
+	font-family:"Lucida Grande", Arial;
+	font-size:13px;
+	line-height:21px;
+	color:#444;  
+}     
+
+p{
+	margin:15px 0;
+}              
+
+h2{
+	margin-top:20px;
+}
+
+#container{
+	background:#fff;
+	border-left:1px #ddd solid;
+	border-right:1px #ddd solid;
+	border-bottom:1px #ddd solid;
+	width:600px;
+	margin:0 auto;
+}  
+
+header h1#logo a{
+	text-indent:-9999px;
+	display:block;
+	width:600px;
+	height:82px;
+	background:url(image-med.jpg) no-repeat 0 0;
+}             
+
+#content{
+	width:95%;
+	margin:0 auto;
+}
+
+footer{
+	text-align:center;
+	width:100%;
+	display:block;    
+	font-size:11px;
+}  
+
+img {
+	max-width:570px;
+	margin:10px 0;
+}                                             
+
+@media screen and (min-width:1200px){
+	img {
+		max-width:1000px;
+	}
+	
+	#container{
+		width:1100px;
+	}  
+	
+	header h1#logo a{
+		width:1100px;
+		height:150px;
+		background:url(image.jpg) no-repeat 0 0;
+	}                          
+	
+}
+
+@media screen and (max-width:767px){  
+	img {
+    	max-width:305px;
+	}
+	
+	#container{
+		width:320px;
+	} 
+	
+	header h1#logo a{
+		width:320px;
+		height:44px;
+		background:url(image-small.jpg) no-repeat 0 0;
+	}                           
+	
+}

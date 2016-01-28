@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <text x="0" y="15" fill="red" transform="rotate(30 20,40)">I love SVG</text>
+	 
+  <a xlink:href="textonpath.svg" >
+    <text x="20" y="200" fill="red">Next text on a path</text>
+  </a>
+</svg>

@@ -1,0 +1,67 @@
+<html>
+	<head>
+	   <script type="text/javascript" src="http://127.0.0.1:83/Application/www/sapp/src/asl.js"></script>
+		<script>
+			var xmlhttp = new XMLHttpRequest();
+			var inflight = 0;
+			
+			function loadXMLDoc()
+			{
+
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				  }
+				else
+				  {// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				xmlhttp.onreadystatechange=function()
+				  {
+				  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+					//document.getElementById("div"+count).innerHTML = xmlhttp.response+" "+new Date();
+					var div1 = document.getElementById('div1');
+					var btn=document.createElement("P");
+					var t=document.createTextNode(xmlhttp.response+" "+new Date());
+					btn.appendChild(t);
+					div1.appendChild(btn);
+					inflight--;
+					document.getElementById("inflight_dec").innerHTML = inflight;
+					
+					}
+				  }
+				xmlhttp.open("GET","test.txt",true);
+				inflight++;
+				document.getElementById("inflight_inc").innerHTML = inflight;
+				xmlhttp.send();
+				
+
+				
+			}
+			setInterval(function(){
+				document.getElementById('div1').innerHTML = "";
+				for(var i=1; i<= 10; i++){
+					loadXMLDoc();
+				}
+			},10000)
+		
+			
+		</script>
+	</head>
+	<body>
+		<br/><br/><br/>
+		<div id="dialog">
+		<header> AJAX Test </header>
+		<div class="text">Ajax Count</div>
+		<div id="inflight_inc">inflight_inc</div>
+		<div id="inflight_dec">inflight_dec</div>
+		<div id="div1">
+
+		</div>
+
+	
+		</div>
+	</body>
+</html>

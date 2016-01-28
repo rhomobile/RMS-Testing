@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://app.oneserve.co.uk/RainbowTest/mobile/home.html -->
+<html manifest="cache.manifest" class="ui-mobile"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><!--<base href="https://app.oneserve.co.uk/RainbowTest/mobile/home.html">--><base href=".">
+    	<!-- remote debugger  
+    	<script src="http://192.168.1.61:8081/target/target-script-min.js#anonymous"></script>
+    	-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="apple-touch-icon" href="./home_files/logo-highres.png">
+		<!-- android requires below -->
+		<link rel="apple-touch-icon-precomposed" href="./home_files/logo-highres.png">
+        <link type="text/css" rel="stylesheet" media="screen" href="./home_files/jquery.mobile-1.1.1.css">
+		<link type="text/css" rel="stylesheet" media="screen" href="./home_files/oneserve-mobile.css">
+		<link rel="icon" href="https://app.oneserve.co.uk/RainbowTest/mobile/images/favicon.ico" type="image/x-icon">  
+		<link rel="shortcut icon" href="https://app.oneserve.co.uk/RainbowTest/mobile/images/favicon.ico" type="image/x-icon">		
+		<script type="text/javascript">
+			//indicates if we have come from the login screen if not set this will
+			//force redirect to login.jsp, otherwise non of the styles are loaded
+			var loginPageInitialised = true;
+
+			//remove pullServerScheduled, requestInProgress if we reloaded window
+			//as that related data will be lost
+			//The online check will run on home page.
+			localStorage.removeItem('pullServerScheduled');
+			localStorage.removeItem('requestInProgress');
+
+			localStorage.ctx = '/RainbowTest'; 			
+		</script>
+        <script type="text/javascript" src="./home_files/jquery-1.6.4.js"></script>
+        <!-- normalizes and exposes stack traces for unhandled exceptions -->
+        <script type="text/javascript" src="./home_files/tracekit.js"></script>
+        <!-- init - set up the default settings etc -->
+        <script type="text/javascript" src="./home_files/oneserve-init.js"></script>
+		<script type="text/javascript" src="./home_files/oneserve-queue.js"></script>
+		<script type="text/javascript" src="./home_files/oneserve-utils.js"></script>
+		<script type="text/javascript" src="./home_files/oneserve-db.js"></script>        
+		<script type="text/javascript" src="./home_files/oneserve-model.js"></script>  
+		<script type="text/javascript" src="./home_files/oneserve-controller.js"></script>		
+		<script type="text/javascript" src="./home_files/oneserve-surveys.js"></script>			
+		<script type="text/javascript" src="./home_files/db-loader.js"></script>
+		<script type="text/javascript" src="./home_files/gps-worker.js"></script>						        
+		<script type="text/javascript" src="./home_files/oneserve-online.js"></script>		
+		<script type="text/javascript" src="./home_files/localstoragedb.js"></script>		
+		<script type="text/javascript" src="./home_files/resource-database.js"></script>
+		<script type="text/javascript" src="./home_files/resource-dataprovider.js"></script>	
+		       
+		
+		<!-- insert messages before jquery mobile initialisation -->
+		<script type="text/javascript">
+	    	// localisation variables
+	    	var messageDao = new $.MessageDao();
+	    	var messageList = new Array();
+			messageList.push({key:"service.title",message:"Services"});
+messageList.push({key:"sendToServer",message:"Send Local Data to Server"});
+messageList.push({key:"loginfail",message:"Invalid username or password"});
+messageList.push({key:"appt.client",message:"Client"});
+messageList.push({key:"activity.title",message:"Activities"});
+messageList.push({key:"libraryActivity.noDeleteRights",message:"You do not have the rights to delete an activity with job versioning enabled"});
+messageList.push({key:"username",message:"Username"});
+messageList.push({key:"partCategoryList.title",message:"Parts"});
+messageList.push({key:"activityEdit.titleEdit",message:"Edit Activity"});
+messageList.push({key:"showMore",message:"Show more..."});
+messageList.push({key:"locationName.toLong",message:"Name can only be 200 characters long"});
+messageList.push({key:"addPart.quantityUsed",message:"Quantity used on this job"});
+messageList.push({key:"signature.title",message:"Signature"});
+messageList.push({key:"apptType",message:"0"});
+messageList.push({key:"loader.appointment.list",message:"Getting appointments and surveys"});
+messageList.push({key:"addPart.cancel",message:"Cancel"});
+messageList.push({key:"assetRef.required",message:"Ref is required"});
+messageList.push({key:"averageBandwidth",message:"Average bandwidth KB/s"});
+messageList.push({key:"lastApptType",message:"0"});
+messageList.push({key:"searchJob.futureDate",message:"Appointment date must be in the future"});
+messageList.push({key:"searchJob.addingAppointment",message:"Adding appointment"});
+messageList.push({key:"check.version.error",message:"Connection error getting version number, status code:"});
+messageList.push({key:"assetModel.required",message:"Model is required"});
+messageList.push({key:"survey.completionStage.1",message:"Anytime"});
+messageList.push({key:"survey.completionStage.2",message:"Before Works Starts"});
+messageList.push({key:"authmsg",message:"Authenticating..."});
+messageList.push({key:"addPart.purchasedQuantityGreaterThenZero",message:"Purchased Quantity must be greater then zero"});
+messageList.push({key:"myappts",message:"Appointments"});
+messageList.push({key:"addPart.purchaseRef",message:"Purchase Ref"});
+messageList.push({key:"assetLocationExists",message:"Location already exists"});
+messageList.push({key:"appointmentEditPart.update",message:"Update"});
+messageList.push({key:"searchJob.loadingResults",message:"Loading results"});
+messageList.push({key:"searchJobStartDate",message:"Start Date:"});
+messageList.push({key:"searchJob.unableToAddAppointmentOther",message:"Unable to add appointment, check your signal and try again."});
+messageList.push({key:"logoutConfirmation.message",message:"Are you sure you want to log out?"});
+messageList.push({key:"survey.asset.removal.select.full",message:"Remove completely"});
+messageList.push({key:"appointmentStatus4",message:"Complete"});
+messageList.push({key:"searchJob.addAppointment.button",message:"Add Appointment"});
+messageList.push({key:"appointmentStatus3",message:"In Progress"});
+messageList.push({key:"activityEdit.completeQty",message:"Completed Quantity"});
+messageList.push({key:"noAppts",message:"No appointments"});
+messageList.push({key:"appointmentStatus2",message:"Pending"});
+messageList.push({key:"survey.asset.removal.select.stock",message:"Return to stock"});
+messageList.push({key:"appointmentStatus1",message:"Rescheduled (NC)"});
+messageList.push({key:"appointmentStatus8",message:"Rescheduled"});
+messageList.push({key:"appointmentStatus7",message:"Deleted (NC)"});
+messageList.push({key:"appointmentStatus6",message:"Being Rescheduled"});
+messageList.push({key:"appt.planned",message:"Planned"});
+messageList.push({key:"appointmentStatus5",message:"Cost Complete"});
+messageList.push({key:"survey.asset.condition",message:"Condition"});
+messageList.push({key:"appointmentStatus9",message:"Cancelled"});
+messageList.push({key:"addPart.usedQuantityNumber",message:"Used Quantity must be valid number"});
+messageList.push({key:"lastOffline",message:"Last offline"});
+messageList.push({key:"loadingErrorMsg",message:"Server not reachable"});
+messageList.push({key:"home.title",message:""});
+messageList.push({key:"searchJob.emptySearch",message:"Enter search criteria first"});
+messageList.push({key:"back",message:"Back"});
+messageList.push({key:"signature.signHere",message:"Sign here"});
+messageList.push({key:"survey.asset.location",message:"Location"});
+messageList.push({key:"newAssetModel.title",message:"New asset model"});
+messageList.push({key:"appointmentStatus0",message:"New"});
+messageList.push({key:"workDescription",message:"Work description"});
+messageList.push({key:"addPart.purchasedQuantityNumber",message:"Purchased Quantity must be valid number"});
+messageList.push({key:"addPart.partAdded",message:"Part has been added"});
+messageList.push({key:"loader.appointment.count",message:"Getting appointment counts"});
+messageList.push({key:"apptDescription.title",message:"Description"});
+messageList.push({key:"offlineHeader",message:"Offline,"});
+messageList.push({key:"notes",message:"Notes"});
+messageList.push({key:"assetRef.toLong",message:"Ref can only be 100 characters long"});
+messageList.push({key:"searchJobStartTime",message:"Start Time:"});
+messageList.push({key:"searchJob.newAppointmentNotes",message:"Appointment added via Mobile"});
+messageList.push({key:"appointmentList.title",message:"Appointments"});
+messageList.push({key:"appointmentNotes.title",message:"Notes"});
+messageList.push({key:"partServiceList.title",message:"Parts"});
+messageList.push({key:"addPart.notEnoughStock",message:"Not enough parts in store"});
+messageList.push({key:"addAppt.reasonRequired",message:"A Reason is Required"});
+messageList.push({key:"appointmentEditPart.title",message:"Edit Part"});
+messageList.push({key:"survey.download.error",message:"Error downloading survey details; survey functionality will be impaired"});
+messageList.push({key:"searchJob.searchTimeout",message:"Sorry, job data could not be accessed. Please check your signal and try again."});
+messageList.push({key:"libraryActivity.title",message:"Add activities"});
+messageList.push({key:"appointment.title",message:"Appointment"});
+messageList.push({key:"cancel",message:"Cancel"});
+messageList.push({key:"inProgress",message:"In Progress"});
+messageList.push({key:"appointment.noLongerExists",message:"Previously 'In Progress' appointment no longer found, it may have been modified via the main application. You will be returned to the appointment list."});
+messageList.push({key:"appt.actual_end",message:"ACTUAL END:"});
+messageList.push({key:"activityEdit.titleAdd",message:"Add Activity"});
+messageList.push({key:"al.completedActivities",message:"Completed Activities"});
+messageList.push({key:"description",message:"Description"});
+messageList.push({key:"signature.type1",message:"Customer"});
+messageList.push({key:"signature.type0",message:"Operative"});
+messageList.push({key:"welcome",message:"Welcome to Oneserve"});
+messageList.push({key:"login.title",message:"Oneserve Mobile"});
+messageList.push({key:"addAsset.title",message:"Add Asset"});
+messageList.push({key:"libraryActivity.noUpdateRights",message:"You do not have the rights to update an activity with job versioning enabled"});
+messageList.push({key:"appt.actual_start",message:"ACTUAL START:"});
+messageList.push({key:"offlineLastCheck",message:"last check:"});
+messageList.push({key:"assetModelRef.required",message:"Model ref is required"});
+messageList.push({key:"appt.completeCheck",message:"Are you sure you wish to complete this appointment?"});
+messageList.push({key:"assetNewLocation",message:"Add New"});
+messageList.push({key:"assetNewModel",message:"Add New"});
+messageList.push({key:"update",message:"Update"});
+messageList.push({key:"appt.planned_end",message:"PLANNED END:"});
+messageList.push({key:"appt.additional",message:"Additional Appointment"});
+messageList.push({key:"assetCondition",message:"Condition"});
+messageList.push({key:"searchJob.unableToAddAppointmentConflict",message:"Unable to add appointment, check if new appointment doesn't conflict with existing one"});
+messageList.push({key:"appointmentParts.title",message:"Parts"});
+messageList.push({key:"signature.save",message:"Save"});
+messageList.push({key:"survey.asset.remove",message:"Remove asset"});
+messageList.push({key:"signature.clear",message:"Clear"});
+messageList.push({key:"lal.code",message:"Code:"});
+messageList.push({key:"activityEdit.totalQty",message:"Total Quantity"});
+messageList.push({key:"loginMessage",message:"Sign in below or register HERE to get started"});
+messageList.push({key:"activityEdit.activityNotes",message:"Notes"});
+messageList.push({key:"survey.title",message:"Survey"});
+messageList.push({key:"notStarted",message:"Not Started"});
+messageList.push({key:"edit",message:"Edit"});
+messageList.push({key:"al.completedOfTotal",message:"of"});
+messageList.push({key:"appt.jobClientRef",message:"Ref"});
+messageList.push({key:"searchJob.invalidDate",message:"You have entered invalid date"});
+messageList.push({key:"lastOnline",message:"Last online check"});
+messageList.push({key:"activityEdit.activityLocation",message:"Location"});
+messageList.push({key:"searchJobDuration",message:"Expected Duration[min]:"});
+messageList.push({key:"survey.asset.removal.select.title",message:"Select asset removal type"});
+messageList.push({key:"survey.complete",message:"Complete"});
+messageList.push({key:"assetLocation.required",message:"Location is required"});
+messageList.push({key:"surveyList.title",message:"Surveys"});
+messageList.push({key:"assetModel.toLong",message:"Model can only be 200 characters long"});
+messageList.push({key:"assetSave",message:"Save"});
+messageList.push({key:"addPart.quantityPurchased",message:"Quantity Purchased"});
+messageList.push({key:"tools.title",message:"Tools"});
+messageList.push({key:"refresh",message:"Refresh"});
+messageList.push({key:"workComplete",message:"All Work Complete"});
+messageList.push({key:"rescheduled",message:"The appointment you have just completed has since been rescheduled.  Please check your job list for new appointments."});
+messageList.push({key:"assetLocation",message:"Location"});
+messageList.push({key:"downloadingMessage",message:"Downloading, please wait..."});
+messageList.push({key:"offlineChecking",message:"Offline, checking..."});
+messageList.push({key:"survey.please.select",message:"- please select -"});
+messageList.push({key:"appointmentStatus10",message:"Holding"});
+messageList.push({key:"addPart.usedQuantityRequired",message:"Used Quantity is required"});
+messageList.push({key:"lal.clientRef",message:"Client ref:"});
+messageList.push({key:"home",message:"Home"});
+messageList.push({key:"survey.asset.ref",message:"Ref"});
+messageList.push({key:"desktopVersion",message:"Desktop version"});
+messageList.push({key:"appointmentSigSelect.title",message:"Signatures"});
+messageList.push({key:"assetLocationName.required",message:"Location name is required"});
+messageList.push({key:"addPart.usedQuantityZeroOrGreater",message:"Used Quantity must be zero or greater"});
+messageList.push({key:"version",message:"Version:"});
+messageList.push({key:"title",message:"Oneserve Mobile"});
+messageList.push({key:"alerts",message:"Alerts"});
+messageList.push({key:"delete",message:"Delete"});
+messageList.push({key:"addAppointmentMsg",message:"Are you sure you wish to request an additional appointment and complete this appointment?"});
+messageList.push({key:"signature.customer",message:"Customer Signature"});
+messageList.push({key:"completed",message:"Completed"});
+messageList.push({key:"assetModel",message:"Model"});
+messageList.push({key:"assetModelExists",message:"Model already exists"});
+messageList.push({key:"refreshNotSafe",message:"Refresh disabled until queued updates have been processed"});
+messageList.push({key:"activityEdit.emptyCategory",message:"Select Category"});
+messageList.push({key:"libraryActivity.noAddRights",message:"You do not have the rights to add an activity with job versioning enabled"});
+messageList.push({key:"partCategoryList.allOption",message:"All"});
+messageList.push({key:"signature.operative",message:"Operative Signature"});
+messageList.push({key:"assetCondition.required",message:"Condition is required"});
+messageList.push({key:"logout",message:"Logout"});
+messageList.push({key:"activityEdit.emptyLocation",message:"Select Location"});
+messageList.push({key:"addPart.save",message:"Save"});
+messageList.push({key:"activityEdit.confirmDelete",message:"Are you sure you want to delete this activity?"});
+messageList.push({key:"survey.attribute.mandatory.overflow",message:"These and more mandatory fields have not been updated"});
+messageList.push({key:"telephone",message:"Tel:"});
+messageList.push({key:"workNotes",message:"Work notes"});
+messageList.push({key:"login-unexpectedError",message:"Unexpected error occurred, please try again"});
+messageList.push({key:"survey.asset.restore.select.location",message:"Select asset location"});
+messageList.push({key:"signature.saved",message:"Signature saved"});
+messageList.push({key:"password",message:"Password"});
+messageList.push({key:"apptComplete.title",message:"Complete"});
+messageList.push({key:"appt.reason",message:"Add reason"});
+messageList.push({key:"addPart.purchasedQuantityRequired",message:"Purchased Quantity is required"});
+messageList.push({key:"tools",message:"Tools"});
+messageList.push({key:"searchJob.invalidDuration",message:"Duration must be a positive integer"});
+messageList.push({key:"newAssetModelOk",message:"Ok"});
+messageList.push({key:"userId",message:"0"});
+messageList.push({key:"activityEdit.activityCategory",message:"Category"});
+messageList.push({key:"survey.accept",message:"Accept"});
+messageList.push({key:"appt.planned_start",message:"PLANNED START:"});
+messageList.push({key:"survey.asset.restore",message:"Restore asset"});
+messageList.push({key:"status",message:"Status"});
+messageList.push({key:"assetRef",message:"Ref"});
+messageList.push({key:"newAssetModelCancel",message:"Cancel"});
+messageList.push({key:"assetTypeList.title",message:"Asset Type"});
+messageList.push({key:"addPart.purchasedOrUsedQtyGreaterThenZero",message:"Purchased or/and Used Quantity must be greater then zero"});
+messageList.push({key:"notesUpdated",message:"Notes updated"});
+messageList.push({key:"storePartList.title",message:"Parts"});
+messageList.push({key:"surveys",message:"Surveys"});
+messageList.push({key:"teamappts",message:"Team appointments"});
+messageList.push({key:"appt.actual",message:"Actual"});
+messageList.push({key:"survey.status.1",message:"Pending"});
+messageList.push({key:"survey.status.3",message:"Complete"});
+messageList.push({key:"survey.status.2",message:"In progress"});
+messageList.push({key:"survey.status.5",message:"Rejected"});
+messageList.push({key:"add",message:"Add"});
+messageList.push({key:"survey.status.4",message:"Approved"});
+messageList.push({key:"newAssetLocationCancel",message:"Cancel"});
+messageList.push({key:"assetManufacturerList.title",message:"Asset Manufacturer"});
+messageList.push({key:"signin",message:"Sign in"});
+messageList.push({key:"addPart.currentQty",message:"Current Quantity in Store"});
+messageList.push({key:"appointmentEditPart.delete",message:"Delete"});
+messageList.push({key:"considerations",message:"Considerations"});
+messageList.push({key:"logoutConfirmation.title",message:"Please confirm"});
+messageList.push({key:"newAssetLocationOk",message:"Ok"});
+messageList.push({key:"newAssetLocation.title",message:"New asset location"});
+messageList.push({key:"searchJob.title",message:"Add Appointment"});
+messageList.push({key:"error",message:"An error has occurred, code:"});
+messageList.push({key:"survey.finished",message:"Finished"});
+messageList.push({key:"appointment.rescheduled",message:"The appointment has been rescheduled, please refresh your list"});
+messageList.push({key:"al.totalActivities",message:"Total Activities"});
+messageList.push({key:"loader.surveys.list",message:"Getting {0} surveys"});
+messageList.push({key:"queuedItemsCount",message:"Queued updates"});
+messageList.push({key:"appointmentEditPart.delete.confirm",message:"Are you sure you want to delete this part?"});
+messageList.push({key:"loader.login",message:"Authenticating"});
+messageList.push({key:"loadingMsg",message:"Page loading..."});
+messageList.push({key:"timeout",message:"Sorry, job data could not be accessed. Please check your signal and try again."});
+messageList.push({key:"addPart.title",message:"Parts"});
+
+			messageDao.addAll(messageList);
+			document.title = getMessage("title","Oneserve Mobile");
+	    </script><title>Oneserve Mobile</title>
+		
+		<script type="text/javascript" src="./home_files/oneserve.js"></script>
+        <script type="text/javascript" src="./home_files/jquery.mobile-1.1.1.js"></script>
+		<script type="text/javascript" src="./home_files/oneserve-ICanHaz.js"></script>		
+		         
+		<link type="text/css" rel="stylesheet" media="screen" href="./home_files/oneserve-signaturepad.css">		
+		<script type="text/javascript" src="./home_files/oneserve-signaturepad.js"></script>
+        <script type="text/javascript" src="./home_files/json2.min.js"></script>
+		<script type="text/javascript" src="./home_files/oneserve-signature.js"></script>
+		
+		<script type="text/javascript" src="./home_files/view.js"></script>
+	    <script type="text/javascript" src="./home_files/model.js"></script>
+	    <script type="text/javascript" src="./home_files/controller.js"></script>
+	    
+	    <script type="text/javascript" src="./home_files/view(1).js"></script>
+	    <script type="text/javascript" src="./home_files/model(1).js"></script>
+	    <script type="text/javascript" src="./home_files/controller(1).js"></script>
+
+        <script type="text/javascript" src="./home_files/view(2).js"></script>
+        <script type="text/javascript" src="./home_files/model(2).js"></script>
+        <script type="text/javascript" src="./home_files/controller(2).js"></script>
+
+        <script type="text/javascript" src="./home_files/view(3).js"></script>
+        <script type="text/javascript" src="./home_files/model(3).js"></script>
+        <script type="text/javascript" src="./home_files/controller(3).js"></script>
+
+        <script type="text/javascript" src="./home_files/view(4).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(5).js"></script>
+        <script type="text/javascript" src="./home_files/model(4).js"></script>
+        <script type="text/javascript" src="./home_files/controller(4).js"></script>
+        <script type="text/javascript" src="./home_files/model(5).js"></script>
+        <script type="text/javascript" src="./home_files/controller(5).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(6).js"></script>
+        <script type="text/javascript" src="./home_files/model(6).js"></script>
+        <script type="text/javascript" src="./home_files/controller(6).js"></script> 
+        
+        <script type="text/javascript" src="./home_files/view(7).js"></script>
+        <script type="text/javascript" src="./home_files/model(7).js"></script>
+        <script type="text/javascript" src="./home_files/controller(7).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(8).js"></script>
+        <script type="text/javascript" src="./home_files/model(8).js"></script>
+        <script type="text/javascript" src="./home_files/controller(8).js"></script>           
+        
+        <script type="text/javascript" src="./home_files/view(9).js"></script>
+        <script type="text/javascript" src="./home_files/model(9).js"></script>
+        <script type="text/javascript" src="./home_files/controller(9).js"></script>  
+                
+        <script type="text/javascript" src="./home_files/view(10).js"></script>
+        <script type="text/javascript" src="./home_files/model(10).js"></script>
+        <script type="text/javascript" src="./home_files/controller(10).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(11).js"></script>
+        <script type="text/javascript" src="./home_files/model(11).js"></script>
+        <script type="text/javascript" src="./home_files/controller(11).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(12).js"></script>
+        <script type="text/javascript" src="./home_files/model(12).js"></script>
+        <script type="text/javascript" src="./home_files/controller(12).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(13).js"></script>
+        <script type="text/javascript" src="./home_files/model(13).js"></script>
+        <script type="text/javascript" src="./home_files/controller(13).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(14).js"></script>
+        <script type="text/javascript" src="./home_files/model(14).js"></script>
+        <script type="text/javascript" src="./home_files/controller(14).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(15).js"></script>
+        <script type="text/javascript" src="./home_files/model(15).js"></script>
+        <script type="text/javascript" src="./home_files/controller(15).js"></script>        
+        
+        <script type="text/javascript" src="./home_files/view(16).js"></script>
+        <script type="text/javascript" src="./home_files/model(16).js"></script>
+        <script type="text/javascript" src="./home_files/controller(16).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(17).js"></script>
+        <script type="text/javascript" src="./home_files/model(17).js"></script>
+        <script type="text/javascript" src="./home_files/controller(17).js"></script>
+  
+	    <script type="text/javascript" src="./home_files/view(18).js"></script>
+	    <script type="text/javascript" src="./home_files/model(18).js"></script>
+	    <script type="text/javascript" src="./home_files/controller(18).js"></script>
+
+	    <script type="text/javascript" src="./home_files/view(19).js"></script>
+	    <script type="text/javascript" src="./home_files/model(19).js"></script>
+	    <script type="text/javascript" src="./home_files/controller(19).js"></script>
+	    
+        <!-- map test 
+        <script type="text/javascript" src="http://openspace.ordnancesurvey.co.uk/osmapapi/openspace.js?key=B6CBB83F442581D8E0405F0AC860182C"></script>        
+        <script type="text/javascript" src="js/postcodeMap/view.js"></script>
+        <script type="text/javascript" src="js/postcodeMap/model.js"></script>
+        <script type="text/javascript" src="js/postcodeMap/controller.js"></script>  
+        -->
+        <script type="text/javascript" src="./home_files/view(20).js"></script>
+        <script type="text/javascript" src="./home_files/model(20).js"></script>
+        <script type="text/javascript" src="./home_files/controller(20).js"></script>
+        
+        <script type="text/javascript" src="./home_files/view(21).js"></script>
+        <script type="text/javascript" src="./home_files/model(21).js"></script>
+        <script type="text/javascript" src="./home_files/controller(21).js"></script>
+
+        <script type="text/javascript" src="./home_files/view(22).js"></script>
+	    <script type="text/javascript" src="./home_files/model(22).js"></script>
+	    <script type="text/javascript" src="./home_files/controller(22).js"></script>
+	    
+        <script type="text/javascript" src="./home_files/view(23).js"></script>
+        <script type="text/javascript" src="./home_files/model(23).js"></script>
+        <script type="text/javascript" src="./home_files/controller(23).js"></script>
+
+		<script type="text/javascript">
+		$(document).ready(function() {  
+			
+			if (localStorage.ctx != undefined)
+			{
+				var pattern = /Test$/;
+				if (localStorage.ctx.match(pattern) != null)
+				{
+					$('#testSite').text('The address suggests this is a test site, please check');
+				}
+			}
+			// go to home page if already logged in
+			if (localStorage.resource != undefined)
+			{
+				var res = jQuery.parseJSON(localStorage.resource);
+				// we also need to check we haven't changed context
+				consoleLog("Stored context: "+localStorage.ctx+"  resource context: "+res.context);
+				if (localStorage.ctx == res.context)
+				{
+					$.mobile.changePage( "home.html", { showLoadMsg: false } );
+				}
+				else
+				{
+					// clear down data if we have changed context
+					clearOnLogout();
+				}
+			}
+
+			console.log("Platform: "+navigator.platform);
+			// new and not widely supported
+			var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+			if (connection != null && connection != undefined)
+			{
+				try
+				{
+					connection.addEventListener("change", updateConnectionStatus);
+					function updateConnectionStatus() {
+					  console.log("Connection bandwidth: " + connection.bandwidth + " MB/s");
+					  if (connection.metered) {
+					    console.log("The connection is metered!");
+					  }
+					}
+				}
+				catch (e) 
+				{
+					console.log ("Couldn't add connection listener");
+				}
+			}			 
+			else
+			{
+				  console.log("Network connection info not available");
+			}
+  
+			//$('#version').text(getManifestVersion());
+			
+			// enable login button
+			var appLoaded = localStorage.getObject("appLoaded");
+			if (appLoaded != undefined && appLoaded == 'true')
+			{
+				hideLoadingMessage();
+				$('#loginButton').removeClass('ui-disabled');
+			}
+			
+			$('#loginButton').click(function() {
+				var user = $("input#user").val();
+				var pass = $("input#pass").val();		
+				doLogin(user,pass);			
+				return false;				
+			});
+			
+			// alternative 'enter' to log in
+			$(document).keydown(function(objEvent) {
+		    	if ($.mobile.activePage.attr('id') == 'login' && objEvent.keyCode == 13)
+		    	{
+					var user = $("input#user").val();
+					var pass = $("input#pass").val();			
+					doLogin(user,pass);			
+					return false;
+		    	}    
+		    });	
+		    
+			$("#login .column-b > h4").click(function(){
+				window.location = 'debug/index.html';
+			});		    
+		});		
+
+		</script>
+	</head>
+	
+	<body class="ui-mobile-viewport ui-overlay-c">
+		<div data-role="page" id="login" class="login-page ui-page ui-body-c" data-url="login" tabindex="0" style="min-height: 752px; top: 34px;" apn-was-fixed-top="0px">
+			<div data-role="header" class="header column-layout ui-header ui-bar-c" role="banner">
+				<div class="row-content">
+					<div class="column-a"></div> 
+					<div class="column-c">
+						<!-- external page as javascript my fail if there are any errors on the page -->
+						<a href="https://app.oneserve.co.uk/RainbowTest/mobile/home.html#" rel="external" class="reset-all ui-link">
+							<img id="login-logo" src="./home_files/logo-highres.png">
+						</a>
+					</div>
+					<div class="column-b">
+						<h4>Oneserve Mobile</h4>
+					</div>					
+					<div class="clear"></div>
+				</div>
+			</div>			
+			<div id="login-content" data-role="content" class="login ui-btn-corner-all ui-content ui-body-c" role="main">
+				<form action="./home_files/home.html" method="POST" style="margin-left:10px">
+					<table>
+					  	<tbody>
+						  	<tr>
+						  		<td colspan="2">
+						  			<div id="auth">
+						  			</div>
+						  		</td>					  	
+						  	</tr>
+						  	<tr>
+						  		<td colspan="2"><label for="user" class="ui-input-text">Username</label></td>
+						  	</tr>
+						  	<tr>					  		  
+						  		<td colspan="2"><input type="text" name="username" id="user" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></td>
+						  	</tr>
+						  	<tr>
+						  		<td colspan="2"><label for="password">Password</label></td>
+						  	</tr>
+						  	<tr>
+						  		<td colspan="2"><input type="password" name="password" id="pass" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></td>
+						  	</tr>
+						  	<tr>
+						  		<td><p id="testSite" style="color:red">The address suggests this is a test site, please check</p></td>
+						  	</tr>
+						  	<tr>
+						  		<td colspan="2">
+						  		<a data-icon="" data-role="button" href="https://app.oneserve.co.uk/RainbowTest/mobile/home.html#" id="loginButton" class="column-a ui-btn ui-btn-corner-all ui-shadow ui-btn-up-c" data-theme="c"><span class="ui-btn-inner ui-btn-corner-all" aria-hidden="true"><span class="ui-btn-text">Sign in</span></span></a>
+						  		</td>
+						  	</tr>
+						  	<tr class="version">
+						  		<td><label>Version:</label> <label id="appversion">8.0.1582, Rev: 5459, 01/03/2013 11:02
+</label></td>
+						  		<td>07.03.2013 10:18:26</td>  
+						  	</tr>
+						  	<tr class="copyright">
+						  		<td>©2013 Oneserve</td>
+						  		<td><a href="https://app.oneserve.co.uk/RainbowTest/pages/login.jsp?browser=desktop" rel="external" class="ui-link">Desktop version</a></td>  
+						  	</tr>
+						</tbody>
+					</table>
+			  	</form>
+			</div>							
+		</div>
+    
+
+<div class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon ui-icon-loading"></span><h1>Page loading...</h1></div><div data-role="page" id="home" data-position="inline" data-url="/RainbowTest/mobile/home.html" data-external-page="true" tabindex="0" class="ui-page ui-body-c ui-page-active" apn-was-fixed-top="0px" style="top: 34px; min-height: 752px;"> 
+		    
+			<script id="homeList" type="text/html">
+			    <li>
+			    	{{#link}}
+			    	<a href="appointmentList.html" data-transition="slide" data-url="{{type}}">
+				    	<img src="{{image}}" class="ui-li-icon" style="margin-top:-10px;">&nbsp;&nbsp;{{label}}
+				    	<span class="ui-li-count count-circle">{{incCount}} / {{count}}</span>
+			    	</a>
+			    	{{/link}}
+			    	{{^link}}
+				    	<img src="{{image}}" class="ui-li-icon" style="margin-top:-10px;">&nbsp;&nbsp;{{label}}
+				    	<span class="ui-li-count count-circle" style="margin-right:28px">{{incCount}} / {{count}}</span>
+			    	{{/link}}			    	
+			    </li>
+			</script>
+			<script id="myPartLink" type="text/html">
+				<li>
+					<a href="partCategoryList.html" data-transition="slide" id="myparts" onclick="sessionStorage.removeItem('addPartToAppointment')">
+					<img src="images/myparts.png" class="ui-li-icon" style="margin-top:-10px;"/>&nbsp;&nbsp;Parts
+					</a>
+				</li>
+			</script>
+
+			<div id="home-header" data-role="header" class="header column-layout ui-header ui-bar-c" role="banner">
+				<div class="row-content">
+					<a class="column-a ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all" href="https://app.oneserve.co.uk/RainbowTest/mobile/logoutConfirm.html" data-rel="dialog" data-role="button" data-transition="slide" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Logout</span></span></a>
+						
+					<div class="column-c">
+						<a href="https://app.oneserve.co.uk/RainbowTest/mobile/tools.html" data-role="button" data-icon="gear" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" title="Tools" class="ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-btn-icon-notext"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Tools</span><span class="ui-icon ui-icon-gear ui-icon-shadow">&nbsp;</span></span></a>
+						<a id="refreshList" href="https://app.oneserve.co.uk/RainbowTest/mobile/home.html#" data-role="button" data-icon="refresh" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" title="Refresh" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-c"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Refresh</span><span class="ui-icon ui-icon-refresh ui-icon-shadow"></span></span></a>
+					</div>
+					<div class="column-b">
+						<h4></h4>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			
+					
+			 <div id="home-content" data-role="content" class="ui-content ui-body-c" role="main">		        			 
+			 	<div style="margin-left:10px">
+			 		<p id="username">Robert Williams</p>
+			 		<p id="supplier">Central Reactive</p>
+			 	</div>
+			 				 
+				<ul id="apptsummarylist" data-inset="true" data-role="listview" class="ui-listview ui-listview-inset ui-corner-all ui-shadow"><li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-count ui-li-has-icon ui-corner-top ui-btn-up-c"><div class="ui-btn-inner ui-li ui-corner-top"><div class="ui-btn-text">
+			    				    	<a href="https://app.oneserve.co.uk/RainbowTest/mobile/appointmentList.html" data-transition="slide" data-url="1" class="ui-link-inherit">
+				    	<img src="./home_files/myappts.png" class="ui-li-icon ui-li-thumb" style="margin-top:-10px;">&nbsp;&nbsp;Appointments
+				    	<span class="ui-li-count count-circle ui-btn-up-c ui-btn-corner-all">0 / 0</span>
+			    	</a>
+			    	</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li><li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-icon ui-corner-bottom ui-btn-up-c"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+					<a href="https://app.oneserve.co.uk/RainbowTest/mobile/partCategoryList.html" data-transition="slide" id="myparts" onclick="sessionStorage.removeItem(&#39;addPartToAppointment&#39;)" class="ui-link-inherit">
+					<img src="./home_files/myparts.png" class="ui-li-icon ui-li-thumb" style="margin-top:-10px;">&nbsp;&nbsp;Parts
+					</a>
+				</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li></ul>
+			</div>	 
+
+		</div></body><link id="apn-null-stylesheet" rel="stylesheet" href="chrome-extension://aaaaojmikegpiepcfdkkjaplodkpfmlo/config/skin/css/containers.css"><iframe id="apn-null-toolbar" src="./home_files/toolbar.htm" class="apn-toolbar SkipThisFixedPosition" style="top: 0px;"></iframe><style id="apn-body-style">html {    padding-top: 34px ! important;     border-top: 1px solid transparent; }</style></html>

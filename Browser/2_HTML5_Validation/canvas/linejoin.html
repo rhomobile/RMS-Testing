@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #myCanvas {
+        border: 1px solid #9C9898;
+      }
+    </style>
+    <script>
+      window.onload = function() {
+        var canvas = document.getElementById("myCanvas");
+        var context = canvas.getContext("2d");
+
+        // set line width for all lines
+        context.lineWidth = 25;
+
+        // miter line join (left)
+        context.beginPath();
+        context.moveTo(99, 150);
+        context.lineTo(149, 50);
+        context.lineTo(199, 150);
+        context.lineJoin = "miter";
+        context.stroke();
+
+        // round line join (middle)
+        context.beginPath();
+        context.moveTo(239, 150);
+        context.lineTo(289, 50);
+        context.lineTo(339, 150);
+        context.lineJoin = "round";
+        context.stroke();
+
+        // bevel line join (right)
+        context.beginPath();
+        context.moveTo(379, 150);
+        context.lineTo(429, 50);
+        context.lineTo(479, 150);
+        context.lineJoin = "bevel";
+        context.stroke();
+      };
+
+    </script>
+  </head>
+  <body><br /><br /><br />
+    <canvas id="myCanvas" width="578" height="200"></canvas>
+  </body>
+</html>
