@@ -1,0 +1,30 @@
+2016-01-27 22:40:30,658 DEBUG [EBManual_Webview_JSSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-27 22:40:30,664 DEBUG [EBManual_Webview_JSSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:40:41,095 DEBUG [EBManual_Webview_JSSTTL-116709] Exiting Init_Selendroid function
+2016-01-27 22:40:41,111 DEBUG [EBManual_Webview_JSSTTL-116709] TestCase with Description "Change pageload indication to 1" Execution started
+2016-01-27 22:40:41,111 DEBUG [EBManual_Webview_JSSTTL-116709] In execute keyword function
+2016-01-27 22:40:41,111 DEBUG [EBManual_Webview_JSSTTL-116709] Executing wait function:
+2016-01-27 22:40:41,111 DEBUG [EBManual_Webview_JSSTTL-116709] Started Executing wait function
+2016-01-27 22:40:44,112 DEBUG [EBManual_Webview_JSSTTL-116709] Exiting from wait function
+2016-01-27 22:40:44,112 DEBUG [EBManual_Webview_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 22:40:44,112 DEBUG [EBManual_Webview_JSSTTL-116709] In execute keyword function
+2016-01-27 22:40:44,112 DEBUG [EBManual_Webview_JSSTTL-116709] Executing PullConfigxml function:
+2016-01-27 22:40:44,112 DEBUG [EBManual_Webview_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 22:40:48,132 DEBUG [EBManual_Webview_JSSTTL-116709] TestStepResult of PullConfigxml: Pass
+2016-01-27 22:40:48,132 DEBUG [EBManual_Webview_JSSTTL-116709] In execute keyword function
+2016-01-27 22:40:48,132 DEBUG [EBManual_Webview_JSSTTL-116709] Executing ChangeConfigxml function:
+2016-01-27 22:40:48,132 DEBUG [EBManual_Webview_JSSTTL-116709] Executing ChangeConfigxml function
+2016-01-27 22:40:48,134 DEBUG [EBManual_Webview_JSSTTL-116709] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 22:40:48,134 DEBUG [EBManual_Webview_JSSTTL-116709] In execute keyword function
+2016-01-27 22:40:48,134 DEBUG [EBManual_Webview_JSSTTL-116709] Executing PushConfigxml function:
+2016-01-27 22:40:48,134 DEBUG [EBManual_Webview_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 22:40:52,156 DEBUG [EBManual_Webview_JSSTTL-116709] TestStepResult of PushConfigxml: Pass
+2016-01-27 22:40:52,156 DEBUG [EBManual_Webview_JSSTTL-116709] allstep_result contains: PassPassPassPassnull
+2016-01-27 22:40:52,156 DEBUG [EBManual_Webview_JSSTTL-116709] allexpected_result contains: null
+2016-01-27 22:40:52,156 DEBUG [EBManual_Webview_JSSTTL-116709] Testcase_Result contains: nullPassPassPassPassnull
+2016-01-27 22:40:52,156 DEBUG [EBManual_Webview_JSSTTL-116709] Test case with description Change pageload indication to 1 Pass
+2016-01-27 22:40:53,208 DEBUG [EBManual_Webview_JSSTTL-116709] Executing browser_Quit function
+2016-01-27 22:40:53,208 DEBUG [EBManual_Webview_JSSTTL-116709] Completed browser_Quit function
+2016-01-27 22:40:53,208 DEBUG [EBManual_Webview_JSSTTL-116709] Completed quitSelendroid function
+2016-01-27 22:40:53,208 DEBUG [EBManual_Webview_JSSTTL-116709] Row number:10
+2016-01-27 22:40:53,239 DEBUG [EBManual_Webview_JSSTTL-116709] Ending Test Case IDSTTL-116709

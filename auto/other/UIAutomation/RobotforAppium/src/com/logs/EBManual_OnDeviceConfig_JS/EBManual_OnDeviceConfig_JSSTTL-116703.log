@@ -1,0 +1,38 @@
+2016-01-27 20:14:38,340 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Executing Test Case ID: STTL-116703
+2016-01-27 20:14:38,348 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:14:48,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Exiting Init_Selendroid function
+2016-01-27 20:14:48,267 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] TestCase with Description "On click settings button it should load settings.html page" Execution started
+2016-01-27 20:14:48,267 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] In execute keyword function
+2016-01-27 20:14:48,267 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Executing wait function:
+2016-01-27 20:14:48,267 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Started Executing wait function
+2016-01-27 20:14:51,267 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Exiting from wait function
+2016-01-27 20:14:51,267 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 20:14:51,267 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] In execute keyword function
+2016-01-27 20:14:51,267 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Executing validate_PageTitle function:
+2016-01-27 20:14:51,301 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] The title of the page is *********************************: Welcome to Enterprise Browser
+2016-01-27 20:14:51,301 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] The page title found is correct
+2016-01-27 20:14:51,301 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Result of validate_PageTitle: pass
+2016-01-27 20:14:51,301 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] In execute keyword function
+2016-01-27 20:14:51,301 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Executing ClickNativeIcon function:
+2016-01-27 20:14:52,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] [[AppiumTouchActionExtension: selendroid on ANDROID (7e0abf42-eb31-14a1-036e-20b0026d7e7d)] -> xpath: //*[@id="quitButton"]]Clicked successfully
+2016-01-27 20:14:52,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] TestStepResult of ClickNativeIcon: pass
+2016-01-27 20:14:52,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] In execute keyword function
+2016-01-27 20:14:52,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Executing wait function:
+2016-01-27 20:14:52,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Started Executing wait function
+2016-01-27 20:14:54,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Exiting from wait function
+2016-01-27 20:14:54,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 20:14:54,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] In execute keyword function
+2016-01-27 20:14:54,660 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Executing validate_PageTitle function:
+2016-01-27 20:14:54,701 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] The title of the page is *********************************: Welcome to Enterprise Browser
+2016-01-27 20:14:54,702 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] The page title found is incorrect
+2016-01-27 20:14:54,702 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Result of validate_PageTitle: fail
+2016-01-27 20:14:54,702 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] In execute keyword function
+2016-01-27 20:14:54,702 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] TestStepResult of : Function <> not found in the keyword class
+2016-01-27 20:14:54,702 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] allstep_result contains: Function <> not found in the keyword classPasspassPassnull
+2016-01-27 20:14:54,702 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] allexpected_result contains: nullfailnullpassnull
+2016-01-27 20:14:54,702 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Testcase_Result contains: nullfailnullpassnullFunction <> not found in the keyword classPasspassPassnull
+2016-01-27 20:14:54,702 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Test case with description On click settings button it should load settings.html page Fail
+2016-01-27 20:14:55,689 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Executing browser_Quit function
+2016-01-27 20:14:55,690 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Completed browser_Quit function
+2016-01-27 20:14:55,690 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Completed quitSelendroid function
+2016-01-27 20:14:55,690 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116703] Row number:4

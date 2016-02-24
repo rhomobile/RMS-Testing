@@ -1,0 +1,38 @@
+2016-01-27 20:27:28,533 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing Test Case ID: STTL-116720
+2016-01-27 20:27:28,541 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:27:38,848 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Exiting Init_Selendroid function
+2016-01-27 20:27:38,866 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] TestCase with Description "set SettingsButton enabled and set Setting Password Enable
+" Execution started
+2016-01-27 20:27:38,866 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] In execute keyword function
+2016-01-27 20:27:38,866 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing wait function:
+2016-01-27 20:27:38,866 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Started Executing wait function
+2016-01-27 20:27:41,867 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Exiting from wait function
+2016-01-27 20:27:41,867 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] TestStepResult of wait: Pass
+2016-01-27 20:27:41,867 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] In execute keyword function
+2016-01-27 20:27:41,867 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing validate_PageTitle function:
+2016-01-27 20:27:41,920 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] The title of the page is *********************************: Welcome to Enterprise Browser
+2016-01-27 20:27:41,920 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] The page title found is correct
+2016-01-27 20:27:41,920 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Result of validate_PageTitle: pass
+2016-01-27 20:27:41,920 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] In execute keyword function
+2016-01-27 20:27:41,920 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing ClickNativeIcon function:
+2016-01-27 20:27:43,247 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] [[AppiumTouchActionExtension: selendroid on ANDROID (3ee8def5-69b0-5e30-ca0c-37b4ee8e03a4)] -> xpath: //*[@id="quitButton"]]Clicked successfully
+2016-01-27 20:27:43,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] TestStepResult of ClickNativeIcon: pass
+2016-01-27 20:27:43,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] In execute keyword function
+2016-01-27 20:27:43,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing wait function:
+2016-01-27 20:27:43,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Started Executing wait function
+2016-01-27 20:27:45,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Exiting from wait function
+2016-01-27 20:27:45,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] TestStepResult of wait: Pass
+2016-01-27 20:27:45,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] In execute keyword function
+2016-01-27 20:27:45,248 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing validate_PageTitle function:
+2016-01-27 20:27:45,284 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] The title of the page is *********************************: Welcome to Enterprise Browser
+2016-01-27 20:27:45,285 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] The page title found is incorrect
+2016-01-27 20:27:45,285 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Result of validate_PageTitle: fail
+2016-01-27 20:27:45,285 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] In execute keyword function
+2016-01-27 20:27:45,285 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing SelectFromDropdown function:
+2016-01-27 20:27:45,285 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Entering the SelectFromDropdown function
+2016-01-27 20:28:35,441 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Error: Unable to Find element :setting_buttonenable_xpath
+2016-01-27 20:28:35,441 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] 
+2016-01-27 20:28:36,436 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Executing browser_Quit function
+2016-01-27 20:28:36,436 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Completed browser_Quit function
+2016-01-27 20:28:36,436 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Completed quitSelendroid function
+2016-01-27 20:28:36,438 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116720] Row number:0

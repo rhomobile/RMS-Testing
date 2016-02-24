@@ -1,0 +1,55 @@
+2016-01-27 18:26:45,687 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing Test Case ID: STTL-116711
+2016-01-27 18:26:45,751 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 18:26:55,852 DEBUG [EBManual_Configxml_JSSTTL-116711] Exiting Init_Selendroid function
+2016-01-27 18:26:55,950 DEBUG [EBManual_Configxml_JSSTTL-116711] TestCase with Description "DefaultMetaTags Signal" Execution started
+2016-01-27 18:26:55,950 DEBUG [EBManual_Configxml_JSSTTL-116711] In execute keyword function
+2016-01-27 18:26:55,950 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing wait function:
+2016-01-27 18:26:55,950 DEBUG [EBManual_Configxml_JSSTTL-116711] Started Executing wait function
+2016-01-27 18:27:01,951 DEBUG [EBManual_Configxml_JSSTTL-116711] Exiting from wait function
+2016-01-27 18:27:01,951 DEBUG [EBManual_Configxml_JSSTTL-116711] TestStepResult of wait: Pass
+2016-01-27 18:27:01,951 DEBUG [EBManual_Configxml_JSSTTL-116711] In execute keyword function
+2016-01-27 18:27:01,951 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing validate_PageTitle function:
+2016-01-27 18:27:02,000 DEBUG [EBManual_Configxml_JSSTTL-116711] The title of the page is *********************************: Welcome to Enterprise Browser
+2016-01-27 18:27:02,000 DEBUG [EBManual_Configxml_JSSTTL-116711] The page title found is correct
+2016-01-27 18:27:02,000 DEBUG [EBManual_Configxml_JSSTTL-116711] Result of validate_PageTitle: pass
+2016-01-27 18:27:02,000 DEBUG [EBManual_Configxml_JSSTTL-116711] In execute keyword function
+2016-01-27 18:27:02,000 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing TakeScreenshot function:
+2016-01-27 18:27:02,875 DEBUG [EBManual_Configxml_JSSTTL-116711] Started Executing Validate_App_launched_Device function
+2016-01-27 18:27:02,875 DEBUG [EBManual_Configxml_JSSTTL-116711] Entered CheckUIButtonExists function
+2016-01-27 18:27:02,875 DEBUG [EBManual_Configxml_JSSTTL-116711] Started executeCommandLine function
+2016-01-27 18:27:06,883 DEBUG [EBManual_Configxml_JSSTTL-116711] Exiting from executeCommandLine function
+2016-01-27 18:27:06,883 DEBUG [EBManual_Configxml_JSSTTL-116711] Button is not Present
+2016-01-27 18:27:06,883 DEBUG [EBManual_Configxml_JSSTTL-116711] Exiting from CheckUIButtonExists function
+2016-01-27 18:27:06,883 DEBUG [EBManual_Configxml_JSSTTL-116711] Started executeCommandLine function
+2016-01-27 18:27:10,903 DEBUG [EBManual_Configxml_JSSTTL-116711] Given App is in Foreground
+2016-01-27 18:27:10,903 DEBUG [EBManual_Configxml_JSSTTL-116711] Exiting Validate_App_launched_Device function
+2016-01-27 18:27:11,090 DEBUG [EBManual_Configxml_JSSTTL-116711] TestStepResult of TakeScreenshot: pass
+2016-01-27 18:27:11,090 DEBUG [EBManual_Configxml_JSSTTL-116711] In execute keyword function
+2016-01-27 18:27:11,090 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing validate_Screenshot function:
+2016-01-27 18:27:11,254 DEBUG [EBManual_Configxml_JSSTTL-116711] Match found with reference image
+2016-01-27 18:27:11,254 DEBUG [EBManual_Configxml_JSSTTL-116711] Result of validate_Screenshot: Pass
+2016-01-27 18:27:11,254 DEBUG [EBManual_Configxml_JSSTTL-116711] In execute keyword function
+2016-01-27 18:27:11,254 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing PushBkpConfigxml function:
+2016-01-27 18:27:11,254 DEBUG [EBManual_Configxml_JSSTTL-116711] Started executeCommandLine function
+2016-01-27 18:27:15,263 DEBUG [EBManual_Configxml_JSSTTL-116711] TestStepResult of PushBkpConfigxml: Pass
+2016-01-27 18:27:15,263 DEBUG [EBManual_Configxml_JSSTTL-116711] In execute keyword function
+2016-01-27 18:27:15,263 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing PullConfigxml function:
+2016-01-27 18:27:15,264 DEBUG [EBManual_Configxml_JSSTTL-116711] Started executeCommandLine function
+2016-01-27 18:27:19,282 DEBUG [EBManual_Configxml_JSSTTL-116711] TestStepResult of PullConfigxml: Pass
+2016-01-27 18:27:19,282 DEBUG [EBManual_Configxml_JSSTTL-116711] In execute keyword function
+2016-01-27 18:27:19,282 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing ChangeConfigxml function:
+2016-01-27 18:27:19,282 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing ChangeConfigxml function
+2016-01-27 18:27:19,284 DEBUG [EBManual_Configxml_JSSTTL-116711] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 18:27:19,284 DEBUG [EBManual_Configxml_JSSTTL-116711] In execute keyword function
+2016-01-27 18:27:19,284 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing PushConfigxml function:
+2016-01-27 18:27:19,330 DEBUG [EBManual_Configxml_JSSTTL-116711] Started executeCommandLine function
+2016-01-27 18:27:23,341 DEBUG [EBManual_Configxml_JSSTTL-116711] TestStepResult of PushConfigxml: Pass
+2016-01-27 18:27:23,341 DEBUG [EBManual_Configxml_JSSTTL-116711] allstep_result contains: PassPassPassPasspassPassnull
+2016-01-27 18:27:23,341 DEBUG [EBManual_Configxml_JSSTTL-116711] allexpected_result contains: nullPassnullpassnull
+2016-01-27 18:27:23,341 DEBUG [EBManual_Configxml_JSSTTL-116711] Testcase_Result contains: nullPassnullpassnullPassPassPassPasspassPassnull
+2016-01-27 18:27:23,341 DEBUG [EBManual_Configxml_JSSTTL-116711] Test case with description DefaultMetaTags Signal Pass
+2016-01-27 18:27:24,457 DEBUG [EBManual_Configxml_JSSTTL-116711] Executing browser_Quit function
+2016-01-27 18:27:24,457 DEBUG [EBManual_Configxml_JSSTTL-116711] Completed browser_Quit function
+2016-01-27 18:27:24,457 DEBUG [EBManual_Configxml_JSSTTL-116711] Completed quitSelendroid function
+2016-01-27 18:27:24,457 DEBUG [EBManual_Configxml_JSSTTL-116711] Row number:12
+2016-01-27 18:27:27,221 DEBUG [EBManual_Configxml_JSSTTL-116711] Ending Test Case IDSTTL-116711

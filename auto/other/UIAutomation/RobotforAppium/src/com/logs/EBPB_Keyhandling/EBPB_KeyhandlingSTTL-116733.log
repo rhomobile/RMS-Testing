@@ -1,0 +1,336 @@
+2016-01-28 02:06:00,703 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing Test Case ID: STTL-116733
+2016-01-28 02:06:00,712 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:06:11,383 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting Init_Selendroid function
+2016-01-28 02:06:11,401 DEBUG [EBPB_KeyhandlingSTTL-116733] TestCase with Description "KeyValue:All(Numeric, Arrow, Volume & PTT Keys)JavaScript function with iswindows key=1" Execution started
+2016-01-28 02:06:11,401 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:11,401 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing wait function:
+2016-01-28 02:06:11,401 DEBUG [EBPB_KeyhandlingSTTL-116733] Started Executing wait function
+2016-01-28 02:06:16,402 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from wait function
+2016-01-28 02:06:16,402 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of wait: Pass
+2016-01-28 02:06:16,402 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:16,402 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_PageTitle function:
+2016-01-28 02:06:16,443 DEBUG [EBPB_KeyhandlingSTTL-116733] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 02:06:16,443 DEBUG [EBPB_KeyhandlingSTTL-116733] The page title found is correct
+2016-01-28 02:06:16,443 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_PageTitle: pass
+2016-01-28 02:06:16,443 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:16,443 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing link_Click function:
+2016-01-28 02:06:17,064 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing Click function
+2016-01-28 02:06:18,174 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting Click function
+2016-01-28 02:06:18,174 DEBUG [EBPB_KeyhandlingSTTL-116733] keyhandling_link clicked successfully
+2016-01-28 02:06:18,174 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of link_Click: Pass
+2016-01-28 02:06:18,174 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:18,174 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_PageTitle function:
+2016-01-28 02:06:18,208 DEBUG [EBPB_KeyhandlingSTTL-116733] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Keyhandling
+2016-01-28 02:06:18,208 DEBUG [EBPB_KeyhandlingSTTL-116733] The page title found is correct
+2016-01-28 02:06:18,208 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_PageTitle: pass
+2016-01-28 02:06:18,208 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:18,208 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing SelectTestToRun function:
+2016-01-28 02:06:22,386 DEBUG [EBPB_KeyhandlingSTTL-116733] Successfull in selecting clicking the category
+2016-01-28 02:06:22,386 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of SelectTestToRun: pass
+2016-01-28 02:06:22,386 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:22,386 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing ClickRunTest function:
+2016-01-28 02:06:22,762 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing Click function
+2016-01-28 02:06:23,771 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting Click function
+2016-01-28 02:06:23,771 DEBUG [EBPB_KeyhandlingSTTL-116733] runtest_top_xpath Button clicked Successfully
+2016-01-28 02:06:23,771 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of ClickRunTest: pass
+2016-01-28 02:06:23,771 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:23,771 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_Text_Exists function:
+2016-01-28 02:06:24,049 DEBUG [EBPB_KeyhandlingSTTL-116733] VT056-0709 Testcase Text found
+2016-01-28 02:06:24,049 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_Text_Exists: Pass
+2016-01-28 02:06:24,049 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:24,049 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:24,050 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:24,050 DEBUG [EBPB_KeyhandlingSTTL-116733] Volumeup
+2016-01-28 02:06:24,050 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered volumeup
+2016-01-28 02:06:24,050 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:06:28,070 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:06:28,070 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:28,070 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:06:28,070 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:28,070 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:06:28,070 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] 175
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] Volumedown
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered volumedown
+2016-01-28 02:06:28,362 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:06:32,383 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:06:32,383 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:32,383 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:06:32,383 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:32,383 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:06:32,383 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] 174
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] PTTKey
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered PTTKey
+2016-01-28 02:06:32,571 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:06:36,591 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:06:36,591 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:36,591 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:06:36,591 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:36,591 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:06:36,591 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:06:36,801 DEBUG [EBPB_KeyhandlingSTTL-116733] 174
+2016-01-28 02:06:36,801 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value does not match Expected
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] fail
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: fail
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] 0
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 0
+2016-01-28 02:06:36,802 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:06:40,822 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:06:40,822 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:40,822 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:06:40,822 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:40,822 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:06:40,822 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] 48
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] 1
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 1
+2016-01-28 02:06:41,002 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:06:45,023 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:06:45,023 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:45,023 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:06:45,023 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:45,023 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:06:45,023 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] 49
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] 2
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 2
+2016-01-28 02:06:45,203 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:06:49,223 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:06:49,223 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:49,223 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:06:49,223 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:49,223 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:06:49,223 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] 50
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] 3
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 3
+2016-01-28 02:06:49,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:06:53,437 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:06:53,437 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:53,437 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:06:53,437 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:53,437 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:06:53,437 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] 51
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] 4
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 4
+2016-01-28 02:06:53,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:06:57,628 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:06:57,628 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:57,628 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:06:57,628 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:57,628 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:06:57,628 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:06:57,805 DEBUG [EBPB_KeyhandlingSTTL-116733] 52
+2016-01-28 02:06:57,805 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:06:57,805 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:06:57,806 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:06:57,806 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:06:57,806 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:06:57,806 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:06:57,806 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:06:57,806 DEBUG [EBPB_KeyhandlingSTTL-116733] 5
+2016-01-28 02:06:57,806 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 5
+2016-01-28 02:06:57,806 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:01,825 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:01,825 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:01,825 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:01,825 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:01,825 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:01,825 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:02,029 DEBUG [EBPB_KeyhandlingSTTL-116733] 53
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] 6
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 6
+2016-01-28 02:07:02,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:06,051 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:06,051 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:06,051 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:06,051 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:06,051 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:06,051 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] 54
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] 7
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 7
+2016-01-28 02:07:06,198 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:10,215 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:10,215 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:10,215 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:10,215 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:10,215 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:10,215 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] 55
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] 8
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 8
+2016-01-28 02:07:10,416 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:14,437 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:14,437 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:14,437 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:14,437 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:14,437 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:14,437 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] 56
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] 9
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered 9
+2016-01-28 02:07:14,608 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:18,620 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:18,620 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:18,620 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:18,620 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:18,620 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:18,620 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] 57
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] UpArrow
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered UpArrowkey
+2016-01-28 02:07:18,807 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:22,821 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:22,821 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:22,821 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:22,821 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:22,821 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:22,821 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] 38
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] DownArrow
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered DownArrowkey
+2016-01-28 02:07:23,010 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:27,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:27,030 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:27,030 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:27,030 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:27,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:27,030 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] 40
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] LeftArrow
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered LeftArrowkey
+2016-01-28 02:07:27,224 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:31,244 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:31,244 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:31,244 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:31,244 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:31,244 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:31,244 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:31,421 DEBUG [EBPB_KeyhandlingSTTL-116733] 37
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing sendKeyEvents function:
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered sendKeyEvents function
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] RightArrow
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered RightArrowkey
+2016-01-28 02:07:31,422 DEBUG [EBPB_KeyhandlingSTTL-116733] Started executeCommandLine function
+2016-01-28 02:07:35,443 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from executeCommandLine function
+2016-01-28 02:07:35,443 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:35,443 DEBUG [EBPB_KeyhandlingSTTL-116733] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:07:35,443 DEBUG [EBPB_KeyhandlingSTTL-116733] In execute keyword function
+2016-01-28 02:07:35,443 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing validate_keyCaptured function:
+2016-01-28 02:07:35,443 DEBUG [EBPB_KeyhandlingSTTL-116733] Entered validate_keyCaptured function
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] 39
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] Actual Value matches Expected
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] pass
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] Exiting from validate_keyCaptured function
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] Result of validate_keyCaptured: pass
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] allstep_result contains: passpasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspassPassPassnull
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] allexpected_result contains: nullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullfailnullpassnullpassnullPassnullpassnullpassnull
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] Testcase_Result contains: nullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullfailnullpassnullpassnullPassnullpassnullpassnullpasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspassPassPassnull
+2016-01-28 02:07:35,624 DEBUG [EBPB_KeyhandlingSTTL-116733] Test case with description KeyValue:All(Numeric, Arrow, Volume & PTT Keys)JavaScript function with iswindows key=1 Fail
+2016-01-28 02:07:36,629 DEBUG [EBPB_KeyhandlingSTTL-116733] Executing browser_Quit function
+2016-01-28 02:07:36,629 DEBUG [EBPB_KeyhandlingSTTL-116733] Completed browser_Quit function
+2016-01-28 02:07:36,629 DEBUG [EBPB_KeyhandlingSTTL-116733] Completed quitSelendroid function
+2016-01-28 02:07:36,630 DEBUG [EBPB_KeyhandlingSTTL-116733] Row number:34

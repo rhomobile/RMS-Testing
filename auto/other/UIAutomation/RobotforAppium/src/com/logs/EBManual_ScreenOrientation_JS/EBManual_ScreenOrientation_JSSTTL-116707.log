@@ -1,0 +1,83 @@
+2016-01-27 20:35:17,821 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing Test Case ID: STTL-116707
+2016-01-27 20:35:17,828 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:35:27,600 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Exiting Init_Selendroid function
+2016-01-27 20:35:27,615 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] TestCase with Description "autoRotate with default value" Execution started
+2016-01-27 20:35:27,615 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:27,615 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing wait function:
+2016-01-27 20:35:27,615 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Started Executing wait function
+2016-01-27 20:35:30,615 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Exiting from wait function
+2016-01-27 20:35:30,615 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 20:35:30,615 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:30,615 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing validate_PageTitle function:
+2016-01-27 20:35:30,633 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] The title of the page is *********************************: Manual specs
+2016-01-27 20:35:30,633 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] The page title found is correct
+2016-01-27 20:35:30,633 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Result of validate_PageTitle: pass
+2016-01-27 20:35:30,633 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:30,633 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing link_Click function:
+2016-01-27 20:35:31,369 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing Click function
+2016-01-27 20:35:32,718 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Exiting Click function
+2016-01-27 20:35:32,718 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] ScreenOrientation_test_link clicked successfully
+2016-01-27 20:35:32,718 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] TestStepResult of link_Click: Pass
+2016-01-27 20:35:32,719 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:32,719 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing wait function:
+2016-01-27 20:35:32,719 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Started Executing wait function
+2016-01-27 20:35:34,719 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Exiting from wait function
+2016-01-27 20:35:34,719 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 20:35:34,719 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:34,719 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing validate_PageTitle function:
+2016-01-27 20:35:34,758 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] The title of the page is *********************************: ScreenOrientation JS Test
+2016-01-27 20:35:34,758 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] The page title found is correct
+2016-01-27 20:35:34,758 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Result of validate_PageTitle: pass
+2016-01-27 20:35:34,758 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:34,758 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 20:35:37,738 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 20:35:37,738 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 20:35:37,738 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:37,738 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 20:35:38,108 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing Click function
+2016-01-27 20:35:39,219 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Exiting Click function
+2016-01-27 20:35:39,219 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 20:35:39,219 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 20:35:39,219 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:39,219 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing validate_Text_Exists function:
+2016-01-27 20:35:39,589 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] VT281-0909 Testcase Text found
+2016-01-27 20:35:39,589 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Result of validate_Text_Exists: Pass
+2016-01-27 20:35:39,589 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:39,589 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing Rotate_Screen function:
+2016-01-27 20:35:39,896 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Rotated to landscape successfully
+2016-01-27 20:35:39,896 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] TestStepResult of Rotate_Screen: pass
+2016-01-27 20:35:39,896 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:39,896 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing validate_screenOrientation function:
+2016-01-27 20:35:39,896 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 20:35:43,919 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Screen rotated successfully with specified orientation
+2016-01-27 20:35:43,919 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Result of validate_screenOrientation: Pass
+2016-01-27 20:35:43,919 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:43,919 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing validate_Result function:
+2016-01-27 20:35:44,190 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] leftHanded Text found in DATA:-
+Output:
+"leftHanded"
+2016-01-27 20:35:44,190 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Result of validate_Result: Pass
+2016-01-27 20:35:44,190 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:44,190 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing Rotate_Screen function:
+2016-01-27 20:35:44,432 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Rotated to potrait successfully
+2016-01-27 20:35:44,432 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] TestStepResult of Rotate_Screen: pass
+2016-01-27 20:35:44,432 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:44,432 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing validate_screenOrientation function:
+2016-01-27 20:35:44,432 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 20:35:48,453 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Screen rotated successfully with specified orientation
+2016-01-27 20:35:48,453 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Result of validate_screenOrientation: Pass
+2016-01-27 20:35:48,453 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] In execute keyword function
+2016-01-27 20:35:48,453 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing validate_Result function:
+2016-01-27 20:35:48,665 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] normal Text found in DATA:-
+Output:
+"normal"
+2016-01-27 20:35:48,665 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Result of validate_Result: Pass
+2016-01-27 20:35:48,665 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] allstep_result contains: passpasspasspassPassPassPassnull
+2016-01-27 20:35:48,665 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] allexpected_result contains: nullPassnullPassnullPassnullPassnullPassnullpassnullpassnull
+2016-01-27 20:35:48,665 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Testcase_Result contains: nullPassnullPassnullPassnullPassnullPassnullpassnullpassnullpasspasspasspassPassPassPassnull
+2016-01-27 20:35:48,665 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Test case with description autoRotate with default value Pass
+2016-01-27 20:35:49,629 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Executing browser_Quit function
+2016-01-27 20:35:49,629 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Completed browser_Quit function
+2016-01-27 20:35:49,629 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Completed quitSelendroid function
+2016-01-27 20:35:49,629 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Row number:8
+2016-01-27 20:35:49,673 DEBUG [EBManual_ScreenOrientation_JSSTTL-116707] Ending Test Case IDSTTL-116707

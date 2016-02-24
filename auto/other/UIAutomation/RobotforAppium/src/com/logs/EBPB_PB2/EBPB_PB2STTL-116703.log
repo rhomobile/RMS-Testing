@@ -1,0 +1,146 @@
+2016-01-28 02:14:15,999 DEBUG [EBPB_PB2STTL-116703] Executing Test Case ID: STTL-116703
+2016-01-28 02:14:16,006 DEBUG [EBPB_PB2STTL-116703] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:14:25,919 DEBUG [EBPB_PB2STTL-116703] Exiting Init_Selendroid function
+2016-01-28 02:14:25,934 DEBUG [EBPB_PB2STTL-116703] TestCase with Description "Signal" Execution started
+2016-01-28 02:14:25,934 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:25,934 DEBUG [EBPB_PB2STTL-116703] Executing wait function:
+2016-01-28 02:14:25,934 DEBUG [EBPB_PB2STTL-116703] Started Executing wait function
+2016-01-28 02:14:28,934 DEBUG [EBPB_PB2STTL-116703] Exiting from wait function
+2016-01-28 02:14:28,934 DEBUG [EBPB_PB2STTL-116703] TestStepResult of wait: Pass
+2016-01-28 02:14:28,934 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:28,934 DEBUG [EBPB_PB2STTL-116703] Executing validate_PageTitle function:
+2016-01-28 02:14:28,976 DEBUG [EBPB_PB2STTL-116703] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 02:14:28,976 DEBUG [EBPB_PB2STTL-116703] The page title found is correct
+2016-01-28 02:14:28,976 DEBUG [EBPB_PB2STTL-116703] Result of validate_PageTitle: pass
+2016-01-28 02:14:28,976 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:28,976 DEBUG [EBPB_PB2STTL-116703] Executing link_Click function:
+2016-01-28 02:14:29,643 DEBUG [EBPB_PB2STTL-116703] Executing Click function
+2016-01-28 02:14:30,928 DEBUG [EBPB_PB2STTL-116703] Exiting Click function
+2016-01-28 02:14:30,928 DEBUG [EBPB_PB2STTL-116703] PB2_test_link clicked successfully
+2016-01-28 02:14:30,928 DEBUG [EBPB_PB2STTL-116703] TestStepResult of link_Click: Pass
+2016-01-28 02:14:30,928 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:30,928 DEBUG [EBPB_PB2STTL-116703] Executing wait function:
+2016-01-28 02:14:30,928 DEBUG [EBPB_PB2STTL-116703] Started Executing wait function
+2016-01-28 02:14:32,929 DEBUG [EBPB_PB2STTL-116703] Exiting from wait function
+2016-01-28 02:14:32,929 DEBUG [EBPB_PB2STTL-116703] TestStepResult of wait: Pass
+2016-01-28 02:14:32,929 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:32,929 DEBUG [EBPB_PB2STTL-116703] Executing validate_PageTitle function:
+2016-01-28 02:14:32,987 DEBUG [EBPB_PB2STTL-116703] The title of the page is *********************************: PB2 Tests
+2016-01-28 02:14:32,987 DEBUG [EBPB_PB2STTL-116703] The page title found is correct
+2016-01-28 02:14:32,987 DEBUG [EBPB_PB2STTL-116703] Result of validate_PageTitle: pass
+2016-01-28 02:14:32,987 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:32,987 DEBUG [EBPB_PB2STTL-116703] Executing link_Click function:
+2016-01-28 02:14:33,440 DEBUG [EBPB_PB2STTL-116703] Executing Click function
+2016-01-28 02:14:34,658 DEBUG [EBPB_PB2STTL-116703] Exiting Click function
+2016-01-28 02:14:34,659 DEBUG [EBPB_PB2STTL-116703] signalpb_test_link clicked successfully
+2016-01-28 02:14:34,659 DEBUG [EBPB_PB2STTL-116703] TestStepResult of link_Click: Pass
+2016-01-28 02:14:34,659 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:34,659 DEBUG [EBPB_PB2STTL-116703] Executing wait function:
+2016-01-28 02:14:34,659 DEBUG [EBPB_PB2STTL-116703] Started Executing wait function
+2016-01-28 02:14:36,659 DEBUG [EBPB_PB2STTL-116703] Exiting from wait function
+2016-01-28 02:14:36,659 DEBUG [EBPB_PB2STTL-116703] TestStepResult of wait: Pass
+2016-01-28 02:14:36,659 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:36,659 DEBUG [EBPB_PB2STTL-116703] Executing TakeScreenshot function:
+2016-01-28 02:14:37,394 DEBUG [EBPB_PB2STTL-116703] Started Executing Validate_App_launched_Device function
+2016-01-28 02:14:37,394 DEBUG [EBPB_PB2STTL-116703] Entered CheckUIButtonExists function
+2016-01-28 02:14:37,394 DEBUG [EBPB_PB2STTL-116703] Started executeCommandLine function
+2016-01-28 02:14:41,408 DEBUG [EBPB_PB2STTL-116703] Exiting from executeCommandLine function
+2016-01-28 02:14:41,408 DEBUG [EBPB_PB2STTL-116703] Button is not Present
+2016-01-28 02:14:41,408 DEBUG [EBPB_PB2STTL-116703] Exiting from CheckUIButtonExists function
+2016-01-28 02:14:41,408 DEBUG [EBPB_PB2STTL-116703] Started executeCommandLine function
+2016-01-28 02:14:45,430 DEBUG [EBPB_PB2STTL-116703] Given App is in Foreground
+2016-01-28 02:14:45,430 DEBUG [EBPB_PB2STTL-116703] Exiting Validate_App_launched_Device function
+2016-01-28 02:14:45,543 DEBUG [EBPB_PB2STTL-116703] TestStepResult of TakeScreenshot: pass
+2016-01-28 02:14:45,543 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:45,543 DEBUG [EBPB_PB2STTL-116703] Executing wait function:
+2016-01-28 02:14:45,543 DEBUG [EBPB_PB2STTL-116703] Started Executing wait function
+2016-01-28 02:14:47,543 DEBUG [EBPB_PB2STTL-116703] Exiting from wait function
+2016-01-28 02:14:47,543 DEBUG [EBPB_PB2STTL-116703] TestStepResult of wait: Pass
+2016-01-28 02:14:47,543 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:47,543 DEBUG [EBPB_PB2STTL-116703] Executing validate_Screenshot function:
+2016-01-28 02:14:47,748 DEBUG [EBPB_PB2STTL-116703] Match found with reference image
+2016-01-28 02:14:47,748 DEBUG [EBPB_PB2STTL-116703] Result of validate_Screenshot: Pass
+2016-01-28 02:14:47,748 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:47,748 DEBUG [EBPB_PB2STTL-116703] Executing link_Click function:
+2016-01-28 02:14:48,138 DEBUG [EBPB_PB2STTL-116703] Executing Click function
+2016-01-28 02:14:49,058 DEBUG [EBPB_PB2STTL-116703] Exiting Click function
+2016-01-28 02:14:49,058 DEBUG [EBPB_PB2STTL-116703] hidesignalradio_link clicked successfully
+2016-01-28 02:14:49,058 DEBUG [EBPB_PB2STTL-116703] TestStepResult of link_Click: Pass
+2016-01-28 02:14:49,058 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:49,058 DEBUG [EBPB_PB2STTL-116703] Executing TakeScreenshot function:
+2016-01-28 02:14:49,618 DEBUG [EBPB_PB2STTL-116703] Started Executing Validate_App_launched_Device function
+2016-01-28 02:14:49,618 DEBUG [EBPB_PB2STTL-116703] Entered CheckUIButtonExists function
+2016-01-28 02:14:49,618 DEBUG [EBPB_PB2STTL-116703] Started executeCommandLine function
+2016-01-28 02:14:53,627 DEBUG [EBPB_PB2STTL-116703] Exiting from executeCommandLine function
+2016-01-28 02:14:53,627 DEBUG [EBPB_PB2STTL-116703] Button is not Present
+2016-01-28 02:14:53,627 DEBUG [EBPB_PB2STTL-116703] Exiting from CheckUIButtonExists function
+2016-01-28 02:14:53,627 DEBUG [EBPB_PB2STTL-116703] Started executeCommandLine function
+2016-01-28 02:14:57,647 DEBUG [EBPB_PB2STTL-116703] Given App is in Foreground
+2016-01-28 02:14:57,647 DEBUG [EBPB_PB2STTL-116703] Exiting Validate_App_launched_Device function
+2016-01-28 02:14:57,747 DEBUG [EBPB_PB2STTL-116703] TestStepResult of TakeScreenshot: pass
+2016-01-28 02:14:57,748 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:57,748 DEBUG [EBPB_PB2STTL-116703] Executing link_Click function:
+2016-01-28 02:14:58,133 DEBUG [EBPB_PB2STTL-116703] Executing Click function
+2016-01-28 02:14:59,095 DEBUG [EBPB_PB2STTL-116703] Exiting Click function
+2016-01-28 02:14:59,095 DEBUG [EBPB_PB2STTL-116703] signalradiocallback_link clicked successfully
+2016-01-28 02:14:59,095 DEBUG [EBPB_PB2STTL-116703] TestStepResult of link_Click: Pass
+2016-01-28 02:14:59,095 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:14:59,095 DEBUG [EBPB_PB2STTL-116703] Executing wait function:
+2016-01-28 02:14:59,095 DEBUG [EBPB_PB2STTL-116703] Started Executing wait function
+2016-01-28 02:15:01,095 DEBUG [EBPB_PB2STTL-116703] Exiting from wait function
+2016-01-28 02:15:01,095 DEBUG [EBPB_PB2STTL-116703] TestStepResult of wait: Pass
+2016-01-28 02:15:01,095 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:15:01,095 DEBUG [EBPB_PB2STTL-116703] Executing validate_Result function:
+2016-01-28 02:15:01,351 DEBUG [EBPB_PB2STTL-116703] Signal Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+2016-01-28 02:15:01,351 DEBUG [EBPB_PB2STTL-116703] Result of validate_Result: Pass
+2016-01-28 02:15:01,351 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:15:01,351 DEBUG [EBPB_PB2STTL-116703] Executing validate_Result function:
+2016-01-28 02:15:01,495 DEBUG [EBPB_PB2STTL-116703] ESSID Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+2016-01-28 02:15:01,495 DEBUG [EBPB_PB2STTL-116703] Result of validate_Result: Pass
+2016-01-28 02:15:01,495 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:15:01,495 DEBUG [EBPB_PB2STTL-116703] Executing validate_Result function:
+2016-01-28 02:15:01,645 DEBUG [EBPB_PB2STTL-116703] IPAddress Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+2016-01-28 02:15:01,645 DEBUG [EBPB_PB2STTL-116703] Result of validate_Result: Pass
+2016-01-28 02:15:01,645 DEBUG [EBPB_PB2STTL-116703] In execute keyword function
+2016-01-28 02:15:01,645 DEBUG [EBPB_PB2STTL-116703] Executing validate_Screenshot function:
+2016-01-28 02:15:01,910 DEBUG [EBPB_PB2STTL-116703] Match found with reference image
+2016-01-28 02:15:01,910 DEBUG [EBPB_PB2STTL-116703] Result of validate_Screenshot: Pass
+2016-01-28 02:15:01,910 DEBUG [EBPB_PB2STTL-116703] allstep_result contains: PassPasspassPassPasspassPassPassPassPassPassnull
+2016-01-28 02:15:01,910 DEBUG [EBPB_PB2STTL-116703] allexpected_result contains: nullPassnullPassPassPassnullPassnullpassnullpassnull
+2016-01-28 02:15:01,910 DEBUG [EBPB_PB2STTL-116703] Testcase_Result contains: nullPassnullPassPassPassnullPassnullpassnullpassnullPassPasspassPassPasspassPassPassPassPassPassnull
+2016-01-28 02:15:01,910 DEBUG [EBPB_PB2STTL-116703] Test case with description Signal Pass
+2016-01-28 02:15:02,949 DEBUG [EBPB_PB2STTL-116703] Executing browser_Quit function
+2016-01-28 02:15:02,949 DEBUG [EBPB_PB2STTL-116703] Completed browser_Quit function
+2016-01-28 02:15:02,949 DEBUG [EBPB_PB2STTL-116703] Completed quitSelendroid function
+2016-01-28 02:15:02,949 DEBUG [EBPB_PB2STTL-116703] Row number:4
+2016-01-28 02:15:02,989 DEBUG [EBPB_PB2STTL-116703] Ending Test Case IDSTTL-116703

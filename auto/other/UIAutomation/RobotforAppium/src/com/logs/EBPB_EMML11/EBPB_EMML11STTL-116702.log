@@ -1,0 +1,122 @@
+2016-01-28 00:09:46,666 DEBUG [EBPB_EMML11STTL-116702] Executing Test Case ID: STTL-116702
+2016-01-28 00:09:46,672 DEBUG [EBPB_EMML11STTL-116702] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:09:57,002 DEBUG [EBPB_EMML11STTL-116702] Exiting Init_Selendroid function
+2016-01-28 00:09:57,016 DEBUG [EBPB_EMML11STTL-116702] TestCase with Description "Battery" Execution started
+2016-01-28 00:09:57,016 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:09:57,016 DEBUG [EBPB_EMML11STTL-116702] Executing wait function:
+2016-01-28 00:09:57,017 DEBUG [EBPB_EMML11STTL-116702] Started Executing wait function
+2016-01-28 00:10:00,017 DEBUG [EBPB_EMML11STTL-116702] Exiting from wait function
+2016-01-28 00:10:00,017 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of wait: Pass
+2016-01-28 00:10:00,017 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:00,017 DEBUG [EBPB_EMML11STTL-116702] Executing validate_PageTitle function:
+2016-01-28 00:10:00,058 DEBUG [EBPB_EMML11STTL-116702] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:10:00,058 DEBUG [EBPB_EMML11STTL-116702] The page title found is correct
+2016-01-28 00:10:00,058 DEBUG [EBPB_EMML11STTL-116702] Result of validate_PageTitle: pass
+2016-01-28 00:10:00,058 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:00,058 DEBUG [EBPB_EMML11STTL-116702] Executing link_Click function:
+2016-01-28 00:10:00,675 DEBUG [EBPB_EMML11STTL-116702] Executing Click function
+2016-01-28 00:10:01,754 DEBUG [EBPB_EMML11STTL-116702] Exiting Click function
+2016-01-28 00:10:01,754 DEBUG [EBPB_EMML11STTL-116702] EMML11_test_link clicked successfully
+2016-01-28 00:10:01,754 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of link_Click: Pass
+2016-01-28 00:10:01,754 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:01,754 DEBUG [EBPB_EMML11STTL-116702] Executing wait function:
+2016-01-28 00:10:01,754 DEBUG [EBPB_EMML11STTL-116702] Started Executing wait function
+2016-01-28 00:10:03,755 DEBUG [EBPB_EMML11STTL-116702] Exiting from wait function
+2016-01-28 00:10:03,755 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of wait: Pass
+2016-01-28 00:10:03,755 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:03,755 DEBUG [EBPB_EMML11STTL-116702] Executing validate_PageTitle function:
+2016-01-28 00:10:03,791 DEBUG [EBPB_EMML11STTL-116702] The title of the page is *********************************: EMML1.1 Test Index Page
+2016-01-28 00:10:03,791 DEBUG [EBPB_EMML11STTL-116702] The page title found is correct
+2016-01-28 00:10:03,791 DEBUG [EBPB_EMML11STTL-116702] Result of validate_PageTitle: pass
+2016-01-28 00:10:03,791 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:03,791 DEBUG [EBPB_EMML11STTL-116702] Executing link_Click function:
+2016-01-28 00:10:04,142 DEBUG [EBPB_EMML11STTL-116702] Executing Click function
+2016-01-28 00:10:05,122 DEBUG [EBPB_EMML11STTL-116702] Exiting Click function
+2016-01-28 00:10:05,122 DEBUG [EBPB_EMML11STTL-116702] battery11_test_link clicked successfully
+2016-01-28 00:10:05,122 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of link_Click: Pass
+2016-01-28 00:10:05,122 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:05,122 DEBUG [EBPB_EMML11STTL-116702] Executing wait function:
+2016-01-28 00:10:05,122 DEBUG [EBPB_EMML11STTL-116702] Started Executing wait function
+2016-01-28 00:10:07,122 DEBUG [EBPB_EMML11STTL-116702] Exiting from wait function
+2016-01-28 00:10:07,122 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of wait: Pass
+2016-01-28 00:10:07,122 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:07,122 DEBUG [EBPB_EMML11STTL-116702] Executing TakeScreenshot function:
+2016-01-28 00:10:07,680 DEBUG [EBPB_EMML11STTL-116702] Started Executing Validate_App_launched_Device function
+2016-01-28 00:10:07,680 DEBUG [EBPB_EMML11STTL-116702] Entered CheckUIButtonExists function
+2016-01-28 00:10:07,681 DEBUG [EBPB_EMML11STTL-116702] Started executeCommandLine function
+2016-01-28 00:10:11,689 DEBUG [EBPB_EMML11STTL-116702] Exiting from executeCommandLine function
+2016-01-28 00:10:11,689 DEBUG [EBPB_EMML11STTL-116702] Button is not Present
+2016-01-28 00:10:11,689 DEBUG [EBPB_EMML11STTL-116702] Exiting from CheckUIButtonExists function
+2016-01-28 00:10:11,689 DEBUG [EBPB_EMML11STTL-116702] Started executeCommandLine function
+2016-01-28 00:10:15,711 DEBUG [EBPB_EMML11STTL-116702] Given App is in Foreground
+2016-01-28 00:10:15,711 DEBUG [EBPB_EMML11STTL-116702] Exiting Validate_App_launched_Device function
+2016-01-28 00:10:15,844 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of TakeScreenshot: pass
+2016-01-28 00:10:15,845 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:15,845 DEBUG [EBPB_EMML11STTL-116702] Executing wait function:
+2016-01-28 00:10:15,845 DEBUG [EBPB_EMML11STTL-116702] Started Executing wait function
+2016-01-28 00:10:17,845 DEBUG [EBPB_EMML11STTL-116702] Exiting from wait function
+2016-01-28 00:10:17,845 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of wait: Pass
+2016-01-28 00:10:17,845 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:17,845 DEBUG [EBPB_EMML11STTL-116702] Executing validate_Screenshot function:
+2016-01-28 00:10:18,245 DEBUG [EBPB_EMML11STTL-116702] Match found with reference image
+2016-01-28 00:10:18,245 DEBUG [EBPB_EMML11STTL-116702] Result of validate_Screenshot: Pass
+2016-01-28 00:10:18,245 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:18,245 DEBUG [EBPB_EMML11STTL-116702] Executing link_Click function:
+2016-01-28 00:10:18,632 DEBUG [EBPB_EMML11STTL-116702] Executing Click function
+2016-01-28 00:10:19,588 DEBUG [EBPB_EMML11STTL-116702] Exiting Click function
+2016-01-28 00:10:19,588 DEBUG [EBPB_EMML11STTL-116702] hidebattery_link clicked successfully
+2016-01-28 00:10:19,588 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of link_Click: Pass
+2016-01-28 00:10:19,588 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:19,588 DEBUG [EBPB_EMML11STTL-116702] Executing TakeScreenshot function:
+2016-01-28 00:10:20,179 DEBUG [EBPB_EMML11STTL-116702] Started Executing Validate_App_launched_Device function
+2016-01-28 00:10:20,179 DEBUG [EBPB_EMML11STTL-116702] Entered CheckUIButtonExists function
+2016-01-28 00:10:20,179 DEBUG [EBPB_EMML11STTL-116702] Started executeCommandLine function
+2016-01-28 00:10:24,191 DEBUG [EBPB_EMML11STTL-116702] Exiting from executeCommandLine function
+2016-01-28 00:10:24,191 DEBUG [EBPB_EMML11STTL-116702] Button is not Present
+2016-01-28 00:10:24,191 DEBUG [EBPB_EMML11STTL-116702] Exiting from CheckUIButtonExists function
+2016-01-28 00:10:24,191 DEBUG [EBPB_EMML11STTL-116702] Started executeCommandLine function
+2016-01-28 00:10:28,211 DEBUG [EBPB_EMML11STTL-116702] Given App is in Foreground
+2016-01-28 00:10:28,211 DEBUG [EBPB_EMML11STTL-116702] Exiting Validate_App_launched_Device function
+2016-01-28 00:10:28,326 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of TakeScreenshot: pass
+2016-01-28 00:10:28,326 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:28,326 DEBUG [EBPB_EMML11STTL-116702] Executing link_Click function:
+2016-01-28 00:10:28,733 DEBUG [EBPB_EMML11STTL-116702] Executing Click function
+2016-01-28 00:10:29,684 DEBUG [EBPB_EMML11STTL-116702] Exiting Click function
+2016-01-28 00:10:29,684 DEBUG [EBPB_EMML11STTL-116702] batterycallback_link clicked successfully
+2016-01-28 00:10:29,684 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of link_Click: Pass
+2016-01-28 00:10:29,684 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:29,684 DEBUG [EBPB_EMML11STTL-116702] Executing wait function:
+2016-01-28 00:10:29,684 DEBUG [EBPB_EMML11STTL-116702] Started Executing wait function
+2016-01-28 00:10:31,684 DEBUG [EBPB_EMML11STTL-116702] Exiting from wait function
+2016-01-28 00:10:31,684 DEBUG [EBPB_EMML11STTL-116702] TestStepResult of wait: Pass
+2016-01-28 00:10:31,684 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:31,684 DEBUG [EBPB_EMML11STTL-116702] Executing validate_Result function:
+2016-01-28 00:10:31,977 DEBUG [EBPB_EMML11STTL-116702] AC: 1 Text found in AC: 1
+main:100
+backup: 0
+2016-01-28 00:10:31,977 DEBUG [EBPB_EMML11STTL-116702] Result of validate_Result: Pass
+2016-01-28 00:10:31,977 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:31,977 DEBUG [EBPB_EMML11STTL-116702] Executing validate_Result function:
+2016-01-28 00:10:32,122 DEBUG [EBPB_EMML11STTL-116702] main Text found in AC: 1
+main:100
+backup: 0
+2016-01-28 00:10:32,122 DEBUG [EBPB_EMML11STTL-116702] Result of validate_Result: Pass
+2016-01-28 00:10:32,122 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:32,122 DEBUG [EBPB_EMML11STTL-116702] Executing validate_Result function:
+2016-01-28 00:10:32,281 DEBUG [EBPB_EMML11STTL-116702] backup Text found in AC: 1
+main:100
+backup: 0
+2016-01-28 00:10:32,281 DEBUG [EBPB_EMML11STTL-116702] Result of validate_Result: Pass
+2016-01-28 00:10:32,281 DEBUG [EBPB_EMML11STTL-116702] In execute keyword function
+2016-01-28 00:10:32,281 DEBUG [EBPB_EMML11STTL-116702] Executing validate_Screenshot function:
+2016-01-28 00:10:32,468 DEBUG [EBPB_EMML11STTL-116702] Match found with reference image
+2016-01-28 00:10:32,468 DEBUG [EBPB_EMML11STTL-116702] Result of validate_Screenshot: Pass
+2016-01-28 00:10:32,468 DEBUG [EBPB_EMML11STTL-116702] allstep_result contains: PassPasspassPassPasspassPassPassPassPassPassnull
+2016-01-28 00:10:32,468 DEBUG [EBPB_EMML11STTL-116702] allexpected_result contains: nullPassnullPassPassPassnullPassnullpassnullpassnull
+2016-01-28 00:10:32,469 DEBUG [EBPB_EMML11STTL-116702] Testcase_Result contains: nullPassnullPassPassPassnullPassnullpassnullpassnullPassPasspassPassPasspassPassPassPassPassPassnull
+2016-01-28 00:10:32,469 DEBUG [EBPB_EMML11STTL-116702] Test case with description Battery Pass
+2016-01-28 00:10:33,605 DEBUG [EBPB_EMML11STTL-116702] Executing browser_Quit function
+2016-01-28 00:10:33,605 DEBUG [EBPB_EMML11STTL-116702] Completed browser_Quit function
+2016-01-28 00:10:33,605 DEBUG [EBPB_EMML11STTL-116702] Completed quitSelendroid function
+2016-01-28 00:10:33,606 DEBUG [EBPB_EMML11STTL-116702] Row number:3
+2016-01-28 00:10:33,636 DEBUG [EBPB_EMML11STTL-116702] Ending Test Case IDSTTL-116702

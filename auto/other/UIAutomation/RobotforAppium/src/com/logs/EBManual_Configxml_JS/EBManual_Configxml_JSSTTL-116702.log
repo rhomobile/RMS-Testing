@@ -1,0 +1,83 @@
+2016-01-27 18:21:18,457 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing Test Case ID: STTL-116702
+2016-01-27 18:21:18,541 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 18:21:28,614 DEBUG [EBManual_Configxml_JSSTTL-116702] Exiting Init_Selendroid function
+2016-01-27 18:21:28,680 DEBUG [EBManual_Configxml_JSSTTL-116702] TestCase with Description "DebugButtonsEnabled" Execution started
+2016-01-27 18:21:28,680 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:28,680 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing wait function:
+2016-01-27 18:21:28,680 DEBUG [EBManual_Configxml_JSSTTL-116702] Started Executing wait function
+2016-01-27 18:21:32,681 DEBUG [EBManual_Configxml_JSSTTL-116702] Exiting from wait function
+2016-01-27 18:21:32,681 DEBUG [EBManual_Configxml_JSSTTL-116702] TestStepResult of wait: Pass
+2016-01-27 18:21:32,681 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:32,681 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_PageTitle function:
+2016-01-27 18:21:32,753 DEBUG [EBManual_Configxml_JSSTTL-116702] The title of the page is *********************************: All Index
+2016-01-27 18:21:32,753 DEBUG [EBManual_Configxml_JSSTTL-116702] The page title found is correct
+2016-01-27 18:21:32,753 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_PageTitle: pass
+2016-01-27 18:21:32,753 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:32,754 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:32,754 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:33,183 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:33,183 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:33,183 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:33,183 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:33,564 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:33,564 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:33,564 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:33,564 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:33,872 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:33,872 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:33,872 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:33,872 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:34,197 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:34,197 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:34,197 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:34,197 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:34,539 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:34,540 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:34,540 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:34,540 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:34,829 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:34,829 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:34,829 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:34,829 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:35,159 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:35,159 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:35,159 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:35,159 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:35,432 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:35,433 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:35,433 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:35,433 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:35,735 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:35,735 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:35,735 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing validate_isIconDisplayed function:
+2016-01-27 18:21:35,735 DEBUG [EBManual_Configxml_JSSTTL-116702] Entered validate_isIconDisplayed function
+2016-01-27 18:21:36,008 DEBUG [EBManual_Configxml_JSSTTL-116702] Result of validate_isIconDisplayed: Pass
+2016-01-27 18:21:36,008 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:36,008 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing PushBkpConfigxml function:
+2016-01-27 18:21:36,008 DEBUG [EBManual_Configxml_JSSTTL-116702] Started executeCommandLine function
+2016-01-27 18:21:40,027 DEBUG [EBManual_Configxml_JSSTTL-116702] TestStepResult of PushBkpConfigxml: Pass
+2016-01-27 18:21:40,027 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:40,027 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing PullConfigxml function:
+2016-01-27 18:21:40,027 DEBUG [EBManual_Configxml_JSSTTL-116702] Started executeCommandLine function
+2016-01-27 18:21:44,048 DEBUG [EBManual_Configxml_JSSTTL-116702] TestStepResult of PullConfigxml: Pass
+2016-01-27 18:21:44,048 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:44,048 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing ChangeConfigxml function:
+2016-01-27 18:21:44,048 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing ChangeConfigxml function
+2016-01-27 18:21:44,050 DEBUG [EBManual_Configxml_JSSTTL-116702] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 18:21:44,050 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:44,050 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing ChangeConfigxml function:
+2016-01-27 18:21:44,050 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing ChangeConfigxml function
+2016-01-27 18:21:44,052 DEBUG [EBManual_Configxml_JSSTTL-116702] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 18:21:44,053 DEBUG [EBManual_Configxml_JSSTTL-116702] In execute keyword function
+2016-01-27 18:21:44,053 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing PushConfigxml function:
+2016-01-27 18:21:44,053 DEBUG [EBManual_Configxml_JSSTTL-116702] Started executeCommandLine function
+2016-01-27 18:21:48,084 DEBUG [EBManual_Configxml_JSSTTL-116702] TestStepResult of PushConfigxml: Pass
+2016-01-27 18:21:48,084 DEBUG [EBManual_Configxml_JSSTTL-116702] allstep_result contains: PassPassPassPassPassPassnull
+2016-01-27 18:21:48,084 DEBUG [EBManual_Configxml_JSSTTL-116702] allexpected_result contains: nullPassPassPassPassPassPassPassPassPassPassnullpassnull
+2016-01-27 18:21:48,084 DEBUG [EBManual_Configxml_JSSTTL-116702] Testcase_Result contains: nullPassPassPassPassPassPassPassPassPassPassnullpassnullPassPassPassPassPassPassnull
+2016-01-27 18:21:48,084 DEBUG [EBManual_Configxml_JSSTTL-116702] Test case with description DebugButtonsEnabled Pass
+2016-01-27 18:21:49,100 DEBUG [EBManual_Configxml_JSSTTL-116702] Executing browser_Quit function
+2016-01-27 18:21:49,100 DEBUG [EBManual_Configxml_JSSTTL-116702] Completed browser_Quit function
+2016-01-27 18:21:49,100 DEBUG [EBManual_Configxml_JSSTTL-116702] Completed quitSelendroid function
+2016-01-27 18:21:49,101 DEBUG [EBManual_Configxml_JSSTTL-116702] Row number:3
+2016-01-27 18:21:51,844 DEBUG [EBManual_Configxml_JSSTTL-116702] Ending Test Case IDSTTL-116702

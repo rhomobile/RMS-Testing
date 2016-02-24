@@ -1,0 +1,64 @@
+2016-01-27 22:30:17,736 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing Test Case ID: STTL-116706
+2016-01-27 22:30:17,742 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:30:28,376 DEBUG [EBManual_Toolbar_JSSTTL-116706] Exiting Init_Selendroid function
+2016-01-27 22:30:28,391 DEBUG [EBManual_Toolbar_JSSTTL-116706] TestCase with Description "remove ToolBar  without creating a toolbar " Execution started
+2016-01-27 22:30:28,391 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:28,391 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing wait function:
+2016-01-27 22:30:28,391 DEBUG [EBManual_Toolbar_JSSTTL-116706] Started Executing wait function
+2016-01-27 22:30:33,392 DEBUG [EBManual_Toolbar_JSSTTL-116706] Exiting from wait function
+2016-01-27 22:30:33,392 DEBUG [EBManual_Toolbar_JSSTTL-116706] TestStepResult of wait: Pass
+2016-01-27 22:30:33,392 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:33,392 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing validate_PageTitle function:
+2016-01-27 22:30:33,412 DEBUG [EBManual_Toolbar_JSSTTL-116706] The title of the page is *********************************: Manual specs
+2016-01-27 22:30:33,412 DEBUG [EBManual_Toolbar_JSSTTL-116706] The page title found is correct
+2016-01-27 22:30:33,412 DEBUG [EBManual_Toolbar_JSSTTL-116706] Result of validate_PageTitle: pass
+2016-01-27 22:30:33,412 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:33,412 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing link_Click function:
+2016-01-27 22:30:34,078 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing Click function
+2016-01-27 22:30:35,178 DEBUG [EBManual_Toolbar_JSSTTL-116706] Exiting Click function
+2016-01-27 22:30:35,178 DEBUG [EBManual_Toolbar_JSSTTL-116706] toolbar_test_link clicked successfully
+2016-01-27 22:30:35,178 DEBUG [EBManual_Toolbar_JSSTTL-116706] TestStepResult of link_Click: Pass
+2016-01-27 22:30:35,178 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:35,178 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing validate_PageTitle function:
+2016-01-27 22:30:35,198 DEBUG [EBManual_Toolbar_JSSTTL-116706] The title of the page is *********************************: Native Toolbar JS Test
+2016-01-27 22:30:35,198 DEBUG [EBManual_Toolbar_JSSTTL-116706] The page title found is correct
+2016-01-27 22:30:35,198 DEBUG [EBManual_Toolbar_JSSTTL-116706] Result of validate_PageTitle: pass
+2016-01-27 22:30:35,198 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:35,198 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing SelectTestToRun function:
+2016-01-27 22:30:38,800 DEBUG [EBManual_Toolbar_JSSTTL-116706] Successfull in selecting clicking the category
+2016-01-27 22:30:38,800 DEBUG [EBManual_Toolbar_JSSTTL-116706] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:30:38,800 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:38,800 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing ClickRunTest function:
+2016-01-27 22:30:39,181 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing Click function
+2016-01-27 22:30:40,167 DEBUG [EBManual_Toolbar_JSSTTL-116706] Exiting Click function
+2016-01-27 22:30:40,167 DEBUG [EBManual_Toolbar_JSSTTL-116706] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:30:40,167 DEBUG [EBManual_Toolbar_JSSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-27 22:30:40,167 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:40,167 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing validate_Text_Exists function:
+2016-01-27 22:30:40,780 DEBUG [EBManual_Toolbar_JSSTTL-116706] VT283-0110 Testcase Text found
+2016-01-27 22:30:40,780 DEBUG [EBManual_Toolbar_JSSTTL-116706] Result of validate_Text_Exists: Pass
+2016-01-27 22:30:40,780 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:40,780 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing ClickRunTest function:
+2016-01-27 22:30:41,102 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing Click function
+2016-01-27 22:30:42,053 DEBUG [EBManual_Toolbar_JSSTTL-116706] Exiting Click function
+2016-01-27 22:30:42,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:30:42,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-27 22:30:42,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:42,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing wait function:
+2016-01-27 22:30:42,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] Started Executing wait function
+2016-01-27 22:30:44,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] Exiting from wait function
+2016-01-27 22:30:44,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] TestStepResult of wait: Pass
+2016-01-27 22:30:44,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] In execute keyword function
+2016-01-27 22:30:44,054 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing validate_PageTitle function:
+2016-01-27 22:30:44,078 DEBUG [EBManual_Toolbar_JSSTTL-116706] The title of the page is *********************************: Native Toolbar JS Test
+2016-01-27 22:30:44,078 DEBUG [EBManual_Toolbar_JSSTTL-116706] The page title found is correct
+2016-01-27 22:30:44,078 DEBUG [EBManual_Toolbar_JSSTTL-116706] Result of validate_PageTitle: pass
+2016-01-27 22:30:44,078 DEBUG [EBManual_Toolbar_JSSTTL-116706] allstep_result contains: PasspasspasspassPassPassnull
+2016-01-27 22:30:44,078 DEBUG [EBManual_Toolbar_JSSTTL-116706] allexpected_result contains: nullpassnullPassnullpassnullpassnull
+2016-01-27 22:30:44,078 DEBUG [EBManual_Toolbar_JSSTTL-116706] Testcase_Result contains: nullpassnullPassnullpassnullpassnullPasspasspasspassPassPassnull
+2016-01-27 22:30:44,078 DEBUG [EBManual_Toolbar_JSSTTL-116706] Test case with description remove ToolBar  without creating a toolbar  Pass
+2016-01-27 22:30:45,194 DEBUG [EBManual_Toolbar_JSSTTL-116706] Executing browser_Quit function
+2016-01-27 22:30:45,194 DEBUG [EBManual_Toolbar_JSSTTL-116706] Completed browser_Quit function
+2016-01-27 22:30:45,194 DEBUG [EBManual_Toolbar_JSSTTL-116706] Completed quitSelendroid function
+2016-01-27 22:30:45,194 DEBUG [EBManual_Toolbar_JSSTTL-116706] Row number:0
+2016-01-27 22:30:45,208 DEBUG [EBManual_Toolbar_JSSTTL-116706] Ending Test Case IDSTTL-116706

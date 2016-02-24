@@ -1,0 +1,74 @@
+2016-01-27 22:23:40,111 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing Test Case ID: STTL-116715
+2016-01-27 22:23:40,119 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:23:50,610 DEBUG [EBManual_Tabbar_JSSTTL-116715] Exiting Init_Selendroid function
+2016-01-27 22:23:50,623 DEBUG [EBManual_Tabbar_JSSTTL-116715] TestCase with Description "call remove without creating any Tabbar" Execution started
+2016-01-27 22:23:50,623 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:23:50,623 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing wait function:
+2016-01-27 22:23:50,623 DEBUG [EBManual_Tabbar_JSSTTL-116715] Started Executing wait function
+2016-01-27 22:23:55,623 DEBUG [EBManual_Tabbar_JSSTTL-116715] Exiting from wait function
+2016-01-27 22:23:55,623 DEBUG [EBManual_Tabbar_JSSTTL-116715] TestStepResult of wait: Pass
+2016-01-27 22:23:55,623 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:23:55,623 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing validate_PageTitle function:
+2016-01-27 22:23:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] The title of the page is *********************************: Manual specs
+2016-01-27 22:23:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] The page title found is correct
+2016-01-27 22:23:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] Result of validate_PageTitle: pass
+2016-01-27 22:23:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:23:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing link_Click function:
+2016-01-27 22:23:56,271 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing Click function
+2016-01-27 22:23:57,377 DEBUG [EBManual_Tabbar_JSSTTL-116715] Exiting Click function
+2016-01-27 22:23:57,377 DEBUG [EBManual_Tabbar_JSSTTL-116715] tabbar_test_link clicked successfully
+2016-01-27 22:23:57,377 DEBUG [EBManual_Tabbar_JSSTTL-116715] TestStepResult of link_Click: Pass
+2016-01-27 22:23:57,377 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:23:57,377 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing validate_PageTitle function:
+2016-01-27 22:23:57,389 DEBUG [EBManual_Tabbar_JSSTTL-116715] The title of the page is *********************************: Native Tabbar JS Test
+2016-01-27 22:23:57,389 DEBUG [EBManual_Tabbar_JSSTTL-116715] The page title found is correct
+2016-01-27 22:23:57,389 DEBUG [EBManual_Tabbar_JSSTTL-116715] Result of validate_PageTitle: pass
+2016-01-27 22:23:57,389 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:23:57,389 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing SelectTestToRun function:
+2016-01-27 22:24:00,305 DEBUG [EBManual_Tabbar_JSSTTL-116715] Successfull in selecting clicking the category
+2016-01-27 22:24:00,305 DEBUG [EBManual_Tabbar_JSSTTL-116715] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:24:00,305 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:24:00,305 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing ClickRunTest function:
+2016-01-27 22:24:00,670 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing Click function
+2016-01-27 22:24:01,604 DEBUG [EBManual_Tabbar_JSSTTL-116715] Exiting Click function
+2016-01-27 22:24:01,604 DEBUG [EBManual_Tabbar_JSSTTL-116715] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:24:01,604 DEBUG [EBManual_Tabbar_JSSTTL-116715] TestStepResult of ClickRunTest: pass
+2016-01-27 22:24:01,605 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:24:01,605 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing validate_Text_Exists function:
+2016-01-27 22:24:01,924 DEBUG [EBManual_Tabbar_JSSTTL-116715] VT283-0308 Testcase Text found
+2016-01-27 22:24:01,924 DEBUG [EBManual_Tabbar_JSSTTL-116715] Result of validate_Text_Exists: Pass
+2016-01-27 22:24:01,924 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:24:01,924 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing ClickRunTest function:
+2016-01-27 22:24:02,247 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing Click function
+2016-01-27 22:24:03,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] Exiting Click function
+2016-01-27 22:24:03,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:24:03,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] TestStepResult of ClickRunTest: pass
+2016-01-27 22:24:03,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:24:03,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing wait function:
+2016-01-27 22:24:03,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] Started Executing wait function
+2016-01-27 22:24:05,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] Exiting from wait function
+2016-01-27 22:24:05,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] TestStepResult of wait: Pass
+2016-01-27 22:24:05,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:24:05,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing validate_isIconDisplayed function:
+2016-01-27 22:24:05,153 DEBUG [EBManual_Tabbar_JSSTTL-116715] Entered validate_isIconDisplayed function
+2016-01-27 22:24:55,610 DEBUG [EBManual_Tabbar_JSSTTL-116715] reason :An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 50.33 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: 'unknown', revision: 'unknown', time: 'unknown'
+System info: host: 'HJMC36-02', ip: '10.233.82.97', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_31'
+Driver info: com.utils.Keywords$AppiumTouchActionExtension
+Capabilities [{app=C:\Users\jwg348\Desktop\Project_Automation\Polarion\RobotforAppium\src\com\input\EnterpriseBrowser_v1.4.8.0.apk, appPackage=null, rotatable=true, networkConnectionEnabled=true, noReset=true, warnings={}, handlesAlerts=true, version=0.15.0, deviceName=Galaxy nexus, platform=ANDROID, appActivity=com.rhomobile.rhodes.RhodesActivity, acceptSslCerts=true, desired={app=C:\Users\jwg348\Desktop\Project_Automation\Polarion\RobotforAppium\src\com\input\EnterpriseBrowser_v1.4.8.0.apk, appActivity=com.rhomobile.rhodes.RhodesActivity, appPackage=null, noReset=true, newCommandTimeout=600, automationName=selendroid, browserName=, platformName=Android, udid=143505225D0057, deviceName=Galaxy nexus, version=4.4.2}, newCommandTimeout=600, platformVersion=19, automationName=selendroid, browserName=selendroid, takesScreenshot=true, javascriptEnabled=true, udid=143505225D0057, platformName=android}]
+Session ID: b0b97853-cf61-0117-1660-7af654dd29c6
+*** Element info: {Using=xpath, value=//TabWidget}
+2016-01-27 22:24:55,670 DEBUG [EBManual_Tabbar_JSSTTL-116715] Result of validate_isIconDisplayed: Pass
+2016-01-27 22:24:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] In execute keyword function
+2016-01-27 22:24:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] TestStepResult of : Function <> not found in the keyword class
+2016-01-27 22:24:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] allstep_result contains: Function <> not found in the keyword classPasspasspasspassPassPassnull
+2016-01-27 22:24:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 22:24:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] Testcase_Result contains: nullPassnullPassnullpassnullpassnullFunction <> not found in the keyword classPasspasspasspassPassPassnull
+2016-01-27 22:24:55,671 DEBUG [EBManual_Tabbar_JSSTTL-116715] Test case with description call remove without creating any Tabbar Pass
+2016-01-27 22:24:56,723 DEBUG [EBManual_Tabbar_JSSTTL-116715] Executing browser_Quit function
+2016-01-27 22:24:56,723 DEBUG [EBManual_Tabbar_JSSTTL-116715] Completed browser_Quit function
+2016-01-27 22:24:56,723 DEBUG [EBManual_Tabbar_JSSTTL-116715] Completed quitSelendroid function
+2016-01-27 22:24:56,724 DEBUG [EBManual_Tabbar_JSSTTL-116715] Row number:16
+2016-01-27 22:24:56,749 DEBUG [EBManual_Tabbar_JSSTTL-116715] Ending Test Case IDSTTL-116715

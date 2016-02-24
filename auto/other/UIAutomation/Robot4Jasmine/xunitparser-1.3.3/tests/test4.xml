@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites errors="1" failures="1" tests="4" time="45">
+<testsuite errors="1" failures="1" hostname="localhost" id="0" name="base_test_1"
+package="testdb" tests="4" timestamp="2012-11-15T01:02:29">
+<properties>
+<property name="assert-passed" value="1"/>
+</properties>
+<testcase classname="testdb.directory" name="001-passed-test" time="10"/>
+<testcase classname="testdb.directory" name="002-failed-test" time="20">
+<failure message="Assertion FAILED: some failed assert" type="failure">
+the output of the testcase
+</failure>
+</testcase>
+<testcase classname="package.directory" name="003-errord-test" time="15">
+<error message="Assertion ERROR: some error assert" type="error">
+the output of the testcase
+</error>
+</testcase>
+<testcase classname="testdb.directory" name="003-passed-test" time="10">
+<system-out>
+I am testcase system output
+</system-out>
+<system-err>
+I am the testcase error output
+</system-err>
+</testcase>
+<system-out>
+I am testsuite system output
+</system-out>
+<system-err>
+I am the testsuite error output
+</system-err>
+</testsuite>
+</testsuites>

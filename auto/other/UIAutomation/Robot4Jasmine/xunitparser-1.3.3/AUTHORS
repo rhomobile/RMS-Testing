@@ -1,0 +1,28 @@
+xunitparser is a free software written by:
+
+Laurent Bachelier <laurent@bachelier.name>
+    * Idea and majority of the code
+    * Current maintainer
+
+Nicolas Léveillé <nicolas@uucidl.com>
+    * Added new attributes
+
+Damien Nozay <damien.nozay@gmail.com>
+    * Added support for system-out / system-err at the testsuite level
+
+Josh Goodson <joshua.goodson@webfilings.com>
+    * Various fixes, new tests
+
+Kevin Frommelt <kevin.frommelt@gmail.com>
+    * Added support for NaN
+
+Thanks to:
+
+Larry Cai <larry.caiyu@gmail.com>
+    * Provided interesting samples
+
+Yaron Kretchmer <ykretchm@altera.com>
+    * Provided interesting samples / bug reports
+
+Felix Schulze <fschulze@autoscout24.com>
+    * Provided interesting samples / bug reports

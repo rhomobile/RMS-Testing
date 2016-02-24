@@ -1,0 +1,101 @@
+2016-01-28 00:59:28,919 DEBUG [EBPB_GestureSTTL-116706] Executing Test Case ID: STTL-116706
+2016-01-28 00:59:28,926 DEBUG [EBPB_GestureSTTL-116706] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:59:39,343 DEBUG [EBPB_GestureSTTL-116706] Exiting Init_Selendroid function
+2016-01-28 00:59:39,359 DEBUG [EBPB_GestureSTTL-116706] TestCase with Description "Linear gesture - preset:top-bottom" Execution started
+2016-01-28 00:59:39,359 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:39,359 DEBUG [EBPB_GestureSTTL-116706] Executing wait function:
+2016-01-28 00:59:39,359 DEBUG [EBPB_GestureSTTL-116706] Started Executing wait function
+2016-01-28 00:59:43,360 DEBUG [EBPB_GestureSTTL-116706] Exiting from wait function
+2016-01-28 00:59:43,360 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 00:59:43,360 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:43,360 DEBUG [EBPB_GestureSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 00:59:43,410 DEBUG [EBPB_GestureSTTL-116706] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:59:43,410 DEBUG [EBPB_GestureSTTL-116706] The page title found is correct
+2016-01-28 00:59:43,410 DEBUG [EBPB_GestureSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 00:59:43,410 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:43,410 DEBUG [EBPB_GestureSTTL-116706] Executing link_Click function:
+2016-01-28 00:59:44,045 DEBUG [EBPB_GestureSTTL-116706] Executing Click function
+2016-01-28 00:59:45,100 DEBUG [EBPB_GestureSTTL-116706] Exiting Click function
+2016-01-28 00:59:45,100 DEBUG [EBPB_GestureSTTL-116706] gesturepb3_test_link clicked successfully
+2016-01-28 00:59:45,100 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of link_Click: Pass
+2016-01-28 00:59:45,101 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:45,101 DEBUG [EBPB_GestureSTTL-116706] Executing wait function:
+2016-01-28 00:59:45,101 DEBUG [EBPB_GestureSTTL-116706] Started Executing wait function
+2016-01-28 00:59:47,101 DEBUG [EBPB_GestureSTTL-116706] Exiting from wait function
+2016-01-28 00:59:47,101 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 00:59:47,101 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:47,101 DEBUG [EBPB_GestureSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 00:59:47,137 DEBUG [EBPB_GestureSTTL-116706] The title of the page is *********************************: Gesture Index
+2016-01-28 00:59:47,137 DEBUG [EBPB_GestureSTTL-116706] The page title found is correct
+2016-01-28 00:59:47,137 DEBUG [EBPB_GestureSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 00:59:47,137 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:47,137 DEBUG [EBPB_GestureSTTL-116706] Executing link_Click function:
+2016-01-28 00:59:47,531 DEBUG [EBPB_GestureSTTL-116706] Executing Click function
+2016-01-28 00:59:48,510 DEBUG [EBPB_GestureSTTL-116706] Exiting Click function
+2016-01-28 00:59:48,510 DEBUG [EBPB_GestureSTTL-116706] lineargesturepb3_test_link clicked successfully
+2016-01-28 00:59:48,510 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of link_Click: Pass
+2016-01-28 00:59:48,510 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:48,511 DEBUG [EBPB_GestureSTTL-116706] Executing wait function:
+2016-01-28 00:59:48,511 DEBUG [EBPB_GestureSTTL-116706] Started Executing wait function
+2016-01-28 00:59:50,511 DEBUG [EBPB_GestureSTTL-116706] Exiting from wait function
+2016-01-28 00:59:50,511 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 00:59:50,511 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:50,511 DEBUG [EBPB_GestureSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 00:59:50,545 DEBUG [EBPB_GestureSTTL-116706] The title of the page is *********************************: Linear Gesture
+2016-01-28 00:59:50,545 DEBUG [EBPB_GestureSTTL-116706] The page title found is correct
+2016-01-28 00:59:50,545 DEBUG [EBPB_GestureSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 00:59:50,545 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:50,545 DEBUG [EBPB_GestureSTTL-116706] Executing SelectTestToRun function:
+2016-01-28 00:59:53,338 DEBUG [EBPB_GestureSTTL-116706] Successfull in selecting clicking the category
+2016-01-28 00:59:53,338 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of SelectTestToRun: pass
+2016-01-28 00:59:53,338 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:53,338 DEBUG [EBPB_GestureSTTL-116706] Executing validate_Text_Exists function:
+2016-01-28 00:59:53,594 DEBUG [EBPB_GestureSTTL-116706] VT056-0347 Testcase Text found
+2016-01-28 00:59:53,594 DEBUG [EBPB_GestureSTTL-116706] Result of validate_Text_Exists: Pass
+2016-01-28 00:59:53,594 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:53,594 DEBUG [EBPB_GestureSTTL-116706] Executing ClickRunTest function:
+2016-01-28 00:59:53,990 DEBUG [EBPB_GestureSTTL-116706] Executing Click function
+2016-01-28 00:59:54,991 DEBUG [EBPB_GestureSTTL-116706] Exiting Click function
+2016-01-28 00:59:54,991 DEBUG [EBPB_GestureSTTL-116706] runtest_top_xpath Button clicked Successfully
+2016-01-28 00:59:54,991 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-28 00:59:54,991 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 00:59:54,991 DEBUG [EBPB_GestureSTTL-116706] Executing DrawGesture function:
+2016-01-28 00:59:54,991 DEBUG [EBPB_GestureSTTL-116706] Started executeCommandLine function
+2016-01-28 00:59:59,012 DEBUG [EBPB_GestureSTTL-116706] Started executeCommandLine function
+2016-01-28 01:00:03,033 DEBUG [EBPB_GestureSTTL-116706] Gesture top-bottom drawn successfully
+2016-01-28 01:00:03,033 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of DrawGesture: Pass
+2016-01-28 01:00:03,033 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 01:00:03,033 DEBUG [EBPB_GestureSTTL-116706] Executing validate_Result function:
+2016-01-28 01:00:03,320 DEBUG [EBPB_GestureSTTL-116706] Gesture detected for 1th time Text found in Gesture detected for 1th time.
+Gesture ID: linearGesture, Count: 0
+2016-01-28 01:00:03,320 DEBUG [EBPB_GestureSTTL-116706] Result of validate_Result: Pass
+2016-01-28 01:00:03,320 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 01:00:03,321 DEBUG [EBPB_GestureSTTL-116706] Executing validate_Result function:
+2016-01-28 01:00:03,467 DEBUG [EBPB_GestureSTTL-116706] linearGesture Text found in Gesture detected for 1th time.
+Gesture ID: linearGesture, Count: 0
+2016-01-28 01:00:03,467 DEBUG [EBPB_GestureSTTL-116706] Result of validate_Result: Pass
+2016-01-28 01:00:03,467 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 01:00:03,467 DEBUG [EBPB_GestureSTTL-116706] Executing DrawGesture function:
+2016-01-28 01:00:03,467 DEBUG [EBPB_GestureSTTL-116706] Started executeCommandLine function
+2016-01-28 01:00:07,487 DEBUG [EBPB_GestureSTTL-116706] Started executeCommandLine function
+2016-01-28 01:00:11,508 DEBUG [EBPB_GestureSTTL-116706] Gesture top-bottom drawn successfully
+2016-01-28 01:00:11,508 DEBUG [EBPB_GestureSTTL-116706] TestStepResult of DrawGesture: Pass
+2016-01-28 01:00:11,508 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 01:00:11,508 DEBUG [EBPB_GestureSTTL-116706] Executing validate_Result function:
+2016-01-28 01:00:11,724 DEBUG [EBPB_GestureSTTL-116706] Gesture detected for 2th time Text found in Gesture detected for 2th time.
+Gesture ID: linearGesture, Count: 0
+2016-01-28 01:00:11,724 DEBUG [EBPB_GestureSTTL-116706] Result of validate_Result: Pass
+2016-01-28 01:00:11,724 DEBUG [EBPB_GestureSTTL-116706] In execute keyword function
+2016-01-28 01:00:11,724 DEBUG [EBPB_GestureSTTL-116706] Executing validate_Result function:
+2016-01-28 01:00:11,859 DEBUG [EBPB_GestureSTTL-116706] linearGesture Text found in Gesture detected for 2th time.
+Gesture ID: linearGesture, Count: 0
+2016-01-28 01:00:11,859 DEBUG [EBPB_GestureSTTL-116706] Result of validate_Result: Pass
+2016-01-28 01:00:11,859 DEBUG [EBPB_GestureSTTL-116706] allstep_result contains: PassPasspasspassPassPassPassPassPassnull
+2016-01-28 01:00:11,859 DEBUG [EBPB_GestureSTTL-116706] allexpected_result contains: nullPassPassnullPassPassnullPassnullpassnullpassnullpassnull
+2016-01-28 01:00:11,859 DEBUG [EBPB_GestureSTTL-116706] Testcase_Result contains: nullPassPassnullPassPassnullPassnullpassnullpassnullpassnullPassPasspasspassPassPassPassPassPassnull
+2016-01-28 01:00:11,859 DEBUG [EBPB_GestureSTTL-116706] Test case with description Linear gesture - preset:top-bottom Pass
+2016-01-28 01:00:12,791 DEBUG [EBPB_GestureSTTL-116706] Executing browser_Quit function
+2016-01-28 01:00:12,792 DEBUG [EBPB_GestureSTTL-116706] Completed browser_Quit function
+2016-01-28 01:00:12,792 DEBUG [EBPB_GestureSTTL-116706] Completed quitSelendroid function
+2016-01-28 01:00:12,792 DEBUG [EBPB_GestureSTTL-116706] Row number:7
+2016-01-28 01:00:12,827 DEBUG [EBPB_GestureSTTL-116706] Ending Test Case IDSTTL-116706

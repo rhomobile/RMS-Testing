@@ -1,0 +1,57 @@
+2016-01-28 00:13:32,386 DEBUG [EBPB_EMML11STTL-116707] Executing Test Case ID: STTL-116707
+2016-01-28 00:13:32,394 DEBUG [EBPB_EMML11STTL-116707] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:13:42,815 DEBUG [EBPB_EMML11STTL-116707] Exiting Init_Selendroid function
+2016-01-28 00:13:42,829 DEBUG [EBPB_EMML11STTL-116707] TestCase with Description "Hourglass " Execution started
+2016-01-28 00:13:42,829 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:42,830 DEBUG [EBPB_EMML11STTL-116707] Executing wait function:
+2016-01-28 00:13:42,830 DEBUG [EBPB_EMML11STTL-116707] Started Executing wait function
+2016-01-28 00:13:45,830 DEBUG [EBPB_EMML11STTL-116707] Exiting from wait function
+2016-01-28 00:13:45,830 DEBUG [EBPB_EMML11STTL-116707] TestStepResult of wait: Pass
+2016-01-28 00:13:45,830 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:45,830 DEBUG [EBPB_EMML11STTL-116707] Executing validate_PageTitle function:
+2016-01-28 00:13:45,876 DEBUG [EBPB_EMML11STTL-116707] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:13:45,876 DEBUG [EBPB_EMML11STTL-116707] The page title found is correct
+2016-01-28 00:13:45,876 DEBUG [EBPB_EMML11STTL-116707] Result of validate_PageTitle: pass
+2016-01-28 00:13:45,876 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:45,876 DEBUG [EBPB_EMML11STTL-116707] Executing link_Click function:
+2016-01-28 00:13:46,468 DEBUG [EBPB_EMML11STTL-116707] Executing Click function
+2016-01-28 00:13:47,512 DEBUG [EBPB_EMML11STTL-116707] Exiting Click function
+2016-01-28 00:13:47,512 DEBUG [EBPB_EMML11STTL-116707] EMML11_test_link clicked successfully
+2016-01-28 00:13:47,512 DEBUG [EBPB_EMML11STTL-116707] TestStepResult of link_Click: Pass
+2016-01-28 00:13:47,512 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:47,512 DEBUG [EBPB_EMML11STTL-116707] Executing wait function:
+2016-01-28 00:13:47,512 DEBUG [EBPB_EMML11STTL-116707] Started Executing wait function
+2016-01-28 00:13:49,513 DEBUG [EBPB_EMML11STTL-116707] Exiting from wait function
+2016-01-28 00:13:49,513 DEBUG [EBPB_EMML11STTL-116707] TestStepResult of wait: Pass
+2016-01-28 00:13:49,513 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:49,513 DEBUG [EBPB_EMML11STTL-116707] Executing validate_PageTitle function:
+2016-01-28 00:13:49,548 DEBUG [EBPB_EMML11STTL-116707] The title of the page is *********************************: EMML1.1 Test Index Page
+2016-01-28 00:13:49,548 DEBUG [EBPB_EMML11STTL-116707] The page title found is correct
+2016-01-28 00:13:49,548 DEBUG [EBPB_EMML11STTL-116707] Result of validate_PageTitle: pass
+2016-01-28 00:13:49,548 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:49,548 DEBUG [EBPB_EMML11STTL-116707] Executing link_Click function:
+2016-01-28 00:13:50,046 DEBUG [EBPB_EMML11STTL-116707] Executing Click function
+2016-01-28 00:13:51,126 DEBUG [EBPB_EMML11STTL-116707] Exiting Click function
+2016-01-28 00:13:51,126 DEBUG [EBPB_EMML11STTL-116707] DeviceApplicationhourglass11_test_link clicked successfully
+2016-01-28 00:13:51,126 DEBUG [EBPB_EMML11STTL-116707] TestStepResult of link_Click: Pass
+2016-01-28 00:13:51,126 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:51,126 DEBUG [EBPB_EMML11STTL-116707] Executing validate_isIconDisplayed function:
+2016-01-28 00:13:51,126 DEBUG [EBPB_EMML11STTL-116707] Entered validate_isIconDisplayed function
+2016-01-28 00:13:51,641 DEBUG [EBPB_EMML11STTL-116707] Result of validate_isIconDisplayed: Pass
+2016-01-28 00:13:51,641 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:51,641 DEBUG [EBPB_EMML11STTL-116707] Executing validate_Iconposition function:
+2016-01-28 00:13:51,641 DEBUG [EBPB_EMML11STTL-116707] Entered validate_Iconposition function
+2016-01-28 00:13:52,649 DEBUG [EBPB_EMML11STTL-116707] Result of validate_Iconposition: Pass
+2016-01-28 00:13:52,649 DEBUG [EBPB_EMML11STTL-116707] In execute keyword function
+2016-01-28 00:13:52,649 DEBUG [EBPB_EMML11STTL-116707] Executing validate_Iconposition function:
+2016-01-28 00:13:52,649 DEBUG [EBPB_EMML11STTL-116707] Entered validate_Iconposition function
+2016-01-28 00:13:53,438 DEBUG [EBPB_EMML11STTL-116707] Result of validate_Iconposition: Pass
+2016-01-28 00:13:53,438 DEBUG [EBPB_EMML11STTL-116707] allstep_result contains: PassPassPassPassnull
+2016-01-28 00:13:53,438 DEBUG [EBPB_EMML11STTL-116707] allexpected_result contains: nullPassPassPassnullpassnullpassnull
+2016-01-28 00:13:53,438 DEBUG [EBPB_EMML11STTL-116707] Testcase_Result contains: nullPassPassPassnullpassnullpassnullPassPassPassPassnull
+2016-01-28 00:13:53,438 DEBUG [EBPB_EMML11STTL-116707] Test case with description Hourglass  Pass
+2016-01-28 00:13:54,456 DEBUG [EBPB_EMML11STTL-116707] Executing browser_Quit function
+2016-01-28 00:13:54,456 DEBUG [EBPB_EMML11STTL-116707] Completed browser_Quit function
+2016-01-28 00:13:54,456 DEBUG [EBPB_EMML11STTL-116707] Completed quitSelendroid function
+2016-01-28 00:13:54,456 DEBUG [EBPB_EMML11STTL-116707] Row number:0
+2016-01-28 00:13:54,471 DEBUG [EBPB_EMML11STTL-116707] Ending Test Case IDSTTL-116707

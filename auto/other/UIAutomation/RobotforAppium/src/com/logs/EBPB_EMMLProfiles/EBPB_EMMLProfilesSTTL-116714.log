@@ -1,0 +1,91 @@
+2016-01-28 00:30:15,398 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing Test Case ID: STTL-116714
+2016-01-28 00:30:15,404 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:30:25,801 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting Init_Selendroid function
+2016-01-28 00:30:25,816 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestCase with Description "Battery & Signal Persistant" Execution started
+2016-01-28 00:30:25,816 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:25,816 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing wait function:
+2016-01-28 00:30:25,816 DEBUG [EBPB_EMMLProfilesSTTL-116714] Started Executing wait function
+2016-01-28 00:30:28,816 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting from wait function
+2016-01-28 00:30:28,816 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of wait: Pass
+2016-01-28 00:30:28,816 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:28,816 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing validate_PageTitle function:
+2016-01-28 00:30:28,855 DEBUG [EBPB_EMMLProfilesSTTL-116714] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:30:28,855 DEBUG [EBPB_EMMLProfilesSTTL-116714] The page title found is correct
+2016-01-28 00:30:28,855 DEBUG [EBPB_EMMLProfilesSTTL-116714] Result of validate_PageTitle: pass
+2016-01-28 00:30:28,855 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:28,855 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing link_Click function:
+2016-01-28 00:30:29,500 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing Click function
+2016-01-28 00:30:30,594 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting Click function
+2016-01-28 00:30:30,594 DEBUG [EBPB_EMMLProfilesSTTL-116714] eprofile_test_link clicked successfully
+2016-01-28 00:30:30,594 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-28 00:30:30,594 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:30,594 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing validate_PageTitle function:
+2016-01-28 00:30:30,635 DEBUG [EBPB_EMMLProfilesSTTL-116714] The title of the page is *********************************: PB 3.0 EMML Profiles Index
+2016-01-28 00:30:30,635 DEBUG [EBPB_EMMLProfilesSTTL-116714] The page title found is correct
+2016-01-28 00:30:30,635 DEBUG [EBPB_EMMLProfilesSTTL-116714] Result of validate_PageTitle: pass
+2016-01-28 00:30:30,635 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:30,635 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing link_Click function:
+2016-01-28 00:30:31,134 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing Click function
+2016-01-28 00:30:32,458 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting Click function
+2016-01-28 00:30:32,458 DEBUG [EBPB_EMMLProfilesSTTL-116714] pindicators_test_link clicked successfully
+2016-01-28 00:30:32,458 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-28 00:30:32,458 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:32,458 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing validate_PageTitle function:
+2016-01-28 00:30:32,495 DEBUG [EBPB_EMMLProfilesSTTL-116714] The title of the page is *********************************: Named Indicators EMML Profile Script
+2016-01-28 00:30:32,495 DEBUG [EBPB_EMMLProfilesSTTL-116714] The page title found is correct
+2016-01-28 00:30:32,495 DEBUG [EBPB_EMMLProfilesSTTL-116714] Result of validate_PageTitle: pass
+2016-01-28 00:30:32,495 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:32,495 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing link_Click function:
+2016-01-28 00:30:32,972 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing Click function
+2016-01-28 00:30:33,902 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting Click function
+2016-01-28 00:30:33,902 DEBUG [EBPB_EMMLProfilesSTTL-116714] importprofile_test_link clicked successfully
+2016-01-28 00:30:33,902 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-28 00:30:33,902 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:33,902 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing link_Click function:
+2016-01-28 00:30:34,290 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing Click function
+2016-01-28 00:30:35,257 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting Click function
+2016-01-28 00:30:35,257 DEBUG [EBPB_EMMLProfilesSTTL-116714] ppage_test_link clicked successfully
+2016-01-28 00:30:35,257 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-28 00:30:35,257 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:35,257 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing validate_PageTitle function:
+2016-01-28 00:30:35,294 DEBUG [EBPB_EMMLProfilesSTTL-116714] The title of the page is *********************************: Named Indicators EMML Test Script
+2016-01-28 00:30:35,294 DEBUG [EBPB_EMMLProfilesSTTL-116714] The page title found is correct
+2016-01-28 00:30:35,294 DEBUG [EBPB_EMMLProfilesSTTL-116714] Result of validate_PageTitle: pass
+2016-01-28 00:30:35,294 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:35,294 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing link_Click function:
+2016-01-28 00:30:35,713 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing Click function
+2016-01-28 00:30:36,646 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting Click function
+2016-01-28 00:30:36,646 DEBUG [EBPB_EMMLProfilesSTTL-116714] apply_battery_test_link clicked successfully
+2016-01-28 00:30:36,646 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-28 00:30:36,646 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:36,646 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing link_Click function:
+2016-01-28 00:30:37,009 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing Click function
+2016-01-28 00:30:37,964 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting Click function
+2016-01-28 00:30:37,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] apply_signal_test_link clicked successfully
+2016-01-28 00:30:37,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-28 00:30:37,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:37,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing wait function:
+2016-01-28 00:30:37,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] Started Executing wait function
+2016-01-28 00:30:38,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting from wait function
+2016-01-28 00:30:38,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of wait: Pass
+2016-01-28 00:30:38,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:38,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing isTextPresent function:
+2016-01-28 00:30:38,966 DEBUG [EBPB_EMMLProfilesSTTL-116714] Entered isTextPresent function
+2016-01-28 00:30:39,263 DEBUG [EBPB_EMMLProfilesSTTL-116714] sig_id has some text
+2016-01-28 00:30:39,263 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting from isTextPresent function
+2016-01-28 00:30:39,263 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of isTextPresent: Pass
+2016-01-28 00:30:39,263 DEBUG [EBPB_EMMLProfilesSTTL-116714] In execute keyword function
+2016-01-28 00:30:39,263 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing isTextPresent function:
+2016-01-28 00:30:39,263 DEBUG [EBPB_EMMLProfilesSTTL-116714] Entered isTextPresent function
+2016-01-28 00:30:39,524 DEBUG [EBPB_EMMLProfilesSTTL-116714] bat_id has some text
+2016-01-28 00:30:39,524 DEBUG [EBPB_EMMLProfilesSTTL-116714] Exiting from isTextPresent function
+2016-01-28 00:30:39,524 DEBUG [EBPB_EMMLProfilesSTTL-116714] TestStepResult of isTextPresent: Pass
+2016-01-28 00:30:39,524 DEBUG [EBPB_EMMLProfilesSTTL-116714] allstep_result contains: PassPassPassPassPassPassPassPassPassPassnull
+2016-01-28 00:30:39,524 DEBUG [EBPB_EMMLProfilesSTTL-116714] allexpected_result contains: nullpassnullpassnullpassnullpassnull
+2016-01-28 00:30:39,524 DEBUG [EBPB_EMMLProfilesSTTL-116714] Testcase_Result contains: nullpassnullpassnullpassnullpassnullPassPassPassPassPassPassPassPassPassPassnull
+2016-01-28 00:30:39,524 DEBUG [EBPB_EMMLProfilesSTTL-116714] Test case with description Battery & Signal Persistant Pass
+2016-01-28 00:30:40,511 DEBUG [EBPB_EMMLProfilesSTTL-116714] Executing browser_Quit function
+2016-01-28 00:30:40,511 DEBUG [EBPB_EMMLProfilesSTTL-116714] Completed browser_Quit function
+2016-01-28 00:30:40,511 DEBUG [EBPB_EMMLProfilesSTTL-116714] Completed quitSelendroid function
+2016-01-28 00:30:40,511 DEBUG [EBPB_EMMLProfilesSTTL-116714] Row number:15
+2016-01-28 00:30:40,551 DEBUG [EBPB_EMMLProfilesSTTL-116714] Ending Test Case IDSTTL-116714

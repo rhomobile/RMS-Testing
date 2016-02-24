@@ -1,0 +1,470 @@
+2016-01-27 21:30:20,239 DEBUG [EBManual_System_JSSTTL-116705] Executing Test Case ID: STTL-116705
+2016-01-27 21:30:20,253 DEBUG [EBManual_System_JSSTTL-116705] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 21:30:30,583 DEBUG [EBManual_System_JSSTTL-116705] Exiting Init_Selendroid function
+2016-01-27 21:30:30,607 DEBUG [EBManual_System_JSSTTL-116705] TestCase with Description "Application install for Android" Execution started
+2016-01-27 21:30:30,608 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:30,608 DEBUG [EBManual_System_JSSTTL-116705] Executing wait function:
+2016-01-27 21:30:30,608 DEBUG [EBManual_System_JSSTTL-116705] Started Executing wait function
+2016-01-27 21:30:33,609 DEBUG [EBManual_System_JSSTTL-116705] Exiting from wait function
+2016-01-27 21:30:33,609 DEBUG [EBManual_System_JSSTTL-116705] TestStepResult of wait: Pass
+2016-01-27 21:30:33,609 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:33,609 DEBUG [EBManual_System_JSSTTL-116705] Executing validate_PageTitle function:
+2016-01-27 21:30:33,649 DEBUG [EBManual_System_JSSTTL-116705] The title of the page is *********************************: Manual specs
+2016-01-27 21:30:33,649 DEBUG [EBManual_System_JSSTTL-116705] The page title found is correct
+2016-01-27 21:30:33,649 DEBUG [EBManual_System_JSSTTL-116705] Result of validate_PageTitle: pass
+2016-01-27 21:30:33,649 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:33,649 DEBUG [EBManual_System_JSSTTL-116705] Executing link_Click function:
+2016-01-27 21:30:34,369 DEBUG [EBManual_System_JSSTTL-116705] Executing Click function
+2016-01-27 21:30:35,796 DEBUG [EBManual_System_JSSTTL-116705] Exiting Click function
+2016-01-27 21:30:35,797 DEBUG [EBManual_System_JSSTTL-116705] system_test_link clicked successfully
+2016-01-27 21:30:35,797 DEBUG [EBManual_System_JSSTTL-116705] TestStepResult of link_Click: Pass
+2016-01-27 21:30:35,797 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:35,797 DEBUG [EBManual_System_JSSTTL-116705] Executing validate_PageTitle function:
+2016-01-27 21:30:35,816 DEBUG [EBManual_System_JSSTTL-116705] The title of the page is *********************************: System JS Test
+2016-01-27 21:30:35,816 DEBUG [EBManual_System_JSSTTL-116705] The page title found is correct
+2016-01-27 21:30:35,816 DEBUG [EBManual_System_JSSTTL-116705] Result of validate_PageTitle: pass
+2016-01-27 21:30:35,816 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:35,816 DEBUG [EBManual_System_JSSTTL-116705] Executing SelectTestToRun function:
+2016-01-27 21:30:41,692 DEBUG [EBManual_System_JSSTTL-116705] Successfull in selecting clicking the category
+2016-01-27 21:30:41,693 DEBUG [EBManual_System_JSSTTL-116705] TestStepResult of SelectTestToRun: pass
+2016-01-27 21:30:41,693 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:41,693 DEBUG [EBManual_System_JSSTTL-116705] Executing ClickRunTest function:
+2016-01-27 21:30:42,030 DEBUG [EBManual_System_JSSTTL-116705] Executing Click function
+2016-01-27 21:30:42,964 DEBUG [EBManual_System_JSSTTL-116705] Exiting Click function
+2016-01-27 21:30:42,964 DEBUG [EBManual_System_JSSTTL-116705] runtest_top_xpath Button clicked Successfully
+2016-01-27 21:30:42,964 DEBUG [EBManual_System_JSSTTL-116705] TestStepResult of ClickRunTest: pass
+2016-01-27 21:30:42,964 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:42,964 DEBUG [EBManual_System_JSSTTL-116705] Executing validate_Text_Exists function:
+2016-01-27 21:30:43,885 DEBUG [EBManual_System_JSSTTL-116705] VT300-057 Testcase Text found
+2016-01-27 21:30:43,885 DEBUG [EBManual_System_JSSTTL-116705] Result of validate_Text_Exists: Pass
+2016-01-27 21:30:43,885 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:43,885 DEBUG [EBManual_System_JSSTTL-116705] Executing ClickRunTest function:
+2016-01-27 21:30:44,228 DEBUG [EBManual_System_JSSTTL-116705] Executing Click function
+2016-01-27 21:30:45,164 DEBUG [EBManual_System_JSSTTL-116705] Exiting Click function
+2016-01-27 21:30:45,164 DEBUG [EBManual_System_JSSTTL-116705] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 21:30:45,164 DEBUG [EBManual_System_JSSTTL-116705] TestStepResult of ClickRunTest: pass
+2016-01-27 21:30:45,164 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:30:45,164 DEBUG [EBManual_System_JSSTTL-116705] Executing ClickUIButtonText function:
+2016-01-27 21:30:45,164 DEBUG [EBManual_System_JSSTTL-116705] Entered ClickUIButtonText function
+2016-01-27 21:30:45,164 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:30:49,185 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:30:50,185 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:30:54,206 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:30:55,206 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:30:59,226 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:00,226 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:04,247 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:05,247 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:09,267 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:10,267 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:14,289 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:15,289 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:19,310 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:20,310 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:24,332 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:25,332 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:29,352 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:30,352 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:34,373 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:35,373 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:39,394 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:40,394 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:44,416 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:45,416 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:49,432 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:50,432 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:54,454 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:31:55,454 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:31:59,478 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:00,478 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:04,499 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:05,499 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:09,519 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:10,519 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:14,548 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:15,548 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:19,569 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:20,569 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:24,590 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:25,590 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:29,610 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:30,610 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:34,631 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:35,631 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:39,651 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:40,651 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:44,673 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:45,673 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:49,694 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:50,694 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:54,715 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:32:55,715 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:32:59,735 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:00,735 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:04,759 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:05,759 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:09,779 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:10,779 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:14,800 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:15,800 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:19,820 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:20,820 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:24,841 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:25,841 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:29,862 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:30,862 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:34,883 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:35,883 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:39,904 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:40,904 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:44,925 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:45,925 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:49,946 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:50,946 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:54,968 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:33:55,968 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:33:59,988 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:00,988 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:05,009 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:06,009 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:10,029 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:11,029 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:15,050 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:16,050 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:20,071 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:21,071 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:25,093 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:26,093 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:30,114 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:31,114 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:35,135 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:36,135 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:40,156 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:41,157 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:45,177 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:46,177 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:50,198 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:51,199 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:34:55,219 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:34:56,219 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:00,239 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:01,240 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:05,268 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:06,268 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:10,289 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:11,290 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:15,310 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:16,310 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:20,330 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:21,331 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:25,352 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:26,352 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:30,372 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:31,373 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:35,393 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:36,393 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:40,414 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:41,415 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:45,435 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:46,435 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:50,455 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:51,456 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:35:55,476 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:35:56,476 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:00,497 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:01,498 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:05,518 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:06,518 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:10,538 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:11,539 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:15,559 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:16,559 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:20,580 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:21,581 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:25,601 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:26,601 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:30,622 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:31,623 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:35,643 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:36,643 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:40,663 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:41,664 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:45,684 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:46,684 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:50,704 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:51,705 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:36:55,725 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:36:56,725 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:00,745 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:01,746 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:05,766 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:06,766 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:10,786 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:11,787 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:15,808 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:16,808 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:20,828 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:21,829 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:25,849 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:26,849 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:30,869 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:31,870 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:35,891 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:36,891 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:40,911 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:41,912 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:45,933 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:46,933 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:50,954 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:51,955 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:37:55,975 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:37:56,975 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:00,996 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:01,997 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:06,017 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:07,017 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:11,026 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:12,027 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:16,047 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:17,047 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:21,068 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:22,069 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:26,089 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:27,089 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:31,109 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:32,110 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:36,130 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:37,130 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:41,150 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:42,151 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:46,171 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:47,171 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:51,192 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:52,192 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:38:56,213 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:38:57,213 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:01,234 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:02,234 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:06,255 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:07,255 DEBUG [EBManual_System_JSSTTL-116705] Button is not Present
+2016-01-27 21:39:07,255 DEBUG [EBManual_System_JSSTTL-116705] Exiting from ClickUIButtonText function
+2016-01-27 21:39:07,255 DEBUG [EBManual_System_JSSTTL-116705] TestStepResult of ClickUIButtonText: Fail
+2016-01-27 21:39:07,255 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:39:07,255 DEBUG [EBManual_System_JSSTTL-116705] Executing ClickUIButtonText function:
+2016-01-27 21:39:07,255 DEBUG [EBManual_System_JSSTTL-116705] Entered ClickUIButtonText function
+2016-01-27 21:39:07,255 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:11,277 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:12,277 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:16,298 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:17,298 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:21,320 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:22,320 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:26,340 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:27,340 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:31,361 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:32,361 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:36,374 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:37,374 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:41,396 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:42,396 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:46,416 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:47,416 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:51,436 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:52,436 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:39:56,457 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:39:57,457 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:01,478 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:02,478 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:06,498 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:07,498 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:11,520 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:12,520 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:16,540 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:17,540 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:21,561 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:22,561 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:26,581 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:27,581 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:31,603 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:32,603 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:36,623 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:37,623 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:41,632 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:42,632 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:46,652 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:47,652 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:51,674 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:52,674 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:40:56,694 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:40:57,694 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:01,716 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:02,716 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:06,736 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:07,736 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:11,758 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:12,758 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:16,778 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:17,778 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:21,799 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:22,799 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:26,819 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:27,819 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:31,841 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:32,841 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:36,863 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:37,863 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:41,885 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:42,885 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:46,905 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:47,905 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:51,926 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:52,926 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:41:56,946 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:41:57,946 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:01,968 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:02,968 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:06,988 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:07,988 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:12,009 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:13,009 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:17,029 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:18,029 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:22,050 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:23,050 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:27,070 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:28,070 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:32,092 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:33,092 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:37,112 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:38,112 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:42,133 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:43,133 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:47,153 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:48,153 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:52,174 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:53,174 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:42:57,194 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:42:58,194 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:02,215 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:03,215 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:07,235 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:08,235 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:12,257 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:13,257 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:17,278 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:18,278 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:22,299 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:23,299 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:27,320 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:28,320 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:32,339 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:33,339 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:37,360 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:38,360 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:42,382 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:43,382 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:47,403 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:48,403 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:52,424 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:53,424 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:43:57,444 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:43:58,444 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:02,465 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:03,465 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:07,486 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:08,486 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:12,507 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:13,507 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:17,528 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:18,528 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:22,549 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:23,549 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:27,570 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:28,570 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:32,592 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:33,592 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:37,613 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:38,613 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:42,634 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:43,634 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:47,654 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:48,654 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:52,676 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:53,676 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:44:57,696 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:44:58,696 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:02,717 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:03,717 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:07,738 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:08,738 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:12,759 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:13,759 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:17,779 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:18,779 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:22,801 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:23,801 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:27,822 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:28,822 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:32,843 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:33,843 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:37,863 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:38,863 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:42,884 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:43,884 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:47,905 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:48,905 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:52,926 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:53,926 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:45:57,946 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:45:58,946 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:02,968 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:03,968 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:07,988 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:08,988 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:13,009 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:14,009 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:18,029 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:19,029 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:23,051 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:24,051 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:28,071 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:29,071 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:33,093 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:34,093 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:38,113 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:39,113 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:43,135 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:44,135 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:48,155 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:49,155 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:53,176 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:54,176 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:46:58,197 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:46:59,197 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:47:03,218 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:47:04,218 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:47:08,238 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:47:09,238 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:47:13,259 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:47:14,259 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:47:18,279 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:47:19,279 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:47:23,301 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:47:24,301 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:47:28,321 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:47:29,321 DEBUG [EBManual_System_JSSTTL-116705] Button is not Present
+2016-01-27 21:47:29,321 DEBUG [EBManual_System_JSSTTL-116705] Exiting from ClickUIButtonText function
+2016-01-27 21:47:29,321 DEBUG [EBManual_System_JSSTTL-116705] TestStepResult of ClickUIButtonText: Fail
+2016-01-27 21:47:29,321 DEBUG [EBManual_System_JSSTTL-116705] In execute keyword function
+2016-01-27 21:47:29,321 DEBUG [EBManual_System_JSSTTL-116705] Executing validate_App_Exist_Device function:
+2016-01-27 21:47:29,321 DEBUG [EBManual_System_JSSTTL-116705] Started Executing Validate_App_Exist_Device function
+2016-01-27 21:47:29,321 DEBUG [EBManual_System_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 21:47:33,347 DEBUG [EBManual_System_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 21:47:33,347 DEBUG [EBManual_System_JSSTTL-116705] App not is installed
+2016-01-27 21:47:33,347 DEBUG [EBManual_System_JSSTTL-116705] Result of validate_App_Exist_Device: Fail
+2016-01-27 21:47:33,347 DEBUG [EBManual_System_JSSTTL-116705] allstep_result contains: FailFailpasspasspassPassPassnull
+2016-01-27 21:47:33,347 DEBUG [EBManual_System_JSSTTL-116705] allexpected_result contains: nullFailnullPassnullpassnullpassnull
+2016-01-27 21:47:33,347 DEBUG [EBManual_System_JSSTTL-116705] Testcase_Result contains: nullFailnullPassnullpassnullpassnullFailFailpasspasspassPassPassnull
+2016-01-27 21:47:33,347 DEBUG [EBManual_System_JSSTTL-116705] Test case with description Application install for Android Fail
+2016-01-27 21:47:33,357 DEBUG [EBManual_System_JSSTTL-116705] Completed quitSelendroid function
+2016-01-27 21:47:33,358 DEBUG [EBManual_System_JSSTTL-116705] Row number:6

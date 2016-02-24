@@ -1,0 +1,83 @@
+2016-01-28 00:28:28,764 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing Test Case ID: STTL-116711
+2016-01-28 00:28:28,770 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:28:38,780 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting Init_Selendroid function
+2016-01-28 00:28:38,794 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestCase with Description "Imager Persistant" Execution started
+2016-01-28 00:28:38,795 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:38,795 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing wait function:
+2016-01-28 00:28:38,795 DEBUG [EBPB_EMMLProfilesSTTL-116711] Started Executing wait function
+2016-01-28 00:28:41,795 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting from wait function
+2016-01-28 00:28:41,795 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of wait: Pass
+2016-01-28 00:28:41,795 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:41,795 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing validate_PageTitle function:
+2016-01-28 00:28:41,833 DEBUG [EBPB_EMMLProfilesSTTL-116711] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:28:41,833 DEBUG [EBPB_EMMLProfilesSTTL-116711] The page title found is correct
+2016-01-28 00:28:41,833 DEBUG [EBPB_EMMLProfilesSTTL-116711] Result of validate_PageTitle: pass
+2016-01-28 00:28:41,833 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:41,833 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing link_Click function:
+2016-01-28 00:28:42,435 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing Click function
+2016-01-28 00:28:43,489 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting Click function
+2016-01-28 00:28:43,489 DEBUG [EBPB_EMMLProfilesSTTL-116711] eprofile_test_link clicked successfully
+2016-01-28 00:28:43,489 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of link_Click: Pass
+2016-01-28 00:28:43,490 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:43,490 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing validate_PageTitle function:
+2016-01-28 00:28:43,527 DEBUG [EBPB_EMMLProfilesSTTL-116711] The title of the page is *********************************: PB 3.0 EMML Profiles Index
+2016-01-28 00:28:43,527 DEBUG [EBPB_EMMLProfilesSTTL-116711] The page title found is correct
+2016-01-28 00:28:43,527 DEBUG [EBPB_EMMLProfilesSTTL-116711] Result of validate_PageTitle: pass
+2016-01-28 00:28:43,527 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:43,527 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing link_Click function:
+2016-01-28 00:28:44,196 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing Click function
+2016-01-28 00:28:45,255 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting Click function
+2016-01-28 00:28:45,256 DEBUG [EBPB_EMMLProfilesSTTL-116711] pimager_test_link clicked successfully
+2016-01-28 00:28:45,256 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of link_Click: Pass
+2016-01-28 00:28:45,256 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:45,256 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing validate_PageTitle function:
+2016-01-28 00:28:45,275 DEBUG [EBPB_EMMLProfilesSTTL-116711] The title of the page is *********************************: Named Imager EMML Profile script
+2016-01-28 00:28:45,275 DEBUG [EBPB_EMMLProfilesSTTL-116711] The page title found is correct
+2016-01-28 00:28:45,275 DEBUG [EBPB_EMMLProfilesSTTL-116711] Result of validate_PageTitle: pass
+2016-01-28 00:28:45,276 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:45,276 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing link_Click function:
+2016-01-28 00:28:45,623 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing Click function
+2016-01-28 00:28:46,614 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting Click function
+2016-01-28 00:28:46,614 DEBUG [EBPB_EMMLProfilesSTTL-116711] ppage_test_link clicked successfully
+2016-01-28 00:28:46,614 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of link_Click: Pass
+2016-01-28 00:28:46,614 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:46,614 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing validate_PageTitle function:
+2016-01-28 00:28:46,653 DEBUG [EBPB_EMMLProfilesSTTL-116711] The title of the page is *********************************: Named Imager EMML Test Script
+2016-01-28 00:28:46,653 DEBUG [EBPB_EMMLProfilesSTTL-116711] The page title found is correct
+2016-01-28 00:28:46,653 DEBUG [EBPB_EMMLProfilesSTTL-116711] Result of validate_PageTitle: pass
+2016-01-28 00:28:46,653 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:46,653 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing link_Click function:
+2016-01-28 00:28:47,063 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing Click function
+2016-01-28 00:28:47,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting Click function
+2016-01-28 00:28:47,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] apply_httpimager_test_link clicked successfully
+2016-01-28 00:28:47,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of link_Click: Pass
+2016-01-28 00:28:47,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:47,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing wait function:
+2016-01-28 00:28:47,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] Started Executing wait function
+2016-01-28 00:28:48,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting from wait function
+2016-01-28 00:28:48,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of wait: Pass
+2016-01-28 00:28:48,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:48,970 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing link_Click function:
+2016-01-28 00:28:49,354 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing Click function
+2016-01-28 00:28:50,279 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting Click function
+2016-01-28 00:28:50,280 DEBUG [EBPB_EMMLProfilesSTTL-116711] activecapture_test_link clicked successfully
+2016-01-28 00:28:50,280 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of link_Click: Pass
+2016-01-28 00:28:50,280 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:50,280 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing wait function:
+2016-01-28 00:28:50,280 DEBUG [EBPB_EMMLProfilesSTTL-116711] Started Executing wait function
+2016-01-28 00:28:52,281 DEBUG [EBPB_EMMLProfilesSTTL-116711] Exiting from wait function
+2016-01-28 00:28:52,281 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of wait: Pass
+2016-01-28 00:28:52,281 DEBUG [EBPB_EMMLProfilesSTTL-116711] In execute keyword function
+2016-01-28 00:28:52,281 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing CheckUITextContains function:
+2016-01-28 00:28:52,281 DEBUG [EBPB_EMMLProfilesSTTL-116711] Started executeCommandLine function
+2016-01-28 00:28:56,301 DEBUG [EBPB_EMMLProfilesSTTL-116711] Text is Present
+2016-01-28 00:28:56,301 DEBUG [EBPB_EMMLProfilesSTTL-116711] TestStepResult of CheckUITextContains: Pass
+2016-01-28 00:28:56,301 DEBUG [EBPB_EMMLProfilesSTTL-116711] allstep_result contains: PassPassPassPassPassPassPassPassPassnull
+2016-01-28 00:28:56,301 DEBUG [EBPB_EMMLProfilesSTTL-116711] allexpected_result contains: nullpassnullpassnullpassnullpassnull
+2016-01-28 00:28:56,301 DEBUG [EBPB_EMMLProfilesSTTL-116711] Testcase_Result contains: nullpassnullpassnullpassnullpassnullPassPassPassPassPassPassPassPassPassnull
+2016-01-28 00:28:56,301 DEBUG [EBPB_EMMLProfilesSTTL-116711] Test case with description Imager Persistant Pass
+2016-01-28 00:28:57,412 DEBUG [EBPB_EMMLProfilesSTTL-116711] Executing browser_Quit function
+2016-01-28 00:28:57,412 DEBUG [EBPB_EMMLProfilesSTTL-116711] Completed browser_Quit function
+2016-01-28 00:28:57,412 DEBUG [EBPB_EMMLProfilesSTTL-116711] Completed quitSelendroid function
+2016-01-28 00:28:57,413 DEBUG [EBPB_EMMLProfilesSTTL-116711] Row number:12
+2016-01-28 00:28:57,442 DEBUG [EBPB_EMMLProfilesSTTL-116711] Ending Test Case IDSTTL-116711

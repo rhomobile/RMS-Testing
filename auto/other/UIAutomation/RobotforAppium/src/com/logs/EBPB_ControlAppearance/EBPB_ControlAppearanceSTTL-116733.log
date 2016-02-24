@@ -1,0 +1,61 @@
+2016-01-27 23:18:28,288 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing Test Case ID: STTL-116733
+2016-01-27 23:18:28,298 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 23:18:37,909 DEBUG [EBPB_ControlAppearanceSTTL-116733] Exiting Init_Selendroid function
+2016-01-27 23:18:37,933 DEBUG [EBPB_ControlAppearanceSTTL-116733] TestCase with Description "Note: Run this test with Javascript object.
+
+GoButton Hidden" Execution started
+2016-01-27 23:18:37,933 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:37,933 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing wait function:
+2016-01-27 23:18:37,933 DEBUG [EBPB_ControlAppearanceSTTL-116733] Started Executing wait function
+2016-01-27 23:18:39,933 DEBUG [EBPB_ControlAppearanceSTTL-116733] Exiting from wait function
+2016-01-27 23:18:39,933 DEBUG [EBPB_ControlAppearanceSTTL-116733] TestStepResult of wait: Pass
+2016-01-27 23:18:39,933 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:39,933 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing validate_PageTitle function:
+2016-01-27 23:18:39,975 DEBUG [EBPB_ControlAppearanceSTTL-116733] The title of the page is *********************************: Pocket Browser Tests
+2016-01-27 23:18:39,975 DEBUG [EBPB_ControlAppearanceSTTL-116733] The page title found is correct
+2016-01-27 23:18:39,975 DEBUG [EBPB_ControlAppearanceSTTL-116733] Result of validate_PageTitle: pass
+2016-01-27 23:18:39,975 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:39,975 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing link_Click function:
+2016-01-27 23:18:40,602 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing Click function
+2016-01-27 23:18:41,656 DEBUG [EBPB_ControlAppearanceSTTL-116733] Exiting Click function
+2016-01-27 23:18:41,656 DEBUG [EBPB_ControlAppearanceSTTL-116733] controlappearance_test_link clicked successfully
+2016-01-27 23:18:41,656 DEBUG [EBPB_ControlAppearanceSTTL-116733] TestStepResult of link_Click: Pass
+2016-01-27 23:18:41,656 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:41,656 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing wait function:
+2016-01-27 23:18:41,656 DEBUG [EBPB_ControlAppearanceSTTL-116733] Started Executing wait function
+2016-01-27 23:18:43,657 DEBUG [EBPB_ControlAppearanceSTTL-116733] Exiting from wait function
+2016-01-27 23:18:43,657 DEBUG [EBPB_ControlAppearanceSTTL-116733] TestStepResult of wait: Pass
+2016-01-27 23:18:43,657 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:43,657 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing validate_PageTitle function:
+2016-01-27 23:18:43,693 DEBUG [EBPB_ControlAppearanceSTTL-116733] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Control & Appearance
+2016-01-27 23:18:43,693 DEBUG [EBPB_ControlAppearanceSTTL-116733] The page title found is correct
+2016-01-27 23:18:43,693 DEBUG [EBPB_ControlAppearanceSTTL-116733] Result of validate_PageTitle: pass
+2016-01-27 23:18:43,694 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:43,694 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing SelectTestToRun function:
+2016-01-27 23:18:49,578 DEBUG [EBPB_ControlAppearanceSTTL-116733] Successfull in selecting clicking the category
+2016-01-27 23:18:49,578 DEBUG [EBPB_ControlAppearanceSTTL-116733] TestStepResult of SelectTestToRun: pass
+2016-01-27 23:18:49,578 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:49,578 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing validate_Text_Exists function:
+2016-01-27 23:18:49,856 DEBUG [EBPB_ControlAppearanceSTTL-116733] VT056-0523 Testcase Text found
+2016-01-27 23:18:49,856 DEBUG [EBPB_ControlAppearanceSTTL-116733] Result of validate_Text_Exists: Pass
+2016-01-27 23:18:49,856 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:49,856 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing ClickRunTest function:
+2016-01-27 23:18:50,176 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing Click function
+2016-01-27 23:18:51,147 DEBUG [EBPB_ControlAppearanceSTTL-116733] Exiting Click function
+2016-01-27 23:18:51,147 DEBUG [EBPB_ControlAppearanceSTTL-116733] runtest_top_xpath Button clicked Successfully
+2016-01-27 23:18:51,147 DEBUG [EBPB_ControlAppearanceSTTL-116733] TestStepResult of ClickRunTest: pass
+2016-01-27 23:18:51,147 DEBUG [EBPB_ControlAppearanceSTTL-116733] In execute keyword function
+2016-01-27 23:18:51,147 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing validate_isIconDisplayed function:
+2016-01-27 23:18:51,147 DEBUG [EBPB_ControlAppearanceSTTL-116733] Entered validate_isIconDisplayed function
+2016-01-27 23:18:51,819 DEBUG [EBPB_ControlAppearanceSTTL-116733] Result of validate_isIconDisplayed: Pass
+2016-01-27 23:18:51,819 DEBUG [EBPB_ControlAppearanceSTTL-116733] allstep_result contains: passpassPassPassPassnull
+2016-01-27 23:18:51,819 DEBUG [EBPB_ControlAppearanceSTTL-116733] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 23:18:51,819 DEBUG [EBPB_ControlAppearanceSTTL-116733] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspassPassPassPassnull
+2016-01-27 23:18:51,819 DEBUG [EBPB_ControlAppearanceSTTL-116733] Test case with description Note: Run this test with Javascript object.
+
+GoButton Hidden Pass
+2016-01-27 23:18:52,835 DEBUG [EBPB_ControlAppearanceSTTL-116733] Executing browser_Quit function
+2016-01-27 23:18:52,835 DEBUG [EBPB_ControlAppearanceSTTL-116733] Completed browser_Quit function
+2016-01-27 23:18:52,835 DEBUG [EBPB_ControlAppearanceSTTL-116733] Completed quitSelendroid function
+2016-01-27 23:18:52,836 DEBUG [EBPB_ControlAppearanceSTTL-116733] Row number:34
+2016-01-27 23:18:52,876 DEBUG [EBPB_ControlAppearanceSTTL-116733] Ending Test Case IDSTTL-116733

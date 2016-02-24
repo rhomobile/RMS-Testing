@@ -1,0 +1,129 @@
+2016-01-27 20:58:26,989 DEBUG [EBManual_Signature_JSSTTL-116702] Executing Test Case ID: STTL-116702
+2016-01-27 20:58:26,996 DEBUG [EBManual_Signature_JSSTTL-116702] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:58:37,366 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting Init_Selendroid function
+2016-01-27 20:58:37,384 DEBUG [EBManual_Signature_JSSTTL-116702] TestCase with Description "Call takeFullScreen with callback as function and retruned status OK" Execution started
+2016-01-27 20:58:37,384 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:37,384 DEBUG [EBManual_Signature_JSSTTL-116702] Executing wait function:
+2016-01-27 20:58:37,384 DEBUG [EBManual_Signature_JSSTTL-116702] Started Executing wait function
+2016-01-27 20:58:40,384 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting from wait function
+2016-01-27 20:58:40,384 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of wait: Pass
+2016-01-27 20:58:40,384 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:40,384 DEBUG [EBManual_Signature_JSSTTL-116702] Executing validate_PageTitle function:
+2016-01-27 20:58:40,432 DEBUG [EBManual_Signature_JSSTTL-116702] The title of the page is *********************************: Manual specs
+2016-01-27 20:58:40,432 DEBUG [EBManual_Signature_JSSTTL-116702] The page title found is correct
+2016-01-27 20:58:40,432 DEBUG [EBManual_Signature_JSSTTL-116702] Result of validate_PageTitle: pass
+2016-01-27 20:58:40,432 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:40,433 DEBUG [EBManual_Signature_JSSTTL-116702] Executing link_Click function:
+2016-01-27 20:58:41,198 DEBUG [EBManual_Signature_JSSTTL-116702] Executing Click function
+2016-01-27 20:58:42,579 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting Click function
+2016-01-27 20:58:42,579 DEBUG [EBManual_Signature_JSSTTL-116702] signature_page1_link clicked successfully
+2016-01-27 20:58:42,579 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of link_Click: Pass
+2016-01-27 20:58:42,579 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:42,579 DEBUG [EBManual_Signature_JSSTTL-116702] Executing validate_PageTitle function:
+2016-01-27 20:58:42,594 DEBUG [EBManual_Signature_JSSTTL-116702] The title of the page is *********************************: Signature JS Test
+2016-01-27 20:58:42,594 DEBUG [EBManual_Signature_JSSTTL-116702] The page title found is correct
+2016-01-27 20:58:42,594 DEBUG [EBManual_Signature_JSSTTL-116702] Result of validate_PageTitle: pass
+2016-01-27 20:58:42,594 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:42,594 DEBUG [EBManual_Signature_JSSTTL-116702] Executing SelectTestToRun function:
+2016-01-27 20:58:45,299 DEBUG [EBManual_Signature_JSSTTL-116702] Successfull in selecting clicking the category
+2016-01-27 20:58:45,299 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of SelectTestToRun: pass
+2016-01-27 20:58:45,299 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:45,299 DEBUG [EBManual_Signature_JSSTTL-116702] Executing ClickRunTest function:
+2016-01-27 20:58:45,684 DEBUG [EBManual_Signature_JSSTTL-116702] Executing Click function
+2016-01-27 20:58:46,609 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting Click function
+2016-01-27 20:58:46,609 DEBUG [EBManual_Signature_JSSTTL-116702] runtest_top_xpath Button clicked Successfully
+2016-01-27 20:58:46,610 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of ClickRunTest: pass
+2016-01-27 20:58:46,610 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:46,610 DEBUG [EBManual_Signature_JSSTTL-116702] Executing validate_Text_Exists function:
+2016-01-27 20:58:47,192 DEBUG [EBManual_Signature_JSSTTL-116702] VT299-0001 Testcase Text found
+2016-01-27 20:58:47,192 DEBUG [EBManual_Signature_JSSTTL-116702] Result of validate_Text_Exists: Pass
+2016-01-27 20:58:47,192 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:47,192 DEBUG [EBManual_Signature_JSSTTL-116702] Executing ClickRunTest function:
+2016-01-27 20:58:47,551 DEBUG [EBManual_Signature_JSSTTL-116702] Executing Click function
+2016-01-27 20:58:48,499 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting Click function
+2016-01-27 20:58:48,499 DEBUG [EBManual_Signature_JSSTTL-116702] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 20:58:48,499 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of ClickRunTest: pass
+2016-01-27 20:58:48,499 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:48,499 DEBUG [EBManual_Signature_JSSTTL-116702] Executing wait function:
+2016-01-27 20:58:48,499 DEBUG [EBManual_Signature_JSSTTL-116702] Started Executing wait function
+2016-01-27 20:58:50,499 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting from wait function
+2016-01-27 20:58:50,499 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of wait: Pass
+2016-01-27 20:58:50,499 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:50,499 DEBUG [EBManual_Signature_JSSTTL-116702] Executing SwitchApp function:
+2016-01-27 20:58:50,598 DEBUG [EBManual_Signature_JSSTTL-116702] Successfully switched to NATIVE_APP
+2016-01-27 20:58:50,598 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of SwitchApp: Pass
+2016-01-27 20:58:50,598 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:50,598 DEBUG [EBManual_Signature_JSSTTL-116702] Executing DrawSignature function:
+2016-01-27 20:58:50,881 DEBUG [EBManual_Signature_JSSTTL-116702] Started executeCommandLine function
+2016-01-27 20:58:54,891 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting from executeCommandLine function
+2016-01-27 20:58:54,891 DEBUG [EBManual_Signature_JSSTTL-116702] Signature drawn successfully
+2016-01-27 20:58:54,891 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of DrawSignature: Pass
+2016-01-27 20:58:54,891 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:58:54,891 DEBUG [EBManual_Signature_JSSTTL-116702] Executing TakeScreenshot function:
+2016-01-27 20:58:55,619 DEBUG [EBManual_Signature_JSSTTL-116702] Started Executing Validate_App_launched_Device function
+2016-01-27 20:58:55,619 DEBUG [EBManual_Signature_JSSTTL-116702] Entered CheckUIButtonExists function
+2016-01-27 20:58:55,619 DEBUG [EBManual_Signature_JSSTTL-116702] Started executeCommandLine function
+2016-01-27 20:58:59,631 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting from executeCommandLine function
+2016-01-27 20:58:59,631 DEBUG [EBManual_Signature_JSSTTL-116702] Button is not Present
+2016-01-27 20:58:59,631 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting from CheckUIButtonExists function
+2016-01-27 20:58:59,631 DEBUG [EBManual_Signature_JSSTTL-116702] Started executeCommandLine function
+2016-01-27 20:59:03,653 DEBUG [EBManual_Signature_JSSTTL-116702] Given App is in Foreground
+2016-01-27 20:59:03,653 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting Validate_App_launched_Device function
+2016-01-27 20:59:03,748 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of TakeScreenshot: pass
+2016-01-27 20:59:03,748 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:03,748 DEBUG [EBManual_Signature_JSSTTL-116702] Executing ClickNativeIcon function:
+2016-01-27 20:59:04,443 DEBUG [EBManual_Signature_JSSTTL-116702] [[AppiumTouchActionExtension: selendroid on ANDROID (4040977d-40db-af24-26df-a701116beb0c)] -> xpath: //ImageButton[@id='sig_okButton']]Clicked successfully
+2016-01-27 20:59:04,443 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of ClickNativeIcon: pass
+2016-01-27 20:59:04,443 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:04,443 DEBUG [EBManual_Signature_JSSTTL-116702] Executing wait function:
+2016-01-27 20:59:04,443 DEBUG [EBManual_Signature_JSSTTL-116702] Started Executing wait function
+2016-01-27 20:59:06,443 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting from wait function
+2016-01-27 20:59:06,443 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of wait: Pass
+2016-01-27 20:59:06,443 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:06,443 DEBUG [EBManual_Signature_JSSTTL-116702] Executing SwitchApp function:
+2016-01-27 20:59:06,570 DEBUG [EBManual_Signature_JSSTTL-116702] Successfully switched to WEBVIEW
+2016-01-27 20:59:06,570 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of SwitchApp: Pass
+2016-01-27 20:59:06,570 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:06,570 DEBUG [EBManual_Signature_JSSTTL-116702] Executing wait function:
+2016-01-27 20:59:06,570 DEBUG [EBManual_Signature_JSSTTL-116702] Started Executing wait function
+2016-01-27 20:59:08,570 DEBUG [EBManual_Signature_JSSTTL-116702] Exiting from wait function
+2016-01-27 20:59:08,570 DEBUG [EBManual_Signature_JSSTTL-116702] TestStepResult of wait: Pass
+2016-01-27 20:59:08,570 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:08,570 DEBUG [EBManual_Signature_JSSTTL-116702] Executing validate_Screenshot function:
+2016-01-27 20:59:08,763 DEBUG [EBManual_Signature_JSSTTL-116702] Started executeCommandLine function
+2016-01-27 20:59:09,694 DEBUG [EBManual_Signature_JSSTTL-116702] Partial Match found with reference image 43.6426
+2016-01-27 20:59:09,695 DEBUG [EBManual_Signature_JSSTTL-116702] Started executeCommandLine function
+2016-01-27 20:59:13,708 DEBUG [EBManual_Signature_JSSTTL-116702] Result of validate_Screenshot: Pass
+2016-01-27 20:59:13,708 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:13,708 DEBUG [EBManual_Signature_JSSTTL-116702] Executing validate_Result function:
+2016-01-27 20:59:14,000 DEBUG [EBManual_Signature_JSSTTL-116702] Status: Text found in Results
+Status: : ok
+ImageUri: : file:///data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/VT299-0001.png
+2016-01-27 20:59:14,000 DEBUG [EBManual_Signature_JSSTTL-116702] Result of validate_Result: Pass
+2016-01-27 20:59:14,000 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:14,000 DEBUG [EBManual_Signature_JSSTTL-116702] Executing validate_Result function:
+2016-01-27 20:59:14,176 DEBUG [EBManual_Signature_JSSTTL-116702] ok Text found in Results
+Status: : ok
+ImageUri: : file:///data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/VT299-0001.png
+2016-01-27 20:59:14,176 DEBUG [EBManual_Signature_JSSTTL-116702] Result of validate_Result: Pass
+2016-01-27 20:59:14,177 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:14,177 DEBUG [EBManual_Signature_JSSTTL-116702] Executing validate_Result function:
+2016-01-27 20:59:14,344 DEBUG [EBManual_Signature_JSSTTL-116702] ImageUri: Text found in Results
+Status: : ok
+ImageUri: : file:///data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/VT299-0001.png
+2016-01-27 20:59:14,344 DEBUG [EBManual_Signature_JSSTTL-116702] Result of validate_Result: Pass
+2016-01-27 20:59:14,344 DEBUG [EBManual_Signature_JSSTTL-116702] In execute keyword function
+2016-01-27 20:59:14,344 DEBUG [EBManual_Signature_JSSTTL-116702] Executing validate_Result function:
+2016-01-27 20:59:14,590 DEBUG [EBManual_Signature_JSSTTL-116702] file:///data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/VT299-0001.png Text found in Results
+Status: : ok
+ImageUri: : file:///data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/VT299-0001.png
+2016-01-27 20:59:14,590 DEBUG [EBManual_Signature_JSSTTL-116702] Result of validate_Result: Pass
+2016-01-27 20:59:14,590 DEBUG [EBManual_Signature_JSSTTL-116702] allstep_result contains: PassPassPasspasspassPassPassPasspasspasspassPassPassnull
+2016-01-27 20:59:14,590 DEBUG [EBManual_Signature_JSSTTL-116702] allexpected_result contains: nullPassPassPassPassPassnullPassnullpassnullpassnull
+2016-01-27 20:59:14,590 DEBUG [EBManual_Signature_JSSTTL-116702] Testcase_Result contains: nullPassPassPassPassPassnullPassnullpassnullpassnullPassPassPasspasspassPassPassPasspasspasspassPassPassnull
+2016-01-27 20:59:14,590 DEBUG [EBManual_Signature_JSSTTL-116702] Test case with description Call takeFullScreen with callback as function and retruned status OK Pass
+2016-01-27 20:59:15,580 DEBUG [EBManual_Signature_JSSTTL-116702] Executing browser_Quit function
+2016-01-27 20:59:15,580 DEBUG [EBManual_Signature_JSSTTL-116702] Completed browser_Quit function
+2016-01-27 20:59:15,580 DEBUG [EBManual_Signature_JSSTTL-116702] Completed quitSelendroid function
+2016-01-27 20:59:15,581 DEBUG [EBManual_Signature_JSSTTL-116702] Row number:3
+2016-01-27 20:59:15,621 DEBUG [EBManual_Signature_JSSTTL-116702] Ending Test Case IDSTTL-116702

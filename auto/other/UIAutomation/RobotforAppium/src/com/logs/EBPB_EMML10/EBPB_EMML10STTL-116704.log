@@ -1,0 +1,53 @@
+2016-01-28 00:02:19,231 DEBUG [EBPB_EMML10STTL-116704] Executing Test Case ID: STTL-116704
+2016-01-28 00:02:19,237 DEBUG [EBPB_EMML10STTL-116704] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:02:29,642 DEBUG [EBPB_EMML10STTL-116704] Exiting Init_Selendroid function
+2016-01-28 00:02:29,656 DEBUG [EBPB_EMML10STTL-116704] TestCase with Description "FileManagement" Execution started
+2016-01-28 00:02:29,656 DEBUG [EBPB_EMML10STTL-116704] In execute keyword function
+2016-01-28 00:02:29,656 DEBUG [EBPB_EMML10STTL-116704] Executing wait function:
+2016-01-28 00:02:29,656 DEBUG [EBPB_EMML10STTL-116704] Started Executing wait function
+2016-01-28 00:02:32,657 DEBUG [EBPB_EMML10STTL-116704] Exiting from wait function
+2016-01-28 00:02:32,657 DEBUG [EBPB_EMML10STTL-116704] TestStepResult of wait: Pass
+2016-01-28 00:02:32,657 DEBUG [EBPB_EMML10STTL-116704] In execute keyword function
+2016-01-28 00:02:32,657 DEBUG [EBPB_EMML10STTL-116704] Executing validate_PageTitle function:
+2016-01-28 00:02:32,696 DEBUG [EBPB_EMML10STTL-116704] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:02:32,696 DEBUG [EBPB_EMML10STTL-116704] The page title found is correct
+2016-01-28 00:02:32,696 DEBUG [EBPB_EMML10STTL-116704] Result of validate_PageTitle: pass
+2016-01-28 00:02:32,696 DEBUG [EBPB_EMML10STTL-116704] In execute keyword function
+2016-01-28 00:02:32,696 DEBUG [EBPB_EMML10STTL-116704] Executing link_Click function:
+2016-01-28 00:02:33,270 DEBUG [EBPB_EMML10STTL-116704] Executing Click function
+2016-01-28 00:02:34,334 DEBUG [EBPB_EMML10STTL-116704] Exiting Click function
+2016-01-28 00:02:34,334 DEBUG [EBPB_EMML10STTL-116704] EMML10_test_link clicked successfully
+2016-01-28 00:02:34,334 DEBUG [EBPB_EMML10STTL-116704] TestStepResult of link_Click: Pass
+2016-01-28 00:02:34,334 DEBUG [EBPB_EMML10STTL-116704] In execute keyword function
+2016-01-28 00:02:34,334 DEBUG [EBPB_EMML10STTL-116704] Executing wait function:
+2016-01-28 00:02:34,334 DEBUG [EBPB_EMML10STTL-116704] Started Executing wait function
+2016-01-28 00:02:36,334 DEBUG [EBPB_EMML10STTL-116704] Exiting from wait function
+2016-01-28 00:02:36,334 DEBUG [EBPB_EMML10STTL-116704] TestStepResult of wait: Pass
+2016-01-28 00:02:36,334 DEBUG [EBPB_EMML10STTL-116704] In execute keyword function
+2016-01-28 00:02:36,334 DEBUG [EBPB_EMML10STTL-116704] Executing validate_PageTitle function:
+2016-01-28 00:02:36,373 DEBUG [EBPB_EMML10STTL-116704] The title of the page is *********************************: EMML1.0 Test Index Page
+2016-01-28 00:02:36,373 DEBUG [EBPB_EMML10STTL-116704] The page title found is correct
+2016-01-28 00:02:36,373 DEBUG [EBPB_EMML10STTL-116704] Result of validate_PageTitle: pass
+2016-01-28 00:02:36,373 DEBUG [EBPB_EMML10STTL-116704] In execute keyword function
+2016-01-28 00:02:36,373 DEBUG [EBPB_EMML10STTL-116704] Executing link_Click function:
+2016-01-28 00:02:36,757 DEBUG [EBPB_EMML10STTL-116704] Executing Click function
+2016-01-28 00:02:37,747 DEBUG [EBPB_EMML10STTL-116704] Exiting Click function
+2016-01-28 00:02:37,747 DEBUG [EBPB_EMML10STTL-116704] File10_test_link clicked successfully
+2016-01-28 00:02:37,747 DEBUG [EBPB_EMML10STTL-116704] TestStepResult of link_Click: Pass
+2016-01-28 00:02:37,747 DEBUG [EBPB_EMML10STTL-116704] In execute keyword function
+2016-01-28 00:02:37,747 DEBUG [EBPB_EMML10STTL-116704] Executing wait function:
+2016-01-28 00:02:37,747 DEBUG [EBPB_EMML10STTL-116704] Started Executing wait function
+2016-01-28 00:02:45,748 DEBUG [EBPB_EMML10STTL-116704] Exiting from wait function
+2016-01-28 00:02:45,748 DEBUG [EBPB_EMML10STTL-116704] TestStepResult of wait: Pass
+2016-01-28 00:02:45,748 DEBUG [EBPB_EMML10STTL-116704] In execute keyword function
+2016-01-28 00:02:45,748 DEBUG [EBPB_EMML10STTL-116704] Executing validate_Result function:
+2016-01-28 00:02:46,030 DEBUG [EBPB_EMML10STTL-116704] OK: File Sent Text not found in TransferMessageError Code: 2
+2016-01-28 00:02:46,030 DEBUG [EBPB_EMML10STTL-116704] Result of validate_Result: Fail
+2016-01-28 00:02:46,031 DEBUG [EBPB_EMML10STTL-116704] allstep_result contains: PassPassPassPassPassnull
+2016-01-28 00:02:46,031 DEBUG [EBPB_EMML10STTL-116704] allexpected_result contains: nullFailnullpassnullpassnull
+2016-01-28 00:02:46,031 DEBUG [EBPB_EMML10STTL-116704] Testcase_Result contains: nullFailnullpassnullpassnullPassPassPassPassPassnull
+2016-01-28 00:02:46,031 DEBUG [EBPB_EMML10STTL-116704] Test case with description FileManagement Fail
+2016-01-28 00:02:47,109 DEBUG [EBPB_EMML10STTL-116704] Executing browser_Quit function
+2016-01-28 00:02:47,109 DEBUG [EBPB_EMML10STTL-116704] Completed browser_Quit function
+2016-01-28 00:02:47,109 DEBUG [EBPB_EMML10STTL-116704] Completed quitSelendroid function
+2016-01-28 00:02:47,109 DEBUG [EBPB_EMML10STTL-116704] Row number:5

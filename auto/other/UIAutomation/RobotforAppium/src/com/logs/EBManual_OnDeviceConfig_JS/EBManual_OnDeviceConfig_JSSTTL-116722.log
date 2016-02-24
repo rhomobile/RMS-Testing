@@ -1,0 +1,37 @@
+2016-01-27 20:29:43,452 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing Test Case ID: STTL-116722
+2016-01-27 20:29:43,460 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:29:53,211 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Exiting Init_Selendroid function
+2016-01-27 20:29:53,229 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] TestCase with Description "Validate Setting password with correct password and click Cancel button
+" Execution started
+2016-01-27 20:29:53,229 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] In execute keyword function
+2016-01-27 20:29:53,229 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing wait function:
+2016-01-27 20:29:53,229 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Started Executing wait function
+2016-01-27 20:29:56,229 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Exiting from wait function
+2016-01-27 20:29:56,229 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] TestStepResult of wait: Pass
+2016-01-27 20:29:56,229 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] In execute keyword function
+2016-01-27 20:29:56,229 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing validate_PageTitle function:
+2016-01-27 20:29:56,266 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] The title of the page is *********************************: Welcome to Enterprise Browser
+2016-01-27 20:29:56,266 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] The page title found is correct
+2016-01-27 20:29:56,266 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Result of validate_PageTitle: pass
+2016-01-27 20:29:56,266 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] In execute keyword function
+2016-01-27 20:29:56,266 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing SwitchApp function:
+2016-01-27 20:29:56,315 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Successfully switched to NATIVE_APP
+2016-01-27 20:29:56,315 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] TestStepResult of SwitchApp: Pass
+2016-01-27 20:29:56,315 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] In execute keyword function
+2016-01-27 20:29:56,315 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing ClickNativeIcon function:
+2016-01-27 20:29:56,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] [[AppiumTouchActionExtension: selendroid on ANDROID (8cf731ba-8839-5037-02c4-6c42634d1255)] -> xpath: (//Button[@id='settings_button'])[1]]Clicked Failed
+2016-01-27 20:29:56,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] TestStepResult of ClickNativeIcon: Fail
+2016-01-27 20:29:56,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] In execute keyword function
+2016-01-27 20:29:56,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing wait function:
+2016-01-27 20:29:56,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Started Executing wait function
+2016-01-27 20:29:58,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Exiting from wait function
+2016-01-27 20:29:58,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] TestStepResult of wait: Pass
+2016-01-27 20:29:58,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] In execute keyword function
+2016-01-27 20:29:58,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing EnterData function:
+2016-01-27 20:29:58,591 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing SendData function
+2016-01-27 20:30:48,993 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Error: Unable to Find element :SettingPwdenter_xpath
+2016-01-27 20:30:48,993 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] 
+2016-01-27 20:30:50,011 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Executing browser_Quit function
+2016-01-27 20:30:50,011 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Completed browser_Quit function
+2016-01-27 20:30:50,011 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Completed quitSelendroid function
+2016-01-27 20:30:50,013 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116722] Row number:0

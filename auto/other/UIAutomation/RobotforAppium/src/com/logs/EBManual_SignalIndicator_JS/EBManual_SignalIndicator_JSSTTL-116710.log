@@ -1,0 +1,71 @@
+2016-01-27 20:44:36,905 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing Test Case ID: STTL-116710
+2016-01-27 20:44:36,912 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:44:45,601 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Exiting Init_Selendroid function
+2016-01-27 20:44:45,612 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestCase with Description "Signal showIcon layout with down" Execution started
+2016-01-27 20:44:45,612 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:45,612 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing wait function:
+2016-01-27 20:44:45,612 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Started Executing wait function
+2016-01-27 20:44:48,612 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Exiting from wait function
+2016-01-27 20:44:48,612 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestStepResult of wait: Pass
+2016-01-27 20:44:48,612 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:48,612 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing validate_PageTitle function:
+2016-01-27 20:44:48,630 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] The title of the page is *********************************: Manual specs
+2016-01-27 20:44:48,630 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] The page title found is correct
+2016-01-27 20:44:48,630 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Result of validate_PageTitle: pass
+2016-01-27 20:44:48,630 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:48,630 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing link_Click function:
+2016-01-27 20:44:49,432 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing Click function
+2016-01-27 20:44:50,834 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Exiting Click function
+2016-01-27 20:44:50,834 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] signal_test_link clicked successfully
+2016-01-27 20:44:50,834 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestStepResult of link_Click: Pass
+2016-01-27 20:44:50,834 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:50,834 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing validate_PageTitle function:
+2016-01-27 20:44:50,850 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] The title of the page is *********************************: Signal JS Test
+2016-01-27 20:44:50,850 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] The page title found is correct
+2016-01-27 20:44:50,850 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Result of validate_PageTitle: pass
+2016-01-27 20:44:50,850 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:50,850 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing SelectTestToRun function:
+2016-01-27 20:44:54,449 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Successfull in selecting clicking the category
+2016-01-27 20:44:54,449 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestStepResult of SelectTestToRun: pass
+2016-01-27 20:44:54,450 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:54,450 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing ClickRunTest function:
+2016-01-27 20:44:54,814 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing Click function
+2016-01-27 20:44:55,776 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Exiting Click function
+2016-01-27 20:44:55,777 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] runtest_top_xpath Button clicked Successfully
+2016-01-27 20:44:55,777 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestStepResult of ClickRunTest: pass
+2016-01-27 20:44:55,777 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:55,777 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing validate_Text_Exists function:
+2016-01-27 20:44:56,374 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] VT298-0011 Testcase Text found
+2016-01-27 20:44:56,374 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Result of validate_Text_Exists: Pass
+2016-01-27 20:44:56,375 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:56,375 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing ClickRunTest function:
+2016-01-27 20:44:56,736 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing Click function
+2016-01-27 20:44:57,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Exiting Click function
+2016-01-27 20:44:57,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 20:44:57,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestStepResult of ClickRunTest: pass
+2016-01-27 20:44:57,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:57,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing wait function:
+2016-01-27 20:44:57,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Started Executing wait function
+2016-01-27 20:44:59,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Exiting from wait function
+2016-01-27 20:44:59,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestStepResult of wait: Pass
+2016-01-27 20:44:59,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:44:59,679 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing TakeScreenshot function:
+2016-01-27 20:45:01,483 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestStepResult of TakeScreenshot: pass
+2016-01-27 20:45:01,483 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:45:01,483 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing wait function:
+2016-01-27 20:45:01,483 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Started Executing wait function
+2016-01-27 20:45:03,483 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Exiting from wait function
+2016-01-27 20:45:03,483 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] TestStepResult of wait: Pass
+2016-01-27 20:45:03,483 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] In execute keyword function
+2016-01-27 20:45:03,483 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing validate_Screenshot function:
+2016-01-27 20:45:03,516 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Match found with reference image
+2016-01-27 20:45:03,516 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Result of validate_Screenshot: Pass
+2016-01-27 20:45:03,516 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] allstep_result contains: PasspassPasspasspasspassPassPassnull
+2016-01-27 20:45:03,516 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 20:45:03,516 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Testcase_Result contains: nullPassnullPassnullpassnullpassnullPasspassPasspasspasspassPassPassnull
+2016-01-27 20:45:03,516 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Test case with description Signal showIcon layout with down Pass
+2016-01-27 20:45:04,601 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Executing browser_Quit function
+2016-01-27 20:45:04,601 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Completed browser_Quit function
+2016-01-27 20:45:04,601 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Completed quitSelendroid function
+2016-01-27 20:45:04,601 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Row number:11
+2016-01-27 20:45:04,640 DEBUG [EBManual_SignalIndicator_JSSTTL-116710] Ending Test Case IDSTTL-116710

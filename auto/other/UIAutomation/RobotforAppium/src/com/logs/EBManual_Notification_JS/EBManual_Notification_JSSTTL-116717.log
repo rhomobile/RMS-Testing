@@ -1,0 +1,96 @@
+2016-01-27 19:58:45,309 DEBUG [EBManual_Notification_JSSTTL-116717] Executing Test Case ID: STTL-116717
+2016-01-27 19:58:45,318 DEBUG [EBManual_Notification_JSSTTL-116717] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 19:58:55,633 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting Init_Selendroid function
+2016-01-27 19:58:55,651 DEBUG [EBManual_Notification_JSSTTL-116717] TestCase with Description "Should allow to interact with application from notification area without activating the application when types is only EB.TYPE_NOTIFICATION_DIALOG." Execution started
+2016-01-27 19:58:55,651 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:58:55,651 DEBUG [EBManual_Notification_JSSTTL-116717] Executing wait function:
+2016-01-27 19:58:55,651 DEBUG [EBManual_Notification_JSSTTL-116717] Started Executing wait function
+2016-01-27 19:59:00,651 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting from wait function
+2016-01-27 19:59:00,651 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of wait: Pass
+2016-01-27 19:59:00,651 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:00,651 DEBUG [EBManual_Notification_JSSTTL-116717] Executing validate_PageTitle function:
+2016-01-27 19:59:00,669 DEBUG [EBManual_Notification_JSSTTL-116717] The title of the page is *********************************: Manual specs
+2016-01-27 19:59:00,669 DEBUG [EBManual_Notification_JSSTTL-116717] The page title found is correct
+2016-01-27 19:59:00,669 DEBUG [EBManual_Notification_JSSTTL-116717] Result of validate_PageTitle: pass
+2016-01-27 19:59:00,669 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:00,669 DEBUG [EBManual_Notification_JSSTTL-116717] Executing link_Click function:
+2016-01-27 19:59:01,334 DEBUG [EBManual_Notification_JSSTTL-116717] Executing Click function
+2016-01-27 19:59:02,448 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting Click function
+2016-01-27 19:59:02,448 DEBUG [EBManual_Notification_JSSTTL-116717] notification_test_link clicked successfully
+2016-01-27 19:59:02,448 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of link_Click: Pass
+2016-01-27 19:59:02,448 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:02,448 DEBUG [EBManual_Notification_JSSTTL-116717] Executing validate_PageTitle function:
+2016-01-27 19:59:02,465 DEBUG [EBManual_Notification_JSSTTL-116717] The title of the page is *********************************: Notification JS Test
+2016-01-27 19:59:02,465 DEBUG [EBManual_Notification_JSSTTL-116717] The page title found is correct
+2016-01-27 19:59:02,466 DEBUG [EBManual_Notification_JSSTTL-116717] Result of validate_PageTitle: pass
+2016-01-27 19:59:02,466 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:02,466 DEBUG [EBManual_Notification_JSSTTL-116717] Executing SelectTestToRun function:
+2016-01-27 19:59:09,151 DEBUG [EBManual_Notification_JSSTTL-116717] Successfull in selecting clicking the category
+2016-01-27 19:59:09,151 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:59:09,152 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:09,152 DEBUG [EBManual_Notification_JSSTTL-116717] Executing ClickRunTest function:
+2016-01-27 19:59:09,501 DEBUG [EBManual_Notification_JSSTTL-116717] Executing Click function
+2016-01-27 19:59:10,509 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting Click function
+2016-01-27 19:59:10,509 DEBUG [EBManual_Notification_JSSTTL-116717] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:59:10,509 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of ClickRunTest: pass
+2016-01-27 19:59:10,509 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:10,509 DEBUG [EBManual_Notification_JSSTTL-116717] Executing wait function:
+2016-01-27 19:59:10,509 DEBUG [EBManual_Notification_JSSTTL-116717] Started Executing wait function
+2016-01-27 19:59:12,510 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting from wait function
+2016-01-27 19:59:12,510 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of wait: Pass
+2016-01-27 19:59:12,510 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:12,510 DEBUG [EBManual_Notification_JSSTTL-116717] Executing validate_Text_Exists function:
+2016-01-27 19:59:12,746 DEBUG [EBManual_Notification_JSSTTL-116717] VT307-0039 Testcase Text found
+2016-01-27 19:59:12,746 DEBUG [EBManual_Notification_JSSTTL-116717] Result of validate_Text_Exists: Pass
+2016-01-27 19:59:12,746 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:12,746 DEBUG [EBManual_Notification_JSSTTL-116717] Executing ClickRunTest function:
+2016-01-27 19:59:13,097 DEBUG [EBManual_Notification_JSSTTL-116717] Executing Click function
+2016-01-27 19:59:14,100 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting Click function
+2016-01-27 19:59:14,100 DEBUG [EBManual_Notification_JSSTTL-116717] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 19:59:14,100 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of ClickRunTest: pass
+2016-01-27 19:59:14,100 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:14,100 DEBUG [EBManual_Notification_JSSTTL-116717] Executing wait function:
+2016-01-27 19:59:14,100 DEBUG [EBManual_Notification_JSSTTL-116717] Started Executing wait function
+2016-01-27 19:59:16,100 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting from wait function
+2016-01-27 19:59:16,100 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of wait: Pass
+2016-01-27 19:59:16,100 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:16,100 DEBUG [EBManual_Notification_JSSTTL-116717] Executing launch_App_Device function:
+2016-01-27 19:59:16,100 DEBUG [EBManual_Notification_JSSTTL-116717] Started Executing Launch_App_Device function
+2016-01-27 19:59:16,100 DEBUG [EBManual_Notification_JSSTTL-116717] Started executeCommandLine function
+2016-01-27 19:59:20,121 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting from executeCommandLine function
+2016-01-27 19:59:21,122 DEBUG [EBManual_Notification_JSSTTL-116717] Successfully launched the App
+2016-01-27 19:59:21,122 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting Launch_App_Device function
+2016-01-27 19:59:21,122 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of launch_App_Device: Pass
+2016-01-27 19:59:21,122 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:21,122 DEBUG [EBManual_Notification_JSSTTL-116717] Executing CheckUITextContains function:
+2016-01-27 19:59:21,122 DEBUG [EBManual_Notification_JSSTTL-116717] Started executeCommandLine function
+2016-01-27 19:59:25,142 DEBUG [EBManual_Notification_JSSTTL-116717] Text is Present
+2016-01-27 19:59:25,142 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of CheckUITextContains: Pass
+2016-01-27 19:59:25,142 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:25,142 DEBUG [EBManual_Notification_JSSTTL-116717] Executing ClickUIButtonText function:
+2016-01-27 19:59:25,142 DEBUG [EBManual_Notification_JSSTTL-116717] Entered ClickUIButtonText function
+2016-01-27 19:59:25,142 DEBUG [EBManual_Notification_JSSTTL-116717] Started executeCommandLine function
+2016-01-27 19:59:29,163 DEBUG [EBManual_Notification_JSSTTL-116717] Started executeCommandLine function
+2016-01-27 19:59:33,629 DEBUG [EBManual_Notification_JSSTTL-116717] Exiting ClickUIButtonText function
+2016-01-27 19:59:33,629 DEBUG [EBManual_Notification_JSSTTL-116717] TestStepResult of ClickUIButtonText: Pass
+2016-01-27 19:59:33,629 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:33,629 DEBUG [EBManual_Notification_JSSTTL-116717] Executing validate_Result function:
+2016-01-27 19:59:33,878 DEBUG [EBManual_Notification_JSSTTL-116717] "button_title":"yes" Text found in {"button_title":"yes","button_id":"accept","button_index":"0"}
+2016-01-27 19:59:33,878 DEBUG [EBManual_Notification_JSSTTL-116717] Result of validate_Result: Pass
+2016-01-27 19:59:33,878 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:33,878 DEBUG [EBManual_Notification_JSSTTL-116717] Executing validate_Result function:
+2016-01-27 19:59:34,090 DEBUG [EBManual_Notification_JSSTTL-116717] "button_id":"accept" Text found in {"button_title":"yes","button_id":"accept","button_index":"0"}
+2016-01-27 19:59:34,090 DEBUG [EBManual_Notification_JSSTTL-116717] Result of validate_Result: Pass
+2016-01-27 19:59:34,090 DEBUG [EBManual_Notification_JSSTTL-116717] In execute keyword function
+2016-01-27 19:59:34,090 DEBUG [EBManual_Notification_JSSTTL-116717] Executing validate_Result function:
+2016-01-27 19:59:34,239 DEBUG [EBManual_Notification_JSSTTL-116717] "button_index":"0" Text found in {"button_title":"yes","button_id":"accept","button_index":"0"}
+2016-01-27 19:59:34,239 DEBUG [EBManual_Notification_JSSTTL-116717] Result of validate_Result: Pass
+2016-01-27 19:59:34,239 DEBUG [EBManual_Notification_JSSTTL-116717] allstep_result contains: PassPassPassPasspassPasspasspassPassPassnull
+2016-01-27 19:59:34,239 DEBUG [EBManual_Notification_JSSTTL-116717] allexpected_result contains: nullPassPassPassnullPassnullpassnullpassnull
+2016-01-27 19:59:34,239 DEBUG [EBManual_Notification_JSSTTL-116717] Testcase_Result contains: nullPassPassPassnullPassnullpassnullpassnullPassPassPassPasspassPasspasspassPassPassnull
+2016-01-27 19:59:34,239 DEBUG [EBManual_Notification_JSSTTL-116717] Test case with description Should allow to interact with application from notification area without activating the application when types is only EB.TYPE_NOTIFICATION_DIALOG. Pass
+2016-01-27 19:59:35,231 DEBUG [EBManual_Notification_JSSTTL-116717] Executing browser_Quit function
+2016-01-27 19:59:35,231 DEBUG [EBManual_Notification_JSSTTL-116717] Completed browser_Quit function
+2016-01-27 19:59:35,231 DEBUG [EBManual_Notification_JSSTTL-116717] Completed quitSelendroid function
+2016-01-27 19:59:35,232 DEBUG [EBManual_Notification_JSSTTL-116717] Row number:18
+2016-01-27 19:59:35,269 DEBUG [EBManual_Notification_JSSTTL-116717] Ending Test Case IDSTTL-116717

@@ -1,0 +1,84 @@
+2016-01-28 01:08:37,259 DEBUG [EBPB_GestureSTTL-116721] Executing Test Case ID: STTL-116721
+2016-01-28 01:08:37,266 DEBUG [EBPB_GestureSTTL-116721] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 01:08:47,364 DEBUG [EBPB_GestureSTTL-116721] Exiting Init_Selendroid function
+2016-01-28 01:08:47,380 DEBUG [EBPB_GestureSTTL-116721] TestCase with Description "Gesture - Gesture Type=Hold, Center-x=100, Center-y=100, radius=Default." Execution started
+2016-01-28 01:08:47,380 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:47,380 DEBUG [EBPB_GestureSTTL-116721] Executing wait function:
+2016-01-28 01:08:47,380 DEBUG [EBPB_GestureSTTL-116721] Started Executing wait function
+2016-01-28 01:08:51,380 DEBUG [EBPB_GestureSTTL-116721] Exiting from wait function
+2016-01-28 01:08:51,380 DEBUG [EBPB_GestureSTTL-116721] TestStepResult of wait: Pass
+2016-01-28 01:08:51,380 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:51,380 DEBUG [EBPB_GestureSTTL-116721] Executing validate_PageTitle function:
+2016-01-28 01:08:51,398 DEBUG [EBPB_GestureSTTL-116721] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 01:08:51,398 DEBUG [EBPB_GestureSTTL-116721] The page title found is correct
+2016-01-28 01:08:51,398 DEBUG [EBPB_GestureSTTL-116721] Result of validate_PageTitle: pass
+2016-01-28 01:08:51,398 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:51,398 DEBUG [EBPB_GestureSTTL-116721] Executing link_Click function:
+2016-01-28 01:08:52,083 DEBUG [EBPB_GestureSTTL-116721] Executing Click function
+2016-01-28 01:08:53,158 DEBUG [EBPB_GestureSTTL-116721] Exiting Click function
+2016-01-28 01:08:53,158 DEBUG [EBPB_GestureSTTL-116721] gesturepb3_test_link clicked successfully
+2016-01-28 01:08:53,158 DEBUG [EBPB_GestureSTTL-116721] TestStepResult of link_Click: Pass
+2016-01-28 01:08:53,158 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:53,158 DEBUG [EBPB_GestureSTTL-116721] Executing wait function:
+2016-01-28 01:08:53,158 DEBUG [EBPB_GestureSTTL-116721] Started Executing wait function
+2016-01-28 01:08:55,158 DEBUG [EBPB_GestureSTTL-116721] Exiting from wait function
+2016-01-28 01:08:55,158 DEBUG [EBPB_GestureSTTL-116721] TestStepResult of wait: Pass
+2016-01-28 01:08:55,158 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:55,158 DEBUG [EBPB_GestureSTTL-116721] Executing validate_PageTitle function:
+2016-01-28 01:08:55,191 DEBUG [EBPB_GestureSTTL-116721] The title of the page is *********************************: Gesture Index
+2016-01-28 01:08:55,191 DEBUG [EBPB_GestureSTTL-116721] The page title found is correct
+2016-01-28 01:08:55,191 DEBUG [EBPB_GestureSTTL-116721] Result of validate_PageTitle: pass
+2016-01-28 01:08:55,191 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:55,191 DEBUG [EBPB_GestureSTTL-116721] Executing link_Click function:
+2016-01-28 01:08:55,596 DEBUG [EBPB_GestureSTTL-116721] Executing Click function
+2016-01-28 01:08:56,618 DEBUG [EBPB_GestureSTTL-116721] Exiting Click function
+2016-01-28 01:08:56,618 DEBUG [EBPB_GestureSTTL-116721] holdgesturepb3_test_link clicked successfully
+2016-01-28 01:08:56,618 DEBUG [EBPB_GestureSTTL-116721] TestStepResult of link_Click: Pass
+2016-01-28 01:08:56,618 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:56,618 DEBUG [EBPB_GestureSTTL-116721] Executing wait function:
+2016-01-28 01:08:56,618 DEBUG [EBPB_GestureSTTL-116721] Started Executing wait function
+2016-01-28 01:08:58,618 DEBUG [EBPB_GestureSTTL-116721] Exiting from wait function
+2016-01-28 01:08:58,618 DEBUG [EBPB_GestureSTTL-116721] TestStepResult of wait: Pass
+2016-01-28 01:08:58,618 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:58,618 DEBUG [EBPB_GestureSTTL-116721] Executing validate_PageTitle function:
+2016-01-28 01:08:58,655 DEBUG [EBPB_GestureSTTL-116721] The title of the page is *********************************: Hold Gesture
+2016-01-28 01:08:58,656 DEBUG [EBPB_GestureSTTL-116721] The page title found is correct
+2016-01-28 01:08:58,656 DEBUG [EBPB_GestureSTTL-116721] Result of validate_PageTitle: pass
+2016-01-28 01:08:58,656 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:08:58,656 DEBUG [EBPB_GestureSTTL-116721] Executing SelectTestToRun function:
+2016-01-28 01:09:01,101 DEBUG [EBPB_GestureSTTL-116721] Successfull in selecting clicking the category
+2016-01-28 01:09:01,101 DEBUG [EBPB_GestureSTTL-116721] TestStepResult of SelectTestToRun: pass
+2016-01-28 01:09:01,101 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:09:01,101 DEBUG [EBPB_GestureSTTL-116721] Executing validate_Text_Exists function:
+2016-01-28 01:09:01,343 DEBUG [EBPB_GestureSTTL-116721] VT056-0422 Testcase Text found
+2016-01-28 01:09:01,343 DEBUG [EBPB_GestureSTTL-116721] Result of validate_Text_Exists: Pass
+2016-01-28 01:09:01,343 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:09:01,343 DEBUG [EBPB_GestureSTTL-116721] Executing ClickRunTest function:
+2016-01-28 01:09:01,655 DEBUG [EBPB_GestureSTTL-116721] Executing Click function
+2016-01-28 01:09:02,640 DEBUG [EBPB_GestureSTTL-116721] Exiting Click function
+2016-01-28 01:09:02,640 DEBUG [EBPB_GestureSTTL-116721] runtest_top_xpath Button clicked Successfully
+2016-01-28 01:09:02,640 DEBUG [EBPB_GestureSTTL-116721] TestStepResult of ClickRunTest: pass
+2016-01-28 01:09:02,640 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:09:02,640 DEBUG [EBPB_GestureSTTL-116721] Executing DrawGesture function:
+2016-01-28 01:09:02,640 DEBUG [EBPB_GestureSTTL-116721] Started executeCommandLine function
+2016-01-28 01:09:09,553 DEBUG [EBPB_GestureSTTL-116721] Gesture hold drawn successfully
+2016-01-28 01:09:09,553 DEBUG [EBPB_GestureSTTL-116721] TestStepResult of DrawGesture: Pass
+2016-01-28 01:09:09,553 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:09:09,553 DEBUG [EBPB_GestureSTTL-116721] Executing validate_Result function:
+2016-01-28 01:09:09,841 DEBUG [EBPB_GestureSTTL-116721] Gesture detected for 3th time Text found in Gesture detected for 3th time.
+Gesture ID: holdGesture, Count: 0
+2016-01-28 01:09:09,841 DEBUG [EBPB_GestureSTTL-116721] Result of validate_Result: Pass
+2016-01-28 01:09:09,841 DEBUG [EBPB_GestureSTTL-116721] In execute keyword function
+2016-01-28 01:09:09,841 DEBUG [EBPB_GestureSTTL-116721] Executing validate_Result function:
+2016-01-28 01:09:09,973 DEBUG [EBPB_GestureSTTL-116721] holdGesture Text found in Gesture detected for 3th time.
+Gesture ID: holdGesture, Count: 0
+2016-01-28 01:09:09,973 DEBUG [EBPB_GestureSTTL-116721] Result of validate_Result: Pass
+2016-01-28 01:09:09,973 DEBUG [EBPB_GestureSTTL-116721] allstep_result contains: PasspasspassPassPassPassPassPassnull
+2016-01-28 01:09:09,973 DEBUG [EBPB_GestureSTTL-116721] allexpected_result contains: nullPassPassnullPassnullpassnullpassnullpassnull
+2016-01-28 01:09:09,973 DEBUG [EBPB_GestureSTTL-116721] Testcase_Result contains: nullPassPassnullPassnullpassnullpassnullpassnullPasspasspassPassPassPassPassPassnull
+2016-01-28 01:09:09,974 DEBUG [EBPB_GestureSTTL-116721] Test case with description Gesture - Gesture Type=Hold, Center-x=100, Center-y=100, radius=Default. Pass
+2016-01-28 01:09:10,881 DEBUG [EBPB_GestureSTTL-116721] Executing browser_Quit function
+2016-01-28 01:09:10,881 DEBUG [EBPB_GestureSTTL-116721] Completed browser_Quit function
+2016-01-28 01:09:10,881 DEBUG [EBPB_GestureSTTL-116721] Completed quitSelendroid function
+2016-01-28 01:09:10,882 DEBUG [EBPB_GestureSTTL-116721] Row number:22
+2016-01-28 01:09:10,919 DEBUG [EBPB_GestureSTTL-116721] Ending Test Case IDSTTL-116721

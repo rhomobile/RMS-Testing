@@ -1,0 +1,107 @@
+2016-01-28 04:49:01,608 DEBUG [EBRE22_NetworkSTTL-116706] Executing Test Case ID: STTL-116706
+2016-01-28 04:49:01,613 DEBUG [EBRE22_NetworkSTTL-116706] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 04:49:12,186 DEBUG [EBRE22_NetworkSTTL-116706] Exiting Init_Selendroid function
+2016-01-28 04:49:12,198 DEBUG [EBRE22_NetworkSTTL-116706] TestCase with Description "Check NetworkPollInterval" Execution started
+2016-01-28 04:49:12,198 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:12,198 DEBUG [EBRE22_NetworkSTTL-116706] Executing wait function:
+2016-01-28 04:49:12,198 DEBUG [EBRE22_NetworkSTTL-116706] Started Executing wait function
+2016-01-28 04:49:15,198 DEBUG [EBRE22_NetworkSTTL-116706] Exiting from wait function
+2016-01-28 04:49:15,198 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 04:49:15,198 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:15,198 DEBUG [EBRE22_NetworkSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 04:49:15,239 DEBUG [EBRE22_NetworkSTTL-116706] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 04:49:15,239 DEBUG [EBRE22_NetworkSTTL-116706] The page title found is correct
+2016-01-28 04:49:15,239 DEBUG [EBRE22_NetworkSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 04:49:15,239 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:15,239 DEBUG [EBRE22_NetworkSTTL-116706] Executing link_Click function:
+2016-01-28 04:49:15,846 DEBUG [EBRE22_NetworkSTTL-116706] Executing Click function
+2016-01-28 04:49:16,954 DEBUG [EBRE22_NetworkSTTL-116706] Exiting Click function
+2016-01-28 04:49:16,954 DEBUG [EBRE22_NetworkSTTL-116706] network22_test_link clicked successfully
+2016-01-28 04:49:16,954 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of link_Click: Pass
+2016-01-28 04:49:16,954 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:16,954 DEBUG [EBRE22_NetworkSTTL-116706] Executing wait function:
+2016-01-28 04:49:16,954 DEBUG [EBRE22_NetworkSTTL-116706] Started Executing wait function
+2016-01-28 04:49:18,954 DEBUG [EBRE22_NetworkSTTL-116706] Exiting from wait function
+2016-01-28 04:49:18,954 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 04:49:18,954 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:18,954 DEBUG [EBRE22_NetworkSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 04:49:18,989 DEBUG [EBRE22_NetworkSTTL-116706] The title of the page is *********************************: Network
+2016-01-28 04:49:18,990 DEBUG [EBRE22_NetworkSTTL-116706] The page title found is correct
+2016-01-28 04:49:18,990 DEBUG [EBRE22_NetworkSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 04:49:18,990 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:18,990 DEBUG [EBRE22_NetworkSTTL-116706] Executing SelectTestToRun function:
+2016-01-28 04:49:21,795 DEBUG [EBRE22_NetworkSTTL-116706] Successfull in selecting clicking the category
+2016-01-28 04:49:21,795 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:49:21,795 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:21,795 DEBUG [EBRE22_NetworkSTTL-116706] Executing validate_Text_Exists function:
+2016-01-28 04:49:22,066 DEBUG [EBRE22_NetworkSTTL-116706] VT187-0755 Testcase Text found
+2016-01-28 04:49:22,066 DEBUG [EBRE22_NetworkSTTL-116706] Result of validate_Text_Exists: Pass
+2016-01-28 04:49:22,066 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:22,066 DEBUG [EBRE22_NetworkSTTL-116706] Executing ClickRunTest function:
+2016-01-28 04:49:22,381 DEBUG [EBRE22_NetworkSTTL-116706] Executing Click function
+2016-01-28 04:49:23,414 DEBUG [EBRE22_NetworkSTTL-116706] Exiting Click function
+2016-01-28 04:49:23,414 DEBUG [EBRE22_NetworkSTTL-116706] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:49:23,414 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-28 04:49:23,414 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:23,414 DEBUG [EBRE22_NetworkSTTL-116706] Executing validate_Result function:
+2016-01-28 04:49:23,727 DEBUG [EBRE22_NetworkSTTL-116706] Connected Text found in Connection status: Connected
+2016-01-28 04:49:23,727 DEBUG [EBRE22_NetworkSTTL-116706] Result of validate_Result: Pass
+2016-01-28 04:49:23,727 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:23,727 DEBUG [EBRE22_NetworkSTTL-116706] Executing wifi_Mode function:
+2016-01-28 04:49:23,727 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:49:27,748 DEBUG [EBRE22_NetworkSTTL-116706] Turning off WiFi
+2016-01-28 04:49:27,748 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:49:32,770 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:49:46,792 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of wifi_Mode: pass
+2016-01-28 04:49:46,792 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:49:46,792 DEBUG [EBRE22_NetworkSTTL-116706] Executing wait function:
+2016-01-28 04:49:46,792 DEBUG [EBRE22_NetworkSTTL-116706] Started Executing wait function
+2016-01-28 04:50:46,795 DEBUG [EBRE22_NetworkSTTL-116706] Exiting from wait function
+2016-01-28 04:50:46,795 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 04:50:46,795 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:50:46,795 DEBUG [EBRE22_NetworkSTTL-116706] Executing press_Key function:
+2016-01-28 04:50:46,795 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:50:50,816 DEBUG [EBRE22_NetworkSTTL-116706] Exiting from executeCommandLine function
+2016-01-28 04:50:50,816 DEBUG [EBRE22_NetworkSTTL-116706] pressed on the home key
+2016-01-28 04:50:50,816 DEBUG [EBRE22_NetworkSTTL-116706] home works
+2016-01-28 04:50:51,817 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of press_Key: pass
+2016-01-28 04:50:51,817 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:50:51,817 DEBUG [EBRE22_NetworkSTTL-116706] Executing launch_App_Device function:
+2016-01-28 04:50:51,817 DEBUG [EBRE22_NetworkSTTL-116706] Started Executing Launch_App_Device function
+2016-01-28 04:50:51,817 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:50:55,837 DEBUG [EBRE22_NetworkSTTL-116706] Exiting from executeCommandLine function
+2016-01-28 04:50:56,837 DEBUG [EBRE22_NetworkSTTL-116706] Successfully launched the App
+2016-01-28 04:50:56,837 DEBUG [EBRE22_NetworkSTTL-116706] Exiting Launch_App_Device function
+2016-01-28 04:50:56,837 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of launch_App_Device: Pass
+2016-01-28 04:50:56,837 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:50:56,837 DEBUG [EBRE22_NetworkSTTL-116706] Executing validate_Result function:
+2016-01-28 04:50:57,096 DEBUG [EBRE22_NetworkSTTL-116706] Disconnected Text found in Connection status: Disconnected
+2016-01-28 04:50:57,096 DEBUG [EBRE22_NetworkSTTL-116706] Result of validate_Result: Pass
+2016-01-28 04:50:57,097 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:50:57,097 DEBUG [EBRE22_NetworkSTTL-116706] Executing wifi_Mode function:
+2016-01-28 04:50:57,097 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:51:01,118 DEBUG [EBRE22_NetworkSTTL-116706] Turning on WiFi
+2016-01-28 04:51:01,118 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:51:06,140 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:51:20,161 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of wifi_Mode: pass
+2016-01-28 04:51:20,161 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:51:20,161 DEBUG [EBRE22_NetworkSTTL-116706] Executing wait function:
+2016-01-28 04:51:20,161 DEBUG [EBRE22_NetworkSTTL-116706] Started Executing wait function
+2016-01-28 04:51:40,162 DEBUG [EBRE22_NetworkSTTL-116706] Exiting from wait function
+2016-01-28 04:51:40,162 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 04:51:40,162 DEBUG [EBRE22_NetworkSTTL-116706] In execute keyword function
+2016-01-28 04:51:40,162 DEBUG [EBRE22_NetworkSTTL-116706] Executing press_Key function:
+2016-01-28 04:51:40,162 DEBUG [EBRE22_NetworkSTTL-116706] Started executeCommandLine function
+2016-01-28 04:51:44,184 DEBUG [EBRE22_NetworkSTTL-116706] Exiting from executeCommandLine function
+2016-01-28 04:51:44,184 DEBUG [EBRE22_NetworkSTTL-116706] pressed on the home key
+2016-01-28 04:51:44,184 DEBUG [EBRE22_NetworkSTTL-116706] home works
+2016-01-28 04:51:45,184 DEBUG [EBRE22_NetworkSTTL-116706] TestStepResult of press_Key: pass
+2016-01-28 04:51:45,184 DEBUG [EBRE22_NetworkSTTL-116706] allstep_result contains: passPasspassPasspassPasspasspasspassPassPassPassnull
+2016-01-28 04:51:45,184 DEBUG [EBRE22_NetworkSTTL-116706] allexpected_result contains: nullPassnullPassnullPassnullpassnullpassnull
+2016-01-28 04:51:45,184 DEBUG [EBRE22_NetworkSTTL-116706] Testcase_Result contains: nullPassnullPassnullPassnullpassnullpassnullpassPasspassPasspassPasspasspasspassPassPassPassnull
+2016-01-28 04:51:45,184 DEBUG [EBRE22_NetworkSTTL-116706] Test case with description Check NetworkPollInterval Pass
+2016-01-28 04:51:46,100 DEBUG [EBRE22_NetworkSTTL-116706] Executing browser_Quit function
+2016-01-28 04:51:46,100 DEBUG [EBRE22_NetworkSTTL-116706] Completed browser_Quit function
+2016-01-28 04:51:46,100 DEBUG [EBRE22_NetworkSTTL-116706] Completed quitSelendroid function
+2016-01-28 04:51:46,100 DEBUG [EBRE22_NetworkSTTL-116706] Row number:7
+2016-01-28 04:51:46,123 DEBUG [EBRE22_NetworkSTTL-116706] Ending Test Case IDSTTL-116706

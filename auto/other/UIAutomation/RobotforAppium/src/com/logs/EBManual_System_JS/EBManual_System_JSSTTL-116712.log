@@ -1,0 +1,65 @@
+2016-01-27 22:00:46,982 DEBUG [EBManual_System_JSSTTL-116712] Executing Test Case ID: STTL-116712
+2016-01-27 22:00:46,992 DEBUG [EBManual_System_JSSTTL-116712] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:00:57,438 DEBUG [EBManual_System_JSSTTL-116712] Exiting Init_Selendroid function
+2016-01-27 22:00:57,463 DEBUG [EBManual_System_JSSTTL-116712] TestCase with Description "call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback" Execution started
+2016-01-27 22:00:57,463 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:00:57,463 DEBUG [EBManual_System_JSSTTL-116712] Executing wait function:
+2016-01-27 22:00:57,463 DEBUG [EBManual_System_JSSTTL-116712] Started Executing wait function
+2016-01-27 22:01:00,463 DEBUG [EBManual_System_JSSTTL-116712] Exiting from wait function
+2016-01-27 22:01:00,463 DEBUG [EBManual_System_JSSTTL-116712] TestStepResult of wait: Pass
+2016-01-27 22:01:00,463 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:01:00,463 DEBUG [EBManual_System_JSSTTL-116712] Executing validate_PageTitle function:
+2016-01-27 22:01:00,504 DEBUG [EBManual_System_JSSTTL-116712] The title of the page is *********************************: Manual specs
+2016-01-27 22:01:00,504 DEBUG [EBManual_System_JSSTTL-116712] The page title found is correct
+2016-01-27 22:01:00,504 DEBUG [EBManual_System_JSSTTL-116712] Result of validate_PageTitle: pass
+2016-01-27 22:01:00,504 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:01:00,504 DEBUG [EBManual_System_JSSTTL-116712] Executing link_Click function:
+2016-01-27 22:01:01,233 DEBUG [EBManual_System_JSSTTL-116712] Executing Click function
+2016-01-27 22:01:02,681 DEBUG [EBManual_System_JSSTTL-116712] Exiting Click function
+2016-01-27 22:01:02,681 DEBUG [EBManual_System_JSSTTL-116712] system_test_link clicked successfully
+2016-01-27 22:01:02,681 DEBUG [EBManual_System_JSSTTL-116712] TestStepResult of link_Click: Pass
+2016-01-27 22:01:02,681 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:01:02,681 DEBUG [EBManual_System_JSSTTL-116712] Executing validate_PageTitle function:
+2016-01-27 22:01:02,698 DEBUG [EBManual_System_JSSTTL-116712] The title of the page is *********************************: System JS Test
+2016-01-27 22:01:02,698 DEBUG [EBManual_System_JSSTTL-116712] The page title found is correct
+2016-01-27 22:01:02,698 DEBUG [EBManual_System_JSSTTL-116712] Result of validate_PageTitle: pass
+2016-01-27 22:01:02,698 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:01:02,698 DEBUG [EBManual_System_JSSTTL-116712] Executing SelectTestToRun function:
+2016-01-27 22:01:09,378 DEBUG [EBManual_System_JSSTTL-116712] Successfull in selecting clicking the category
+2016-01-27 22:01:09,378 DEBUG [EBManual_System_JSSTTL-116712] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:01:09,378 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:01:09,378 DEBUG [EBManual_System_JSSTTL-116712] Executing ClickRunTest function:
+2016-01-27 22:01:09,843 DEBUG [EBManual_System_JSSTTL-116712] Executing Click function
+2016-01-27 22:01:10,803 DEBUG [EBManual_System_JSSTTL-116712] Exiting Click function
+2016-01-27 22:01:10,803 DEBUG [EBManual_System_JSSTTL-116712] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:01:10,803 DEBUG [EBManual_System_JSSTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-27 22:01:10,803 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:01:10,803 DEBUG [EBManual_System_JSSTTL-116712] Executing validate_Text_Exists function:
+2016-01-27 22:01:11,632 DEBUG [EBManual_System_JSSTTL-116712] VT300-064 Testcase Text found
+2016-01-27 22:01:11,632 DEBUG [EBManual_System_JSSTTL-116712] Result of validate_Text_Exists: Pass
+2016-01-27 22:01:11,632 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:01:11,632 DEBUG [EBManual_System_JSSTTL-116712] Executing ClickRunTest function:
+2016-01-27 22:01:11,987 DEBUG [EBManual_System_JSSTTL-116712] Executing Click function
+2016-01-27 22:01:13,127 DEBUG [EBManual_System_JSSTTL-116712] Exiting Click function
+2016-01-27 22:01:13,127 DEBUG [EBManual_System_JSSTTL-116712] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:01:13,127 DEBUG [EBManual_System_JSSTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-27 22:01:13,128 DEBUG [EBManual_System_JSSTTL-116712] In execute keyword function
+2016-01-27 22:01:13,128 DEBUG [EBManual_System_JSSTTL-116712] Executing validate_SystemProperties function:
+2016-01-27 22:01:13,428 DEBUG [EBManual_System_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 22:01:17,449 DEBUG [EBManual_System_JSSTTL-116712] country Value is US and Result is Pass
+2016-01-27 22:01:17,449 DEBUG [EBManual_System_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 22:01:21,470 DEBUG [EBManual_System_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 22:01:25,490 DEBUG [EBManual_System_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 22:01:29,511 DEBUG [EBManual_System_JSSTTL-116712] deviceName Value is Zebra Technologies TC75 and Result is Pass
+2016-01-27 22:01:29,511 DEBUG [EBManual_System_JSSTTL-116712] devicePushId Value is   and Result is Pass
+2016-01-27 22:01:29,511 DEBUG [EBManual_System_JSSTTL-116712] freeServerPort Value is 43950 and Result is Pass
+2016-01-27 22:01:29,511 DEBUG [EBManual_System_JSSTTL-116712] Result of validate_SystemProperties: Pass
+2016-01-27 22:01:29,511 DEBUG [EBManual_System_JSSTTL-116712] allstep_result contains: passpasspassPassPassnull
+2016-01-27 22:01:29,511 DEBUG [EBManual_System_JSSTTL-116712] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 22:01:29,511 DEBUG [EBManual_System_JSSTTL-116712] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-27 22:01:29,512 DEBUG [EBManual_System_JSSTTL-116712] Test case with description call getproperties with country,deviceName, devicePushId, freeServerPort and sync callback Pass
+2016-01-27 22:01:30,621 DEBUG [EBManual_System_JSSTTL-116712] Executing browser_Quit function
+2016-01-27 22:01:30,621 DEBUG [EBManual_System_JSSTTL-116712] Completed browser_Quit function
+2016-01-27 22:01:30,621 DEBUG [EBManual_System_JSSTTL-116712] Completed quitSelendroid function
+2016-01-27 22:01:30,622 DEBUG [EBManual_System_JSSTTL-116712] Row number:13
+2016-01-27 22:01:30,668 DEBUG [EBManual_System_JSSTTL-116712] Ending Test Case IDSTTL-116712

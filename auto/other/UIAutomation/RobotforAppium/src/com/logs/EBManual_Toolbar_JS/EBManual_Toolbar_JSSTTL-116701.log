@@ -1,0 +1,38 @@
+2016-01-27 22:26:06,109 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing Test Case ID: STTL-116701
+2016-01-27 22:26:41,168 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:26:51,889 DEBUG [EBManual_Toolbar_JSSTTL-116701] Exiting Init_Selendroid function
+2016-01-27 22:26:51,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] TestCase with Description "Change Start page" Execution started
+2016-01-27 22:26:51,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] In execute keyword function
+2016-01-27 22:26:51,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing wait function:
+2016-01-27 22:26:51,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] Started Executing wait function
+2016-01-27 22:26:54,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] Exiting from wait function
+2016-01-27 22:26:54,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] TestStepResult of wait: Pass
+2016-01-27 22:26:54,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] In execute keyword function
+2016-01-27 22:26:54,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing PullConfigxml function:
+2016-01-27 22:26:54,904 DEBUG [EBManual_Toolbar_JSSTTL-116701] Started executeCommandLine function
+2016-01-27 22:26:58,925 DEBUG [EBManual_Toolbar_JSSTTL-116701] TestStepResult of PullConfigxml: Pass
+2016-01-27 22:26:58,925 DEBUG [EBManual_Toolbar_JSSTTL-116701] In execute keyword function
+2016-01-27 22:26:58,925 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing ChangeConfigxml function:
+2016-01-27 22:26:58,925 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing ChangeConfigxml function
+2016-01-27 22:26:58,927 DEBUG [EBManual_Toolbar_JSSTTL-116701] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 22:26:58,927 DEBUG [EBManual_Toolbar_JSSTTL-116701] In execute keyword function
+2016-01-27 22:26:58,927 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing ChangeConfigxml function:
+2016-01-27 22:26:58,927 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing ChangeConfigxml function
+2016-01-27 22:26:58,929 DEBUG [EBManual_Toolbar_JSSTTL-116701] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 22:26:58,929 DEBUG [EBManual_Toolbar_JSSTTL-116701] In execute keyword function
+2016-01-27 22:26:58,929 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing ChangeConfigxml function:
+2016-01-27 22:26:58,929 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing ChangeConfigxml function
+2016-01-27 22:26:58,931 DEBUG [EBManual_Toolbar_JSSTTL-116701] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 22:26:58,931 DEBUG [EBManual_Toolbar_JSSTTL-116701] In execute keyword function
+2016-01-27 22:26:58,931 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing PushConfigxml function:
+2016-01-27 22:26:58,931 DEBUG [EBManual_Toolbar_JSSTTL-116701] Started executeCommandLine function
+2016-01-27 22:27:02,951 DEBUG [EBManual_Toolbar_JSSTTL-116701] TestStepResult of PushConfigxml: Pass
+2016-01-27 22:27:02,951 DEBUG [EBManual_Toolbar_JSSTTL-116701] allstep_result contains: PassPassPassPassPassPassnull
+2016-01-27 22:27:02,951 DEBUG [EBManual_Toolbar_JSSTTL-116701] allexpected_result contains: null
+2016-01-27 22:27:02,951 DEBUG [EBManual_Toolbar_JSSTTL-116701] Testcase_Result contains: nullPassPassPassPassPassPassnull
+2016-01-27 22:27:02,951 DEBUG [EBManual_Toolbar_JSSTTL-116701] Test case with description Change Start page Pass
+2016-01-27 22:27:04,017 DEBUG [EBManual_Toolbar_JSSTTL-116701] Executing browser_Quit function
+2016-01-27 22:27:04,017 DEBUG [EBManual_Toolbar_JSSTTL-116701] Completed browser_Quit function
+2016-01-27 22:27:04,017 DEBUG [EBManual_Toolbar_JSSTTL-116701] Completed quitSelendroid function
+2016-01-27 22:27:04,017 DEBUG [EBManual_Toolbar_JSSTTL-116701] Row number:2
+2016-01-27 22:27:04,050 DEBUG [EBManual_Toolbar_JSSTTL-116701] Ending Test Case IDSTTL-116701

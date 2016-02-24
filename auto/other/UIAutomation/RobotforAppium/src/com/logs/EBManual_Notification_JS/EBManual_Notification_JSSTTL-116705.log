@@ -1,0 +1,79 @@
+2016-01-27 19:49:10,641 DEBUG [EBManual_Notification_JSSTTL-116705] Executing Test Case ID: STTL-116705
+2016-01-27 19:49:10,650 DEBUG [EBManual_Notification_JSSTTL-116705] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 19:49:20,988 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting Init_Selendroid function
+2016-01-27 19:49:21,008 DEBUG [EBManual_Notification_JSSTTL-116705] TestCase with Description "should display a toast message on android when application is in background" Execution started
+2016-01-27 19:49:21,008 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:21,008 DEBUG [EBManual_Notification_JSSTTL-116705] Executing wait function:
+2016-01-27 19:49:21,008 DEBUG [EBManual_Notification_JSSTTL-116705] Started Executing wait function
+2016-01-27 19:49:24,008 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting from wait function
+2016-01-27 19:49:24,008 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of wait: Pass
+2016-01-27 19:49:24,008 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:24,008 DEBUG [EBManual_Notification_JSSTTL-116705] Executing validate_PageTitle function:
+2016-01-27 19:49:24,035 DEBUG [EBManual_Notification_JSSTTL-116705] The title of the page is *********************************: Manual specs
+2016-01-27 19:49:24,035 DEBUG [EBManual_Notification_JSSTTL-116705] The page title found is correct
+2016-01-27 19:49:24,035 DEBUG [EBManual_Notification_JSSTTL-116705] Result of validate_PageTitle: pass
+2016-01-27 19:49:24,035 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:24,035 DEBUG [EBManual_Notification_JSSTTL-116705] Executing link_Click function:
+2016-01-27 19:49:24,699 DEBUG [EBManual_Notification_JSSTTL-116705] Executing Click function
+2016-01-27 19:49:25,792 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting Click function
+2016-01-27 19:49:25,792 DEBUG [EBManual_Notification_JSSTTL-116705] notification_test_link clicked successfully
+2016-01-27 19:49:25,792 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of link_Click: Pass
+2016-01-27 19:49:25,793 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:25,793 DEBUG [EBManual_Notification_JSSTTL-116705] Executing validate_PageTitle function:
+2016-01-27 19:49:25,813 DEBUG [EBManual_Notification_JSSTTL-116705] The title of the page is *********************************: Notification JS Test
+2016-01-27 19:49:25,813 DEBUG [EBManual_Notification_JSSTTL-116705] The page title found is correct
+2016-01-27 19:49:25,813 DEBUG [EBManual_Notification_JSSTTL-116705] Result of validate_PageTitle: pass
+2016-01-27 19:49:25,813 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:25,813 DEBUG [EBManual_Notification_JSSTTL-116705] Executing SelectTestToRun function:
+2016-01-27 19:49:30,644 DEBUG [EBManual_Notification_JSSTTL-116705] Successfull in selecting clicking the category
+2016-01-27 19:49:30,644 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:49:30,644 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:30,644 DEBUG [EBManual_Notification_JSSTTL-116705] Executing ClickRunTest function:
+2016-01-27 19:49:30,988 DEBUG [EBManual_Notification_JSSTTL-116705] Executing Click function
+2016-01-27 19:49:31,992 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting Click function
+2016-01-27 19:49:31,992 DEBUG [EBManual_Notification_JSSTTL-116705] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:49:31,992 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of ClickRunTest: pass
+2016-01-27 19:49:31,992 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:31,992 DEBUG [EBManual_Notification_JSSTTL-116705] Executing validate_Text_Exists function:
+2016-01-27 19:49:32,630 DEBUG [EBManual_Notification_JSSTTL-116705] VT307-0021 Testcase Text found
+2016-01-27 19:49:32,630 DEBUG [EBManual_Notification_JSSTTL-116705] Result of validate_Text_Exists: Pass
+2016-01-27 19:49:32,630 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:32,630 DEBUG [EBManual_Notification_JSSTTL-116705] Executing ClickRunTest function:
+2016-01-27 19:49:32,916 DEBUG [EBManual_Notification_JSSTTL-116705] Executing Click function
+2016-01-27 19:49:33,869 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting Click function
+2016-01-27 19:49:33,869 DEBUG [EBManual_Notification_JSSTTL-116705] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 19:49:33,869 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of ClickRunTest: pass
+2016-01-27 19:49:33,869 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:33,869 DEBUG [EBManual_Notification_JSSTTL-116705] Executing wait function:
+2016-01-27 19:49:33,869 DEBUG [EBManual_Notification_JSSTTL-116705] Started Executing wait function
+2016-01-27 19:49:35,869 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting from wait function
+2016-01-27 19:49:35,869 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of wait: Pass
+2016-01-27 19:49:35,869 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:35,869 DEBUG [EBManual_Notification_JSSTTL-116705] Executing launch_App_Device function:
+2016-01-27 19:49:35,869 DEBUG [EBManual_Notification_JSSTTL-116705] Started Executing Launch_App_Device function
+2016-01-27 19:49:35,869 DEBUG [EBManual_Notification_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 19:49:39,889 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting from executeCommandLine function
+2016-01-27 19:49:40,890 DEBUG [EBManual_Notification_JSSTTL-116705] Successfully launched the App
+2016-01-27 19:49:40,890 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting Launch_App_Device function
+2016-01-27 19:49:40,890 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of launch_App_Device: Pass
+2016-01-27 19:49:40,890 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:40,890 DEBUG [EBManual_Notification_JSSTTL-116705] Executing CheckUITextContains function:
+2016-01-27 19:49:40,890 DEBUG [EBManual_Notification_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 19:49:44,911 DEBUG [EBManual_Notification_JSSTTL-116705] Text is Present
+2016-01-27 19:49:44,911 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of CheckUITextContains: Pass
+2016-01-27 19:49:44,911 DEBUG [EBManual_Notification_JSSTTL-116705] In execute keyword function
+2016-01-27 19:49:44,911 DEBUG [EBManual_Notification_JSSTTL-116705] Executing ClickUIButtonText function:
+2016-01-27 19:49:44,911 DEBUG [EBManual_Notification_JSSTTL-116705] Entered ClickUIButtonText function
+2016-01-27 19:49:44,911 DEBUG [EBManual_Notification_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 19:49:48,931 DEBUG [EBManual_Notification_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 19:49:53,380 DEBUG [EBManual_Notification_JSSTTL-116705] Exiting ClickUIButtonText function
+2016-01-27 19:49:53,380 DEBUG [EBManual_Notification_JSSTTL-116705] TestStepResult of ClickUIButtonText: Pass
+2016-01-27 19:49:53,380 DEBUG [EBManual_Notification_JSSTTL-116705] allstep_result contains: PassPassPassPasspasspasspassPassPassnull
+2016-01-27 19:49:53,380 DEBUG [EBManual_Notification_JSSTTL-116705] allexpected_result contains: nullPassnullpassnullpassnull
+2016-01-27 19:49:53,380 DEBUG [EBManual_Notification_JSSTTL-116705] Testcase_Result contains: nullPassnullpassnullpassnullPassPassPassPasspasspasspassPassPassnull
+2016-01-27 19:49:53,380 DEBUG [EBManual_Notification_JSSTTL-116705] Test case with description should display a toast message on android when application is in background Pass
+2016-01-27 19:49:54,342 DEBUG [EBManual_Notification_JSSTTL-116705] Executing browser_Quit function
+2016-01-27 19:49:54,342 DEBUG [EBManual_Notification_JSSTTL-116705] Completed browser_Quit function
+2016-01-27 19:49:54,342 DEBUG [EBManual_Notification_JSSTTL-116705] Completed quitSelendroid function
+2016-01-27 19:49:54,342 DEBUG [EBManual_Notification_JSSTTL-116705] Row number:6
+2016-01-27 19:49:54,384 DEBUG [EBManual_Notification_JSSTTL-116705] Ending Test Case IDSTTL-116705

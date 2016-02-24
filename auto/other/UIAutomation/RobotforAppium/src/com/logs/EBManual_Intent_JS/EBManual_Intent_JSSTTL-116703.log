@@ -1,0 +1,80 @@
+2016-01-27 18:30:02,374 DEBUG [EBManual_Intent_JSSTTL-116703] Executing Test Case ID: STTL-116703
+2016-01-27 18:30:02,399 DEBUG [EBManual_Intent_JSSTTL-116703] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 18:30:12,702 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting Init_Selendroid function
+2016-01-27 18:30:12,721 DEBUG [EBManual_Intent_JSSTTL-116703] TestCase with Description "category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN"" Execution started
+2016-01-27 18:30:12,721 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:12,721 DEBUG [EBManual_Intent_JSSTTL-116703] Executing wait function:
+2016-01-27 18:30:12,721 DEBUG [EBManual_Intent_JSSTTL-116703] Started Executing wait function
+2016-01-27 18:30:15,721 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting from wait function
+2016-01-27 18:30:15,721 DEBUG [EBManual_Intent_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 18:30:15,721 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:15,721 DEBUG [EBManual_Intent_JSSTTL-116703] Executing validate_PageTitle function:
+2016-01-27 18:30:15,763 DEBUG [EBManual_Intent_JSSTTL-116703] The title of the page is *********************************: Manual specs
+2016-01-27 18:30:15,763 DEBUG [EBManual_Intent_JSSTTL-116703] The page title found is correct
+2016-01-27 18:30:15,763 DEBUG [EBManual_Intent_JSSTTL-116703] Result of validate_PageTitle: pass
+2016-01-27 18:30:15,763 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:15,763 DEBUG [EBManual_Intent_JSSTTL-116703] Executing link_Click function:
+2016-01-27 18:30:16,353 DEBUG [EBManual_Intent_JSSTTL-116703] Executing Click function
+2016-01-27 18:30:17,411 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting Click function
+2016-01-27 18:30:17,411 DEBUG [EBManual_Intent_JSSTTL-116703] intent_test_link clicked successfully
+2016-01-27 18:30:17,411 DEBUG [EBManual_Intent_JSSTTL-116703] TestStepResult of link_Click: Pass
+2016-01-27 18:30:17,412 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:17,412 DEBUG [EBManual_Intent_JSSTTL-116703] Executing validate_PageTitle function:
+2016-01-27 18:30:17,428 DEBUG [EBManual_Intent_JSSTTL-116703] The title of the page is *********************************: Intent JS Test
+2016-01-27 18:30:17,429 DEBUG [EBManual_Intent_JSSTTL-116703] The page title found is correct
+2016-01-27 18:30:17,429 DEBUG [EBManual_Intent_JSSTTL-116703] Result of validate_PageTitle: pass
+2016-01-27 18:30:17,429 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:17,429 DEBUG [EBManual_Intent_JSSTTL-116703] Executing SelectTestToRun function:
+2016-01-27 18:30:21,481 DEBUG [EBManual_Intent_JSSTTL-116703] Successfull in selecting clicking the category
+2016-01-27 18:30:21,481 DEBUG [EBManual_Intent_JSSTTL-116703] TestStepResult of SelectTestToRun: pass
+2016-01-27 18:30:21,481 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:21,481 DEBUG [EBManual_Intent_JSSTTL-116703] Executing ClickRunTest function:
+2016-01-27 18:30:21,839 DEBUG [EBManual_Intent_JSSTTL-116703] Executing Click function
+2016-01-27 18:30:22,811 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting Click function
+2016-01-27 18:30:22,811 DEBUG [EBManual_Intent_JSSTTL-116703] runtest_top_xpath Button clicked Successfully
+2016-01-27 18:30:22,811 DEBUG [EBManual_Intent_JSSTTL-116703] TestStepResult of ClickRunTest: pass
+2016-01-27 18:30:22,812 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:22,812 DEBUG [EBManual_Intent_JSSTTL-116703] Executing validate_OldText_Exists function:
+2016-01-27 18:30:22,812 DEBUG [EBManual_Intent_JSSTTL-116703] Entered validate_OldText_Exists function
+2016-01-27 18:30:23,256 DEBUG [EBManual_Intent_JSSTTL-116703] VT328_13 Testcase Text found
+2016-01-27 18:30:23,256 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting from validate_OldText_Exists function
+2016-01-27 18:30:23,256 DEBUG [EBManual_Intent_JSSTTL-116703] Result of validate_OldText_Exists: Pass
+2016-01-27 18:30:23,256 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:23,256 DEBUG [EBManual_Intent_JSSTTL-116703] Executing ClickRunTest function:
+2016-01-27 18:30:23,579 DEBUG [EBManual_Intent_JSSTTL-116703] Executing Click function
+2016-01-27 18:30:24,567 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting Click function
+2016-01-27 18:30:24,567 DEBUG [EBManual_Intent_JSSTTL-116703] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 18:30:24,567 DEBUG [EBManual_Intent_JSSTTL-116703] TestStepResult of ClickRunTest: pass
+2016-01-27 18:30:24,567 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:24,567 DEBUG [EBManual_Intent_JSSTTL-116703] Executing wait function:
+2016-01-27 18:30:24,567 DEBUG [EBManual_Intent_JSSTTL-116703] Started Executing wait function
+2016-01-27 18:30:29,567 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting from wait function
+2016-01-27 18:30:29,567 DEBUG [EBManual_Intent_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 18:30:29,567 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:29,567 DEBUG [EBManual_Intent_JSSTTL-116703] Executing validate_App_Launched_Device function:
+2016-01-27 18:30:29,567 DEBUG [EBManual_Intent_JSSTTL-116703] Started Executing Validate_App_launched_Device function
+2016-01-27 18:30:29,567 DEBUG [EBManual_Intent_JSSTTL-116703] Entered CheckUIButtonExists function
+2016-01-27 18:30:29,567 DEBUG [EBManual_Intent_JSSTTL-116703] Started executeCommandLine function
+2016-01-27 18:30:33,587 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting from executeCommandLine function
+2016-01-27 18:30:33,587 DEBUG [EBManual_Intent_JSSTTL-116703] Button is not Present
+2016-01-27 18:30:33,587 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting from CheckUIButtonExists function
+2016-01-27 18:30:33,587 DEBUG [EBManual_Intent_JSSTTL-116703] Started executeCommandLine function
+2016-01-27 18:30:37,607 DEBUG [EBManual_Intent_JSSTTL-116703] Given App is in Foreground
+2016-01-27 18:30:37,607 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting Validate_App_launched_Device function
+2016-01-27 18:30:37,607 DEBUG [EBManual_Intent_JSSTTL-116703] Result of validate_App_Launched_Device: Pass
+2016-01-27 18:30:37,607 DEBUG [EBManual_Intent_JSSTTL-116703] In execute keyword function
+2016-01-27 18:30:37,607 DEBUG [EBManual_Intent_JSSTTL-116703] Executing press_Key function:
+2016-01-27 18:30:37,607 DEBUG [EBManual_Intent_JSSTTL-116703] Started executeCommandLine function
+2016-01-27 18:30:41,628 DEBUG [EBManual_Intent_JSSTTL-116703] Exiting from executeCommandLine function
+2016-01-27 18:30:41,628 DEBUG [EBManual_Intent_JSSTTL-116703] pressed on the back key
+2016-01-27 18:30:41,628 DEBUG [EBManual_Intent_JSSTTL-116703] Back works
+2016-01-27 18:30:42,628 DEBUG [EBManual_Intent_JSSTTL-116703] TestStepResult of press_Key: pass
+2016-01-27 18:30:42,628 DEBUG [EBManual_Intent_JSSTTL-116703] allstep_result contains: passPasspasspasspassPassPassnull
+2016-01-27 18:30:42,628 DEBUG [EBManual_Intent_JSSTTL-116703] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 18:30:42,628 DEBUG [EBManual_Intent_JSSTTL-116703] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpassPasspasspasspassPassPassnull
+2016-01-27 18:30:42,628 DEBUG [EBManual_Intent_JSSTTL-116703] Test case with description category - Launch browser from test application by setting category "CATEGORY_APP_BROWSER" and action "ACTION_MAIN" Pass
+2016-01-27 18:30:43,668 DEBUG [EBManual_Intent_JSSTTL-116703] Executing browser_Quit function
+2016-01-27 18:30:43,668 DEBUG [EBManual_Intent_JSSTTL-116703] Completed browser_Quit function
+2016-01-27 18:30:43,668 DEBUG [EBManual_Intent_JSSTTL-116703] Completed quitSelendroid function
+2016-01-27 18:30:43,668 DEBUG [EBManual_Intent_JSSTTL-116703] Row number:4
+2016-01-27 18:30:43,716 DEBUG [EBManual_Intent_JSSTTL-116703] Ending Test Case IDSTTL-116703

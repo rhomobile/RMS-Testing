@@ -1,0 +1,99 @@
+2016-01-28 03:38:20,983 DEBUG [EBRE22_GestureSTTL-116702] Executing Test Case ID: STTL-116702
+2016-01-28 03:38:20,989 DEBUG [EBRE22_GestureSTTL-116702] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:38:31,488 DEBUG [EBRE22_GestureSTTL-116702] Exiting Init_Selendroid function
+2016-01-28 03:38:31,502 DEBUG [EBRE22_GestureSTTL-116702] TestCase with Description "Linear Gesture start-x :10,start-y:200,end-x:150,end-y:200" Execution started
+2016-01-28 03:38:31,502 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:31,502 DEBUG [EBRE22_GestureSTTL-116702] Executing wait function:
+2016-01-28 03:38:31,502 DEBUG [EBRE22_GestureSTTL-116702] Started Executing wait function
+2016-01-28 03:38:35,503 DEBUG [EBRE22_GestureSTTL-116702] Exiting from wait function
+2016-01-28 03:38:35,503 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of wait: Pass
+2016-01-28 03:38:35,503 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:35,503 DEBUG [EBRE22_GestureSTTL-116702] Executing validate_PageTitle function:
+2016-01-28 03:38:35,541 DEBUG [EBRE22_GestureSTTL-116702] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:38:35,541 DEBUG [EBRE22_GestureSTTL-116702] The page title found is correct
+2016-01-28 03:38:35,541 DEBUG [EBRE22_GestureSTTL-116702] Result of validate_PageTitle: pass
+2016-01-28 03:38:35,541 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:35,541 DEBUG [EBRE22_GestureSTTL-116702] Executing link_Click function:
+2016-01-28 03:38:36,184 DEBUG [EBRE22_GestureSTTL-116702] Executing Click function
+2016-01-28 03:38:37,279 DEBUG [EBRE22_GestureSTTL-116702] Exiting Click function
+2016-01-28 03:38:37,280 DEBUG [EBRE22_GestureSTTL-116702] gesture22_test_link clicked successfully
+2016-01-28 03:38:37,280 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of link_Click: Pass
+2016-01-28 03:38:37,280 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:37,280 DEBUG [EBRE22_GestureSTTL-116702] Executing wait function:
+2016-01-28 03:38:37,280 DEBUG [EBRE22_GestureSTTL-116702] Started Executing wait function
+2016-01-28 03:38:39,280 DEBUG [EBRE22_GestureSTTL-116702] Exiting from wait function
+2016-01-28 03:38:39,280 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of wait: Pass
+2016-01-28 03:38:39,280 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:39,280 DEBUG [EBRE22_GestureSTTL-116702] Executing validate_PageTitle function:
+2016-01-28 03:38:39,316 DEBUG [EBRE22_GestureSTTL-116702] The title of the page is *********************************: Gesture Index
+2016-01-28 03:38:39,316 DEBUG [EBRE22_GestureSTTL-116702] The page title found is correct
+2016-01-28 03:38:39,316 DEBUG [EBRE22_GestureSTTL-116702] Result of validate_PageTitle: pass
+2016-01-28 03:38:39,316 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:39,316 DEBUG [EBRE22_GestureSTTL-116702] Executing link_Click function:
+2016-01-28 03:38:39,735 DEBUG [EBRE22_GestureSTTL-116702] Executing Click function
+2016-01-28 03:38:40,680 DEBUG [EBRE22_GestureSTTL-116702] Exiting Click function
+2016-01-28 03:38:40,680 DEBUG [EBRE22_GestureSTTL-116702] lineargesture22_test_link clicked successfully
+2016-01-28 03:38:40,680 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of link_Click: Pass
+2016-01-28 03:38:40,680 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:40,680 DEBUG [EBRE22_GestureSTTL-116702] Executing wait function:
+2016-01-28 03:38:40,680 DEBUG [EBRE22_GestureSTTL-116702] Started Executing wait function
+2016-01-28 03:38:42,680 DEBUG [EBRE22_GestureSTTL-116702] Exiting from wait function
+2016-01-28 03:38:42,680 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of wait: Pass
+2016-01-28 03:38:42,680 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:42,680 DEBUG [EBRE22_GestureSTTL-116702] Executing validate_PageTitle function:
+2016-01-28 03:38:42,719 DEBUG [EBRE22_GestureSTTL-116702] The title of the page is *********************************: Linear Gesture
+2016-01-28 03:38:42,719 DEBUG [EBRE22_GestureSTTL-116702] The page title found is correct
+2016-01-28 03:38:42,719 DEBUG [EBRE22_GestureSTTL-116702] Result of validate_PageTitle: pass
+2016-01-28 03:38:42,719 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:42,719 DEBUG [EBRE22_GestureSTTL-116702] Executing SelectTestToRun function:
+2016-01-28 03:38:45,524 DEBUG [EBRE22_GestureSTTL-116702] Successfull in selecting clicking the category
+2016-01-28 03:38:45,524 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:38:45,524 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:45,524 DEBUG [EBRE22_GestureSTTL-116702] Executing validate_Text_Exists function:
+2016-01-28 03:38:45,773 DEBUG [EBRE22_GestureSTTL-116702] VT187-0021 Testcase Text found
+2016-01-28 03:38:45,773 DEBUG [EBRE22_GestureSTTL-116702] Result of validate_Text_Exists: Pass
+2016-01-28 03:38:45,773 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:45,773 DEBUG [EBRE22_GestureSTTL-116702] Executing ClickRunTest function:
+2016-01-28 03:38:46,127 DEBUG [EBRE22_GestureSTTL-116702] Executing Click function
+2016-01-28 03:38:47,191 DEBUG [EBRE22_GestureSTTL-116702] Exiting Click function
+2016-01-28 03:38:47,191 DEBUG [EBRE22_GestureSTTL-116702] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:38:47,191 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of ClickRunTest: pass
+2016-01-28 03:38:47,191 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:47,191 DEBUG [EBRE22_GestureSTTL-116702] Executing DrawGesture function:
+2016-01-28 03:38:47,191 DEBUG [EBRE22_GestureSTTL-116702] Started executeCommandLine function
+2016-01-28 03:38:51,212 DEBUG [EBRE22_GestureSTTL-116702] Gesture linear drawn successfully
+2016-01-28 03:38:51,212 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of DrawGesture: Pass
+2016-01-28 03:38:51,212 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:51,212 DEBUG [EBRE22_GestureSTTL-116702] Executing validate_Result function:
+2016-01-28 03:38:51,538 DEBUG [EBRE22_GestureSTTL-116702] Gesture detected for 1th time Text found in Gesture detected for 1th time.
+Gesture ID: My Linear Gesture, Count: 0
+2016-01-28 03:38:51,538 DEBUG [EBRE22_GestureSTTL-116702] Result of validate_Result: Pass
+2016-01-28 03:38:51,538 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:51,538 DEBUG [EBRE22_GestureSTTL-116702] Executing validate_Result function:
+2016-01-28 03:38:51,696 DEBUG [EBRE22_GestureSTTL-116702] My Linear Gesture Text found in Gesture detected for 1th time.
+Gesture ID: My Linear Gesture, Count: 0
+2016-01-28 03:38:51,696 DEBUG [EBRE22_GestureSTTL-116702] Result of validate_Result: Pass
+2016-01-28 03:38:51,696 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:51,696 DEBUG [EBRE22_GestureSTTL-116702] Executing DrawGesture function:
+2016-01-28 03:38:51,696 DEBUG [EBRE22_GestureSTTL-116702] Started executeCommandLine function
+2016-01-28 03:38:55,718 DEBUG [EBRE22_GestureSTTL-116702] Gesture linear drawn successfully
+2016-01-28 03:38:55,718 DEBUG [EBRE22_GestureSTTL-116702] TestStepResult of DrawGesture: Pass
+2016-01-28 03:38:55,718 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:55,718 DEBUG [EBRE22_GestureSTTL-116702] Executing validate_Result function:
+2016-01-28 03:38:55,849 DEBUG [EBRE22_GestureSTTL-116702] Gesture detected for 2th time Text found in Gesture detected for 2th time.
+Gesture ID: My Linear Gesture, Count: 0
+2016-01-28 03:38:55,849 DEBUG [EBRE22_GestureSTTL-116702] Result of validate_Result: Pass
+2016-01-28 03:38:55,849 DEBUG [EBRE22_GestureSTTL-116702] In execute keyword function
+2016-01-28 03:38:55,849 DEBUG [EBRE22_GestureSTTL-116702] Executing validate_Result function:
+2016-01-28 03:38:56,002 DEBUG [EBRE22_GestureSTTL-116702] My Linear Gesture Text found in Gesture detected for 2th time.
+Gesture ID: My Linear Gesture, Count: 0
+2016-01-28 03:38:56,002 DEBUG [EBRE22_GestureSTTL-116702] Result of validate_Result: Pass
+2016-01-28 03:38:56,002 DEBUG [EBRE22_GestureSTTL-116702] allstep_result contains: PassPasspasspassPassPassPassPassPassnull
+2016-01-28 03:38:56,002 DEBUG [EBRE22_GestureSTTL-116702] allexpected_result contains: nullPassPassnullPassPassnullPassnullpassnullpassnullpassnull
+2016-01-28 03:38:56,002 DEBUG [EBRE22_GestureSTTL-116702] Testcase_Result contains: nullPassPassnullPassPassnullPassnullpassnullpassnullpassnullPassPasspasspassPassPassPassPassPassnull
+2016-01-28 03:38:56,002 DEBUG [EBRE22_GestureSTTL-116702] Test case with description Linear Gesture start-x :10,start-y:200,end-x:150,end-y:200 Pass
+2016-01-28 03:38:57,017 DEBUG [EBRE22_GestureSTTL-116702] Executing browser_Quit function
+2016-01-28 03:38:57,017 DEBUG [EBRE22_GestureSTTL-116702] Completed browser_Quit function
+2016-01-28 03:38:57,017 DEBUG [EBRE22_GestureSTTL-116702] Completed quitSelendroid function
+2016-01-28 03:38:57,018 DEBUG [EBRE22_GestureSTTL-116702] Row number:3
+2016-01-28 03:38:57,056 DEBUG [EBRE22_GestureSTTL-116702] Ending Test Case IDSTTL-116702

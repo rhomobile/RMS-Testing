@@ -1,0 +1,545 @@
+2016-01-27 19:07:47,678 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Test Case ID: STTL-116707
+2016-01-27 19:07:47,704 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 19:07:58,589 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Init_Selendroid function
+2016-01-27 19:07:58,628 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestCase with Description "call captureKey twice, dispatch false with KeyValue ALL first then true with particular key" Execution started
+2016-01-27 19:07:58,628 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:07:58,628 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:07:58,628 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:08:03,629 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:08:03,629 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:08:03,629 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:03,629 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_PageTitle function:
+2016-01-27 19:08:03,699 DEBUG [EBManual_Keycapture_JSSTTL-116707] The title of the page is *********************************: Manual specs
+2016-01-27 19:08:03,699 DEBUG [EBManual_Keycapture_JSSTTL-116707] The page title found is correct
+2016-01-27 19:08:03,699 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_PageTitle: pass
+2016-01-27 19:08:03,699 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:03,699 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing link_Click function:
+2016-01-27 19:08:04,310 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:08:05,499 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:08:05,499 DEBUG [EBManual_Keycapture_JSSTTL-116707] keycapture_test_link clicked successfully
+2016-01-27 19:08:05,499 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of link_Click: Pass
+2016-01-27 19:08:05,499 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:05,499 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_PageTitle function:
+2016-01-27 19:08:05,516 DEBUG [EBManual_Keycapture_JSSTTL-116707] The title of the page is *********************************: Keycapture JS Test
+2016-01-27 19:08:05,516 DEBUG [EBManual_Keycapture_JSSTTL-116707] The page title found is correct
+2016-01-27 19:08:05,516 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_PageTitle: pass
+2016-01-27 19:08:05,516 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:05,516 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 19:08:08,898 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 19:08:08,898 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:08:08,898 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:08,898 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 19:08:09,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:08:10,353 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:08:10,353 DEBUG [EBManual_Keycapture_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:08:10,353 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 19:08:10,353 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:10,353 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_OldText_Exists function:
+2016-01-27 19:08:10,353 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_OldText_Exists function
+2016-01-27 19:08:10,824 DEBUG [EBManual_Keycapture_JSSTTL-116707] VT289-015 Testcase Text found
+2016-01-27 19:08:10,824 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_OldText_Exists function
+2016-01-27 19:08:10,824 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_OldText_Exists: Pass
+2016-01-27 19:08:10,824 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:10,824 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing textBoxClick function:
+2016-01-27 19:08:12,216 DEBUG [EBManual_Keycapture_JSSTTL-116707] keytxtInput_idtext box clicked successfully
+2016-01-27 19:08:12,216 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of textBoxClick: pass
+2016-01-27 19:08:12,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:12,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:08:12,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:08:14,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:08:14,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:08:14,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:14,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing sendKeyEvents function:
+2016-01-27 19:08:14,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered sendKeyEvents function
+2016-01-27 19:08:14,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] 3
+2016-01-27 19:08:14,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered 3
+2016-01-27 19:08:14,217 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 19:08:18,240 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from executeCommandLine function
+2016-01-27 19:08:18,240 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:08:18,240 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of sendKeyEvents: pass
+2016-01-27 19:08:18,240 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:18,240 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_textBoxData function:
+2016-01-27 19:08:18,240 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing getAttribute function
+2016-01-27 19:08:18,424 DEBUG [EBManual_Keycapture_JSSTTL-116707] 3
+2016-01-27 19:08:18,424 DEBUG [EBManual_Keycapture_JSSTTL-116707] 3 value matches with Expected 3 value
+2016-01-27 19:08:18,424 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_textBoxData: Pass
+2016-01-27 19:08:18,424 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:18,424 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_keyCaptured function:
+2016-01-27 19:08:18,424 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_keyCaptured function
+2016-01-27 19:08:18,865 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:08:18,865 DEBUG [EBManual_Keycapture_JSSTTL-116707] 10
+2016-01-27 19:08:18,866 DEBUG [EBManual_Keycapture_JSSTTL-116707] Actual Value matches Expected
+2016-01-27 19:08:18,866 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:08:18,866 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_keyCaptured function
+2016-01-27 19:08:18,866 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_keyCaptured: pass
+2016-01-27 19:08:18,866 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:18,866 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:08:18,916 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to NATIVE_APP
+2016-01-27 19:08:18,916 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:08:18,916 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:18,916 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickNativeIcon function:
+2016-01-27 19:08:19,851 DEBUG [EBManual_Keycapture_JSSTTL-116707] [[AppiumTouchActionExtension: selendroid on ANDROID (830b1df2-412c-cc7a-69e1-0bf7bbb7929e)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-27 19:08:19,851 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickNativeIcon: pass
+2016-01-27 19:08:19,851 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:19,851 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:08:19,851 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:08:29,852 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:08:29,852 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:08:29,852 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:29,852 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:08:29,956 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to WEBVIEW
+2016-01-27 19:08:29,956 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:08:29,956 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:29,956 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 19:08:32,974 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 19:08:32,974 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:08:32,975 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:32,975 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 19:08:33,290 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:08:34,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:08:34,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:08:34,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 19:08:34,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:34,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_OldText_Exists function:
+2016-01-27 19:08:34,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_OldText_Exists function
+2016-01-27 19:08:34,907 DEBUG [EBManual_Keycapture_JSSTTL-116707] VT289-015 Testcase Text found
+2016-01-27 19:08:34,907 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_OldText_Exists function
+2016-01-27 19:08:34,907 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_OldText_Exists: Pass
+2016-01-27 19:08:34,907 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:34,907 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing textBoxClick function:
+2016-01-27 19:08:36,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] keytxtInput_idtext box clicked successfully
+2016-01-27 19:08:36,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of textBoxClick: pass
+2016-01-27 19:08:36,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:36,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:08:36,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:08:38,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:08:38,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:08:38,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:38,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing sendKeyEvents function:
+2016-01-27 19:08:38,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered sendKeyEvents function
+2016-01-27 19:08:38,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] 2
+2016-01-27 19:08:38,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered 2
+2016-01-27 19:08:38,332 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 19:08:42,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from executeCommandLine function
+2016-01-27 19:08:42,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:08:42,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of sendKeyEvents: pass
+2016-01-27 19:08:42,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:42,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_textBoxData function:
+2016-01-27 19:08:42,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing getAttribute function
+2016-01-27 19:08:42,518 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:08:42,518 DEBUG [EBManual_Keycapture_JSSTTL-116707]  value matches with Expected null value
+2016-01-27 19:08:42,518 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_textBoxData: Pass
+2016-01-27 19:08:42,518 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:42,518 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_keyCaptured function:
+2016-01-27 19:08:42,518 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_keyCaptured function
+2016-01-27 19:08:42,936 DEBUG [EBManual_Keycapture_JSSTTL-116707] 9
+2016-01-27 19:08:42,936 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:08:42,937 DEBUG [EBManual_Keycapture_JSSTTL-116707] Actual Value matches Expected
+2016-01-27 19:08:42,937 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:08:42,937 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_keyCaptured function
+2016-01-27 19:08:42,937 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_keyCaptured: pass
+2016-01-27 19:08:42,937 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:42,937 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:08:42,987 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to NATIVE_APP
+2016-01-27 19:08:42,987 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:08:42,987 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:42,987 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickNativeIcon function:
+2016-01-27 19:08:43,841 DEBUG [EBManual_Keycapture_JSSTTL-116707] [[AppiumTouchActionExtension: selendroid on ANDROID (830b1df2-412c-cc7a-69e1-0bf7bbb7929e)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-27 19:08:43,841 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickNativeIcon: pass
+2016-01-27 19:08:43,841 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:43,842 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:08:43,842 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:08:53,843 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:08:53,843 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:08:53,843 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:53,843 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:08:53,902 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to WEBVIEW
+2016-01-27 19:08:53,902 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:08:53,902 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:53,902 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 19:08:56,878 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 19:08:56,878 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:08:56,878 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:56,878 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 19:08:57,203 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:08:58,351 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:08:58,351 DEBUG [EBManual_Keycapture_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:08:58,351 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 19:08:58,352 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:58,352 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_OldText_Exists function:
+2016-01-27 19:08:58,352 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_OldText_Exists function
+2016-01-27 19:08:58,958 DEBUG [EBManual_Keycapture_JSSTTL-116707] VT289-015 Testcase Text found
+2016-01-27 19:08:58,958 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_OldText_Exists function
+2016-01-27 19:08:58,958 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_OldText_Exists: Pass
+2016-01-27 19:08:58,959 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:08:58,959 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing textBoxClick function:
+2016-01-27 19:09:00,356 DEBUG [EBManual_Keycapture_JSSTTL-116707] keytxtInput_idtext box clicked successfully
+2016-01-27 19:09:00,356 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of textBoxClick: pass
+2016-01-27 19:09:00,356 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:00,356 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:09:00,356 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:09:02,357 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:09:02,357 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:09:02,357 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:02,357 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing sendKeyEvents function:
+2016-01-27 19:09:02,357 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered sendKeyEvents function
+2016-01-27 19:09:02,357 DEBUG [EBManual_Keycapture_JSSTTL-116707] 9
+2016-01-27 19:09:02,357 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered 9
+2016-01-27 19:09:02,357 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 19:09:06,365 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from executeCommandLine function
+2016-01-27 19:09:06,365 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:09:06,365 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of sendKeyEvents: pass
+2016-01-27 19:09:06,365 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:06,365 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_textBoxData function:
+2016-01-27 19:09:06,365 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing getAttribute function
+2016-01-27 19:09:06,542 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:09:06,542 DEBUG [EBManual_Keycapture_JSSTTL-116707]  value matches with Expected null value
+2016-01-27 19:09:06,542 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_textBoxData: Pass
+2016-01-27 19:09:06,542 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:06,542 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_keyCaptured function:
+2016-01-27 19:09:06,542 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_keyCaptured function
+2016-01-27 19:09:06,899 DEBUG [EBManual_Keycapture_JSSTTL-116707] 16
+2016-01-27 19:09:06,899 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:09:06,899 DEBUG [EBManual_Keycapture_JSSTTL-116707] Actual Value matches Expected
+2016-01-27 19:09:06,899 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:09:06,899 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_keyCaptured function
+2016-01-27 19:09:06,899 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_keyCaptured: pass
+2016-01-27 19:09:06,899 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:06,899 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:09:06,961 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to NATIVE_APP
+2016-01-27 19:09:06,961 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:09:06,961 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:06,962 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickNativeIcon function:
+2016-01-27 19:09:07,787 DEBUG [EBManual_Keycapture_JSSTTL-116707] [[AppiumTouchActionExtension: selendroid on ANDROID (830b1df2-412c-cc7a-69e1-0bf7bbb7929e)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-27 19:09:07,787 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickNativeIcon: pass
+2016-01-27 19:09:07,787 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:07,787 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:09:07,787 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:09:17,788 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:09:17,788 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:09:17,788 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:17,788 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:09:17,890 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to WEBVIEW
+2016-01-27 19:09:17,890 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:09:17,890 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:17,890 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 19:09:20,924 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 19:09:20,924 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:09:20,924 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:20,924 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 19:09:21,222 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:09:22,287 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:09:22,287 DEBUG [EBManual_Keycapture_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:09:22,287 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 19:09:22,287 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:22,287 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_OldText_Exists function:
+2016-01-27 19:09:22,287 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_OldText_Exists function
+2016-01-27 19:09:22,828 DEBUG [EBManual_Keycapture_JSSTTL-116707] VT289-015 Testcase Text found
+2016-01-27 19:09:22,829 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_OldText_Exists function
+2016-01-27 19:09:22,829 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_OldText_Exists: Pass
+2016-01-27 19:09:22,829 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:22,829 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing textBoxClick function:
+2016-01-27 19:09:24,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] keytxtInput_idtext box clicked successfully
+2016-01-27 19:09:24,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of textBoxClick: pass
+2016-01-27 19:09:24,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:24,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:09:24,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:09:26,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:09:26,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:09:26,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:26,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing sendKeyEvents function:
+2016-01-27 19:09:26,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered sendKeyEvents function
+2016-01-27 19:09:26,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] x
+2016-01-27 19:09:26,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered x
+2016-01-27 19:09:26,284 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 19:09:30,305 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from executeCommandLine function
+2016-01-27 19:09:30,305 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:09:30,305 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of sendKeyEvents: pass
+2016-01-27 19:09:30,305 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:30,305 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_textBoxData function:
+2016-01-27 19:09:30,305 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing getAttribute function
+2016-01-27 19:09:30,444 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:09:30,444 DEBUG [EBManual_Keycapture_JSSTTL-116707]  value matches with Expected null value
+2016-01-27 19:09:30,444 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_textBoxData: Pass
+2016-01-27 19:09:30,444 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:30,444 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_keyCaptured function:
+2016-01-27 19:09:30,444 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_keyCaptured function
+2016-01-27 19:09:30,823 DEBUG [EBManual_Keycapture_JSSTTL-116707] 52
+2016-01-27 19:09:30,823 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:09:30,823 DEBUG [EBManual_Keycapture_JSSTTL-116707] Actual Value matches Expected
+2016-01-27 19:09:30,823 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:09:30,823 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_keyCaptured function
+2016-01-27 19:09:30,824 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_keyCaptured: pass
+2016-01-27 19:09:30,824 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:30,824 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:09:30,874 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to NATIVE_APP
+2016-01-27 19:09:30,874 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:09:30,874 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:30,874 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickNativeIcon function:
+2016-01-27 19:09:31,729 DEBUG [EBManual_Keycapture_JSSTTL-116707] [[AppiumTouchActionExtension: selendroid on ANDROID (830b1df2-412c-cc7a-69e1-0bf7bbb7929e)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-27 19:09:31,729 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickNativeIcon: pass
+2016-01-27 19:09:31,729 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:31,729 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:09:31,729 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:09:41,730 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:09:41,730 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:09:41,730 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:41,730 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:09:41,819 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to WEBVIEW
+2016-01-27 19:09:41,819 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:09:41,819 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:41,819 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 19:09:44,993 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 19:09:44,993 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:09:44,994 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:44,994 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 19:09:45,296 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:09:46,383 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:09:46,383 DEBUG [EBManual_Keycapture_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:09:46,383 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 19:09:46,383 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:46,383 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_OldText_Exists function:
+2016-01-27 19:09:46,383 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_OldText_Exists function
+2016-01-27 19:09:46,948 DEBUG [EBManual_Keycapture_JSSTTL-116707] VT289-015 Testcase Text found
+2016-01-27 19:09:46,948 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_OldText_Exists function
+2016-01-27 19:09:46,948 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_OldText_Exists: Pass
+2016-01-27 19:09:46,948 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:46,948 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing textBoxClick function:
+2016-01-27 19:09:48,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] keytxtInput_idtext box clicked successfully
+2016-01-27 19:09:48,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of textBoxClick: pass
+2016-01-27 19:09:48,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:48,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:09:48,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:09:50,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:09:50,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:09:50,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:50,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing sendKeyEvents function:
+2016-01-27 19:09:50,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered sendKeyEvents function
+2016-01-27 19:09:50,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] z
+2016-01-27 19:09:50,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered z
+2016-01-27 19:09:50,272 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 19:09:54,293 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from executeCommandLine function
+2016-01-27 19:09:54,293 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:09:54,293 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of sendKeyEvents: pass
+2016-01-27 19:09:54,293 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:54,293 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_textBoxData function:
+2016-01-27 19:09:54,293 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing getAttribute function
+2016-01-27 19:09:54,493 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:09:54,493 DEBUG [EBManual_Keycapture_JSSTTL-116707]  value matches with Expected null value
+2016-01-27 19:09:54,494 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_textBoxData: Pass
+2016-01-27 19:09:54,494 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:54,494 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_keyCaptured function:
+2016-01-27 19:09:54,494 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_keyCaptured function
+2016-01-27 19:09:54,855 DEBUG [EBManual_Keycapture_JSSTTL-116707] 54
+2016-01-27 19:09:54,855 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:09:54,855 DEBUG [EBManual_Keycapture_JSSTTL-116707] Actual Value matches Expected
+2016-01-27 19:09:54,855 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:09:54,855 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_keyCaptured function
+2016-01-27 19:09:54,855 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_keyCaptured: pass
+2016-01-27 19:09:54,855 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:54,855 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:09:54,919 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to NATIVE_APP
+2016-01-27 19:09:54,919 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:09:54,919 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:54,919 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickNativeIcon function:
+2016-01-27 19:09:55,739 DEBUG [EBManual_Keycapture_JSSTTL-116707] [[AppiumTouchActionExtension: selendroid on ANDROID (830b1df2-412c-cc7a-69e1-0bf7bbb7929e)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-27 19:09:55,739 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickNativeIcon: pass
+2016-01-27 19:09:55,739 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:09:55,739 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:09:55,739 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:10:05,740 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:10:05,740 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:10:05,740 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:05,740 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:10:05,850 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to WEBVIEW
+2016-01-27 19:10:05,851 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:10:05,851 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:05,851 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 19:10:08,912 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 19:10:08,912 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:10:08,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:08,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 19:10:09,250 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:10:10,375 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:10:10,375 DEBUG [EBManual_Keycapture_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:10:10,375 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 19:10:10,375 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:10,375 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_OldText_Exists function:
+2016-01-27 19:10:10,375 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_OldText_Exists function
+2016-01-27 19:10:10,980 DEBUG [EBManual_Keycapture_JSSTTL-116707] VT289-015 Testcase Text found
+2016-01-27 19:10:10,980 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_OldText_Exists function
+2016-01-27 19:10:10,980 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_OldText_Exists: Pass
+2016-01-27 19:10:10,980 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:10,980 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing textBoxClick function:
+2016-01-27 19:10:12,437 DEBUG [EBManual_Keycapture_JSSTTL-116707] keytxtInput_idtext box clicked successfully
+2016-01-27 19:10:12,437 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of textBoxClick: pass
+2016-01-27 19:10:12,437 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:12,437 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:10:12,437 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:10:14,438 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:10:14,438 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:10:14,438 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:14,438 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing sendKeyEvents function:
+2016-01-27 19:10:14,438 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered sendKeyEvents function
+2016-01-27 19:10:14,438 DEBUG [EBManual_Keycapture_JSSTTL-116707] Plus
+2016-01-27 19:10:14,438 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered Pluskey
+2016-01-27 19:10:14,438 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 19:10:18,459 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from executeCommandLine function
+2016-01-27 19:10:18,459 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:10:18,459 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of sendKeyEvents: pass
+2016-01-27 19:10:18,459 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:18,459 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_textBoxData function:
+2016-01-27 19:10:18,459 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing getAttribute function
+2016-01-27 19:10:18,658 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:10:18,658 DEBUG [EBManual_Keycapture_JSSTTL-116707]  value matches with Expected null value
+2016-01-27 19:10:18,658 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_textBoxData: Pass
+2016-01-27 19:10:18,658 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:18,658 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_keyCaptured function:
+2016-01-27 19:10:18,658 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_keyCaptured function
+2016-01-27 19:10:19,048 DEBUG [EBManual_Keycapture_JSSTTL-116707] 157
+2016-01-27 19:10:19,048 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:10:19,048 DEBUG [EBManual_Keycapture_JSSTTL-116707] Actual Value matches Expected
+2016-01-27 19:10:19,048 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:10:19,048 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_keyCaptured function
+2016-01-27 19:10:19,048 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_keyCaptured: pass
+2016-01-27 19:10:19,048 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:19,048 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:10:19,109 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to NATIVE_APP
+2016-01-27 19:10:19,110 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:10:19,110 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:19,110 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickNativeIcon function:
+2016-01-27 19:10:19,963 DEBUG [EBManual_Keycapture_JSSTTL-116707] [[AppiumTouchActionExtension: selendroid on ANDROID (830b1df2-412c-cc7a-69e1-0bf7bbb7929e)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-27 19:10:19,963 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickNativeIcon: pass
+2016-01-27 19:10:19,963 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:19,963 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:10:19,963 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:10:29,965 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:10:29,965 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:10:29,965 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:29,965 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:10:30,093 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to WEBVIEW
+2016-01-27 19:10:30,093 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:10:30,093 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:30,094 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 19:10:33,096 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 19:10:33,096 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:10:33,096 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:33,096 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 19:10:33,395 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:10:34,468 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:10:34,468 DEBUG [EBManual_Keycapture_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:10:34,468 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 19:10:34,468 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:34,468 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_OldText_Exists function:
+2016-01-27 19:10:34,468 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_OldText_Exists function
+2016-01-27 19:10:34,988 DEBUG [EBManual_Keycapture_JSSTTL-116707] VT289-015 Testcase Text found
+2016-01-27 19:10:34,988 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_OldText_Exists function
+2016-01-27 19:10:34,988 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_OldText_Exists: Pass
+2016-01-27 19:10:34,988 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:34,988 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing textBoxClick function:
+2016-01-27 19:10:36,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] keytxtInput_idtext box clicked successfully
+2016-01-27 19:10:36,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of textBoxClick: pass
+2016-01-27 19:10:36,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:36,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:10:36,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:10:38,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:10:38,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:10:38,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:38,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing sendKeyEvents function:
+2016-01-27 19:10:38,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered sendKeyEvents function
+2016-01-27 19:10:38,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] Divide
+2016-01-27 19:10:38,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered Dividekey
+2016-01-27 19:10:38,379 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 19:10:42,403 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from executeCommandLine function
+2016-01-27 19:10:42,403 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:10:42,403 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of sendKeyEvents: pass
+2016-01-27 19:10:42,403 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:42,403 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_textBoxData function:
+2016-01-27 19:10:42,403 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing getAttribute function
+2016-01-27 19:10:42,579 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:10:42,579 DEBUG [EBManual_Keycapture_JSSTTL-116707]  value matches with Expected null value
+2016-01-27 19:10:42,579 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_textBoxData: Pass
+2016-01-27 19:10:42,579 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:42,579 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_keyCaptured function:
+2016-01-27 19:10:42,579 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_keyCaptured function
+2016-01-27 19:10:42,985 DEBUG [EBManual_Keycapture_JSSTTL-116707] 154
+2016-01-27 19:10:42,985 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:10:42,985 DEBUG [EBManual_Keycapture_JSSTTL-116707] Actual Value matches Expected
+2016-01-27 19:10:42,985 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:10:42,985 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_keyCaptured function
+2016-01-27 19:10:42,985 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_keyCaptured: pass
+2016-01-27 19:10:42,985 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:42,985 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:10:43,050 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to NATIVE_APP
+2016-01-27 19:10:43,050 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:10:43,050 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:43,050 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickNativeIcon function:
+2016-01-27 19:10:43,900 DEBUG [EBManual_Keycapture_JSSTTL-116707] [[AppiumTouchActionExtension: selendroid on ANDROID (830b1df2-412c-cc7a-69e1-0bf7bbb7929e)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-27 19:10:43,900 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickNativeIcon: pass
+2016-01-27 19:10:43,900 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:43,900 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:10:43,900 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:10:53,901 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:10:53,901 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:10:53,901 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:53,901 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SwitchApp function:
+2016-01-27 19:10:54,022 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfully switched to WEBVIEW
+2016-01-27 19:10:54,022 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SwitchApp: Pass
+2016-01-27 19:10:54,022 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:54,022 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 19:10:57,067 DEBUG [EBManual_Keycapture_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 19:10:57,067 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:10:57,067 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:57,067 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 19:10:57,380 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing Click function
+2016-01-27 19:10:58,510 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting Click function
+2016-01-27 19:10:58,511 DEBUG [EBManual_Keycapture_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:10:58,511 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 19:10:58,511 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:58,511 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_OldText_Exists function:
+2016-01-27 19:10:58,511 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_OldText_Exists function
+2016-01-27 19:10:58,990 DEBUG [EBManual_Keycapture_JSSTTL-116707] VT289-015 Testcase Text found
+2016-01-27 19:10:58,990 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_OldText_Exists function
+2016-01-27 19:10:58,990 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_OldText_Exists: Pass
+2016-01-27 19:10:58,990 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:10:58,990 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing textBoxClick function:
+2016-01-27 19:11:00,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] keytxtInput_idtext box clicked successfully
+2016-01-27 19:11:00,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of textBoxClick: pass
+2016-01-27 19:11:00,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:11:00,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing wait function:
+2016-01-27 19:11:00,344 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started Executing wait function
+2016-01-27 19:11:02,345 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from wait function
+2016-01-27 19:11:02,345 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 19:11:02,345 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:11:02,345 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing sendKeyEvents function:
+2016-01-27 19:11:02,345 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered sendKeyEvents function
+2016-01-27 19:11:02,345 DEBUG [EBManual_Keycapture_JSSTTL-116707] Star
+2016-01-27 19:11:02,345 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered Starkey
+2016-01-27 19:11:02,345 DEBUG [EBManual_Keycapture_JSSTTL-116707] Started executeCommandLine function
+2016-01-27 19:11:06,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from executeCommandLine function
+2016-01-27 19:11:06,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:11:06,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] TestStepResult of sendKeyEvents: pass
+2016-01-27 19:11:06,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:11:06,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_textBoxData function:
+2016-01-27 19:11:06,366 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing getAttribute function
+2016-01-27 19:11:06,540 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:11:06,540 DEBUG [EBManual_Keycapture_JSSTTL-116707]  value matches with Expected null value
+2016-01-27 19:11:06,540 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_textBoxData: Pass
+2016-01-27 19:11:06,540 DEBUG [EBManual_Keycapture_JSSTTL-116707] In execute keyword function
+2016-01-27 19:11:06,540 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing validate_keyCaptured function:
+2016-01-27 19:11:06,540 DEBUG [EBManual_Keycapture_JSSTTL-116707] Entered validate_keyCaptured function
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] 17
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] 
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] Actual Value matches Expected
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] pass
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] Exiting from validate_keyCaptured function
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] Result of validate_keyCaptured: pass
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] allstep_result contains: passPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPassnull
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] allexpected_result contains: nullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullpassnullpassnull
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] Testcase_Result contains: nullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullpassnullpassnullpassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPassnull
+2016-01-27 19:11:06,913 DEBUG [EBManual_Keycapture_JSSTTL-116707] Test case with description call captureKey twice, dispatch false with KeyValue ALL first then true with particular key Pass
+2016-01-27 19:11:08,184 DEBUG [EBManual_Keycapture_JSSTTL-116707] Executing browser_Quit function
+2016-01-27 19:11:08,184 DEBUG [EBManual_Keycapture_JSSTTL-116707] Completed browser_Quit function
+2016-01-27 19:11:08,184 DEBUG [EBManual_Keycapture_JSSTTL-116707] Completed quitSelendroid function
+2016-01-27 19:11:08,185 DEBUG [EBManual_Keycapture_JSSTTL-116707] Row number:8
+2016-01-27 19:11:08,215 DEBUG [EBManual_Keycapture_JSSTTL-116707] Ending Test Case IDSTTL-116707

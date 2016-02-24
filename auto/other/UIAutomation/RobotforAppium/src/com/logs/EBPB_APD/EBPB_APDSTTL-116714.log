@@ -1,0 +1,78 @@
+2016-01-27 22:50:35,819 DEBUG [EBPB_APDSTTL-116714] Executing Test Case ID: STTL-116714
+2016-01-27 22:50:35,825 DEBUG [EBPB_APDSTTL-116714] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:50:44,894 DEBUG [EBPB_APDSTTL-116714] Exiting Init_Selendroid function
+2016-01-27 22:50:44,908 DEBUG [EBPB_APDSTTL-116714] TestCase with Description "Show Progress Bar Command 0113" Execution started
+2016-01-27 22:50:44,908 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:44,908 DEBUG [EBPB_APDSTTL-116714] Executing wait function:
+2016-01-27 22:50:44,908 DEBUG [EBPB_APDSTTL-116714] Started Executing wait function
+2016-01-27 22:50:47,908 DEBUG [EBPB_APDSTTL-116714] Exiting from wait function
+2016-01-27 22:50:47,908 DEBUG [EBPB_APDSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 22:50:47,908 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:47,908 DEBUG [EBPB_APDSTTL-116714] Executing validate_PageTitle function:
+2016-01-27 22:50:47,949 DEBUG [EBPB_APDSTTL-116714] The title of the page is *********************************: Pocket Browser Tests
+2016-01-27 22:50:47,949 DEBUG [EBPB_APDSTTL-116714] The page title found is correct
+2016-01-27 22:50:47,949 DEBUG [EBPB_APDSTTL-116714] Result of validate_PageTitle: pass
+2016-01-27 22:50:47,949 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:47,949 DEBUG [EBPB_APDSTTL-116714] Executing link_Click function:
+2016-01-27 22:50:48,532 DEBUG [EBPB_APDSTTL-116714] Executing Click function
+2016-01-27 22:50:49,546 DEBUG [EBPB_APDSTTL-116714] Exiting Click function
+2016-01-27 22:50:49,546 DEBUG [EBPB_APDSTTL-116714] apd_test_link clicked successfully
+2016-01-27 22:50:49,546 DEBUG [EBPB_APDSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-27 22:50:49,546 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:49,546 DEBUG [EBPB_APDSTTL-116714] Executing validate_PageTitle function:
+2016-01-27 22:50:49,577 DEBUG [EBPB_APDSTTL-116714] The title of the page is *********************************: Module Index Page
+2016-01-27 22:50:49,577 DEBUG [EBPB_APDSTTL-116714] The page title found is correct
+2016-01-27 22:50:49,577 DEBUG [EBPB_APDSTTL-116714] Result of validate_PageTitle: pass
+2016-01-27 22:50:49,577 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:49,577 DEBUG [EBPB_APDSTTL-116714] Executing link_Click function:
+2016-01-27 22:50:49,910 DEBUG [EBPB_APDSTTL-116714] Executing Click function
+2016-01-27 22:50:50,845 DEBUG [EBPB_APDSTTL-116714] Exiting Click function
+2016-01-27 22:50:50,845 DEBUG [EBPB_APDSTTL-116714] activex_link clicked successfully
+2016-01-27 22:50:50,845 DEBUG [EBPB_APDSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-27 22:50:50,845 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:50,845 DEBUG [EBPB_APDSTTL-116714] Executing validate_PageTitle function:
+2016-01-27 22:50:50,865 DEBUG [EBPB_APDSTTL-116714] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : APD
+2016-01-27 22:50:50,865 DEBUG [EBPB_APDSTTL-116714] The page title found is correct
+2016-01-27 22:50:50,865 DEBUG [EBPB_APDSTTL-116714] Result of validate_PageTitle: pass
+2016-01-27 22:50:50,865 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:50,865 DEBUG [EBPB_APDSTTL-116714] Executing wait function:
+2016-01-27 22:50:50,865 DEBUG [EBPB_APDSTTL-116714] Started Executing wait function
+2016-01-27 22:50:51,866 DEBUG [EBPB_APDSTTL-116714] Exiting from wait function
+2016-01-27 22:50:51,866 DEBUG [EBPB_APDSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 22:50:51,866 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:51,866 DEBUG [EBPB_APDSTTL-116714] Executing SelectTestToRun function:
+2016-01-27 22:50:56,232 DEBUG [EBPB_APDSTTL-116714] Successfull in selecting clicking the category
+2016-01-27 22:50:56,232 DEBUG [EBPB_APDSTTL-116714] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:50:56,232 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:56,232 DEBUG [EBPB_APDSTTL-116714] Executing validate_Text_Exists function:
+2016-01-27 22:50:56,482 DEBUG [EBPB_APDSTTL-116714] VT056-1264 Testcase Text found
+2016-01-27 22:50:56,482 DEBUG [EBPB_APDSTTL-116714] Result of validate_Text_Exists: Pass
+2016-01-27 22:50:56,482 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:56,482 DEBUG [EBPB_APDSTTL-116714] Executing wait function:
+2016-01-27 22:50:56,482 DEBUG [EBPB_APDSTTL-116714] Started Executing wait function
+2016-01-27 22:50:57,482 DEBUG [EBPB_APDSTTL-116714] Exiting from wait function
+2016-01-27 22:50:57,482 DEBUG [EBPB_APDSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 22:50:57,482 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:57,482 DEBUG [EBPB_APDSTTL-116714] Executing ClickRunTest function:
+2016-01-27 22:50:57,873 DEBUG [EBPB_APDSTTL-116714] Executing Click function
+2016-01-27 22:50:58,871 DEBUG [EBPB_APDSTTL-116714] Exiting Click function
+2016-01-27 22:50:58,871 DEBUG [EBPB_APDSTTL-116714] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:50:58,871 DEBUG [EBPB_APDSTTL-116714] TestStepResult of ClickRunTest: pass
+2016-01-27 22:50:58,871 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:50:58,871 DEBUG [EBPB_APDSTTL-116714] Executing wait function:
+2016-01-27 22:50:58,871 DEBUG [EBPB_APDSTTL-116714] Started Executing wait function
+2016-01-27 22:51:03,872 DEBUG [EBPB_APDSTTL-116714] Exiting from wait function
+2016-01-27 22:51:03,872 DEBUG [EBPB_APDSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 22:51:03,872 DEBUG [EBPB_APDSTTL-116714] In execute keyword function
+2016-01-27 22:51:03,872 DEBUG [EBPB_APDSTTL-116714] Executing validate_Result function:
+2016-01-27 22:51:10,878 DEBUG [EBPB_APDSTTL-116714] ProgressbarOn275: 0 Text found in ProgressbarOn275: 0
+2016-01-27 22:51:10,878 DEBUG [EBPB_APDSTTL-116714] Result of validate_Result: Pass
+2016-01-27 22:51:10,878 DEBUG [EBPB_APDSTTL-116714] allstep_result contains: PasspassPasspassPassPassPassPassnull
+2016-01-27 22:51:10,878 DEBUG [EBPB_APDSTTL-116714] allexpected_result contains: nullPassnullPassnullpassnullpassnullpassnull
+2016-01-27 22:51:10,878 DEBUG [EBPB_APDSTTL-116714] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpassnullPasspassPasspassPassPassPassPassnull
+2016-01-27 22:51:10,878 DEBUG [EBPB_APDSTTL-116714] Test case with description Show Progress Bar Command 0113 Pass
+2016-01-27 22:51:11,886 DEBUG [EBPB_APDSTTL-116714] Executing browser_Quit function
+2016-01-27 22:51:11,886 DEBUG [EBPB_APDSTTL-116714] Completed browser_Quit function
+2016-01-27 22:51:11,886 DEBUG [EBPB_APDSTTL-116714] Completed quitSelendroid function
+2016-01-27 22:51:11,886 DEBUG [EBPB_APDSTTL-116714] Row number:15
+2016-01-27 22:51:11,923 DEBUG [EBPB_APDSTTL-116714] Ending Test Case IDSTTL-116714

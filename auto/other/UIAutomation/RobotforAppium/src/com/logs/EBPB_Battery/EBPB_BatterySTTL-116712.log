@@ -1,0 +1,67 @@
+2016-01-27 22:58:38,475 DEBUG [EBPB_BatterySTTL-116712] Executing Test Case ID: STTL-116712
+2016-01-27 22:58:38,482 DEBUG [EBPB_BatterySTTL-116712] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:58:48,738 DEBUG [EBPB_BatterySTTL-116712] Exiting Init_Selendroid function
+2016-01-27 22:58:48,753 DEBUG [EBPB_BatterySTTL-116712] TestCase with Description "Battery with Left_Bottom" Execution started
+2016-01-27 22:58:48,753 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:58:48,753 DEBUG [EBPB_BatterySTTL-116712] Executing wait function:
+2016-01-27 22:58:48,753 DEBUG [EBPB_BatterySTTL-116712] Started Executing wait function
+2016-01-27 22:58:51,754 DEBUG [EBPB_BatterySTTL-116712] Exiting from wait function
+2016-01-27 22:58:51,754 DEBUG [EBPB_BatterySTTL-116712] TestStepResult of wait: Pass
+2016-01-27 22:58:51,754 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:58:51,754 DEBUG [EBPB_BatterySTTL-116712] Executing validate_PageTitle function:
+2016-01-27 22:58:51,793 DEBUG [EBPB_BatterySTTL-116712] The title of the page is *********************************: Pocket Browser Tests
+2016-01-27 22:58:51,793 DEBUG [EBPB_BatterySTTL-116712] The page title found is correct
+2016-01-27 22:58:51,793 DEBUG [EBPB_BatterySTTL-116712] Result of validate_PageTitle: pass
+2016-01-27 22:58:51,793 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:58:51,793 DEBUG [EBPB_BatterySTTL-116712] Executing link_Click function:
+2016-01-27 22:58:52,399 DEBUG [EBPB_BatterySTTL-116712] Executing Click function
+2016-01-27 22:58:53,438 DEBUG [EBPB_BatterySTTL-116712] Exiting Click function
+2016-01-27 22:58:53,438 DEBUG [EBPB_BatterySTTL-116712] PB_battery_test_link clicked successfully
+2016-01-27 22:58:53,438 DEBUG [EBPB_BatterySTTL-116712] TestStepResult of link_Click: Pass
+2016-01-27 22:58:53,438 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:58:53,438 DEBUG [EBPB_BatterySTTL-116712] Executing validate_PageTitle function:
+2016-01-27 22:58:53,473 DEBUG [EBPB_BatterySTTL-116712] The title of the page is *********************************: PB Battery Test
+2016-01-27 22:58:53,473 DEBUG [EBPB_BatterySTTL-116712] The page title found is correct
+2016-01-27 22:58:53,473 DEBUG [EBPB_BatterySTTL-116712] Result of validate_PageTitle: pass
+2016-01-27 22:58:53,473 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:58:53,473 DEBUG [EBPB_BatterySTTL-116712] Executing SelectTestToRun function:
+2016-01-27 22:58:57,048 DEBUG [EBPB_BatterySTTL-116712] Successfull in selecting clicking the category
+2016-01-27 22:58:57,048 DEBUG [EBPB_BatterySTTL-116712] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:58:57,048 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:58:57,048 DEBUG [EBPB_BatterySTTL-116712] Executing ClickRunTest function:
+2016-01-27 22:58:57,450 DEBUG [EBPB_BatterySTTL-116712] Executing Click function
+2016-01-27 22:58:58,549 DEBUG [EBPB_BatterySTTL-116712] Exiting Click function
+2016-01-27 22:58:58,549 DEBUG [EBPB_BatterySTTL-116712] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:58:58,549 DEBUG [EBPB_BatterySTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-27 22:58:58,549 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:58:58,549 DEBUG [EBPB_BatterySTTL-116712] Executing wait function:
+2016-01-27 22:58:58,549 DEBUG [EBPB_BatterySTTL-116712] Started Executing wait function
+2016-01-27 22:59:01,550 DEBUG [EBPB_BatterySTTL-116712] Exiting from wait function
+2016-01-27 22:59:01,550 DEBUG [EBPB_BatterySTTL-116712] TestStepResult of wait: Pass
+2016-01-27 22:59:01,550 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:59:01,550 DEBUG [EBPB_BatterySTTL-116712] Executing TakeScreenshot function:
+2016-01-27 22:59:02,397 DEBUG [EBPB_BatterySTTL-116712] Started Executing Validate_App_launched_Device function
+2016-01-27 22:59:02,397 DEBUG [EBPB_BatterySTTL-116712] Entered CheckUIButtonExists function
+2016-01-27 22:59:02,397 DEBUG [EBPB_BatterySTTL-116712] Started executeCommandLine function
+2016-01-27 22:59:06,408 DEBUG [EBPB_BatterySTTL-116712] Exiting from executeCommandLine function
+2016-01-27 22:59:06,408 DEBUG [EBPB_BatterySTTL-116712] Button is not Present
+2016-01-27 22:59:06,408 DEBUG [EBPB_BatterySTTL-116712] Exiting from CheckUIButtonExists function
+2016-01-27 22:59:06,408 DEBUG [EBPB_BatterySTTL-116712] Started executeCommandLine function
+2016-01-27 22:59:10,421 DEBUG [EBPB_BatterySTTL-116712] Given App is in Foreground
+2016-01-27 22:59:10,421 DEBUG [EBPB_BatterySTTL-116712] Exiting Validate_App_launched_Device function
+2016-01-27 22:59:10,583 DEBUG [EBPB_BatterySTTL-116712] TestStepResult of TakeScreenshot: pass
+2016-01-27 22:59:10,583 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:59:10,583 DEBUG [EBPB_BatterySTTL-116712] Executing validate_Screenshot function:
+2016-01-27 22:59:10,753 DEBUG [EBPB_BatterySTTL-116712] Match found with reference image
+2016-01-27 22:59:10,753 DEBUG [EBPB_BatterySTTL-116712] Result of validate_Screenshot: Pass
+2016-01-27 22:59:10,753 DEBUG [EBPB_BatterySTTL-116712] In execute keyword function
+2016-01-27 22:59:10,753 DEBUG [EBPB_BatterySTTL-116712] TestStepResult of : Function <> not found in the keyword class
+2016-01-27 22:59:10,753 DEBUG [EBPB_BatterySTTL-116712] allstep_result contains: Function <> not found in the keyword classpassPasspasspassPassPassnull
+2016-01-27 22:59:10,753 DEBUG [EBPB_BatterySTTL-116712] allexpected_result contains: nullPassnullpassnullpassnull
+2016-01-27 22:59:10,753 DEBUG [EBPB_BatterySTTL-116712] Testcase_Result contains: nullPassnullpassnullpassnullFunction <> not found in the keyword classpassPasspasspassPassPassnull
+2016-01-27 22:59:10,753 DEBUG [EBPB_BatterySTTL-116712] Test case with description Battery with Left_Bottom Pass
+2016-01-27 22:59:11,660 DEBUG [EBPB_BatterySTTL-116712] Executing browser_Quit function
+2016-01-27 22:59:11,660 DEBUG [EBPB_BatterySTTL-116712] Completed browser_Quit function
+2016-01-27 22:59:11,660 DEBUG [EBPB_BatterySTTL-116712] Completed quitSelendroid function
+2016-01-27 22:59:11,661 DEBUG [EBPB_BatterySTTL-116712] Row number:13
+2016-01-27 22:59:11,698 DEBUG [EBPB_BatterySTTL-116712] Ending Test Case IDSTTL-116712

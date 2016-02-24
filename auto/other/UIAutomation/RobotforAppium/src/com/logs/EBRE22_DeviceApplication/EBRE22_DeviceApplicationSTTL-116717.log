@@ -1,0 +1,95 @@
+2016-01-28 03:23:29,788 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing Test Case ID: STTL-116717
+2016-01-28 03:23:29,794 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:23:39,680 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting Init_Selendroid function
+2016-01-28 03:23:39,694 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestCase with Description "Zoom- text parameter to 0" Execution started
+2016-01-28 03:23:39,695 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:39,695 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing wait function:
+2016-01-28 03:23:39,695 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started Executing wait function
+2016-01-28 03:23:42,695 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting from wait function
+2016-01-28 03:23:42,695 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of wait: Pass
+2016-01-28 03:23:42,695 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:42,695 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing validate_PageTitle function:
+2016-01-28 03:23:42,749 DEBUG [EBRE22_DeviceApplicationSTTL-116717] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:23:42,749 DEBUG [EBRE22_DeviceApplicationSTTL-116717] The page title found is correct
+2016-01-28 03:23:42,749 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Result of validate_PageTitle: pass
+2016-01-28 03:23:42,749 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:42,749 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing link_Click function:
+2016-01-28 03:23:43,381 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing Click function
+2016-01-28 03:23:44,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting Click function
+2016-01-28 03:23:44,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] DeviceApplication_test_link clicked successfully
+2016-01-28 03:23:44,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of link_Click: Pass
+2016-01-28 03:23:44,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:44,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing wait function:
+2016-01-28 03:23:44,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started Executing wait function
+2016-01-28 03:23:46,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting from wait function
+2016-01-28 03:23:46,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of wait: Pass
+2016-01-28 03:23:46,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:46,423 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing validate_PageTitle function:
+2016-01-28 03:23:46,462 DEBUG [EBRE22_DeviceApplicationSTTL-116717] The title of the page is *********************************: Device & Application
+2016-01-28 03:23:46,462 DEBUG [EBRE22_DeviceApplicationSTTL-116717] The page title found is correct
+2016-01-28 03:23:46,462 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Result of validate_PageTitle: pass
+2016-01-28 03:23:46,462 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:46,462 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing SelectTestToRun function:
+2016-01-28 03:23:52,193 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Successfull in selecting clicking the category
+2016-01-28 03:23:52,194 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:23:52,194 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:52,194 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing validate_Text_Exists function:
+2016-01-28 03:23:52,466 DEBUG [EBRE22_DeviceApplicationSTTL-116717] VT187-2348 Testcase Text found
+2016-01-28 03:23:52,466 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Result of validate_Text_Exists: Pass
+2016-01-28 03:23:52,466 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:52,467 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing wait function:
+2016-01-28 03:23:52,467 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started Executing wait function
+2016-01-28 03:23:54,468 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting from wait function
+2016-01-28 03:23:54,468 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of wait: Pass
+2016-01-28 03:23:54,468 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:23:54,468 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing TakeScreenshot function:
+2016-01-28 03:23:55,317 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started Executing Validate_App_launched_Device function
+2016-01-28 03:23:55,317 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Entered CheckUIButtonExists function
+2016-01-28 03:23:55,317 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started executeCommandLine function
+2016-01-28 03:23:59,329 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting from executeCommandLine function
+2016-01-28 03:23:59,329 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Button is not Present
+2016-01-28 03:23:59,329 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting from CheckUIButtonExists function
+2016-01-28 03:23:59,329 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started executeCommandLine function
+2016-01-28 03:24:03,351 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Given App is in Foreground
+2016-01-28 03:24:03,351 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting Validate_App_launched_Device function
+2016-01-28 03:24:03,519 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of TakeScreenshot: pass
+2016-01-28 03:24:03,519 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:24:03,519 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing validate_Screenshot function:
+2016-01-28 03:24:03,698 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Match found with reference image
+2016-01-28 03:24:03,698 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Result of validate_Screenshot: Pass
+2016-01-28 03:24:03,698 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:24:03,698 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing ClickRunTest function:
+2016-01-28 03:24:04,069 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing Click function
+2016-01-28 03:24:05,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting Click function
+2016-01-28 03:24:05,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:24:05,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of ClickRunTest: pass
+2016-01-28 03:24:05,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:24:05,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing wait function:
+2016-01-28 03:24:05,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started Executing wait function
+2016-01-28 03:24:07,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting from wait function
+2016-01-28 03:24:07,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of wait: Pass
+2016-01-28 03:24:07,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:24:07,100 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing TakeScreenshot function:
+2016-01-28 03:24:07,766 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started Executing Validate_App_launched_Device function
+2016-01-28 03:24:07,766 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Entered CheckUIButtonExists function
+2016-01-28 03:24:07,766 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started executeCommandLine function
+2016-01-28 03:24:11,779 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting from executeCommandLine function
+2016-01-28 03:24:11,779 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Button is not Present
+2016-01-28 03:24:11,779 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting from CheckUIButtonExists function
+2016-01-28 03:24:11,779 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Started executeCommandLine function
+2016-01-28 03:24:15,801 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Given App is in Foreground
+2016-01-28 03:24:15,801 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Exiting Validate_App_launched_Device function
+2016-01-28 03:24:15,918 DEBUG [EBRE22_DeviceApplicationSTTL-116717] TestStepResult of TakeScreenshot: pass
+2016-01-28 03:24:15,918 DEBUG [EBRE22_DeviceApplicationSTTL-116717] In execute keyword function
+2016-01-28 03:24:15,918 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing validate_Screenshot function:
+2016-01-28 03:24:16,092 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Match found with reference image
+2016-01-28 03:24:16,092 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Result of validate_Screenshot: Pass
+2016-01-28 03:24:16,092 DEBUG [EBRE22_DeviceApplicationSTTL-116717] allstep_result contains: passPasspasspassPasspassPassPassPassnull
+2016-01-28 03:24:16,092 DEBUG [EBRE22_DeviceApplicationSTTL-116717] allexpected_result contains: nullPassnullPassnullPassnullpassnullpassnull
+2016-01-28 03:24:16,092 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Testcase_Result contains: nullPassnullPassnullPassnullpassnullpassnullpassPasspasspassPasspassPassPassPassnull
+2016-01-28 03:24:16,092 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Test case with description Zoom- text parameter to 0 Pass
+2016-01-28 03:24:17,191 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Executing browser_Quit function
+2016-01-28 03:24:17,191 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Completed browser_Quit function
+2016-01-28 03:24:17,191 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Completed quitSelendroid function
+2016-01-28 03:24:17,192 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Row number:18
+2016-01-28 03:24:17,234 DEBUG [EBRE22_DeviceApplicationSTTL-116717] Ending Test Case IDSTTL-116717

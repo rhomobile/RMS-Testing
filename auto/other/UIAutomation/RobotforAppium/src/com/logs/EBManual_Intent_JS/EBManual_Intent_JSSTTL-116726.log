@@ -1,0 +1,89 @@
+2016-01-27 18:49:24,852 DEBUG [EBManual_Intent_JSSTTL-116726] Executing Test Case ID: STTL-116726
+2016-01-27 18:49:24,862 DEBUG [EBManual_Intent_JSSTTL-116726] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 18:49:35,023 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting Init_Selendroid function
+2016-01-27 18:49:35,045 DEBUG [EBManual_Intent_JSSTTL-116726] TestCase with Description "Send intent to view jpeg from package" Execution started
+2016-01-27 18:49:35,045 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:35,045 DEBUG [EBManual_Intent_JSSTTL-116726] Executing wait function:
+2016-01-27 18:49:35,045 DEBUG [EBManual_Intent_JSSTTL-116726] Started Executing wait function
+2016-01-27 18:49:38,045 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting from wait function
+2016-01-27 18:49:38,045 DEBUG [EBManual_Intent_JSSTTL-116726] TestStepResult of wait: Pass
+2016-01-27 18:49:38,045 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:38,045 DEBUG [EBManual_Intent_JSSTTL-116726] Executing validate_PageTitle function:
+2016-01-27 18:49:38,060 DEBUG [EBManual_Intent_JSSTTL-116726] The title of the page is *********************************: Manual specs
+2016-01-27 18:49:38,060 DEBUG [EBManual_Intent_JSSTTL-116726] The page title found is correct
+2016-01-27 18:49:38,060 DEBUG [EBManual_Intent_JSSTTL-116726] Result of validate_PageTitle: pass
+2016-01-27 18:49:38,061 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:38,061 DEBUG [EBManual_Intent_JSSTTL-116726] Executing link_Click function:
+2016-01-27 18:49:38,590 DEBUG [EBManual_Intent_JSSTTL-116726] Executing Click function
+2016-01-27 18:49:39,665 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting Click function
+2016-01-27 18:49:39,665 DEBUG [EBManual_Intent_JSSTTL-116726] intent_test_link clicked successfully
+2016-01-27 18:49:39,665 DEBUG [EBManual_Intent_JSSTTL-116726] TestStepResult of link_Click: Pass
+2016-01-27 18:49:39,665 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:39,665 DEBUG [EBManual_Intent_JSSTTL-116726] Executing validate_PageTitle function:
+2016-01-27 18:49:39,686 DEBUG [EBManual_Intent_JSSTTL-116726] The title of the page is *********************************: Intent JS Test
+2016-01-27 18:49:39,686 DEBUG [EBManual_Intent_JSSTTL-116726] The page title found is correct
+2016-01-27 18:49:39,686 DEBUG [EBManual_Intent_JSSTTL-116726] Result of validate_PageTitle: pass
+2016-01-27 18:49:39,687 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:39,687 DEBUG [EBManual_Intent_JSSTTL-116726] Executing SelectTestToRun function:
+2016-01-27 18:49:46,587 DEBUG [EBManual_Intent_JSSTTL-116726] Successfull in selecting clicking the category
+2016-01-27 18:49:46,587 DEBUG [EBManual_Intent_JSSTTL-116726] TestStepResult of SelectTestToRun: pass
+2016-01-27 18:49:46,587 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:46,587 DEBUG [EBManual_Intent_JSSTTL-116726] Executing ClickRunTest function:
+2016-01-27 18:49:46,917 DEBUG [EBManual_Intent_JSSTTL-116726] Executing Click function
+2016-01-27 18:49:47,858 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting Click function
+2016-01-27 18:49:47,858 DEBUG [EBManual_Intent_JSSTTL-116726] runtest_top_xpath Button clicked Successfully
+2016-01-27 18:49:47,858 DEBUG [EBManual_Intent_JSSTTL-116726] TestStepResult of ClickRunTest: pass
+2016-01-27 18:49:47,858 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:47,858 DEBUG [EBManual_Intent_JSSTTL-116726] Executing validate_OldText_Exists function:
+2016-01-27 18:49:47,858 DEBUG [EBManual_Intent_JSSTTL-116726] Entered validate_OldText_Exists function
+2016-01-27 18:49:48,457 DEBUG [EBManual_Intent_JSSTTL-116726] VT328_45 Testcase Text found
+2016-01-27 18:49:48,457 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting from validate_OldText_Exists function
+2016-01-27 18:49:48,457 DEBUG [EBManual_Intent_JSSTTL-116726] Result of validate_OldText_Exists: Pass
+2016-01-27 18:49:48,457 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:48,457 DEBUG [EBManual_Intent_JSSTTL-116726] Executing ClickRunTest function:
+2016-01-27 18:49:48,774 DEBUG [EBManual_Intent_JSSTTL-116726] Executing Click function
+2016-01-27 18:49:49,680 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting Click function
+2016-01-27 18:49:49,680 DEBUG [EBManual_Intent_JSSTTL-116726] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 18:49:49,680 DEBUG [EBManual_Intent_JSSTTL-116726] TestStepResult of ClickRunTest: pass
+2016-01-27 18:49:49,680 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:49:49,680 DEBUG [EBManual_Intent_JSSTTL-116726] Executing UIAutomatorScreenshot function:
+2016-01-27 18:49:49,680 DEBUG [EBManual_Intent_JSSTTL-116726] Started executeCommandLine function
+2016-01-27 18:49:53,703 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting from executeCommandLine function
+2016-01-27 18:49:53,703 DEBUG [EBManual_Intent_JSSTTL-116726] Started executeCommandLine function
+2016-01-27 18:49:57,724 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting from executeCommandLine function
+2016-01-27 18:49:57,818 DEBUG [EBManual_Intent_JSSTTL-116726] Started executeCommandLine function
+2016-01-27 18:50:01,828 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting from executeCommandLine function
+2016-01-27 18:50:01,828 DEBUG [EBManual_Intent_JSSTTL-116726] TestStepResult of UIAutomatorScreenshot: pass
+2016-01-27 18:50:01,828 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:50:01,828 DEBUG [EBManual_Intent_JSSTTL-116726] Executing validate_App_Launched_Device function:
+2016-01-27 18:50:01,828 DEBUG [EBManual_Intent_JSSTTL-116726] Started Executing Validate_App_launched_Device function
+2016-01-27 18:50:01,828 DEBUG [EBManual_Intent_JSSTTL-116726] Entered CheckUIButtonExists function
+2016-01-27 18:50:01,828 DEBUG [EBManual_Intent_JSSTTL-116726] Started executeCommandLine function
+2016-01-27 18:50:05,840 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting from executeCommandLine function
+2016-01-27 18:50:05,840 DEBUG [EBManual_Intent_JSSTTL-116726] Button is not Present
+2016-01-27 18:50:05,840 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting from CheckUIButtonExists function
+2016-01-27 18:50:05,840 DEBUG [EBManual_Intent_JSSTTL-116726] Started executeCommandLine function
+2016-01-27 18:50:09,860 DEBUG [EBManual_Intent_JSSTTL-116726] Given App is in Foreground
+2016-01-27 18:50:09,860 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting Validate_App_launched_Device function
+2016-01-27 18:50:09,860 DEBUG [EBManual_Intent_JSSTTL-116726] Result of validate_App_Launched_Device: Pass
+2016-01-27 18:50:09,860 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:50:09,860 DEBUG [EBManual_Intent_JSSTTL-116726] Executing press_Key function:
+2016-01-27 18:50:09,860 DEBUG [EBManual_Intent_JSSTTL-116726] Started executeCommandLine function
+2016-01-27 18:50:13,885 DEBUG [EBManual_Intent_JSSTTL-116726] Exiting from executeCommandLine function
+2016-01-27 18:50:13,885 DEBUG [EBManual_Intent_JSSTTL-116726] pressed on the back key
+2016-01-27 18:50:13,885 DEBUG [EBManual_Intent_JSSTTL-116726] Back works
+2016-01-27 18:50:14,885 DEBUG [EBManual_Intent_JSSTTL-116726] TestStepResult of press_Key: pass
+2016-01-27 18:50:14,885 DEBUG [EBManual_Intent_JSSTTL-116726] In execute keyword function
+2016-01-27 18:50:14,885 DEBUG [EBManual_Intent_JSSTTL-116726] Executing validate_Screenshot function:
+2016-01-27 18:50:14,951 DEBUG [EBManual_Intent_JSSTTL-116726] Started executeCommandLine function
+2016-01-27 18:50:17,087 DEBUG [EBManual_Intent_JSSTTL-116726] Match not found, Difference image isC:\Users\jwg348\Desktop\Project_Automation\Polarion\RobotforAppium\test-output\TC75\Difference\EBManual_Intent_JS\VT328-19.png
+2016-01-27 18:50:17,087 DEBUG [EBManual_Intent_JSSTTL-116726] Comparision of 2 C:\Users\jwg348\Desktop\Project_Automation\Polarion\RobotforAppium\test-output\TC75\EBManual_Intent_JS\VT328-19.png C:\Users\jwg348\Desktop\Project_Automation\Polarion\RobotforAppium\test-output\Reference\TC8000\EBManual_Intent_JS\VT328-19.png images Failed
+2016-01-27 18:50:17,087 DEBUG [EBManual_Intent_JSSTTL-116726] Result of validate_Screenshot: Fail
+2016-01-27 18:50:17,088 DEBUG [EBManual_Intent_JSSTTL-116726] allstep_result contains: passpasspasspasspassPassPassnull
+2016-01-27 18:50:17,088 DEBUG [EBManual_Intent_JSSTTL-116726] allexpected_result contains: nullFailnullPassnullPassnullpassnullpassnull
+2016-01-27 18:50:17,088 DEBUG [EBManual_Intent_JSSTTL-116726] Testcase_Result contains: nullFailnullPassnullPassnullpassnullpassnullpasspasspasspasspassPassPassnull
+2016-01-27 18:50:17,088 DEBUG [EBManual_Intent_JSSTTL-116726] Test case with description Send intent to view jpeg from package Fail
+2016-01-27 18:50:18,135 DEBUG [EBManual_Intent_JSSTTL-116726] Executing browser_Quit function
+2016-01-27 18:50:18,135 DEBUG [EBManual_Intent_JSSTTL-116726] Completed browser_Quit function
+2016-01-27 18:50:18,135 DEBUG [EBManual_Intent_JSSTTL-116726] Completed quitSelendroid function
+2016-01-27 18:50:18,137 DEBUG [EBManual_Intent_JSSTTL-116726] Row number:27

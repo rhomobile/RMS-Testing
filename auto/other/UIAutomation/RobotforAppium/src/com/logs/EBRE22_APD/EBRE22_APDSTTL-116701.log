@@ -1,0 +1,34 @@
+2016-01-28 02:54:49,986 DEBUG [EBRE22_APDSTTL-116701] Executing Test Case ID: STTL-116701
+2016-01-28 02:55:25,058 DEBUG [EBRE22_APDSTTL-116701] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:55:35,612 DEBUG [EBRE22_APDSTTL-116701] Exiting Init_Selendroid function
+2016-01-28 02:55:35,624 DEBUG [EBRE22_APDSTTL-116701] TestCase with Description "Change Start page" Execution started
+2016-01-28 02:55:35,624 DEBUG [EBRE22_APDSTTL-116701] In execute keyword function
+2016-01-28 02:55:35,624 DEBUG [EBRE22_APDSTTL-116701] Executing wait function:
+2016-01-28 02:55:35,624 DEBUG [EBRE22_APDSTTL-116701] Started Executing wait function
+2016-01-28 02:55:38,624 DEBUG [EBRE22_APDSTTL-116701] Exiting from wait function
+2016-01-28 02:55:38,624 DEBUG [EBRE22_APDSTTL-116701] TestStepResult of wait: Pass
+2016-01-28 02:55:38,624 DEBUG [EBRE22_APDSTTL-116701] In execute keyword function
+2016-01-28 02:55:38,624 DEBUG [EBRE22_APDSTTL-116701] Executing PullConfigxml function:
+2016-01-28 02:55:38,624 DEBUG [EBRE22_APDSTTL-116701] Started executeCommandLine function
+2016-01-28 02:55:42,645 DEBUG [EBRE22_APDSTTL-116701] TestStepResult of PullConfigxml: Pass
+2016-01-28 02:55:42,645 DEBUG [EBRE22_APDSTTL-116701] In execute keyword function
+2016-01-28 02:55:42,645 DEBUG [EBRE22_APDSTTL-116701] Executing ChangeConfigxml function:
+2016-01-28 02:55:42,645 DEBUG [EBRE22_APDSTTL-116701] Executing ChangeConfigxml function
+2016-01-28 02:55:42,647 DEBUG [EBRE22_APDSTTL-116701] TestStepResult of ChangeConfigxml: Pass
+2016-01-28 02:55:42,647 DEBUG [EBRE22_APDSTTL-116701] In execute keyword function
+2016-01-28 02:55:42,647 DEBUG [EBRE22_APDSTTL-116701] Executing ChangeConfigxml function:
+2016-01-28 02:55:42,647 DEBUG [EBRE22_APDSTTL-116701] Executing ChangeConfigxml function
+2016-01-28 02:55:42,648 DEBUG [EBRE22_APDSTTL-116701] TestStepResult of ChangeConfigxml: Pass
+2016-01-28 02:55:42,648 DEBUG [EBRE22_APDSTTL-116701] In execute keyword function
+2016-01-28 02:55:42,648 DEBUG [EBRE22_APDSTTL-116701] Executing PushConfigxml function:
+2016-01-28 02:55:42,648 DEBUG [EBRE22_APDSTTL-116701] Started executeCommandLine function
+2016-01-28 02:55:46,666 DEBUG [EBRE22_APDSTTL-116701] TestStepResult of PushConfigxml: Pass
+2016-01-28 02:55:46,666 DEBUG [EBRE22_APDSTTL-116701] allstep_result contains: PassPassPassPassPassnull
+2016-01-28 02:55:46,666 DEBUG [EBRE22_APDSTTL-116701] allexpected_result contains: null
+2016-01-28 02:55:46,666 DEBUG [EBRE22_APDSTTL-116701] Testcase_Result contains: nullPassPassPassPassPassnull
+2016-01-28 02:55:46,666 DEBUG [EBRE22_APDSTTL-116701] Test case with description Change Start page Pass
+2016-01-28 02:55:47,763 DEBUG [EBRE22_APDSTTL-116701] Executing browser_Quit function
+2016-01-28 02:55:47,763 DEBUG [EBRE22_APDSTTL-116701] Completed browser_Quit function
+2016-01-28 02:55:47,763 DEBUG [EBRE22_APDSTTL-116701] Completed quitSelendroid function
+2016-01-28 02:55:47,763 DEBUG [EBRE22_APDSTTL-116701] Row number:2
+2016-01-28 02:55:47,790 DEBUG [EBRE22_APDSTTL-116701] Ending Test Case IDSTTL-116701

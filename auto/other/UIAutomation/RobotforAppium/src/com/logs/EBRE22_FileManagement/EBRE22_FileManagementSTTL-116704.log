@@ -1,0 +1,66 @@
+2016-01-28 03:27:21,302 DEBUG [EBRE22_FileManagementSTTL-116704] Executing Test Case ID: STTL-116704
+2016-01-28 03:27:21,310 DEBUG [EBRE22_FileManagementSTTL-116704] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:27:30,464 DEBUG [EBRE22_FileManagementSTTL-116704] Exiting Init_Selendroid function
+2016-01-28 03:27:30,478 DEBUG [EBRE22_FileManagementSTTL-116704] TestCase with Description "Note: Run this test with Javascript object.
+
+FTP Server to Device File Transfer" Execution started
+2016-01-28 03:27:30,478 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:30,478 DEBUG [EBRE22_FileManagementSTTL-116704] Executing wait function:
+2016-01-28 03:27:30,478 DEBUG [EBRE22_FileManagementSTTL-116704] Started Executing wait function
+2016-01-28 03:27:32,478 DEBUG [EBRE22_FileManagementSTTL-116704] Exiting from wait function
+2016-01-28 03:27:32,478 DEBUG [EBRE22_FileManagementSTTL-116704] TestStepResult of wait: Pass
+2016-01-28 03:27:32,478 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:32,478 DEBUG [EBRE22_FileManagementSTTL-116704] Executing validate_PageTitle function:
+2016-01-28 03:27:32,524 DEBUG [EBRE22_FileManagementSTTL-116704] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:27:32,524 DEBUG [EBRE22_FileManagementSTTL-116704] The page title found is correct
+2016-01-28 03:27:32,524 DEBUG [EBRE22_FileManagementSTTL-116704] Result of validate_PageTitle: pass
+2016-01-28 03:27:32,524 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:32,524 DEBUG [EBRE22_FileManagementSTTL-116704] Executing link_Click function:
+2016-01-28 03:27:33,109 DEBUG [EBRE22_FileManagementSTTL-116704] Executing Click function
+2016-01-28 03:27:34,177 DEBUG [EBRE22_FileManagementSTTL-116704] Exiting Click function
+2016-01-28 03:27:34,177 DEBUG [EBRE22_FileManagementSTTL-116704] filemanagement_test_link clicked successfully
+2016-01-28 03:27:34,177 DEBUG [EBRE22_FileManagementSTTL-116704] TestStepResult of link_Click: Pass
+2016-01-28 03:27:34,177 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:34,177 DEBUG [EBRE22_FileManagementSTTL-116704] Executing wait function:
+2016-01-28 03:27:34,177 DEBUG [EBRE22_FileManagementSTTL-116704] Started Executing wait function
+2016-01-28 03:27:36,177 DEBUG [EBRE22_FileManagementSTTL-116704] Exiting from wait function
+2016-01-28 03:27:36,177 DEBUG [EBRE22_FileManagementSTTL-116704] TestStepResult of wait: Pass
+2016-01-28 03:27:36,177 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:36,177 DEBUG [EBRE22_FileManagementSTTL-116704] Executing validate_PageTitle function:
+2016-01-28 03:27:36,213 DEBUG [EBRE22_FileManagementSTTL-116704] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : FileManagement
+2016-01-28 03:27:36,213 DEBUG [EBRE22_FileManagementSTTL-116704] The page title found is correct
+2016-01-28 03:27:36,213 DEBUG [EBRE22_FileManagementSTTL-116704] Result of validate_PageTitle: pass
+2016-01-28 03:27:36,213 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:36,213 DEBUG [EBRE22_FileManagementSTTL-116704] Executing SelectTestToRun function:
+2016-01-28 03:27:38,803 DEBUG [EBRE22_FileManagementSTTL-116704] Successfull in selecting clicking the category
+2016-01-28 03:27:38,803 DEBUG [EBRE22_FileManagementSTTL-116704] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:27:38,803 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:38,803 DEBUG [EBRE22_FileManagementSTTL-116704] Executing ClickRunTest function:
+2016-01-28 03:27:39,188 DEBUG [EBRE22_FileManagementSTTL-116704] Executing Click function
+2016-01-28 03:27:40,166 DEBUG [EBRE22_FileManagementSTTL-116704] Exiting Click function
+2016-01-28 03:27:40,166 DEBUG [EBRE22_FileManagementSTTL-116704] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:27:40,166 DEBUG [EBRE22_FileManagementSTTL-116704] TestStepResult of ClickRunTest: pass
+2016-01-28 03:27:40,166 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:40,166 DEBUG [EBRE22_FileManagementSTTL-116704] Executing validate_Text_Exists function:
+2016-01-28 03:27:40,443 DEBUG [EBRE22_FileManagementSTTL-116704] VT187-0308 Testcase Text found
+2016-01-28 03:27:40,443 DEBUG [EBRE22_FileManagementSTTL-116704] Result of validate_Text_Exists: Pass
+2016-01-28 03:27:40,443 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:27:40,443 DEBUG [EBRE22_FileManagementSTTL-116704] Executing wait function:
+2016-01-28 03:27:40,443 DEBUG [EBRE22_FileManagementSTTL-116704] Started Executing wait function
+2016-01-28 03:28:00,444 DEBUG [EBRE22_FileManagementSTTL-116704] Exiting from wait function
+2016-01-28 03:28:00,444 DEBUG [EBRE22_FileManagementSTTL-116704] TestStepResult of wait: Pass
+2016-01-28 03:28:00,444 DEBUG [EBRE22_FileManagementSTTL-116704] In execute keyword function
+2016-01-28 03:28:00,444 DEBUG [EBRE22_FileManagementSTTL-116704] Executing validate_Result function:
+2016-01-28 03:28:00,715 DEBUG [EBRE22_FileManagementSTTL-116704] Received Text found in OK: File Received
+2016-01-28 03:28:00,715 DEBUG [EBRE22_FileManagementSTTL-116704] Result of validate_Result: Pass
+2016-01-28 03:28:00,715 DEBUG [EBRE22_FileManagementSTTL-116704] allstep_result contains: PasspasspassPassPassPassnull
+2016-01-28 03:28:00,716 DEBUG [EBRE22_FileManagementSTTL-116704] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 03:28:00,716 DEBUG [EBRE22_FileManagementSTTL-116704] Testcase_Result contains: nullPassnullPassnullpassnullpassnullPasspasspassPassPassPassnull
+2016-01-28 03:28:00,716 DEBUG [EBRE22_FileManagementSTTL-116704] Test case with description Note: Run this test with Javascript object.
+
+FTP Server to Device File Transfer Pass
+2016-01-28 03:28:01,750 DEBUG [EBRE22_FileManagementSTTL-116704] Executing browser_Quit function
+2016-01-28 03:28:01,750 DEBUG [EBRE22_FileManagementSTTL-116704] Completed browser_Quit function
+2016-01-28 03:28:01,750 DEBUG [EBRE22_FileManagementSTTL-116704] Completed quitSelendroid function
+2016-01-28 03:28:01,750 DEBUG [EBRE22_FileManagementSTTL-116704] Row number:5
+2016-01-28 03:28:01,777 DEBUG [EBRE22_FileManagementSTTL-116704] Ending Test Case IDSTTL-116704

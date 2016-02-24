@@ -1,0 +1,60 @@
+2016-01-28 03:21:25,414 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing Test Case ID: STTL-116713
+2016-01-28 03:21:25,420 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:21:35,840 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Exiting Init_Selendroid function
+2016-01-28 03:21:35,855 DEBUG [EBRE22_DeviceApplicationSTTL-116713] TestCase with Description "Set autoRotate is enabled" Execution started
+2016-01-28 03:21:35,856 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:35,856 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing wait function:
+2016-01-28 03:21:35,856 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Started Executing wait function
+2016-01-28 03:21:38,856 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Exiting from wait function
+2016-01-28 03:21:38,856 DEBUG [EBRE22_DeviceApplicationSTTL-116713] TestStepResult of wait: Pass
+2016-01-28 03:21:38,856 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:38,856 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing validate_PageTitle function:
+2016-01-28 03:21:38,897 DEBUG [EBRE22_DeviceApplicationSTTL-116713] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:21:38,897 DEBUG [EBRE22_DeviceApplicationSTTL-116713] The page title found is correct
+2016-01-28 03:21:38,897 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Result of validate_PageTitle: pass
+2016-01-28 03:21:38,897 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:38,897 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing link_Click function:
+2016-01-28 03:21:39,488 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing Click function
+2016-01-28 03:21:40,494 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Exiting Click function
+2016-01-28 03:21:40,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] DeviceApplication_test_link clicked successfully
+2016-01-28 03:21:40,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] TestStepResult of link_Click: Pass
+2016-01-28 03:21:40,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:40,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing wait function:
+2016-01-28 03:21:40,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Started Executing wait function
+2016-01-28 03:21:42,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Exiting from wait function
+2016-01-28 03:21:42,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] TestStepResult of wait: Pass
+2016-01-28 03:21:42,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:42,495 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing validate_PageTitle function:
+2016-01-28 03:21:42,537 DEBUG [EBRE22_DeviceApplicationSTTL-116713] The title of the page is *********************************: Device & Application
+2016-01-28 03:21:42,537 DEBUG [EBRE22_DeviceApplicationSTTL-116713] The page title found is correct
+2016-01-28 03:21:42,537 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Result of validate_PageTitle: pass
+2016-01-28 03:21:42,537 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:42,537 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing SelectTestToRun function:
+2016-01-28 03:21:47,238 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Successfull in selecting clicking the category
+2016-01-28 03:21:47,238 DEBUG [EBRE22_DeviceApplicationSTTL-116713] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:21:47,238 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:47,238 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing validate_Text_Exists function:
+2016-01-28 03:21:47,503 DEBUG [EBRE22_DeviceApplicationSTTL-116713] VT187-2261 Testcase Text found
+2016-01-28 03:21:47,503 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Result of validate_Text_Exists: Pass
+2016-01-28 03:21:47,503 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:47,503 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing ClickRunTest function:
+2016-01-28 03:21:47,801 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing Click function
+2016-01-28 03:21:48,778 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Exiting Click function
+2016-01-28 03:21:48,778 DEBUG [EBRE22_DeviceApplicationSTTL-116713] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:21:48,778 DEBUG [EBRE22_DeviceApplicationSTTL-116713] TestStepResult of ClickRunTest: pass
+2016-01-28 03:21:48,778 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:48,778 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing validate_ScreenRotate function:
+2016-01-28 03:21:48,778 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Started Executing Rotate_Screen function
+2016-01-28 03:21:49,186 DEBUG [EBRE22_DeviceApplicationSTTL-116713] can rotate
+2016-01-28 03:21:49,215 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Result of validate_ScreenRotate: Pass
+2016-01-28 03:21:49,215 DEBUG [EBRE22_DeviceApplicationSTTL-116713] In execute keyword function
+2016-01-28 03:21:49,216 DEBUG [EBRE22_DeviceApplicationSTTL-116713] TestStepResult of : Function <> not found in the keyword class
+2016-01-28 03:21:49,216 DEBUG [EBRE22_DeviceApplicationSTTL-116713] allstep_result contains: Function <> not found in the keyword classpasspassPassPassPassnull
+2016-01-28 03:21:49,216 DEBUG [EBRE22_DeviceApplicationSTTL-116713] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 03:21:49,216 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Testcase_Result contains: nullPassnullPassnullpassnullpassnullFunction <> not found in the keyword classpasspassPassPassPassnull
+2016-01-28 03:21:49,216 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Test case with description Set autoRotate is enabled Pass
+2016-01-28 03:21:50,272 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Executing browser_Quit function
+2016-01-28 03:21:50,272 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Completed browser_Quit function
+2016-01-28 03:21:50,272 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Completed quitSelendroid function
+2016-01-28 03:21:50,273 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Row number:14
+2016-01-28 03:21:50,297 DEBUG [EBRE22_DeviceApplicationSTTL-116713] Ending Test Case IDSTTL-116713

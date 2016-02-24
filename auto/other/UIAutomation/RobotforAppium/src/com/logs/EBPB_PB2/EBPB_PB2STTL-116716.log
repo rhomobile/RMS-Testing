@@ -1,0 +1,77 @@
+2016-01-28 02:22:50,195 DEBUG [EBPB_PB2STTL-116716] Executing Test Case ID: STTL-116716
+2016-01-28 02:22:50,201 DEBUG [EBPB_PB2STTL-116716] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:23:00,734 DEBUG [EBPB_PB2STTL-116716] Exiting Init_Selendroid function
+2016-01-28 02:23:00,749 DEBUG [EBPB_PB2STTL-116716] TestCase with Description "Addressbar " Execution started
+2016-01-28 02:23:00,749 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:00,749 DEBUG [EBPB_PB2STTL-116716] Executing wait function:
+2016-01-28 02:23:00,749 DEBUG [EBPB_PB2STTL-116716] Started Executing wait function
+2016-01-28 02:23:03,750 DEBUG [EBPB_PB2STTL-116716] Exiting from wait function
+2016-01-28 02:23:03,750 DEBUG [EBPB_PB2STTL-116716] TestStepResult of wait: Pass
+2016-01-28 02:23:03,750 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:03,750 DEBUG [EBPB_PB2STTL-116716] Executing validate_PageTitle function:
+2016-01-28 02:23:03,796 DEBUG [EBPB_PB2STTL-116716] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 02:23:03,796 DEBUG [EBPB_PB2STTL-116716] The page title found is correct
+2016-01-28 02:23:03,797 DEBUG [EBPB_PB2STTL-116716] Result of validate_PageTitle: pass
+2016-01-28 02:23:03,797 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:03,797 DEBUG [EBPB_PB2STTL-116716] Executing link_Click function:
+2016-01-28 02:23:04,469 DEBUG [EBPB_PB2STTL-116716] Executing Click function
+2016-01-28 02:23:05,812 DEBUG [EBPB_PB2STTL-116716] Exiting Click function
+2016-01-28 02:23:05,812 DEBUG [EBPB_PB2STTL-116716] PB2_test_link clicked successfully
+2016-01-28 02:23:05,812 DEBUG [EBPB_PB2STTL-116716] TestStepResult of link_Click: Pass
+2016-01-28 02:23:05,812 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:05,812 DEBUG [EBPB_PB2STTL-116716] Executing wait function:
+2016-01-28 02:23:05,812 DEBUG [EBPB_PB2STTL-116716] Started Executing wait function
+2016-01-28 02:23:07,812 DEBUG [EBPB_PB2STTL-116716] Exiting from wait function
+2016-01-28 02:23:07,812 DEBUG [EBPB_PB2STTL-116716] TestStepResult of wait: Pass
+2016-01-28 02:23:07,812 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:07,812 DEBUG [EBPB_PB2STTL-116716] Executing validate_PageTitle function:
+2016-01-28 02:23:07,851 DEBUG [EBPB_PB2STTL-116716] The title of the page is *********************************: PB2 Tests
+2016-01-28 02:23:07,851 DEBUG [EBPB_PB2STTL-116716] The page title found is correct
+2016-01-28 02:23:07,851 DEBUG [EBPB_PB2STTL-116716] Result of validate_PageTitle: pass
+2016-01-28 02:23:07,851 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:07,851 DEBUG [EBPB_PB2STTL-116716] Executing link_Click function:
+2016-01-28 02:23:08,258 DEBUG [EBPB_PB2STTL-116716] Executing Click function
+2016-01-28 02:23:09,278 DEBUG [EBPB_PB2STTL-116716] Exiting Click function
+2016-01-28 02:23:09,278 DEBUG [EBPB_PB2STTL-116716] CandAaddress_test_link clicked successfully
+2016-01-28 02:23:09,278 DEBUG [EBPB_PB2STTL-116716] TestStepResult of link_Click: Pass
+2016-01-28 02:23:09,278 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:09,278 DEBUG [EBPB_PB2STTL-116716] Executing wait function:
+2016-01-28 02:23:09,278 DEBUG [EBPB_PB2STTL-116716] Started Executing wait function
+2016-01-28 02:23:11,278 DEBUG [EBPB_PB2STTL-116716] Exiting from wait function
+2016-01-28 02:23:11,278 DEBUG [EBPB_PB2STTL-116716] TestStepResult of wait: Pass
+2016-01-28 02:23:11,278 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:11,278 DEBUG [EBPB_PB2STTL-116716] Executing SwitchApp function:
+2016-01-28 02:23:11,390 DEBUG [EBPB_PB2STTL-116716] Successfully switched to NATIVE_APP
+2016-01-28 02:23:11,390 DEBUG [EBPB_PB2STTL-116716] TestStepResult of SwitchApp: Pass
+2016-01-28 02:23:11,390 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:11,390 DEBUG [EBPB_PB2STTL-116716] Executing TypeinAddressbar function:
+2016-01-28 02:23:11,390 DEBUG [EBPB_PB2STTL-116716] Executing SendData function
+2016-01-28 02:23:13,900 DEBUG [EBPB_PB2STTL-116716] Exiting Senddata function
+2016-01-28 02:23:13,900 DEBUG [EBPB_PB2STTL-116716] TestStepResult of TypeinAddressbar: pass
+2016-01-28 02:23:13,900 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:13,900 DEBUG [EBPB_PB2STTL-116716] Executing ClickNativeIcon function:
+2016-01-28 02:23:14,814 DEBUG [EBPB_PB2STTL-116716] [[AppiumTouchActionExtension: selendroid on ANDROID (c1df3c55-e2a1-4813-c2d2-edb86bdc38e8)] -> xpath: (//Button[@id='go_button'])[1]]Clicked successfully
+2016-01-28 02:23:14,814 DEBUG [EBPB_PB2STTL-116716] TestStepResult of ClickNativeIcon: pass
+2016-01-28 02:23:14,814 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:14,814 DEBUG [EBPB_PB2STTL-116716] Executing wait function:
+2016-01-28 02:23:14,814 DEBUG [EBPB_PB2STTL-116716] Started Executing wait function
+2016-01-28 02:23:24,815 DEBUG [EBPB_PB2STTL-116716] Exiting from wait function
+2016-01-28 02:23:24,815 DEBUG [EBPB_PB2STTL-116716] TestStepResult of wait: Pass
+2016-01-28 02:23:24,815 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:24,815 DEBUG [EBPB_PB2STTL-116716] Executing SwitchApp function:
+2016-01-28 02:23:24,933 DEBUG [EBPB_PB2STTL-116716] Successfully switched to WEBVIEW
+2016-01-28 02:23:24,933 DEBUG [EBPB_PB2STTL-116716] TestStepResult of SwitchApp: Pass
+2016-01-28 02:23:24,933 DEBUG [EBPB_PB2STTL-116716] In execute keyword function
+2016-01-28 02:23:24,933 DEBUG [EBPB_PB2STTL-116716] Executing validate_PageTitle function:
+2016-01-28 02:23:24,957 DEBUG [EBPB_PB2STTL-116716] The title of the page is *********************************: All Index
+2016-01-28 02:23:24,957 DEBUG [EBPB_PB2STTL-116716] The page title found is correct
+2016-01-28 02:23:24,957 DEBUG [EBPB_PB2STTL-116716] Result of validate_PageTitle: pass
+2016-01-28 02:23:24,957 DEBUG [EBPB_PB2STTL-116716] allstep_result contains: PassPasspasspassPassPassPassPassPassPassnull
+2016-01-28 02:23:24,957 DEBUG [EBPB_PB2STTL-116716] allexpected_result contains: nullpassnullpassnullpassnull
+2016-01-28 02:23:24,957 DEBUG [EBPB_PB2STTL-116716] Testcase_Result contains: nullpassnullpassnullpassnullPassPasspasspassPassPassPassPassPassPassnull
+2016-01-28 02:23:24,957 DEBUG [EBPB_PB2STTL-116716] Test case with description Addressbar  Pass
+2016-01-28 02:23:26,012 DEBUG [EBPB_PB2STTL-116716] Executing browser_Quit function
+2016-01-28 02:23:26,012 DEBUG [EBPB_PB2STTL-116716] Completed browser_Quit function
+2016-01-28 02:23:26,012 DEBUG [EBPB_PB2STTL-116716] Completed quitSelendroid function
+2016-01-28 02:23:26,013 DEBUG [EBPB_PB2STTL-116716] Row number:0
+2016-01-28 02:23:26,023 DEBUG [EBPB_PB2STTL-116716] Ending Test Case IDSTTL-116716

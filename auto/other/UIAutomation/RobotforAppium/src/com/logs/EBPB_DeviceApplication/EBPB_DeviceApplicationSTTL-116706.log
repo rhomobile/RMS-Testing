@@ -1,0 +1,63 @@
+2016-01-27 23:41:30,697 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing Test Case ID: STTL-116706
+2016-01-27 23:41:30,705 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 23:41:41,165 DEBUG [EBPB_DeviceApplicationSTTL-116706] Exiting Init_Selendroid function
+2016-01-27 23:41:41,182 DEBUG [EBPB_DeviceApplicationSTTL-116706] TestCase with Description "alarm with URL" Execution started
+2016-01-27 23:41:41,182 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:41,182 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing wait function:
+2016-01-27 23:41:41,182 DEBUG [EBPB_DeviceApplicationSTTL-116706] Started Executing wait function
+2016-01-27 23:41:44,183 DEBUG [EBPB_DeviceApplicationSTTL-116706] Exiting from wait function
+2016-01-27 23:41:44,183 DEBUG [EBPB_DeviceApplicationSTTL-116706] TestStepResult of wait: Pass
+2016-01-27 23:41:44,183 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:44,183 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing validate_PageTitle function:
+2016-01-27 23:41:44,226 DEBUG [EBPB_DeviceApplicationSTTL-116706] The title of the page is *********************************: Pocket Browser Tests
+2016-01-27 23:41:44,226 DEBUG [EBPB_DeviceApplicationSTTL-116706] The page title found is correct
+2016-01-27 23:41:44,226 DEBUG [EBPB_DeviceApplicationSTTL-116706] Result of validate_PageTitle: pass
+2016-01-27 23:41:44,226 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:44,226 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing link_Click function:
+2016-01-27 23:41:44,858 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing Click function
+2016-01-27 23:41:45,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] Exiting Click function
+2016-01-27 23:41:45,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] DeviceApplication_test_link clicked successfully
+2016-01-27 23:41:45,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] TestStepResult of link_Click: Pass
+2016-01-27 23:41:45,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:45,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing wait function:
+2016-01-27 23:41:45,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] Started Executing wait function
+2016-01-27 23:41:47,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] Exiting from wait function
+2016-01-27 23:41:47,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] TestStepResult of wait: Pass
+2016-01-27 23:41:47,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:47,885 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing validate_PageTitle function:
+2016-01-27 23:41:47,923 DEBUG [EBPB_DeviceApplicationSTTL-116706] The title of the page is *********************************: Device & Application
+2016-01-27 23:41:47,923 DEBUG [EBPB_DeviceApplicationSTTL-116706] The page title found is correct
+2016-01-27 23:41:47,923 DEBUG [EBPB_DeviceApplicationSTTL-116706] Result of validate_PageTitle: pass
+2016-01-27 23:41:47,923 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:47,923 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing SelectTestToRun function:
+2016-01-27 23:41:51,009 DEBUG [EBPB_DeviceApplicationSTTL-116706] Successfull in selecting clicking the category
+2016-01-27 23:41:51,009 DEBUG [EBPB_DeviceApplicationSTTL-116706] TestStepResult of SelectTestToRun: pass
+2016-01-27 23:41:51,009 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:51,009 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing validate_Text_Exists function:
+2016-01-27 23:41:51,321 DEBUG [EBPB_DeviceApplicationSTTL-116706] VT056-880 Testcase Text found
+2016-01-27 23:41:51,321 DEBUG [EBPB_DeviceApplicationSTTL-116706] Result of validate_Text_Exists: Pass
+2016-01-27 23:41:51,321 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:51,321 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing ClickRunTest function:
+2016-01-27 23:41:51,658 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing Click function
+2016-01-27 23:41:52,789 DEBUG [EBPB_DeviceApplicationSTTL-116706] Exiting Click function
+2016-01-27 23:41:52,789 DEBUG [EBPB_DeviceApplicationSTTL-116706] runtest_top_xpath Button clicked Successfully
+2016-01-27 23:41:52,789 DEBUG [EBPB_DeviceApplicationSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-27 23:41:52,789 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:41:52,789 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing wait function:
+2016-01-27 23:41:52,789 DEBUG [EBPB_DeviceApplicationSTTL-116706] Started Executing wait function
+2016-01-27 23:42:27,790 DEBUG [EBPB_DeviceApplicationSTTL-116706] Exiting from wait function
+2016-01-27 23:42:27,790 DEBUG [EBPB_DeviceApplicationSTTL-116706] TestStepResult of wait: Pass
+2016-01-27 23:42:27,790 DEBUG [EBPB_DeviceApplicationSTTL-116706] In execute keyword function
+2016-01-27 23:42:27,790 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing validate_PageTitle function:
+2016-01-27 23:42:27,829 DEBUG [EBPB_DeviceApplicationSTTL-116706] The title of the page is *********************************: Navigation Check
+2016-01-27 23:42:27,829 DEBUG [EBPB_DeviceApplicationSTTL-116706] The page title found is correct
+2016-01-27 23:42:27,829 DEBUG [EBPB_DeviceApplicationSTTL-116706] Result of validate_PageTitle: pass
+2016-01-27 23:42:27,829 DEBUG [EBPB_DeviceApplicationSTTL-116706] allstep_result contains: PasspasspassPassPassPassnull
+2016-01-27 23:42:27,829 DEBUG [EBPB_DeviceApplicationSTTL-116706] allexpected_result contains: nullpassnullPassnullpassnullpassnull
+2016-01-27 23:42:27,829 DEBUG [EBPB_DeviceApplicationSTTL-116706] Testcase_Result contains: nullpassnullPassnullpassnullpassnullPasspasspassPassPassPassnull
+2016-01-27 23:42:27,829 DEBUG [EBPB_DeviceApplicationSTTL-116706] Test case with description alarm with URL Pass
+2016-01-27 23:42:28,856 DEBUG [EBPB_DeviceApplicationSTTL-116706] Executing browser_Quit function
+2016-01-27 23:42:28,856 DEBUG [EBPB_DeviceApplicationSTTL-116706] Completed browser_Quit function
+2016-01-27 23:42:28,856 DEBUG [EBPB_DeviceApplicationSTTL-116706] Completed quitSelendroid function
+2016-01-27 23:42:28,856 DEBUG [EBPB_DeviceApplicationSTTL-116706] Row number:7
+2016-01-27 23:42:28,888 DEBUG [EBPB_DeviceApplicationSTTL-116706] Ending Test Case IDSTTL-116706

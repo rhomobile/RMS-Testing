@@ -1,0 +1,66 @@
+2016-01-27 22:20:23,921 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-27 22:20:23,926 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:20:33,825 DEBUG [EBManual_Tabbar_JSSTTL-116709] Exiting Init_Selendroid function
+2016-01-27 22:20:33,838 DEBUG [EBManual_Tabbar_JSSTTL-116709] TestCase with Description "Disable the tab." Execution started
+2016-01-27 22:20:33,838 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:33,838 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing wait function:
+2016-01-27 22:20:33,838 DEBUG [EBManual_Tabbar_JSSTTL-116709] Started Executing wait function
+2016-01-27 22:20:38,838 DEBUG [EBManual_Tabbar_JSSTTL-116709] Exiting from wait function
+2016-01-27 22:20:38,838 DEBUG [EBManual_Tabbar_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 22:20:38,838 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:38,838 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 22:20:38,878 DEBUG [EBManual_Tabbar_JSSTTL-116709] The title of the page is *********************************: Manual specs
+2016-01-27 22:20:38,878 DEBUG [EBManual_Tabbar_JSSTTL-116709] The page title found is correct
+2016-01-27 22:20:38,878 DEBUG [EBManual_Tabbar_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 22:20:38,878 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:38,878 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing link_Click function:
+2016-01-27 22:20:39,574 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing Click function
+2016-01-27 22:20:40,789 DEBUG [EBManual_Tabbar_JSSTTL-116709] Exiting Click function
+2016-01-27 22:20:40,789 DEBUG [EBManual_Tabbar_JSSTTL-116709] tabbar_test_link clicked successfully
+2016-01-27 22:20:40,789 DEBUG [EBManual_Tabbar_JSSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-27 22:20:40,790 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:40,790 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 22:20:40,808 DEBUG [EBManual_Tabbar_JSSTTL-116709] The title of the page is *********************************: Native Tabbar JS Test
+2016-01-27 22:20:40,808 DEBUG [EBManual_Tabbar_JSSTTL-116709] The page title found is correct
+2016-01-27 22:20:40,808 DEBUG [EBManual_Tabbar_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 22:20:40,809 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:40,809 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing SelectTestToRun function:
+2016-01-27 22:20:44,333 DEBUG [EBManual_Tabbar_JSSTTL-116709] Successfull in selecting clicking the category
+2016-01-27 22:20:44,333 DEBUG [EBManual_Tabbar_JSSTTL-116709] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:20:44,333 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:44,333 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing ClickRunTest function:
+2016-01-27 22:20:44,687 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing Click function
+2016-01-27 22:20:45,659 DEBUG [EBManual_Tabbar_JSSTTL-116709] Exiting Click function
+2016-01-27 22:20:45,659 DEBUG [EBManual_Tabbar_JSSTTL-116709] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:20:45,659 DEBUG [EBManual_Tabbar_JSSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-27 22:20:45,659 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:45,659 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing validate_Text_Exists function:
+2016-01-27 22:20:46,303 DEBUG [EBManual_Tabbar_JSSTTL-116709] VT283-0319 Testcase Text found
+2016-01-27 22:20:46,303 DEBUG [EBManual_Tabbar_JSSTTL-116709] Result of validate_Text_Exists: Pass
+2016-01-27 22:20:46,303 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:46,303 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing ClickRunTest function:
+2016-01-27 22:20:46,623 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing Click function
+2016-01-27 22:20:47,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] Exiting Click function
+2016-01-27 22:20:47,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:20:47,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-27 22:20:47,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:47,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing wait function:
+2016-01-27 22:20:47,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] Started Executing wait function
+2016-01-27 22:20:52,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] Exiting from wait function
+2016-01-27 22:20:52,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 22:20:52,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:52,612 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing TakeScreenshot function:
+2016-01-27 22:20:54,469 DEBUG [EBManual_Tabbar_JSSTTL-116709] TestStepResult of TakeScreenshot: pass
+2016-01-27 22:20:54,469 DEBUG [EBManual_Tabbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:20:54,469 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing validate_Screenshot function:
+2016-01-27 22:20:54,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] Match found with reference image
+2016-01-27 22:20:54,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] Result of validate_Screenshot: Pass
+2016-01-27 22:20:54,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] allstep_result contains: passPasspasspasspassPassPassnull
+2016-01-27 22:20:54,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 22:20:54,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpassPasspasspasspassPassPassnull
+2016-01-27 22:20:54,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] Test case with description Disable the tab. Pass
+2016-01-27 22:20:55,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] Executing browser_Quit function
+2016-01-27 22:20:55,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] Completed browser_Quit function
+2016-01-27 22:20:55,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] Completed quitSelendroid function
+2016-01-27 22:20:55,526 DEBUG [EBManual_Tabbar_JSSTTL-116709] Row number:10
+2016-01-27 22:20:55,561 DEBUG [EBManual_Tabbar_JSSTTL-116709] Ending Test Case IDSTTL-116709

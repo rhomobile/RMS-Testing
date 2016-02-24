@@ -1,0 +1,31 @@
+2016-01-27 20:27:12,403 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Executing Test Case ID: STTL-116719
+2016-01-27 20:27:12,412 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:27:22,709 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Exiting Init_Selendroid function
+2016-01-27 20:27:22,727 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] TestCase with Description "validate SettingsButton is disabled" Execution started
+2016-01-27 20:27:22,727 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] In execute keyword function
+2016-01-27 20:27:22,727 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Executing wait function:
+2016-01-27 20:27:22,727 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Started Executing wait function
+2016-01-27 20:27:24,727 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Exiting from wait function
+2016-01-27 20:27:24,727 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] TestStepResult of wait: Pass
+2016-01-27 20:27:24,727 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] In execute keyword function
+2016-01-27 20:27:24,727 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Executing SwitchApp function:
+2016-01-27 20:27:24,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Successfully switched to NATIVE_APP
+2016-01-27 20:27:24,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] TestStepResult of SwitchApp: Pass
+2016-01-27 20:27:24,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] In execute keyword function
+2016-01-27 20:27:24,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Executing wait function:
+2016-01-27 20:27:24,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Started Executing wait function
+2016-01-27 20:27:26,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Exiting from wait function
+2016-01-27 20:27:26,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] TestStepResult of wait: Pass
+2016-01-27 20:27:26,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] In execute keyword function
+2016-01-27 20:27:26,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Executing validate_isIconDisplayed function:
+2016-01-27 20:27:26,812 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Entered validate_isIconDisplayed function
+2016-01-27 20:27:27,491 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Result of validate_isIconDisplayed: Pass
+2016-01-27 20:27:27,491 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] allstep_result contains: PassPassPassnull
+2016-01-27 20:27:27,491 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] allexpected_result contains: nullPassnull
+2016-01-27 20:27:27,491 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Testcase_Result contains: nullPassnullPassPassPassnull
+2016-01-27 20:27:27,491 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Test case with description validate SettingsButton is disabled Pass
+2016-01-27 20:27:28,486 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Executing browser_Quit function
+2016-01-27 20:27:28,486 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Completed browser_Quit function
+2016-01-27 20:27:28,486 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Completed quitSelendroid function
+2016-01-27 20:27:28,487 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Row number:20
+2016-01-27 20:27:28,519 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116719] Ending Test Case IDSTTL-116719

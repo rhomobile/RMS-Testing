@@ -1,0 +1,57 @@
+2016-01-28 01:17:39,172 DEBUG [EBPB_ImagerSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-28 01:17:39,177 DEBUG [EBPB_ImagerSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 01:17:48,032 DEBUG [EBPB_ImagerSTTL-116709] Exiting Init_Selendroid function
+2016-01-28 01:17:48,045 DEBUG [EBPB_ImagerSTTL-116709] TestCase with Description "Destination Url(http)" Execution started
+2016-01-28 01:17:48,045 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:17:48,046 DEBUG [EBPB_ImagerSTTL-116709] Executing wait function:
+2016-01-28 01:17:48,046 DEBUG [EBPB_ImagerSTTL-116709] Started Executing wait function
+2016-01-28 01:17:51,046 DEBUG [EBPB_ImagerSTTL-116709] Exiting from wait function
+2016-01-28 01:17:51,046 DEBUG [EBPB_ImagerSTTL-116709] TestStepResult of wait: Pass
+2016-01-28 01:17:51,046 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:17:51,046 DEBUG [EBPB_ImagerSTTL-116709] Executing validate_PageTitle function:
+2016-01-28 01:17:51,090 DEBUG [EBPB_ImagerSTTL-116709] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 01:17:51,090 DEBUG [EBPB_ImagerSTTL-116709] The page title found is correct
+2016-01-28 01:17:51,090 DEBUG [EBPB_ImagerSTTL-116709] Result of validate_PageTitle: pass
+2016-01-28 01:17:51,090 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:17:51,090 DEBUG [EBPB_ImagerSTTL-116709] Executing link_Click function:
+2016-01-28 01:17:51,692 DEBUG [EBPB_ImagerSTTL-116709] Executing Click function
+2016-01-28 01:17:52,736 DEBUG [EBPB_ImagerSTTL-116709] Exiting Click function
+2016-01-28 01:17:52,736 DEBUG [EBPB_ImagerSTTL-116709] imager_test_link clicked successfully
+2016-01-28 01:17:52,736 DEBUG [EBPB_ImagerSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 01:17:52,736 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:17:52,736 DEBUG [EBPB_ImagerSTTL-116709] Executing validate_PageTitle function:
+2016-01-28 01:17:52,755 DEBUG [EBPB_ImagerSTTL-116709] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Imager
+2016-01-28 01:17:52,755 DEBUG [EBPB_ImagerSTTL-116709] The page title found is correct
+2016-01-28 01:17:52,755 DEBUG [EBPB_ImagerSTTL-116709] Result of validate_PageTitle: pass
+2016-01-28 01:17:52,755 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:17:52,755 DEBUG [EBPB_ImagerSTTL-116709] Executing SelectTestToRun function:
+2016-01-28 01:17:56,419 DEBUG [EBPB_ImagerSTTL-116709] Successfull in selecting clicking the category
+2016-01-28 01:17:56,419 DEBUG [EBPB_ImagerSTTL-116709] TestStepResult of SelectTestToRun: pass
+2016-01-28 01:17:56,420 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:17:56,420 DEBUG [EBPB_ImagerSTTL-116709] Executing validate_Text_Exists function:
+2016-01-28 01:17:56,729 DEBUG [EBPB_ImagerSTTL-116709] VT056-1138 Testcase Text found
+2016-01-28 01:17:56,729 DEBUG [EBPB_ImagerSTTL-116709] Result of validate_Text_Exists: Pass
+2016-01-28 01:17:56,730 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:17:56,730 DEBUG [EBPB_ImagerSTTL-116709] Executing ClickRunTest function:
+2016-01-28 01:17:57,059 DEBUG [EBPB_ImagerSTTL-116709] Executing Click function
+2016-01-28 01:17:58,066 DEBUG [EBPB_ImagerSTTL-116709] Exiting Click function
+2016-01-28 01:17:58,066 DEBUG [EBPB_ImagerSTTL-116709] runtest_top_xpath Button clicked Successfully
+2016-01-28 01:17:58,066 DEBUG [EBPB_ImagerSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-28 01:17:58,066 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:17:58,066 DEBUG [EBPB_ImagerSTTL-116709] Executing wait function:
+2016-01-28 01:17:58,066 DEBUG [EBPB_ImagerSTTL-116709] Started Executing wait function
+2016-01-28 01:18:13,068 DEBUG [EBPB_ImagerSTTL-116709] Exiting from wait function
+2016-01-28 01:18:13,068 DEBUG [EBPB_ImagerSTTL-116709] TestStepResult of wait: Pass
+2016-01-28 01:18:13,068 DEBUG [EBPB_ImagerSTTL-116709] In execute keyword function
+2016-01-28 01:18:13,068 DEBUG [EBPB_ImagerSTTL-116709] Executing validate_Result function:
+2016-01-28 01:18:13,335 DEBUG [EBPB_ImagerSTTL-116709] Sent Text found in FileSent
+2016-01-28 01:18:13,335 DEBUG [EBPB_ImagerSTTL-116709] Result of validate_Result: Pass
+2016-01-28 01:18:13,335 DEBUG [EBPB_ImagerSTTL-116709] allstep_result contains: PasspasspassPassPassnull
+2016-01-28 01:18:13,335 DEBUG [EBPB_ImagerSTTL-116709] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 01:18:13,335 DEBUG [EBPB_ImagerSTTL-116709] Testcase_Result contains: nullPassnullPassnullpassnullpassnullPasspasspassPassPassnull
+2016-01-28 01:18:13,335 DEBUG [EBPB_ImagerSTTL-116709] Test case with description Destination Url(http) Pass
+2016-01-28 01:18:14,277 DEBUG [EBPB_ImagerSTTL-116709] Executing browser_Quit function
+2016-01-28 01:18:14,277 DEBUG [EBPB_ImagerSTTL-116709] Completed browser_Quit function
+2016-01-28 01:18:14,277 DEBUG [EBPB_ImagerSTTL-116709] Completed quitSelendroid function
+2016-01-28 01:18:14,277 DEBUG [EBPB_ImagerSTTL-116709] Row number:10
+2016-01-28 01:18:14,310 DEBUG [EBPB_ImagerSTTL-116709] Ending Test Case IDSTTL-116709

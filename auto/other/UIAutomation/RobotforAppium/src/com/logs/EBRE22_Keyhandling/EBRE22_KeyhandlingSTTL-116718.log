@@ -1,0 +1,521 @@
+2016-01-28 04:19:43,270 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Test Case ID: STTL-116718
+2016-01-28 04:19:43,277 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 04:19:53,310 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Init_Selendroid function
+2016-01-28 04:19:53,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestCase with Description "KeyValue:All  Dispatch:true for alphabets and special keys" Execution started
+2016-01-28 04:19:53,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:19:53,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:19:53,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:19:58,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:19:58,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:19:58,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:19:58,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_PageTitle function:
+2016-01-28 04:19:58,368 DEBUG [EBRE22_KeyhandlingSTTL-116718] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 04:19:58,368 DEBUG [EBRE22_KeyhandlingSTTL-116718] The page title found is correct
+2016-01-28 04:19:58,368 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_PageTitle: pass
+2016-01-28 04:19:58,368 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:19:58,368 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing link_Click function:
+2016-01-28 04:19:58,952 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:19:59,995 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:19:59,995 DEBUG [EBRE22_KeyhandlingSTTL-116718] keyhandling_link clicked successfully
+2016-01-28 04:19:59,995 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of link_Click: Pass
+2016-01-28 04:19:59,995 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:19:59,995 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_PageTitle function:
+2016-01-28 04:20:00,040 DEBUG [EBRE22_KeyhandlingSTTL-116718] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Keyhandling
+2016-01-28 04:20:00,040 DEBUG [EBRE22_KeyhandlingSTTL-116718] The page title found is correct
+2016-01-28 04:20:00,040 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_PageTitle: pass
+2016-01-28 04:20:00,040 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:00,040 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 04:20:04,119 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 04:20:04,119 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:20:04,119 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:04,119 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickRunTest function:
+2016-01-28 04:20:04,445 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:20:05,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:20:05,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:20:05,441 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 04:20:05,441 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:05,441 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 04:20:05,736 DEBUG [EBRE22_KeyhandlingSTTL-116718] VT187-2591 Testcase Text found
+2016-01-28 04:20:05,736 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 04:20:05,736 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:05,736 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing textBoxClick function:
+2016-01-28 04:20:07,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] keytxtInput_idtext box clicked successfully
+2016-01-28 04:20:07,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of textBoxClick: pass
+2016-01-28 04:20:07,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:07,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:20:07,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:20:09,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:20:09,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:20:09,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:09,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing sendKeyEvents function:
+2016-01-28 04:20:09,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered sendKeyEvents function
+2016-01-28 04:20:09,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] a
+2016-01-28 04:20:09,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered a
+2016-01-28 04:20:09,135 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started executeCommandLine function
+2016-01-28 04:20:13,157 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from executeCommandLine function
+2016-01-28 04:20:13,157 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:20:13,157 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:20:13,157 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:13,157 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_textBoxData function:
+2016-01-28 04:20:13,157 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing getAttribute function
+2016-01-28 04:20:13,313 DEBUG [EBRE22_KeyhandlingSTTL-116718] a
+2016-01-28 04:20:13,313 DEBUG [EBRE22_KeyhandlingSTTL-116718] a value matches with Expected a value
+2016-01-28 04:20:13,313 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_textBoxData: Pass
+2016-01-28 04:20:13,313 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:13,313 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_keyCaptured function:
+2016-01-28 04:20:13,313 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered validate_keyCaptured function
+2016-01-28 04:20:13,586 DEBUG [EBRE22_KeyhandlingSTTL-116718] 29
+2016-01-28 04:20:13,586 DEBUG [EBRE22_KeyhandlingSTTL-116718] Actual Value matches Expected
+2016-01-28 04:20:13,586 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:20:13,586 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from validate_keyCaptured function
+2016-01-28 04:20:13,586 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_keyCaptured: pass
+2016-01-28 04:20:13,586 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:13,586 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:20:13,643 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to NATIVE_APP
+2016-01-28 04:20:13,643 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:20:13,643 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:13,643 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickNativeIcon function:
+2016-01-28 04:20:14,557 DEBUG [EBRE22_KeyhandlingSTTL-116718] [[AppiumTouchActionExtension: selendroid on ANDROID (ae72beaa-09bf-aca0-9702-9e00c52be1e1)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-28 04:20:14,557 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickNativeIcon: pass
+2016-01-28 04:20:14,557 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:14,557 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:20:14,557 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:20:24,558 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:20:24,558 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:20:24,558 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:24,558 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:20:24,617 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to WEBVIEW
+2016-01-28 04:20:24,617 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:20:24,617 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:24,617 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 04:20:28,746 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 04:20:28,746 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:20:28,746 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:28,746 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickRunTest function:
+2016-01-28 04:20:29,074 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:20:30,103 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:20:30,103 DEBUG [EBRE22_KeyhandlingSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:20:30,103 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 04:20:30,103 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:30,103 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 04:20:30,353 DEBUG [EBRE22_KeyhandlingSTTL-116718] VT187-2591 Testcase Text found
+2016-01-28 04:20:30,353 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 04:20:30,353 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:30,353 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing textBoxClick function:
+2016-01-28 04:20:31,871 DEBUG [EBRE22_KeyhandlingSTTL-116718] keytxtInput_idtext box clicked successfully
+2016-01-28 04:20:31,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of textBoxClick: pass
+2016-01-28 04:20:31,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:31,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:20:31,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:20:33,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:20:33,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:20:33,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:33,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing sendKeyEvents function:
+2016-01-28 04:20:33,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered sendKeyEvents function
+2016-01-28 04:20:33,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] p
+2016-01-28 04:20:33,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered p
+2016-01-28 04:20:33,872 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started executeCommandLine function
+2016-01-28 04:20:37,894 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from executeCommandLine function
+2016-01-28 04:20:37,894 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:20:37,894 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:20:37,894 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:37,894 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_textBoxData function:
+2016-01-28 04:20:37,894 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing getAttribute function
+2016-01-28 04:20:38,099 DEBUG [EBRE22_KeyhandlingSTTL-116718] p
+2016-01-28 04:20:38,099 DEBUG [EBRE22_KeyhandlingSTTL-116718] p value matches with Expected p value
+2016-01-28 04:20:38,100 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_textBoxData: Pass
+2016-01-28 04:20:38,100 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:38,100 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_keyCaptured function:
+2016-01-28 04:20:38,100 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered validate_keyCaptured function
+2016-01-28 04:20:38,309 DEBUG [EBRE22_KeyhandlingSTTL-116718] 44
+2016-01-28 04:20:38,309 DEBUG [EBRE22_KeyhandlingSTTL-116718] Actual Value matches Expected
+2016-01-28 04:20:38,309 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:20:38,309 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from validate_keyCaptured function
+2016-01-28 04:20:38,309 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_keyCaptured: pass
+2016-01-28 04:20:38,309 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:38,309 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:20:38,359 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to NATIVE_APP
+2016-01-28 04:20:38,359 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:20:38,359 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:38,359 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickNativeIcon function:
+2016-01-28 04:20:39,213 DEBUG [EBRE22_KeyhandlingSTTL-116718] [[AppiumTouchActionExtension: selendroid on ANDROID (ae72beaa-09bf-aca0-9702-9e00c52be1e1)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-28 04:20:39,213 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickNativeIcon: pass
+2016-01-28 04:20:39,213 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:39,213 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:20:39,213 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:20:49,214 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:20:49,214 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:20:49,214 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:49,214 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:20:49,324 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to WEBVIEW
+2016-01-28 04:20:49,324 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:20:49,324 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:49,324 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 04:20:53,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 04:20:53,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:20:53,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:53,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickRunTest function:
+2016-01-28 04:20:53,753 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:20:54,792 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:20:54,793 DEBUG [EBRE22_KeyhandlingSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:20:54,793 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 04:20:54,793 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:54,793 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 04:20:55,000 DEBUG [EBRE22_KeyhandlingSTTL-116718] VT187-2591 Testcase Text found
+2016-01-28 04:20:55,001 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 04:20:55,001 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:55,001 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing textBoxClick function:
+2016-01-28 04:20:56,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] keytxtInput_idtext box clicked successfully
+2016-01-28 04:20:56,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of textBoxClick: pass
+2016-01-28 04:20:56,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:56,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:20:56,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:20:58,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:20:58,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:20:58,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:20:58,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing sendKeyEvents function:
+2016-01-28 04:20:58,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered sendKeyEvents function
+2016-01-28 04:20:58,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] t
+2016-01-28 04:20:58,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered t
+2016-01-28 04:20:58,440 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started executeCommandLine function
+2016-01-28 04:21:02,462 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from executeCommandLine function
+2016-01-28 04:21:02,462 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:21:02,462 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:21:02,462 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:02,462 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_textBoxData function:
+2016-01-28 04:21:02,462 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing getAttribute function
+2016-01-28 04:21:02,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] t
+2016-01-28 04:21:02,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] t value matches with Expected t value
+2016-01-28 04:21:02,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_textBoxData: Pass
+2016-01-28 04:21:02,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:02,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_keyCaptured function:
+2016-01-28 04:21:02,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered validate_keyCaptured function
+2016-01-28 04:21:02,874 DEBUG [EBRE22_KeyhandlingSTTL-116718] 48
+2016-01-28 04:21:02,874 DEBUG [EBRE22_KeyhandlingSTTL-116718] Actual Value matches Expected
+2016-01-28 04:21:02,874 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:21:02,874 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from validate_keyCaptured function
+2016-01-28 04:21:02,874 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_keyCaptured: pass
+2016-01-28 04:21:02,874 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:02,874 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:21:02,924 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to NATIVE_APP
+2016-01-28 04:21:02,924 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:21:02,924 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:02,924 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickNativeIcon function:
+2016-01-28 04:21:03,765 DEBUG [EBRE22_KeyhandlingSTTL-116718] [[AppiumTouchActionExtension: selendroid on ANDROID (ae72beaa-09bf-aca0-9702-9e00c52be1e1)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-28 04:21:03,765 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickNativeIcon: pass
+2016-01-28 04:21:03,765 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:03,765 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:21:03,765 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:21:13,766 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:21:13,766 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:21:13,766 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:13,766 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:21:13,866 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to WEBVIEW
+2016-01-28 04:21:13,866 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:21:13,866 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:13,866 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 04:21:17,653 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 04:21:17,653 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:21:17,653 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:17,653 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickRunTest function:
+2016-01-28 04:21:17,999 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:21:19,038 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:21:19,038 DEBUG [EBRE22_KeyhandlingSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:21:19,038 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 04:21:19,038 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:19,038 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 04:21:19,339 DEBUG [EBRE22_KeyhandlingSTTL-116718] VT187-2591 Testcase Text found
+2016-01-28 04:21:19,339 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 04:21:19,339 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:19,339 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing textBoxClick function:
+2016-01-28 04:21:20,807 DEBUG [EBRE22_KeyhandlingSTTL-116718] keytxtInput_idtext box clicked successfully
+2016-01-28 04:21:20,807 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of textBoxClick: pass
+2016-01-28 04:21:20,807 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:20,807 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:21:20,807 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:21:22,808 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:21:22,808 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:21:22,808 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:22,808 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing sendKeyEvents function:
+2016-01-28 04:21:22,808 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered sendKeyEvents function
+2016-01-28 04:21:22,808 DEBUG [EBRE22_KeyhandlingSTTL-116718] x
+2016-01-28 04:21:22,808 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered x
+2016-01-28 04:21:22,808 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started executeCommandLine function
+2016-01-28 04:21:26,828 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from executeCommandLine function
+2016-01-28 04:21:26,828 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:21:26,828 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:21:26,828 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:26,828 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_textBoxData function:
+2016-01-28 04:21:26,828 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing getAttribute function
+2016-01-28 04:21:27,027 DEBUG [EBRE22_KeyhandlingSTTL-116718] x
+2016-01-28 04:21:27,027 DEBUG [EBRE22_KeyhandlingSTTL-116718] x value matches with Expected x value
+2016-01-28 04:21:27,027 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_textBoxData: Pass
+2016-01-28 04:21:27,027 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:27,027 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_keyCaptured function:
+2016-01-28 04:21:27,027 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered validate_keyCaptured function
+2016-01-28 04:21:27,261 DEBUG [EBRE22_KeyhandlingSTTL-116718] 52
+2016-01-28 04:21:27,261 DEBUG [EBRE22_KeyhandlingSTTL-116718] Actual Value matches Expected
+2016-01-28 04:21:27,261 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:21:27,261 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from validate_keyCaptured function
+2016-01-28 04:21:27,261 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_keyCaptured: pass
+2016-01-28 04:21:27,261 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:27,261 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:21:27,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to NATIVE_APP
+2016-01-28 04:21:27,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:21:27,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:27,327 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickNativeIcon function:
+2016-01-28 04:21:28,171 DEBUG [EBRE22_KeyhandlingSTTL-116718] [[AppiumTouchActionExtension: selendroid on ANDROID (ae72beaa-09bf-aca0-9702-9e00c52be1e1)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-28 04:21:28,171 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickNativeIcon: pass
+2016-01-28 04:21:28,171 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:28,171 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:21:28,171 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:21:38,172 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:21:38,172 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:21:38,172 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:38,172 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:21:38,286 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to WEBVIEW
+2016-01-28 04:21:38,286 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:21:38,286 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:38,286 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 04:21:42,264 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 04:21:42,264 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:21:42,265 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:42,265 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickRunTest function:
+2016-01-28 04:21:42,611 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:21:43,651 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:21:43,651 DEBUG [EBRE22_KeyhandlingSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:21:43,651 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 04:21:43,651 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:43,651 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 04:21:43,924 DEBUG [EBRE22_KeyhandlingSTTL-116718] VT187-2591 Testcase Text found
+2016-01-28 04:21:43,924 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 04:21:43,924 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:43,924 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing textBoxClick function:
+2016-01-28 04:21:45,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] keytxtInput_idtext box clicked successfully
+2016-01-28 04:21:45,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of textBoxClick: pass
+2016-01-28 04:21:45,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:45,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:21:45,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:21:47,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:21:47,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:21:47,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:47,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing sendKeyEvents function:
+2016-01-28 04:21:47,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered sendKeyEvents function
+2016-01-28 04:21:47,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] z
+2016-01-28 04:21:47,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered z
+2016-01-28 04:21:47,372 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started executeCommandLine function
+2016-01-28 04:21:51,394 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from executeCommandLine function
+2016-01-28 04:21:51,394 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:21:51,394 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:21:51,394 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:51,394 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_textBoxData function:
+2016-01-28 04:21:51,394 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing getAttribute function
+2016-01-28 04:21:51,592 DEBUG [EBRE22_KeyhandlingSTTL-116718] z
+2016-01-28 04:21:51,592 DEBUG [EBRE22_KeyhandlingSTTL-116718] z value matches with Expected z value
+2016-01-28 04:21:51,592 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_textBoxData: Pass
+2016-01-28 04:21:51,592 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:51,592 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_keyCaptured function:
+2016-01-28 04:21:51,592 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered validate_keyCaptured function
+2016-01-28 04:21:51,771 DEBUG [EBRE22_KeyhandlingSTTL-116718] 54
+2016-01-28 04:21:51,771 DEBUG [EBRE22_KeyhandlingSTTL-116718] Actual Value matches Expected
+2016-01-28 04:21:51,771 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:21:51,771 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from validate_keyCaptured function
+2016-01-28 04:21:51,771 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_keyCaptured: pass
+2016-01-28 04:21:51,771 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:51,771 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:21:51,822 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to NATIVE_APP
+2016-01-28 04:21:51,822 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:21:51,822 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:51,823 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickNativeIcon function:
+2016-01-28 04:21:52,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] [[AppiumTouchActionExtension: selendroid on ANDROID (ae72beaa-09bf-aca0-9702-9e00c52be1e1)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-28 04:21:52,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickNativeIcon: pass
+2016-01-28 04:21:52,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:21:52,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:21:52,640 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:22:02,641 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:22:02,641 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:22:02,641 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:02,641 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:22:02,753 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to WEBVIEW
+2016-01-28 04:22:02,753 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:22:02,753 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:02,753 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 04:22:06,764 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 04:22:06,764 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:22:06,764 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:06,764 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickRunTest function:
+2016-01-28 04:22:07,071 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:22:08,123 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:22:08,123 DEBUG [EBRE22_KeyhandlingSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:22:08,123 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 04:22:08,123 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:08,123 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 04:22:08,385 DEBUG [EBRE22_KeyhandlingSTTL-116718] VT187-2591 Testcase Text found
+2016-01-28 04:22:08,385 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 04:22:08,385 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:08,385 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing textBoxClick function:
+2016-01-28 04:22:09,850 DEBUG [EBRE22_KeyhandlingSTTL-116718] keytxtInput_idtext box clicked successfully
+2016-01-28 04:22:09,850 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of textBoxClick: pass
+2016-01-28 04:22:09,851 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:09,851 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:22:09,851 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:22:11,852 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:22:11,852 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:22:11,852 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:11,852 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing sendKeyEvents function:
+2016-01-28 04:22:11,852 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered sendKeyEvents function
+2016-01-28 04:22:11,852 DEBUG [EBRE22_KeyhandlingSTTL-116718] Plus
+2016-01-28 04:22:11,852 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered Pluskey
+2016-01-28 04:22:11,852 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started executeCommandLine function
+2016-01-28 04:22:15,873 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from executeCommandLine function
+2016-01-28 04:22:15,873 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:22:15,873 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:22:15,873 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:15,873 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_textBoxData function:
+2016-01-28 04:22:15,873 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing getAttribute function
+2016-01-28 04:22:16,054 DEBUG [EBRE22_KeyhandlingSTTL-116718] +
+2016-01-28 04:22:16,054 DEBUG [EBRE22_KeyhandlingSTTL-116718] + value matches with Expected + value
+2016-01-28 04:22:16,054 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_textBoxData: Pass
+2016-01-28 04:22:16,054 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:16,054 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_keyCaptured function:
+2016-01-28 04:22:16,054 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered validate_keyCaptured function
+2016-01-28 04:22:16,241 DEBUG [EBRE22_KeyhandlingSTTL-116718] 157
+2016-01-28 04:22:16,241 DEBUG [EBRE22_KeyhandlingSTTL-116718] Actual Value matches Expected
+2016-01-28 04:22:16,241 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:22:16,241 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from validate_keyCaptured function
+2016-01-28 04:22:16,241 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_keyCaptured: pass
+2016-01-28 04:22:16,241 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:16,241 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:22:16,291 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to NATIVE_APP
+2016-01-28 04:22:16,291 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:22:16,291 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:16,291 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickNativeIcon function:
+2016-01-28 04:22:17,108 DEBUG [EBRE22_KeyhandlingSTTL-116718] [[AppiumTouchActionExtension: selendroid on ANDROID (ae72beaa-09bf-aca0-9702-9e00c52be1e1)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-28 04:22:17,108 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickNativeIcon: pass
+2016-01-28 04:22:17,108 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:17,108 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:22:17,108 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:22:27,109 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:22:27,109 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:22:27,109 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:27,109 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:22:27,208 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to WEBVIEW
+2016-01-28 04:22:27,208 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:22:27,208 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:27,208 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 04:22:31,059 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 04:22:31,059 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:22:31,059 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:31,059 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickRunTest function:
+2016-01-28 04:22:31,360 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:22:32,376 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:22:32,377 DEBUG [EBRE22_KeyhandlingSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:22:32,377 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 04:22:32,377 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:32,377 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 04:22:32,633 DEBUG [EBRE22_KeyhandlingSTTL-116718] VT187-2591 Testcase Text found
+2016-01-28 04:22:32,633 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 04:22:32,633 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:32,633 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing textBoxClick function:
+2016-01-28 04:22:34,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] keytxtInput_idtext box clicked successfully
+2016-01-28 04:22:34,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of textBoxClick: pass
+2016-01-28 04:22:34,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:34,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:22:34,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:22:36,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:22:36,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:22:36,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:36,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing sendKeyEvents function:
+2016-01-28 04:22:36,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered sendKeyEvents function
+2016-01-28 04:22:36,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] Divide
+2016-01-28 04:22:36,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered Dividekey
+2016-01-28 04:22:36,018 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started executeCommandLine function
+2016-01-28 04:22:40,039 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from executeCommandLine function
+2016-01-28 04:22:40,039 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:22:40,039 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:22:40,039 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:40,039 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_textBoxData function:
+2016-01-28 04:22:40,039 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing getAttribute function
+2016-01-28 04:22:40,253 DEBUG [EBRE22_KeyhandlingSTTL-116718] /
+2016-01-28 04:22:40,253 DEBUG [EBRE22_KeyhandlingSTTL-116718] / value matches with Expected / value
+2016-01-28 04:22:40,253 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_textBoxData: Pass
+2016-01-28 04:22:40,253 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:40,253 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_keyCaptured function:
+2016-01-28 04:22:40,253 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered validate_keyCaptured function
+2016-01-28 04:22:40,489 DEBUG [EBRE22_KeyhandlingSTTL-116718] 154
+2016-01-28 04:22:40,489 DEBUG [EBRE22_KeyhandlingSTTL-116718] Actual Value matches Expected
+2016-01-28 04:22:40,489 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:22:40,489 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from validate_keyCaptured function
+2016-01-28 04:22:40,489 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_keyCaptured: pass
+2016-01-28 04:22:40,489 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:40,489 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:22:40,554 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to NATIVE_APP
+2016-01-28 04:22:40,554 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:22:40,554 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:40,554 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickNativeIcon function:
+2016-01-28 04:22:41,405 DEBUG [EBRE22_KeyhandlingSTTL-116718] [[AppiumTouchActionExtension: selendroid on ANDROID (ae72beaa-09bf-aca0-9702-9e00c52be1e1)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-28 04:22:41,405 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickNativeIcon: pass
+2016-01-28 04:22:41,405 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:41,405 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:22:41,405 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:22:51,406 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:22:51,406 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:22:51,406 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:51,406 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SwitchApp function:
+2016-01-28 04:22:51,529 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfully switched to WEBVIEW
+2016-01-28 04:22:51,529 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SwitchApp: Pass
+2016-01-28 04:22:51,529 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:51,529 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 04:22:55,652 DEBUG [EBRE22_KeyhandlingSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 04:22:55,652 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:22:55,652 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:55,652 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing ClickRunTest function:
+2016-01-28 04:22:55,961 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing Click function
+2016-01-28 04:22:56,973 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting Click function
+2016-01-28 04:22:56,973 DEBUG [EBRE22_KeyhandlingSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:22:56,973 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 04:22:56,973 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:56,973 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 04:22:57,222 DEBUG [EBRE22_KeyhandlingSTTL-116718] VT187-2591 Testcase Text found
+2016-01-28 04:22:57,222 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 04:22:57,222 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:57,222 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing textBoxClick function:
+2016-01-28 04:22:58,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] keytxtInput_idtext box clicked successfully
+2016-01-28 04:22:58,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of textBoxClick: pass
+2016-01-28 04:22:58,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:22:58,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing wait function:
+2016-01-28 04:22:58,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started Executing wait function
+2016-01-28 04:23:00,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from wait function
+2016-01-28 04:23:00,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 04:23:00,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:23:00,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing sendKeyEvents function:
+2016-01-28 04:23:00,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered sendKeyEvents function
+2016-01-28 04:23:00,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] Star
+2016-01-28 04:23:00,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered Starkey
+2016-01-28 04:23:00,644 DEBUG [EBRE22_KeyhandlingSTTL-116718] Started executeCommandLine function
+2016-01-28 04:23:04,666 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from executeCommandLine function
+2016-01-28 04:23:04,666 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:23:04,666 DEBUG [EBRE22_KeyhandlingSTTL-116718] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:23:04,666 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:23:04,666 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_textBoxData function:
+2016-01-28 04:23:04,666 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing getAttribute function
+2016-01-28 04:23:04,844 DEBUG [EBRE22_KeyhandlingSTTL-116718] *
+2016-01-28 04:23:04,844 DEBUG [EBRE22_KeyhandlingSTTL-116718] * value matches with Expected * value
+2016-01-28 04:23:04,844 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_textBoxData: Pass
+2016-01-28 04:23:04,844 DEBUG [EBRE22_KeyhandlingSTTL-116718] In execute keyword function
+2016-01-28 04:23:04,844 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing validate_keyCaptured function:
+2016-01-28 04:23:04,844 DEBUG [EBRE22_KeyhandlingSTTL-116718] Entered validate_keyCaptured function
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] 17
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] Actual Value matches Expected
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] pass
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] Exiting from validate_keyCaptured function
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] Result of validate_keyCaptured: pass
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] allstep_result contains: passPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPassnull
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] allexpected_result contains: nullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullpassnullpassnull
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] Testcase_Result contains: nullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullPasspassnullPassnullpassnullpassnullpassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPassnull
+2016-01-28 04:23:05,062 DEBUG [EBRE22_KeyhandlingSTTL-116718] Test case with description KeyValue:All  Dispatch:true for alphabets and special keys Pass
+2016-01-28 04:23:06,008 DEBUG [EBRE22_KeyhandlingSTTL-116718] Executing browser_Quit function
+2016-01-28 04:23:06,008 DEBUG [EBRE22_KeyhandlingSTTL-116718] Completed browser_Quit function
+2016-01-28 04:23:06,008 DEBUG [EBRE22_KeyhandlingSTTL-116718] Completed quitSelendroid function
+2016-01-28 04:23:06,008 DEBUG [EBRE22_KeyhandlingSTTL-116718] Row number:19
+2016-01-28 04:23:06,045 DEBUG [EBRE22_KeyhandlingSTTL-116718] Ending Test Case IDSTTL-116718

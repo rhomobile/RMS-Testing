@@ -1,0 +1,231 @@
+2016-01-28 05:09:45,124 DEBUG [EBRE22_SignalSTTL-116710] Executing Test Case ID: STTL-116710
+2016-01-28 05:09:45,131 DEBUG [EBRE22_SignalSTTL-116710] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 05:09:55,123 DEBUG [EBRE22_SignalSTTL-116710] Exiting Init_Selendroid function
+2016-01-28 05:09:55,135 DEBUG [EBRE22_SignalSTTL-116710] TestCase with Description "Signal Event of JSON object type" Execution started
+2016-01-28 05:09:55,135 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:09:55,135 DEBUG [EBRE22_SignalSTTL-116710] Executing wait function:
+2016-01-28 05:09:55,136 DEBUG [EBRE22_SignalSTTL-116710] Started Executing wait function
+2016-01-28 05:09:58,136 DEBUG [EBRE22_SignalSTTL-116710] Exiting from wait function
+2016-01-28 05:09:58,136 DEBUG [EBRE22_SignalSTTL-116710] TestStepResult of wait: Pass
+2016-01-28 05:09:58,136 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:09:58,136 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_PageTitle function:
+2016-01-28 05:09:58,174 DEBUG [EBRE22_SignalSTTL-116710] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 05:09:58,174 DEBUG [EBRE22_SignalSTTL-116710] The page title found is correct
+2016-01-28 05:09:58,174 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_PageTitle: pass
+2016-01-28 05:09:58,174 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:09:58,174 DEBUG [EBRE22_SignalSTTL-116710] Executing link_Click function:
+2016-01-28 05:09:58,833 DEBUG [EBRE22_SignalSTTL-116710] Executing Click function
+2016-01-28 05:10:00,086 DEBUG [EBRE22_SignalSTTL-116710] Exiting Click function
+2016-01-28 05:10:00,086 DEBUG [EBRE22_SignalSTTL-116710] RE22_signal_test_link clicked successfully
+2016-01-28 05:10:00,086 DEBUG [EBRE22_SignalSTTL-116710] TestStepResult of link_Click: Pass
+2016-01-28 05:10:00,086 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:00,086 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_PageTitle function:
+2016-01-28 05:10:00,124 DEBUG [EBRE22_SignalSTTL-116710] The title of the page is *********************************: Signal Test
+2016-01-28 05:10:00,124 DEBUG [EBRE22_SignalSTTL-116710] The page title found is correct
+2016-01-28 05:10:00,124 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_PageTitle: pass
+2016-01-28 05:10:00,124 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:00,124 DEBUG [EBRE22_SignalSTTL-116710] Executing SelectTestToRun function:
+2016-01-28 05:10:03,615 DEBUG [EBRE22_SignalSTTL-116710] Successfull in selecting clicking the category
+2016-01-28 05:10:03,615 DEBUG [EBRE22_SignalSTTL-116710] TestStepResult of SelectTestToRun: pass
+2016-01-28 05:10:03,616 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:03,616 DEBUG [EBRE22_SignalSTTL-116710] Executing ClickRunTest function:
+2016-01-28 05:10:03,956 DEBUG [EBRE22_SignalSTTL-116710] Executing Click function
+2016-01-28 05:10:05,136 DEBUG [EBRE22_SignalSTTL-116710] Exiting Click function
+2016-01-28 05:10:05,136 DEBUG [EBRE22_SignalSTTL-116710] toprun_xpath Button clicked Successfully
+2016-01-28 05:10:05,136 DEBUG [EBRE22_SignalSTTL-116710] TestStepResult of ClickRunTest: pass
+2016-01-28 05:10:05,136 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:05,136 DEBUG [EBRE22_SignalSTTL-116710] Executing wait function:
+2016-01-28 05:10:05,136 DEBUG [EBRE22_SignalSTTL-116710] Started Executing wait function
+2016-01-28 05:10:08,136 DEBUG [EBRE22_SignalSTTL-116710] Exiting from wait function
+2016-01-28 05:10:08,136 DEBUG [EBRE22_SignalSTTL-116710] TestStepResult of wait: Pass
+2016-01-28 05:10:08,136 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:08,136 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:08,409 DEBUG [EBRE22_SignalSTTL-116710] Signal: Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 1
+2016-01-28 05:10:08,409 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:08,409 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:08,409 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:08,585 DEBUG [EBRE22_SignalSTTL-116710] ESSID:"ard" Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 1
+2016-01-28 05:10:08,585 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:08,585 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:08,585 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:08,720 DEBUG [EBRE22_SignalSTTL-116710] MAC: Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 1
+2016-01-28 05:10:08,720 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:08,720 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:08,720 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:08,874 DEBUG [EBRE22_SignalSTTL-116710] AdapterName: wlan0 Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 1
+2016-01-28 05:10:08,875 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:08,875 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:08,875 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:09,019 DEBUG [EBRE22_SignalSTTL-116710] DHCPServer: Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 1
+2016-01-28 05:10:09,019 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:09,019 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:09,019 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:09,211 DEBUG [EBRE22_SignalSTTL-116710] DHCPStatic: Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 1
+2016-01-28 05:10:09,211 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:09,211 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:09,211 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:09,341 DEBUG [EBRE22_SignalSTTL-116710] Gateway: 10.233 Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 1
+2016-01-28 05:10:09,342 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:09,342 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:09,342 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:09,589 DEBUG [EBRE22_SignalSTTL-116710] IPAddress: 10.233 Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 2
+2016-01-28 05:10:09,589 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:09,589 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:09,589 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:09,734 DEBUG [EBRE22_SignalSTTL-116710] RSSI: Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 2
+2016-01-28 05:10:09,734 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:09,734 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:09,734 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:09,940 DEBUG [EBRE22_SignalSTTL-116710] SubnetMask: 255.255 Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 2
+2016-01-28 05:10:09,940 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:09,940 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:09,940 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:10,078 DEBUG [EBRE22_SignalSTTL-116710] Wins: Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 2
+2016-01-28 05:10:10,078 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:10,078 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:10,078 DEBUG [EBRE22_SignalSTTL-116710] Executing validate_Result function:
+2016-01-28 05:10:10,237 DEBUG [EBRE22_SignalSTTL-116710] Count: Text found in Signal: 100
+ESSID:"ard"
+MAC: 40:83:de:7e:5e:f4
+AdapterName: wlan0
+DHCPServer: 10.233.92.20
+DHCPStatic:
+Gateway: 10.233.82.254
+IPAddress: 10.233.82.34
+RSSI: -38
+SubnetMask: 255.255.255.0
+Wins:
+Count: 2
+2016-01-28 05:10:10,237 DEBUG [EBRE22_SignalSTTL-116710] Result of validate_Result: Pass
+2016-01-28 05:10:10,237 DEBUG [EBRE22_SignalSTTL-116710] In execute keyword function
+2016-01-28 05:10:10,237 DEBUG [EBRE22_SignalSTTL-116710] TestStepResult of : Function <> not found in the keyword class
+2016-01-28 05:10:10,238 DEBUG [EBRE22_SignalSTTL-116710] allstep_result contains: Function <> not found in the keyword classPasspasspassPassPassnull
+2016-01-28 05:10:10,238 DEBUG [EBRE22_SignalSTTL-116710] allexpected_result contains: nullPassPassPassPassPassPassPassPassPassPassPassPassnullpassnullpassnull
+2016-01-28 05:10:10,238 DEBUG [EBRE22_SignalSTTL-116710] Testcase_Result contains: nullPassPassPassPassPassPassPassPassPassPassPassPassnullpassnullpassnullFunction <> not found in the keyword classPasspasspassPassPassnull
+2016-01-28 05:10:10,238 DEBUG [EBRE22_SignalSTTL-116710] Test case with description Signal Event of JSON object type Pass
+2016-01-28 05:10:11,175 DEBUG [EBRE22_SignalSTTL-116710] Executing browser_Quit function
+2016-01-28 05:10:11,175 DEBUG [EBRE22_SignalSTTL-116710] Completed browser_Quit function
+2016-01-28 05:10:11,175 DEBUG [EBRE22_SignalSTTL-116710] Completed quitSelendroid function
+2016-01-28 05:10:11,175 DEBUG [EBRE22_SignalSTTL-116710] Row number:11
+2016-01-28 05:10:11,209 DEBUG [EBRE22_SignalSTTL-116710] Ending Test Case IDSTTL-116710

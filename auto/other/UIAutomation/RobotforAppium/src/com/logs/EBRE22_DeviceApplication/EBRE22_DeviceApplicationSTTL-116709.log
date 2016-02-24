@@ -1,0 +1,77 @@
+2016-01-28 03:18:51,801 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-28 03:18:51,807 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:19:02,392 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Exiting Init_Selendroid function
+2016-01-28 03:19:02,406 DEBUG [EBRE22_DeviceApplicationSTTL-116709] TestCase with Description "Version Event(java script)" Execution started
+2016-01-28 03:19:02,406 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:02,406 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing wait function:
+2016-01-28 03:19:02,406 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Started Executing wait function
+2016-01-28 03:19:05,407 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Exiting from wait function
+2016-01-28 03:19:05,407 DEBUG [EBRE22_DeviceApplicationSTTL-116709] TestStepResult of wait: Pass
+2016-01-28 03:19:05,407 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:05,407 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_PageTitle function:
+2016-01-28 03:19:05,452 DEBUG [EBRE22_DeviceApplicationSTTL-116709] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:19:05,452 DEBUG [EBRE22_DeviceApplicationSTTL-116709] The page title found is correct
+2016-01-28 03:19:05,452 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_PageTitle: pass
+2016-01-28 03:19:05,452 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:05,452 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing link_Click function:
+2016-01-28 03:19:06,068 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing Click function
+2016-01-28 03:19:07,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Exiting Click function
+2016-01-28 03:19:07,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] DeviceApplication_test_link clicked successfully
+2016-01-28 03:19:07,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 03:19:07,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:07,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing wait function:
+2016-01-28 03:19:07,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Started Executing wait function
+2016-01-28 03:19:09,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Exiting from wait function
+2016-01-28 03:19:09,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] TestStepResult of wait: Pass
+2016-01-28 03:19:09,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:09,116 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_PageTitle function:
+2016-01-28 03:19:09,154 DEBUG [EBRE22_DeviceApplicationSTTL-116709] The title of the page is *********************************: Device & Application
+2016-01-28 03:19:09,155 DEBUG [EBRE22_DeviceApplicationSTTL-116709] The page title found is correct
+2016-01-28 03:19:09,155 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_PageTitle: pass
+2016-01-28 03:19:09,155 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:09,155 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing SelectTestToRun function:
+2016-01-28 03:19:12,236 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Successfull in selecting clicking the category
+2016-01-28 03:19:12,236 DEBUG [EBRE22_DeviceApplicationSTTL-116709] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:19:12,236 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:12,236 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_Text_Exists function:
+2016-01-28 03:19:12,519 DEBUG [EBRE22_DeviceApplicationSTTL-116709] VT187-1382 Testcase Text found
+2016-01-28 03:19:12,519 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_Text_Exists: Pass
+2016-01-28 03:19:12,519 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:12,519 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing ClickRunTest function:
+2016-01-28 03:19:12,866 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing Click function
+2016-01-28 03:19:13,875 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Exiting Click function
+2016-01-28 03:19:13,875 DEBUG [EBRE22_DeviceApplicationSTTL-116709] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:19:13,875 DEBUG [EBRE22_DeviceApplicationSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-28 03:19:13,875 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:13,875 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_Result function:
+2016-01-28 03:19:14,118 DEBUG [EBRE22_DeviceApplicationSTTL-116709] productVersion Text found in {"productVersion":"1.4.8.0","hotFixes":[],"componentVersions":[{"module":"","NVPOrder":"module,version","version":""}]}
+2016-01-28 03:19:14,118 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_Result: Pass
+2016-01-28 03:19:14,118 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:14,118 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_Result function:
+2016-01-28 03:19:14,279 DEBUG [EBRE22_DeviceApplicationSTTL-116709] hotFixes Text found in {"productVersion":"1.4.8.0","hotFixes":[],"componentVersions":[{"module":"","NVPOrder":"module,version","version":""}]}
+2016-01-28 03:19:14,279 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_Result: Pass
+2016-01-28 03:19:14,279 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:14,279 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_Result function:
+2016-01-28 03:19:14,437 DEBUG [EBRE22_DeviceApplicationSTTL-116709] componentVersions Text found in {"productVersion":"1.4.8.0","hotFixes":[],"componentVersions":[{"module":"","NVPOrder":"module,version","version":""}]}
+2016-01-28 03:19:14,437 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_Result: Pass
+2016-01-28 03:19:14,437 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:14,438 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_Result function:
+2016-01-28 03:19:14,682 DEBUG [EBRE22_DeviceApplicationSTTL-116709] module Text found in {"productVersion":"1.4.8.0","hotFixes":[],"componentVersions":[{"module":"","NVPOrder":"module,version","version":""}]}
+2016-01-28 03:19:14,682 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_Result: Pass
+2016-01-28 03:19:14,682 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:14,682 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_Result function:
+2016-01-28 03:19:14,828 DEBUG [EBRE22_DeviceApplicationSTTL-116709] NVPOrder Text found in {"productVersion":"1.4.8.0","hotFixes":[],"componentVersions":[{"module":"","NVPOrder":"module,version","version":""}]}
+2016-01-28 03:19:14,828 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_Result: Pass
+2016-01-28 03:19:14,828 DEBUG [EBRE22_DeviceApplicationSTTL-116709] In execute keyword function
+2016-01-28 03:19:14,829 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing validate_Result function:
+2016-01-28 03:19:15,050 DEBUG [EBRE22_DeviceApplicationSTTL-116709] version Text found in {"productVersion":"1.4.8.0","hotFixes":[],"componentVersions":[{"module":"","NVPOrder":"module,version","version":""}]}
+2016-01-28 03:19:15,050 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Result of validate_Result: Pass
+2016-01-28 03:19:15,050 DEBUG [EBRE22_DeviceApplicationSTTL-116709] allstep_result contains: passpassPassPassPassnull
+2016-01-28 03:19:15,050 DEBUG [EBRE22_DeviceApplicationSTTL-116709] allexpected_result contains: nullPassPassPassPassPassPassnullPassnullpassnullpassnull
+2016-01-28 03:19:15,050 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Testcase_Result contains: nullPassPassPassPassPassPassnullPassnullpassnullpassnullpasspassPassPassPassnull
+2016-01-28 03:19:15,050 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Test case with description Version Event(java script) Pass
+2016-01-28 03:19:16,155 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Executing browser_Quit function
+2016-01-28 03:19:16,155 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Completed browser_Quit function
+2016-01-28 03:19:16,155 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Completed quitSelendroid function
+2016-01-28 03:19:16,155 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Row number:10
+2016-01-28 03:19:16,184 DEBUG [EBRE22_DeviceApplicationSTTL-116709] Ending Test Case IDSTTL-116709

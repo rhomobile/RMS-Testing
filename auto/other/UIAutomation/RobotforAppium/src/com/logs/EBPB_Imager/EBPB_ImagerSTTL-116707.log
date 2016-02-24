@@ -1,0 +1,74 @@
+2016-01-28 01:16:44,970 DEBUG [EBPB_ImagerSTTL-116707] Executing Test Case ID: STTL-116707
+2016-01-28 01:16:44,976 DEBUG [EBPB_ImagerSTTL-116707] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 01:16:53,961 DEBUG [EBPB_ImagerSTTL-116707] Exiting Init_Selendroid function
+2016-01-28 01:16:53,974 DEBUG [EBPB_ImagerSTTL-116707] TestCase with Description "Set Left to 30 and Top to 170" Execution started
+2016-01-28 01:16:53,974 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:16:53,974 DEBUG [EBPB_ImagerSTTL-116707] Executing wait function:
+2016-01-28 01:16:53,974 DEBUG [EBPB_ImagerSTTL-116707] Started Executing wait function
+2016-01-28 01:16:56,974 DEBUG [EBPB_ImagerSTTL-116707] Exiting from wait function
+2016-01-28 01:16:56,974 DEBUG [EBPB_ImagerSTTL-116707] TestStepResult of wait: Pass
+2016-01-28 01:16:56,974 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:16:56,974 DEBUG [EBPB_ImagerSTTL-116707] Executing validate_PageTitle function:
+2016-01-28 01:16:56,998 DEBUG [EBPB_ImagerSTTL-116707] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 01:16:56,998 DEBUG [EBPB_ImagerSTTL-116707] The page title found is correct
+2016-01-28 01:16:56,998 DEBUG [EBPB_ImagerSTTL-116707] Result of validate_PageTitle: pass
+2016-01-28 01:16:56,998 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:16:56,998 DEBUG [EBPB_ImagerSTTL-116707] Executing link_Click function:
+2016-01-28 01:16:57,652 DEBUG [EBPB_ImagerSTTL-116707] Executing Click function
+2016-01-28 01:16:58,710 DEBUG [EBPB_ImagerSTTL-116707] Exiting Click function
+2016-01-28 01:16:58,710 DEBUG [EBPB_ImagerSTTL-116707] imager_test_link clicked successfully
+2016-01-28 01:16:58,710 DEBUG [EBPB_ImagerSTTL-116707] TestStepResult of link_Click: Pass
+2016-01-28 01:16:58,710 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:16:58,710 DEBUG [EBPB_ImagerSTTL-116707] Executing validate_PageTitle function:
+2016-01-28 01:16:58,730 DEBUG [EBPB_ImagerSTTL-116707] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Imager
+2016-01-28 01:16:58,730 DEBUG [EBPB_ImagerSTTL-116707] The page title found is correct
+2016-01-28 01:16:58,730 DEBUG [EBPB_ImagerSTTL-116707] Result of validate_PageTitle: pass
+2016-01-28 01:16:58,730 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:16:58,730 DEBUG [EBPB_ImagerSTTL-116707] Executing SelectTestToRun function:
+2016-01-28 01:17:01,668 DEBUG [EBPB_ImagerSTTL-116707] Successfull in selecting clicking the category
+2016-01-28 01:17:01,668 DEBUG [EBPB_ImagerSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-28 01:17:01,668 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:17:01,668 DEBUG [EBPB_ImagerSTTL-116707] Executing validate_Text_Exists function:
+2016-01-28 01:17:01,910 DEBUG [EBPB_ImagerSTTL-116707] VT056-1128 Testcase Text found
+2016-01-28 01:17:01,910 DEBUG [EBPB_ImagerSTTL-116707] Result of validate_Text_Exists: Pass
+2016-01-28 01:17:01,910 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:17:01,910 DEBUG [EBPB_ImagerSTTL-116707] Executing ClickRunTest function:
+2016-01-28 01:17:02,234 DEBUG [EBPB_ImagerSTTL-116707] Executing Click function
+2016-01-28 01:17:03,331 DEBUG [EBPB_ImagerSTTL-116707] Exiting Click function
+2016-01-28 01:17:03,331 DEBUG [EBPB_ImagerSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-28 01:17:03,331 DEBUG [EBPB_ImagerSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-28 01:17:03,331 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:17:03,331 DEBUG [EBPB_ImagerSTTL-116707] Executing wait function:
+2016-01-28 01:17:03,331 DEBUG [EBPB_ImagerSTTL-116707] Started Executing wait function
+2016-01-28 01:17:05,331 DEBUG [EBPB_ImagerSTTL-116707] Exiting from wait function
+2016-01-28 01:17:05,331 DEBUG [EBPB_ImagerSTTL-116707] TestStepResult of wait: Pass
+2016-01-28 01:17:05,331 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:17:05,331 DEBUG [EBPB_ImagerSTTL-116707] Executing ClickRunTest function:
+2016-01-28 01:17:05,712 DEBUG [EBPB_ImagerSTTL-116707] Executing Click function
+2016-01-28 01:17:06,724 DEBUG [EBPB_ImagerSTTL-116707] Exiting Click function
+2016-01-28 01:17:06,724 DEBUG [EBPB_ImagerSTTL-116707] capture_xpath Button clicked Successfully
+2016-01-28 01:17:06,724 DEBUG [EBPB_ImagerSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-28 01:17:06,724 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:17:06,724 DEBUG [EBPB_ImagerSTTL-116707] Executing wait function:
+2016-01-28 01:17:06,724 DEBUG [EBPB_ImagerSTTL-116707] Started Executing wait function
+2016-01-28 01:17:08,724 DEBUG [EBPB_ImagerSTTL-116707] Exiting from wait function
+2016-01-28 01:17:08,724 DEBUG [EBPB_ImagerSTTL-116707] TestStepResult of wait: Pass
+2016-01-28 01:17:08,724 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:17:08,724 DEBUG [EBPB_ImagerSTTL-116707] Executing ClickRunTest function:
+2016-01-28 01:17:09,200 DEBUG [EBPB_ImagerSTTL-116707] Executing Click function
+2016-01-28 01:17:10,324 DEBUG [EBPB_ImagerSTTL-116707] Exiting Click function
+2016-01-28 01:17:10,324 DEBUG [EBPB_ImagerSTTL-116707] disable_xpath Button clicked Successfully
+2016-01-28 01:17:10,324 DEBUG [EBPB_ImagerSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-28 01:17:10,324 DEBUG [EBPB_ImagerSTTL-116707] In execute keyword function
+2016-01-28 01:17:10,324 DEBUG [EBPB_ImagerSTTL-116707] Executing validate_Result function:
+2016-01-28 01:17:10,607 DEBUG [EBPB_ImagerSTTL-116707] data:image/png Text found in data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAKAAeADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDGooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopKAFooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApKWigAooooASloooAKKKKACiiigBKWiigAooooASilooAKKKSgApaKKACiiigBKWiigBKKWigAooooASilooAKKSloAKSlooAKKKKACiiigApKWigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKSloAKKKKACiiigAoopKAFooooAKKKKACiiigBKWkpaACiiigBKWiigAopKKAClpKKAFooooAKKKKACikooAWikpaACikpaACiiigAooooAKKKKACiiigAooooAKKSigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopKWgApKWigAooooAKKKKACiiigBKKWigBKWiigBKKWkoAKKWigBKWikoAKKKWgBKKWigBKWiigBKKWigBKKWigBKWiigAooooAKKKKACiiigAooooASloooASloooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApKWigAooooAKKKKACiiigAooooAKKKKACiikoAWkpaSgBaKSloAKKSloAKKSloAKKKKAEopaSgBaSlooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopKAFooooAKKKKACiiigAooooAKKKKACikpaACiiigAopKKAFoopKAFopKWgAooooASiiigApaSloAKKKSgApaSloAKKSigApaKSgBaKSloAKKKKACiiigAooooAKKKKACiikoAWiiigAooooAKKKKACiiigAooooAKKKKACiiigAopKWgAooooAKKSloAKKSigBaKSigBaKSloAKSiigApaSloAKSlpKAFopKKAFpKKKAFopKKAFopKKAFopKKACiiigBaKSigBaSiigApaKKACkpaKACikpaACikpaACiiigAopKKAFooooAKKSloAKKKKACiiigAopKWgAopKWgAooooAKKKKACikpaACiiigAooooAKKKKACiiigBKWikoAKWkpaACkoooAKKWkoAKWkooAKKKKAFpKWkoAWkpaKAEpaSigApaSigAoopaACiiigAopKWgAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooASiiloAKKKKAEpaKKACiiigAooooAKKKKACikooAKKKWgBKKWkoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKWkoAWiikoAKWkooAKWkpaACiiigAopKKAFooooAKKKKACiiigAooooAKKKKACiiigAopKWgAooooAKKSigBaKSloAKKKSgBaKSloASilooAKSlpKAFopKKACiiigAopaSgApaSigAooooAWkpaSgBaSiloASiiloASiiigAooooAKWikoAWkpaSgBaKKSgBaKKSgBaKSloASlpKKAClpKKAFooooAKKKKACiiigAooooAKKSloASlpKWgApKKKAClpKWgApKWkoAWikpaACiiigAooooAKKKKAEooooAWikpaAEooooAKKKKACiiigAooooAKWkpaAEpaSigAooooAKKKKAFpKWigApKKKAClpKKAFpKWkoAWkopaAEpaSigBaKKKACiiigAooooAKKSloAKKKKACiiigBKKKKACiiigAooooAKKKKACiiigAooooAWkoooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKWkooAKKKKAFopKKAClpKKAFoopKACiiigBaKSigBaSiigBaSiigApaKKAEoopaAEoopaAEooooAWiikoAKKWigBKKKKACiiigBaSiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBaSiloASloooAKKKKAEooooAKKKWgAooooAKKKKAEpaKKACiiigAooooAKSlooASlpKKAFoopKAFopKKAClpKKAFopKKAClopKAFooooAKKKSgApaSigApaSigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiloASiiigAooooAKKKKAFopKKAFopKKAFpKKWgAooooASlpKWgAoopKAFopKWgAooooASiiigAopaKAEooooAKKKWgBKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApaSigAooooAKKKKACiiloASilooASlopKAFpKKKACiiloAKSiigAooooAWkpaSgBaSiigApaSigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAWkoooAKKKKACiiigBaSiigBaSiigAooooAKWkooAKKKWgApKWigBKKKWgBKWkpaAEooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiloASiiloASiiigAooooAKKKWgBKWiigApKKWgBKKWigBKKWigBKWkooAWkpaKAEooooAKKKKACilpKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKWgBKKWkoAKWkooAKKKWgAoopKAClpKKAClpKKAFpKWigBKKKWgBKKWigBKWkpaAEoopaAEooooAKKKWgBKKKKAClpKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApaSloASiiloASlpKWgBKKKKACloooAKSlooASlpKKAFpKWkoAKKKKAClpKWgBKKKKAFopKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAFpKKKAFopKKAFpKKKACiiigBaSlpKAFpKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopaAEooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApaSigBaSiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACilpKACiiigBaSiigAooooAKWkooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKWkoAKKKKACiiigAooooAKKWkoAWiikoAKKKWgBKKKWgBKKWkoAWkoooAKKKWgBKKKKACiiloASiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKWgAoopKAClpKWgAoopKAFpKKWgApKWkoAWikooAKKKWgApKWigBKWiigBKKKWgBKKKKACilooASilooASilpKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopaSgAopaKAEopaSgAopaSgAoopaAEooooAWikooAWiiigApKWkoAKWkpaAEooooAKWkooAWkpaSgBaSiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKWkoAKKKKAClpKKAFpKKKAFopKWgBKWkpaACikooAKKKKAClopKACilooAKSiigAooooAKKKKACiiloASiiloASiiloASiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAWkoooAKKKKACiiigAooooAKWkpaAEpaKSgApaSigAopaSgAooooAKKKKAFpKWigBKWkpaAEooooAKKKKAClpKWgApKWkoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKWkoAKKKKAClpKKACiiigAooooAWikpaAEpaSloASiiigAoopaAEoopaAEpaKSgApaKKACiiigAooooAKKSloAKKKKAEpaKKACiiigApKKKACiiloASloooASilpKACiiigAooooAKKWkoAKKWigBKKKKACiiloASiiigAopaSgBaSiigApaSigAopaKAEopaKAEoopaAEpaKKACiiigBKWiigAoopKAFooooASilooASiiigBaKKSgBaKSloASloooASiiigAooooAKWkooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBaSiigAooooAKKKKAFpKKWgBKKKKACiiigBaKSigAooooAKWkpaAEoopaACiiigBKWikoAKWkooAWikooAKWkooAWikooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACilpKAClpKKAClpKWgAopKKAFpKKKAFpKKKAFpKKKAClpKWgAooooASiiloASloooASilpKACloooASilooAKSiloASlpKWgBKKKKACiiigAooooAKKKKACiiigAopaSgAooooAKKKKACiiigAoopaAEopaSgAooooAKKKWgBKKWigBKKKKACloooASilooAKKKKACkpaKAEopaKAEoopaACiiigBKWiigBKWiigBKKKWgApKWigBKWiigAooooASilooASilpKACiiigAooooAKKKKACilooASiiigAopaSgAooooAKKKKACilpKACilpKACilooASilooASilooASilooASilooASloooASiiloASilooASilooASiiloASiiloAKKSloAKKKSgBaKSloASloooAKKKSgApaKKACkopaACiiigApKKKAFpKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApaSigBaKSloASilooAKSiloAKKKSgBaKKKACikooAWiiigApKKWgAooooAKKKKACikooAWiikoAWkpaSgApaKKACiiigAopKWgAoopKAClopKACiiloASilpKAClpKWgBKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopaSgAooooAKKKKACiiigBaKKKAEpaSigBaSiigBaSlooAKKSigAoopaAEpaKSgBaSlooASilooAKKSloAKSlooAKKKKACiikoAWkoooAKKKWgBKKWkoAKKWkoAKKKWgBKKKKACiiigAoopaAEooooAKKKKACiiigAoopaACkpaSgAoopaAEopaKACiiigBKKWkoAWiiigBKKKKAFooooASloooAKKKKACkpaKACiiigAooooAKKKSgBaKKKACiiigAoopKAFpKKWgBKWiigApKWkoAWkpaKACkopaACkpaSgBaKSloAKSiigBaSiigAooooAKKKKACiiigBaKSigBaSiigBaKSigApaKKACikpaAEpaKSgBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooASloooAKSlooASloooAKKKKACiiigBKWkpaAEpaSigBaSiigAooooAKKKKAFpKWkoAKWiigBKWkooAKKKKAClpKKAFpKKKAFoopKAFooooAKKKKACikpaAEpaKSgBaKKKACikpaACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiikoAWkpaSgBaKKKAEpaSloAKSlooAKSlpKACiiigApaSigAopaSgBaSlooASlpKWgBKKKKACiiigBaSlooASloooAKKKSgBaSlpKAFoopKAFpKKKAFooooAKKKKACiiigAooooAKKKKACkpaKAP//Z
+2016-01-28 01:17:10,607 DEBUG [EBPB_ImagerSTTL-116707] Result of validate_Result: Pass
+2016-01-28 01:17:10,607 DEBUG [EBPB_ImagerSTTL-116707] allstep_result contains: passPasspassPasspasspassPassPassnull
+2016-01-28 01:17:10,607 DEBUG [EBPB_ImagerSTTL-116707] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 01:17:10,607 DEBUG [EBPB_ImagerSTTL-116707] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpassPasspassPasspasspassPassPassnull
+2016-01-28 01:17:10,607 DEBUG [EBPB_ImagerSTTL-116707] Test case with description Set Left to 30 and Top to 170 Pass
+2016-01-28 01:17:11,534 DEBUG [EBPB_ImagerSTTL-116707] Executing browser_Quit function
+2016-01-28 01:17:11,534 DEBUG [EBPB_ImagerSTTL-116707] Completed browser_Quit function
+2016-01-28 01:17:11,534 DEBUG [EBPB_ImagerSTTL-116707] Completed quitSelendroid function
+2016-01-28 01:17:11,534 DEBUG [EBPB_ImagerSTTL-116707] Row number:8
+2016-01-28 01:17:11,613 DEBUG [EBPB_ImagerSTTL-116707] Ending Test Case IDSTTL-116707

@@ -1,0 +1,68 @@
+2016-01-28 02:19:09,225 DEBUG [EBPB_PB2STTL-116709] Executing Test Case ID: STTL-116709
+2016-01-28 02:19:09,233 DEBUG [EBPB_PB2STTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:19:19,659 DEBUG [EBPB_PB2STTL-116709] Exiting Init_Selendroid function
+2016-01-28 02:19:19,674 DEBUG [EBPB_PB2STTL-116709] TestCase with Description "Imager http" Execution started
+2016-01-28 02:19:19,674 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:19,674 DEBUG [EBPB_PB2STTL-116709] Executing wait function:
+2016-01-28 02:19:19,674 DEBUG [EBPB_PB2STTL-116709] Started Executing wait function
+2016-01-28 02:19:22,675 DEBUG [EBPB_PB2STTL-116709] Exiting from wait function
+2016-01-28 02:19:22,675 DEBUG [EBPB_PB2STTL-116709] TestStepResult of wait: Pass
+2016-01-28 02:19:22,675 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:22,675 DEBUG [EBPB_PB2STTL-116709] Executing validate_PageTitle function:
+2016-01-28 02:19:22,717 DEBUG [EBPB_PB2STTL-116709] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 02:19:22,717 DEBUG [EBPB_PB2STTL-116709] The page title found is correct
+2016-01-28 02:19:22,717 DEBUG [EBPB_PB2STTL-116709] Result of validate_PageTitle: pass
+2016-01-28 02:19:22,717 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:22,717 DEBUG [EBPB_PB2STTL-116709] Executing link_Click function:
+2016-01-28 02:19:23,366 DEBUG [EBPB_PB2STTL-116709] Executing Click function
+2016-01-28 02:19:24,681 DEBUG [EBPB_PB2STTL-116709] Exiting Click function
+2016-01-28 02:19:24,681 DEBUG [EBPB_PB2STTL-116709] PB2_test_link clicked successfully
+2016-01-28 02:19:24,681 DEBUG [EBPB_PB2STTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 02:19:24,681 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:24,681 DEBUG [EBPB_PB2STTL-116709] Executing wait function:
+2016-01-28 02:19:24,681 DEBUG [EBPB_PB2STTL-116709] Started Executing wait function
+2016-01-28 02:19:26,681 DEBUG [EBPB_PB2STTL-116709] Exiting from wait function
+2016-01-28 02:19:26,681 DEBUG [EBPB_PB2STTL-116709] TestStepResult of wait: Pass
+2016-01-28 02:19:26,681 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:26,681 DEBUG [EBPB_PB2STTL-116709] Executing validate_PageTitle function:
+2016-01-28 02:19:26,718 DEBUG [EBPB_PB2STTL-116709] The title of the page is *********************************: PB2 Tests
+2016-01-28 02:19:26,718 DEBUG [EBPB_PB2STTL-116709] The page title found is correct
+2016-01-28 02:19:26,718 DEBUG [EBPB_PB2STTL-116709] Result of validate_PageTitle: pass
+2016-01-28 02:19:26,718 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:26,718 DEBUG [EBPB_PB2STTL-116709] Executing link_Click function:
+2016-01-28 02:19:27,132 DEBUG [EBPB_PB2STTL-116709] Executing Click function
+2016-01-28 02:19:28,160 DEBUG [EBPB_PB2STTL-116709] Exiting Click function
+2016-01-28 02:19:28,160 DEBUG [EBPB_PB2STTL-116709] imagerhttp_test_link clicked successfully
+2016-01-28 02:19:28,160 DEBUG [EBPB_PB2STTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 02:19:28,160 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:28,160 DEBUG [EBPB_PB2STTL-116709] Executing ClickRunTest function:
+2016-01-28 02:19:29,542 DEBUG [EBPB_PB2STTL-116709] Executing Click function
+2016-01-28 02:19:30,496 DEBUG [EBPB_PB2STTL-116709] Exiting Click function
+2016-01-28 02:19:30,496 DEBUG [EBPB_PB2STTL-116709] captureButton_xpath Button clicked Successfully
+2016-01-28 02:19:30,496 DEBUG [EBPB_PB2STTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-28 02:19:30,496 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:30,496 DEBUG [EBPB_PB2STTL-116709] Executing wait function:
+2016-01-28 02:19:30,496 DEBUG [EBPB_PB2STTL-116709] Started Executing wait function
+2016-01-28 02:19:38,498 DEBUG [EBPB_PB2STTL-116709] Exiting from wait function
+2016-01-28 02:19:38,498 DEBUG [EBPB_PB2STTL-116709] TestStepResult of wait: Pass
+2016-01-28 02:19:38,498 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:38,498 DEBUG [EBPB_PB2STTL-116709] Executing CheckUITextContains function:
+2016-01-28 02:19:38,498 DEBUG [EBPB_PB2STTL-116709] Started executeCommandLine function
+2016-01-28 02:19:42,520 DEBUG [EBPB_PB2STTL-116709] Text is Present
+2016-01-28 02:19:42,520 DEBUG [EBPB_PB2STTL-116709] TestStepResult of CheckUITextContains: Pass
+2016-01-28 02:19:42,520 DEBUG [EBPB_PB2STTL-116709] In execute keyword function
+2016-01-28 02:19:42,520 DEBUG [EBPB_PB2STTL-116709] Executing ClickUIButtonText function:
+2016-01-28 02:19:42,520 DEBUG [EBPB_PB2STTL-116709] Entered ClickUIButtonText function
+2016-01-28 02:19:42,520 DEBUG [EBPB_PB2STTL-116709] Started executeCommandLine function
+2016-01-28 02:19:46,540 DEBUG [EBPB_PB2STTL-116709] Started executeCommandLine function
+2016-01-28 02:19:51,052 DEBUG [EBPB_PB2STTL-116709] Exiting ClickUIButtonText function
+2016-01-28 02:19:51,052 DEBUG [EBPB_PB2STTL-116709] TestStepResult of ClickUIButtonText: Pass
+2016-01-28 02:19:51,052 DEBUG [EBPB_PB2STTL-116709] allstep_result contains: PassPassPasspassPassPassPassPassnull
+2016-01-28 02:19:51,052 DEBUG [EBPB_PB2STTL-116709] allexpected_result contains: nullpassnullpassnull
+2016-01-28 02:19:51,053 DEBUG [EBPB_PB2STTL-116709] Testcase_Result contains: nullpassnullpassnullPassPassPasspassPassPassPassPassnull
+2016-01-28 02:19:51,053 DEBUG [EBPB_PB2STTL-116709] Test case with description Imager http Pass
+2016-01-28 02:19:52,135 DEBUG [EBPB_PB2STTL-116709] Executing browser_Quit function
+2016-01-28 02:19:52,135 DEBUG [EBPB_PB2STTL-116709] Completed browser_Quit function
+2016-01-28 02:19:52,135 DEBUG [EBPB_PB2STTL-116709] Completed quitSelendroid function
+2016-01-28 02:19:52,135 DEBUG [EBPB_PB2STTL-116709] Row number:10
+2016-01-28 02:19:52,175 DEBUG [EBPB_PB2STTL-116709] Ending Test Case IDSTTL-116709

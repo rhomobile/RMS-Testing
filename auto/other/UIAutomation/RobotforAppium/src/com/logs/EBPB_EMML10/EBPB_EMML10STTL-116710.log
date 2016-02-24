@@ -1,0 +1,73 @@
+2016-01-28 00:05:56,043 DEBUG [EBPB_EMML10STTL-116710] Executing Test Case ID: STTL-116710
+2016-01-28 00:05:56,049 DEBUG [EBPB_EMML10STTL-116710] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:06:06,429 DEBUG [EBPB_EMML10STTL-116710] Exiting Init_Selendroid function
+2016-01-28 00:06:06,443 DEBUG [EBPB_EMML10STTL-116710] TestCase with Description "Application PowerOn" Execution started
+2016-01-28 00:06:06,443 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:06,443 DEBUG [EBPB_EMML10STTL-116710] Executing wait function:
+2016-01-28 00:06:06,443 DEBUG [EBPB_EMML10STTL-116710] Started Executing wait function
+2016-01-28 00:06:09,443 DEBUG [EBPB_EMML10STTL-116710] Exiting from wait function
+2016-01-28 00:06:09,443 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of wait: Pass
+2016-01-28 00:06:09,443 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:09,443 DEBUG [EBPB_EMML10STTL-116710] Executing validate_PageTitle function:
+2016-01-28 00:06:09,487 DEBUG [EBPB_EMML10STTL-116710] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:06:09,487 DEBUG [EBPB_EMML10STTL-116710] The page title found is correct
+2016-01-28 00:06:09,487 DEBUG [EBPB_EMML10STTL-116710] Result of validate_PageTitle: pass
+2016-01-28 00:06:09,487 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:09,487 DEBUG [EBPB_EMML10STTL-116710] Executing link_Click function:
+2016-01-28 00:06:10,065 DEBUG [EBPB_EMML10STTL-116710] Executing Click function
+2016-01-28 00:06:11,117 DEBUG [EBPB_EMML10STTL-116710] Exiting Click function
+2016-01-28 00:06:11,117 DEBUG [EBPB_EMML10STTL-116710] EMML10_test_link clicked successfully
+2016-01-28 00:06:11,117 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of link_Click: Pass
+2016-01-28 00:06:11,117 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:11,117 DEBUG [EBPB_EMML10STTL-116710] Executing wait function:
+2016-01-28 00:06:11,117 DEBUG [EBPB_EMML10STTL-116710] Started Executing wait function
+2016-01-28 00:06:13,118 DEBUG [EBPB_EMML10STTL-116710] Exiting from wait function
+2016-01-28 00:06:13,118 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of wait: Pass
+2016-01-28 00:06:13,118 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:13,118 DEBUG [EBPB_EMML10STTL-116710] Executing validate_PageTitle function:
+2016-01-28 00:06:13,155 DEBUG [EBPB_EMML10STTL-116710] The title of the page is *********************************: EMML1.0 Test Index Page
+2016-01-28 00:06:13,155 DEBUG [EBPB_EMML10STTL-116710] The page title found is correct
+2016-01-28 00:06:13,155 DEBUG [EBPB_EMML10STTL-116710] Result of validate_PageTitle: pass
+2016-01-28 00:06:13,155 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:13,155 DEBUG [EBPB_EMML10STTL-116710] Executing link_Click function:
+2016-01-28 00:06:13,537 DEBUG [EBPB_EMML10STTL-116710] Executing Click function
+2016-01-28 00:06:14,607 DEBUG [EBPB_EMML10STTL-116710] Exiting Click function
+2016-01-28 00:06:14,607 DEBUG [EBPB_EMML10STTL-116710] DeviceApplicationPower10_test_link clicked successfully
+2016-01-28 00:06:14,607 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of link_Click: Pass
+2016-01-28 00:06:14,607 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:14,607 DEBUG [EBPB_EMML10STTL-116710] Executing Lock_UnlockScreen function:
+2016-01-28 00:06:14,607 DEBUG [EBPB_EMML10STTL-116710] locking screen
+2016-01-28 00:06:14,607 DEBUG [EBPB_EMML10STTL-116710] Started executeCommandLine function
+2016-01-28 00:06:19,628 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of Lock_UnlockScreen: pass
+2016-01-28 00:06:19,628 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:19,628 DEBUG [EBPB_EMML10STTL-116710] Executing Lock_UnlockScreen function:
+2016-01-28 00:06:19,628 DEBUG [EBPB_EMML10STTL-116710] unlocking screen
+2016-01-28 00:06:19,628 DEBUG [EBPB_EMML10STTL-116710] Started executeCommandLine function
+2016-01-28 00:06:23,650 DEBUG [EBPB_EMML10STTL-116710] Started executeCommandLine function
+2016-01-28 00:06:27,670 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of Lock_UnlockScreen: pass
+2016-01-28 00:06:27,670 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:27,670 DEBUG [EBPB_EMML10STTL-116710] Executing wait function:
+2016-01-28 00:06:27,670 DEBUG [EBPB_EMML10STTL-116710] Started Executing wait function
+2016-01-28 00:06:29,670 DEBUG [EBPB_EMML10STTL-116710] Exiting from wait function
+2016-01-28 00:06:29,670 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of wait: Pass
+2016-01-28 00:06:29,670 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:29,670 DEBUG [EBPB_EMML10STTL-116710] Executing CheckUITextContains function:
+2016-01-28 00:06:29,670 DEBUG [EBPB_EMML10STTL-116710] Started executeCommandLine function
+2016-01-28 00:06:33,692 DEBUG [EBPB_EMML10STTL-116710] Text is Present
+2016-01-28 00:06:33,692 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of CheckUITextContains: Pass
+2016-01-28 00:06:33,692 DEBUG [EBPB_EMML10STTL-116710] In execute keyword function
+2016-01-28 00:06:33,692 DEBUG [EBPB_EMML10STTL-116710] Executing ClickUIButtonText function:
+2016-01-28 00:06:33,692 DEBUG [EBPB_EMML10STTL-116710] Entered ClickUIButtonText function
+2016-01-28 00:06:33,692 DEBUG [EBPB_EMML10STTL-116710] Started executeCommandLine function
+2016-01-28 00:06:37,713 DEBUG [EBPB_EMML10STTL-116710] Started executeCommandLine function
+2016-01-28 00:06:42,160 DEBUG [EBPB_EMML10STTL-116710] Exiting ClickUIButtonText function
+2016-01-28 00:06:42,160 DEBUG [EBPB_EMML10STTL-116710] TestStepResult of ClickUIButtonText: Pass
+2016-01-28 00:06:42,160 DEBUG [EBPB_EMML10STTL-116710] allstep_result contains: PassPassPasspasspassPassPassPassPassnull
+2016-01-28 00:06:42,160 DEBUG [EBPB_EMML10STTL-116710] allexpected_result contains: nullpassnullpassnull
+2016-01-28 00:06:42,160 DEBUG [EBPB_EMML10STTL-116710] Testcase_Result contains: nullpassnullpassnullPassPassPasspasspassPassPassPassPassnull
+2016-01-28 00:06:42,160 DEBUG [EBPB_EMML10STTL-116710] Test case with description Application PowerOn Pass
+2016-01-28 00:06:43,248 DEBUG [EBPB_EMML10STTL-116710] Executing browser_Quit function
+2016-01-28 00:06:43,248 DEBUG [EBPB_EMML10STTL-116710] Completed browser_Quit function
+2016-01-28 00:06:43,248 DEBUG [EBPB_EMML10STTL-116710] Completed quitSelendroid function
+2016-01-28 00:06:43,249 DEBUG [EBPB_EMML10STTL-116710] Row number:11
+2016-01-28 00:06:43,283 DEBUG [EBPB_EMML10STTL-116710] Ending Test Case IDSTTL-116710

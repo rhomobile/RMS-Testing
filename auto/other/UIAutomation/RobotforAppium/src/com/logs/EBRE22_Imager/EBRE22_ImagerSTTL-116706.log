@@ -1,0 +1,83 @@
+2016-01-28 03:54:25,752 DEBUG [EBRE22_ImagerSTTL-116706] Executing Test Case ID: STTL-116706
+2016-01-28 03:54:25,758 DEBUG [EBRE22_ImagerSTTL-116706] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:54:36,204 DEBUG [EBRE22_ImagerSTTL-116706] Exiting Init_Selendroid function
+2016-01-28 03:54:36,218 DEBUG [EBRE22_ImagerSTTL-116706] TestCase with Description "Set left to 150" Execution started
+2016-01-28 03:54:36,218 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:36,218 DEBUG [EBRE22_ImagerSTTL-116706] Executing wait function:
+2016-01-28 03:54:36,218 DEBUG [EBRE22_ImagerSTTL-116706] Started Executing wait function
+2016-01-28 03:54:39,218 DEBUG [EBRE22_ImagerSTTL-116706] Exiting from wait function
+2016-01-28 03:54:39,218 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 03:54:39,218 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:39,218 DEBUG [EBRE22_ImagerSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 03:54:39,260 DEBUG [EBRE22_ImagerSTTL-116706] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:54:39,260 DEBUG [EBRE22_ImagerSTTL-116706] The page title found is correct
+2016-01-28 03:54:39,260 DEBUG [EBRE22_ImagerSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 03:54:39,260 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:39,260 DEBUG [EBRE22_ImagerSTTL-116706] Executing link_Click function:
+2016-01-28 03:54:39,887 DEBUG [EBRE22_ImagerSTTL-116706] Executing Click function
+2016-01-28 03:54:40,987 DEBUG [EBRE22_ImagerSTTL-116706] Exiting Click function
+2016-01-28 03:54:40,987 DEBUG [EBRE22_ImagerSTTL-116706] imager_test_link clicked successfully
+2016-01-28 03:54:40,987 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of link_Click: Pass
+2016-01-28 03:54:40,987 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:40,987 DEBUG [EBRE22_ImagerSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 03:54:41,024 DEBUG [EBRE22_ImagerSTTL-116706] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Imager
+2016-01-28 03:54:41,024 DEBUG [EBRE22_ImagerSTTL-116706] The page title found is correct
+2016-01-28 03:54:41,024 DEBUG [EBRE22_ImagerSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 03:54:41,024 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:41,024 DEBUG [EBRE22_ImagerSTTL-116706] Executing wait function:
+2016-01-28 03:54:41,024 DEBUG [EBRE22_ImagerSTTL-116706] Started Executing wait function
+2016-01-28 03:54:46,025 DEBUG [EBRE22_ImagerSTTL-116706] Exiting from wait function
+2016-01-28 03:54:46,025 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 03:54:46,025 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:46,025 DEBUG [EBRE22_ImagerSTTL-116706] Executing SelectImager function:
+2016-01-28 03:54:48,637 DEBUG [EBRE22_ImagerSTTL-116706] Successfull in selecting the imager: Back Facing Camera
+2016-01-28 03:54:48,637 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of SelectImager: Pass
+2016-01-28 03:54:48,637 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:48,637 DEBUG [EBRE22_ImagerSTTL-116706] Executing SelectTestToRun function:
+2016-01-28 03:54:51,625 DEBUG [EBRE22_ImagerSTTL-116706] Successfull in selecting clicking the category
+2016-01-28 03:54:51,625 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:54:51,625 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:51,625 DEBUG [EBRE22_ImagerSTTL-116706] Executing validate_Text_Exists function:
+2016-01-28 03:54:51,848 DEBUG [EBRE22_ImagerSTTL-116706] VT187-0178 Testcase Text found
+2016-01-28 03:54:51,848 DEBUG [EBRE22_ImagerSTTL-116706] Result of validate_Text_Exists: Pass
+2016-01-28 03:54:51,848 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:51,848 DEBUG [EBRE22_ImagerSTTL-116706] Executing ClickRunTest function:
+2016-01-28 03:54:52,217 DEBUG [EBRE22_ImagerSTTL-116706] Executing Click function
+2016-01-28 03:54:53,223 DEBUG [EBRE22_ImagerSTTL-116706] Exiting Click function
+2016-01-28 03:54:53,223 DEBUG [EBRE22_ImagerSTTL-116706] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:54:53,223 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-28 03:54:53,223 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:53,223 DEBUG [EBRE22_ImagerSTTL-116706] Executing wait function:
+2016-01-28 03:54:53,223 DEBUG [EBRE22_ImagerSTTL-116706] Started Executing wait function
+2016-01-28 03:54:55,223 DEBUG [EBRE22_ImagerSTTL-116706] Exiting from wait function
+2016-01-28 03:54:55,223 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 03:54:55,223 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:55,223 DEBUG [EBRE22_ImagerSTTL-116706] Executing ClickRunTest function:
+2016-01-28 03:54:55,623 DEBUG [EBRE22_ImagerSTTL-116706] Executing Click function
+2016-01-28 03:54:56,621 DEBUG [EBRE22_ImagerSTTL-116706] Exiting Click function
+2016-01-28 03:54:56,621 DEBUG [EBRE22_ImagerSTTL-116706] capture_xpath Button clicked Successfully
+2016-01-28 03:54:56,621 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-28 03:54:56,621 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:56,621 DEBUG [EBRE22_ImagerSTTL-116706] Executing wait function:
+2016-01-28 03:54:56,621 DEBUG [EBRE22_ImagerSTTL-116706] Started Executing wait function
+2016-01-28 03:54:58,621 DEBUG [EBRE22_ImagerSTTL-116706] Exiting from wait function
+2016-01-28 03:54:58,621 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 03:54:58,621 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:54:58,621 DEBUG [EBRE22_ImagerSTTL-116706] Executing ClickRunTest function:
+2016-01-28 03:54:59,027 DEBUG [EBRE22_ImagerSTTL-116706] Executing Click function
+2016-01-28 03:55:00,105 DEBUG [EBRE22_ImagerSTTL-116706] Exiting Click function
+2016-01-28 03:55:00,105 DEBUG [EBRE22_ImagerSTTL-116706] disable_xpath Button clicked Successfully
+2016-01-28 03:55:00,105 DEBUG [EBRE22_ImagerSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-28 03:55:00,105 DEBUG [EBRE22_ImagerSTTL-116706] In execute keyword function
+2016-01-28 03:55:00,105 DEBUG [EBRE22_ImagerSTTL-116706] Executing validate_Result function:
+2016-01-28 03:55:00,404 DEBUG [EBRE22_ImagerSTTL-116706] data:image/png Text found in data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAKAAeADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDGooooAKKKKACiiigAooooAKKKKACiiigAooooASloooAKKKKACiiigAopKWgAooooAKKKSgBaKSigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiikoAKWiigAooooAKKKKACiiigAooooAKKKKACiiigAooooASloooAKKKKAEpaSloASloooAKKKKACkpaKACkopaACiiigAooooAKKKKACiiigAooooAKKKSgBaSlooASloooAKKKKACkpaKACiiigAooooAKKKKACiiigAooooAKKKKACikpaACiiigAooooAKKKKACiiigAooooAKKKKAEpaKKAEpaKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopKWgBKWiigBKWkpaACkpaSgApaKSgBaKSigApaKSgApaKKAEpaSloAKKKSgBaKKKACiiigApKWigAooooASilooAKKKKACiiigAooooAKKKKACiiigAooooASlpKWgAooooAKKKKACiiigAooooAKSlooAKKKKACiiigAooooASilooAKSlooAKKKKAEpaKKACkpaSgAopaKACkopaACiiigBKWiigBKWiigAooooAKKKKACiiigAooooAKKKKAEpaKKACiiigAooooAKKKKACiiigAooooASloooAKSlooAKKKKACikpaACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopKWgAooooAKKKKAEpaKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBKWiigAooooAKKKKACiiigAooooAKKSigBaKKKACikpaACkoooAWikpaACiiigAopKWgAooooAKKKSgBaKKSgBaKSloAKKSigBaKKSgBaKSigBaSiigBaKSigBaKKKACikooAWiikoAWiiigAopKKAFopKWgAoopKAFooooAKKKKACiiigAooooAKKKKACiiigAooooAKKSloAKKKKACikooAWikooAWikooAWiiigAoopKAFopKWgAoopKAFpKKKAFoopKAFpKKWgBKKKKAFopKKAFpKKKAClopKAFpKWkoAKWkooAWiiigAooooAKKKSgBaKKSgBaKKKACikpaACiiigAooooAKKKKACiiigAooooAKKKKAEpaSloAKKKKACiiigAooooAKKKSgBaKKKACiiigBKWkpaACikooAWikpaACkpaKACiiigBKKWkoAWkpaKACkpaSgBaKSloAKSlooASloooAKKKKACikpaACiiigAoopKAFooooASlpKWgAooooAKKKKACiiigAooooAKKKKACiiigBKKKKAFooooASiiloAKKSloAKKKKACikpaACkoooAKKKKACilooASiiigAopaSgApaSigAooooAKKWigBKKKKACiiigAooooAKWkooAKWiigApKKWgApKWkoAKKKKACloooASiiloAKKKKACiiigAooooASilooAKKKKACiikoAKKKKAFpKWigBKKKWgBKKKKACiiloAKSlooAKKKKAEoopaAEpaKKAEooooAKKKWgBKWkpaAEooooAKWkooAKKKKACiiigAoopaAEooooAWikpaACkpaSgApaSigBaSiloAKSlooASiiloASilooAKKSloAKKSloAKKKKACiiigApKWkoAWkoooAWkpaKACikpaAEpaKKAEopaKACiiigApKWigAopKKAFpKWigBKKKKAFopKWgAoopKACiiigAooooAKWkooAKWkpaACkopaAEpaSigBaKKKACiiigBKWiigApKKWgApKWkoAKWkooAWiiigAooooAKKKKACikpaACiiigAooooASiiigAooooAKKKKACiiigAooooAWikooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAFpKKKACiiigAooooAKKKKACiiigBaSiigBaKSloAKKKKAEpaSloAKKKKACiikoAKWkpaACiiigAopKWgBKWiigBKWiigApKWigApKWkoAKWkpaACkpaSgBaSlpKAFpKKKAClpKWgBKKKKACiiigAooooAKKKKAClpKKACiiigApaSloAKKKKACiikoAKKKWgBKKWigBKKKWgAooooASloooAKKKKACiiigApKWigAooooASiiigBaSiigBaKSigApaSigBaKSigBaKSigApaSigBaKSigBaKKSgBaKSigAooooAKWkooAKKKKACiiigAooooAKKKKAFpKKKACiiigAooooAWkoooAKKKKACiiigBaSiigApaSigBaKSigBaKSigBaKKKACikpaACiiigAooooASiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopaACiiigBKKKKACiiigAooooAKKKKAFpKWigBKWkpaACkoooAKWkooAWiiigBKKKKACiiigBaSiigAooooAKKKKAClpKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBaSiigAooooAKKKKACiiigBaSiigBaKKSgApaSloAKKSigBaKSigBaKKKACkpaSgAooooAWkpaKAEooooAKKKWgBKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopaKAEpaSloASilooASiiloAKSlooAKSlpKACiiigBaSiloAKSiigAooooAKWkooAKKKKAClpKKAFpKKKACiiigBaSiigAooooAWkoooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAClpKKACiiigAooooAKKKKACiiigBaSiigBaKSloAKKKSgAooooAKWikoAWikooAKKKKAFopKKAClpKWgBKKKKACiiigApaSloASiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAFooooASilooAKSlpKACiiloAKKKKACkpaSgAooooAKKKKACiiigAooooAKKKKAClpKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAClpKKACiiigAooooAKKKKAFopKKAFopKKAClpKKAFoopKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopaAEopaSgAooooAKKKKACiiigAooooAKKKKACiiigAoopaAEooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiloASiiigAoopaAEopaSgAooooAKWiigBKKWkoAKKKKAFpKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAFpKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopaAEopaSgAooooAKKKKACiiigAoopaACkpaSgAooooAKKWigBKKKWgBKKWkoAKKKWgBKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKWkoAKKKKACiiigAooooAKKKWgBKWkpaAEoopaAEopaKAEopaSgBaKKSgBaSlpKACiiigAopaKAEoopaAEopaKAEooooAKKKWgBKKKWgBKKKWgBKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopaSgAooooAKKKKACiiigAoopaAEopaSgAopaKAEopaKAEopaKAEopaKACkpaSgAoopaACiikoAKWkooAWikpaAEooooAWkopaAEooooAKKKKAFpKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBaSlooASiiigAooooAKKWkoAKWkooAWikooAWkopaACkpaSgApaSigBaKSigAooooAKKKKAFoopKAClpKWgBKWiigAopKKACilpKACilpKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKWkooAWkoooAKKKKAFpKKKAClpKWgApKKKAClpKKAClpKWgBKWkooAKKWigBKKWigBKWiigBKKWigBKKWigApKWigBKWiigBKKKWgBKKKWgBKKKKACilooASilpKACiiigAooooAKKKKACiiigAooooAKKKKACilooASilooASiiigAooooAKKWigBKKWigBKWiigAooooAKSlooASloooASilooASiiloASlpKWgAooooAKKKKAEopaKAEpaSloAKKKKAEooooAKWkpaAEooooAKKKKACilpKACiiloASiiigAooooAKKKKACiiigAooooAKKKWgBKKKWgBKKKKACiiloASilooASiiigAooooAKWiigAooooAKKKKAEpaKKACiiigAooooASiiigBaSiigApaSloAKKSloASiiloAKKSigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKWigBKKKKACiiigAooooAKKKKACilpKACilpKACiiigApaSigBaSiloASiiigBaKSloASilooASlpKWgAopKWgApKWigBKKWkoAKWikoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKWkooAKWkooAKKKKACiiigAopaKACikpaACikpaACiikoAKKKWgAooooAKSlpKACiiloAKKKKAEpaKKAEopaKAEpaKKACkpaKAEopaSgAopaSgBaSlooASiiigAopaSgAoopaAEooooAKKKKACiiloASiiigAooooAKKKWgBKKKKAFpKWigBKKKWgBKKKWgBKKWigBKKKKAFpKWigBKWiigAooooASilooAKKKSgBaKKSgBaSlooAKKKKACiiigApKWigBKWiigBKWiigBKKWigApKKWgBKKWigApKKKACilpKACiiigAoopaAEooooAKKKKACiiigAooooAKKKKACilpKACiiigBaSlpKACiiigAopaSgApaSloAKSlooASloooAKKKKACiiigAooooASilpKAFopKWgAooooAKKKKACkpaKACiikoAKWiigAopKWgAopKKAFpKKKACiiigAooooAKKWkoAKKKKACiiigAooooAKKKKAClopKACiiigBaKSigBaSlpKAFopKKAFopKWgApKKKAClpKKAFopKKAFooooAKKKSgBaKSloAKKKKACiiigBKKKWgAooooAKSlooASlpKWgApKKWgAooooASlopKACiiloASilpKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACilpKACiiloASilpKACiiigAopaSgAooooAKKKWgBKWkooAWiiigAopKWgAooooASilooAKKKKACikpaACiiigAopKWgAooooAKKSloAKKSigApaSloAKKKKAEooooAKKWkoAWikooAKKWkoAKKKKAClpKKACiiigBaSlpKACiiigBaSlpKACloooAKSiigBaKSigBaSiigApaSigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooASlpKWgAooooAKKKKACiiigBKKKWgBKKWkoAKKWkoAKWkooAWiikoAKKKKACilpKAFopKWgAopKKAFoopKAClpKWgApKWkoAWkoooAKWkooAWiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAEpaSloAKKKKACiiigApKWigAooooAKKKSgAopaSgBaKKKACiikoAKKKKACilpKAFpKWkoAKWikoAWikooAWkoooAWkoooAWiiigAoopKAFpKKWgApKWigBKWiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKSlooAKSlpKACilpKACiiigBaKKKAEpaKSgBaSiigAoopaAEoopaAEooooAKKWigAooooAKKKKAEooooAKWkpaACkpaKAEpaSloAKKKKACiiigAooooAKKSloAKKKKACiiigD//2Q==
+2016-01-28 03:55:00,404 DEBUG [EBRE22_ImagerSTTL-116706] Result of validate_Result: Pass
+2016-01-28 03:55:00,404 DEBUG [EBRE22_ImagerSTTL-116706] allstep_result contains: passPasspassPasspasspassPassPassPassPassnull
+2016-01-28 03:55:00,404 DEBUG [EBRE22_ImagerSTTL-116706] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 03:55:00,404 DEBUG [EBRE22_ImagerSTTL-116706] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpassPasspassPasspasspassPassPassPassPassnull
+2016-01-28 03:55:00,404 DEBUG [EBRE22_ImagerSTTL-116706] Test case with description Set left to 150 Pass
+2016-01-28 03:55:01,403 DEBUG [EBRE22_ImagerSTTL-116706] Executing browser_Quit function
+2016-01-28 03:55:01,403 DEBUG [EBRE22_ImagerSTTL-116706] Completed browser_Quit function
+2016-01-28 03:55:01,403 DEBUG [EBRE22_ImagerSTTL-116706] Completed quitSelendroid function
+2016-01-28 03:55:01,403 DEBUG [EBRE22_ImagerSTTL-116706] Row number:7
+2016-01-28 03:55:01,433 DEBUG [EBRE22_ImagerSTTL-116706] Ending Test Case IDSTTL-116706

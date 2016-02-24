@@ -1,0 +1,66 @@
+2016-01-28 03:58:33,480 DEBUG [EBRE22_ImagerSTTL-116713] Executing Test Case ID: STTL-116713
+2016-01-28 03:58:33,486 DEBUG [EBRE22_ImagerSTTL-116713] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:58:44,015 DEBUG [EBRE22_ImagerSTTL-116713] Exiting Init_Selendroid function
+2016-01-28 03:58:44,021 DEBUG [EBRE22_ImagerSTTL-116713] TestCase with Description "Imager Event" Execution started
+2016-01-28 03:58:44,021 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:58:44,021 DEBUG [EBRE22_ImagerSTTL-116713] Executing wait function:
+2016-01-28 03:58:44,021 DEBUG [EBRE22_ImagerSTTL-116713] Started Executing wait function
+2016-01-28 03:58:47,021 DEBUG [EBRE22_ImagerSTTL-116713] Exiting from wait function
+2016-01-28 03:58:47,021 DEBUG [EBRE22_ImagerSTTL-116713] TestStepResult of wait: Pass
+2016-01-28 03:58:47,021 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:58:47,021 DEBUG [EBRE22_ImagerSTTL-116713] Executing validate_PageTitle function:
+2016-01-28 03:58:47,065 DEBUG [EBRE22_ImagerSTTL-116713] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:58:47,065 DEBUG [EBRE22_ImagerSTTL-116713] The page title found is correct
+2016-01-28 03:58:47,065 DEBUG [EBRE22_ImagerSTTL-116713] Result of validate_PageTitle: pass
+2016-01-28 03:58:47,065 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:58:47,065 DEBUG [EBRE22_ImagerSTTL-116713] Executing link_Click function:
+2016-01-28 03:58:47,683 DEBUG [EBRE22_ImagerSTTL-116713] Executing Click function
+2016-01-28 03:58:48,746 DEBUG [EBRE22_ImagerSTTL-116713] Exiting Click function
+2016-01-28 03:58:48,746 DEBUG [EBRE22_ImagerSTTL-116713] imager_test_link clicked successfully
+2016-01-28 03:58:48,746 DEBUG [EBRE22_ImagerSTTL-116713] TestStepResult of link_Click: Pass
+2016-01-28 03:58:48,746 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:58:48,746 DEBUG [EBRE22_ImagerSTTL-116713] Executing validate_PageTitle function:
+2016-01-28 03:58:48,764 DEBUG [EBRE22_ImagerSTTL-116713] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Imager
+2016-01-28 03:58:48,764 DEBUG [EBRE22_ImagerSTTL-116713] The page title found is correct
+2016-01-28 03:58:48,764 DEBUG [EBRE22_ImagerSTTL-116713] Result of validate_PageTitle: pass
+2016-01-28 03:58:48,764 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:58:48,765 DEBUG [EBRE22_ImagerSTTL-116713] Executing wait function:
+2016-01-28 03:58:48,765 DEBUG [EBRE22_ImagerSTTL-116713] Started Executing wait function
+2016-01-28 03:58:53,764 DEBUG [EBRE22_ImagerSTTL-116713] Exiting from wait function
+2016-01-28 03:58:53,764 DEBUG [EBRE22_ImagerSTTL-116713] TestStepResult of wait: Pass
+2016-01-28 03:58:53,764 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:58:53,764 DEBUG [EBRE22_ImagerSTTL-116713] Executing SelectImager function:
+2016-01-28 03:58:56,483 DEBUG [EBRE22_ImagerSTTL-116713] Successfull in selecting the imager: Front Facing Camera
+2016-01-28 03:58:56,483 DEBUG [EBRE22_ImagerSTTL-116713] TestStepResult of SelectImager: Pass
+2016-01-28 03:58:56,483 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:58:56,483 DEBUG [EBRE22_ImagerSTTL-116713] Executing SelectTestToRun function:
+2016-01-28 03:59:00,700 DEBUG [EBRE22_ImagerSTTL-116713] Successfull in selecting clicking the category
+2016-01-28 03:59:00,700 DEBUG [EBRE22_ImagerSTTL-116713] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:59:00,700 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:59:00,700 DEBUG [EBRE22_ImagerSTTL-116713] Executing validate_Text_Exists function:
+2016-01-28 03:59:00,999 DEBUG [EBRE22_ImagerSTTL-116713] VT187-0223 Testcase Text found
+2016-01-28 03:59:01,000 DEBUG [EBRE22_ImagerSTTL-116713] Result of validate_Text_Exists: Pass
+2016-01-28 03:59:01,000 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:59:01,000 DEBUG [EBRE22_ImagerSTTL-116713] Executing ClickRunTest function:
+2016-01-28 03:59:01,353 DEBUG [EBRE22_ImagerSTTL-116713] Executing Click function
+2016-01-28 03:59:02,402 DEBUG [EBRE22_ImagerSTTL-116713] Exiting Click function
+2016-01-28 03:59:02,402 DEBUG [EBRE22_ImagerSTTL-116713] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:59:02,402 DEBUG [EBRE22_ImagerSTTL-116713] TestStepResult of ClickRunTest: pass
+2016-01-28 03:59:02,402 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:59:02,402 DEBUG [EBRE22_ImagerSTTL-116713] Executing wait function:
+2016-01-28 03:59:02,402 DEBUG [EBRE22_ImagerSTTL-116713] Started Executing wait function
+2016-01-28 03:59:07,402 DEBUG [EBRE22_ImagerSTTL-116713] Exiting from wait function
+2016-01-28 03:59:07,402 DEBUG [EBRE22_ImagerSTTL-116713] TestStepResult of wait: Pass
+2016-01-28 03:59:07,402 DEBUG [EBRE22_ImagerSTTL-116713] In execute keyword function
+2016-01-28 03:59:07,402 DEBUG [EBRE22_ImagerSTTL-116713] Executing validate_Result function:
+2016-01-28 03:59:07,691 DEBUG [EBRE22_ImagerSTTL-116713] JSON response: FileSent Text found in JSON response: FileSent
+2016-01-28 03:59:07,691 DEBUG [EBRE22_ImagerSTTL-116713] Result of validate_Result: Pass
+2016-01-28 03:59:07,692 DEBUG [EBRE22_ImagerSTTL-116713] allstep_result contains: PasspasspassPassPassPassPassnull
+2016-01-28 03:59:07,693 DEBUG [EBRE22_ImagerSTTL-116713] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 03:59:07,693 DEBUG [EBRE22_ImagerSTTL-116713] Testcase_Result contains: nullPassnullPassnullpassnullpassnullPasspasspassPassPassPassPassnull
+2016-01-28 03:59:07,693 DEBUG [EBRE22_ImagerSTTL-116713] Test case with description Imager Event Pass
+2016-01-28 03:59:08,686 DEBUG [EBRE22_ImagerSTTL-116713] Executing browser_Quit function
+2016-01-28 03:59:08,686 DEBUG [EBRE22_ImagerSTTL-116713] Completed browser_Quit function
+2016-01-28 03:59:08,686 DEBUG [EBRE22_ImagerSTTL-116713] Completed quitSelendroid function
+2016-01-28 03:59:08,686 DEBUG [EBRE22_ImagerSTTL-116713] Row number:14
+2016-01-28 03:59:08,712 DEBUG [EBRE22_ImagerSTTL-116713] Ending Test Case IDSTTL-116713

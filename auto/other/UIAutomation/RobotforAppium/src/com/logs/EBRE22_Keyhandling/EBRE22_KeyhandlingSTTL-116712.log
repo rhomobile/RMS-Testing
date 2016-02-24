@@ -1,0 +1,507 @@
+2016-01-28 04:10:11,764 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing Test Case ID: STTL-116712
+2016-01-28 04:10:11,780 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 04:10:22,345 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting Init_Selendroid function
+2016-01-28 04:10:22,362 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestCase with Description "KeyValue:All(Function & Special Keys)Json Object" Execution started
+2016-01-28 04:10:22,362 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:22,362 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing wait function:
+2016-01-28 04:10:22,362 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started Executing wait function
+2016-01-28 04:10:27,362 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from wait function
+2016-01-28 04:10:27,362 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of wait: Pass
+2016-01-28 04:10:27,362 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:27,362 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_PageTitle function:
+2016-01-28 04:10:27,404 DEBUG [EBRE22_KeyhandlingSTTL-116712] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 04:10:27,404 DEBUG [EBRE22_KeyhandlingSTTL-116712] The page title found is correct
+2016-01-28 04:10:27,404 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_PageTitle: pass
+2016-01-28 04:10:27,405 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:27,405 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing link_Click function:
+2016-01-28 04:10:27,991 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing Click function
+2016-01-28 04:10:29,101 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting Click function
+2016-01-28 04:10:29,101 DEBUG [EBRE22_KeyhandlingSTTL-116712] keyhandling_link clicked successfully
+2016-01-28 04:10:29,101 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of link_Click: Pass
+2016-01-28 04:10:29,101 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:29,101 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_PageTitle function:
+2016-01-28 04:10:29,139 DEBUG [EBRE22_KeyhandlingSTTL-116712] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Keyhandling
+2016-01-28 04:10:29,139 DEBUG [EBRE22_KeyhandlingSTTL-116712] The page title found is correct
+2016-01-28 04:10:29,139 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_PageTitle: pass
+2016-01-28 04:10:29,139 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:29,139 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing SelectTestToRun function:
+2016-01-28 04:10:32,489 DEBUG [EBRE22_KeyhandlingSTTL-116712] Successfull in selecting clicking the category
+2016-01-28 04:10:32,489 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of SelectTestToRun: pass
+2016-01-28 04:10:32,489 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:32,489 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing ClickRunTest function:
+2016-01-28 04:10:32,827 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing Click function
+2016-01-28 04:10:33,813 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting Click function
+2016-01-28 04:10:33,813 DEBUG [EBRE22_KeyhandlingSTTL-116712] runtest_top_xpath Button clicked Successfully
+2016-01-28 04:10:33,813 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-28 04:10:33,813 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:33,813 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_Text_Exists function:
+2016-01-28 04:10:34,105 DEBUG [EBRE22_KeyhandlingSTTL-116712] VT187-2581 Testcase Text found
+2016-01-28 04:10:34,105 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_Text_Exists: Pass
+2016-01-28 04:10:34,105 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:34,105 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:10:34,105 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:10:34,105 DEBUG [EBRE22_KeyhandlingSTTL-116712] F1
+2016-01-28 04:10:34,105 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F1key
+2016-01-28 04:10:34,105 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:10:38,126 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:10:38,126 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:38,126 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:10:38,126 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:38,127 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:10:38,127 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] 131
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] F2
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F2key
+2016-01-28 04:10:38,395 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:10:42,416 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:10:42,416 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:42,416 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:10:42,416 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:42,416 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:10:42,416 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] 132
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] F3
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F3key
+2016-01-28 04:10:42,589 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:10:46,609 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:10:46,609 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:46,609 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:10:46,609 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:46,609 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:10:46,609 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] 133
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] F4
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F4key
+2016-01-28 04:10:46,785 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:10:50,804 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:10:50,804 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:50,804 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:10:50,804 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:50,804 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:10:50,804 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] 134
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] F5
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F5key
+2016-01-28 04:10:50,976 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:10:54,996 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:10:54,996 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:54,996 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:10:54,996 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:54,996 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:10:54,996 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:10:55,209 DEBUG [EBRE22_KeyhandlingSTTL-116712] 135
+2016-01-28 04:10:55,209 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:10:55,209 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:55,209 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:10:55,209 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:10:55,209 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:55,210 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:10:55,210 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:10:55,210 DEBUG [EBRE22_KeyhandlingSTTL-116712] F6
+2016-01-28 04:10:55,210 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F6key
+2016-01-28 04:10:55,210 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:10:59,230 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:10:59,230 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:59,230 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:10:59,230 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:59,230 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:10:59,230 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] 136
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] F7
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F7key
+2016-01-28 04:10:59,394 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:03,420 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:03,420 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:03,420 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:03,420 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:03,420 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:03,420 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] 137
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] F8
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F8key
+2016-01-28 04:11:03,593 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:07,613 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:07,613 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:07,613 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:07,613 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:07,613 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:07,613 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] 138
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] F9
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F9key
+2016-01-28 04:11:07,797 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:11,818 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:11,818 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:11,818 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:11,818 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:11,818 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:11,818 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:11,989 DEBUG [EBRE22_KeyhandlingSTTL-116712] 139
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] F10
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F10key
+2016-01-28 04:11:11,990 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:16,016 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:16,016 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:16,016 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:16,016 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:16,016 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:16,016 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] 140
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] F11
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F11key
+2016-01-28 04:11:16,213 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:20,234 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:20,234 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:20,234 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:20,234 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:20,234 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:20,234 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] 141
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] F12
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered F12key
+2016-01-28 04:11:20,397 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:24,418 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:24,418 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:24,418 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:24,418 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:24,418 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:24,418 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:24,586 DEBUG [EBRE22_KeyhandlingSTTL-116712] 142
+2016-01-28 04:11:24,586 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:24,586 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:24,586 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:24,586 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:24,587 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:24,587 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:24,587 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:24,587 DEBUG [EBRE22_KeyhandlingSTTL-116712] CTRL
+2016-01-28 04:11:24,587 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered CTRLkey
+2016-01-28 04:11:24,587 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:28,607 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:28,607 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:28,607 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:28,607 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:28,607 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:28,607 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] 113
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] Alt
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Altkey
+2016-01-28 04:11:28,807 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:32,828 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:32,828 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:32,828 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:32,828 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:32,828 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:32,828 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] 57
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] ENTER
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Enterkey
+2016-01-28 04:11:33,006 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:37,026 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:37,026 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:37,026 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:37,026 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:37,026 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:37,026 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:37,223 DEBUG [EBRE22_KeyhandlingSTTL-116712] 66
+2016-01-28 04:11:37,223 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:37,223 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:37,223 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:37,223 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:37,223 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:37,223 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:37,224 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:37,224 DEBUG [EBRE22_KeyhandlingSTTL-116712] BACK
+2016-01-28 04:11:37,224 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered BACKkey
+2016-01-28 04:11:37,224 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:41,244 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:41,244 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:41,244 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:41,244 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:41,244 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:41,244 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:41,445 DEBUG [EBRE22_KeyhandlingSTTL-116712] 67
+2016-01-28 04:11:41,445 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:41,445 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:41,446 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:41,446 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:41,446 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:41,446 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:41,446 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:41,446 DEBUG [EBRE22_KeyhandlingSTTL-116712] TAB
+2016-01-28 04:11:41,446 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered TABkey
+2016-01-28 04:11:41,446 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:45,466 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:45,466 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:45,466 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:45,466 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:45,466 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:45,466 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:45,683 DEBUG [EBRE22_KeyhandlingSTTL-116712] 61
+2016-01-28 04:11:45,683 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:45,683 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:45,683 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:45,683 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:45,683 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:45,683 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:45,683 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:45,684 DEBUG [EBRE22_KeyhandlingSTTL-116712] SPACE
+2016-01-28 04:11:45,684 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered SPACEkey
+2016-01-28 04:11:45,684 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:49,703 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:49,703 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:49,703 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:49,703 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:49,703 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:49,703 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:49,870 DEBUG [EBRE22_KeyhandlingSTTL-116712] 62
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] SHIFT
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Shiftkey
+2016-01-28 04:11:49,871 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:53,891 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:53,891 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:53,891 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:53,891 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:53,891 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:53,891 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:54,094 DEBUG [EBRE22_KeyhandlingSTTL-116712] 59
+2016-01-28 04:11:54,094 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:54,094 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:54,095 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:54,095 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:54,095 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:54,095 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:54,095 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:54,095 DEBUG [EBRE22_KeyhandlingSTTL-116712] DecimalPoint
+2016-01-28 04:11:54,095 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered DecimalPointkey
+2016-01-28 04:11:54,095 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:11:58,114 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:11:58,114 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:58,114 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:11:58,114 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:58,114 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:11:58,114 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] 56
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] Star
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Starkey
+2016-01-28 04:11:58,314 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:12:02,334 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:12:02,334 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:02,334 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:12:02,334 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:02,334 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:12:02,334 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] 17
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] Plus
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Pluskey
+2016-01-28 04:12:02,500 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:12:06,520 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:12:06,520 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:06,520 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:12:06,520 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:06,520 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:12:06,520 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:12:06,712 DEBUG [EBRE22_KeyhandlingSTTL-116712] 157
+2016-01-28 04:12:06,712 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:12:06,712 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:06,712 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:12:06,712 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:12:06,713 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:06,713 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:12:06,713 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:12:06,713 DEBUG [EBRE22_KeyhandlingSTTL-116712] Minus
+2016-01-28 04:12:06,713 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Minuskey
+2016-01-28 04:12:06,713 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:12:10,733 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:12:10,733 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:10,733 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:12:10,733 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:10,733 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:12:10,733 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:12:10,916 DEBUG [EBRE22_KeyhandlingSTTL-116712] 156
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] Multiply
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Multiplykey
+2016-01-28 04:12:10,917 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:12:14,936 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:12:14,936 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:14,936 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:12:14,936 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:14,936 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:12:14,936 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] 155
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] Divide
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Dividekey
+2016-01-28 04:12:15,132 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:12:19,152 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:12:19,152 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:19,152 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:12:19,152 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:19,152 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:12:19,152 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:12:19,347 DEBUG [EBRE22_KeyhandlingSTTL-116712] 154
+2016-01-28 04:12:19,347 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:12:19,347 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:19,347 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:12:19,347 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:12:19,348 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:19,348 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:12:19,348 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:12:19,348 DEBUG [EBRE22_KeyhandlingSTTL-116712] Equals
+2016-01-28 04:12:19,348 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered Equalskey
+2016-01-28 04:12:19,348 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:12:23,367 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:12:23,367 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:23,367 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:12:23,367 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:23,367 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:12:23,367 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] 161
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] ESC
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered ESCkey
+2016-01-28 04:12:23,563 DEBUG [EBRE22_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 04:12:27,583 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 04:12:27,583 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:27,583 DEBUG [EBRE22_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 04:12:27,583 DEBUG [EBRE22_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 04:12:27,583 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing validate_keyCaptured function:
+2016-01-28 04:12:27,583 DEBUG [EBRE22_KeyhandlingSTTL-116712] Entered validate_keyCaptured function
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] 111
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] Actual Value matches Expected
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] pass
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] Exiting from validate_keyCaptured function
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] Result of validate_keyCaptured: pass
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] allstep_result contains: passpasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspassPassPassnull
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] allexpected_result contains: nullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullPassnullpassnullpassnull
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] Testcase_Result contains: nullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullpassnullPassnullpassnullpassnullpasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspasspassPassPassnull
+2016-01-28 04:12:27,750 DEBUG [EBRE22_KeyhandlingSTTL-116712] Test case with description KeyValue:All(Function & Special Keys)Json Object Pass
+2016-01-28 04:12:28,695 DEBUG [EBRE22_KeyhandlingSTTL-116712] Executing browser_Quit function
+2016-01-28 04:12:28,695 DEBUG [EBRE22_KeyhandlingSTTL-116712] Completed browser_Quit function
+2016-01-28 04:12:28,695 DEBUG [EBRE22_KeyhandlingSTTL-116712] Completed quitSelendroid function
+2016-01-28 04:12:28,696 DEBUG [EBRE22_KeyhandlingSTTL-116712] Row number:13
+2016-01-28 04:12:28,735 DEBUG [EBRE22_KeyhandlingSTTL-116712] Ending Test Case IDSTTL-116712

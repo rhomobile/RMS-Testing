@@ -1,0 +1,68 @@
+2016-01-27 18:55:24,521 DEBUG [EBManual_Intent_JSSTTL-116733] Executing Test Case ID: STTL-116733
+2016-01-27 18:55:24,546 DEBUG [EBManual_Intent_JSSTTL-116733] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 18:55:34,465 DEBUG [EBManual_Intent_JSSTTL-116733] Exiting Init_Selendroid function
+2016-01-27 18:55:34,488 DEBUG [EBManual_Intent_JSSTTL-116733] TestCase with Description "Stop listening to background intents before executing startListening method" Execution started
+2016-01-27 18:55:34,488 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:34,488 DEBUG [EBManual_Intent_JSSTTL-116733] Executing wait function:
+2016-01-27 18:55:34,488 DEBUG [EBManual_Intent_JSSTTL-116733] Started Executing wait function
+2016-01-27 18:55:37,488 DEBUG [EBManual_Intent_JSSTTL-116733] Exiting from wait function
+2016-01-27 18:55:37,488 DEBUG [EBManual_Intent_JSSTTL-116733] TestStepResult of wait: Pass
+2016-01-27 18:55:37,488 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:37,488 DEBUG [EBManual_Intent_JSSTTL-116733] Executing validate_PageTitle function:
+2016-01-27 18:55:37,531 DEBUG [EBManual_Intent_JSSTTL-116733] The title of the page is *********************************: Manual specs
+2016-01-27 18:55:37,531 DEBUG [EBManual_Intent_JSSTTL-116733] The page title found is correct
+2016-01-27 18:55:37,531 DEBUG [EBManual_Intent_JSSTTL-116733] Result of validate_PageTitle: pass
+2016-01-27 18:55:37,531 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:37,531 DEBUG [EBManual_Intent_JSSTTL-116733] Executing link_Click function:
+2016-01-27 18:55:38,162 DEBUG [EBManual_Intent_JSSTTL-116733] Executing Click function
+2016-01-27 18:55:39,230 DEBUG [EBManual_Intent_JSSTTL-116733] Exiting Click function
+2016-01-27 18:55:39,230 DEBUG [EBManual_Intent_JSSTTL-116733] intent_test_link clicked successfully
+2016-01-27 18:55:39,230 DEBUG [EBManual_Intent_JSSTTL-116733] TestStepResult of link_Click: Pass
+2016-01-27 18:55:39,230 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:39,230 DEBUG [EBManual_Intent_JSSTTL-116733] Executing validate_PageTitle function:
+2016-01-27 18:55:39,246 DEBUG [EBManual_Intent_JSSTTL-116733] The title of the page is *********************************: Intent JS Test
+2016-01-27 18:55:39,246 DEBUG [EBManual_Intent_JSSTTL-116733] The page title found is correct
+2016-01-27 18:55:39,246 DEBUG [EBManual_Intent_JSSTTL-116733] Result of validate_PageTitle: pass
+2016-01-27 18:55:39,246 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:39,246 DEBUG [EBManual_Intent_JSSTTL-116733] Executing SelectTestToRun function:
+2016-01-27 18:55:46,220 DEBUG [EBManual_Intent_JSSTTL-116733] Successfull in selecting clicking the category
+2016-01-27 18:55:46,220 DEBUG [EBManual_Intent_JSSTTL-116733] TestStepResult of SelectTestToRun: pass
+2016-01-27 18:55:46,221 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:46,221 DEBUG [EBManual_Intent_JSSTTL-116733] Executing ClickRunTest function:
+2016-01-27 18:55:46,562 DEBUG [EBManual_Intent_JSSTTL-116733] Executing Click function
+2016-01-27 18:55:47,562 DEBUG [EBManual_Intent_JSSTTL-116733] Exiting Click function
+2016-01-27 18:55:47,562 DEBUG [EBManual_Intent_JSSTTL-116733] runtest_top_xpath Button clicked Successfully
+2016-01-27 18:55:47,562 DEBUG [EBManual_Intent_JSSTTL-116733] TestStepResult of ClickRunTest: pass
+2016-01-27 18:55:47,562 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:47,563 DEBUG [EBManual_Intent_JSSTTL-116733] Executing validate_OldText_Exists function:
+2016-01-27 18:55:47,563 DEBUG [EBManual_Intent_JSSTTL-116733] Entered validate_OldText_Exists function
+2016-01-27 18:55:48,305 DEBUG [EBManual_Intent_JSSTTL-116733] VT328_42 Testcase Text found
+2016-01-27 18:55:48,305 DEBUG [EBManual_Intent_JSSTTL-116733] Exiting from validate_OldText_Exists function
+2016-01-27 18:55:48,306 DEBUG [EBManual_Intent_JSSTTL-116733] Result of validate_OldText_Exists: Pass
+2016-01-27 18:55:48,306 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:48,306 DEBUG [EBManual_Intent_JSSTTL-116733] Executing ClickRunTest function:
+2016-01-27 18:55:48,637 DEBUG [EBManual_Intent_JSSTTL-116733] Executing Click function
+2016-01-27 18:55:49,713 DEBUG [EBManual_Intent_JSSTTL-116733] Exiting Click function
+2016-01-27 18:55:49,713 DEBUG [EBManual_Intent_JSSTTL-116733] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 18:55:49,713 DEBUG [EBManual_Intent_JSSTTL-116733] TestStepResult of ClickRunTest: pass
+2016-01-27 18:55:49,713 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:49,713 DEBUG [EBManual_Intent_JSSTTL-116733] Executing wait function:
+2016-01-27 18:55:49,713 DEBUG [EBManual_Intent_JSSTTL-116733] Started Executing wait function
+2016-01-27 18:55:54,713 DEBUG [EBManual_Intent_JSSTTL-116733] Exiting from wait function
+2016-01-27 18:55:54,713 DEBUG [EBManual_Intent_JSSTTL-116733] TestStepResult of wait: Pass
+2016-01-27 18:55:54,713 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:55:54,713 DEBUG [EBManual_Intent_JSSTTL-116733] Executing CheckUITextContains function:
+2016-01-27 18:55:54,713 DEBUG [EBManual_Intent_JSSTTL-116733] Started executeCommandLine function
+2016-01-27 18:56:08,634 DEBUG [EBManual_Intent_JSSTTL-116733] Text is not Present
+2016-01-27 18:56:08,634 DEBUG [EBManual_Intent_JSSTTL-116733] TestStepResult of CheckUITextContains: Pass
+2016-01-27 18:56:08,634 DEBUG [EBManual_Intent_JSSTTL-116733] In execute keyword function
+2016-01-27 18:56:08,634 DEBUG [EBManual_Intent_JSSTTL-116733] TestStepResult of : Function <> not found in the keyword class
+2016-01-27 18:56:08,634 DEBUG [EBManual_Intent_JSSTTL-116733] allstep_result contains: Function <> not found in the keyword classPassPasspasspasspassPassPassnull
+2016-01-27 18:56:08,634 DEBUG [EBManual_Intent_JSSTTL-116733] allexpected_result contains: nullPassnullpassnullpassnull
+2016-01-27 18:56:08,634 DEBUG [EBManual_Intent_JSSTTL-116733] Testcase_Result contains: nullPassnullpassnullpassnullFunction <> not found in the keyword classPassPasspasspasspassPassPassnull
+2016-01-27 18:56:08,634 DEBUG [EBManual_Intent_JSSTTL-116733] Test case with description Stop listening to background intents before executing startListening method Pass
+2016-01-27 18:56:09,751 DEBUG [EBManual_Intent_JSSTTL-116733] Executing browser_Quit function
+2016-01-27 18:56:09,751 DEBUG [EBManual_Intent_JSSTTL-116733] Completed browser_Quit function
+2016-01-27 18:56:09,751 DEBUG [EBManual_Intent_JSSTTL-116733] Completed quitSelendroid function
+2016-01-27 18:56:09,752 DEBUG [EBManual_Intent_JSSTTL-116733] Row number:34
+2016-01-27 18:56:09,814 DEBUG [EBManual_Intent_JSSTTL-116733] Ending Test Case IDSTTL-116733

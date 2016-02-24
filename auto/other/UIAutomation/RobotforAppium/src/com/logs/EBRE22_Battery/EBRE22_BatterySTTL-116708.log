@@ -1,0 +1,113 @@
+2016-01-28 03:03:04,087 DEBUG [EBRE22_BatterySTTL-116708] Executing Test Case ID: STTL-116708
+2016-01-28 03:03:04,092 DEBUG [EBRE22_BatterySTTL-116708] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:03:14,081 DEBUG [EBRE22_BatterySTTL-116708] Exiting Init_Selendroid function
+2016-01-28 03:03:14,090 DEBUG [EBRE22_BatterySTTL-116708] TestCase with Description "batteryEvent with JSON
+" Execution started
+2016-01-28 03:03:14,090 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:14,090 DEBUG [EBRE22_BatterySTTL-116708] Executing wait function:
+2016-01-28 03:03:14,090 DEBUG [EBRE22_BatterySTTL-116708] Started Executing wait function
+2016-01-28 03:03:17,090 DEBUG [EBRE22_BatterySTTL-116708] Exiting from wait function
+2016-01-28 03:03:17,090 DEBUG [EBRE22_BatterySTTL-116708] TestStepResult of wait: Pass
+2016-01-28 03:03:17,090 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:17,090 DEBUG [EBRE22_BatterySTTL-116708] Executing validate_PageTitle function:
+2016-01-28 03:03:17,129 DEBUG [EBRE22_BatterySTTL-116708] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:03:17,129 DEBUG [EBRE22_BatterySTTL-116708] The page title found is correct
+2016-01-28 03:03:17,129 DEBUG [EBRE22_BatterySTTL-116708] Result of validate_PageTitle: pass
+2016-01-28 03:03:17,129 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:17,129 DEBUG [EBRE22_BatterySTTL-116708] Executing link_Click function:
+2016-01-28 03:03:17,709 DEBUG [EBRE22_BatterySTTL-116708] Executing Click function
+2016-01-28 03:03:18,713 DEBUG [EBRE22_BatterySTTL-116708] Exiting Click function
+2016-01-28 03:03:18,713 DEBUG [EBRE22_BatterySTTL-116708] RE22_battery_test_link clicked successfully
+2016-01-28 03:03:18,713 DEBUG [EBRE22_BatterySTTL-116708] TestStepResult of link_Click: Pass
+2016-01-28 03:03:18,713 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:18,713 DEBUG [EBRE22_BatterySTTL-116708] Executing validate_PageTitle function:
+2016-01-28 03:03:18,765 DEBUG [EBRE22_BatterySTTL-116708] The title of the page is *********************************: Battery Test
+2016-01-28 03:03:18,765 DEBUG [EBRE22_BatterySTTL-116708] The page title found is correct
+2016-01-28 03:03:18,765 DEBUG [EBRE22_BatterySTTL-116708] Result of validate_PageTitle: pass
+2016-01-28 03:03:18,766 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:18,766 DEBUG [EBRE22_BatterySTTL-116708] Executing SelectTestToRun function:
+2016-01-28 03:03:23,442 DEBUG [EBRE22_BatterySTTL-116708] Successfull in selecting clicking the category
+2016-01-28 03:03:23,442 DEBUG [EBRE22_BatterySTTL-116708] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:03:23,442 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:23,442 DEBUG [EBRE22_BatterySTTL-116708] Executing ClickRunTest function:
+2016-01-28 03:03:23,806 DEBUG [EBRE22_BatterySTTL-116708] Executing Click function
+2016-01-28 03:03:24,963 DEBUG [EBRE22_BatterySTTL-116708] Exiting Click function
+2016-01-28 03:03:24,963 DEBUG [EBRE22_BatterySTTL-116708] toprun_xpath Button clicked Successfully
+2016-01-28 03:03:24,963 DEBUG [EBRE22_BatterySTTL-116708] TestStepResult of ClickRunTest: pass
+2016-01-28 03:03:24,963 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:24,963 DEBUG [EBRE22_BatterySTTL-116708] Executing wait function:
+2016-01-28 03:03:24,963 DEBUG [EBRE22_BatterySTTL-116708] Started Executing wait function
+2016-01-28 03:03:27,963 DEBUG [EBRE22_BatterySTTL-116708] Exiting from wait function
+2016-01-28 03:03:27,963 DEBUG [EBRE22_BatterySTTL-116708] TestStepResult of wait: Pass
+2016-01-28 03:03:27,963 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:27,963 DEBUG [EBRE22_BatterySTTL-116708] Executing validate_Result function:
+2016-01-28 03:03:28,242 DEBUG [EBRE22_BatterySTTL-116708] acLineStatus: 1 Text found in acLineStatus: 1
+batteryLifePercent: 100
+backupBatteryLifePercent: 0
+eventSource: undefined
+batteryLifeKnown: undefined
+backupBatteryLifeKnown: undefined
+Count: 1
+2016-01-28 03:03:28,242 DEBUG [EBRE22_BatterySTTL-116708] Result of validate_Result: Pass
+2016-01-28 03:03:28,242 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:28,242 DEBUG [EBRE22_BatterySTTL-116708] Executing validate_Result function:
+2016-01-28 03:03:28,380 DEBUG [EBRE22_BatterySTTL-116708] batteryLifePercent: Text found in acLineStatus: 1
+batteryLifePercent: 100
+backupBatteryLifePercent: 0
+eventSource: undefined
+batteryLifeKnown: undefined
+backupBatteryLifeKnown: undefined
+Count: 1
+2016-01-28 03:03:28,380 DEBUG [EBRE22_BatterySTTL-116708] Result of validate_Result: Pass
+2016-01-28 03:03:28,380 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:28,380 DEBUG [EBRE22_BatterySTTL-116708] Executing validate_Result function:
+2016-01-28 03:03:28,521 DEBUG [EBRE22_BatterySTTL-116708] backupBatteryLifePercent: Text found in acLineStatus: 1
+batteryLifePercent: 100
+backupBatteryLifePercent: 0
+eventSource: undefined
+batteryLifeKnown: undefined
+backupBatteryLifeKnown: undefined
+Count: 1
+2016-01-28 03:03:28,521 DEBUG [EBRE22_BatterySTTL-116708] Result of validate_Result: Pass
+2016-01-28 03:03:28,521 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:28,521 DEBUG [EBRE22_BatterySTTL-116708] Executing validate_Result function:
+2016-01-28 03:03:28,703 DEBUG [EBRE22_BatterySTTL-116708] eventSource: Text found in acLineStatus: 1
+batteryLifePercent: 100
+backupBatteryLifePercent: 0
+eventSource: undefined
+batteryLifeKnown: undefined
+backupBatteryLifeKnown: undefined
+Count: 1
+2016-01-28 03:03:28,703 DEBUG [EBRE22_BatterySTTL-116708] Result of validate_Result: Pass
+2016-01-28 03:03:28,703 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:28,703 DEBUG [EBRE22_BatterySTTL-116708] Executing validate_Result function:
+2016-01-28 03:03:28,840 DEBUG [EBRE22_BatterySTTL-116708] batteryLifeKnown: Text found in acLineStatus: 1
+batteryLifePercent: 100
+backupBatteryLifePercent: 0
+eventSource: undefined
+batteryLifeKnown: undefined
+backupBatteryLifeKnown: undefined
+Count: 1
+2016-01-28 03:03:28,840 DEBUG [EBRE22_BatterySTTL-116708] Result of validate_Result: Pass
+2016-01-28 03:03:28,840 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:28,840 DEBUG [EBRE22_BatterySTTL-116708] Executing validate_Result function:
+2016-01-28 03:03:29,060 DEBUG [EBRE22_BatterySTTL-116708] backupBatteryLifeKnown: Text found in acLineStatus: 1
+batteryLifePercent: 100
+backupBatteryLifePercent: 0
+eventSource: undefined
+batteryLifeKnown: undefined
+backupBatteryLifeKnown: undefined
+Count: 1
+2016-01-28 03:03:29,060 DEBUG [EBRE22_BatterySTTL-116708] Result of validate_Result: Pass
+2016-01-28 03:03:29,060 DEBUG [EBRE22_BatterySTTL-116708] In execute keyword function
+2016-01-28 03:03:29,060 DEBUG [EBRE22_BatterySTTL-116708] TestStepResult of : Function <> not found in the keyword class
+2016-01-28 03:03:29,060 DEBUG [EBRE22_BatterySTTL-116708] allstep_result contains: Function <> not found in the keyword classPasspasspassPassPassnull
+2016-01-28 03:03:29,060 DEBUG [EBRE22_BatterySTTL-116708] allexpected_result contains: nullPassPassPassPassPassPassnullpassnullpassnull
+2016-01-28 03:03:29,060 DEBUG [EBRE22_BatterySTTL-116708] Testcase_Result contains: nullPassPassPassPassPassPassnullpassnullpassnullFunction <> not found in the keyword classPasspasspassPassPassnull
+2016-01-28 03:03:29,060 DEBUG [EBRE22_BatterySTTL-116708] Test case with description batteryEvent with JSON
+ Pass
+2016-01-28 03:03:30,143 DEBUG [EBRE22_BatterySTTL-116708] Executing browser_Quit function
+2016-01-28 03:03:30,144 DEBUG [EBRE22_BatterySTTL-116708] Completed browser_Quit function
+2016-01-28 03:03:30,144 DEBUG [EBRE22_BatterySTTL-116708] Completed quitSelendroid function
+2016-01-28 03:03:30,144 DEBUG [EBRE22_BatterySTTL-116708] Row number:0
+2016-01-28 03:03:30,156 DEBUG [EBRE22_BatterySTTL-116708] Ending Test Case IDSTTL-116708

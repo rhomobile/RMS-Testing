@@ -1,0 +1,47 @@
+2016-01-27 18:22:50,552 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing Test Case ID: STTL-116705
+2016-01-27 18:22:50,596 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 18:23:00,276 DEBUG [EBManual_Configxml_JSSTTL-116705] Exiting Init_Selendroid function
+2016-01-27 18:23:00,386 DEBUG [EBManual_Configxml_JSSTTL-116705] TestCase with Description "FullScreenEnabled" Execution started
+2016-01-27 18:23:00,387 DEBUG [EBManual_Configxml_JSSTTL-116705] In execute keyword function
+2016-01-27 18:23:00,387 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing wait function:
+2016-01-27 18:23:00,387 DEBUG [EBManual_Configxml_JSSTTL-116705] Started Executing wait function
+2016-01-27 18:23:04,387 DEBUG [EBManual_Configxml_JSSTTL-116705] Exiting from wait function
+2016-01-27 18:23:04,387 DEBUG [EBManual_Configxml_JSSTTL-116705] TestStepResult of wait: Pass
+2016-01-27 18:23:04,387 DEBUG [EBManual_Configxml_JSSTTL-116705] In execute keyword function
+2016-01-27 18:23:04,387 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing validate_PageTitle function:
+2016-01-27 18:23:04,434 DEBUG [EBManual_Configxml_JSSTTL-116705] The title of the page is *********************************: All Index
+2016-01-27 18:23:04,435 DEBUG [EBManual_Configxml_JSSTTL-116705] The page title found is correct
+2016-01-27 18:23:04,435 DEBUG [EBManual_Configxml_JSSTTL-116705] Result of validate_PageTitle: pass
+2016-01-27 18:23:04,435 DEBUG [EBManual_Configxml_JSSTTL-116705] In execute keyword function
+2016-01-27 18:23:04,435 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing validate_fullscreen function:
+2016-01-27 18:23:05,200 DEBUG [EBManual_Configxml_JSSTTL-116705] App is in fullscreen mode
+2016-01-27 18:23:05,200 DEBUG [EBManual_Configxml_JSSTTL-116705] Result of validate_fullscreen: Pass
+2016-01-27 18:23:05,200 DEBUG [EBManual_Configxml_JSSTTL-116705] In execute keyword function
+2016-01-27 18:23:05,200 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing PushBkpConfigxml function:
+2016-01-27 18:23:05,200 DEBUG [EBManual_Configxml_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 18:23:09,220 DEBUG [EBManual_Configxml_JSSTTL-116705] TestStepResult of PushBkpConfigxml: Pass
+2016-01-27 18:23:09,220 DEBUG [EBManual_Configxml_JSSTTL-116705] In execute keyword function
+2016-01-27 18:23:09,220 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing PullConfigxml function:
+2016-01-27 18:23:09,220 DEBUG [EBManual_Configxml_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 18:23:13,241 DEBUG [EBManual_Configxml_JSSTTL-116705] TestStepResult of PullConfigxml: Pass
+2016-01-27 18:23:13,241 DEBUG [EBManual_Configxml_JSSTTL-116705] In execute keyword function
+2016-01-27 18:23:13,241 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing ChangeConfigxml function:
+2016-01-27 18:23:13,241 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing ChangeConfigxml function
+2016-01-27 18:23:13,243 DEBUG [EBManual_Configxml_JSSTTL-116705] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 18:23:13,243 DEBUG [EBManual_Configxml_JSSTTL-116705] In execute keyword function
+2016-01-27 18:23:13,243 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing ChangeConfigxml function:
+2016-01-27 18:23:13,243 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing ChangeConfigxml function
+2016-01-27 18:23:13,245 DEBUG [EBManual_Configxml_JSSTTL-116705] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 18:23:13,245 DEBUG [EBManual_Configxml_JSSTTL-116705] In execute keyword function
+2016-01-27 18:23:13,245 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing PushConfigxml function:
+2016-01-27 18:23:13,245 DEBUG [EBManual_Configxml_JSSTTL-116705] Started executeCommandLine function
+2016-01-27 18:23:17,266 DEBUG [EBManual_Configxml_JSSTTL-116705] TestStepResult of PushConfigxml: Pass
+2016-01-27 18:23:17,266 DEBUG [EBManual_Configxml_JSSTTL-116705] allstep_result contains: PassPassPassPassPassPassnull
+2016-01-27 18:23:17,266 DEBUG [EBManual_Configxml_JSSTTL-116705] allexpected_result contains: nullPassnullpassnull
+2016-01-27 18:23:17,266 DEBUG [EBManual_Configxml_JSSTTL-116705] Testcase_Result contains: nullPassnullpassnullPassPassPassPassPassPassnull
+2016-01-27 18:23:17,266 DEBUG [EBManual_Configxml_JSSTTL-116705] Test case with description FullScreenEnabled Pass
+2016-01-27 18:23:18,235 DEBUG [EBManual_Configxml_JSSTTL-116705] Executing browser_Quit function
+2016-01-27 18:23:18,235 DEBUG [EBManual_Configxml_JSSTTL-116705] Completed browser_Quit function
+2016-01-27 18:23:18,235 DEBUG [EBManual_Configxml_JSSTTL-116705] Completed quitSelendroid function
+2016-01-27 18:23:18,235 DEBUG [EBManual_Configxml_JSSTTL-116705] Row number:6
+2016-01-27 18:23:21,903 DEBUG [EBManual_Configxml_JSSTTL-116705] Ending Test Case IDSTTL-116705

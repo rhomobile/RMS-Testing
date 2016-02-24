@@ -1,0 +1,44 @@
+2016-01-27 20:19:49,640 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-27 20:19:49,651 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:19:59,918 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Exiting Init_Selendroid function
+2016-01-27 20:19:59,937 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] TestCase with Description "Validation of startpath with http file path set in the previous test
+" Execution started
+2016-01-27 20:19:59,937 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] In execute keyword function
+2016-01-27 20:19:59,937 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing wait function:
+2016-01-27 20:19:59,937 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Started Executing wait function
+2016-01-27 20:20:02,938 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Exiting from wait function
+2016-01-27 20:20:02,938 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 20:20:02,938 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] In execute keyword function
+2016-01-27 20:20:02,938 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 20:20:02,980 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] The title of the page is *********************************: Welcome to Enterprise Browser
+2016-01-27 20:20:02,980 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] The page title found is incorrect
+2016-01-27 20:20:02,980 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Result of validate_PageTitle: fail
+2016-01-27 20:20:02,980 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] In execute keyword function
+2016-01-27 20:20:02,980 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing PullConfigxml function:
+2016-01-27 20:20:02,980 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 20:20:07,000 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] TestStepResult of PullConfigxml: Pass
+2016-01-27 20:20:07,000 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] In execute keyword function
+2016-01-27 20:20:07,000 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing ChangeConfigxml function:
+2016-01-27 20:20:07,000 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing ChangeConfigxml function
+2016-01-27 20:20:07,002 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 20:20:07,002 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] In execute keyword function
+2016-01-27 20:20:07,002 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing ChangeConfigxml function:
+2016-01-27 20:20:07,002 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing ChangeConfigxml function
+2016-01-27 20:20:07,004 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 20:20:07,004 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] In execute keyword function
+2016-01-27 20:20:07,004 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing ChangeConfigxml function:
+2016-01-27 20:20:07,004 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing ChangeConfigxml function
+2016-01-27 20:20:07,006 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] TestStepResult of ChangeConfigxml: Pass
+2016-01-27 20:20:07,006 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] In execute keyword function
+2016-01-27 20:20:07,006 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing PushConfigxml function:
+2016-01-27 20:20:07,006 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 20:20:11,030 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] TestStepResult of PushConfigxml: Pass
+2016-01-27 20:20:11,030 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] allstep_result contains: PassPassPassPassPassPassnull
+2016-01-27 20:20:11,030 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] allexpected_result contains: nullfailnull
+2016-01-27 20:20:11,030 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Testcase_Result contains: nullfailnullPassPassPassPassPassPassnull
+2016-01-27 20:20:11,030 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Test case with description Validation of startpath with http file path set in the previous test
+ Fail
+2016-01-27 20:20:12,054 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Executing browser_Quit function
+2016-01-27 20:20:12,054 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Completed browser_Quit function
+2016-01-27 20:20:12,054 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Completed quitSelendroid function
+2016-01-27 20:20:12,055 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116709] Row number:0

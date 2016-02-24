@@ -1,0 +1,93 @@
+2016-01-28 03:08:28,910 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing Test Case ID: STTL-116708
+2016-01-28 03:08:28,916 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:08:39,068 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting Init_Selendroid function
+2016-01-28 03:08:39,081 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestCase with Description "Note: Run this test with Javascript object.
+
+MinimizeButton functionality Test" Execution started
+2016-01-28 03:08:39,081 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:39,081 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing wait function:
+2016-01-28 03:08:39,081 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started Executing wait function
+2016-01-28 03:08:41,081 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting from wait function
+2016-01-28 03:08:41,081 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of wait: Pass
+2016-01-28 03:08:41,081 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:41,081 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing validate_PageTitle function:
+2016-01-28 03:08:41,123 DEBUG [EBRE22_ControlAppearanceSTTL-116708] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:08:41,123 DEBUG [EBRE22_ControlAppearanceSTTL-116708] The page title found is correct
+2016-01-28 03:08:41,123 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Result of validate_PageTitle: pass
+2016-01-28 03:08:41,123 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:41,123 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing link_Click function:
+2016-01-28 03:08:41,676 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing Click function
+2016-01-28 03:08:42,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting Click function
+2016-01-28 03:08:42,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] controlappearance_test_link clicked successfully
+2016-01-28 03:08:42,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of link_Click: Pass
+2016-01-28 03:08:42,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:42,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing wait function:
+2016-01-28 03:08:42,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started Executing wait function
+2016-01-28 03:08:44,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting from wait function
+2016-01-28 03:08:44,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of wait: Pass
+2016-01-28 03:08:44,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:44,724 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing validate_PageTitle function:
+2016-01-28 03:08:44,771 DEBUG [EBRE22_ControlAppearanceSTTL-116708] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Control & Appearance
+2016-01-28 03:08:44,771 DEBUG [EBRE22_ControlAppearanceSTTL-116708] The page title found is correct
+2016-01-28 03:08:44,772 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Result of validate_PageTitle: pass
+2016-01-28 03:08:44,772 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:44,772 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing SelectTestToRun function:
+2016-01-28 03:08:47,713 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Successfull in selecting clicking the category
+2016-01-28 03:08:47,713 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:08:47,714 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:47,714 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing ClickRunTest function:
+2016-01-28 03:08:48,074 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing Click function
+2016-01-28 03:08:49,051 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting Click function
+2016-01-28 03:08:49,051 DEBUG [EBRE22_ControlAppearanceSTTL-116708] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:08:49,051 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of ClickRunTest: pass
+2016-01-28 03:08:49,051 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:49,051 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing validate_Text_Exists function:
+2016-01-28 03:08:49,352 DEBUG [EBRE22_ControlAppearanceSTTL-116708] VT187-1627 Testcase Text found
+2016-01-28 03:08:49,352 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Result of validate_Text_Exists: Pass
+2016-01-28 03:08:49,352 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:49,352 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing wait function:
+2016-01-28 03:08:49,352 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started Executing wait function
+2016-01-28 03:08:51,353 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting from wait function
+2016-01-28 03:08:51,353 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of wait: Pass
+2016-01-28 03:08:51,353 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:51,353 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing SwitchApp function:
+2016-01-28 03:08:51,473 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Successfully switched to NATIVE_APP
+2016-01-28 03:08:51,473 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of SwitchApp: Pass
+2016-01-28 03:08:51,473 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:51,473 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing ClickNativeIcon function:
+2016-01-28 03:08:52,391 DEBUG [EBRE22_ControlAppearanceSTTL-116708] [[AppiumTouchActionExtension: selendroid on ANDROID (f2383d5e-e021-ebdc-a65f-18e9f834853f)] -> xpath: (//Button[@id='minimize_button'])[1]]Clicked successfully
+2016-01-28 03:08:52,391 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of ClickNativeIcon: pass
+2016-01-28 03:08:52,391 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:52,391 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing wait function:
+2016-01-28 03:08:52,391 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started Executing wait function
+2016-01-28 03:08:55,392 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting from wait function
+2016-01-28 03:08:55,392 DEBUG [EBRE22_ControlAppearanceSTTL-116708] TestStepResult of wait: Pass
+2016-01-28 03:08:55,392 DEBUG [EBRE22_ControlAppearanceSTTL-116708] In execute keyword function
+2016-01-28 03:08:55,392 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing validate_AppMinimized function:
+2016-01-28 03:08:55,392 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started Executing validate_AppMinimized function
+2016-01-28 03:08:55,392 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started Executing Validate_App_launched_Device function
+2016-01-28 03:08:55,392 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Entered CheckUIButtonExists function
+2016-01-28 03:08:55,392 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started executeCommandLine function
+2016-01-28 03:08:59,413 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting from executeCommandLine function
+2016-01-28 03:08:59,413 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Button is not Present
+2016-01-28 03:08:59,413 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting from CheckUIButtonExists function
+2016-01-28 03:08:59,413 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started executeCommandLine function
+2016-01-28 03:09:03,434 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting from executeCommandLine function
+2016-01-28 03:09:03,434 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Started executeCommandLine function
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting from executeCommandLine function
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Given App is not in Foreground
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting Validate_App_launched_Device function
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Not in com.symbol.enterprisebrowser screen
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Exiting validate_AppMinimized function
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Result of validate_AppMinimized: Pass
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] allstep_result contains: PasspassPassPasspasspassPassPassPassnull
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Testcase_Result contains: nullPassnullPassnullpassnullpassnullPasspassPassPasspasspassPassPassPassnull
+2016-01-28 03:09:07,454 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Test case with description Note: Run this test with Javascript object.
+
+MinimizeButton functionality Test Pass
+2016-01-28 03:09:08,387 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Executing browser_Quit function
+2016-01-28 03:09:08,388 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Completed browser_Quit function
+2016-01-28 03:09:08,388 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Completed quitSelendroid function
+2016-01-28 03:09:08,388 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Row number:9
+2016-01-28 03:09:08,420 DEBUG [EBRE22_ControlAppearanceSTTL-116708] Ending Test Case IDSTTL-116708

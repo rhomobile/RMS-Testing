@@ -1,0 +1,62 @@
+2016-01-28 01:57:31,953 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing Test Case ID: STTL-116723
+2016-01-28 01:57:31,961 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 01:57:42,212 DEBUG [EBPB_KeyhandlingSTTL-116723] Exiting Init_Selendroid function
+2016-01-28 01:57:42,230 DEBUG [EBPB_KeyhandlingSTTL-116723] TestCase with Description "KeyValue:All with event URL for numeric" Execution started
+2016-01-28 01:57:42,230 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:42,230 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing wait function:
+2016-01-28 01:57:42,230 DEBUG [EBPB_KeyhandlingSTTL-116723] Started Executing wait function
+2016-01-28 01:57:47,231 DEBUG [EBPB_KeyhandlingSTTL-116723] Exiting from wait function
+2016-01-28 01:57:47,231 DEBUG [EBPB_KeyhandlingSTTL-116723] TestStepResult of wait: Pass
+2016-01-28 01:57:47,231 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:47,231 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing validate_PageTitle function:
+2016-01-28 01:57:47,272 DEBUG [EBPB_KeyhandlingSTTL-116723] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 01:57:47,272 DEBUG [EBPB_KeyhandlingSTTL-116723] The page title found is correct
+2016-01-28 01:57:47,272 DEBUG [EBPB_KeyhandlingSTTL-116723] Result of validate_PageTitle: pass
+2016-01-28 01:57:47,272 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:47,272 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing link_Click function:
+2016-01-28 01:57:47,938 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing Click function
+2016-01-28 01:57:49,023 DEBUG [EBPB_KeyhandlingSTTL-116723] Exiting Click function
+2016-01-28 01:57:49,023 DEBUG [EBPB_KeyhandlingSTTL-116723] keyhandling_link clicked successfully
+2016-01-28 01:57:49,023 DEBUG [EBPB_KeyhandlingSTTL-116723] TestStepResult of link_Click: Pass
+2016-01-28 01:57:49,023 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:49,023 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing validate_PageTitle function:
+2016-01-28 01:57:49,044 DEBUG [EBPB_KeyhandlingSTTL-116723] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Keyhandling
+2016-01-28 01:57:49,044 DEBUG [EBPB_KeyhandlingSTTL-116723] The page title found is correct
+2016-01-28 01:57:49,044 DEBUG [EBPB_KeyhandlingSTTL-116723] Result of validate_PageTitle: pass
+2016-01-28 01:57:49,044 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:49,044 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing SelectTestToRun function:
+2016-01-28 01:57:53,385 DEBUG [EBPB_KeyhandlingSTTL-116723] Successfull in selecting clicking the category
+2016-01-28 01:57:53,385 DEBUG [EBPB_KeyhandlingSTTL-116723] TestStepResult of SelectTestToRun: pass
+2016-01-28 01:57:53,385 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:53,385 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing ClickRunTest function:
+2016-01-28 01:57:53,730 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing Click function
+2016-01-28 01:57:54,737 DEBUG [EBPB_KeyhandlingSTTL-116723] Exiting Click function
+2016-01-28 01:57:54,738 DEBUG [EBPB_KeyhandlingSTTL-116723] runtest_top_xpath Button clicked Successfully
+2016-01-28 01:57:54,738 DEBUG [EBPB_KeyhandlingSTTL-116723] TestStepResult of ClickRunTest: pass
+2016-01-28 01:57:54,738 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:54,738 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing validate_Text_Exists function:
+2016-01-28 01:57:55,012 DEBUG [EBPB_KeyhandlingSTTL-116723] VT056-0710 Testcase Text found
+2016-01-28 01:57:55,012 DEBUG [EBPB_KeyhandlingSTTL-116723] Result of validate_Text_Exists: Pass
+2016-01-28 01:57:55,012 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:55,012 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing sendKeyEvents function:
+2016-01-28 01:57:55,012 DEBUG [EBPB_KeyhandlingSTTL-116723] Entered sendKeyEvents function
+2016-01-28 01:57:55,013 DEBUG [EBPB_KeyhandlingSTTL-116723] 9
+2016-01-28 01:57:55,013 DEBUG [EBPB_KeyhandlingSTTL-116723] Entered 9
+2016-01-28 01:57:55,013 DEBUG [EBPB_KeyhandlingSTTL-116723] Started executeCommandLine function
+2016-01-28 01:57:59,032 DEBUG [EBPB_KeyhandlingSTTL-116723] Exiting from executeCommandLine function
+2016-01-28 01:57:59,032 DEBUG [EBPB_KeyhandlingSTTL-116723] pass
+2016-01-28 01:57:59,032 DEBUG [EBPB_KeyhandlingSTTL-116723] TestStepResult of sendKeyEvents: pass
+2016-01-28 01:57:59,032 DEBUG [EBPB_KeyhandlingSTTL-116723] In execute keyword function
+2016-01-28 01:57:59,032 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing validate_PageTitle function:
+2016-01-28 01:57:59,067 DEBUG [EBPB_KeyhandlingSTTL-116723] The title of the page is *********************************: Navigation Check
+2016-01-28 01:57:59,067 DEBUG [EBPB_KeyhandlingSTTL-116723] The page title found is correct
+2016-01-28 01:57:59,067 DEBUG [EBPB_KeyhandlingSTTL-116723] Result of validate_PageTitle: pass
+2016-01-28 01:57:59,067 DEBUG [EBPB_KeyhandlingSTTL-116723] allstep_result contains: passpasspassPassPassnull
+2016-01-28 01:57:59,067 DEBUG [EBPB_KeyhandlingSTTL-116723] allexpected_result contains: nullpassnullPassnullpassnullpassnull
+2016-01-28 01:57:59,067 DEBUG [EBPB_KeyhandlingSTTL-116723] Testcase_Result contains: nullpassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-28 01:57:59,067 DEBUG [EBPB_KeyhandlingSTTL-116723] Test case with description KeyValue:All with event URL for numeric Pass
+2016-01-28 01:58:00,133 DEBUG [EBPB_KeyhandlingSTTL-116723] Executing browser_Quit function
+2016-01-28 01:58:00,133 DEBUG [EBPB_KeyhandlingSTTL-116723] Completed browser_Quit function
+2016-01-28 01:58:00,133 DEBUG [EBPB_KeyhandlingSTTL-116723] Completed quitSelendroid function
+2016-01-28 01:58:00,134 DEBUG [EBPB_KeyhandlingSTTL-116723] Row number:24
+2016-01-28 01:58:00,168 DEBUG [EBPB_KeyhandlingSTTL-116723] Ending Test Case IDSTTL-116723

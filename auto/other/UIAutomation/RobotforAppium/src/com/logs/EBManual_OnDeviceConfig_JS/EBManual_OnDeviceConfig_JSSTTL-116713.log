@@ -1,0 +1,86 @@
+2016-01-27 20:22:51,217 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing Test Case ID: STTL-116713
+2016-01-27 20:22:51,225 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 20:23:01,670 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting Init_Selendroid function
+2016-01-27 20:23:01,688 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] TestCase with Description "validate debug buttons after setting to 1" Execution started
+2016-01-27 20:23:01,688 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:01,688 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing wait function:
+2016-01-27 20:23:01,688 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Started Executing wait function
+2016-01-27 20:23:03,688 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from wait function
+2016-01-27 20:23:03,688 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] TestStepResult of wait: Pass
+2016-01-27 20:23:03,688 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:03,688 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing SwitchApp function:
+2016-01-27 20:23:03,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Successfully switched to NATIVE_APP
+2016-01-27 20:23:03,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] TestStepResult of SwitchApp: Pass
+2016-01-27 20:23:03,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:03,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing wait function:
+2016-01-27 20:23:03,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Started Executing wait function
+2016-01-27 20:23:05,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from wait function
+2016-01-27 20:23:05,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] TestStepResult of wait: Pass
+2016-01-27 20:23:05,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:05,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:05,775 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:06,521 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Addressbar_xpath Testcase Text not found
+2016-01-27 20:23:06,521 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:06,521 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:06,521 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:06,521 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:06,521 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:07,085 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] HomeButton_xpath Testcase Text not found
+2016-01-27 20:23:07,085 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:07,085 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:07,085 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:07,085 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:07,085 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:07,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] GoButton_xpath Testcase Text not found
+2016-01-27 20:23:07,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:07,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:07,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:07,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:07,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:08,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] BackButton_xpath Testcase Text not found
+2016-01-27 20:23:08,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:08,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:08,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:08,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:08,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:08,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] ForwardButton_xpath Testcase Text not found
+2016-01-27 20:23:08,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:08,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:08,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:08,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:08,648 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:09,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] ReloadButton_xpath Testcase Text not found
+2016-01-27 20:23:09,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:09,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:09,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:09,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:09,158 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:09,679 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] MinimizeButton_xpath Testcase Text not found
+2016-01-27 20:23:09,679 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:09,679 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:09,679 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:09,679 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:09,679 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:10,187 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] QuitButton_xpath Testcase Text not found
+2016-01-27 20:23:10,187 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:10,187 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:10,187 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:10,187 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:10,187 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:10,686 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] ZoomtextButton_xpath Testcase Text not found
+2016-01-27 20:23:10,686 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:10,686 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:10,686 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] In execute keyword function
+2016-01-27 20:23:10,686 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing validate_isIconDisplayed function:
+2016-01-27 20:23:10,686 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Entered validate_isIconDisplayed function
+2016-01-27 20:23:11,159 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] SipButton_xpath Testcase Text not found
+2016-01-27 20:23:11,159 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Exiting from validate_Iconposition function
+2016-01-27 20:23:11,159 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Result of validate_isIconDisplayed: Fail
+2016-01-27 20:23:11,159 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] allstep_result contains: PassPassPassnull
+2016-01-27 20:23:11,159 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] allexpected_result contains: nullFailFailFailFailFailFailFailFailFailFailnull
+2016-01-27 20:23:11,159 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Testcase_Result contains: nullFailFailFailFailFailFailFailFailFailFailnullPassPassPassnull
+2016-01-27 20:23:11,159 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Test case with description validate debug buttons after setting to 1 Fail
+2016-01-27 20:23:12,121 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Executing browser_Quit function
+2016-01-27 20:23:12,121 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Completed browser_Quit function
+2016-01-27 20:23:12,121 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Completed quitSelendroid function
+2016-01-27 20:23:12,121 DEBUG [EBManual_OnDeviceConfig_JSSTTL-116713] Row number:14

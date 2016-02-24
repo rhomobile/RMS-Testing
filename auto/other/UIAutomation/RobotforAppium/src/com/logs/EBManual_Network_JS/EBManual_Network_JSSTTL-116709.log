@@ -1,0 +1,61 @@
+2016-01-27 19:41:24,565 DEBUG [EBManual_Network_JSSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-27 19:41:24,572 DEBUG [EBManual_Network_JSSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 19:41:35,063 DEBUG [EBManual_Network_JSSTTL-116709] Exiting Init_Selendroid function
+2016-01-27 19:41:35,078 DEBUG [EBManual_Network_JSSTTL-116709] TestCase with Description "Objective:
+hasNetwork with wifi" Execution started
+2016-01-27 19:41:35,078 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:35,078 DEBUG [EBManual_Network_JSSTTL-116709] Executing wait function:
+2016-01-27 19:41:35,078 DEBUG [EBManual_Network_JSSTTL-116709] Started Executing wait function
+2016-01-27 19:41:38,079 DEBUG [EBManual_Network_JSSTTL-116709] Exiting from wait function
+2016-01-27 19:41:38,079 DEBUG [EBManual_Network_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 19:41:38,079 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:38,079 DEBUG [EBManual_Network_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 19:41:38,107 DEBUG [EBManual_Network_JSSTTL-116709] The title of the page is *********************************: Manual specs
+2016-01-27 19:41:38,107 DEBUG [EBManual_Network_JSSTTL-116709] The page title found is correct
+2016-01-27 19:41:38,107 DEBUG [EBManual_Network_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 19:41:38,107 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:38,107 DEBUG [EBManual_Network_JSSTTL-116709] Executing link_Click function:
+2016-01-27 19:41:38,724 DEBUG [EBManual_Network_JSSTTL-116709] Executing Click function
+2016-01-27 19:41:39,815 DEBUG [EBManual_Network_JSSTTL-116709] Exiting Click function
+2016-01-27 19:41:39,815 DEBUG [EBManual_Network_JSSTTL-116709] network_test_link clicked successfully
+2016-01-27 19:41:39,815 DEBUG [EBManual_Network_JSSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-27 19:41:39,815 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:39,815 DEBUG [EBManual_Network_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 19:41:39,831 DEBUG [EBManual_Network_JSSTTL-116709] The title of the page is *********************************: Network JS Test
+2016-01-27 19:41:39,831 DEBUG [EBManual_Network_JSSTTL-116709] The page title found is correct
+2016-01-27 19:41:39,831 DEBUG [EBManual_Network_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 19:41:39,831 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:39,831 DEBUG [EBManual_Network_JSSTTL-116709] Executing SelectTestToRun function:
+2016-01-27 19:41:43,561 DEBUG [EBManual_Network_JSSTTL-116709] Successfull in selecting clicking the category
+2016-01-27 19:41:43,561 DEBUG [EBManual_Network_JSSTTL-116709] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:41:43,561 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:43,561 DEBUG [EBManual_Network_JSSTTL-116709] Executing ClickRunTest function:
+2016-01-27 19:41:43,964 DEBUG [EBManual_Network_JSSTTL-116709] Executing Click function
+2016-01-27 19:41:44,941 DEBUG [EBManual_Network_JSSTTL-116709] Exiting Click function
+2016-01-27 19:41:44,941 DEBUG [EBManual_Network_JSSTTL-116709] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:41:44,941 DEBUG [EBManual_Network_JSSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-27 19:41:44,941 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:44,941 DEBUG [EBManual_Network_JSSTTL-116709] Executing validate_Text_Exists function:
+2016-01-27 19:41:45,541 DEBUG [EBManual_Network_JSSTTL-116709] VT293-0027 Testcase Text found
+2016-01-27 19:41:45,541 DEBUG [EBManual_Network_JSSTTL-116709] Result of validate_Text_Exists: Pass
+2016-01-27 19:41:45,541 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:45,541 DEBUG [EBManual_Network_JSSTTL-116709] Executing ClickRunTest function:
+2016-01-27 19:41:45,856 DEBUG [EBManual_Network_JSSTTL-116709] Executing Click function
+2016-01-27 19:41:46,828 DEBUG [EBManual_Network_JSSTTL-116709] Exiting Click function
+2016-01-27 19:41:46,828 DEBUG [EBManual_Network_JSSTTL-116709] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 19:41:46,828 DEBUG [EBManual_Network_JSSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-27 19:41:46,828 DEBUG [EBManual_Network_JSSTTL-116709] In execute keyword function
+2016-01-27 19:41:46,828 DEBUG [EBManual_Network_JSSTTL-116709] Executing validate_Result function:
+2016-01-27 19:41:47,137 DEBUG [EBManual_Network_JSSTTL-116709] true Text found in Results
+hasNetwork : : true
+2016-01-27 19:41:47,138 DEBUG [EBManual_Network_JSSTTL-116709] Result of validate_Result: Pass
+2016-01-27 19:41:47,138 DEBUG [EBManual_Network_JSSTTL-116709] allstep_result contains: passpasspassPassPassnull
+2016-01-27 19:41:47,138 DEBUG [EBManual_Network_JSSTTL-116709] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 19:41:47,138 DEBUG [EBManual_Network_JSSTTL-116709] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-27 19:41:47,138 DEBUG [EBManual_Network_JSSTTL-116709] Test case with description Objective:
+hasNetwork with wifi Pass
+2016-01-27 19:41:48,087 DEBUG [EBManual_Network_JSSTTL-116709] Executing browser_Quit function
+2016-01-27 19:41:48,087 DEBUG [EBManual_Network_JSSTTL-116709] Completed browser_Quit function
+2016-01-27 19:41:48,087 DEBUG [EBManual_Network_JSSTTL-116709] Completed quitSelendroid function
+2016-01-27 19:41:48,087 DEBUG [EBManual_Network_JSSTTL-116709] Row number:10
+2016-01-27 19:41:48,174 DEBUG [EBManual_Network_JSSTTL-116709] Ending Test Case IDSTTL-116709

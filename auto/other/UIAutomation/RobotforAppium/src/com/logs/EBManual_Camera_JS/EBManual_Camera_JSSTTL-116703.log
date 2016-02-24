@@ -1,0 +1,90 @@
+2016-01-27 17:49:58,040 DEBUG [EBManual_Camera_JSSTTL-116703] Executing Test Case ID: STTL-116703
+2016-01-27 17:49:58,058 DEBUG [EBManual_Camera_JSSTTL-116703] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 17:50:08,183 DEBUG [EBManual_Camera_JSSTTL-116703] Exiting Init_Selendroid function
+2016-01-27 17:50:08,214 DEBUG [EBManual_Camera_JSSTTL-116703] TestCase with Description "should call choosePicture with callback status cancel" Execution started
+2016-01-27 17:50:08,214 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:08,214 DEBUG [EBManual_Camera_JSSTTL-116703] Executing wait function:
+2016-01-27 17:50:08,214 DEBUG [EBManual_Camera_JSSTTL-116703] Started Executing wait function
+2016-01-27 17:50:13,214 DEBUG [EBManual_Camera_JSSTTL-116703] Exiting from wait function
+2016-01-27 17:50:13,214 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 17:50:13,214 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:13,214 DEBUG [EBManual_Camera_JSSTTL-116703] Executing validate_PageTitle function:
+2016-01-27 17:50:13,254 DEBUG [EBManual_Camera_JSSTTL-116703] The title of the page is *********************************: Manual specs
+2016-01-27 17:50:13,254 DEBUG [EBManual_Camera_JSSTTL-116703] The page title found is correct
+2016-01-27 17:50:13,254 DEBUG [EBManual_Camera_JSSTTL-116703] Result of validate_PageTitle: pass
+2016-01-27 17:50:13,254 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:13,254 DEBUG [EBManual_Camera_JSSTTL-116703] Executing link_Click function:
+2016-01-27 17:50:13,829 DEBUG [EBManual_Camera_JSSTTL-116703] Executing Click function
+2016-01-27 17:50:14,882 DEBUG [EBManual_Camera_JSSTTL-116703] Exiting Click function
+2016-01-27 17:50:14,882 DEBUG [EBManual_Camera_JSSTTL-116703] camera_main_link clicked successfully
+2016-01-27 17:50:14,882 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of link_Click: Pass
+2016-01-27 17:50:14,882 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:14,883 DEBUG [EBManual_Camera_JSSTTL-116703] Executing validate_PageTitle function:
+2016-01-27 17:50:14,900 DEBUG [EBManual_Camera_JSSTTL-116703] The title of the page is *********************************: Camera Main Tests
+2016-01-27 17:50:14,900 DEBUG [EBManual_Camera_JSSTTL-116703] The page title found is correct
+2016-01-27 17:50:14,900 DEBUG [EBManual_Camera_JSSTTL-116703] Result of validate_PageTitle: pass
+2016-01-27 17:50:14,900 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:14,900 DEBUG [EBManual_Camera_JSSTTL-116703] Executing SelectTestToRun function:
+2016-01-27 17:50:22,579 DEBUG [EBManual_Camera_JSSTTL-116703] Successfull in selecting clicking the category
+2016-01-27 17:50:22,579 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of SelectTestToRun: pass
+2016-01-27 17:50:22,579 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:22,579 DEBUG [EBManual_Camera_JSSTTL-116703] Executing ClickRunTest function:
+2016-01-27 17:50:22,902 DEBUG [EBManual_Camera_JSSTTL-116703] Executing Click function
+2016-01-27 17:50:23,846 DEBUG [EBManual_Camera_JSSTTL-116703] Exiting Click function
+2016-01-27 17:50:23,847 DEBUG [EBManual_Camera_JSSTTL-116703] runtest_top_xpath Button clicked Successfully
+2016-01-27 17:50:23,847 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of ClickRunTest: pass
+2016-01-27 17:50:23,847 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:23,847 DEBUG [EBManual_Camera_JSSTTL-116703] Executing wait function:
+2016-01-27 17:50:23,847 DEBUG [EBManual_Camera_JSSTTL-116703] Started Executing wait function
+2016-01-27 17:50:25,847 DEBUG [EBManual_Camera_JSSTTL-116703] Exiting from wait function
+2016-01-27 17:50:25,847 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 17:50:25,847 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:25,847 DEBUG [EBManual_Camera_JSSTTL-116703] Executing validate_Text_Exists function:
+2016-01-27 17:50:26,158 DEBUG [EBManual_Camera_JSSTTL-116703] VT285-0002 Testcase Text found
+2016-01-27 17:50:26,159 DEBUG [EBManual_Camera_JSSTTL-116703] Result of validate_Text_Exists: Pass
+2016-01-27 17:50:26,159 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:26,159 DEBUG [EBManual_Camera_JSSTTL-116703] Executing ClickRunTest function:
+2016-01-27 17:50:26,500 DEBUG [EBManual_Camera_JSSTTL-116703] Executing Click function
+2016-01-27 17:50:27,479 DEBUG [EBManual_Camera_JSSTTL-116703] Exiting Click function
+2016-01-27 17:50:27,479 DEBUG [EBManual_Camera_JSSTTL-116703] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 17:50:27,480 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of ClickRunTest: pass
+2016-01-27 17:50:27,480 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:27,480 DEBUG [EBManual_Camera_JSSTTL-116703] Executing CheckUITextContains function:
+2016-01-27 17:50:27,480 DEBUG [EBManual_Camera_JSSTTL-116703] Started executeCommandLine function
+2016-01-27 17:50:31,500 DEBUG [EBManual_Camera_JSSTTL-116703] Text is Present
+2016-01-27 17:50:31,500 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of CheckUITextContains: Pass
+2016-01-27 17:50:31,500 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:31,500 DEBUG [EBManual_Camera_JSSTTL-116703] Executing CheckUITextContains function:
+2016-01-27 17:50:31,500 DEBUG [EBManual_Camera_JSSTTL-116703] Started executeCommandLine function
+2016-01-27 17:50:35,520 DEBUG [EBManual_Camera_JSSTTL-116703] Text is Present
+2016-01-27 17:50:35,520 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of CheckUITextContains: Pass
+2016-01-27 17:50:35,520 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:35,520 DEBUG [EBManual_Camera_JSSTTL-116703] Executing ClickUIButtonText function:
+2016-01-27 17:50:35,520 DEBUG [EBManual_Camera_JSSTTL-116703] Entered ClickUIButtonText function
+2016-01-27 17:50:35,520 DEBUG [EBManual_Camera_JSSTTL-116703] Started executeCommandLine function
+2016-01-27 17:50:39,540 DEBUG [EBManual_Camera_JSSTTL-116703] Started executeCommandLine function
+2016-01-27 17:50:44,157 DEBUG [EBManual_Camera_JSSTTL-116703] Exiting ClickUIButtonText function
+2016-01-27 17:50:44,158 DEBUG [EBManual_Camera_JSSTTL-116703] TestStepResult of ClickUIButtonText: Pass
+2016-01-27 17:50:44,158 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:44,159 DEBUG [EBManual_Camera_JSSTTL-116703] Executing validate_Text_Exists function:
+2016-01-27 17:50:44,357 DEBUG [EBManual_Camera_JSSTTL-116703] VT285-0002 Testcase Text found
+2016-01-27 17:50:44,357 DEBUG [EBManual_Camera_JSSTTL-116703] Result of validate_Text_Exists: Pass
+2016-01-27 17:50:44,357 DEBUG [EBManual_Camera_JSSTTL-116703] In execute keyword function
+2016-01-27 17:50:44,357 DEBUG [EBManual_Camera_JSSTTL-116703] Executing validate_Result function:
+2016-01-27 17:50:44,616 DEBUG [EBManual_Camera_JSSTTL-116703] cancel Text found in Results
+status : : cancel
+message : : User canceled operation.
+imageHeight : : undefined
+imageWidth : : undefined
+imageFormat : : undefined
+imageUri : : undefined
+2016-01-27 17:50:44,616 DEBUG [EBManual_Camera_JSSTTL-116703] Result of validate_Result: Pass
+2016-01-27 17:50:44,616 DEBUG [EBManual_Camera_JSSTTL-116703] allstep_result contains: PassPassPasspassPasspasspassPassPassnull
+2016-01-27 17:50:44,616 DEBUG [EBManual_Camera_JSSTTL-116703] allexpected_result contains: nullPassPassnullPassnullpassnullpassnull
+2016-01-27 17:50:44,617 DEBUG [EBManual_Camera_JSSTTL-116703] Testcase_Result contains: nullPassPassnullPassnullpassnullpassnullPassPassPasspassPasspasspassPassPassnull
+2016-01-27 17:50:44,617 DEBUG [EBManual_Camera_JSSTTL-116703] Test case with description should call choosePicture with callback status cancel Pass
+2016-01-27 17:50:45,620 DEBUG [EBManual_Camera_JSSTTL-116703] Executing browser_Quit function
+2016-01-27 17:50:45,620 DEBUG [EBManual_Camera_JSSTTL-116703] Completed browser_Quit function
+2016-01-27 17:50:45,620 DEBUG [EBManual_Camera_JSSTTL-116703] Completed quitSelendroid function
+2016-01-27 17:50:45,620 DEBUG [EBManual_Camera_JSSTTL-116703] Row number:4
+2016-01-27 17:50:45,662 DEBUG [EBManual_Camera_JSSTTL-116703] Ending Test Case IDSTTL-116703

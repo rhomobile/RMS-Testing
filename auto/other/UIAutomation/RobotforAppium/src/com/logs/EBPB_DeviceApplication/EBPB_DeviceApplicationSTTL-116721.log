@@ -1,0 +1,58 @@
+2016-01-27 23:50:37,950 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing Test Case ID: STTL-116721
+2016-01-27 23:50:37,957 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 23:50:46,966 DEBUG [EBPB_DeviceApplicationSTTL-116721] Exiting Init_Selendroid function
+2016-01-27 23:50:46,982 DEBUG [EBPB_DeviceApplicationSTTL-116721] TestCase with Description "ScreenOrientation Upsidedown" Execution started
+2016-01-27 23:50:46,982 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:50:46,982 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing wait function:
+2016-01-27 23:50:46,982 DEBUG [EBPB_DeviceApplicationSTTL-116721] Started Executing wait function
+2016-01-27 23:50:49,982 DEBUG [EBPB_DeviceApplicationSTTL-116721] Exiting from wait function
+2016-01-27 23:50:49,982 DEBUG [EBPB_DeviceApplicationSTTL-116721] TestStepResult of wait: Pass
+2016-01-27 23:50:49,982 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:50:49,982 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing validate_PageTitle function:
+2016-01-27 23:50:50,029 DEBUG [EBPB_DeviceApplicationSTTL-116721] The title of the page is *********************************: Pocket Browser Tests
+2016-01-27 23:50:50,029 DEBUG [EBPB_DeviceApplicationSTTL-116721] The page title found is correct
+2016-01-27 23:50:50,029 DEBUG [EBPB_DeviceApplicationSTTL-116721] Result of validate_PageTitle: pass
+2016-01-27 23:50:50,029 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:50:50,029 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing link_Click function:
+2016-01-27 23:50:50,706 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing Click function
+2016-01-27 23:50:51,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] Exiting Click function
+2016-01-27 23:50:51,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] DeviceApplication_test_link clicked successfully
+2016-01-27 23:50:51,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] TestStepResult of link_Click: Pass
+2016-01-27 23:50:51,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:50:51,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing wait function:
+2016-01-27 23:50:51,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] Started Executing wait function
+2016-01-27 23:50:53,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] Exiting from wait function
+2016-01-27 23:50:53,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] TestStepResult of wait: Pass
+2016-01-27 23:50:53,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:50:53,781 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing validate_PageTitle function:
+2016-01-27 23:50:53,817 DEBUG [EBPB_DeviceApplicationSTTL-116721] The title of the page is *********************************: Device & Application
+2016-01-27 23:50:53,817 DEBUG [EBPB_DeviceApplicationSTTL-116721] The page title found is correct
+2016-01-27 23:50:53,817 DEBUG [EBPB_DeviceApplicationSTTL-116721] Result of validate_PageTitle: pass
+2016-01-27 23:50:53,817 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:50:53,817 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing SelectTestToRun function:
+2016-01-27 23:51:00,461 DEBUG [EBPB_DeviceApplicationSTTL-116721] Successfull in selecting clicking the category
+2016-01-27 23:51:00,461 DEBUG [EBPB_DeviceApplicationSTTL-116721] TestStepResult of SelectTestToRun: pass
+2016-01-27 23:51:00,461 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:51:00,461 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing validate_Text_Exists function:
+2016-01-27 23:51:00,832 DEBUG [EBPB_DeviceApplicationSTTL-116721] VT056-913 Testcase Text found
+2016-01-27 23:51:00,832 DEBUG [EBPB_DeviceApplicationSTTL-116721] Result of validate_Text_Exists: Pass
+2016-01-27 23:51:00,832 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:51:00,832 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing ClickRunTest function:
+2016-01-27 23:51:01,128 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing Click function
+2016-01-27 23:51:02,179 DEBUG [EBPB_DeviceApplicationSTTL-116721] Exiting Click function
+2016-01-27 23:51:02,179 DEBUG [EBPB_DeviceApplicationSTTL-116721] runtest_top_xpath Button clicked Successfully
+2016-01-27 23:51:02,180 DEBUG [EBPB_DeviceApplicationSTTL-116721] TestStepResult of ClickRunTest: pass
+2016-01-27 23:51:02,180 DEBUG [EBPB_DeviceApplicationSTTL-116721] In execute keyword function
+2016-01-27 23:51:02,180 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing validate_screenOrientation function:
+2016-01-27 23:51:02,180 DEBUG [EBPB_DeviceApplicationSTTL-116721] Started executeCommandLine function
+2016-01-27 23:51:06,200 DEBUG [EBPB_DeviceApplicationSTTL-116721] Screen rotated successfully with specified orientation
+2016-01-27 23:51:06,200 DEBUG [EBPB_DeviceApplicationSTTL-116721] Result of validate_screenOrientation: Pass
+2016-01-27 23:51:06,200 DEBUG [EBPB_DeviceApplicationSTTL-116721] allstep_result contains: passpassPassPassPassnull
+2016-01-27 23:51:06,200 DEBUG [EBPB_DeviceApplicationSTTL-116721] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 23:51:06,200 DEBUG [EBPB_DeviceApplicationSTTL-116721] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspassPassPassPassnull
+2016-01-27 23:51:06,200 DEBUG [EBPB_DeviceApplicationSTTL-116721] Test case with description ScreenOrientation Upsidedown Pass
+2016-01-27 23:51:07,186 DEBUG [EBPB_DeviceApplicationSTTL-116721] Executing browser_Quit function
+2016-01-27 23:51:07,186 DEBUG [EBPB_DeviceApplicationSTTL-116721] Completed browser_Quit function
+2016-01-27 23:51:07,186 DEBUG [EBPB_DeviceApplicationSTTL-116721] Completed quitSelendroid function
+2016-01-27 23:51:07,187 DEBUG [EBPB_DeviceApplicationSTTL-116721] Row number:22
+2016-01-27 23:51:07,217 DEBUG [EBPB_DeviceApplicationSTTL-116721] Ending Test Case IDSTTL-116721

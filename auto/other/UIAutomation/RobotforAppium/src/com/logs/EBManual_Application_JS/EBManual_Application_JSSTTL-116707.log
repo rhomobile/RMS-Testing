@@ -1,0 +1,59 @@
+2016-01-27 17:16:32,062 DEBUG [EBManual_Application_JSSTTL-116707] Executing Test Case ID: STTL-116707
+2016-01-27 17:16:32,110 DEBUG [EBManual_Application_JSSTTL-116707] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 17:16:41,884 DEBUG [EBManual_Application_JSSTTL-116707] Exiting Init_Selendroid function
+2016-01-27 17:16:41,932 DEBUG [EBManual_Application_JSSTTL-116707] TestCase with Description "database file path with pre defined db partition "user"" Execution started
+2016-01-27 17:16:41,932 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:41,932 DEBUG [EBManual_Application_JSSTTL-116707] Executing wait function:
+2016-01-27 17:16:41,932 DEBUG [EBManual_Application_JSSTTL-116707] Started Executing wait function
+2016-01-27 17:16:44,932 DEBUG [EBManual_Application_JSSTTL-116707] Exiting from wait function
+2016-01-27 17:16:44,932 DEBUG [EBManual_Application_JSSTTL-116707] TestStepResult of wait: Pass
+2016-01-27 17:16:44,932 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:44,932 DEBUG [EBManual_Application_JSSTTL-116707] Executing validate_PageTitle function:
+2016-01-27 17:16:44,981 DEBUG [EBManual_Application_JSSTTL-116707] The title of the page is *********************************: Manual specs
+2016-01-27 17:16:44,981 DEBUG [EBManual_Application_JSSTTL-116707] The page title found is correct
+2016-01-27 17:16:44,981 DEBUG [EBManual_Application_JSSTTL-116707] Result of validate_PageTitle: pass
+2016-01-27 17:16:44,981 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:44,981 DEBUG [EBManual_Application_JSSTTL-116707] Executing link_Click function:
+2016-01-27 17:16:45,531 DEBUG [EBManual_Application_JSSTTL-116707] Executing Click function
+2016-01-27 17:16:46,566 DEBUG [EBManual_Application_JSSTTL-116707] Exiting Click function
+2016-01-27 17:16:46,566 DEBUG [EBManual_Application_JSSTTL-116707] Application_test_link clicked successfully
+2016-01-27 17:16:46,566 DEBUG [EBManual_Application_JSSTTL-116707] TestStepResult of link_Click: Pass
+2016-01-27 17:16:46,567 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:46,567 DEBUG [EBManual_Application_JSSTTL-116707] Executing validate_PageTitle function:
+2016-01-27 17:16:46,592 DEBUG [EBManual_Application_JSSTTL-116707] The title of the page is *********************************: Application JS Test
+2016-01-27 17:16:46,592 DEBUG [EBManual_Application_JSSTTL-116707] The page title found is correct
+2016-01-27 17:16:46,592 DEBUG [EBManual_Application_JSSTTL-116707] Result of validate_PageTitle: pass
+2016-01-27 17:16:46,592 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:46,592 DEBUG [EBManual_Application_JSSTTL-116707] Executing SelectTestToRun function:
+2016-01-27 17:16:49,868 DEBUG [EBManual_Application_JSSTTL-116707] Successfull in selecting clicking the category
+2016-01-27 17:16:49,868 DEBUG [EBManual_Application_JSSTTL-116707] TestStepResult of SelectTestToRun: pass
+2016-01-27 17:16:49,868 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:49,868 DEBUG [EBManual_Application_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 17:16:50,219 DEBUG [EBManual_Application_JSSTTL-116707] Executing Click function
+2016-01-27 17:16:51,210 DEBUG [EBManual_Application_JSSTTL-116707] Exiting Click function
+2016-01-27 17:16:51,210 DEBUG [EBManual_Application_JSSTTL-116707] runtest_top_xpath Button clicked Successfully
+2016-01-27 17:16:51,210 DEBUG [EBManual_Application_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 17:16:51,210 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:51,210 DEBUG [EBManual_Application_JSSTTL-116707] Executing validate_Text_Exists function:
+2016-01-27 17:16:51,874 DEBUG [EBManual_Application_JSSTTL-116707] VT281-0026 Testcase Text found
+2016-01-27 17:16:51,875 DEBUG [EBManual_Application_JSSTTL-116707] Result of validate_Text_Exists: Pass
+2016-01-27 17:16:51,875 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:51,875 DEBUG [EBManual_Application_JSSTTL-116707] Executing ClickRunTest function:
+2016-01-27 17:16:52,204 DEBUG [EBManual_Application_JSSTTL-116707] Executing Click function
+2016-01-27 17:16:53,162 DEBUG [EBManual_Application_JSSTTL-116707] Exiting Click function
+2016-01-27 17:16:53,162 DEBUG [EBManual_Application_JSSTTL-116707] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 17:16:53,162 DEBUG [EBManual_Application_JSSTTL-116707] TestStepResult of ClickRunTest: pass
+2016-01-27 17:16:53,162 DEBUG [EBManual_Application_JSSTTL-116707] In execute keyword function
+2016-01-27 17:16:53,162 DEBUG [EBManual_Application_JSSTTL-116707] Executing validate_Result function:
+2016-01-27 17:16:53,451 DEBUG [EBManual_Application_JSSTTL-116707] /data/data/com.symbol.enterprisebrowser/rhodata/db/syncdbuser.sqlite Text found in Results
+DB File Path with Local as Partition is : : /data/data/com.symbol.enterprisebrowser/rhodata/db/syncdbuser.sqlite
+2016-01-27 17:16:53,451 DEBUG [EBManual_Application_JSSTTL-116707] Result of validate_Result: Pass
+2016-01-27 17:16:53,451 DEBUG [EBManual_Application_JSSTTL-116707] allstep_result contains: passpasspassPassPassnull
+2016-01-27 17:16:53,451 DEBUG [EBManual_Application_JSSTTL-116707] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 17:16:53,451 DEBUG [EBManual_Application_JSSTTL-116707] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-27 17:16:53,451 DEBUG [EBManual_Application_JSSTTL-116707] Test case with description database file path with pre defined db partition "user" Pass
+2016-01-27 17:16:54,442 DEBUG [EBManual_Application_JSSTTL-116707] Executing browser_Quit function
+2016-01-27 17:16:54,442 DEBUG [EBManual_Application_JSSTTL-116707] Completed browser_Quit function
+2016-01-27 17:16:54,442 DEBUG [EBManual_Application_JSSTTL-116707] Completed quitSelendroid function
+2016-01-27 17:16:54,459 DEBUG [EBManual_Application_JSSTTL-116707] Row number:8
+2016-01-27 17:16:54,574 DEBUG [EBManual_Application_JSSTTL-116707] Ending Test Case IDSTTL-116707

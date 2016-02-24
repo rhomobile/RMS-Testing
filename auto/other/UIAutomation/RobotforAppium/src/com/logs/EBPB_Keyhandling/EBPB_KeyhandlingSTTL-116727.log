@@ -1,0 +1,62 @@
+2016-01-28 02:01:14,155 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing Test Case ID: STTL-116727
+2016-01-28 02:01:14,163 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:01:24,788 DEBUG [EBPB_KeyhandlingSTTL-116727] Exiting Init_Selendroid function
+2016-01-28 02:01:24,806 DEBUG [EBPB_KeyhandlingSTTL-116727] TestCase with Description "KeyValue:66(Enter Key)" Execution started
+2016-01-28 02:01:24,806 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:24,807 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing wait function:
+2016-01-28 02:01:24,807 DEBUG [EBPB_KeyhandlingSTTL-116727] Started Executing wait function
+2016-01-28 02:01:29,807 DEBUG [EBPB_KeyhandlingSTTL-116727] Exiting from wait function
+2016-01-28 02:01:29,807 DEBUG [EBPB_KeyhandlingSTTL-116727] TestStepResult of wait: Pass
+2016-01-28 02:01:29,807 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:29,807 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing validate_PageTitle function:
+2016-01-28 02:01:29,850 DEBUG [EBPB_KeyhandlingSTTL-116727] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 02:01:29,850 DEBUG [EBPB_KeyhandlingSTTL-116727] The page title found is correct
+2016-01-28 02:01:29,850 DEBUG [EBPB_KeyhandlingSTTL-116727] Result of validate_PageTitle: pass
+2016-01-28 02:01:29,850 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:29,850 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing link_Click function:
+2016-01-28 02:01:30,475 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing Click function
+2016-01-28 02:01:31,573 DEBUG [EBPB_KeyhandlingSTTL-116727] Exiting Click function
+2016-01-28 02:01:31,573 DEBUG [EBPB_KeyhandlingSTTL-116727] keyhandling_link clicked successfully
+2016-01-28 02:01:31,573 DEBUG [EBPB_KeyhandlingSTTL-116727] TestStepResult of link_Click: Pass
+2016-01-28 02:01:31,573 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:31,573 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing validate_PageTitle function:
+2016-01-28 02:01:31,608 DEBUG [EBPB_KeyhandlingSTTL-116727] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Keyhandling
+2016-01-28 02:01:31,608 DEBUG [EBPB_KeyhandlingSTTL-116727] The page title found is correct
+2016-01-28 02:01:31,608 DEBUG [EBPB_KeyhandlingSTTL-116727] Result of validate_PageTitle: pass
+2016-01-28 02:01:31,608 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:31,608 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing SelectTestToRun function:
+2016-01-28 02:01:35,960 DEBUG [EBPB_KeyhandlingSTTL-116727] Successfull in selecting clicking the category
+2016-01-28 02:01:35,960 DEBUG [EBPB_KeyhandlingSTTL-116727] TestStepResult of SelectTestToRun: pass
+2016-01-28 02:01:35,960 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:35,960 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing ClickRunTest function:
+2016-01-28 02:01:36,308 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing Click function
+2016-01-28 02:01:37,292 DEBUG [EBPB_KeyhandlingSTTL-116727] Exiting Click function
+2016-01-28 02:01:37,292 DEBUG [EBPB_KeyhandlingSTTL-116727] runtest_top_xpath Button clicked Successfully
+2016-01-28 02:01:37,292 DEBUG [EBPB_KeyhandlingSTTL-116727] TestStepResult of ClickRunTest: pass
+2016-01-28 02:01:37,292 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:37,292 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing validate_Text_Exists function:
+2016-01-28 02:01:37,575 DEBUG [EBPB_KeyhandlingSTTL-116727] VT056-0713 Testcase Text found
+2016-01-28 02:01:37,575 DEBUG [EBPB_KeyhandlingSTTL-116727] Result of validate_Text_Exists: Pass
+2016-01-28 02:01:37,575 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:37,575 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing sendKeyEvents function:
+2016-01-28 02:01:37,575 DEBUG [EBPB_KeyhandlingSTTL-116727] Entered sendKeyEvents function
+2016-01-28 02:01:37,575 DEBUG [EBPB_KeyhandlingSTTL-116727] ENTER
+2016-01-28 02:01:37,575 DEBUG [EBPB_KeyhandlingSTTL-116727] Entered Enterkey
+2016-01-28 02:01:37,575 DEBUG [EBPB_KeyhandlingSTTL-116727] Started executeCommandLine function
+2016-01-28 02:01:41,596 DEBUG [EBPB_KeyhandlingSTTL-116727] Exiting from executeCommandLine function
+2016-01-28 02:01:41,596 DEBUG [EBPB_KeyhandlingSTTL-116727] pass
+2016-01-28 02:01:41,596 DEBUG [EBPB_KeyhandlingSTTL-116727] TestStepResult of sendKeyEvents: pass
+2016-01-28 02:01:41,596 DEBUG [EBPB_KeyhandlingSTTL-116727] In execute keyword function
+2016-01-28 02:01:41,596 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing validate_PageTitle function:
+2016-01-28 02:01:41,630 DEBUG [EBPB_KeyhandlingSTTL-116727] The title of the page is *********************************: Navigation Check
+2016-01-28 02:01:41,630 DEBUG [EBPB_KeyhandlingSTTL-116727] The page title found is correct
+2016-01-28 02:01:41,630 DEBUG [EBPB_KeyhandlingSTTL-116727] Result of validate_PageTitle: pass
+2016-01-28 02:01:41,630 DEBUG [EBPB_KeyhandlingSTTL-116727] allstep_result contains: passpasspassPassPassnull
+2016-01-28 02:01:41,630 DEBUG [EBPB_KeyhandlingSTTL-116727] allexpected_result contains: nullpassnullPassnullpassnullpassnull
+2016-01-28 02:01:41,630 DEBUG [EBPB_KeyhandlingSTTL-116727] Testcase_Result contains: nullpassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-28 02:01:41,630 DEBUG [EBPB_KeyhandlingSTTL-116727] Test case with description KeyValue:66(Enter Key) Pass
+2016-01-28 02:01:42,643 DEBUG [EBPB_KeyhandlingSTTL-116727] Executing browser_Quit function
+2016-01-28 02:01:42,643 DEBUG [EBPB_KeyhandlingSTTL-116727] Completed browser_Quit function
+2016-01-28 02:01:42,643 DEBUG [EBPB_KeyhandlingSTTL-116727] Completed quitSelendroid function
+2016-01-28 02:01:42,644 DEBUG [EBPB_KeyhandlingSTTL-116727] Row number:28
+2016-01-28 02:01:42,679 DEBUG [EBPB_KeyhandlingSTTL-116727] Ending Test Case IDSTTL-116727

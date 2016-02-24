@@ -1,0 +1,66 @@
+2016-01-28 00:43:18,977 DEBUG [EBPB_FileManagementSTTL-116718] Executing Test Case ID: STTL-116718
+2016-01-28 00:43:18,983 DEBUG [EBPB_FileManagementSTTL-116718] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:43:29,011 DEBUG [EBPB_FileManagementSTTL-116718] Exiting Init_Selendroid function
+2016-01-28 00:43:29,026 DEBUG [EBPB_FileManagementSTTL-116718] TestCase with Description ".
+
+Device file system to FTP server invalid file" Execution started
+2016-01-28 00:43:29,026 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:29,026 DEBUG [EBPB_FileManagementSTTL-116718] Executing wait function:
+2016-01-28 00:43:29,026 DEBUG [EBPB_FileManagementSTTL-116718] Started Executing wait function
+2016-01-28 00:43:31,027 DEBUG [EBPB_FileManagementSTTL-116718] Exiting from wait function
+2016-01-28 00:43:31,027 DEBUG [EBPB_FileManagementSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 00:43:31,027 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:31,027 DEBUG [EBPB_FileManagementSTTL-116718] Executing validate_PageTitle function:
+2016-01-28 00:43:31,068 DEBUG [EBPB_FileManagementSTTL-116718] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:43:31,068 DEBUG [EBPB_FileManagementSTTL-116718] The page title found is correct
+2016-01-28 00:43:31,068 DEBUG [EBPB_FileManagementSTTL-116718] Result of validate_PageTitle: pass
+2016-01-28 00:43:31,068 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:31,068 DEBUG [EBPB_FileManagementSTTL-116718] Executing link_Click function:
+2016-01-28 00:43:31,673 DEBUG [EBPB_FileManagementSTTL-116718] Executing Click function
+2016-01-28 00:43:32,748 DEBUG [EBPB_FileManagementSTTL-116718] Exiting Click function
+2016-01-28 00:43:32,748 DEBUG [EBPB_FileManagementSTTL-116718] filemanagement_test_link clicked successfully
+2016-01-28 00:43:32,748 DEBUG [EBPB_FileManagementSTTL-116718] TestStepResult of link_Click: Pass
+2016-01-28 00:43:32,748 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:32,748 DEBUG [EBPB_FileManagementSTTL-116718] Executing wait function:
+2016-01-28 00:43:32,748 DEBUG [EBPB_FileManagementSTTL-116718] Started Executing wait function
+2016-01-28 00:43:34,748 DEBUG [EBPB_FileManagementSTTL-116718] Exiting from wait function
+2016-01-28 00:43:34,748 DEBUG [EBPB_FileManagementSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 00:43:34,748 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:34,748 DEBUG [EBPB_FileManagementSTTL-116718] Executing validate_PageTitle function:
+2016-01-28 00:43:34,784 DEBUG [EBPB_FileManagementSTTL-116718] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : FileManagement
+2016-01-28 00:43:34,784 DEBUG [EBPB_FileManagementSTTL-116718] The page title found is correct
+2016-01-28 00:43:34,784 DEBUG [EBPB_FileManagementSTTL-116718] Result of validate_PageTitle: pass
+2016-01-28 00:43:34,784 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:34,784 DEBUG [EBPB_FileManagementSTTL-116718] Executing SelectTestToRun function:
+2016-01-28 00:43:38,827 DEBUG [EBPB_FileManagementSTTL-116718] Successfull in selecting clicking the category
+2016-01-28 00:43:38,827 DEBUG [EBPB_FileManagementSTTL-116718] TestStepResult of SelectTestToRun: pass
+2016-01-28 00:43:38,827 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:38,827 DEBUG [EBPB_FileManagementSTTL-116718] Executing ClickRunTest function:
+2016-01-28 00:43:39,179 DEBUG [EBPB_FileManagementSTTL-116718] Executing Click function
+2016-01-28 00:43:40,290 DEBUG [EBPB_FileManagementSTTL-116718] Exiting Click function
+2016-01-28 00:43:40,290 DEBUG [EBPB_FileManagementSTTL-116718] runtest_top_xpath Button clicked Successfully
+2016-01-28 00:43:40,290 DEBUG [EBPB_FileManagementSTTL-116718] TestStepResult of ClickRunTest: pass
+2016-01-28 00:43:40,290 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:40,290 DEBUG [EBPB_FileManagementSTTL-116718] Executing validate_Text_Exists function:
+2016-01-28 00:43:40,568 DEBUG [EBPB_FileManagementSTTL-116718] VT056-1040 Testcase Text found
+2016-01-28 00:43:40,568 DEBUG [EBPB_FileManagementSTTL-116718] Result of validate_Text_Exists: Pass
+2016-01-28 00:43:40,568 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:40,568 DEBUG [EBPB_FileManagementSTTL-116718] Executing wait function:
+2016-01-28 00:43:40,568 DEBUG [EBPB_FileManagementSTTL-116718] Started Executing wait function
+2016-01-28 00:43:50,569 DEBUG [EBPB_FileManagementSTTL-116718] Exiting from wait function
+2016-01-28 00:43:50,569 DEBUG [EBPB_FileManagementSTTL-116718] TestStepResult of wait: Pass
+2016-01-28 00:43:50,569 DEBUG [EBPB_FileManagementSTTL-116718] In execute keyword function
+2016-01-28 00:43:50,569 DEBUG [EBPB_FileManagementSTTL-116718] Executing validate_Result function:
+2016-01-28 00:43:50,863 DEBUG [EBPB_FileManagementSTTL-116718] 2 Text found in Error Code: 2
+2016-01-28 00:43:50,863 DEBUG [EBPB_FileManagementSTTL-116718] Result of validate_Result: Pass
+2016-01-28 00:43:50,863 DEBUG [EBPB_FileManagementSTTL-116718] allstep_result contains: PasspasspassPassPassPassnull
+2016-01-28 00:43:50,863 DEBUG [EBPB_FileManagementSTTL-116718] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 00:43:50,863 DEBUG [EBPB_FileManagementSTTL-116718] Testcase_Result contains: nullPassnullPassnullpassnullpassnullPasspasspassPassPassPassnull
+2016-01-28 00:43:50,863 DEBUG [EBPB_FileManagementSTTL-116718] Test case with description .
+
+Device file system to FTP server invalid file Pass
+2016-01-28 00:43:51,774 DEBUG [EBPB_FileManagementSTTL-116718] Executing browser_Quit function
+2016-01-28 00:43:51,774 DEBUG [EBPB_FileManagementSTTL-116718] Completed browser_Quit function
+2016-01-28 00:43:51,774 DEBUG [EBPB_FileManagementSTTL-116718] Completed quitSelendroid function
+2016-01-28 00:43:51,774 DEBUG [EBPB_FileManagementSTTL-116718] Row number:19
+2016-01-28 00:43:51,805 DEBUG [EBPB_FileManagementSTTL-116718] Ending Test Case IDSTTL-116718

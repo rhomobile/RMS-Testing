@@ -1,0 +1,59 @@
+2016-01-27 22:40:53,253 DEBUG [EBManual_Webview_JSSTTL-116710] Executing Test Case ID: STTL-116710
+2016-01-27 22:40:53,260 DEBUG [EBManual_Webview_JSSTTL-116710] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:41:03,040 DEBUG [EBManual_Webview_JSSTTL-116710] Exiting Init_Selendroid function
+2016-01-27 22:41:03,056 DEBUG [EBManual_Webview_JSSTTL-116710] TestCase with Description "Get the value of enablePageLoadingIndication as true" Execution started
+2016-01-27 22:41:03,056 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:03,056 DEBUG [EBManual_Webview_JSSTTL-116710] Executing wait function:
+2016-01-27 22:41:03,056 DEBUG [EBManual_Webview_JSSTTL-116710] Started Executing wait function
+2016-01-27 22:41:06,056 DEBUG [EBManual_Webview_JSSTTL-116710] Exiting from wait function
+2016-01-27 22:41:06,056 DEBUG [EBManual_Webview_JSSTTL-116710] TestStepResult of wait: Pass
+2016-01-27 22:41:06,056 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:06,056 DEBUG [EBManual_Webview_JSSTTL-116710] Executing validate_PageTitle function:
+2016-01-27 22:41:06,098 DEBUG [EBManual_Webview_JSSTTL-116710] The title of the page is *********************************: Manual specs
+2016-01-27 22:41:06,098 DEBUG [EBManual_Webview_JSSTTL-116710] The page title found is correct
+2016-01-27 22:41:06,098 DEBUG [EBManual_Webview_JSSTTL-116710] Result of validate_PageTitle: pass
+2016-01-27 22:41:06,098 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:06,098 DEBUG [EBManual_Webview_JSSTTL-116710] Executing link_Click function:
+2016-01-27 22:41:06,841 DEBUG [EBManual_Webview_JSSTTL-116710] Executing Click function
+2016-01-27 22:41:08,159 DEBUG [EBManual_Webview_JSSTTL-116710] Exiting Click function
+2016-01-27 22:41:08,159 DEBUG [EBManual_Webview_JSSTTL-116710] webview_test_link clicked successfully
+2016-01-27 22:41:08,159 DEBUG [EBManual_Webview_JSSTTL-116710] TestStepResult of link_Click: Pass
+2016-01-27 22:41:08,160 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:08,160 DEBUG [EBManual_Webview_JSSTTL-116710] Executing validate_PageTitle function:
+2016-01-27 22:41:08,177 DEBUG [EBManual_Webview_JSSTTL-116710] The title of the page is *********************************: Webview JS Test
+2016-01-27 22:41:08,177 DEBUG [EBManual_Webview_JSSTTL-116710] The page title found is correct
+2016-01-27 22:41:08,177 DEBUG [EBManual_Webview_JSSTTL-116710] Result of validate_PageTitle: pass
+2016-01-27 22:41:08,177 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:08,177 DEBUG [EBManual_Webview_JSSTTL-116710] Executing SelectTestToRun function:
+2016-01-27 22:41:11,649 DEBUG [EBManual_Webview_JSSTTL-116710] Successfull in selecting clicking the category
+2016-01-27 22:41:11,649 DEBUG [EBManual_Webview_JSSTTL-116710] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:41:11,649 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:11,649 DEBUG [EBManual_Webview_JSSTTL-116710] Executing ClickRunTest function:
+2016-01-27 22:41:12,065 DEBUG [EBManual_Webview_JSSTTL-116710] Executing Click function
+2016-01-27 22:41:13,168 DEBUG [EBManual_Webview_JSSTTL-116710] Exiting Click function
+2016-01-27 22:41:13,168 DEBUG [EBManual_Webview_JSSTTL-116710] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:41:13,168 DEBUG [EBManual_Webview_JSSTTL-116710] TestStepResult of ClickRunTest: pass
+2016-01-27 22:41:13,168 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:13,168 DEBUG [EBManual_Webview_JSSTTL-116710] Executing validate_Text_Exists function:
+2016-01-27 22:41:13,586 DEBUG [EBManual_Webview_JSSTTL-116710] VT301-0011 Testcase Text found
+2016-01-27 22:41:13,586 DEBUG [EBManual_Webview_JSSTTL-116710] Result of validate_Text_Exists: Pass
+2016-01-27 22:41:13,586 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:13,586 DEBUG [EBManual_Webview_JSSTTL-116710] Executing ClickRunTest function:
+2016-01-27 22:41:13,945 DEBUG [EBManual_Webview_JSSTTL-116710] Executing Click function
+2016-01-27 22:41:14,842 DEBUG [EBManual_Webview_JSSTTL-116710] Exiting Click function
+2016-01-27 22:41:14,842 DEBUG [EBManual_Webview_JSSTTL-116710] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:41:14,842 DEBUG [EBManual_Webview_JSSTTL-116710] TestStepResult of ClickRunTest: pass
+2016-01-27 22:41:14,842 DEBUG [EBManual_Webview_JSSTTL-116710] In execute keyword function
+2016-01-27 22:41:14,843 DEBUG [EBManual_Webview_JSSTTL-116710] Executing validate_Result function:
+2016-01-27 22:41:15,080 DEBUG [EBManual_Webview_JSSTTL-116710] true Text found in Result:
+enablePageLoadingIndication value is: true
+2016-01-27 22:41:15,080 DEBUG [EBManual_Webview_JSSTTL-116710] Result of validate_Result: Pass
+2016-01-27 22:41:15,080 DEBUG [EBManual_Webview_JSSTTL-116710] allstep_result contains: passpasspassPassPassnull
+2016-01-27 22:41:15,080 DEBUG [EBManual_Webview_JSSTTL-116710] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 22:41:15,080 DEBUG [EBManual_Webview_JSSTTL-116710] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-27 22:41:15,080 DEBUG [EBManual_Webview_JSSTTL-116710] Test case with description Get the value of enablePageLoadingIndication as true Pass
+2016-01-27 22:41:16,050 DEBUG [EBManual_Webview_JSSTTL-116710] Executing browser_Quit function
+2016-01-27 22:41:16,050 DEBUG [EBManual_Webview_JSSTTL-116710] Completed browser_Quit function
+2016-01-27 22:41:16,050 DEBUG [EBManual_Webview_JSSTTL-116710] Completed quitSelendroid function
+2016-01-27 22:41:16,050 DEBUG [EBManual_Webview_JSSTTL-116710] Row number:11
+2016-01-27 22:41:16,091 DEBUG [EBManual_Webview_JSSTTL-116710] Ending Test Case IDSTTL-116710

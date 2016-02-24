@@ -1,0 +1,38 @@
+2016-01-28 02:12:30,921 DEBUG [EBPB_PB2STTL-116701] Executing Test Case ID: STTL-116701
+2016-01-28 02:13:05,993 DEBUG [EBPB_PB2STTL-116701] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:13:16,629 DEBUG [EBPB_PB2STTL-116701] Exiting Init_Selendroid function
+2016-01-28 02:13:16,644 DEBUG [EBPB_PB2STTL-116701] TestCase with Description "Change Start page" Execution started
+2016-01-28 02:13:16,644 DEBUG [EBPB_PB2STTL-116701] In execute keyword function
+2016-01-28 02:13:16,644 DEBUG [EBPB_PB2STTL-116701] Executing wait function:
+2016-01-28 02:13:16,644 DEBUG [EBPB_PB2STTL-116701] Started Executing wait function
+2016-01-28 02:13:19,644 DEBUG [EBPB_PB2STTL-116701] Exiting from wait function
+2016-01-28 02:13:19,644 DEBUG [EBPB_PB2STTL-116701] TestStepResult of wait: Pass
+2016-01-28 02:13:19,644 DEBUG [EBPB_PB2STTL-116701] In execute keyword function
+2016-01-28 02:13:19,644 DEBUG [EBPB_PB2STTL-116701] Executing PullConfigxml function:
+2016-01-28 02:13:19,644 DEBUG [EBPB_PB2STTL-116701] Started executeCommandLine function
+2016-01-28 02:13:23,666 DEBUG [EBPB_PB2STTL-116701] TestStepResult of PullConfigxml: Pass
+2016-01-28 02:13:23,666 DEBUG [EBPB_PB2STTL-116701] In execute keyword function
+2016-01-28 02:13:23,666 DEBUG [EBPB_PB2STTL-116701] Executing ChangeConfigxml function:
+2016-01-28 02:13:23,666 DEBUG [EBPB_PB2STTL-116701] Executing ChangeConfigxml function
+2016-01-28 02:13:23,668 DEBUG [EBPB_PB2STTL-116701] TestStepResult of ChangeConfigxml: Pass
+2016-01-28 02:13:23,668 DEBUG [EBPB_PB2STTL-116701] In execute keyword function
+2016-01-28 02:13:23,668 DEBUG [EBPB_PB2STTL-116701] Executing ChangeConfigxml function:
+2016-01-28 02:13:23,668 DEBUG [EBPB_PB2STTL-116701] Executing ChangeConfigxml function
+2016-01-28 02:13:23,669 DEBUG [EBPB_PB2STTL-116701] TestStepResult of ChangeConfigxml: Pass
+2016-01-28 02:13:23,669 DEBUG [EBPB_PB2STTL-116701] In execute keyword function
+2016-01-28 02:13:23,669 DEBUG [EBPB_PB2STTL-116701] Executing ChangeConfigxml function:
+2016-01-28 02:13:23,670 DEBUG [EBPB_PB2STTL-116701] Executing ChangeConfigxml function
+2016-01-28 02:13:23,671 DEBUG [EBPB_PB2STTL-116701] TestStepResult of ChangeConfigxml: Pass
+2016-01-28 02:13:23,671 DEBUG [EBPB_PB2STTL-116701] In execute keyword function
+2016-01-28 02:13:23,671 DEBUG [EBPB_PB2STTL-116701] Executing PushConfigxml function:
+2016-01-28 02:13:23,671 DEBUG [EBPB_PB2STTL-116701] Started executeCommandLine function
+2016-01-28 02:13:27,691 DEBUG [EBPB_PB2STTL-116701] TestStepResult of PushConfigxml: Pass
+2016-01-28 02:13:27,691 DEBUG [EBPB_PB2STTL-116701] allstep_result contains: PassPassPassPassPassPassnull
+2016-01-28 02:13:27,691 DEBUG [EBPB_PB2STTL-116701] allexpected_result contains: null
+2016-01-28 02:13:27,691 DEBUG [EBPB_PB2STTL-116701] Testcase_Result contains: nullPassPassPassPassPassPassnull
+2016-01-28 02:13:27,691 DEBUG [EBPB_PB2STTL-116701] Test case with description Change Start page Pass
+2016-01-28 02:13:28,743 DEBUG [EBPB_PB2STTL-116701] Executing browser_Quit function
+2016-01-28 02:13:28,744 DEBUG [EBPB_PB2STTL-116701] Completed browser_Quit function
+2016-01-28 02:13:28,744 DEBUG [EBPB_PB2STTL-116701] Completed quitSelendroid function
+2016-01-28 02:13:28,744 DEBUG [EBPB_PB2STTL-116701] Row number:2
+2016-01-28 02:13:28,779 DEBUG [EBPB_PB2STTL-116701] Ending Test Case IDSTTL-116701

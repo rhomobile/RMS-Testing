@@ -1,0 +1,107 @@
+2016-01-28 03:10:17,742 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing Test Case ID: STTL-116711
+2016-01-28 03:10:17,749 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:10:28,304 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting Init_Selendroid function
+2016-01-28 03:10:28,318 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestCase with Description "Note: Run this test with Javascript object.
+
+Stopbutton Functionality Test" Execution started
+2016-01-28 03:10:28,318 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:28,318 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing wait function:
+2016-01-28 03:10:28,318 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Started Executing wait function
+2016-01-28 03:10:30,318 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting from wait function
+2016-01-28 03:10:30,318 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of wait: Pass
+2016-01-28 03:10:30,318 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:30,318 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing validate_PageTitle function:
+2016-01-28 03:10:30,359 DEBUG [EBRE22_ControlAppearanceSTTL-116711] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:10:30,359 DEBUG [EBRE22_ControlAppearanceSTTL-116711] The page title found is correct
+2016-01-28 03:10:30,359 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Result of validate_PageTitle: pass
+2016-01-28 03:10:30,359 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:30,359 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing link_Click function:
+2016-01-28 03:10:30,989 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing Click function
+2016-01-28 03:10:32,026 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting Click function
+2016-01-28 03:10:32,026 DEBUG [EBRE22_ControlAppearanceSTTL-116711] controlappearance_test_link clicked successfully
+2016-01-28 03:10:32,026 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of link_Click: Pass
+2016-01-28 03:10:32,026 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:32,026 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing wait function:
+2016-01-28 03:10:32,026 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Started Executing wait function
+2016-01-28 03:10:34,027 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting from wait function
+2016-01-28 03:10:34,027 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of wait: Pass
+2016-01-28 03:10:34,027 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:34,027 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing validate_PageTitle function:
+2016-01-28 03:10:34,070 DEBUG [EBRE22_ControlAppearanceSTTL-116711] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Control & Appearance
+2016-01-28 03:10:34,070 DEBUG [EBRE22_ControlAppearanceSTTL-116711] The page title found is correct
+2016-01-28 03:10:34,070 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Result of validate_PageTitle: pass
+2016-01-28 03:10:34,071 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:34,071 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing SelectTestToRun function:
+2016-01-28 03:10:37,301 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Successfull in selecting clicking the category
+2016-01-28 03:10:37,301 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:10:37,301 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:37,301 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing ClickRunTest function:
+2016-01-28 03:10:37,668 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing Click function
+2016-01-28 03:10:38,689 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting Click function
+2016-01-28 03:10:38,689 DEBUG [EBRE22_ControlAppearanceSTTL-116711] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:10:38,690 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of ClickRunTest: pass
+2016-01-28 03:10:38,690 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:38,690 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing validate_Text_Exists function:
+2016-01-28 03:10:38,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] VT187-1661 Testcase Text found
+2016-01-28 03:10:38,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Result of validate_Text_Exists: Pass
+2016-01-28 03:10:38,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:38,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing wait function:
+2016-01-28 03:10:38,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Started Executing wait function
+2016-01-28 03:10:40,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting from wait function
+2016-01-28 03:10:40,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of wait: Pass
+2016-01-28 03:10:40,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:40,973 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing SelectTestToRun function:
+2016-01-28 03:10:43,571 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Successfull in selecting clicking the category
+2016-01-28 03:10:43,572 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:10:43,572 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:43,572 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing ClickRunTest function:
+2016-01-28 03:10:43,751 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing Click function
+2016-01-28 03:10:44,713 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting Click function
+2016-01-28 03:10:44,713 DEBUG [EBRE22_ControlAppearanceSTTL-116711] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:10:44,713 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of ClickRunTest: pass
+2016-01-28 03:10:44,714 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:44,714 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing validate_Text_Exists function:
+2016-01-28 03:10:44,916 DEBUG [EBRE22_ControlAppearanceSTTL-116711] VT187-1604 Testcase Text found
+2016-01-28 03:10:44,916 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Result of validate_Text_Exists: Pass
+2016-01-28 03:10:44,916 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:44,916 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing wait function:
+2016-01-28 03:10:44,916 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Started Executing wait function
+2016-01-28 03:10:46,917 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting from wait function
+2016-01-28 03:10:46,917 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of wait: Pass
+2016-01-28 03:10:46,917 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:46,917 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing SwitchApp function:
+2016-01-28 03:10:47,017 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Successfully switched to NATIVE_APP
+2016-01-28 03:10:47,017 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of SwitchApp: Pass
+2016-01-28 03:10:47,017 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:47,017 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing TypeinAddressbar function:
+2016-01-28 03:10:47,017 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing SendData function
+2016-01-28 03:10:48,855 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Exiting Senddata function
+2016-01-28 03:10:48,855 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of TypeinAddressbar: pass
+2016-01-28 03:10:48,856 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:48,856 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing ClickNativeIcon function:
+2016-01-28 03:10:49,792 DEBUG [EBRE22_ControlAppearanceSTTL-116711] [[AppiumTouchActionExtension: selendroid on ANDROID (3ddc39a0-e6f7-4838-e19a-a58accdfa55b)] -> xpath: (//Button[@id='go_button'])[1]]Clicked successfully
+2016-01-28 03:10:49,792 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of ClickNativeIcon: pass
+2016-01-28 03:10:49,792 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:49,792 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing ClickNativeIcon function:
+2016-01-28 03:10:50,633 DEBUG [EBRE22_ControlAppearanceSTTL-116711] [[AppiumTouchActionExtension: selendroid on ANDROID (3ddc39a0-e6f7-4838-e19a-a58accdfa55b)] -> xpath: (//Button[@id='stop_button'])[1]]Clicked successfully
+2016-01-28 03:10:50,633 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of ClickNativeIcon: pass
+2016-01-28 03:10:50,633 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:50,633 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing SwitchApp function:
+2016-01-28 03:10:50,686 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Successfully switched to WEBVIEW
+2016-01-28 03:10:50,686 DEBUG [EBRE22_ControlAppearanceSTTL-116711] TestStepResult of SwitchApp: Pass
+2016-01-28 03:10:50,686 DEBUG [EBRE22_ControlAppearanceSTTL-116711] In execute keyword function
+2016-01-28 03:10:50,686 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing validate_PageTitle function:
+2016-01-28 03:10:50,702 DEBUG [EBRE22_ControlAppearanceSTTL-116711] The title of the page is *********************************: BadLink
+2016-01-28 03:10:50,702 DEBUG [EBRE22_ControlAppearanceSTTL-116711] The page title found is correct
+2016-01-28 03:10:50,702 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Result of validate_PageTitle: pass
+2016-01-28 03:10:50,702 DEBUG [EBRE22_ControlAppearanceSTTL-116711] allstep_result contains: PasspasspasspassPassPasspasspassPasspasspassPassPassPassnull
+2016-01-28 03:10:50,702 DEBUG [EBRE22_ControlAppearanceSTTL-116711] allexpected_result contains: nullpassnullPassnullPassnullpassnullpassnull
+2016-01-28 03:10:50,702 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Testcase_Result contains: nullpassnullPassnullPassnullpassnullpassnullPasspasspasspassPassPasspasspassPasspasspassPassPassPassnull
+2016-01-28 03:10:50,702 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Test case with description Note: Run this test with Javascript object.
+
+Stopbutton Functionality Test Pass
+2016-01-28 03:10:51,743 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Executing browser_Quit function
+2016-01-28 03:10:51,743 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Completed browser_Quit function
+2016-01-28 03:10:51,743 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Completed quitSelendroid function
+2016-01-28 03:10:51,744 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Row number:12
+2016-01-28 03:10:51,772 DEBUG [EBRE22_ControlAppearanceSTTL-116711] Ending Test Case IDSTTL-116711

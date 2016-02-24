@@ -1,0 +1,61 @@
+2016-01-27 22:02:02,497 DEBUG [EBManual_System_JSSTTL-116714] Executing Test Case ID: STTL-116714
+2016-01-27 22:02:02,508 DEBUG [EBManual_System_JSSTTL-116714] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:02:12,367 DEBUG [EBManual_System_JSSTTL-116714] Exiting Init_Selendroid function
+2016-01-27 22:02:12,388 DEBUG [EBManual_System_JSSTTL-116714] TestCase with Description "call getproperties with deviceName" Execution started
+2016-01-27 22:02:12,388 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:12,388 DEBUG [EBManual_System_JSSTTL-116714] Executing wait function:
+2016-01-27 22:02:12,388 DEBUG [EBManual_System_JSSTTL-116714] Started Executing wait function
+2016-01-27 22:02:15,388 DEBUG [EBManual_System_JSSTTL-116714] Exiting from wait function
+2016-01-27 22:02:15,388 DEBUG [EBManual_System_JSSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 22:02:15,388 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:15,388 DEBUG [EBManual_System_JSSTTL-116714] Executing validate_PageTitle function:
+2016-01-27 22:02:15,405 DEBUG [EBManual_System_JSSTTL-116714] The title of the page is *********************************: Manual specs
+2016-01-27 22:02:15,405 DEBUG [EBManual_System_JSSTTL-116714] The page title found is correct
+2016-01-27 22:02:15,405 DEBUG [EBManual_System_JSSTTL-116714] Result of validate_PageTitle: pass
+2016-01-27 22:02:15,405 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:15,405 DEBUG [EBManual_System_JSSTTL-116714] Executing link_Click function:
+2016-01-27 22:02:16,136 DEBUG [EBManual_System_JSSTTL-116714] Executing Click function
+2016-01-27 22:02:17,515 DEBUG [EBManual_System_JSSTTL-116714] Exiting Click function
+2016-01-27 22:02:17,515 DEBUG [EBManual_System_JSSTTL-116714] system_test_link clicked successfully
+2016-01-27 22:02:17,515 DEBUG [EBManual_System_JSSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-27 22:02:17,515 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:17,515 DEBUG [EBManual_System_JSSTTL-116714] Executing validate_PageTitle function:
+2016-01-27 22:02:17,531 DEBUG [EBManual_System_JSSTTL-116714] The title of the page is *********************************: System JS Test
+2016-01-27 22:02:17,531 DEBUG [EBManual_System_JSSTTL-116714] The page title found is correct
+2016-01-27 22:02:17,531 DEBUG [EBManual_System_JSSTTL-116714] Result of validate_PageTitle: pass
+2016-01-27 22:02:17,531 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:17,531 DEBUG [EBManual_System_JSSTTL-116714] Executing SelectTestToRun function:
+2016-01-27 22:02:24,727 DEBUG [EBManual_System_JSSTTL-116714] Successfull in selecting clicking the category
+2016-01-27 22:02:24,727 DEBUG [EBManual_System_JSSTTL-116714] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:02:24,727 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:24,728 DEBUG [EBManual_System_JSSTTL-116714] Executing ClickRunTest function:
+2016-01-27 22:02:25,069 DEBUG [EBManual_System_JSSTTL-116714] Executing Click function
+2016-01-27 22:02:26,011 DEBUG [EBManual_System_JSSTTL-116714] Exiting Click function
+2016-01-27 22:02:26,011 DEBUG [EBManual_System_JSSTTL-116714] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:02:26,011 DEBUG [EBManual_System_JSSTTL-116714] TestStepResult of ClickRunTest: pass
+2016-01-27 22:02:26,011 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:26,011 DEBUG [EBManual_System_JSSTTL-116714] Executing validate_Text_Exists function:
+2016-01-27 22:02:26,922 DEBUG [EBManual_System_JSSTTL-116714] VT300-029 Testcase Text found
+2016-01-27 22:02:26,922 DEBUG [EBManual_System_JSSTTL-116714] Result of validate_Text_Exists: Pass
+2016-01-27 22:02:26,922 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:26,922 DEBUG [EBManual_System_JSSTTL-116714] Executing ClickRunTest function:
+2016-01-27 22:02:27,270 DEBUG [EBManual_System_JSSTTL-116714] Executing Click function
+2016-01-27 22:02:28,337 DEBUG [EBManual_System_JSSTTL-116714] Exiting Click function
+2016-01-27 22:02:28,337 DEBUG [EBManual_System_JSSTTL-116714] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:02:28,337 DEBUG [EBManual_System_JSSTTL-116714] TestStepResult of ClickRunTest: pass
+2016-01-27 22:02:28,337 DEBUG [EBManual_System_JSSTTL-116714] In execute keyword function
+2016-01-27 22:02:28,337 DEBUG [EBManual_System_JSSTTL-116714] Executing validate_SystemProperties function:
+2016-01-27 22:02:28,603 DEBUG [EBManual_System_JSSTTL-116714] Started executeCommandLine function
+2016-01-27 22:02:32,624 DEBUG [EBManual_System_JSSTTL-116714] Started executeCommandLine function
+2016-01-27 22:02:36,645 DEBUG [EBManual_System_JSSTTL-116714] Started executeCommandLine function
+2016-01-27 22:02:40,665 DEBUG [EBManual_System_JSSTTL-116714] deviceName is returned in property
+2016-01-27 22:02:40,665 DEBUG [EBManual_System_JSSTTL-116714] Result of validate_SystemProperties: Pass
+2016-01-27 22:02:40,665 DEBUG [EBManual_System_JSSTTL-116714] allstep_result contains: passpasspassPassPassnull
+2016-01-27 22:02:40,665 DEBUG [EBManual_System_JSSTTL-116714] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 22:02:40,665 DEBUG [EBManual_System_JSSTTL-116714] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-27 22:02:40,665 DEBUG [EBManual_System_JSSTTL-116714] Test case with description call getproperties with deviceName Pass
+2016-01-27 22:02:41,719 DEBUG [EBManual_System_JSSTTL-116714] Executing browser_Quit function
+2016-01-27 22:02:41,719 DEBUG [EBManual_System_JSSTTL-116714] Completed browser_Quit function
+2016-01-27 22:02:41,719 DEBUG [EBManual_System_JSSTTL-116714] Completed quitSelendroid function
+2016-01-27 22:02:41,719 DEBUG [EBManual_System_JSSTTL-116714] Row number:15
+2016-01-27 22:02:41,760 DEBUG [EBManual_System_JSSTTL-116714] Ending Test Case IDSTTL-116714

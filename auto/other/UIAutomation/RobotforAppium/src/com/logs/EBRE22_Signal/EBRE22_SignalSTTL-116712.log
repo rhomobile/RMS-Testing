@@ -1,0 +1,55 @@
+2016-01-28 05:11:52,442 DEBUG [EBRE22_SignalSTTL-116712] Executing Test Case ID: STTL-116712
+2016-01-28 05:11:52,448 DEBUG [EBRE22_SignalSTTL-116712] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 05:12:03,071 DEBUG [EBRE22_SignalSTTL-116712] Exiting Init_Selendroid function
+2016-01-28 05:12:03,084 DEBUG [EBRE22_SignalSTTL-116712] TestCase with Description "Signal Event with URL" Execution started
+2016-01-28 05:12:03,084 DEBUG [EBRE22_SignalSTTL-116712] In execute keyword function
+2016-01-28 05:12:03,084 DEBUG [EBRE22_SignalSTTL-116712] Executing wait function:
+2016-01-28 05:12:03,084 DEBUG [EBRE22_SignalSTTL-116712] Started Executing wait function
+2016-01-28 05:12:06,084 DEBUG [EBRE22_SignalSTTL-116712] Exiting from wait function
+2016-01-28 05:12:06,084 DEBUG [EBRE22_SignalSTTL-116712] TestStepResult of wait: Pass
+2016-01-28 05:12:06,084 DEBUG [EBRE22_SignalSTTL-116712] In execute keyword function
+2016-01-28 05:12:06,084 DEBUG [EBRE22_SignalSTTL-116712] Executing validate_PageTitle function:
+2016-01-28 05:12:06,126 DEBUG [EBRE22_SignalSTTL-116712] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 05:12:06,126 DEBUG [EBRE22_SignalSTTL-116712] The page title found is correct
+2016-01-28 05:12:06,126 DEBUG [EBRE22_SignalSTTL-116712] Result of validate_PageTitle: pass
+2016-01-28 05:12:06,126 DEBUG [EBRE22_SignalSTTL-116712] In execute keyword function
+2016-01-28 05:12:06,126 DEBUG [EBRE22_SignalSTTL-116712] Executing link_Click function:
+2016-01-28 05:12:06,937 DEBUG [EBRE22_SignalSTTL-116712] Executing Click function
+2016-01-28 05:12:08,241 DEBUG [EBRE22_SignalSTTL-116712] Exiting Click function
+2016-01-28 05:12:08,242 DEBUG [EBRE22_SignalSTTL-116712] RE22_signal_test_link clicked successfully
+2016-01-28 05:12:08,242 DEBUG [EBRE22_SignalSTTL-116712] TestStepResult of link_Click: Pass
+2016-01-28 05:12:08,242 DEBUG [EBRE22_SignalSTTL-116712] In execute keyword function
+2016-01-28 05:12:08,242 DEBUG [EBRE22_SignalSTTL-116712] Executing validate_PageTitle function:
+2016-01-28 05:12:08,290 DEBUG [EBRE22_SignalSTTL-116712] The title of the page is *********************************: Signal Test
+2016-01-28 05:12:08,290 DEBUG [EBRE22_SignalSTTL-116712] The page title found is correct
+2016-01-28 05:12:08,290 DEBUG [EBRE22_SignalSTTL-116712] Result of validate_PageTitle: pass
+2016-01-28 05:12:08,290 DEBUG [EBRE22_SignalSTTL-116712] In execute keyword function
+2016-01-28 05:12:08,290 DEBUG [EBRE22_SignalSTTL-116712] Executing SelectTestToRun function:
+2016-01-28 05:12:11,852 DEBUG [EBRE22_SignalSTTL-116712] Successfull in selecting clicking the category
+2016-01-28 05:12:11,852 DEBUG [EBRE22_SignalSTTL-116712] TestStepResult of SelectTestToRun: pass
+2016-01-28 05:12:11,852 DEBUG [EBRE22_SignalSTTL-116712] In execute keyword function
+2016-01-28 05:12:11,852 DEBUG [EBRE22_SignalSTTL-116712] Executing ClickRunTest function:
+2016-01-28 05:12:12,197 DEBUG [EBRE22_SignalSTTL-116712] Executing Click function
+2016-01-28 05:12:13,366 DEBUG [EBRE22_SignalSTTL-116712] Exiting Click function
+2016-01-28 05:12:13,366 DEBUG [EBRE22_SignalSTTL-116712] toprun_xpath Button clicked Successfully
+2016-01-28 05:12:13,366 DEBUG [EBRE22_SignalSTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-28 05:12:13,366 DEBUG [EBRE22_SignalSTTL-116712] In execute keyword function
+2016-01-28 05:12:13,366 DEBUG [EBRE22_SignalSTTL-116712] Executing wait function:
+2016-01-28 05:12:13,366 DEBUG [EBRE22_SignalSTTL-116712] Started Executing wait function
+2016-01-28 05:12:16,366 DEBUG [EBRE22_SignalSTTL-116712] Exiting from wait function
+2016-01-28 05:12:16,366 DEBUG [EBRE22_SignalSTTL-116712] TestStepResult of wait: Pass
+2016-01-28 05:12:16,366 DEBUG [EBRE22_SignalSTTL-116712] In execute keyword function
+2016-01-28 05:12:16,366 DEBUG [EBRE22_SignalSTTL-116712] Executing validate_OldText_Exists function:
+2016-01-28 05:12:16,366 DEBUG [EBRE22_SignalSTTL-116712] Entered validate_OldText_Exists function
+2016-01-28 05:12:16,647 DEBUG [EBRE22_SignalSTTL-116712] Successfully navigated Testcase Text found
+2016-01-28 05:12:16,648 DEBUG [EBRE22_SignalSTTL-116712] Exiting from validate_OldText_Exists function
+2016-01-28 05:12:16,648 DEBUG [EBRE22_SignalSTTL-116712] Result of validate_OldText_Exists: Pass
+2016-01-28 05:12:16,648 DEBUG [EBRE22_SignalSTTL-116712] allstep_result contains: PasspasspassPassPassnull
+2016-01-28 05:12:16,648 DEBUG [EBRE22_SignalSTTL-116712] allexpected_result contains: nullPassnullpassnullpassnull
+2016-01-28 05:12:16,648 DEBUG [EBRE22_SignalSTTL-116712] Testcase_Result contains: nullPassnullpassnullpassnullPasspasspassPassPassnull
+2016-01-28 05:12:16,648 DEBUG [EBRE22_SignalSTTL-116712] Test case with description Signal Event with URL Pass
+2016-01-28 05:12:17,564 DEBUG [EBRE22_SignalSTTL-116712] Executing browser_Quit function
+2016-01-28 05:12:17,564 DEBUG [EBRE22_SignalSTTL-116712] Completed browser_Quit function
+2016-01-28 05:12:17,564 DEBUG [EBRE22_SignalSTTL-116712] Completed quitSelendroid function
+2016-01-28 05:12:17,564 DEBUG [EBRE22_SignalSTTL-116712] Row number:13
+2016-01-28 05:12:17,597 DEBUG [EBRE22_SignalSTTL-116712] Ending Test Case IDSTTL-116712

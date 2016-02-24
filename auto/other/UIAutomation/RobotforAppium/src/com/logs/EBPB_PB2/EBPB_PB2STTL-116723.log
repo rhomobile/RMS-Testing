@@ -1,0 +1,62 @@
+2016-01-28 02:27:38,178 DEBUG [EBPB_PB2STTL-116723] Executing Test Case ID: STTL-116723
+2016-01-28 02:27:38,184 DEBUG [EBPB_PB2STTL-116723] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:27:48,678 DEBUG [EBPB_PB2STTL-116723] Exiting Init_Selendroid function
+2016-01-28 02:27:48,693 DEBUG [EBPB_PB2STTL-116723] TestCase with Description "FileTransfer Ftp receive" Execution started
+2016-01-28 02:27:48,693 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:27:48,693 DEBUG [EBPB_PB2STTL-116723] Executing wait function:
+2016-01-28 02:27:48,693 DEBUG [EBPB_PB2STTL-116723] Started Executing wait function
+2016-01-28 02:27:51,693 DEBUG [EBPB_PB2STTL-116723] Exiting from wait function
+2016-01-28 02:27:51,693 DEBUG [EBPB_PB2STTL-116723] TestStepResult of wait: Pass
+2016-01-28 02:27:51,693 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:27:51,693 DEBUG [EBPB_PB2STTL-116723] Executing validate_PageTitle function:
+2016-01-28 02:27:51,740 DEBUG [EBPB_PB2STTL-116723] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 02:27:51,740 DEBUG [EBPB_PB2STTL-116723] The page title found is correct
+2016-01-28 02:27:51,740 DEBUG [EBPB_PB2STTL-116723] Result of validate_PageTitle: pass
+2016-01-28 02:27:51,740 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:27:51,740 DEBUG [EBPB_PB2STTL-116723] Executing link_Click function:
+2016-01-28 02:27:52,470 DEBUG [EBPB_PB2STTL-116723] Executing Click function
+2016-01-28 02:27:53,833 DEBUG [EBPB_PB2STTL-116723] Exiting Click function
+2016-01-28 02:27:53,833 DEBUG [EBPB_PB2STTL-116723] PB2_test_link clicked successfully
+2016-01-28 02:27:53,833 DEBUG [EBPB_PB2STTL-116723] TestStepResult of link_Click: Pass
+2016-01-28 02:27:53,833 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:27:53,833 DEBUG [EBPB_PB2STTL-116723] Executing wait function:
+2016-01-28 02:27:53,833 DEBUG [EBPB_PB2STTL-116723] Started Executing wait function
+2016-01-28 02:27:55,833 DEBUG [EBPB_PB2STTL-116723] Exiting from wait function
+2016-01-28 02:27:55,833 DEBUG [EBPB_PB2STTL-116723] TestStepResult of wait: Pass
+2016-01-28 02:27:55,833 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:27:55,833 DEBUG [EBPB_PB2STTL-116723] Executing validate_PageTitle function:
+2016-01-28 02:27:55,874 DEBUG [EBPB_PB2STTL-116723] The title of the page is *********************************: PB2 Tests
+2016-01-28 02:27:55,874 DEBUG [EBPB_PB2STTL-116723] The page title found is correct
+2016-01-28 02:27:55,874 DEBUG [EBPB_PB2STTL-116723] Result of validate_PageTitle: pass
+2016-01-28 02:27:55,874 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:27:55,874 DEBUG [EBPB_PB2STTL-116723] Executing link_Click function:
+2016-01-28 02:27:56,315 DEBUG [EBPB_PB2STTL-116723] Executing Click function
+2016-01-28 02:27:57,496 DEBUG [EBPB_PB2STTL-116723] Exiting Click function
+2016-01-28 02:27:57,496 DEBUG [EBPB_PB2STTL-116723] filetransferftp_test_link clicked successfully
+2016-01-28 02:27:57,496 DEBUG [EBPB_PB2STTL-116723] TestStepResult of link_Click: Pass
+2016-01-28 02:27:57,496 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:27:57,496 DEBUG [EBPB_PB2STTL-116723] Executing wait function:
+2016-01-28 02:27:57,496 DEBUG [EBPB_PB2STTL-116723] Started Executing wait function
+2016-01-28 02:28:01,496 DEBUG [EBPB_PB2STTL-116723] Exiting from wait function
+2016-01-28 02:28:01,496 DEBUG [EBPB_PB2STTL-116723] TestStepResult of wait: Pass
+2016-01-28 02:28:01,496 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:28:01,496 DEBUG [EBPB_PB2STTL-116723] Executing CheckUITextContains function:
+2016-01-28 02:28:01,496 DEBUG [EBPB_PB2STTL-116723] Started executeCommandLine function
+2016-01-28 02:28:05,517 DEBUG [EBPB_PB2STTL-116723] Text is Present
+2016-01-28 02:28:05,517 DEBUG [EBPB_PB2STTL-116723] TestStepResult of CheckUITextContains: Pass
+2016-01-28 02:28:05,517 DEBUG [EBPB_PB2STTL-116723] In execute keyword function
+2016-01-28 02:28:05,517 DEBUG [EBPB_PB2STTL-116723] Executing ClickUIButtonText function:
+2016-01-28 02:28:05,517 DEBUG [EBPB_PB2STTL-116723] Entered ClickUIButtonText function
+2016-01-28 02:28:05,517 DEBUG [EBPB_PB2STTL-116723] Started executeCommandLine function
+2016-01-28 02:28:09,537 DEBUG [EBPB_PB2STTL-116723] Started executeCommandLine function
+2016-01-28 02:28:13,975 DEBUG [EBPB_PB2STTL-116723] Exiting ClickUIButtonText function
+2016-01-28 02:28:13,975 DEBUG [EBPB_PB2STTL-116723] TestStepResult of ClickUIButtonText: Pass
+2016-01-28 02:28:13,975 DEBUG [EBPB_PB2STTL-116723] allstep_result contains: PassPassPassPassPassPassPassnull
+2016-01-28 02:28:13,975 DEBUG [EBPB_PB2STTL-116723] allexpected_result contains: nullpassnullpassnull
+2016-01-28 02:28:13,975 DEBUG [EBPB_PB2STTL-116723] Testcase_Result contains: nullpassnullpassnullPassPassPassPassPassPassPassnull
+2016-01-28 02:28:13,975 DEBUG [EBPB_PB2STTL-116723] Test case with description FileTransfer Ftp receive Pass
+2016-01-28 02:28:15,076 DEBUG [EBPB_PB2STTL-116723] Executing browser_Quit function
+2016-01-28 02:28:15,076 DEBUG [EBPB_PB2STTL-116723] Completed browser_Quit function
+2016-01-28 02:28:15,076 DEBUG [EBPB_PB2STTL-116723] Completed quitSelendroid function
+2016-01-28 02:28:15,077 DEBUG [EBPB_PB2STTL-116723] Row number:24
+2016-01-28 02:28:15,113 DEBUG [EBPB_PB2STTL-116723] Ending Test Case IDSTTL-116723

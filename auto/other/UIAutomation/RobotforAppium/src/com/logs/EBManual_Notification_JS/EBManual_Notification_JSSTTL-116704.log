@@ -1,0 +1,71 @@
+2016-01-27 19:48:32,429 DEBUG [EBManual_Notification_JSSTTL-116704] Executing Test Case ID: STTL-116704
+2016-01-27 19:48:32,445 DEBUG [EBManual_Notification_JSSTTL-116704] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 19:48:42,030 DEBUG [EBManual_Notification_JSSTTL-116704] Exiting Init_Selendroid function
+2016-01-27 19:48:42,092 DEBUG [EBManual_Notification_JSSTTL-116704] TestCase with Description "should display a status message on android when app is in foreground" Execution started
+2016-01-27 19:48:42,092 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:42,092 DEBUG [EBManual_Notification_JSSTTL-116704] Executing wait function:
+2016-01-27 19:48:42,092 DEBUG [EBManual_Notification_JSSTTL-116704] Started Executing wait function
+2016-01-27 19:48:45,092 DEBUG [EBManual_Notification_JSSTTL-116704] Exiting from wait function
+2016-01-27 19:48:45,092 DEBUG [EBManual_Notification_JSSTTL-116704] TestStepResult of wait: Pass
+2016-01-27 19:48:45,092 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:45,092 DEBUG [EBManual_Notification_JSSTTL-116704] Executing validate_PageTitle function:
+2016-01-27 19:48:45,132 DEBUG [EBManual_Notification_JSSTTL-116704] The title of the page is *********************************: Manual specs
+2016-01-27 19:48:45,132 DEBUG [EBManual_Notification_JSSTTL-116704] The page title found is correct
+2016-01-27 19:48:45,132 DEBUG [EBManual_Notification_JSSTTL-116704] Result of validate_PageTitle: pass
+2016-01-27 19:48:45,132 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:45,132 DEBUG [EBManual_Notification_JSSTTL-116704] Executing link_Click function:
+2016-01-27 19:48:45,751 DEBUG [EBManual_Notification_JSSTTL-116704] Executing Click function
+2016-01-27 19:48:46,855 DEBUG [EBManual_Notification_JSSTTL-116704] Exiting Click function
+2016-01-27 19:48:46,856 DEBUG [EBManual_Notification_JSSTTL-116704] notification_test_link clicked successfully
+2016-01-27 19:48:46,856 DEBUG [EBManual_Notification_JSSTTL-116704] TestStepResult of link_Click: Pass
+2016-01-27 19:48:46,856 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:46,856 DEBUG [EBManual_Notification_JSSTTL-116704] Executing validate_PageTitle function:
+2016-01-27 19:48:46,875 DEBUG [EBManual_Notification_JSSTTL-116704] The title of the page is *********************************: Notification JS Test
+2016-01-27 19:48:46,875 DEBUG [EBManual_Notification_JSSTTL-116704] The page title found is correct
+2016-01-27 19:48:46,875 DEBUG [EBManual_Notification_JSSTTL-116704] Result of validate_PageTitle: pass
+2016-01-27 19:48:46,875 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:46,875 DEBUG [EBManual_Notification_JSSTTL-116704] Executing SelectTestToRun function:
+2016-01-27 19:48:51,716 DEBUG [EBManual_Notification_JSSTTL-116704] Successfull in selecting clicking the category
+2016-01-27 19:48:51,716 DEBUG [EBManual_Notification_JSSTTL-116704] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:48:51,716 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:51,716 DEBUG [EBManual_Notification_JSSTTL-116704] Executing ClickRunTest function:
+2016-01-27 19:48:52,023 DEBUG [EBManual_Notification_JSSTTL-116704] Executing Click function
+2016-01-27 19:48:53,072 DEBUG [EBManual_Notification_JSSTTL-116704] Exiting Click function
+2016-01-27 19:48:53,072 DEBUG [EBManual_Notification_JSSTTL-116704] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:48:53,072 DEBUG [EBManual_Notification_JSSTTL-116704] TestStepResult of ClickRunTest: pass
+2016-01-27 19:48:53,072 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:53,072 DEBUG [EBManual_Notification_JSSTTL-116704] Executing validate_Text_Exists function:
+2016-01-27 19:48:53,705 DEBUG [EBManual_Notification_JSSTTL-116704] VT307-0020 Testcase Text found
+2016-01-27 19:48:53,705 DEBUG [EBManual_Notification_JSSTTL-116704] Result of validate_Text_Exists: Pass
+2016-01-27 19:48:53,705 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:53,705 DEBUG [EBManual_Notification_JSSTTL-116704] Executing ClickRunTest function:
+2016-01-27 19:48:54,016 DEBUG [EBManual_Notification_JSSTTL-116704] Executing Click function
+2016-01-27 19:48:54,979 DEBUG [EBManual_Notification_JSSTTL-116704] Exiting Click function
+2016-01-27 19:48:54,979 DEBUG [EBManual_Notification_JSSTTL-116704] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 19:48:54,979 DEBUG [EBManual_Notification_JSSTTL-116704] TestStepResult of ClickRunTest: pass
+2016-01-27 19:48:54,979 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:54,979 DEBUG [EBManual_Notification_JSSTTL-116704] Executing wait function:
+2016-01-27 19:48:54,979 DEBUG [EBManual_Notification_JSSTTL-116704] Started Executing wait function
+2016-01-27 19:48:56,979 DEBUG [EBManual_Notification_JSSTTL-116704] Exiting from wait function
+2016-01-27 19:48:56,979 DEBUG [EBManual_Notification_JSSTTL-116704] TestStepResult of wait: Pass
+2016-01-27 19:48:56,979 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:48:56,979 DEBUG [EBManual_Notification_JSSTTL-116704] Executing CheckUITextContains function:
+2016-01-27 19:48:56,979 DEBUG [EBManual_Notification_JSSTTL-116704] Started executeCommandLine function
+2016-01-27 19:49:00,990 DEBUG [EBManual_Notification_JSSTTL-116704] Text is Present
+2016-01-27 19:49:00,990 DEBUG [EBManual_Notification_JSSTTL-116704] TestStepResult of CheckUITextContains: Pass
+2016-01-27 19:49:00,990 DEBUG [EBManual_Notification_JSSTTL-116704] In execute keyword function
+2016-01-27 19:49:00,990 DEBUG [EBManual_Notification_JSSTTL-116704] Executing ClickUIButtonText function:
+2016-01-27 19:49:00,990 DEBUG [EBManual_Notification_JSSTTL-116704] Entered ClickUIButtonText function
+2016-01-27 19:49:00,990 DEBUG [EBManual_Notification_JSSTTL-116704] Started executeCommandLine function
+2016-01-27 19:49:05,011 DEBUG [EBManual_Notification_JSSTTL-116704] Started executeCommandLine function
+2016-01-27 19:49:09,469 DEBUG [EBManual_Notification_JSSTTL-116704] Exiting ClickUIButtonText function
+2016-01-27 19:49:09,469 DEBUG [EBManual_Notification_JSSTTL-116704] TestStepResult of ClickUIButtonText: Pass
+2016-01-27 19:49:09,469 DEBUG [EBManual_Notification_JSSTTL-116704] allstep_result contains: PassPassPasspasspasspassPassPassnull
+2016-01-27 19:49:09,469 DEBUG [EBManual_Notification_JSSTTL-116704] allexpected_result contains: nullPassnullpassnullpassnull
+2016-01-27 19:49:09,469 DEBUG [EBManual_Notification_JSSTTL-116704] Testcase_Result contains: nullPassnullpassnullpassnullPassPassPasspasspasspassPassPassnull
+2016-01-27 19:49:09,469 DEBUG [EBManual_Notification_JSSTTL-116704] Test case with description should display a status message on android when app is in foreground Pass
+2016-01-27 19:49:10,560 DEBUG [EBManual_Notification_JSSTTL-116704] Executing browser_Quit function
+2016-01-27 19:49:10,560 DEBUG [EBManual_Notification_JSSTTL-116704] Completed browser_Quit function
+2016-01-27 19:49:10,560 DEBUG [EBManual_Notification_JSSTTL-116704] Completed quitSelendroid function
+2016-01-27 19:49:10,561 DEBUG [EBManual_Notification_JSSTTL-116704] Row number:5
+2016-01-27 19:49:10,595 DEBUG [EBManual_Notification_JSSTTL-116704] Ending Test Case IDSTTL-116704

@@ -1,0 +1,75 @@
+2016-01-28 05:03:18,179 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing Test Case ID: STTL-116721
+2016-01-28 05:03:18,184 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 05:03:28,081 DEBUG [EBRE22_RawSensorsSTTL-116721] Exiting Init_Selendroid function
+2016-01-28 05:03:28,096 DEBUG [EBRE22_RawSensorsSTTL-116721] TestCase with Description "Disable all" Execution started
+2016-01-28 05:03:28,096 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:28,096 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing wait function:
+2016-01-28 05:03:28,096 DEBUG [EBRE22_RawSensorsSTTL-116721] Started Executing wait function
+2016-01-28 05:03:31,096 DEBUG [EBRE22_RawSensorsSTTL-116721] Exiting from wait function
+2016-01-28 05:03:31,096 DEBUG [EBRE22_RawSensorsSTTL-116721] TestStepResult of wait: Pass
+2016-01-28 05:03:31,096 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:31,096 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing validate_PageTitle function:
+2016-01-28 05:03:31,139 DEBUG [EBRE22_RawSensorsSTTL-116721] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 05:03:31,139 DEBUG [EBRE22_RawSensorsSTTL-116721] The page title found is correct
+2016-01-28 05:03:31,139 DEBUG [EBRE22_RawSensorsSTTL-116721] Result of validate_PageTitle: pass
+2016-01-28 05:03:31,139 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:31,139 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing link_Click function:
+2016-01-28 05:03:31,825 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing Click function
+2016-01-28 05:03:33,042 DEBUG [EBRE22_RawSensorsSTTL-116721] Exiting Click function
+2016-01-28 05:03:33,043 DEBUG [EBRE22_RawSensorsSTTL-116721] rawsensor_test_link clicked successfully
+2016-01-28 05:03:33,043 DEBUG [EBRE22_RawSensorsSTTL-116721] TestStepResult of link_Click: Pass
+2016-01-28 05:03:33,043 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:33,043 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing validate_PageTitle function:
+2016-01-28 05:03:33,063 DEBUG [EBRE22_RawSensorsSTTL-116721] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Raw Sensors
+2016-01-28 05:03:33,063 DEBUG [EBRE22_RawSensorsSTTL-116721] The page title found is correct
+2016-01-28 05:03:33,063 DEBUG [EBRE22_RawSensorsSTTL-116721] Result of validate_PageTitle: pass
+2016-01-28 05:03:33,063 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:33,063 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing wait function:
+2016-01-28 05:03:33,063 DEBUG [EBRE22_RawSensorsSTTL-116721] Started Executing wait function
+2016-01-28 05:03:34,063 DEBUG [EBRE22_RawSensorsSTTL-116721] Exiting from wait function
+2016-01-28 05:03:34,063 DEBUG [EBRE22_RawSensorsSTTL-116721] TestStepResult of wait: Pass
+2016-01-28 05:03:34,063 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:34,063 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing SelectTestToRun function:
+2016-01-28 05:03:38,427 DEBUG [EBRE22_RawSensorsSTTL-116721] Successfull in selecting clicking the category
+2016-01-28 05:03:38,427 DEBUG [EBRE22_RawSensorsSTTL-116721] TestStepResult of SelectTestToRun: pass
+2016-01-28 05:03:38,427 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:38,427 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing validate_Text_Exists function:
+2016-01-28 05:03:38,719 DEBUG [EBRE22_RawSensorsSTTL-116721] VT187-2946 Testcase Text found
+2016-01-28 05:03:38,719 DEBUG [EBRE22_RawSensorsSTTL-116721] Result of validate_Text_Exists: Pass
+2016-01-28 05:03:38,719 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:38,719 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing wait function:
+2016-01-28 05:03:38,719 DEBUG [EBRE22_RawSensorsSTTL-116721] Started Executing wait function
+2016-01-28 05:03:39,719 DEBUG [EBRE22_RawSensorsSTTL-116721] Exiting from wait function
+2016-01-28 05:03:39,719 DEBUG [EBRE22_RawSensorsSTTL-116721] TestStepResult of wait: Pass
+2016-01-28 05:03:39,719 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:39,719 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing ClickRunTest function:
+2016-01-28 05:03:40,065 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing Click function
+2016-01-28 05:03:41,090 DEBUG [EBRE22_RawSensorsSTTL-116721] Exiting Click function
+2016-01-28 05:03:41,091 DEBUG [EBRE22_RawSensorsSTTL-116721] runtest_top_xpath Button clicked Successfully
+2016-01-28 05:03:41,091 DEBUG [EBRE22_RawSensorsSTTL-116721] TestStepResult of ClickRunTest: pass
+2016-01-28 05:03:41,091 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:41,091 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing wait function:
+2016-01-28 05:03:41,091 DEBUG [EBRE22_RawSensorsSTTL-116721] Started Executing wait function
+2016-01-28 05:03:49,092 DEBUG [EBRE22_RawSensorsSTTL-116721] Exiting from wait function
+2016-01-28 05:03:49,092 DEBUG [EBRE22_RawSensorsSTTL-116721] TestStepResult of wait: Pass
+2016-01-28 05:03:49,092 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:49,092 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing isTextNotPresent function:
+2016-01-28 05:03:49,384 DEBUG [EBRE22_RawSensorsSTTL-116721] actualX_id does not have any text displayed
+2016-01-28 05:03:49,384 DEBUG [EBRE22_RawSensorsSTTL-116721] Result of isTextNotPresent: Pass
+2016-01-28 05:03:49,384 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:49,384 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing isTextNotPresent function:
+2016-01-28 05:03:49,603 DEBUG [EBRE22_RawSensorsSTTL-116721] actualY_id does not have any text displayed
+2016-01-28 05:03:49,603 DEBUG [EBRE22_RawSensorsSTTL-116721] Result of isTextNotPresent: Pass
+2016-01-28 05:03:49,603 DEBUG [EBRE22_RawSensorsSTTL-116721] In execute keyword function
+2016-01-28 05:03:49,603 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing isTextNotPresent function:
+2016-01-28 05:03:49,827 DEBUG [EBRE22_RawSensorsSTTL-116721] actualZ_id does not have any text displayed
+2016-01-28 05:03:49,827 DEBUG [EBRE22_RawSensorsSTTL-116721] Result of isTextNotPresent: Pass
+2016-01-28 05:03:49,827 DEBUG [EBRE22_RawSensorsSTTL-116721] allstep_result contains: PasspassPasspassPassPassPassnull
+2016-01-28 05:03:49,827 DEBUG [EBRE22_RawSensorsSTTL-116721] allexpected_result contains: nullPassPassPassnullPassnullpassnullpassnull
+2016-01-28 05:03:49,827 DEBUG [EBRE22_RawSensorsSTTL-116721] Testcase_Result contains: nullPassPassPassnullPassnullpassnullpassnullPasspassPasspassPassPassPassnull
+2016-01-28 05:03:49,827 DEBUG [EBRE22_RawSensorsSTTL-116721] Test case with description Disable all Pass
+2016-01-28 05:03:50,759 DEBUG [EBRE22_RawSensorsSTTL-116721] Executing browser_Quit function
+2016-01-28 05:03:50,759 DEBUG [EBRE22_RawSensorsSTTL-116721] Completed browser_Quit function
+2016-01-28 05:03:50,759 DEBUG [EBRE22_RawSensorsSTTL-116721] Completed quitSelendroid function
+2016-01-28 05:03:50,759 DEBUG [EBRE22_RawSensorsSTTL-116721] Row number:22
+2016-01-28 05:03:50,797 DEBUG [EBRE22_RawSensorsSTTL-116721] Ending Test Case IDSTTL-116721

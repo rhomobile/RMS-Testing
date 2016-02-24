@@ -1,0 +1,79 @@
+2016-01-28 00:27:12,918 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-28 00:27:12,956 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:27:23,495 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting Init_Selendroid function
+2016-01-28 00:27:23,510 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestCase with Description "FileTransfer Persistant" Execution started
+2016-01-28 00:27:23,510 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:23,510 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing wait function:
+2016-01-28 00:27:23,510 DEBUG [EBPB_EMMLProfilesSTTL-116709] Started Executing wait function
+2016-01-28 00:27:26,510 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting from wait function
+2016-01-28 00:27:26,510 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestStepResult of wait: Pass
+2016-01-28 00:27:26,510 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:26,510 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing validate_PageTitle function:
+2016-01-28 00:27:26,550 DEBUG [EBPB_EMMLProfilesSTTL-116709] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:27:26,550 DEBUG [EBPB_EMMLProfilesSTTL-116709] The page title found is correct
+2016-01-28 00:27:26,550 DEBUG [EBPB_EMMLProfilesSTTL-116709] Result of validate_PageTitle: pass
+2016-01-28 00:27:26,550 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:26,550 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing link_Click function:
+2016-01-28 00:27:27,165 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing Click function
+2016-01-28 00:27:28,268 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting Click function
+2016-01-28 00:27:28,268 DEBUG [EBPB_EMMLProfilesSTTL-116709] eprofile_test_link clicked successfully
+2016-01-28 00:27:28,268 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 00:27:28,268 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:28,268 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing validate_PageTitle function:
+2016-01-28 00:27:28,306 DEBUG [EBPB_EMMLProfilesSTTL-116709] The title of the page is *********************************: PB 3.0 EMML Profiles Index
+2016-01-28 00:27:28,306 DEBUG [EBPB_EMMLProfilesSTTL-116709] The page title found is correct
+2016-01-28 00:27:28,306 DEBUG [EBPB_EMMLProfilesSTTL-116709] Result of validate_PageTitle: pass
+2016-01-28 00:27:28,306 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:28,306 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing link_Click function:
+2016-01-28 00:27:28,888 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing Click function
+2016-01-28 00:27:29,972 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting Click function
+2016-01-28 00:27:29,972 DEBUG [EBPB_EMMLProfilesSTTL-116709] npfile_test_link clicked successfully
+2016-01-28 00:27:29,972 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 00:27:29,972 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:29,972 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing validate_PageTitle function:
+2016-01-28 00:27:29,994 DEBUG [EBPB_EMMLProfilesSTTL-116709] The title of the page is *********************************: UnNamed File Management EMML Profile Page
+2016-01-28 00:27:29,994 DEBUG [EBPB_EMMLProfilesSTTL-116709] The page title found is correct
+2016-01-28 00:27:29,994 DEBUG [EBPB_EMMLProfilesSTTL-116709] Result of validate_PageTitle: pass
+2016-01-28 00:27:29,994 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:29,994 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing link_Click function:
+2016-01-28 00:27:30,471 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing Click function
+2016-01-28 00:27:31,441 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting Click function
+2016-01-28 00:27:31,442 DEBUG [EBPB_EMMLProfilesSTTL-116709] nppage_test_link clicked successfully
+2016-01-28 00:27:31,442 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 00:27:31,442 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:31,442 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing validate_PageTitle function:
+2016-01-28 00:27:31,489 DEBUG [EBPB_EMMLProfilesSTTL-116709] The title of the page is *********************************: UnNamed File Management EMML Test Page
+2016-01-28 00:27:31,490 DEBUG [EBPB_EMMLProfilesSTTL-116709] The page title found is correct
+2016-01-28 00:27:31,490 DEBUG [EBPB_EMMLProfilesSTTL-116709] Result of validate_PageTitle: pass
+2016-01-28 00:27:31,490 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:31,490 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing link_Click function:
+2016-01-28 00:27:31,872 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing Click function
+2016-01-28 00:27:32,879 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting Click function
+2016-01-28 00:27:32,879 DEBUG [EBPB_EMMLProfilesSTTL-116709] apply_recieve_test_link clicked successfully
+2016-01-28 00:27:32,879 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 00:27:32,879 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:32,879 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing link_Click function:
+2016-01-28 00:27:33,239 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing Click function
+2016-01-28 00:27:34,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting Click function
+2016-01-28 00:27:34,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] transferfile_test_link clicked successfully
+2016-01-28 00:27:34,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-28 00:27:34,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:34,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing wait function:
+2016-01-28 00:27:34,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] Started Executing wait function
+2016-01-28 00:27:36,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting from wait function
+2016-01-28 00:27:36,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestStepResult of wait: Pass
+2016-01-28 00:27:36,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] In execute keyword function
+2016-01-28 00:27:36,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing CheckUITextContains function:
+2016-01-28 00:27:36,133 DEBUG [EBPB_EMMLProfilesSTTL-116709] Started executeCommandLine function
+2016-01-28 00:27:50,215 DEBUG [EBPB_EMMLProfilesSTTL-116709] Exiting from executeCommandLine function
+2016-01-28 00:27:50,215 DEBUG [EBPB_EMMLProfilesSTTL-116709] Text is not Present
+2016-01-28 00:27:50,215 DEBUG [EBPB_EMMLProfilesSTTL-116709] TestStepResult of CheckUITextContains: Pass
+2016-01-28 00:27:50,215 DEBUG [EBPB_EMMLProfilesSTTL-116709] allstep_result contains: PassPassPassPassPassPassPassPassnull
+2016-01-28 00:27:50,215 DEBUG [EBPB_EMMLProfilesSTTL-116709] allexpected_result contains: nullpassnullpassnullpassnullpassnull
+2016-01-28 00:27:50,215 DEBUG [EBPB_EMMLProfilesSTTL-116709] Testcase_Result contains: nullpassnullpassnullpassnullpassnullPassPassPassPassPassPassPassPassnull
+2016-01-28 00:27:50,215 DEBUG [EBPB_EMMLProfilesSTTL-116709] Test case with description FileTransfer Persistant Pass
+2016-01-28 00:27:51,281 DEBUG [EBPB_EMMLProfilesSTTL-116709] Executing browser_Quit function
+2016-01-28 00:27:51,281 DEBUG [EBPB_EMMLProfilesSTTL-116709] Completed browser_Quit function
+2016-01-28 00:27:51,281 DEBUG [EBPB_EMMLProfilesSTTL-116709] Completed quitSelendroid function
+2016-01-28 00:27:51,281 DEBUG [EBPB_EMMLProfilesSTTL-116709] Row number:9
+2016-01-28 00:27:51,322 DEBUG [EBPB_EMMLProfilesSTTL-116709] Ending Test Case IDSTTL-116709

@@ -1,0 +1,59 @@
+2016-01-27 22:08:21,382 DEBUG [EBManual_System_JSSTTL-116726] Executing Test Case ID: STTL-116726
+2016-01-27 22:08:21,392 DEBUG [EBManual_System_JSSTTL-116726] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:08:31,815 DEBUG [EBManual_System_JSSTTL-116726] Exiting Init_Selendroid function
+2016-01-27 22:08:31,839 DEBUG [EBManual_System_JSSTTL-116726] TestCase with Description "call getProperty with isEmulator" Execution started
+2016-01-27 22:08:31,839 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:31,839 DEBUG [EBManual_System_JSSTTL-116726] Executing wait function:
+2016-01-27 22:08:31,839 DEBUG [EBManual_System_JSSTTL-116726] Started Executing wait function
+2016-01-27 22:08:34,839 DEBUG [EBManual_System_JSSTTL-116726] Exiting from wait function
+2016-01-27 22:08:34,839 DEBUG [EBManual_System_JSSTTL-116726] TestStepResult of wait: Pass
+2016-01-27 22:08:34,839 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:34,839 DEBUG [EBManual_System_JSSTTL-116726] Executing validate_PageTitle function:
+2016-01-27 22:08:34,880 DEBUG [EBManual_System_JSSTTL-116726] The title of the page is *********************************: Manual specs
+2016-01-27 22:08:34,880 DEBUG [EBManual_System_JSSTTL-116726] The page title found is correct
+2016-01-27 22:08:34,880 DEBUG [EBManual_System_JSSTTL-116726] Result of validate_PageTitle: pass
+2016-01-27 22:08:34,880 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:34,880 DEBUG [EBManual_System_JSSTTL-116726] Executing link_Click function:
+2016-01-27 22:08:35,569 DEBUG [EBManual_System_JSSTTL-116726] Executing Click function
+2016-01-27 22:08:36,936 DEBUG [EBManual_System_JSSTTL-116726] Exiting Click function
+2016-01-27 22:08:36,936 DEBUG [EBManual_System_JSSTTL-116726] system_test_link clicked successfully
+2016-01-27 22:08:36,936 DEBUG [EBManual_System_JSSTTL-116726] TestStepResult of link_Click: Pass
+2016-01-27 22:08:36,936 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:36,936 DEBUG [EBManual_System_JSSTTL-116726] Executing validate_PageTitle function:
+2016-01-27 22:08:36,953 DEBUG [EBManual_System_JSSTTL-116726] The title of the page is *********************************: System JS Test
+2016-01-27 22:08:36,953 DEBUG [EBManual_System_JSSTTL-116726] The page title found is correct
+2016-01-27 22:08:36,953 DEBUG [EBManual_System_JSSTTL-116726] Result of validate_PageTitle: pass
+2016-01-27 22:08:36,953 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:36,953 DEBUG [EBManual_System_JSSTTL-116726] Executing SelectTestToRun function:
+2016-01-27 22:08:41,815 DEBUG [EBManual_System_JSSTTL-116726] Successfull in selecting clicking the category
+2016-01-27 22:08:41,815 DEBUG [EBManual_System_JSSTTL-116726] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:08:41,815 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:41,815 DEBUG [EBManual_System_JSSTTL-116726] Executing ClickRunTest function:
+2016-01-27 22:08:42,220 DEBUG [EBManual_System_JSSTTL-116726] Executing Click function
+2016-01-27 22:08:43,134 DEBUG [EBManual_System_JSSTTL-116726] Exiting Click function
+2016-01-27 22:08:43,135 DEBUG [EBManual_System_JSSTTL-116726] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:08:43,135 DEBUG [EBManual_System_JSSTTL-116726] TestStepResult of ClickRunTest: pass
+2016-01-27 22:08:43,135 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:43,135 DEBUG [EBManual_System_JSSTTL-116726] Executing validate_Text_Exists function:
+2016-01-27 22:08:44,016 DEBUG [EBManual_System_JSSTTL-116726] VT300-013 Testcase Text found
+2016-01-27 22:08:44,016 DEBUG [EBManual_System_JSSTTL-116726] Result of validate_Text_Exists: Pass
+2016-01-27 22:08:44,016 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:44,016 DEBUG [EBManual_System_JSSTTL-116726] Executing ClickRunTest function:
+2016-01-27 22:08:44,330 DEBUG [EBManual_System_JSSTTL-116726] Executing Click function
+2016-01-27 22:08:45,261 DEBUG [EBManual_System_JSSTTL-116726] Exiting Click function
+2016-01-27 22:08:45,262 DEBUG [EBManual_System_JSSTTL-116726] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:08:45,262 DEBUG [EBManual_System_JSSTTL-116726] TestStepResult of ClickRunTest: pass
+2016-01-27 22:08:45,262 DEBUG [EBManual_System_JSSTTL-116726] In execute keyword function
+2016-01-27 22:08:45,262 DEBUG [EBManual_System_JSSTTL-116726] Executing validate_SystemProperties function:
+2016-01-27 22:08:45,543 DEBUG [EBManual_System_JSSTTL-116726] Started executeCommandLine function
+2016-01-27 22:08:49,564 DEBUG [EBManual_System_JSSTTL-116726] isEmulator is returned in property
+2016-01-27 22:08:49,564 DEBUG [EBManual_System_JSSTTL-116726] Result of validate_SystemProperties: Pass
+2016-01-27 22:08:49,564 DEBUG [EBManual_System_JSSTTL-116726] allstep_result contains: passpasspassPassPassnull
+2016-01-27 22:08:49,564 DEBUG [EBManual_System_JSSTTL-116726] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 22:08:49,564 DEBUG [EBManual_System_JSSTTL-116726] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-27 22:08:49,564 DEBUG [EBManual_System_JSSTTL-116726] Test case with description call getProperty with isEmulator Pass
+2016-01-27 22:08:50,657 DEBUG [EBManual_System_JSSTTL-116726] Executing browser_Quit function
+2016-01-27 22:08:50,657 DEBUG [EBManual_System_JSSTTL-116726] Completed browser_Quit function
+2016-01-27 22:08:50,657 DEBUG [EBManual_System_JSSTTL-116726] Completed quitSelendroid function
+2016-01-27 22:08:50,657 DEBUG [EBManual_System_JSSTTL-116726] Row number:27
+2016-01-27 22:08:50,695 DEBUG [EBManual_System_JSSTTL-116726] Ending Test Case IDSTTL-116726

@@ -1,0 +1,135 @@
+2016-01-27 22:32:15,394 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-27 22:32:15,400 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:32:25,964 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting Init_Selendroid function
+2016-01-27 22:32:25,978 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestCase with Description "Create toolabar to with action to load an index page" Execution started
+2016-01-27 22:32:25,978 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:25,978 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing wait function:
+2016-01-27 22:32:25,978 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started Executing wait function
+2016-01-27 22:32:28,978 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting from wait function
+2016-01-27 22:32:28,978 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 22:32:28,978 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:28,978 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 22:32:29,025 DEBUG [EBManual_Toolbar_JSSTTL-116709] The title of the page is *********************************: Manual specs
+2016-01-27 22:32:29,025 DEBUG [EBManual_Toolbar_JSSTTL-116709] The page title found is correct
+2016-01-27 22:32:29,025 DEBUG [EBManual_Toolbar_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 22:32:29,025 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:29,025 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing link_Click function:
+2016-01-27 22:32:29,675 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing Click function
+2016-01-27 22:32:30,778 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting Click function
+2016-01-27 22:32:30,778 DEBUG [EBManual_Toolbar_JSSTTL-116709] toolbar_test_link clicked successfully
+2016-01-27 22:32:30,778 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-27 22:32:30,778 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:30,778 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 22:32:30,798 DEBUG [EBManual_Toolbar_JSSTTL-116709] The title of the page is *********************************: Native Toolbar JS Test
+2016-01-27 22:32:30,799 DEBUG [EBManual_Toolbar_JSSTTL-116709] The page title found is correct
+2016-01-27 22:32:30,799 DEBUG [EBManual_Toolbar_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 22:32:30,799 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:30,799 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing SelectTestToRun function:
+2016-01-27 22:32:34,759 DEBUG [EBManual_Toolbar_JSSTTL-116709] Successfull in selecting clicking the category
+2016-01-27 22:32:34,759 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:32:34,759 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:34,759 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing ClickRunTest function:
+2016-01-27 22:32:35,176 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing Click function
+2016-01-27 22:32:36,117 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting Click function
+2016-01-27 22:32:36,117 DEBUG [EBManual_Toolbar_JSSTTL-116709] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:32:36,117 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-27 22:32:36,118 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:36,118 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing validate_Text_Exists function:
+2016-01-27 22:32:36,746 DEBUG [EBManual_Toolbar_JSSTTL-116709] VT283-0114 Testcase Text found
+2016-01-27 22:32:36,746 DEBUG [EBManual_Toolbar_JSSTTL-116709] Result of validate_Text_Exists: Pass
+2016-01-27 22:32:36,746 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:36,746 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing ClickRunTest function:
+2016-01-27 22:32:37,038 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing Click function
+2016-01-27 22:32:38,188 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting Click function
+2016-01-27 22:32:38,188 DEBUG [EBManual_Toolbar_JSSTTL-116709] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:32:38,188 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-27 22:32:38,188 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:38,188 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing wait function:
+2016-01-27 22:32:38,188 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started Executing wait function
+2016-01-27 22:32:43,189 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting from wait function
+2016-01-27 22:32:43,189 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 22:32:43,189 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:43,189 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing TakeScreenshot function:
+2016-01-27 22:32:44,176 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started Executing Validate_App_launched_Device function
+2016-01-27 22:32:44,176 DEBUG [EBManual_Toolbar_JSSTTL-116709] Entered CheckUIButtonExists function
+2016-01-27 22:32:44,176 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 22:32:48,197 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting from executeCommandLine function
+2016-01-27 22:32:48,197 DEBUG [EBManual_Toolbar_JSSTTL-116709] Button is not Present
+2016-01-27 22:32:48,197 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting from CheckUIButtonExists function
+2016-01-27 22:32:48,197 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 22:32:52,218 DEBUG [EBManual_Toolbar_JSSTTL-116709] Given App is in Foreground
+2016-01-27 22:32:52,218 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting Validate_App_launched_Device function
+2016-01-27 22:32:53,183 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of TakeScreenshot: pass
+2016-01-27 22:32:53,183 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:53,183 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing validate_Screenshot function:
+2016-01-27 22:32:53,231 DEBUG [EBManual_Toolbar_JSSTTL-116709] Match found with reference image
+2016-01-27 22:32:53,231 DEBUG [EBManual_Toolbar_JSSTTL-116709] Result of validate_Screenshot: Pass
+2016-01-27 22:32:53,231 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:53,231 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing SwitchApp function:
+2016-01-27 22:32:53,244 DEBUG [EBManual_Toolbar_JSSTTL-116709] Successfully switched to NATIVE_APP
+2016-01-27 22:32:53,244 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of SwitchApp: Pass
+2016-01-27 22:32:53,244 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:53,244 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing ClickNativeIcon function:
+2016-01-27 22:32:54,114 DEBUG [EBManual_Toolbar_JSSTTL-116709] [[AppiumTouchActionExtension: selendroid on ANDROID (42bc399a-83c1-ccb6-c0eb-a9836c9b90e7)] -> xpath: //LinearLayout[1]/ImageButton[4]]Clicked successfully
+2016-01-27 22:32:54,114 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of ClickNativeIcon: pass
+2016-01-27 22:32:54,114 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:54,114 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing SwitchApp function:
+2016-01-27 22:32:54,184 DEBUG [EBManual_Toolbar_JSSTTL-116709] Successfully switched to WEBVIEW
+2016-01-27 22:32:54,184 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of SwitchApp: Pass
+2016-01-27 22:32:54,184 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:54,184 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 22:32:54,202 DEBUG [EBManual_Toolbar_JSSTTL-116709] The title of the page is *********************************: Native Toolbar JS Test
+2016-01-27 22:32:54,202 DEBUG [EBManual_Toolbar_JSSTTL-116709] The page title found is correct
+2016-01-27 22:32:54,202 DEBUG [EBManual_Toolbar_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 22:32:54,202 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:54,202 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing SwitchApp function:
+2016-01-27 22:32:54,252 DEBUG [EBManual_Toolbar_JSSTTL-116709] Successfully switched to NATIVE_APP
+2016-01-27 22:32:54,252 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of SwitchApp: Pass
+2016-01-27 22:32:54,252 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:54,252 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing ClickNativeIcon function:
+2016-01-27 22:32:55,498 DEBUG [EBManual_Toolbar_JSSTTL-116709] [[AppiumTouchActionExtension: selendroid on ANDROID (42bc399a-83c1-ccb6-c0eb-a9836c9b90e7)] -> xpath: //LinearLayout[1]/Button[1]]Clicked successfully
+2016-01-27 22:32:55,499 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of ClickNativeIcon: pass
+2016-01-27 22:32:55,499 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:55,499 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing SwitchApp function:
+2016-01-27 22:32:55,574 DEBUG [EBManual_Toolbar_JSSTTL-116709] Successfully switched to WEBVIEW
+2016-01-27 22:32:55,575 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of SwitchApp: Pass
+2016-01-27 22:32:55,575 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:55,575 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 22:32:55,592 DEBUG [EBManual_Toolbar_JSSTTL-116709] The title of the page is *********************************: Manual specs
+2016-01-27 22:32:55,592 DEBUG [EBManual_Toolbar_JSSTTL-116709] The page title found is correct
+2016-01-27 22:32:55,592 DEBUG [EBManual_Toolbar_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 22:32:55,592 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:55,592 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing SwitchApp function:
+2016-01-27 22:32:55,649 DEBUG [EBManual_Toolbar_JSSTTL-116709] Successfully switched to NATIVE_APP
+2016-01-27 22:32:55,649 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of SwitchApp: Pass
+2016-01-27 22:32:55,649 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:55,649 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing ClickNativeIcon function:
+2016-01-27 22:32:56,490 DEBUG [EBManual_Toolbar_JSSTTL-116709] [[AppiumTouchActionExtension: selendroid on ANDROID (42bc399a-83c1-ccb6-c0eb-a9836c9b90e7)] -> xpath: //LinearLayout[1]/ImageButton[2]]Clicked successfully
+2016-01-27 22:32:56,490 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of ClickNativeIcon: pass
+2016-01-27 22:32:56,490 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:32:56,490 DEBUG [EBManual_Toolbar_JSSTTL-116709] Executing validate_AppMinimized function:
+2016-01-27 22:32:56,490 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started Executing validate_AppMinimized function
+2016-01-27 22:32:56,490 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started Executing Validate_App_launched_Device function
+2016-01-27 22:32:56,491 DEBUG [EBManual_Toolbar_JSSTTL-116709] Entered CheckUIButtonExists function
+2016-01-27 22:32:56,491 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 22:33:00,512 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting from executeCommandLine function
+2016-01-27 22:33:00,512 DEBUG [EBManual_Toolbar_JSSTTL-116709] Button is not Present
+2016-01-27 22:33:00,512 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting from CheckUIButtonExists function
+2016-01-27 22:33:00,512 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 22:33:04,532 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting from executeCommandLine function
+2016-01-27 22:33:04,532 DEBUG [EBManual_Toolbar_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting from executeCommandLine function
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] Given App is not in Foreground
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting Validate_App_launched_Device function
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] Not in com.symbol.enterprisebrowser screen
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] Exiting validate_AppMinimized function
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] Result of validate_AppMinimized: Pass
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] In execute keyword function
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] TestStepResult of : Function <> not found in the keyword class
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] allstep_result contains: Function <> not found in the keyword classpassPassPasspassPassPasspassPasspassPasspasspasspassPassPassnull
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] allexpected_result contains: nullPassnullpassnullpassnullPassnullPassnullpassnullpassnull
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] Testcase_Result contains: nullPassnullpassnullpassnullPassnullPassnullpassnullpassnullFunction <> not found in the keyword classpassPassPasspassPassPasspassPasspassPasspasspasspassPassPassnull
+2016-01-27 22:33:08,552 DEBUG [EBManual_Toolbar_JSSTTL-116709] Test case with description Create toolabar to with action to load an index page Pass
+2016-01-27 22:33:08,565 DEBUG [EBManual_Toolbar_JSSTTL-116709] Completed quitSelendroid function
+2016-01-27 22:33:08,565 DEBUG [EBManual_Toolbar_JSSTTL-116709] Row number:10
+2016-01-27 22:33:08,604 DEBUG [EBManual_Toolbar_JSSTTL-116709] Ending Test Case IDSTTL-116709

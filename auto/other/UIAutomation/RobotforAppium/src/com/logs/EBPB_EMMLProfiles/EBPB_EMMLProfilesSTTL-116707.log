@@ -1,0 +1,68 @@
+2016-01-28 00:25:25,126 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing Test Case ID: STTL-116707
+2016-01-28 00:25:25,132 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:25:35,404 DEBUG [EBPB_EMMLProfilesSTTL-116707] Exiting Init_Selendroid function
+2016-01-28 00:25:35,419 DEBUG [EBPB_EMMLProfilesSTTL-116707] TestCase with Description "Device Application Clear" Execution started
+2016-01-28 00:25:35,419 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:35,419 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing wait function:
+2016-01-28 00:25:35,419 DEBUG [EBPB_EMMLProfilesSTTL-116707] Started Executing wait function
+2016-01-28 00:25:38,419 DEBUG [EBPB_EMMLProfilesSTTL-116707] Exiting from wait function
+2016-01-28 00:25:38,419 DEBUG [EBPB_EMMLProfilesSTTL-116707] TestStepResult of wait: Pass
+2016-01-28 00:25:38,419 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:38,419 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing validate_PageTitle function:
+2016-01-28 00:25:38,456 DEBUG [EBPB_EMMLProfilesSTTL-116707] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:25:38,456 DEBUG [EBPB_EMMLProfilesSTTL-116707] The page title found is correct
+2016-01-28 00:25:38,456 DEBUG [EBPB_EMMLProfilesSTTL-116707] Result of validate_PageTitle: pass
+2016-01-28 00:25:38,456 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:38,456 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing link_Click function:
+2016-01-28 00:25:39,090 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing Click function
+2016-01-28 00:25:40,137 DEBUG [EBPB_EMMLProfilesSTTL-116707] Exiting Click function
+2016-01-28 00:25:40,137 DEBUG [EBPB_EMMLProfilesSTTL-116707] eprofile_test_link clicked successfully
+2016-01-28 00:25:40,137 DEBUG [EBPB_EMMLProfilesSTTL-116707] TestStepResult of link_Click: Pass
+2016-01-28 00:25:40,137 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:40,137 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing validate_PageTitle function:
+2016-01-28 00:25:40,172 DEBUG [EBPB_EMMLProfilesSTTL-116707] The title of the page is *********************************: PB 3.0 EMML Profiles Index
+2016-01-28 00:25:40,172 DEBUG [EBPB_EMMLProfilesSTTL-116707] The page title found is correct
+2016-01-28 00:25:40,172 DEBUG [EBPB_EMMLProfilesSTTL-116707] Result of validate_PageTitle: pass
+2016-01-28 00:25:40,172 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:40,172 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing link_Click function:
+2016-01-28 00:25:40,763 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing Click function
+2016-01-28 00:25:42,090 DEBUG [EBPB_EMMLProfilesSTTL-116707] Exiting Click function
+2016-01-28 00:25:42,090 DEBUG [EBPB_EMMLProfilesSTTL-116707] pdevice_test_link clicked successfully
+2016-01-28 00:25:42,090 DEBUG [EBPB_EMMLProfilesSTTL-116707] TestStepResult of link_Click: Pass
+2016-01-28 00:25:42,090 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:42,090 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing validate_PageTitle function:
+2016-01-28 00:25:42,125 DEBUG [EBPB_EMMLProfilesSTTL-116707] The title of the page is *********************************: Named DeviceApps EMML Profile Script
+2016-01-28 00:25:42,125 DEBUG [EBPB_EMMLProfilesSTTL-116707] The page title found is correct
+2016-01-28 00:25:42,125 DEBUG [EBPB_EMMLProfilesSTTL-116707] Result of validate_PageTitle: pass
+2016-01-28 00:25:42,125 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:42,125 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing link_Click function:
+2016-01-28 00:25:42,698 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing Click function
+2016-01-28 00:25:43,677 DEBUG [EBPB_EMMLProfilesSTTL-116707] Exiting Click function
+2016-01-28 00:25:43,677 DEBUG [EBPB_EMMLProfilesSTTL-116707] clearprofile_test_link clicked successfully
+2016-01-28 00:25:43,677 DEBUG [EBPB_EMMLProfilesSTTL-116707] TestStepResult of link_Click: Pass
+2016-01-28 00:25:43,677 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:43,677 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing link_Click function:
+2016-01-28 00:25:44,065 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing Click function
+2016-01-28 00:25:45,158 DEBUG [EBPB_EMMLProfilesSTTL-116707] Exiting Click function
+2016-01-28 00:25:45,158 DEBUG [EBPB_EMMLProfilesSTTL-116707] alarmprofile_test_link clicked successfully
+2016-01-28 00:25:45,158 DEBUG [EBPB_EMMLProfilesSTTL-116707] TestStepResult of link_Click: Pass
+2016-01-28 00:25:45,158 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:25:45,158 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing wait function:
+2016-01-28 00:25:45,158 DEBUG [EBPB_EMMLProfilesSTTL-116707] Started Executing wait function
+2016-01-28 00:26:30,160 DEBUG [EBPB_EMMLProfilesSTTL-116707] Exiting from wait function
+2016-01-28 00:26:30,160 DEBUG [EBPB_EMMLProfilesSTTL-116707] TestStepResult of wait: Pass
+2016-01-28 00:26:30,160 DEBUG [EBPB_EMMLProfilesSTTL-116707] In execute keyword function
+2016-01-28 00:26:30,160 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing CheckUITextContains function:
+2016-01-28 00:26:30,160 DEBUG [EBPB_EMMLProfilesSTTL-116707] Started executeCommandLine function
+2016-01-28 00:26:44,273 DEBUG [EBPB_EMMLProfilesSTTL-116707] Exiting from executeCommandLine function
+2016-01-28 00:26:44,273 DEBUG [EBPB_EMMLProfilesSTTL-116707] Text is not Present
+2016-01-28 00:26:44,273 DEBUG [EBPB_EMMLProfilesSTTL-116707] TestStepResult of CheckUITextContains: Pass
+2016-01-28 00:26:44,273 DEBUG [EBPB_EMMLProfilesSTTL-116707] allstep_result contains: PassPassPassPassPassPassPassnull
+2016-01-28 00:26:44,273 DEBUG [EBPB_EMMLProfilesSTTL-116707] allexpected_result contains: nullpassnullpassnullpassnull
+2016-01-28 00:26:44,273 DEBUG [EBPB_EMMLProfilesSTTL-116707] Testcase_Result contains: nullpassnullpassnullpassnullPassPassPassPassPassPassPassnull
+2016-01-28 00:26:44,273 DEBUG [EBPB_EMMLProfilesSTTL-116707] Test case with description Device Application Clear Pass
+2016-01-28 00:26:45,296 DEBUG [EBPB_EMMLProfilesSTTL-116707] Executing browser_Quit function
+2016-01-28 00:26:45,296 DEBUG [EBPB_EMMLProfilesSTTL-116707] Completed browser_Quit function
+2016-01-28 00:26:45,296 DEBUG [EBPB_EMMLProfilesSTTL-116707] Completed quitSelendroid function
+2016-01-28 00:26:45,296 DEBUG [EBPB_EMMLProfilesSTTL-116707] Row number:8
+2016-01-28 00:26:45,331 DEBUG [EBPB_EMMLProfilesSTTL-116707] Ending Test Case IDSTTL-116707

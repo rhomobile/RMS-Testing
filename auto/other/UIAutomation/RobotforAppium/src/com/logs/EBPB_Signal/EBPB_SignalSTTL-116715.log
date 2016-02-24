@@ -1,0 +1,72 @@
+2016-01-28 02:36:48,986 DEBUG [EBPB_SignalSTTL-116715] Executing Test Case ID: STTL-116715
+2016-01-28 02:36:48,992 DEBUG [EBPB_SignalSTTL-116715] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:36:59,332 DEBUG [EBPB_SignalSTTL-116715] Exiting Init_Selendroid function
+2016-01-28 02:36:59,347 DEBUG [EBPB_SignalSTTL-116715] TestCase with Description "Signal with Bottom_Left" Execution started
+2016-01-28 02:36:59,347 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:36:59,347 DEBUG [EBPB_SignalSTTL-116715] Executing wait function:
+2016-01-28 02:36:59,347 DEBUG [EBPB_SignalSTTL-116715] Started Executing wait function
+2016-01-28 02:37:02,347 DEBUG [EBPB_SignalSTTL-116715] Exiting from wait function
+2016-01-28 02:37:02,347 DEBUG [EBPB_SignalSTTL-116715] TestStepResult of wait: Pass
+2016-01-28 02:37:02,347 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:02,347 DEBUG [EBPB_SignalSTTL-116715] Executing validate_PageTitle function:
+2016-01-28 02:37:02,387 DEBUG [EBPB_SignalSTTL-116715] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 02:37:02,387 DEBUG [EBPB_SignalSTTL-116715] The page title found is correct
+2016-01-28 02:37:02,387 DEBUG [EBPB_SignalSTTL-116715] Result of validate_PageTitle: pass
+2016-01-28 02:37:02,387 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:02,387 DEBUG [EBPB_SignalSTTL-116715] Executing link_Click function:
+2016-01-28 02:37:03,061 DEBUG [EBPB_SignalSTTL-116715] Executing Click function
+2016-01-28 02:37:04,331 DEBUG [EBPB_SignalSTTL-116715] Exiting Click function
+2016-01-28 02:37:04,331 DEBUG [EBPB_SignalSTTL-116715] PB_signal_test_link clicked successfully
+2016-01-28 02:37:04,331 DEBUG [EBPB_SignalSTTL-116715] TestStepResult of link_Click: Pass
+2016-01-28 02:37:04,331 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:04,331 DEBUG [EBPB_SignalSTTL-116715] Executing validate_PageTitle function:
+2016-01-28 02:37:04,367 DEBUG [EBPB_SignalSTTL-116715] The title of the page is *********************************: PB Signal Test
+2016-01-28 02:37:04,367 DEBUG [EBPB_SignalSTTL-116715] The page title found is correct
+2016-01-28 02:37:04,367 DEBUG [EBPB_SignalSTTL-116715] Result of validate_PageTitle: pass
+2016-01-28 02:37:04,367 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:04,367 DEBUG [EBPB_SignalSTTL-116715] Executing SelectTestToRun function:
+2016-01-28 02:37:08,208 DEBUG [EBPB_SignalSTTL-116715] Successfull in selecting clicking the category
+2016-01-28 02:37:08,208 DEBUG [EBPB_SignalSTTL-116715] TestStepResult of SelectTestToRun: pass
+2016-01-28 02:37:08,208 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:08,208 DEBUG [EBPB_SignalSTTL-116715] Executing ClickRunTest function:
+2016-01-28 02:37:08,589 DEBUG [EBPB_SignalSTTL-116715] Executing Click function
+2016-01-28 02:37:09,661 DEBUG [EBPB_SignalSTTL-116715] Exiting Click function
+2016-01-28 02:37:09,661 DEBUG [EBPB_SignalSTTL-116715] runtest_top_xpath Button clicked Successfully
+2016-01-28 02:37:09,661 DEBUG [EBPB_SignalSTTL-116715] TestStepResult of ClickRunTest: pass
+2016-01-28 02:37:09,661 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:09,661 DEBUG [EBPB_SignalSTTL-116715] Executing wait function:
+2016-01-28 02:37:09,661 DEBUG [EBPB_SignalSTTL-116715] Started Executing wait function
+2016-01-28 02:37:12,662 DEBUG [EBPB_SignalSTTL-116715] Exiting from wait function
+2016-01-28 02:37:12,662 DEBUG [EBPB_SignalSTTL-116715] TestStepResult of wait: Pass
+2016-01-28 02:37:12,662 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:12,662 DEBUG [EBPB_SignalSTTL-116715] Executing TakeScreenshot function:
+2016-01-28 02:37:13,501 DEBUG [EBPB_SignalSTTL-116715] Started Executing Validate_App_launched_Device function
+2016-01-28 02:37:13,501 DEBUG [EBPB_SignalSTTL-116715] Entered CheckUIButtonExists function
+2016-01-28 02:37:13,501 DEBUG [EBPB_SignalSTTL-116715] Started executeCommandLine function
+2016-01-28 02:37:17,510 DEBUG [EBPB_SignalSTTL-116715] Exiting from executeCommandLine function
+2016-01-28 02:37:17,510 DEBUG [EBPB_SignalSTTL-116715] Button is not Present
+2016-01-28 02:37:17,510 DEBUG [EBPB_SignalSTTL-116715] Exiting from CheckUIButtonExists function
+2016-01-28 02:37:17,510 DEBUG [EBPB_SignalSTTL-116715] Started executeCommandLine function
+2016-01-28 02:37:21,530 DEBUG [EBPB_SignalSTTL-116715] Given App is in Foreground
+2016-01-28 02:37:21,530 DEBUG [EBPB_SignalSTTL-116715] Exiting Validate_App_launched_Device function
+2016-01-28 02:37:21,684 DEBUG [EBPB_SignalSTTL-116715] TestStepResult of TakeScreenshot: pass
+2016-01-28 02:37:21,684 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:21,684 DEBUG [EBPB_SignalSTTL-116715] Executing validate_Screenshot function:
+2016-01-28 02:37:21,850 DEBUG [EBPB_SignalSTTL-116715] Match found with reference image
+2016-01-28 02:37:21,850 DEBUG [EBPB_SignalSTTL-116715] Result of validate_Screenshot: Pass
+2016-01-28 02:37:21,850 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:21,850 DEBUG [EBPB_SignalSTTL-116715] Executing wait function:
+2016-01-28 02:37:21,850 DEBUG [EBPB_SignalSTTL-116715] Started Executing wait function
+2016-01-28 02:37:23,851 DEBUG [EBPB_SignalSTTL-116715] Exiting from wait function
+2016-01-28 02:37:23,851 DEBUG [EBPB_SignalSTTL-116715] TestStepResult of wait: Pass
+2016-01-28 02:37:23,851 DEBUG [EBPB_SignalSTTL-116715] In execute keyword function
+2016-01-28 02:37:23,851 DEBUG [EBPB_SignalSTTL-116715] TestStepResult of : Function <> not found in the keyword class
+2016-01-28 02:37:23,851 DEBUG [EBPB_SignalSTTL-116715] allstep_result contains: Function <> not found in the keyword classPasspassPasspasspassPassPassnull
+2016-01-28 02:37:23,851 DEBUG [EBPB_SignalSTTL-116715] allexpected_result contains: nullPassnullpassnullpassnull
+2016-01-28 02:37:23,851 DEBUG [EBPB_SignalSTTL-116715] Testcase_Result contains: nullPassnullpassnullpassnullFunction <> not found in the keyword classPasspassPasspasspassPassPassnull
+2016-01-28 02:37:23,851 DEBUG [EBPB_SignalSTTL-116715] Test case with description Signal with Bottom_Left Pass
+2016-01-28 02:37:24,890 DEBUG [EBPB_SignalSTTL-116715] Executing browser_Quit function
+2016-01-28 02:37:24,890 DEBUG [EBPB_SignalSTTL-116715] Completed browser_Quit function
+2016-01-28 02:37:24,890 DEBUG [EBPB_SignalSTTL-116715] Completed quitSelendroid function
+2016-01-28 02:37:24,891 DEBUG [EBPB_SignalSTTL-116715] Row number:16
+2016-01-28 02:37:24,921 DEBUG [EBPB_SignalSTTL-116715] Ending Test Case IDSTTL-116715

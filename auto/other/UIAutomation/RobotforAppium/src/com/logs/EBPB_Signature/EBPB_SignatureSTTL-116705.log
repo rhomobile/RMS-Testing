@@ -1,0 +1,61 @@
+2016-01-28 02:45:12,408 DEBUG [EBPB_SignatureSTTL-116705] Executing Test Case ID: STTL-116705
+2016-01-28 02:45:12,416 DEBUG [EBPB_SignatureSTTL-116705] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 02:45:22,935 DEBUG [EBPB_SignatureSTTL-116705] Exiting Init_Selendroid function
+2016-01-28 02:45:22,950 DEBUG [EBPB_SignatureSTTL-116705] TestCase with Description "SignatureCapture with left" Execution started
+2016-01-28 02:45:22,950 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:22,950 DEBUG [EBPB_SignatureSTTL-116705] Executing wait function:
+2016-01-28 02:45:22,950 DEBUG [EBPB_SignatureSTTL-116705] Started Executing wait function
+2016-01-28 02:45:26,950 DEBUG [EBPB_SignatureSTTL-116705] Exiting from wait function
+2016-01-28 02:45:26,950 DEBUG [EBPB_SignatureSTTL-116705] TestStepResult of wait: Pass
+2016-01-28 02:45:26,950 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:26,950 DEBUG [EBPB_SignatureSTTL-116705] Executing validate_PageTitle function:
+2016-01-28 02:45:26,993 DEBUG [EBPB_SignatureSTTL-116705] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 02:45:26,993 DEBUG [EBPB_SignatureSTTL-116705] The page title found is correct
+2016-01-28 02:45:26,993 DEBUG [EBPB_SignatureSTTL-116705] Result of validate_PageTitle: pass
+2016-01-28 02:45:26,993 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:26,993 DEBUG [EBPB_SignatureSTTL-116705] Executing link_Click function:
+2016-01-28 02:45:27,684 DEBUG [EBPB_SignatureSTTL-116705] Executing Click function
+2016-01-28 02:45:28,881 DEBUG [EBPB_SignatureSTTL-116705] Exiting Click function
+2016-01-28 02:45:28,881 DEBUG [EBPB_SignatureSTTL-116705] Signaturetest_link clicked successfully
+2016-01-28 02:45:28,881 DEBUG [EBPB_SignatureSTTL-116705] TestStepResult of link_Click: Pass
+2016-01-28 02:45:28,881 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:28,882 DEBUG [EBPB_SignatureSTTL-116705] Executing wait function:
+2016-01-28 02:45:28,882 DEBUG [EBPB_SignatureSTTL-116705] Started Executing wait function
+2016-01-28 02:45:30,882 DEBUG [EBPB_SignatureSTTL-116705] Exiting from wait function
+2016-01-28 02:45:30,882 DEBUG [EBPB_SignatureSTTL-116705] TestStepResult of wait: Pass
+2016-01-28 02:45:30,882 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:30,882 DEBUG [EBPB_SignatureSTTL-116705] Executing validate_PageTitle function:
+2016-01-28 02:45:30,918 DEBUG [EBPB_SignatureSTTL-116705] The title of the page is *********************************: Signature
+2016-01-28 02:45:30,918 DEBUG [EBPB_SignatureSTTL-116705] The page title found is correct
+2016-01-28 02:45:30,918 DEBUG [EBPB_SignatureSTTL-116705] Result of validate_PageTitle: pass
+2016-01-28 02:45:30,918 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:30,918 DEBUG [EBPB_SignatureSTTL-116705] Executing SelectTestToRun function:
+2016-01-28 02:45:33,751 DEBUG [EBPB_SignatureSTTL-116705] Successfull in selecting clicking the category
+2016-01-28 02:45:33,751 DEBUG [EBPB_SignatureSTTL-116705] TestStepResult of SelectTestToRun: pass
+2016-01-28 02:45:33,751 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:33,751 DEBUG [EBPB_SignatureSTTL-116705] Executing validate_Text_Exists function:
+2016-01-28 02:45:34,011 DEBUG [EBPB_SignatureSTTL-116705] VT056-1218 Testcase Text found
+2016-01-28 02:45:34,012 DEBUG [EBPB_SignatureSTTL-116705] Result of validate_Text_Exists: Pass
+2016-01-28 02:45:34,012 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:34,012 DEBUG [EBPB_SignatureSTTL-116705] Executing ClickRunTest function:
+2016-01-28 02:45:34,309 DEBUG [EBPB_SignatureSTTL-116705] Executing Click function
+2016-01-28 02:45:35,287 DEBUG [EBPB_SignatureSTTL-116705] Exiting Click function
+2016-01-28 02:45:35,287 DEBUG [EBPB_SignatureSTTL-116705] runtest_top_xpath Button clicked Successfully
+2016-01-28 02:45:35,287 DEBUG [EBPB_SignatureSTTL-116705] TestStepResult of ClickRunTest: pass
+2016-01-28 02:45:35,287 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:35,287 DEBUG [EBPB_SignatureSTTL-116705] Executing validate_isIconDisplayed function:
+2016-01-28 02:45:35,287 DEBUG [EBPB_SignatureSTTL-116705] Entered validate_isIconDisplayed function
+2016-01-28 02:45:35,697 DEBUG [EBPB_SignatureSTTL-116705] Result of validate_isIconDisplayed: Pass
+2016-01-28 02:45:35,697 DEBUG [EBPB_SignatureSTTL-116705] In execute keyword function
+2016-01-28 02:45:35,697 DEBUG [EBPB_SignatureSTTL-116705] Executing validate_Iconposition function:
+2016-01-28 02:45:35,698 DEBUG [EBPB_SignatureSTTL-116705] Entered validate_Iconposition function
+2016-01-28 02:45:36,630 DEBUG [EBPB_SignatureSTTL-116705] Result of validate_Iconposition: Pass
+2016-01-28 02:45:36,630 DEBUG [EBPB_SignatureSTTL-116705] allstep_result contains: passpassPassPassPassnull
+2016-01-28 02:45:36,630 DEBUG [EBPB_SignatureSTTL-116705] allexpected_result contains: nullPassPassnullPassnullpassnullpassnull
+2016-01-28 02:45:36,630 DEBUG [EBPB_SignatureSTTL-116705] Testcase_Result contains: nullPassPassnullPassnullpassnullpassnullpasspassPassPassPassnull
+2016-01-28 02:45:36,630 DEBUG [EBPB_SignatureSTTL-116705] Test case with description SignatureCapture with left Pass
+2016-01-28 02:45:37,643 DEBUG [EBPB_SignatureSTTL-116705] Executing browser_Quit function
+2016-01-28 02:45:37,643 DEBUG [EBPB_SignatureSTTL-116705] Completed browser_Quit function
+2016-01-28 02:45:37,643 DEBUG [EBPB_SignatureSTTL-116705] Completed quitSelendroid function
+2016-01-28 02:45:37,643 DEBUG [EBPB_SignatureSTTL-116705] Row number:6
+2016-01-28 02:45:37,682 DEBUG [EBPB_SignatureSTTL-116705] Ending Test Case IDSTTL-116705

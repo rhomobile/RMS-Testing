@@ -1,0 +1,77 @@
+2016-01-28 03:15:51,203 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing Test Case ID: STTL-116705
+2016-01-28 03:15:51,209 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 03:16:01,665 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Exiting Init_Selendroid function
+2016-01-28 03:16:01,679 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestCase with Description "SIP with Automatic" Execution started
+2016-01-28 03:16:01,679 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:01,679 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing wait function:
+2016-01-28 03:16:01,679 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Started Executing wait function
+2016-01-28 03:16:04,681 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Exiting from wait function
+2016-01-28 03:16:04,681 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestStepResult of wait: Pass
+2016-01-28 03:16:04,681 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:04,681 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing validate_PageTitle function:
+2016-01-28 03:16:04,726 DEBUG [EBRE22_DeviceApplicationSTTL-116705] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 03:16:04,726 DEBUG [EBRE22_DeviceApplicationSTTL-116705] The page title found is correct
+2016-01-28 03:16:04,726 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Result of validate_PageTitle: pass
+2016-01-28 03:16:04,726 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:04,726 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing link_Click function:
+2016-01-28 03:16:05,324 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing Click function
+2016-01-28 03:16:06,343 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Exiting Click function
+2016-01-28 03:16:06,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] DeviceApplication_test_link clicked successfully
+2016-01-28 03:16:06,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestStepResult of link_Click: Pass
+2016-01-28 03:16:06,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:06,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing wait function:
+2016-01-28 03:16:06,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Started Executing wait function
+2016-01-28 03:16:08,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Exiting from wait function
+2016-01-28 03:16:08,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestStepResult of wait: Pass
+2016-01-28 03:16:08,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:08,344 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing validate_PageTitle function:
+2016-01-28 03:16:08,382 DEBUG [EBRE22_DeviceApplicationSTTL-116705] The title of the page is *********************************: Device & Application
+2016-01-28 03:16:08,382 DEBUG [EBRE22_DeviceApplicationSTTL-116705] The page title found is correct
+2016-01-28 03:16:08,382 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Result of validate_PageTitle: pass
+2016-01-28 03:16:08,382 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:08,382 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing SelectTestToRun function:
+2016-01-28 03:16:13,694 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Successfull in selecting clicking the category
+2016-01-28 03:16:13,694 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestStepResult of SelectTestToRun: pass
+2016-01-28 03:16:13,694 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:13,694 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing validate_Text_Exists function:
+2016-01-28 03:16:13,984 DEBUG [EBRE22_DeviceApplicationSTTL-116705] VT187-2276 Testcase Text found
+2016-01-28 03:16:13,984 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Result of validate_Text_Exists: Pass
+2016-01-28 03:16:13,984 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:13,984 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing ClickRunTest function:
+2016-01-28 03:16:14,347 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing Click function
+2016-01-28 03:16:15,362 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Exiting Click function
+2016-01-28 03:16:15,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] runtest_top_xpath Button clicked Successfully
+2016-01-28 03:16:15,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestStepResult of ClickRunTest: pass
+2016-01-28 03:16:15,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:15,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing wait function:
+2016-01-28 03:16:15,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Started Executing wait function
+2016-01-28 03:16:17,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Exiting from wait function
+2016-01-28 03:16:17,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestStepResult of wait: Pass
+2016-01-28 03:16:17,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:17,363 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing textBoxClick function:
+2016-01-28 03:16:18,905 DEBUG [EBRE22_DeviceApplicationSTTL-116705] VT187_2276_textbox_xpathtext box clicked successfully
+2016-01-28 03:16:18,905 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestStepResult of textBoxClick: pass
+2016-01-28 03:16:18,905 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:18,905 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing sendKeyEvents function:
+2016-01-28 03:16:18,905 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Entered sendKeyEvents function
+2016-01-28 03:16:18,905 DEBUG [EBRE22_DeviceApplicationSTTL-116705] a
+2016-01-28 03:16:18,905 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Entered a
+2016-01-28 03:16:18,905 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Started executeCommandLine function
+2016-01-28 03:16:22,928 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Exiting from executeCommandLine function
+2016-01-28 03:16:22,928 DEBUG [EBRE22_DeviceApplicationSTTL-116705] pass
+2016-01-28 03:16:22,928 DEBUG [EBRE22_DeviceApplicationSTTL-116705] TestStepResult of sendKeyEvents: pass
+2016-01-28 03:16:22,928 DEBUG [EBRE22_DeviceApplicationSTTL-116705] In execute keyword function
+2016-01-28 03:16:22,928 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing validate_textBoxData function:
+2016-01-28 03:16:22,928 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing getAttribute function
+2016-01-28 03:16:23,116 DEBUG [EBRE22_DeviceApplicationSTTL-116705] a
+2016-01-28 03:16:23,116 DEBUG [EBRE22_DeviceApplicationSTTL-116705] a value matches with Expected a value
+2016-01-28 03:16:23,116 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Result of validate_textBoxData: Pass
+2016-01-28 03:16:23,116 DEBUG [EBRE22_DeviceApplicationSTTL-116705] allstep_result contains: passpassPasspasspassPassPassPassnull
+2016-01-28 03:16:23,116 DEBUG [EBRE22_DeviceApplicationSTTL-116705] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-28 03:16:23,116 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspassPasspasspassPassPassPassnull
+2016-01-28 03:16:23,116 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Test case with description SIP with Automatic Pass
+2016-01-28 03:16:24,124 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Executing browser_Quit function
+2016-01-28 03:16:24,124 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Completed browser_Quit function
+2016-01-28 03:16:24,124 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Completed quitSelendroid function
+2016-01-28 03:16:24,124 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Row number:6
+2016-01-28 03:16:24,154 DEBUG [EBRE22_DeviceApplicationSTTL-116705] Ending Test Case IDSTTL-116705

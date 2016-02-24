@@ -1,0 +1,97 @@
+2016-01-27 19:43:51,861 DEBUG [EBManual_Network_JSSTTL-116712] Executing Test Case ID: STTL-116712
+2016-01-27 19:43:51,868 DEBUG [EBManual_Network_JSSTTL-116712] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 19:44:02,197 DEBUG [EBManual_Network_JSSTTL-116712] Exiting Init_Selendroid function
+2016-01-27 19:44:02,213 DEBUG [EBManual_Network_JSSTTL-116712] TestCase with Description "Objective:
+hasWifiNetwork with wifi network" Execution started
+2016-01-27 19:44:02,213 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:02,213 DEBUG [EBManual_Network_JSSTTL-116712] Executing wait function:
+2016-01-27 19:44:02,213 DEBUG [EBManual_Network_JSSTTL-116712] Started Executing wait function
+2016-01-27 19:44:05,213 DEBUG [EBManual_Network_JSSTTL-116712] Exiting from wait function
+2016-01-27 19:44:05,213 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of wait: Pass
+2016-01-27 19:44:05,213 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:05,213 DEBUG [EBManual_Network_JSSTTL-116712] Executing validate_PageTitle function:
+2016-01-27 19:44:05,256 DEBUG [EBManual_Network_JSSTTL-116712] The title of the page is *********************************: Manual specs
+2016-01-27 19:44:05,256 DEBUG [EBManual_Network_JSSTTL-116712] The page title found is correct
+2016-01-27 19:44:05,256 DEBUG [EBManual_Network_JSSTTL-116712] Result of validate_PageTitle: pass
+2016-01-27 19:44:05,256 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:05,256 DEBUG [EBManual_Network_JSSTTL-116712] Executing link_Click function:
+2016-01-27 19:44:05,947 DEBUG [EBManual_Network_JSSTTL-116712] Executing Click function
+2016-01-27 19:44:07,033 DEBUG [EBManual_Network_JSSTTL-116712] Exiting Click function
+2016-01-27 19:44:07,033 DEBUG [EBManual_Network_JSSTTL-116712] network_test_link clicked successfully
+2016-01-27 19:44:07,033 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of link_Click: Pass
+2016-01-27 19:44:07,033 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:07,033 DEBUG [EBManual_Network_JSSTTL-116712] Executing validate_PageTitle function:
+2016-01-27 19:44:07,051 DEBUG [EBManual_Network_JSSTTL-116712] The title of the page is *********************************: Network JS Test
+2016-01-27 19:44:07,051 DEBUG [EBManual_Network_JSSTTL-116712] The page title found is correct
+2016-01-27 19:44:07,051 DEBUG [EBManual_Network_JSSTTL-116712] Result of validate_PageTitle: pass
+2016-01-27 19:44:07,051 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:07,051 DEBUG [EBManual_Network_JSSTTL-116712] Executing SelectTestToRun function:
+2016-01-27 19:44:11,042 DEBUG [EBManual_Network_JSSTTL-116712] Successfull in selecting clicking the category
+2016-01-27 19:44:11,042 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of SelectTestToRun: pass
+2016-01-27 19:44:11,042 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:11,042 DEBUG [EBManual_Network_JSSTTL-116712] Executing ClickRunTest function:
+2016-01-27 19:44:11,398 DEBUG [EBManual_Network_JSSTTL-116712] Executing Click function
+2016-01-27 19:44:12,499 DEBUG [EBManual_Network_JSSTTL-116712] Exiting Click function
+2016-01-27 19:44:12,499 DEBUG [EBManual_Network_JSSTTL-116712] runtest_top_xpath Button clicked Successfully
+2016-01-27 19:44:12,499 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-27 19:44:12,499 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:12,499 DEBUG [EBManual_Network_JSSTTL-116712] Executing validate_Text_Exists function:
+2016-01-27 19:44:13,133 DEBUG [EBManual_Network_JSSTTL-116712] VT293-0030 Testcase Text found
+2016-01-27 19:44:13,133 DEBUG [EBManual_Network_JSSTTL-116712] Result of validate_Text_Exists: Pass
+2016-01-27 19:44:13,133 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:13,133 DEBUG [EBManual_Network_JSSTTL-116712] Executing ClickRunTest function:
+2016-01-27 19:44:13,436 DEBUG [EBManual_Network_JSSTTL-116712] Executing Click function
+2016-01-27 19:44:14,378 DEBUG [EBManual_Network_JSSTTL-116712] Exiting Click function
+2016-01-27 19:44:14,378 DEBUG [EBManual_Network_JSSTTL-116712] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 19:44:14,378 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-27 19:44:14,378 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:14,378 DEBUG [EBManual_Network_JSSTTL-116712] Executing validate_Result function:
+2016-01-27 19:44:14,685 DEBUG [EBManual_Network_JSSTTL-116712] true Text found in Results
+hasWifiNetwork : : true
+2016-01-27 19:44:14,685 DEBUG [EBManual_Network_JSSTTL-116712] Result of validate_Result: Pass
+2016-01-27 19:44:14,685 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:14,685 DEBUG [EBManual_Network_JSSTTL-116712] Executing wifi_Mode function:
+2016-01-27 19:44:14,686 DEBUG [EBManual_Network_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 19:44:18,706 DEBUG [EBManual_Network_JSSTTL-116712] Turning off WiFi
+2016-01-27 19:44:18,706 DEBUG [EBManual_Network_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 19:44:23,730 DEBUG [EBManual_Network_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 19:44:37,752 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of wifi_Mode: pass
+2016-01-27 19:44:37,752 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:37,752 DEBUG [EBManual_Network_JSSTTL-116712] Executing wait function:
+2016-01-27 19:44:37,752 DEBUG [EBManual_Network_JSSTTL-116712] Started Executing wait function
+2016-01-27 19:44:42,753 DEBUG [EBManual_Network_JSSTTL-116712] Exiting from wait function
+2016-01-27 19:44:42,753 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of wait: Pass
+2016-01-27 19:44:42,753 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:42,753 DEBUG [EBManual_Network_JSSTTL-116712] Executing press_Key function:
+2016-01-27 19:44:42,753 DEBUG [EBManual_Network_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 19:44:46,774 DEBUG [EBManual_Network_JSSTTL-116712] Exiting from executeCommandLine function
+2016-01-27 19:44:46,774 DEBUG [EBManual_Network_JSSTTL-116712] pressed on the home key
+2016-01-27 19:44:46,774 DEBUG [EBManual_Network_JSSTTL-116712] home works
+2016-01-27 19:44:47,774 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of press_Key: pass
+2016-01-27 19:44:47,774 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:47,774 DEBUG [EBManual_Network_JSSTTL-116712] Executing launch_App_Device function:
+2016-01-27 19:44:47,774 DEBUG [EBManual_Network_JSSTTL-116712] Started Executing Launch_App_Device function
+2016-01-27 19:44:47,774 DEBUG [EBManual_Network_JSSTTL-116712] Started executeCommandLine function
+2016-01-27 19:44:51,795 DEBUG [EBManual_Network_JSSTTL-116712] Exiting from executeCommandLine function
+2016-01-27 19:44:52,795 DEBUG [EBManual_Network_JSSTTL-116712] Successfully launched the App
+2016-01-27 19:44:52,795 DEBUG [EBManual_Network_JSSTTL-116712] Exiting Launch_App_Device function
+2016-01-27 19:44:52,795 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of launch_App_Device: Pass
+2016-01-27 19:44:52,795 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:52,795 DEBUG [EBManual_Network_JSSTTL-116712] Executing wait function:
+2016-01-27 19:44:52,795 DEBUG [EBManual_Network_JSSTTL-116712] Started Executing wait function
+2016-01-27 19:44:57,795 DEBUG [EBManual_Network_JSSTTL-116712] Exiting from wait function
+2016-01-27 19:44:57,795 DEBUG [EBManual_Network_JSSTTL-116712] TestStepResult of wait: Pass
+2016-01-27 19:44:57,795 DEBUG [EBManual_Network_JSSTTL-116712] In execute keyword function
+2016-01-27 19:44:57,795 DEBUG [EBManual_Network_JSSTTL-116712] Executing validate_Text_Exists function:
+2016-01-27 19:44:57,975 DEBUG [EBManual_Network_JSSTTL-116712] VT293-0030 Testcase Text found
+2016-01-27 19:44:57,976 DEBUG [EBManual_Network_JSSTTL-116712] Result of validate_Text_Exists: Pass
+2016-01-27 19:44:57,976 DEBUG [EBManual_Network_JSSTTL-116712] allstep_result contains: PassPasspassPasspasspasspasspassPassPassnull
+2016-01-27 19:44:57,976 DEBUG [EBManual_Network_JSSTTL-116712] allexpected_result contains: nullPassnullPassnullPassnullpassnullpassnull
+2016-01-27 19:44:57,976 DEBUG [EBManual_Network_JSSTTL-116712] Testcase_Result contains: nullPassnullPassnullPassnullpassnullpassnullPassPasspassPasspasspasspasspassPassPassnull
+2016-01-27 19:44:57,976 DEBUG [EBManual_Network_JSSTTL-116712] Test case with description Objective:
+hasWifiNetwork with wifi network Pass
+2016-01-27 19:44:58,908 DEBUG [EBManual_Network_JSSTTL-116712] Executing browser_Quit function
+2016-01-27 19:44:58,908 DEBUG [EBManual_Network_JSSTTL-116712] Completed browser_Quit function
+2016-01-27 19:44:58,908 DEBUG [EBManual_Network_JSSTTL-116712] Completed quitSelendroid function
+2016-01-27 19:44:58,908 DEBUG [EBManual_Network_JSSTTL-116712] Row number:13
+2016-01-27 19:44:58,937 DEBUG [EBManual_Network_JSSTTL-116712] Ending Test Case IDSTTL-116712

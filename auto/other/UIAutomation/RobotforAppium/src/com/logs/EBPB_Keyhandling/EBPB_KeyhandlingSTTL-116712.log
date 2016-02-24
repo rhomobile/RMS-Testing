@@ -1,0 +1,131 @@
+2016-01-28 01:45:07,166 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing Test Case ID: STTL-116712
+2016-01-28 01:45:07,175 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 01:45:17,208 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting Init_Selendroid function
+2016-01-28 01:45:17,226 DEBUG [EBPB_KeyhandlingSTTL-116712] TestCase with Description "Keyvalue 8
+Remap:9
+(Remap 1 to 2)" Execution started
+2016-01-28 01:45:17,226 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:17,226 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing wait function:
+2016-01-28 01:45:17,226 DEBUG [EBPB_KeyhandlingSTTL-116712] Started Executing wait function
+2016-01-28 01:45:22,226 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting from wait function
+2016-01-28 01:45:22,226 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of wait: Pass
+2016-01-28 01:45:22,226 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:22,226 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing validate_PageTitle function:
+2016-01-28 01:45:22,274 DEBUG [EBPB_KeyhandlingSTTL-116712] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 01:45:22,274 DEBUG [EBPB_KeyhandlingSTTL-116712] The page title found is correct
+2016-01-28 01:45:22,274 DEBUG [EBPB_KeyhandlingSTTL-116712] Result of validate_PageTitle: pass
+2016-01-28 01:45:22,274 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:22,274 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing link_Click function:
+2016-01-28 01:45:22,967 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing Click function
+2016-01-28 01:45:24,080 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting Click function
+2016-01-28 01:45:24,080 DEBUG [EBPB_KeyhandlingSTTL-116712] keyhandling_link clicked successfully
+2016-01-28 01:45:24,080 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of link_Click: Pass
+2016-01-28 01:45:24,080 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:24,080 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing validate_PageTitle function:
+2016-01-28 01:45:24,096 DEBUG [EBPB_KeyhandlingSTTL-116712] The title of the page is *********************************: PB and RE2.2 Semi Auto Frame Work : Keyhandling
+2016-01-28 01:45:24,096 DEBUG [EBPB_KeyhandlingSTTL-116712] The page title found is correct
+2016-01-28 01:45:24,096 DEBUG [EBPB_KeyhandlingSTTL-116712] Result of validate_PageTitle: pass
+2016-01-28 01:45:24,096 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:24,096 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing SelectTestToRun function:
+2016-01-28 01:45:30,514 DEBUG [EBPB_KeyhandlingSTTL-116712] Successfull in selecting clicking the category
+2016-01-28 01:45:30,514 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of SelectTestToRun: pass
+2016-01-28 01:45:30,514 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:30,514 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing ClickRunTest function:
+2016-01-28 01:45:30,864 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing Click function
+2016-01-28 01:45:31,943 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting Click function
+2016-01-28 01:45:31,943 DEBUG [EBPB_KeyhandlingSTTL-116712] runtest_top_xpath Button clicked Successfully
+2016-01-28 01:45:31,943 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-28 01:45:31,943 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:31,944 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing validate_Text_Exists function:
+2016-01-28 01:45:32,257 DEBUG [EBPB_KeyhandlingSTTL-116712] VT056-0726 Testcase Text found
+2016-01-28 01:45:32,257 DEBUG [EBPB_KeyhandlingSTTL-116712] Result of validate_Text_Exists: Pass
+2016-01-28 01:45:32,257 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:32,257 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing textBoxClick function:
+2016-01-28 01:45:33,852 DEBUG [EBPB_KeyhandlingSTTL-116712] keytxtInput_idtext box clicked successfully
+2016-01-28 01:45:33,853 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of textBoxClick: pass
+2016-01-28 01:45:33,853 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:33,853 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing wait function:
+2016-01-28 01:45:33,853 DEBUG [EBPB_KeyhandlingSTTL-116712] Started Executing wait function
+2016-01-28 01:45:35,852 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting from wait function
+2016-01-28 01:45:35,852 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of wait: Pass
+2016-01-28 01:45:35,852 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:35,852 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 01:45:35,852 DEBUG [EBPB_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 01:45:35,852 DEBUG [EBPB_KeyhandlingSTTL-116712] 1
+2016-01-28 01:45:35,852 DEBUG [EBPB_KeyhandlingSTTL-116712] Entered 1
+2016-01-28 01:45:35,852 DEBUG [EBPB_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 01:45:39,873 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 01:45:39,873 DEBUG [EBPB_KeyhandlingSTTL-116712] pass
+2016-01-28 01:45:39,873 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 01:45:39,873 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:39,873 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing validate_textBoxData function:
+2016-01-28 01:45:39,873 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing getAttribute function
+2016-01-28 01:45:40,077 DEBUG [EBPB_KeyhandlingSTTL-116712] 2
+2016-01-28 01:45:40,077 DEBUG [EBPB_KeyhandlingSTTL-116712] 2 value matches with Expected 2 value
+2016-01-28 01:45:40,077 DEBUG [EBPB_KeyhandlingSTTL-116712] Result of validate_textBoxData: Pass
+2016-01-28 01:45:40,077 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:40,077 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing SwitchApp function:
+2016-01-28 01:45:40,135 DEBUG [EBPB_KeyhandlingSTTL-116712] Successfully switched to NATIVE_APP
+2016-01-28 01:45:40,135 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of SwitchApp: Pass
+2016-01-28 01:45:40,135 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:40,135 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing ClickNativeIcon function:
+2016-01-28 01:45:41,066 DEBUG [EBPB_KeyhandlingSTTL-116712] [[AppiumTouchActionExtension: selendroid on ANDROID (7e09dcb3-f910-5aed-f335-3e3d3c50c182)] -> xpath: (//Button[@id='reload_button'])[1]]Clicked successfully
+2016-01-28 01:45:41,066 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of ClickNativeIcon: pass
+2016-01-28 01:45:41,066 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:41,066 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing wait function:
+2016-01-28 01:45:41,066 DEBUG [EBPB_KeyhandlingSTTL-116712] Started Executing wait function
+2016-01-28 01:45:51,065 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting from wait function
+2016-01-28 01:45:51,065 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of wait: Pass
+2016-01-28 01:45:51,065 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:51,065 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing SwitchApp function:
+2016-01-28 01:45:51,176 DEBUG [EBPB_KeyhandlingSTTL-116712] Successfully switched to WEBVIEW
+2016-01-28 01:45:51,176 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of SwitchApp: Pass
+2016-01-28 01:45:51,176 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:51,176 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing SelectTestToRun function:
+2016-01-28 01:45:57,853 DEBUG [EBPB_KeyhandlingSTTL-116712] Successfull in selecting clicking the category
+2016-01-28 01:45:57,853 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of SelectTestToRun: pass
+2016-01-28 01:45:57,853 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:57,853 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing ClickRunTest function:
+2016-01-28 01:45:58,151 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing Click function
+2016-01-28 01:45:59,183 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting Click function
+2016-01-28 01:45:59,183 DEBUG [EBPB_KeyhandlingSTTL-116712] runtest_top_xpath Button clicked Successfully
+2016-01-28 01:45:59,183 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of ClickRunTest: pass
+2016-01-28 01:45:59,183 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:59,183 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing validate_Text_Exists function:
+2016-01-28 01:45:59,390 DEBUG [EBPB_KeyhandlingSTTL-116712] VT056-0726 Testcase Text found
+2016-01-28 01:45:59,390 DEBUG [EBPB_KeyhandlingSTTL-116712] Result of validate_Text_Exists: Pass
+2016-01-28 01:45:59,390 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:45:59,390 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing textBoxClick function:
+2016-01-28 01:46:00,872 DEBUG [EBPB_KeyhandlingSTTL-116712] keytxtInput_idtext box clicked successfully
+2016-01-28 01:46:00,872 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of textBoxClick: pass
+2016-01-28 01:46:00,872 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:46:00,872 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing wait function:
+2016-01-28 01:46:00,872 DEBUG [EBPB_KeyhandlingSTTL-116712] Started Executing wait function
+2016-01-28 01:46:02,873 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting from wait function
+2016-01-28 01:46:02,873 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of wait: Pass
+2016-01-28 01:46:02,873 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:46:02,873 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing sendKeyEvents function:
+2016-01-28 01:46:02,873 DEBUG [EBPB_KeyhandlingSTTL-116712] Entered sendKeyEvents function
+2016-01-28 01:46:02,873 DEBUG [EBPB_KeyhandlingSTTL-116712] 2
+2016-01-28 01:46:02,873 DEBUG [EBPB_KeyhandlingSTTL-116712] Entered 2
+2016-01-28 01:46:02,873 DEBUG [EBPB_KeyhandlingSTTL-116712] Started executeCommandLine function
+2016-01-28 01:46:06,893 DEBUG [EBPB_KeyhandlingSTTL-116712] Exiting from executeCommandLine function
+2016-01-28 01:46:06,893 DEBUG [EBPB_KeyhandlingSTTL-116712] pass
+2016-01-28 01:46:06,893 DEBUG [EBPB_KeyhandlingSTTL-116712] TestStepResult of sendKeyEvents: pass
+2016-01-28 01:46:06,893 DEBUG [EBPB_KeyhandlingSTTL-116712] In execute keyword function
+2016-01-28 01:46:06,893 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing validate_textBoxData function:
+2016-01-28 01:46:06,893 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing getAttribute function
+2016-01-28 01:46:07,086 DEBUG [EBPB_KeyhandlingSTTL-116712] 2
+2016-01-28 01:46:07,086 DEBUG [EBPB_KeyhandlingSTTL-116712] 2 value matches with Expected 2 value
+2016-01-28 01:46:07,086 DEBUG [EBPB_KeyhandlingSTTL-116712] Result of validate_textBoxData: Pass
+2016-01-28 01:46:07,086 DEBUG [EBPB_KeyhandlingSTTL-116712] allstep_result contains: passPasspasspasspassPassPasspassPasspassPasspasspasspassPassPassnull
+2016-01-28 01:46:07,086 DEBUG [EBPB_KeyhandlingSTTL-116712] allexpected_result contains: nullPassnullPassnullPassnullPassnullpassnullpassnull
+2016-01-28 01:46:07,086 DEBUG [EBPB_KeyhandlingSTTL-116712] Testcase_Result contains: nullPassnullPassnullPassnullPassnullpassnullpassnullpassPasspasspasspassPassPasspassPasspassPasspasspasspassPassPassnull
+2016-01-28 01:46:07,086 DEBUG [EBPB_KeyhandlingSTTL-116712] Test case with description Keyvalue 8
+Remap:9
+(Remap 1 to 2) Pass
+2016-01-28 01:46:08,116 DEBUG [EBPB_KeyhandlingSTTL-116712] Executing browser_Quit function
+2016-01-28 01:46:08,117 DEBUG [EBPB_KeyhandlingSTTL-116712] Completed browser_Quit function
+2016-01-28 01:46:08,117 DEBUG [EBPB_KeyhandlingSTTL-116712] Completed quitSelendroid function
+2016-01-28 01:46:08,117 DEBUG [EBPB_KeyhandlingSTTL-116712] Row number:13
+2016-01-28 01:46:08,158 DEBUG [EBPB_KeyhandlingSTTL-116712] Ending Test Case IDSTTL-116712

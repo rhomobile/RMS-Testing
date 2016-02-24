@@ -1,0 +1,68 @@
+2016-01-27 21:47:33,461 DEBUG [EBManual_System_JSSTTL-116706] Executing Test Case ID: STTL-116706
+2016-01-27 21:47:33,477 DEBUG [EBManual_System_JSSTTL-116706] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 21:47:43,719 DEBUG [EBManual_System_JSSTTL-116706] Exiting Init_Selendroid function
+2016-01-27 21:47:43,744 DEBUG [EBManual_System_JSSTTL-116706] TestCase with Description "Is TestApp.apk Application Installed Android" Execution started
+2016-01-27 21:47:43,744 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:43,745 DEBUG [EBManual_System_JSSTTL-116706] Executing wait function:
+2016-01-27 21:47:43,745 DEBUG [EBManual_System_JSSTTL-116706] Started Executing wait function
+2016-01-27 21:47:46,745 DEBUG [EBManual_System_JSSTTL-116706] Exiting from wait function
+2016-01-27 21:47:46,745 DEBUG [EBManual_System_JSSTTL-116706] TestStepResult of wait: Pass
+2016-01-27 21:47:46,745 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:46,745 DEBUG [EBManual_System_JSSTTL-116706] Executing validate_PageTitle function:
+2016-01-27 21:47:46,783 DEBUG [EBManual_System_JSSTTL-116706] The title of the page is *********************************: Manual specs
+2016-01-27 21:47:46,783 DEBUG [EBManual_System_JSSTTL-116706] The page title found is correct
+2016-01-27 21:47:46,783 DEBUG [EBManual_System_JSSTTL-116706] Result of validate_PageTitle: pass
+2016-01-27 21:47:46,783 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:46,783 DEBUG [EBManual_System_JSSTTL-116706] Executing link_Click function:
+2016-01-27 21:47:47,484 DEBUG [EBManual_System_JSSTTL-116706] Executing Click function
+2016-01-27 21:47:48,866 DEBUG [EBManual_System_JSSTTL-116706] Exiting Click function
+2016-01-27 21:47:48,866 DEBUG [EBManual_System_JSSTTL-116706] system_test_link clicked successfully
+2016-01-27 21:47:48,866 DEBUG [EBManual_System_JSSTTL-116706] TestStepResult of link_Click: Pass
+2016-01-27 21:47:48,866 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:48,866 DEBUG [EBManual_System_JSSTTL-116706] Executing validate_PageTitle function:
+2016-01-27 21:47:48,885 DEBUG [EBManual_System_JSSTTL-116706] The title of the page is *********************************: System JS Test
+2016-01-27 21:47:48,885 DEBUG [EBManual_System_JSSTTL-116706] The page title found is correct
+2016-01-27 21:47:48,885 DEBUG [EBManual_System_JSSTTL-116706] Result of validate_PageTitle: pass
+2016-01-27 21:47:48,885 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:48,885 DEBUG [EBManual_System_JSSTTL-116706] Executing SelectTestToRun function:
+2016-01-27 21:47:55,070 DEBUG [EBManual_System_JSSTTL-116706] Successfull in selecting clicking the category
+2016-01-27 21:47:55,070 DEBUG [EBManual_System_JSSTTL-116706] TestStepResult of SelectTestToRun: pass
+2016-01-27 21:47:55,070 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:55,070 DEBUG [EBManual_System_JSSTTL-116706] Executing ClickRunTest function:
+2016-01-27 21:47:55,434 DEBUG [EBManual_System_JSSTTL-116706] Executing Click function
+2016-01-27 21:47:56,375 DEBUG [EBManual_System_JSSTTL-116706] Exiting Click function
+2016-01-27 21:47:56,375 DEBUG [EBManual_System_JSSTTL-116706] runtest_top_xpath Button clicked Successfully
+2016-01-27 21:47:56,375 DEBUG [EBManual_System_JSSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-27 21:47:56,375 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:56,375 DEBUG [EBManual_System_JSSTTL-116706] Executing validate_Text_Exists function:
+2016-01-27 21:47:57,348 DEBUG [EBManual_System_JSSTTL-116706] VT300-058 Testcase Text found
+2016-01-27 21:47:57,348 DEBUG [EBManual_System_JSSTTL-116706] Result of validate_Text_Exists: Pass
+2016-01-27 21:47:57,348 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:57,349 DEBUG [EBManual_System_JSSTTL-116706] Executing ClickRunTest function:
+2016-01-27 21:47:57,656 DEBUG [EBManual_System_JSSTTL-116706] Executing Click function
+2016-01-27 21:47:58,595 DEBUG [EBManual_System_JSSTTL-116706] Exiting Click function
+2016-01-27 21:47:58,595 DEBUG [EBManual_System_JSSTTL-116706] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 21:47:58,595 DEBUG [EBManual_System_JSSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-27 21:47:58,595 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:47:58,595 DEBUG [EBManual_System_JSSTTL-116706] Executing wait function:
+2016-01-27 21:47:58,595 DEBUG [EBManual_System_JSSTTL-116706] Started Executing wait function
+2016-01-27 21:48:03,596 DEBUG [EBManual_System_JSSTTL-116706] Exiting from wait function
+2016-01-27 21:48:03,596 DEBUG [EBManual_System_JSSTTL-116706] TestStepResult of wait: Pass
+2016-01-27 21:48:03,596 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:48:03,596 DEBUG [EBManual_System_JSSTTL-116706] Executing validate_Result function:
+2016-01-27 21:48:03,875 DEBUG [EBManual_System_JSSTTL-116706] Application install status is: Text found in Results
+Application install status is: : false
+2016-01-27 21:48:03,875 DEBUG [EBManual_System_JSSTTL-116706] Result of validate_Result: Pass
+2016-01-27 21:48:03,875 DEBUG [EBManual_System_JSSTTL-116706] In execute keyword function
+2016-01-27 21:48:03,875 DEBUG [EBManual_System_JSSTTL-116706] Executing validate_Result function:
+2016-01-27 21:48:04,048 DEBUG [EBManual_System_JSSTTL-116706] true Text not found in Results
+Application install status is: : false
+2016-01-27 21:48:04,048 DEBUG [EBManual_System_JSSTTL-116706] Result of validate_Result: Fail
+2016-01-27 21:48:04,049 DEBUG [EBManual_System_JSSTTL-116706] allstep_result contains: PasspasspasspassPassPassnull
+2016-01-27 21:48:04,049 DEBUG [EBManual_System_JSSTTL-116706] allexpected_result contains: nullPassFailnullPassnullpassnullpassnull
+2016-01-27 21:48:04,049 DEBUG [EBManual_System_JSSTTL-116706] Testcase_Result contains: nullPassFailnullPassnullpassnullpassnullPasspasspasspassPassPassnull
+2016-01-27 21:48:04,049 DEBUG [EBManual_System_JSSTTL-116706] Test case with description Is TestApp.apk Application Installed Android Fail
+2016-01-27 21:48:05,073 DEBUG [EBManual_System_JSSTTL-116706] Executing browser_Quit function
+2016-01-27 21:48:05,073 DEBUG [EBManual_System_JSSTTL-116706] Completed browser_Quit function
+2016-01-27 21:48:05,073 DEBUG [EBManual_System_JSSTTL-116706] Completed quitSelendroid function
+2016-01-27 21:48:05,073 DEBUG [EBManual_System_JSSTTL-116706] Row number:7

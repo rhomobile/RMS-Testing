@@ -1,0 +1,136 @@
+2016-01-27 17:22:33,971 DEBUG [EBManual_Application_JSSTTL-116714] Executing Test Case ID: STTL-116714
+2016-01-27 17:22:33,999 DEBUG [EBManual_Application_JSSTTL-116714] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 17:22:44,311 DEBUG [EBManual_Application_JSSTTL-116714] Exiting Init_Selendroid function
+2016-01-27 17:22:44,361 DEBUG [EBManual_Application_JSSTTL-116714] TestCase with Description "Check for Application event callback ScreenOff/ScreenOn with pressing power button" Execution started
+2016-01-27 17:22:44,361 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:44,361 DEBUG [EBManual_Application_JSSTTL-116714] Executing wait function:
+2016-01-27 17:22:44,361 DEBUG [EBManual_Application_JSSTTL-116714] Started Executing wait function
+2016-01-27 17:22:47,361 DEBUG [EBManual_Application_JSSTTL-116714] Exiting from wait function
+2016-01-27 17:22:47,361 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 17:22:47,361 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:47,361 DEBUG [EBManual_Application_JSSTTL-116714] Executing validate_PageTitle function:
+2016-01-27 17:22:47,383 DEBUG [EBManual_Application_JSSTTL-116714] The title of the page is *********************************: Manual specs
+2016-01-27 17:22:47,383 DEBUG [EBManual_Application_JSSTTL-116714] The page title found is correct
+2016-01-27 17:22:47,383 DEBUG [EBManual_Application_JSSTTL-116714] Result of validate_PageTitle: pass
+2016-01-27 17:22:47,384 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:47,384 DEBUG [EBManual_Application_JSSTTL-116714] Executing link_Click function:
+2016-01-27 17:22:47,933 DEBUG [EBManual_Application_JSSTTL-116714] Executing Click function
+2016-01-27 17:22:48,980 DEBUG [EBManual_Application_JSSTTL-116714] Exiting Click function
+2016-01-27 17:22:48,981 DEBUG [EBManual_Application_JSSTTL-116714] Application_test_link clicked successfully
+2016-01-27 17:22:48,981 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-27 17:22:48,981 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:48,981 DEBUG [EBManual_Application_JSSTTL-116714] Executing validate_PageTitle function:
+2016-01-27 17:22:49,003 DEBUG [EBManual_Application_JSSTTL-116714] The title of the page is *********************************: Application JS Test
+2016-01-27 17:22:49,003 DEBUG [EBManual_Application_JSSTTL-116714] The page title found is correct
+2016-01-27 17:22:49,003 DEBUG [EBManual_Application_JSSTTL-116714] Result of validate_PageTitle: pass
+2016-01-27 17:22:49,003 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:49,003 DEBUG [EBManual_Application_JSSTTL-116714] Executing SelectTestToRun function:
+2016-01-27 17:22:53,387 DEBUG [EBManual_Application_JSSTTL-116714] Successfull in selecting clicking the category
+2016-01-27 17:22:53,387 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of SelectTestToRun: pass
+2016-01-27 17:22:53,387 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:53,388 DEBUG [EBManual_Application_JSSTTL-116714] Executing ClickRunTest function:
+2016-01-27 17:22:53,789 DEBUG [EBManual_Application_JSSTTL-116714] Executing Click function
+2016-01-27 17:22:54,728 DEBUG [EBManual_Application_JSSTTL-116714] Exiting Click function
+2016-01-27 17:22:54,728 DEBUG [EBManual_Application_JSSTTL-116714] runtest_top_xpath Button clicked Successfully
+2016-01-27 17:22:54,728 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of ClickRunTest: pass
+2016-01-27 17:22:54,728 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:54,728 DEBUG [EBManual_Application_JSSTTL-116714] Executing validate_Text_Exists function:
+2016-01-27 17:22:55,309 DEBUG [EBManual_Application_JSSTTL-116714] VT281-0075 Testcase Text found
+2016-01-27 17:22:55,309 DEBUG [EBManual_Application_JSSTTL-116714] Result of validate_Text_Exists: Pass
+2016-01-27 17:22:55,309 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:55,309 DEBUG [EBManual_Application_JSSTTL-116714] Executing ClickRunTest function:
+2016-01-27 17:22:55,617 DEBUG [EBManual_Application_JSSTTL-116714] Executing Click function
+2016-01-27 17:22:56,695 DEBUG [EBManual_Application_JSSTTL-116714] Exiting Click function
+2016-01-27 17:22:56,695 DEBUG [EBManual_Application_JSSTTL-116714] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 17:22:56,695 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of ClickRunTest: pass
+2016-01-27 17:22:56,696 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:56,696 DEBUG [EBManual_Application_JSSTTL-116714] Executing wait function:
+2016-01-27 17:22:56,696 DEBUG [EBManual_Application_JSSTTL-116714] Started Executing wait function
+2016-01-27 17:22:58,696 DEBUG [EBManual_Application_JSSTTL-116714] Exiting from wait function
+2016-01-27 17:22:58,696 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 17:22:58,696 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:22:58,696 DEBUG [EBManual_Application_JSSTTL-116714] Executing Lock_UnlockScreen function:
+2016-01-27 17:22:58,696 DEBUG [EBManual_Application_JSSTTL-116714] locking screen
+2016-01-27 17:22:58,696 DEBUG [EBManual_Application_JSSTTL-116714] Started executeCommandLine function
+2016-01-27 17:23:03,717 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of Lock_UnlockScreen: pass
+2016-01-27 17:23:03,717 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:03,717 DEBUG [EBManual_Application_JSSTTL-116714] Executing Lock_UnlockScreen function:
+2016-01-27 17:23:03,717 DEBUG [EBManual_Application_JSSTTL-116714] unlocking screen
+2016-01-27 17:23:03,717 DEBUG [EBManual_Application_JSSTTL-116714] Started executeCommandLine function
+2016-01-27 17:23:07,737 DEBUG [EBManual_Application_JSSTTL-116714] Started executeCommandLine function
+2016-01-27 17:23:11,746 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of Lock_UnlockScreen: pass
+2016-01-27 17:23:11,746 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:11,746 DEBUG [EBManual_Application_JSSTTL-116714] Executing wait function:
+2016-01-27 17:23:11,746 DEBUG [EBManual_Application_JSSTTL-116714] Started Executing wait function
+2016-01-27 17:23:13,746 DEBUG [EBManual_Application_JSSTTL-116714] Exiting from wait function
+2016-01-27 17:23:13,746 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 17:23:13,746 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:13,746 DEBUG [EBManual_Application_JSSTTL-116714] Executing link_Click function:
+2016-01-27 17:23:14,105 DEBUG [EBManual_Application_JSSTTL-116714] Executing Click function
+2016-01-27 17:23:15,327 DEBUG [EBManual_Application_JSSTTL-116714] Exiting Click function
+2016-01-27 17:23:15,327 DEBUG [EBManual_Application_JSSTTL-116714] stopCallback_name_xpath clicked successfully
+2016-01-27 17:23:15,327 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of link_Click: Pass
+2016-01-27 17:23:15,327 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:15,327 DEBUG [EBManual_Application_JSSTTL-116714] Executing wait function:
+2016-01-27 17:23:15,327 DEBUG [EBManual_Application_JSSTTL-116714] Started Executing wait function
+2016-01-27 17:23:17,327 DEBUG [EBManual_Application_JSSTTL-116714] Exiting from wait function
+2016-01-27 17:23:17,327 DEBUG [EBManual_Application_JSSTTL-116714] TestStepResult of wait: Pass
+2016-01-27 17:23:17,327 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:17,327 DEBUG [EBManual_Application_JSSTTL-116714] Executing validate_Result function:
+2016-01-27 17:23:17,693 DEBUG [EBManual_Application_JSSTTL-116714] UIDestroyed Text found in Results
+Event : : ScreenOn
+Event : : UIDestroyed
+Event : : ScreenOff
+Event : : Deactivated
+Event : : Activated
+Event : : ScreenOn
+2016-01-27 17:23:17,694 DEBUG [EBManual_Application_JSSTTL-116714] Result of validate_Result: Pass
+2016-01-27 17:23:17,694 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:17,694 DEBUG [EBManual_Application_JSSTTL-116714] Executing validate_Result function:
+2016-01-27 17:23:17,869 DEBUG [EBManual_Application_JSSTTL-116714] ScreenOff Text found in Results
+Event : : ScreenOn
+Event : : UIDestroyed
+Event : : ScreenOff
+Event : : Deactivated
+Event : : Activated
+Event : : ScreenOn
+2016-01-27 17:23:17,869 DEBUG [EBManual_Application_JSSTTL-116714] Result of validate_Result: Pass
+2016-01-27 17:23:17,869 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:17,869 DEBUG [EBManual_Application_JSSTTL-116714] Executing validate_Result function:
+2016-01-27 17:23:18,116 DEBUG [EBManual_Application_JSSTTL-116714] Deactivated Text found in Results
+Event : : ScreenOn
+Event : : UIDestroyed
+Event : : ScreenOff
+Event : : Deactivated
+Event : : Activated
+Event : : ScreenOn
+2016-01-27 17:23:18,117 DEBUG [EBManual_Application_JSSTTL-116714] Result of validate_Result: Pass
+2016-01-27 17:23:18,117 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:18,117 DEBUG [EBManual_Application_JSSTTL-116714] Executing validate_Result function:
+2016-01-27 17:23:18,301 DEBUG [EBManual_Application_JSSTTL-116714] ScreenOn Text found in Results
+Event : : ScreenOn
+Event : : UIDestroyed
+Event : : ScreenOff
+Event : : Deactivated
+Event : : Activated
+Event : : ScreenOn
+2016-01-27 17:23:18,301 DEBUG [EBManual_Application_JSSTTL-116714] Result of validate_Result: Pass
+2016-01-27 17:23:18,301 DEBUG [EBManual_Application_JSSTTL-116714] In execute keyword function
+2016-01-27 17:23:18,301 DEBUG [EBManual_Application_JSSTTL-116714] Executing validate_Result function:
+2016-01-27 17:23:18,518 DEBUG [EBManual_Application_JSSTTL-116714] Activated Text found in Results
+Event : : ScreenOn
+Event : : UIDestroyed
+Event : : ScreenOff
+Event : : Deactivated
+Event : : Activated
+Event : : ScreenOn
+2016-01-27 17:23:18,518 DEBUG [EBManual_Application_JSSTTL-116714] Result of validate_Result: Pass
+2016-01-27 17:23:18,518 DEBUG [EBManual_Application_JSSTTL-116714] allstep_result contains: PassPassPasspasspassPasspasspasspassPassPassnull
+2016-01-27 17:23:18,518 DEBUG [EBManual_Application_JSSTTL-116714] allexpected_result contains: nullPassPassPassPassPassnullPassnullpassnullpassnull
+2016-01-27 17:23:18,518 DEBUG [EBManual_Application_JSSTTL-116714] Testcase_Result contains: nullPassPassPassPassPassnullPassnullpassnullpassnullPassPassPasspasspassPasspasspasspassPassPassnull
+2016-01-27 17:23:18,518 DEBUG [EBManual_Application_JSSTTL-116714] Test case with description Check for Application event callback ScreenOff/ScreenOn with pressing power button Pass
+2016-01-27 17:23:19,526 DEBUG [EBManual_Application_JSSTTL-116714] Executing browser_Quit function
+2016-01-27 17:23:19,526 DEBUG [EBManual_Application_JSSTTL-116714] Completed browser_Quit function
+2016-01-27 17:23:19,526 DEBUG [EBManual_Application_JSSTTL-116714] Completed quitSelendroid function
+2016-01-27 17:23:19,528 DEBUG [EBManual_Application_JSSTTL-116714] Row number:15
+2016-01-27 17:23:19,574 DEBUG [EBManual_Application_JSSTTL-116714] Ending Test Case IDSTTL-116714

@@ -1,0 +1,72 @@
+2016-01-27 17:40:03,489 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing Test Case ID: STTL-116703
+2016-01-27 17:40:03,534 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 17:40:14,224 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Exiting Init_Selendroid function
+2016-01-27 17:40:14,306 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] TestCase with Description "Battery hideIcon after calling showIcon method" Execution started
+2016-01-27 17:40:14,306 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:14,306 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing wait function:
+2016-01-27 17:40:14,307 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Started Executing wait function
+2016-01-27 17:40:17,307 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Exiting from wait function
+2016-01-27 17:40:17,307 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 17:40:17,307 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:17,307 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing validate_PageTitle function:
+2016-01-27 17:40:17,349 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] The title of the page is *********************************: Manual specs
+2016-01-27 17:40:17,349 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] The page title found is correct
+2016-01-27 17:40:17,349 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Result of validate_PageTitle: pass
+2016-01-27 17:40:17,350 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:17,350 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing link_Click function:
+2016-01-27 17:40:17,920 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing Click function
+2016-01-27 17:40:18,918 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Exiting Click function
+2016-01-27 17:40:18,918 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] battery_test_link clicked successfully
+2016-01-27 17:40:18,918 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] TestStepResult of link_Click: Pass
+2016-01-27 17:40:18,919 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:18,919 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing validate_PageTitle function:
+2016-01-27 17:40:18,936 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] The title of the page is *********************************: Battery JS Test
+2016-01-27 17:40:18,937 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] The page title found is correct
+2016-01-27 17:40:18,937 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Result of validate_PageTitle: pass
+2016-01-27 17:40:18,937 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:18,937 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing SelectTestToRun function:
+2016-01-27 17:40:21,664 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Successfull in selecting clicking the category
+2016-01-27 17:40:21,664 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] TestStepResult of SelectTestToRun: pass
+2016-01-27 17:40:21,664 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:21,664 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing ClickRunTest function:
+2016-01-27 17:40:22,011 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing Click function
+2016-01-27 17:40:22,934 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Exiting Click function
+2016-01-27 17:40:22,934 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] runtest_top_xpath Button clicked Successfully
+2016-01-27 17:40:22,934 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] TestStepResult of ClickRunTest: pass
+2016-01-27 17:40:22,935 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:22,935 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing validate_Text_Exists function:
+2016-01-27 17:40:23,489 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] VT284-0019 Testcase Text found
+2016-01-27 17:40:23,489 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Result of validate_Text_Exists: Pass
+2016-01-27 17:40:23,489 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:23,489 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing ClickRunTest function:
+2016-01-27 17:40:23,806 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing Click function
+2016-01-27 17:40:24,787 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Exiting Click function
+2016-01-27 17:40:24,787 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 17:40:24,787 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] TestStepResult of ClickRunTest: pass
+2016-01-27 17:40:24,787 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:24,787 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing wait function:
+2016-01-27 17:40:24,787 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Started Executing wait function
+2016-01-27 17:40:27,788 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Exiting from wait function
+2016-01-27 17:40:27,788 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 17:40:27,788 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:27,788 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing validate_isIconDisplayed function:
+2016-01-27 17:40:27,788 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Entered validate_isIconDisplayed function
+2016-01-27 17:40:28,260 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Result of validate_isIconDisplayed: Pass
+2016-01-27 17:40:28,261 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:28,261 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing wait function:
+2016-01-27 17:40:28,261 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Started Executing wait function
+2016-01-27 17:40:38,262 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Exiting from wait function
+2016-01-27 17:40:38,262 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] TestStepResult of wait: Pass
+2016-01-27 17:40:38,262 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] In execute keyword function
+2016-01-27 17:40:38,262 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing validate_isIconDisplayed function:
+2016-01-27 17:40:38,262 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Entered validate_isIconDisplayed function
+2016-01-27 17:40:38,935 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Result of validate_isIconDisplayed: Pass
+2016-01-27 17:40:38,935 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] allstep_result contains: PassPasspasspasspassPassPassnull
+2016-01-27 17:40:38,935 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] allexpected_result contains: nullPassnullPassnullPassnullpassnullpassnull
+2016-01-27 17:40:38,935 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Testcase_Result contains: nullPassnullPassnullPassnullpassnullpassnullPassPasspasspasspassPassPassnull
+2016-01-27 17:40:38,935 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Test case with description Battery hideIcon after calling showIcon method Pass
+2016-01-27 17:40:39,908 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Executing browser_Quit function
+2016-01-27 17:40:39,908 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Completed browser_Quit function
+2016-01-27 17:40:39,908 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Completed quitSelendroid function
+2016-01-27 17:40:39,908 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Row number:4
+2016-01-27 17:40:39,982 DEBUG [EBManual_BatteryIndicator_JSSTTL-116703] Ending Test Case IDSTTL-116703

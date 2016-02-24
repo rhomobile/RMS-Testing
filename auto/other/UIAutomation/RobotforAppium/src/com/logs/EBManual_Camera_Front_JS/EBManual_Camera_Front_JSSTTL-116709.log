@@ -1,0 +1,125 @@
+2016-01-27 18:13:02,623 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing Test Case ID: STTL-116709
+2016-01-27 18:13:02,654 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 18:13:12,932 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Exiting Init_Selendroid function
+2016-01-27 18:13:12,958 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestCase with Description "Should call takePicture with desiredWidth & desiredHeight more than max supported and Capture" Execution started
+2016-01-27 18:13:12,959 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:12,959 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing wait function:
+2016-01-27 18:13:12,959 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Started Executing wait function
+2016-01-27 18:13:17,959 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Exiting from wait function
+2016-01-27 18:13:17,959 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 18:13:17,959 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:17,959 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 18:13:18,001 DEBUG [EBManual_Camera_Front_JSSTTL-116709] The title of the page is *********************************: Manual specs
+2016-01-27 18:13:18,001 DEBUG [EBManual_Camera_Front_JSSTTL-116709] The page title found is correct
+2016-01-27 18:13:18,001 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 18:13:18,001 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:18,001 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing link_Click function:
+2016-01-27 18:13:18,559 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing Click function
+2016-01-27 18:13:19,759 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Exiting Click function
+2016-01-27 18:13:19,759 DEBUG [EBManual_Camera_Front_JSSTTL-116709] camera_front_link clicked successfully
+2016-01-27 18:13:19,759 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestStepResult of link_Click: Pass
+2016-01-27 18:13:19,759 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:19,759 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing validate_PageTitle function:
+2016-01-27 18:13:19,774 DEBUG [EBManual_Camera_Front_JSSTTL-116709] The title of the page is *********************************: Camera Front Tests
+2016-01-27 18:13:19,774 DEBUG [EBManual_Camera_Front_JSSTTL-116709] The page title found is correct
+2016-01-27 18:13:19,774 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Result of validate_PageTitle: pass
+2016-01-27 18:13:19,774 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:19,774 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing SelectTestToRun function:
+2016-01-27 18:13:28,437 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Successfull in selecting clicking the category
+2016-01-27 18:13:28,437 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestStepResult of SelectTestToRun: pass
+2016-01-27 18:13:28,437 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:28,437 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing ClickRunTest function:
+2016-01-27 18:13:28,791 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing Click function
+2016-01-27 18:13:29,740 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Exiting Click function
+2016-01-27 18:13:29,740 DEBUG [EBManual_Camera_Front_JSSTTL-116709] runtest_top_xpath Button clicked Successfully
+2016-01-27 18:13:29,740 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-27 18:13:29,740 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:29,740 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing wait function:
+2016-01-27 18:13:29,740 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Started Executing wait function
+2016-01-27 18:13:31,741 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Exiting from wait function
+2016-01-27 18:13:31,741 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 18:13:31,741 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:31,741 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing validate_Text_Exists function:
+2016-01-27 18:13:32,011 DEBUG [EBManual_Camera_Front_JSSTTL-116709] VT285-0049a Testcase Text found
+2016-01-27 18:13:32,011 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Result of validate_Text_Exists: Pass
+2016-01-27 18:13:32,011 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:32,011 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing ClickRunTest function:
+2016-01-27 18:13:32,320 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing Click function
+2016-01-27 18:13:33,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Exiting Click function
+2016-01-27 18:13:33,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 18:13:33,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestStepResult of ClickRunTest: pass
+2016-01-27 18:13:33,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:33,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing wait function:
+2016-01-27 18:13:33,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Started Executing wait function
+2016-01-27 18:13:35,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Exiting from wait function
+2016-01-27 18:13:35,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestStepResult of wait: Pass
+2016-01-27 18:13:35,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:35,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing ClickCameraNativeButton function:
+2016-01-27 18:13:35,465 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 18:13:39,485 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Started executeCommandLine function
+2016-01-27 18:13:43,506 DEBUG [EBManual_Camera_Front_JSSTTL-116709] 0 Clicked Camera Native Button
+2016-01-27 18:13:43,506 DEBUG [EBManual_Camera_Front_JSSTTL-116709] TestStepResult of ClickCameraNativeButton: Pass
+2016-01-27 18:13:43,506 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:43,506 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing validate_Result function:
+2016-01-27 18:13:43,755 DEBUG [EBManual_Camera_Front_JSSTTL-116709] ok Text found in Results
+status : : ok
+message : : undefined
+imageHeight : : 1280
+imageWidth : : 960
+imageFormat : : jpg
+imageUri : : /data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/IMG_20160127_061218.jpg
+desiredTest : : true
+2016-01-27 18:13:43,755 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Result of validate_Result: Pass
+2016-01-27 18:13:43,755 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:43,755 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing validate_Result function:
+2016-01-27 18:13:43,944 DEBUG [EBManual_Camera_Front_JSSTTL-116709] jpg Text found in Results
+status : : ok
+message : : undefined
+imageHeight : : 1280
+imageWidth : : 960
+imageFormat : : jpg
+imageUri : : /data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/IMG_20160127_061218.jpg
+desiredTest : : true
+2016-01-27 18:13:43,944 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Result of validate_Result: Pass
+2016-01-27 18:13:43,944 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:43,944 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing validate_Result function:
+2016-01-27 18:13:44,132 DEBUG [EBManual_Camera_Front_JSSTTL-116709] /data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/IMG_ Text found in Results
+status : : ok
+message : : undefined
+imageHeight : : 1280
+imageWidth : : 960
+imageFormat : : jpg
+imageUri : : /data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/IMG_20160127_061218.jpg
+desiredTest : : true
+2016-01-27 18:13:44,133 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Result of validate_Result: Pass
+2016-01-27 18:13:44,133 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:44,133 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing validate_Result function:
+2016-01-27 18:13:44,351 DEBUG [EBManual_Camera_Front_JSSTTL-116709] desiredTest Text found in Results
+status : : ok
+message : : undefined
+imageHeight : : 1280
+imageWidth : : 960
+imageFormat : : jpg
+imageUri : : /data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/IMG_20160127_061218.jpg
+desiredTest : : true
+2016-01-27 18:13:44,351 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Result of validate_Result: Pass
+2016-01-27 18:13:44,351 DEBUG [EBManual_Camera_Front_JSSTTL-116709] In execute keyword function
+2016-01-27 18:13:44,351 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing validate_Result function:
+2016-01-27 18:13:44,525 DEBUG [EBManual_Camera_Front_JSSTTL-116709] true Text found in Results
+status : : ok
+message : : undefined
+imageHeight : : 1280
+imageWidth : : 960
+imageFormat : : jpg
+imageUri : : /data/data/com.symbol.enterprisebrowser/rhodata/db/db-files/IMG_20160127_061218.jpg
+desiredTest : : true
+2016-01-27 18:13:44,525 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Result of validate_Result: Pass
+2016-01-27 18:13:44,525 DEBUG [EBManual_Camera_Front_JSSTTL-116709] allstep_result contains: PassPasspassPasspasspassPassPassnull
+2016-01-27 18:13:44,525 DEBUG [EBManual_Camera_Front_JSSTTL-116709] allexpected_result contains: nullPassPassPassPassPassnullPassnullpassnullpassnull
+2016-01-27 18:13:44,525 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Testcase_Result contains: nullPassPassPassPassPassnullPassnullpassnullpassnullPassPasspassPasspasspassPassPassnull
+2016-01-27 18:13:44,525 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Test case with description Should call takePicture with desiredWidth & desiredHeight more than max supported and Capture Pass
+2016-01-27 18:13:45,557 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Executing browser_Quit function
+2016-01-27 18:13:45,557 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Completed browser_Quit function
+2016-01-27 18:13:45,557 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Completed quitSelendroid function
+2016-01-27 18:13:45,558 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Row number:10
+2016-01-27 18:13:45,594 DEBUG [EBManual_Camera_Front_JSSTTL-116709] Ending Test Case IDSTTL-116709

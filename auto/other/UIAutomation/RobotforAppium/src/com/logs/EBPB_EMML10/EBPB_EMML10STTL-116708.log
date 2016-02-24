@@ -1,0 +1,83 @@
+2016-01-28 00:04:51,772 DEBUG [EBPB_EMML10STTL-116708] Executing Test Case ID: STTL-116708
+2016-01-28 00:04:51,779 DEBUG [EBPB_EMML10STTL-116708] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 00:05:02,253 DEBUG [EBPB_EMML10STTL-116708] Exiting Init_Selendroid function
+2016-01-28 00:05:02,267 DEBUG [EBPB_EMML10STTL-116708] TestCase with Description "Keyhandling" Execution started
+2016-01-28 00:05:02,267 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:02,267 DEBUG [EBPB_EMML10STTL-116708] Executing wait function:
+2016-01-28 00:05:02,267 DEBUG [EBPB_EMML10STTL-116708] Started Executing wait function
+2016-01-28 00:05:05,267 DEBUG [EBPB_EMML10STTL-116708] Exiting from wait function
+2016-01-28 00:05:05,267 DEBUG [EBPB_EMML10STTL-116708] TestStepResult of wait: Pass
+2016-01-28 00:05:05,267 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:05,267 DEBUG [EBPB_EMML10STTL-116708] Executing validate_PageTitle function:
+2016-01-28 00:05:05,317 DEBUG [EBPB_EMML10STTL-116708] The title of the page is *********************************: Pocket Browser Tests
+2016-01-28 00:05:05,318 DEBUG [EBPB_EMML10STTL-116708] The page title found is correct
+2016-01-28 00:05:05,318 DEBUG [EBPB_EMML10STTL-116708] Result of validate_PageTitle: pass
+2016-01-28 00:05:05,318 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:05,318 DEBUG [EBPB_EMML10STTL-116708] Executing link_Click function:
+2016-01-28 00:05:05,848 DEBUG [EBPB_EMML10STTL-116708] Executing Click function
+2016-01-28 00:05:06,927 DEBUG [EBPB_EMML10STTL-116708] Exiting Click function
+2016-01-28 00:05:06,927 DEBUG [EBPB_EMML10STTL-116708] EMML10_test_link clicked successfully
+2016-01-28 00:05:06,927 DEBUG [EBPB_EMML10STTL-116708] TestStepResult of link_Click: Pass
+2016-01-28 00:05:06,927 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:06,927 DEBUG [EBPB_EMML10STTL-116708] Executing wait function:
+2016-01-28 00:05:06,927 DEBUG [EBPB_EMML10STTL-116708] Started Executing wait function
+2016-01-28 00:05:08,927 DEBUG [EBPB_EMML10STTL-116708] Exiting from wait function
+2016-01-28 00:05:08,927 DEBUG [EBPB_EMML10STTL-116708] TestStepResult of wait: Pass
+2016-01-28 00:05:08,927 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:08,927 DEBUG [EBPB_EMML10STTL-116708] Executing validate_PageTitle function:
+2016-01-28 00:05:08,969 DEBUG [EBPB_EMML10STTL-116708] The title of the page is *********************************: EMML1.0 Test Index Page
+2016-01-28 00:05:08,969 DEBUG [EBPB_EMML10STTL-116708] The page title found is correct
+2016-01-28 00:05:08,969 DEBUG [EBPB_EMML10STTL-116708] Result of validate_PageTitle: pass
+2016-01-28 00:05:08,969 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:08,969 DEBUG [EBPB_EMML10STTL-116708] Executing link_Click function:
+2016-01-28 00:05:09,412 DEBUG [EBPB_EMML10STTL-116708] Executing Click function
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] Exiting Click function
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] Keycapture10_test_link clicked successfully
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] TestStepResult of link_Click: Pass
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] Executing sendKeyEvents function:
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] Entered sendKeyEvents function
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] Volumeup
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] Entered volumeup
+2016-01-28 00:05:10,423 DEBUG [EBPB_EMML10STTL-116708] Started executeCommandLine function
+2016-01-28 00:05:14,444 DEBUG [EBPB_EMML10STTL-116708] Exiting from executeCommandLine function
+2016-01-28 00:05:14,444 DEBUG [EBPB_EMML10STTL-116708] pass
+2016-01-28 00:05:14,444 DEBUG [EBPB_EMML10STTL-116708] TestStepResult of sendKeyEvents: pass
+2016-01-28 00:05:14,444 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:14,444 DEBUG [EBPB_EMML10STTL-116708] Executing validate_Result function:
+2016-01-28 00:05:14,760 DEBUG [EBPB_EMML10STTL-116708] 24 Text found in KeyEvent fired for KeyValue:-24
+2016-01-28 00:05:14,760 DEBUG [EBPB_EMML10STTL-116708] Result of validate_Result: Pass
+2016-01-28 00:05:14,760 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:14,760 DEBUG [EBPB_EMML10STTL-116708] Executing sendKeyEvents function:
+2016-01-28 00:05:14,760 DEBUG [EBPB_EMML10STTL-116708] Entered sendKeyEvents function
+2016-01-28 00:05:14,760 DEBUG [EBPB_EMML10STTL-116708] Volumedown
+2016-01-28 00:05:14,761 DEBUG [EBPB_EMML10STTL-116708] Entered volumedown
+2016-01-28 00:05:14,761 DEBUG [EBPB_EMML10STTL-116708] Started executeCommandLine function
+2016-01-28 00:05:18,781 DEBUG [EBPB_EMML10STTL-116708] Exiting from executeCommandLine function
+2016-01-28 00:05:18,781 DEBUG [EBPB_EMML10STTL-116708] pass
+2016-01-28 00:05:18,781 DEBUG [EBPB_EMML10STTL-116708] TestStepResult of sendKeyEvents: pass
+2016-01-28 00:05:18,781 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:18,781 DEBUG [EBPB_EMML10STTL-116708] Executing validate_Result function:
+2016-01-28 00:05:18,950 DEBUG [EBPB_EMML10STTL-116708] 25 Text found in KeyEvent fired for KeyValue:-25
+2016-01-28 00:05:18,950 DEBUG [EBPB_EMML10STTL-116708] Result of validate_Result: Pass
+2016-01-28 00:05:18,950 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:18,950 DEBUG [EBPB_EMML10STTL-116708] Executing sendKeyEvents function:
+2016-01-28 00:05:18,950 DEBUG [EBPB_EMML10STTL-116708] Entered sendKeyEvents function
+2016-01-28 00:05:18,950 DEBUG [EBPB_EMML10STTL-116708] PTTKey
+2016-01-28 00:05:18,950 DEBUG [EBPB_EMML10STTL-116708] Entered PTTKey
+2016-01-28 00:05:18,950 DEBUG [EBPB_EMML10STTL-116708] Started executeCommandLine function
+2016-01-28 00:05:22,971 DEBUG [EBPB_EMML10STTL-116708] Exiting from executeCommandLine function
+2016-01-28 00:05:22,971 DEBUG [EBPB_EMML10STTL-116708] pass
+2016-01-28 00:05:22,971 DEBUG [EBPB_EMML10STTL-116708] TestStepResult of sendKeyEvents: pass
+2016-01-28 00:05:22,971 DEBUG [EBPB_EMML10STTL-116708] In execute keyword function
+2016-01-28 00:05:22,971 DEBUG [EBPB_EMML10STTL-116708] Executing validate_Result function:
+2016-01-28 00:05:23,146 DEBUG [EBPB_EMML10STTL-116708] 104 Text not found in KeyEvent fired for KeyValue:-25
+2016-01-28 00:05:23,146 DEBUG [EBPB_EMML10STTL-116708] Result of validate_Result: Fail
+2016-01-28 00:05:23,146 DEBUG [EBPB_EMML10STTL-116708] allstep_result contains: passpasspassPassPassPassPassnull
+2016-01-28 00:05:23,146 DEBUG [EBPB_EMML10STTL-116708] allexpected_result contains: nullFailnullPassnullPassnullpassnullpassnull
+2016-01-28 00:05:23,146 DEBUG [EBPB_EMML10STTL-116708] Testcase_Result contains: nullFailnullPassnullPassnullpassnullpassnullpasspasspassPassPassPassPassnull
+2016-01-28 00:05:23,146 DEBUG [EBPB_EMML10STTL-116708] Test case with description Keyhandling Fail
+2016-01-28 00:05:24,152 DEBUG [EBPB_EMML10STTL-116708] Executing browser_Quit function
+2016-01-28 00:05:24,152 DEBUG [EBPB_EMML10STTL-116708] Completed browser_Quit function
+2016-01-28 00:05:24,152 DEBUG [EBPB_EMML10STTL-116708] Completed quitSelendroid function
+2016-01-28 00:05:24,152 DEBUG [EBPB_EMML10STTL-116708] Row number:9

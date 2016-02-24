@@ -1,0 +1,87 @@
+2016-01-27 21:20:01,056 DEBUG [EBManual_Signature_JSSTTL-116731] Executing Test Case ID: STTL-116731
+2016-01-27 21:20:01,063 DEBUG [EBManual_Signature_JSSTTL-116731] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 21:20:10,960 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting Init_Selendroid function
+2016-01-27 21:20:10,978 DEBUG [EBManual_Signature_JSSTTL-116731] TestCase with Description "Call show and minimize" Execution started
+2016-01-27 21:20:10,978 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:10,979 DEBUG [EBManual_Signature_JSSTTL-116731] Executing wait function:
+2016-01-27 21:20:10,979 DEBUG [EBManual_Signature_JSSTTL-116731] Started Executing wait function
+2016-01-27 21:20:13,980 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting from wait function
+2016-01-27 21:20:13,980 DEBUG [EBManual_Signature_JSSTTL-116731] TestStepResult of wait: Pass
+2016-01-27 21:20:13,980 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:13,980 DEBUG [EBManual_Signature_JSSTTL-116731] Executing validate_PageTitle function:
+2016-01-27 21:20:14,040 DEBUG [EBManual_Signature_JSSTTL-116731] The title of the page is *********************************: Manual specs
+2016-01-27 21:20:14,040 DEBUG [EBManual_Signature_JSSTTL-116731] The page title found is correct
+2016-01-27 21:20:14,040 DEBUG [EBManual_Signature_JSSTTL-116731] Result of validate_PageTitle: pass
+2016-01-27 21:20:14,040 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:14,040 DEBUG [EBManual_Signature_JSSTTL-116731] Executing link_Click function:
+2016-01-27 21:20:14,728 DEBUG [EBManual_Signature_JSSTTL-116731] Executing Click function
+2016-01-27 21:20:16,107 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting Click function
+2016-01-27 21:20:16,107 DEBUG [EBManual_Signature_JSSTTL-116731] signature_page2_link clicked successfully
+2016-01-27 21:20:16,107 DEBUG [EBManual_Signature_JSSTTL-116731] TestStepResult of link_Click: Pass
+2016-01-27 21:20:16,107 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:16,107 DEBUG [EBManual_Signature_JSSTTL-116731] Executing validate_PageTitle function:
+2016-01-27 21:20:16,123 DEBUG [EBManual_Signature_JSSTTL-116731] The title of the page is *********************************: Signature JS Test
+2016-01-27 21:20:16,124 DEBUG [EBManual_Signature_JSSTTL-116731] The page title found is correct
+2016-01-27 21:20:16,124 DEBUG [EBManual_Signature_JSSTTL-116731] Result of validate_PageTitle: pass
+2016-01-27 21:20:16,124 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:16,124 DEBUG [EBManual_Signature_JSSTTL-116731] Executing SelectTestToRun function:
+2016-01-27 21:20:20,180 DEBUG [EBManual_Signature_JSSTTL-116731] Successfull in selecting clicking the category
+2016-01-27 21:20:20,180 DEBUG [EBManual_Signature_JSSTTL-116731] TestStepResult of SelectTestToRun: pass
+2016-01-27 21:20:20,180 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:20,180 DEBUG [EBManual_Signature_JSSTTL-116731] Executing ClickRunTest function:
+2016-01-27 21:20:20,518 DEBUG [EBManual_Signature_JSSTTL-116731] Executing Click function
+2016-01-27 21:20:21,458 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting Click function
+2016-01-27 21:20:21,458 DEBUG [EBManual_Signature_JSSTTL-116731] runtest_top_xpath Button clicked Successfully
+2016-01-27 21:20:21,458 DEBUG [EBManual_Signature_JSSTTL-116731] TestStepResult of ClickRunTest: pass
+2016-01-27 21:20:21,458 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:21,458 DEBUG [EBManual_Signature_JSSTTL-116731] Executing validate_Text_Exists function:
+2016-01-27 21:20:22,033 DEBUG [EBManual_Signature_JSSTTL-116731] VT299-0034 Testcase Text found
+2016-01-27 21:20:22,033 DEBUG [EBManual_Signature_JSSTTL-116731] Result of validate_Text_Exists: Pass
+2016-01-27 21:20:22,033 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:22,033 DEBUG [EBManual_Signature_JSSTTL-116731] Executing ClickRunTest function:
+2016-01-27 21:20:22,366 DEBUG [EBManual_Signature_JSSTTL-116731] Executing Click function
+2016-01-27 21:20:23,303 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting Click function
+2016-01-27 21:20:23,303 DEBUG [EBManual_Signature_JSSTTL-116731] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 21:20:23,303 DEBUG [EBManual_Signature_JSSTTL-116731] TestStepResult of ClickRunTest: pass
+2016-01-27 21:20:23,303 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:23,303 DEBUG [EBManual_Signature_JSSTTL-116731] Executing press_Key function:
+2016-01-27 21:20:23,303 DEBUG [EBManual_Signature_JSSTTL-116731] Started executeCommandLine function
+2016-01-27 21:20:27,324 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting from executeCommandLine function
+2016-01-27 21:20:27,324 DEBUG [EBManual_Signature_JSSTTL-116731] pressed on the home key
+2016-01-27 21:20:27,324 DEBUG [EBManual_Signature_JSSTTL-116731] home works
+2016-01-27 21:20:28,324 DEBUG [EBManual_Signature_JSSTTL-116731] TestStepResult of press_Key: pass
+2016-01-27 21:20:28,324 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:28,324 DEBUG [EBManual_Signature_JSSTTL-116731] Executing validate_AppMinimized function:
+2016-01-27 21:20:28,324 DEBUG [EBManual_Signature_JSSTTL-116731] Started Executing validate_AppMinimized function
+2016-01-27 21:20:28,324 DEBUG [EBManual_Signature_JSSTTL-116731] Started Executing Validate_App_launched_Device function
+2016-01-27 21:20:28,324 DEBUG [EBManual_Signature_JSSTTL-116731] Entered CheckUIButtonExists function
+2016-01-27 21:20:28,324 DEBUG [EBManual_Signature_JSSTTL-116731] Started executeCommandLine function
+2016-01-27 21:20:32,345 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting from executeCommandLine function
+2016-01-27 21:20:32,345 DEBUG [EBManual_Signature_JSSTTL-116731] Button is not Present
+2016-01-27 21:20:32,345 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting from CheckUIButtonExists function
+2016-01-27 21:20:32,345 DEBUG [EBManual_Signature_JSSTTL-116731] Started executeCommandLine function
+2016-01-27 21:20:36,365 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting from executeCommandLine function
+2016-01-27 21:20:36,365 DEBUG [EBManual_Signature_JSSTTL-116731] Started executeCommandLine function
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting from executeCommandLine function
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Given App is not in Foreground
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting Validate_App_launched_Device function
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Not in com.symbol.enterprisebrowser screen
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting validate_AppMinimized function
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Result of validate_AppMinimized: Pass
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] In execute keyword function
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Executing launch_App_Device function:
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Started Executing Launch_App_Device function
+2016-01-27 21:20:40,385 DEBUG [EBManual_Signature_JSSTTL-116731] Started executeCommandLine function
+2016-01-27 21:20:44,407 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting from executeCommandLine function
+2016-01-27 21:20:45,407 DEBUG [EBManual_Signature_JSSTTL-116731] Successfully launched the App
+2016-01-27 21:20:45,407 DEBUG [EBManual_Signature_JSSTTL-116731] Exiting Launch_App_Device function
+2016-01-27 21:20:45,407 DEBUG [EBManual_Signature_JSSTTL-116731] TestStepResult of launch_App_Device: Pass
+2016-01-27 21:20:45,407 DEBUG [EBManual_Signature_JSSTTL-116731] allstep_result contains: PasspasspasspasspassPassPassnull
+2016-01-27 21:20:45,407 DEBUG [EBManual_Signature_JSSTTL-116731] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 21:20:45,407 DEBUG [EBManual_Signature_JSSTTL-116731] Testcase_Result contains: nullPassnullPassnullpassnullpassnullPasspasspasspasspassPassPassnull
+2016-01-27 21:20:45,407 DEBUG [EBManual_Signature_JSSTTL-116731] Test case with description Call show and minimize Pass
+2016-01-27 21:20:46,394 DEBUG [EBManual_Signature_JSSTTL-116731] Executing browser_Quit function
+2016-01-27 21:20:46,394 DEBUG [EBManual_Signature_JSSTTL-116731] Completed browser_Quit function
+2016-01-27 21:20:46,394 DEBUG [EBManual_Signature_JSSTTL-116731] Completed quitSelendroid function
+2016-01-27 21:20:46,395 DEBUG [EBManual_Signature_JSSTTL-116731] Row number:32
+2016-01-27 21:20:46,431 DEBUG [EBManual_Signature_JSSTTL-116731] Ending Test Case IDSTTL-116731

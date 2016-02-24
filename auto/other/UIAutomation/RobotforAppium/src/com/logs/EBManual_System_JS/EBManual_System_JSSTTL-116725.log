@@ -1,0 +1,60 @@
+2016-01-27 22:07:48,657 DEBUG [EBManual_System_JSSTTL-116725] Executing Test Case ID: STTL-116725
+2016-01-27 22:07:48,666 DEBUG [EBManual_System_JSSTTL-116725] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 22:07:59,099 DEBUG [EBManual_System_JSSTTL-116725] Exiting Init_Selendroid function
+2016-01-27 22:07:59,123 DEBUG [EBManual_System_JSSTTL-116725] TestCase with Description "call getProperty with hasTouchscreen" Execution started
+2016-01-27 22:07:59,123 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:07:59,123 DEBUG [EBManual_System_JSSTTL-116725] Executing wait function:
+2016-01-27 22:07:59,123 DEBUG [EBManual_System_JSSTTL-116725] Started Executing wait function
+2016-01-27 22:08:02,124 DEBUG [EBManual_System_JSSTTL-116725] Exiting from wait function
+2016-01-27 22:08:02,124 DEBUG [EBManual_System_JSSTTL-116725] TestStepResult of wait: Pass
+2016-01-27 22:08:02,124 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:08:02,124 DEBUG [EBManual_System_JSSTTL-116725] Executing validate_PageTitle function:
+2016-01-27 22:08:02,166 DEBUG [EBManual_System_JSSTTL-116725] The title of the page is *********************************: Manual specs
+2016-01-27 22:08:02,166 DEBUG [EBManual_System_JSSTTL-116725] The page title found is correct
+2016-01-27 22:08:02,166 DEBUG [EBManual_System_JSSTTL-116725] Result of validate_PageTitle: pass
+2016-01-27 22:08:02,166 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:08:02,166 DEBUG [EBManual_System_JSSTTL-116725] Executing link_Click function:
+2016-01-27 22:08:02,893 DEBUG [EBManual_System_JSSTTL-116725] Executing Click function
+2016-01-27 22:08:04,321 DEBUG [EBManual_System_JSSTTL-116725] Exiting Click function
+2016-01-27 22:08:04,321 DEBUG [EBManual_System_JSSTTL-116725] system_test_link clicked successfully
+2016-01-27 22:08:04,321 DEBUG [EBManual_System_JSSTTL-116725] TestStepResult of link_Click: Pass
+2016-01-27 22:08:04,321 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:08:04,321 DEBUG [EBManual_System_JSSTTL-116725] Executing validate_PageTitle function:
+2016-01-27 22:08:04,342 DEBUG [EBManual_System_JSSTTL-116725] The title of the page is *********************************: System JS Test
+2016-01-27 22:08:04,342 DEBUG [EBManual_System_JSSTTL-116725] The page title found is correct
+2016-01-27 22:08:04,342 DEBUG [EBManual_System_JSSTTL-116725] Result of validate_PageTitle: pass
+2016-01-27 22:08:04,342 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:08:04,342 DEBUG [EBManual_System_JSSTTL-116725] Executing SelectTestToRun function:
+2016-01-27 22:08:08,506 DEBUG [EBManual_System_JSSTTL-116725] Successfull in selecting clicking the category
+2016-01-27 22:08:08,506 DEBUG [EBManual_System_JSSTTL-116725] TestStepResult of SelectTestToRun: pass
+2016-01-27 22:08:08,506 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:08:08,506 DEBUG [EBManual_System_JSSTTL-116725] Executing ClickRunTest function:
+2016-01-27 22:08:08,873 DEBUG [EBManual_System_JSSTTL-116725] Executing Click function
+2016-01-27 22:08:09,806 DEBUG [EBManual_System_JSSTTL-116725] Exiting Click function
+2016-01-27 22:08:09,806 DEBUG [EBManual_System_JSSTTL-116725] runtest_top_xpath Button clicked Successfully
+2016-01-27 22:08:09,806 DEBUG [EBManual_System_JSSTTL-116725] TestStepResult of ClickRunTest: pass
+2016-01-27 22:08:09,806 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:08:09,806 DEBUG [EBManual_System_JSSTTL-116725] Executing validate_Text_Exists function:
+2016-01-27 22:08:10,597 DEBUG [EBManual_System_JSSTTL-116725] VT300-012 Testcase Text found
+2016-01-27 22:08:10,597 DEBUG [EBManual_System_JSSTTL-116725] Result of validate_Text_Exists: Pass
+2016-01-27 22:08:10,597 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:08:10,597 DEBUG [EBManual_System_JSSTTL-116725] Executing ClickRunTest function:
+2016-01-27 22:08:10,942 DEBUG [EBManual_System_JSSTTL-116725] Executing Click function
+2016-01-27 22:08:11,898 DEBUG [EBManual_System_JSSTTL-116725] Exiting Click function
+2016-01-27 22:08:11,899 DEBUG [EBManual_System_JSSTTL-116725] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 22:08:11,899 DEBUG [EBManual_System_JSSTTL-116725] TestStepResult of ClickRunTest: pass
+2016-01-27 22:08:11,899 DEBUG [EBManual_System_JSSTTL-116725] In execute keyword function
+2016-01-27 22:08:11,899 DEBUG [EBManual_System_JSSTTL-116725] Executing validate_SystemProperties function:
+2016-01-27 22:08:12,153 DEBUG [EBManual_System_JSSTTL-116725] Started executeCommandLine function
+2016-01-27 22:08:16,174 DEBUG [EBManual_System_JSSTTL-116725] Started executeCommandLine function
+2016-01-27 22:08:20,194 DEBUG [EBManual_System_JSSTTL-116725] hasTouchscreenvalue isVT300-012 | call getProperty with hasTouchscreen | : true returned in property and result isPass
+2016-01-27 22:08:20,194 DEBUG [EBManual_System_JSSTTL-116725] Result of validate_SystemProperties: Pass
+2016-01-27 22:08:20,194 DEBUG [EBManual_System_JSSTTL-116725] allstep_result contains: passpasspassPassPassnull
+2016-01-27 22:08:20,194 DEBUG [EBManual_System_JSSTTL-116725] allexpected_result contains: nullPassnullPassnullpassnullpassnull
+2016-01-27 22:08:20,194 DEBUG [EBManual_System_JSSTTL-116725] Testcase_Result contains: nullPassnullPassnullpassnullpassnullpasspasspassPassPassnull
+2016-01-27 22:08:20,194 DEBUG [EBManual_System_JSSTTL-116725] Test case with description call getProperty with hasTouchscreen Pass
+2016-01-27 22:08:21,315 DEBUG [EBManual_System_JSSTTL-116725] Executing browser_Quit function
+2016-01-27 22:08:21,315 DEBUG [EBManual_System_JSSTTL-116725] Completed browser_Quit function
+2016-01-27 22:08:21,315 DEBUG [EBManual_System_JSSTTL-116725] Completed quitSelendroid function
+2016-01-27 22:08:21,316 DEBUG [EBManual_System_JSSTTL-116725] Row number:26
+2016-01-27 22:08:21,365 DEBUG [EBManual_System_JSSTTL-116725] Ending Test Case IDSTTL-116725

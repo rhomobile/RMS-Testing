@@ -1,0 +1,64 @@
+2016-01-27 17:15:17,211 DEBUG [EBManual_Application_JSSTTL-116705] Executing Test Case ID: STTL-116705
+2016-01-27 17:15:17,257 DEBUG [EBManual_Application_JSSTTL-116705] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-27 17:15:27,516 DEBUG [EBManual_Application_JSSTTL-116705] Exiting Init_Selendroid function
+2016-01-27 17:15:27,627 DEBUG [EBManual_Application_JSSTTL-116705] TestCase with Description "set StartUri to a web page google" Execution started
+2016-01-27 17:15:27,627 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:27,627 DEBUG [EBManual_Application_JSSTTL-116705] Executing wait function:
+2016-01-27 17:15:27,627 DEBUG [EBManual_Application_JSSTTL-116705] Started Executing wait function
+2016-01-27 17:15:30,628 DEBUG [EBManual_Application_JSSTTL-116705] Exiting from wait function
+2016-01-27 17:15:30,628 DEBUG [EBManual_Application_JSSTTL-116705] TestStepResult of wait: Pass
+2016-01-27 17:15:30,628 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:30,628 DEBUG [EBManual_Application_JSSTTL-116705] Executing validate_PageTitle function:
+2016-01-27 17:15:30,674 DEBUG [EBManual_Application_JSSTTL-116705] The title of the page is *********************************: Manual specs
+2016-01-27 17:15:30,674 DEBUG [EBManual_Application_JSSTTL-116705] The page title found is correct
+2016-01-27 17:15:30,674 DEBUG [EBManual_Application_JSSTTL-116705] Result of validate_PageTitle: pass
+2016-01-27 17:15:30,675 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:30,675 DEBUG [EBManual_Application_JSSTTL-116705] Executing link_Click function:
+2016-01-27 17:15:31,265 DEBUG [EBManual_Application_JSSTTL-116705] Executing Click function
+2016-01-27 17:15:32,275 DEBUG [EBManual_Application_JSSTTL-116705] Exiting Click function
+2016-01-27 17:15:32,275 DEBUG [EBManual_Application_JSSTTL-116705] Application_test_link clicked successfully
+2016-01-27 17:15:32,275 DEBUG [EBManual_Application_JSSTTL-116705] TestStepResult of link_Click: Pass
+2016-01-27 17:15:32,276 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:32,276 DEBUG [EBManual_Application_JSSTTL-116705] Executing validate_PageTitle function:
+2016-01-27 17:15:32,296 DEBUG [EBManual_Application_JSSTTL-116705] The title of the page is *********************************: Application JS Test
+2016-01-27 17:15:32,296 DEBUG [EBManual_Application_JSSTTL-116705] The page title found is correct
+2016-01-27 17:15:32,296 DEBUG [EBManual_Application_JSSTTL-116705] Result of validate_PageTitle: pass
+2016-01-27 17:15:32,296 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:32,296 DEBUG [EBManual_Application_JSSTTL-116705] Executing SelectTestToRun function:
+2016-01-27 17:15:35,295 DEBUG [EBManual_Application_JSSTTL-116705] Successfull in selecting clicking the category
+2016-01-27 17:15:35,295 DEBUG [EBManual_Application_JSSTTL-116705] TestStepResult of SelectTestToRun: pass
+2016-01-27 17:15:35,295 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:35,295 DEBUG [EBManual_Application_JSSTTL-116705] Executing ClickRunTest function:
+2016-01-27 17:15:35,662 DEBUG [EBManual_Application_JSSTTL-116705] Executing Click function
+2016-01-27 17:15:36,617 DEBUG [EBManual_Application_JSSTTL-116705] Exiting Click function
+2016-01-27 17:15:36,617 DEBUG [EBManual_Application_JSSTTL-116705] runtest_top_xpath Button clicked Successfully
+2016-01-27 17:15:36,617 DEBUG [EBManual_Application_JSSTTL-116705] TestStepResult of ClickRunTest: pass
+2016-01-27 17:15:36,617 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:36,617 DEBUG [EBManual_Application_JSSTTL-116705] Executing validate_Text_Exists function:
+2016-01-27 17:15:37,270 DEBUG [EBManual_Application_JSSTTL-116705] VT281-0020 Testcase Text found
+2016-01-27 17:15:37,270 DEBUG [EBManual_Application_JSSTTL-116705] Result of validate_Text_Exists: Pass
+2016-01-27 17:15:37,271 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:37,271 DEBUG [EBManual_Application_JSSTTL-116705] Executing ClickRunTest function:
+2016-01-27 17:15:37,633 DEBUG [EBManual_Application_JSSTTL-116705] Executing Click function
+2016-01-27 17:15:38,580 DEBUG [EBManual_Application_JSSTTL-116705] Exiting Click function
+2016-01-27 17:15:38,580 DEBUG [EBManual_Application_JSSTTL-116705] runtest_bottom_xpath Button clicked Successfully
+2016-01-27 17:15:38,580 DEBUG [EBManual_Application_JSSTTL-116705] TestStepResult of ClickRunTest: pass
+2016-01-27 17:15:38,580 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:15:38,580 DEBUG [EBManual_Application_JSSTTL-116705] Executing wait function:
+2016-01-27 17:15:38,580 DEBUG [EBManual_Application_JSSTTL-116705] Started Executing wait function
+2016-01-27 17:16:08,582 DEBUG [EBManual_Application_JSSTTL-116705] Exiting from wait function
+2016-01-27 17:16:08,582 DEBUG [EBManual_Application_JSSTTL-116705] TestStepResult of wait: Pass
+2016-01-27 17:16:08,582 DEBUG [EBManual_Application_JSSTTL-116705] In execute keyword function
+2016-01-27 17:16:08,582 DEBUG [EBManual_Application_JSSTTL-116705] Executing validate_PageTitle function:
+2016-01-27 17:16:08,624 DEBUG [EBManual_Application_JSSTTL-116705] The title of the page is *********************************: Google
+2016-01-27 17:16:08,624 DEBUG [EBManual_Application_JSSTTL-116705] The page title found is correct
+2016-01-27 17:16:08,625 DEBUG [EBManual_Application_JSSTTL-116705] Result of validate_PageTitle: pass
+2016-01-27 17:16:08,625 DEBUG [EBManual_Application_JSSTTL-116705] allstep_result contains: PasspasspasspassPassPassnull
+2016-01-27 17:16:08,625 DEBUG [EBManual_Application_JSSTTL-116705] allexpected_result contains: nullpassnullPassnullpassnullpassnull
+2016-01-27 17:16:08,625 DEBUG [EBManual_Application_JSSTTL-116705] Testcase_Result contains: nullpassnullPassnullpassnullpassnullPasspasspasspassPassPassnull
+2016-01-27 17:16:08,625 DEBUG [EBManual_Application_JSSTTL-116705] Test case with description set StartUri to a web page google Pass
+2016-01-27 17:16:09,623 DEBUG [EBManual_Application_JSSTTL-116705] Executing browser_Quit function
+2016-01-27 17:16:09,623 DEBUG [EBManual_Application_JSSTTL-116705] Completed browser_Quit function
+2016-01-27 17:16:09,623 DEBUG [EBManual_Application_JSSTTL-116705] Completed quitSelendroid function
+2016-01-27 17:16:09,628 DEBUG [EBManual_Application_JSSTTL-116705] Row number:6
+2016-01-27 17:16:09,720 DEBUG [EBManual_Application_JSSTTL-116705] Ending Test Case IDSTTL-116705

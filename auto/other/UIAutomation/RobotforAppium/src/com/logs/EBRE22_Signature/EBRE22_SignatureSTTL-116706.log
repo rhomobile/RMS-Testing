@@ -1,0 +1,61 @@
+2016-01-28 05:14:52,349 DEBUG [EBRE22_SignatureSTTL-116706] Executing Test Case ID: STTL-116706
+2016-01-28 05:14:52,355 DEBUG [EBRE22_SignatureSTTL-116706] Executing Init_Selendroid function with APK as parameter and clear data value with 1
+2016-01-28 05:15:02,814 DEBUG [EBRE22_SignatureSTTL-116706] Exiting Init_Selendroid function
+2016-01-28 05:15:02,829 DEBUG [EBRE22_SignatureSTTL-116706] TestCase with Description "SignatureCapture with height" Execution started
+2016-01-28 05:15:02,830 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:02,830 DEBUG [EBRE22_SignatureSTTL-116706] Executing wait function:
+2016-01-28 05:15:02,830 DEBUG [EBRE22_SignatureSTTL-116706] Started Executing wait function
+2016-01-28 05:15:06,830 DEBUG [EBRE22_SignatureSTTL-116706] Exiting from wait function
+2016-01-28 05:15:06,830 DEBUG [EBRE22_SignatureSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 05:15:06,830 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:06,830 DEBUG [EBRE22_SignatureSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 05:15:06,876 DEBUG [EBRE22_SignatureSTTL-116706] The title of the page is *********************************: RE 2.2 Tests
+2016-01-28 05:15:06,877 DEBUG [EBRE22_SignatureSTTL-116706] The page title found is correct
+2016-01-28 05:15:06,877 DEBUG [EBRE22_SignatureSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 05:15:06,877 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:06,877 DEBUG [EBRE22_SignatureSTTL-116706] Executing link_Click function:
+2016-01-28 05:15:07,603 DEBUG [EBRE22_SignatureSTTL-116706] Executing Click function
+2016-01-28 05:15:08,960 DEBUG [EBRE22_SignatureSTTL-116706] Exiting Click function
+2016-01-28 05:15:08,960 DEBUG [EBRE22_SignatureSTTL-116706] signature_test_link clicked successfully
+2016-01-28 05:15:08,960 DEBUG [EBRE22_SignatureSTTL-116706] TestStepResult of link_Click: Pass
+2016-01-28 05:15:08,960 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:08,960 DEBUG [EBRE22_SignatureSTTL-116706] Executing wait function:
+2016-01-28 05:15:08,960 DEBUG [EBRE22_SignatureSTTL-116706] Started Executing wait function
+2016-01-28 05:15:10,960 DEBUG [EBRE22_SignatureSTTL-116706] Exiting from wait function
+2016-01-28 05:15:10,960 DEBUG [EBRE22_SignatureSTTL-116706] TestStepResult of wait: Pass
+2016-01-28 05:15:10,960 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:10,960 DEBUG [EBRE22_SignatureSTTL-116706] Executing validate_PageTitle function:
+2016-01-28 05:15:10,998 DEBUG [EBRE22_SignatureSTTL-116706] The title of the page is *********************************: Signature
+2016-01-28 05:15:10,998 DEBUG [EBRE22_SignatureSTTL-116706] The page title found is correct
+2016-01-28 05:15:10,998 DEBUG [EBRE22_SignatureSTTL-116706] Result of validate_PageTitle: pass
+2016-01-28 05:15:10,998 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:10,998 DEBUG [EBRE22_SignatureSTTL-116706] Executing SelectTestToRun function:
+2016-01-28 05:15:13,945 DEBUG [EBRE22_SignatureSTTL-116706] Successfull in selecting clicking the category
+2016-01-28 05:15:13,945 DEBUG [EBRE22_SignatureSTTL-116706] TestStepResult of SelectTestToRun: pass
+2016-01-28 05:15:13,945 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:13,945 DEBUG [EBRE22_SignatureSTTL-116706] Executing validate_Text_Exists function:
+2016-01-28 05:15:14,232 DEBUG [EBRE22_SignatureSTTL-116706] VT187-0829 Testcase Text found
+2016-01-28 05:15:14,232 DEBUG [EBRE22_SignatureSTTL-116706] Result of validate_Text_Exists: Pass
+2016-01-28 05:15:14,232 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:14,232 DEBUG [EBRE22_SignatureSTTL-116706] Executing ClickRunTest function:
+2016-01-28 05:15:14,601 DEBUG [EBRE22_SignatureSTTL-116706] Executing Click function
+2016-01-28 05:15:15,840 DEBUG [EBRE22_SignatureSTTL-116706] Exiting Click function
+2016-01-28 05:15:15,840 DEBUG [EBRE22_SignatureSTTL-116706] runtest_top_xpath Button clicked Successfully
+2016-01-28 05:15:15,841 DEBUG [EBRE22_SignatureSTTL-116706] TestStepResult of ClickRunTest: pass
+2016-01-28 05:15:15,841 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:15,841 DEBUG [EBRE22_SignatureSTTL-116706] Executing validate_isIconDisplayed function:
+2016-01-28 05:15:15,841 DEBUG [EBRE22_SignatureSTTL-116706] Entered validate_isIconDisplayed function
+2016-01-28 05:15:16,255 DEBUG [EBRE22_SignatureSTTL-116706] Result of validate_isIconDisplayed: Pass
+2016-01-28 05:15:16,255 DEBUG [EBRE22_SignatureSTTL-116706] In execute keyword function
+2016-01-28 05:15:16,255 DEBUG [EBRE22_SignatureSTTL-116706] Executing validate_Iconposition function:
+2016-01-28 05:15:16,255 DEBUG [EBRE22_SignatureSTTL-116706] Entered validate_Iconposition function
+2016-01-28 05:15:17,200 DEBUG [EBRE22_SignatureSTTL-116706] Result of validate_Iconposition: Pass
+2016-01-28 05:15:17,200 DEBUG [EBRE22_SignatureSTTL-116706] allstep_result contains: passpassPassPassPassnull
+2016-01-28 05:15:17,201 DEBUG [EBRE22_SignatureSTTL-116706] allexpected_result contains: nullPassPassnullPassnullpassnullpassnull
+2016-01-28 05:15:17,201 DEBUG [EBRE22_SignatureSTTL-116706] Testcase_Result contains: nullPassPassnullPassnullpassnullpassnullpasspassPassPassPassnull
+2016-01-28 05:15:17,201 DEBUG [EBRE22_SignatureSTTL-116706] Test case with description SignatureCapture with height Pass
+2016-01-28 05:15:18,107 DEBUG [EBRE22_SignatureSTTL-116706] Executing browser_Quit function
+2016-01-28 05:15:18,107 DEBUG [EBRE22_SignatureSTTL-116706] Completed browser_Quit function
+2016-01-28 05:15:18,107 DEBUG [EBRE22_SignatureSTTL-116706] Completed quitSelendroid function
+2016-01-28 05:15:18,107 DEBUG [EBRE22_SignatureSTTL-116706] Row number:7
+2016-01-28 05:15:18,138 DEBUG [EBRE22_SignatureSTTL-116706] Ending Test Case IDSTTL-116706
