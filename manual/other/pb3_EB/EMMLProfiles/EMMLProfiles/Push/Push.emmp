@@ -1,6 +1,0 @@
-.PushLocate{
-    push-port:8080;    
-    push-passkey:123456;
-    push-start;
-   }
-

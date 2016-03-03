@@ -1,6 +1,0 @@
-@font-face {
-  font-family: 'Paytone One';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Paytone One'), local('PaytoneOne'), url(http://themes.googleusercontent.com/static/fonts/paytoneone/v5/D_d4Nj6jwG2cmUCLYeqgKYbN6UDyHWBl620a-IRfuBk.woff) format('woff');
-}

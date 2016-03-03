@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-xmlns:xlink="http://www.w3.org/1999/xlink">
-   <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
-  <a xlink:href="rectangle.svg" >
-    <text x="20" y="200" fill="red">Next test rectangle</text>
-  </a>
-</svg>

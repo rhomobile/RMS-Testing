@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-xmlns:xlink="http://www.w3.org/1999/xlink">
-
-      <polygon points="220,10 300,210 170,250 123,234" style="fill:lime;stroke:purple;stroke-width:1" />
-	  
-  <a xlink:href="astar.svg" >
-    <text x="20" y="200" fill="red">Next test astar</text>
-  </a>
-</svg>

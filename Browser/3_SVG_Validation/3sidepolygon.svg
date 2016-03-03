@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-xmlns:xlink="http://www.w3.org/1999/xlink">
-
-      <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />
-	  
-  <a xlink:href="4sidepolygon.svg" >
-    <text x="20" y="200" fill="red">Next test polygon 4 sides</text>
-  </a>
-</svg>

@@ -1,2 +1,0 @@
-public/app/spec/new_orm_spec.js
---

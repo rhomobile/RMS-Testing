@@ -1,7 +1,0 @@
-ext/platform/android/generated/jni/Dummy.cpp
-ext/platform/android/generated/jni/dummy_ruby_wrap.cpp
-ext/platform/android/generated/jni/dummy_js_wrap.cpp
-ext/platform/android/jni/Dummy_impl.cpp
-ext/shared/generated/dummy_api_init.cpp
-ext/shared/generated/dummy_js_api.cpp
-ext/shared/generated/dummy_ruby_api.c
