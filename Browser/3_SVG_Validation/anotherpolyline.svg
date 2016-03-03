@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-xmlns:xlink="http://www.w3.org/1999/xlink">
-
-     <polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,160" style="fill:white;stroke:red;stroke-width:4" />
-	 
-  <a xlink:href="apath.svg" >
-    <text x="20" y="200" fill="red">Next test apath</text>
-  </a>
-</svg>

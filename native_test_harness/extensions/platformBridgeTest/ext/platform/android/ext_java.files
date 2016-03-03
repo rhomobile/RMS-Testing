@@ -1,9 +1,0 @@
-ext/platform/android/generated/src/com/rho/platformbridgetest/PlatformBridgeTestBase.java
-ext/platform/android/generated/src/com/rho/platformbridgetest/PlatformBridgeTestFactorySingleton.java
-ext/platform/android/generated/src/com/rho/platformbridgetest/PlatformBridgeTestSingletonBase.java
-ext/platform/android/generated/src/com/rho/platformbridgetest/IPlatformBridgeTest.java
-ext/platform/android/generated/src/com/rho/platformbridgetest/IPlatformBridgeTestFactory.java
-ext/platform/android/generated/src/com/rho/platformbridgetest/IPlatformBridgeTestSingleton.java
-ext/platform/android/src/com/rho/platformbridgetest/PlatformBridgeTest.java
-ext/platform/android/src/com/rho/platformbridgetest/PlatformBridgeTestFactory.java
-ext/platform/android/src/com/rho/platformbridgetest/PlatformBridgeTestSingleton.java

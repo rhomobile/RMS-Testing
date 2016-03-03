@@ -1,2 +1,0 @@
-public/added/added_image.png
-public/file_for_replace.txt

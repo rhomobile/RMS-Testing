@@ -1,2 +1,0 @@
-app/BundleTest/image.png
-app/BundleTest/pageadded.erb

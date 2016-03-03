@@ -1,7 +1,0 @@
-AuthType Basic
-AuthName "Restricted Files"
-# (Following line optional)
-#AuthDigestProvider file
-#AuthDigestDomain /rhodes/digest/ http://192.168.6.27/rhodes/digest/
-AuthUserFile C:\xampp\apache\password\basic
-Require user admin 
