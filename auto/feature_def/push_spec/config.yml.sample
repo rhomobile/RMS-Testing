@@ -1,12 +1,10 @@
 # path to local rhodes workspace
-# rhodes: "C:/MotorolaRhoMobileSuite4.0.0.beta.43/ruby/lib/ruby/gems/1.9.1/gems/rhodes-4.0.0.beta.43"
 rhodes: "../../../../rhodes"
 
 # path to local rhoconnect workspace
 rhoconnect: "../../../../rhoconnect"
 
 # path to rhoelements
-rhoelements: "../../../../Motorola-Extensions"
 
 # path to testsuite_root
 testsuite_root: "../../../../RMS-Testing"

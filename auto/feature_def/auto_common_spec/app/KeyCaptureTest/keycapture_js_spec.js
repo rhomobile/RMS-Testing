@@ -1083,7 +1083,7 @@ describe("KeyCapture JS API", function()
 
 	if (!isWindowsMobilePlatform) //putting check for WM because of issues in instumentation API for WM
 	{
-		if (isWindowsMobileOrAndroidPlatform() && Rho.System.isMotorolaDevice == true) 
+		if (isWindowsMobileOrAndroidPlatform() && Rho.System.isSymbolDevice == true) 
 		{
 			describe("Trigger", function()
 			{

@@ -21,6 +21,4 @@ android:
   version: 4.2.2
 app_type: rhoelements
 
-motorola_license: <put_rhoelements_license_here>
-
 extensions: ["json", "rhoconnect-client", "rhoconnect-push"]

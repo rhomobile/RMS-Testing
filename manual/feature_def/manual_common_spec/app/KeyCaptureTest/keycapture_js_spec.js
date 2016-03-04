@@ -495,7 +495,7 @@ describe("KeyCapture Test", function() {
 		//  CaptureTrigger Tests
 		///////////////////////////////////////////////////////////////////////
 
-		if (isWindowsMobileOrAndroidPlatform() && Rho.System.isMotorolaDevice == true) 
+		if (isWindowsMobileOrAndroidPlatform() && Rho.System.isSymbolDevice == true) 
 		{
 			it("VT289-035 | call captureTrigger with function callback |", function() {
 

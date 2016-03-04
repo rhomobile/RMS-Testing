@@ -25,7 +25,6 @@ android:
 extensions: ["json", "rhoconnect-client", "rhoconnect-push"]
 paths:
   extensions:
-    - "/Users/rhomobile/Jenkins/Home/workspace/Motorola-Extensions/extensions"
     - "/Users/rhomobile/Jenkins/Home/workspace/rhoconnect-client/ext"
 sdk: /Users/rhomobile/Jenkins/Home/workspace/rhodes
 

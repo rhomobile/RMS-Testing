@@ -62,7 +62,7 @@ describe("WebView JS API", function () {
 
     /* ----------          platform dependent specs          ---------- */
 
-    if (Rho.System.webviewFramework != "WEBKIT/MOTOROLA") {
+    if (Rho.System.webviewFramework != "WEBKIT/SYMBOL") {
         it("Test setCookie method", function () {
             expect(Rho.WebView.setCookie("http://localhost", "specCookie=123"));
         });

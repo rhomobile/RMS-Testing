@@ -24,7 +24,7 @@
 		<link>
 			<name>framework</name>
 			<type>2</type>
-			<location>C:/MotorolaRhoMobileSuite4.1.1/ruby/lib/ruby/gems/1.9.1/gems/rhodes-4.1.1/lib/framework</location>
+			<location>C:/RhoMobileSuite5.4.0/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.4.0/lib/framework</location>
 		</link>
 	</linkedResources>
 </projectDescription>

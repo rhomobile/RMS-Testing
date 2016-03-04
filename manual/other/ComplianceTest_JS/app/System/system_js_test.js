@@ -57,8 +57,8 @@
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-024 | call getProperty with isMotorolaDevice | ",
-		propertyName	:	"isMotorolaDevice",
+		testName		:	"VT300-024 | call getProperty with isSymbolDevice | ",
+		propertyName	:	"isSymbolDevice",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
@@ -69,7 +69,7 @@
 	{
 		testName		:	"VT300-033 | call getProperty with oemInfo | ",
 		propertyName	:	"oemInfo",
-		osType			: 	["WINDOWS","ANDROID","MOTOROLA"]
+		osType			: 	["WINDOWS","ANDROID","SYMBOL"]
 	},
 	
 	{
@@ -116,7 +116,7 @@
 	{
 		testName		:	"VT300-059 | call getProperty with uuid | ",
 		propertyName	:	"uuid",
-		osType			: 	["WINDOWS","ANDROID","MOTOROLA"]
+		osType			: 	["WINDOWS","ANDROID","SYMBOL"]
 	},
 	{
 		testName		:	"VT300-060 | call getProperty with webviewFramework | ",
@@ -185,8 +185,8 @@
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
-		testName		:	"VT300-152 | call getproperties with isMotorolaDevice | ",
-		propertyName	:	"isMotorolaDevice",
+		testName		:	"VT300-152 | call getproperties with isSymbolDevice | ",
+		propertyName	:	"isSymbolDevice",
 		osType			: 	["WINDOWS","ANDROID","APPLE","WP8","WINDOWS_DESKTOP"]
 	},
 	{
@@ -202,7 +202,7 @@
 	{
 		testName		:	"VT300-161 | call getproperties with oemInfo | ",
 		propertyName	:	"oemInfo",
-		osType			: 	["WINDOWS","ANDROID","MOTOROLA"]
+		osType			: 	["WINDOWS","ANDROID","SYMBOL"]
 	},
 	{
 		testName		:	"VT300-162 | call getproperties with osVersion | ",
@@ -259,7 +259,7 @@
 	{
 		testName		:	"VT300-183 | call getproperties with uuid | ",
 		propertyName	:	"uuid",
-		osType			: 	["WINDOWS","ANDROID","MOTOROLA"]
+		osType			: 	["WINDOWS","ANDROID","SYMBOL"]
 	},
 	{
 		testName		:	"VT300-184 | call getproperties with webviewFramework | ",

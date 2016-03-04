@@ -1032,7 +1032,7 @@ testCases = [
 		propertyName	:	"matrix2of5",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"Motorola ES400|MC45",
+		excludedDevices	:	"ES400|MC45",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1041,7 +1041,7 @@ testCases = [
 		propertyName	:	"matrix2of5maxLength",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"Motorola ES400|MC45",
+		excludedDevices	:	"ES400|MC45",
 		excludedOS		:	"",
 		values			:	["10", "35", "55"]
 	},
@@ -1050,7 +1050,7 @@ testCases = [
 		propertyName	:	"matrix2of5minLength",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"Motorola ES400|MC45",
+		excludedDevices	:	"ES400|MC45",
 		excludedOS		:	"",
 		values			:	["10", "35", "55"]
 	},
@@ -1059,7 +1059,7 @@ testCases = [
 		propertyName	:	"matrix2of5reportCheckDigit",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"Motorola ES400|MC45",
+		excludedDevices	:	"ES400|MC45",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1068,7 +1068,7 @@ testCases = [
 		propertyName	:	"matrix2of5verifyCheckDigit",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"Motorola ES400|MC45",
+		excludedDevices	:	"ES400|MC45",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1212,7 +1212,7 @@ testCases = [
 		propertyName	:	"ausPostal",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1221,7 +1221,7 @@ testCases = [
 		propertyName	:	"canPostal",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1230,7 +1230,7 @@ testCases = [
 		propertyName	:	"dutchPostal",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1239,7 +1239,7 @@ testCases = [
 		propertyName	:	"japPostal",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1248,7 +1248,7 @@ testCases = [
 		propertyName	:	"ukPostal",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1266,7 +1266,7 @@ testCases = [
 		propertyName	:	"us4state",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1275,7 +1275,7 @@ testCases = [
 		propertyName	:	"us4stateFics",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		excludedOS		:	"",
 		values			:	["true", "false"]
@@ -1285,7 +1285,7 @@ testCases = [
 		propertyName	:	"usPlanet",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1303,7 +1303,7 @@ testCases = [
 		propertyName	:	"usPostNet",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1564,7 +1564,7 @@ testCases = [
 		propertyName	:	"webcode",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},
@@ -1573,7 +1573,7 @@ testCases = [
 		propertyName	:	"webcodeDecodeGtSubtype",
 		propertyRW		: 	"RW",
 		scannerTypes	:	"",
-		excludedDevices	:	"MC45|Motorola MC92N0G",
+		excludedDevices	:	"MC45|MC92N0G",
 		excludedOS		:	"",
 		values			:	["true", "false"]
 	},

@@ -32,6 +32,5 @@ wm:
   #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
   extensions: ["barcode", "screenorientation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle", "mediacapture"]
 #capabilities:
-#- non_motorola_device
 
 extensions: ["genPropBag", "logCapture"]

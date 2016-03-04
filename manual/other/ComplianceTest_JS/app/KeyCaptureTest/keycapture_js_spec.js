@@ -135,7 +135,7 @@ describe("KeyCapture Test", function() {
 			//  CaptureTrigger and Remap Tests
 			///////////////////////////////////////////////////////////////////////
 
-			if (isWindowsMobileOrAndroidPlatform() && Rho.System.isMotorolaDevice == true) 
+			if (isWindowsMobileOrAndroidPlatform() && Rho.System.isSymbolDevice == true) 
 			{
 
 				it("VT200-0355 | call captureTrigger with callback as anonymous function |", function() {

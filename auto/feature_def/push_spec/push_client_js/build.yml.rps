@@ -25,6 +25,5 @@ extensions:
 - rhoconnect-client
 paths:
   extensions:
-  - ../../../../../Motorola-Extensions/extensions
   - ../../../../../rhoconnect-client/ext
 sdk: ../../../../../rhodes

@@ -56,8 +56,8 @@ class ContactsController < Rho::RhoController
     $conMobNum = rand(10 ** 10).to_s.rjust(10,'0')
     $conBusNum = rand(10 ** 10).to_s.rjust(10,'0')
     $concoreId =  (0...3).map{ p[rand(p.length)] }.join + rand(3 ** 3).to_s.rjust(3,'0')
-    $conEmail = $concoreId + "@motorolasolutions.com"
-    $conComp = "Motorola Solutions"
+    $conEmail = $concoreId + "@symbol.com"
+    $conComp = "Symbol Technologies"
   end
   
   # Test Case ID VT229-0003

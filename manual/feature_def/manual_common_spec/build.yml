@@ -58,8 +58,6 @@ wm:
 
 #paths:
 #  extensions:
-#    - C:/work/Motorola-Extensions/extensions
-#    - C:/work/Motorola-Extensions/lib/commonAPI
 
 #minify:
 #  js: false

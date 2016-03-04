@@ -13,7 +13,6 @@ describe("Barcode Ruby API Test", function() {
 		var deviceOS = Rho.System.platform;
 		var deviceType = Rho.System.deviceName;
 		//alert(deviceType);
-		//var excludedDevices = "MC45|Motorola MC92N0G";
 		//alert(excludedDevices == "" || (excludedDevices != "" && excludedDevices.toLowerCase().indexOf(deviceType.toLowerCase()) == -1));
 		var currentK = -1;
 		

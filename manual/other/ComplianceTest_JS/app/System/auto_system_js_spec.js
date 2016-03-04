@@ -153,8 +153,8 @@ describe("System JS API", function () {
 
             it("VT278-194 | set and getRegistry setting with HKCU and persistence as False and Type as String | Test123", function () {
 
-                Rho.System.setRegistrySetting({hive: 'HKCU', type: 'String', key: 'Software', setting: 'Motorola', value: 'Test123', persistent: false});
-                var data = Rho.System.getRegistrySetting({hive: 'HKCU', key: 'Software', setting: 'Motorola'});
+                Rho.System.setRegistrySetting({hive: 'HKCU', type: 'String', key: 'Software', setting: 'Symbol', value: 'Test123', persistent: false});
+                var data = Rho.System.getRegistrySetting({hive: 'HKCU', key: 'Software', setting: 'Symbol'});
                 expect(data).toEqual('Test123');
 
             });

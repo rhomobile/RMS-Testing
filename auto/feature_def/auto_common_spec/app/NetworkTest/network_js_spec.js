@@ -1042,7 +1042,7 @@ describe('Network JS API', function() {
           url: srvHttpUploadTextFileUrlAuth,
           authType: "basic",
           authUser: "admin",
-          authPassword: "Motorola@123",
+          authPassword: "Symbol@123",
           filename: fname,
           body: "uploading file",
           fileContentType: "image/png"

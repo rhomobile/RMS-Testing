@@ -25,7 +25,6 @@ android:
 extensions: ["json", "rhoconnect-client", "rhoconnect-push"]
 paths:
   extensions:
-    - "../../../../../Motorola-Extensions/extensions"
     - "../../../../../rhoconnect-client/ext"
 sdk: ../../../../../rhodes
 

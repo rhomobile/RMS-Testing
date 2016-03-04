@@ -230,7 +230,7 @@ end
 
 $local_server.mount_proc '/upload_text_file_auth' do |req,res|
     WEBrick::HTTPAuth.basic_auth(req, res, "My Realm") {|user, pass|
-        user == 'admin' && pass == 'Motorola@123'
+        user == 'admin' && pass == 'Symbol@123'
     }
 
     res.status = 200

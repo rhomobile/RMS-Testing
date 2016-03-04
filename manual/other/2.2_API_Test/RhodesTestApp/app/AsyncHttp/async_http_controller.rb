@@ -202,7 +202,7 @@ class AsyncHttpController < Rho::RhoController
       :authentication => {
            :type => :basic,
            :username => "admin",
-           :password => "Motorola@123"
+           :password => "Symbol@123"
          },
       :callback_param => "" )
   end

@@ -89,8 +89,8 @@ describe("System", function() {
 	        expect(Rho.System.hasCalendar).isBoolean();
 	    });
 	
-	    it("Test isMotorolaDevice property", function () {
-	        expect(Rho.System.isMotorolaDevice).isBoolean();
+	    it("Test isSymbolDevice property", function () {
+	        expect(Rho.System.isSymbolDevice).isBoolean();
 	    });
 	
 	    it("Test default value of localServerPort property", function () {
