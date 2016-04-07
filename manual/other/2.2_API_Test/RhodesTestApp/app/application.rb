@@ -16,7 +16,7 @@ class AppApplication < Rho::RhoApplication
   
   at_exit do
     puts "at_exit"
-    Alert.show_popup("Application Is Closed")
+    #Alert.show_popup("Application Is Closed")
   end
   
 end
