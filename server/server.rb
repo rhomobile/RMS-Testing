@@ -487,16 +487,16 @@ js_update_list.each do |path|
     end
 end
 
-ruby_update_list = [
-    '../auto/feature_def/phone_spec/app/test_server.rb'
-]
+#ruby_update_list = [
+#    '../auto/feature_def/phone_spec/app/test_server.rb'
+#]
 
-ruby_update_list.each do |path|
-    File.open(path,'w') do |f|
-      f.puts("SPEC_TEST_SERVER_HOST='#{host}';")
-      f.puts("SPEC_TEST_SERVER_PORT=#{port};");
-    end
-end
+#ruby_update_list.each do |path|
+#    File.open(path,'w') do |f|
+#      f.puts("SPEC_TEST_SERVER_HOST='#{host}';")
+#      f.puts("SPEC_TEST_SERVER_PORT=#{port};");
+#    end
+#end
 
 modify_iOS_Application_plist_file(host, port)
 
