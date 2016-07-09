@@ -155,7 +155,7 @@ class SpecRunner < MSpecScript
 
     MSpec.exit_code
 
-    Rho::Log.info("***Terminated","APP")
-    System.exit
+#    Rho::Log.info("***Terminated","APP")
+#    System.exit
   end
 end
