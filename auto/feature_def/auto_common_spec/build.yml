@@ -1,6 +1,6 @@
-sdkversion: 3.3.2
 sdkversion: 5.5
 name: auto_common_spec
+app_type: rhoelements
 version: 1.0
 vendor: rhomobile
 build: release
