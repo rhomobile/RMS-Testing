@@ -1,6 +1,5 @@
-#sdk: c:/work/rhodes
 app_type: "rhoelements"
-sdkversion: "3.5.0"
+sdkversion: "5.5"
 name: "manual_common_spec"
 version: 1.0
 vendor: "rhomobile"
@@ -38,7 +37,7 @@ symbian:
 android:
   no_compression: [pdf, png, html, js, css]
   ajax_api_bridge: false
-  version: "4.0.3"
+  version: "4.4.2"
   manifest_template: AndroidManifest.erb
   extensions:
     - emdk3-manager
