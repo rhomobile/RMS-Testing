@@ -13,7 +13,7 @@ capabilities:
 
 iphone:
   ajax_api_bridge: false
-  sdk: "iphoneos8.3"
+  sdk: "iphoneos9.2"
   configuration: "Release"
   provisionprofile: 
   codesignidentity: "iPhone Developer"
@@ -23,6 +23,8 @@ iphone:
     - barcode
     - mediaplayer
     - screenorientation
+    - audiocapture
+    - mediacapture
   BundleIdentifier: "com.rhomobile.manualcommonspec"
   BundleURLScheme: "manualcommonspec"
 
