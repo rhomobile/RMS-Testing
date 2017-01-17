@@ -11,4 +11,4 @@ project_paths:
   wm: ext/platform/wm/NativeBridgeTest.vcproj
   win32: ext/platform/wm/NativeBridgeTest.vcproj
   
-xml_api_paths: ext/NativeBridgeTest.xml
+xml_api_paths: ext/nativebridgetest.xml
