@@ -130,7 +130,26 @@ describe("Application JS API", function () {
 
         //TODO: implement databaseFilePath method
 
-        //TODO: implement expandDatabaseBlobFilePath method
+        it("Rho.Application.expandDatabaseBlobFilePath should return the absolute path to received relative path", function () {
+            var expected = Rho.RhoFile.join(Rho.Application.databaseBlobFolder, "somefile.png");
+            expect(Rho.Application.expandDatabaseBlobFilePath("db/db-files/somefile.png")).toEqual(expected);
+        });
+
+        it("Rho.Application.expandDatabaseBlobFilePath should return the argument if it starts with file://", function () {
+            expect(Rho.Application.expandDatabaseBlobFilePath("file://somepath/somefile.png")).toEqual("file://somepath/somefile.png");
+        });
+
+        it("Rho.Application.expandDatabaseBlobFilePath should return the argument if it is an absolute path and starts with the application root", function () {
+            var rootFolder = Rho.Application.userFolder.slice(0, -5); // we cut off apps/ at the end
+            var expected = Rho.RhoFile.join(rootFolder, "/somepath/somefile.png");
+            expect(Rho.Application.expandDatabaseBlobFilePath(expected)).toEqual(expected);
+        });
+
+        it("Rho.Application.expandDatabaseBlobFilePath should return the application root path joined with the argument if the argument does not start with the root application path", function () {
+            var rootFolder = Rho.Application.userFolder.slice(0, -5); // we cut off apps at the end
+            var expected = Rho.RhoFile.join(rootFolder, "/somepath/somefile.png");
+            expect(Rho.Application.expandDatabaseBlobFilePath("/somepath/somefile.png")).toEqual(expected);
+        });
 
         //TODO: implement quit method
 
