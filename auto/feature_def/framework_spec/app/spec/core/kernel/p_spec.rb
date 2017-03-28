@@ -51,13 +51,13 @@ describe "Kernel#p" do
     o.should_receive(:inspect).any_number_of_times.and_return "Next time, Gadget, NEXT TIME!"
 
     $, = " *helicopter sound*\n"
-    #lambda { p(o) }.should output_to_fd("Next time, Gadget, NEXT TIME!\n")
+    lambda { p(o) }.should output_to_fd("Next time, Gadget, NEXT TIME!\n")
 
     $\ = " *helicopter sound*\n"
-    #lambda { p(o) }.should output_to_fd("Next time, Gadget, NEXT TIME!\n")
+    lambda { p(o) }.should output_to_fd("Next time, Gadget, NEXT TIME!\n")
 
     $/ = " *helicopter sound*\n"
-    #lambda { p(o) }.should output_to_fd("Next time, Gadget, NEXT TIME!\n")
+    lambda { p(o) }.should output_to_fd("Next time, Gadget, NEXT TIME!\n")
   end
 
   it "prints nothing if no argument is given" do

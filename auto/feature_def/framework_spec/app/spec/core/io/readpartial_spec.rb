@@ -14,14 +14,13 @@ describe "IO#readpartial" do
     @wr.close unless @wr.closed?
   end
 
-if System.get_property('platform') != 'ANDROID'      
   it "raises IOError on closed stream" do
     lambda { IOSpecs.closed_io.readpartial(10) }.should raise_error(IOError)
 
     @rd.close
     lambda { @rd.readpartial(10) }.should raise_error(IOError)
   end
-end
+
   it "reads at most the specified number of bytes" do
     @wr.write("foobar")
 

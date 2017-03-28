@@ -1,14 +1,10 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "TCPSocket#recv_nonblock" do
-  before :all do
-    SocketSpecs::SpecTCPServer.start
-  end
-
   before :each do
-    @hostname = SocketSpecs::SpecTCPServer.get.hostname
-    @socket = nil
+    @server = SocketSpecs::SpecTCPServer.new
+    @hostname = @server.hostname
   end
 
   after :each do
@@ -16,6 +12,7 @@ describe "TCPSocket#recv_nonblock" do
       @socket.write "QUIT"
       @socket.close
     end
+    @server.shutdown
   end
 
   it "returns a String read from the socket" do
@@ -28,5 +25,12 @@ describe "TCPSocket#recv_nonblock" do
     # TODO: Figure out a good way to test non-blocking.
     IO.select([@socket])
     @socket.recv_nonblock(50).should == "TCPSocket#recv_nonblock"
+  end
+
+  ruby_version_is '2.3' do
+    it 'returns :wait_readable in exceptionless mode' do
+      @socket = TCPSocket.new @hostname, SocketSpecs.port
+      @socket.recv_nonblock(50, exception: false).should == :wait_readable
+    end
   end
 end

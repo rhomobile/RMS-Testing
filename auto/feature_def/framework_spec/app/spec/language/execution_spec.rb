@@ -1,6 +1,5 @@
 require File.expand_path('../../spec_helper', __FILE__)
 
-=begin
 describe "``" do
   it "returns the output of the executed sub-process" do
     ip = 'world'
@@ -14,4 +13,3 @@ describe "%x" do
     %x(echo disc #{ip}).should == "disc world\n"
   end
 end
-=end

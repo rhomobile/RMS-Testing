@@ -9,25 +9,8 @@ class Object
 end
 
 module ArraySpecs
-  not_compliant_on :rubinius do
-    def self.max_32bit_size
-      2**32/4
-    end
-
-    def self.max_64bit_size
-      2**64/8
-    end
-  end
-
-  deviates_on :rubinius do
-    def self.max_32bit_size
-      2**30-1
-    end
-
-    def self.max_64bit_size
-      2**62-1
-    end
-  end
+  SampleRange = 0..1000
+  SampleCount = 1000
 
   def self.frozen_array
     frozen_array = [1,2,3]
@@ -160,15 +143,6 @@ module ArraySpecs
   class Uncomparable
     def <=>(obj)
       nil
-    end
-  end
-
-  # Useful for shared specs where you pass in an object as the third argument.
-  # @object.new(a,b,c) creates an Array-like object with elements a, b, and c.
-  # This class allows a similar constructor for Array
-  class NewArray
-    def self.new(*args)
-      args
     end
   end
 
@@ -541,4 +515,11 @@ module ArraySpecs
  "test_schema_migrations_table_name",
  "test_target_version_zero_should_run_only_once"]
 
+  class PrivateToAry
+    private
+
+    def to_ary
+      [1, 2, 3]
+    end
+  end
 end

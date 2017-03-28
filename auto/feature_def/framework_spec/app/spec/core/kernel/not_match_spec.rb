@@ -1,7 +1,15 @@
 require File.expand_path('../../../spec_helper', __FILE__)
+require File.expand_path('../fixtures/classes', __FILE__)
 
-ruby_version_is "1.9" do
-  describe "Kernel#!~" do
-    it "needs to be reviewed for spec completeness"
+describe "Kernel#!~" do
+  it 'calls =~ internally and negates the result' do
+    obj = Object.new
+    obj.should_receive(:=~).and_return(true)
+    (obj !~ :foo).should == false
+  end
+
+  it 'can be overridden in subclasses' do
+    obj = KernelSpecs::NotMatch.new
+    (obj !~ :bar).should == :foo
   end
 end

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/common', __FILE__)
 require File.expand_path('../shared/pwd', __FILE__)
@@ -12,40 +13,27 @@ describe "Dir.pwd" do
   end
 
   it_behaves_like :dir_pwd, :pwd
+end
 
-  ruby_version_is ""..."1.9" do
-    it "correctly displays dirs with unicode characters in them" do
-      DirSpecs.clear_dirs
-
-      begin
-        old_kcode, $KCODE=$KCODE,'u'
-        str = [0xe9].pack 'U' #Unicode È
-        Dir.mkdir str
-        File.exist?(str).should == true
-
-        old_pwd = Dir.pwd
-        Dir.chdir(str) { Dir.pwd.should == File.join(old_pwd, str) }
-      ensure
-        DirSpecs.clear_dirs
-        $KCODE=old_kcode
-      end
-    end
+describe "Dir.pwd" do
+  before :each do
+    @name = tmp("„ÅÇ").force_encoding('binary')
+    @fs_encoding = Encoding.find('filesystem')
   end
 
-  ruby_version_is "1.9" do
-    #it "correctly displays dirs with unicode characters in them" do
-    #  DirSpecs.clear_dirs
+  after :each do
+    rm_r @name
+  end
 
-    #  begin
-    #    str = [0xe9].pack 'U' #Unicode È
-    #    Dir.mkdir str
-    #    File.exist?(str).should == true
-    #
-    #    old_pwd = Dir.pwd
-    #    Dir.chdir(str) { Dir.pwd.force_encoding('UTF-8').should == File.join(old_pwd, str) }
-    #  ensure
-    #    DirSpecs.clear_dirs
-    #  end
-    #end
+  platform_is_not :windows do
+    it "correctly handles dirs with unicode characters in them" do
+      Dir.mkdir @name
+      Dir.chdir @name do
+        if @fs_encoding == Encoding::UTF_8
+          Dir.pwd.encoding.should == Encoding::UTF_8
+        end
+        Dir.pwd.force_encoding('binary').should == @name
+      end
+    end
   end
 end

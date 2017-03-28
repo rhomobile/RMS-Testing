@@ -35,6 +35,14 @@ module MethodSpecs
       [:handled_via_method_missing, :also_handled].include? method
     end
 
+    def method_missing(method, *arguments)
+      if [:handled_via_method_missing, :also_handled].include? method
+        arguments
+      else
+        super
+      end
+    end
+
     attr_accessor :attr
 
     def zero; end
@@ -69,12 +77,20 @@ module MethodSpecs
     def two_req_one_opt_with_splat_and_block(a, b, c=nil, *d, &blk); end
     def one_req_two_opt_with_splat_and_block(a, b=nil, c=nil, *d, &blk); end
 
+    def one_key(a: 1); end
+    def one_keyrest(**a); end
+
+    def one_keyreq(a:); end
+
     define_method(:zero_defined_method, Proc.new {||})
     define_method(:zero_with_splat_defined_method, Proc.new {|*x|})
     define_method(:one_req_defined_method, Proc.new {|x|})
     define_method(:two_req_defined_method, Proc.new {|x, y|})
     define_method(:no_args_defined_method) {}
-    define_method(:two_grouped_defined_method) {|(x1,x2)|}
+    define_method(:two_grouped_defined_method) {|(_x1,_x2)|}
+
+    attr_reader :reader
+    attr_writer :writer
   end
 
   module MyMod
@@ -91,12 +107,24 @@ module MethodSpecs
     def baz(a, b)
       self.class
     end
+    def overridden; end
   end
 
   class B < A
+    def overridden; end
+  end
+
+  module BetweenBAndC
+    def overridden; end
   end
 
   class C < B
+    include BetweenBAndC
+    def overridden; end
+  end
+
+  module OverrideAgain
+    def overridden; end
   end
 
   class D
@@ -149,11 +177,28 @@ module MethodSpecs
 
   class ToProcBeta
     def method_called(a)
+      ScratchPad << a
       a
     end
 
     def to_proc
       method(:method_called).to_proc
     end
+  end
+
+  class Methods
+    def one_splat_one_req(*a,b); end
+    def one_splat_two_req(*a,b,c); end
+    def one_splat_one_req_with_block(*a,b,&blk); end
+
+    def one_opt_with_stabby(a=->(b){true}); end
+
+    def one_unnamed_splat(*); end
+
+    def one_splat_one_block(*args, &block)
+      local_is_not_parameter = {}
+    end
+
+    define_method(:one_optional_defined_method) {|x = 1|}
   end
 end

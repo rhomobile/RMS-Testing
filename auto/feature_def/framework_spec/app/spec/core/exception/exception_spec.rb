@@ -39,14 +39,12 @@ describe "Exception" do
     Exception.should be_ancestor_of(SystemStackError)
   end
 
-  ruby_version_is "1.9" do
-    it "is a superclass of SecurityError" do
-      Exception.should be_ancestor_of(SecurityError)
-    end
+  it "is a superclass of SecurityError" do
+    Exception.should be_ancestor_of(SecurityError)
+  end
 
-    it "is a superclass of EncodingError" do
-      Exception.should be_ancestor_of(EncodingError)
-    end
+  it "is a superclass of EncodingError" do
+    Exception.should be_ancestor_of(EncodingError)
   end
 end
 
@@ -61,6 +59,13 @@ describe "Exception#exception" do
     e.should == e.exception(e)
   end
 
+  it "returns an exception of the same class as self with the message given as argument" do
+    e = RuntimeError.new
+    e2 = e.exception("message")
+    e2.should be_an_instance_of(RuntimeError)
+    e2.message.should == "message"
+  end
+
   class CustomArgumentError < StandardError
     attr_reader :val
     def initialize(val)
@@ -68,37 +73,11 @@ describe "Exception#exception" do
     end
   end
 
-  ruby_version_is '' ... '1.9.3' do
-    it "returns an exception of the same class as self with the message given as argument" do
-      e = RuntimeError.new
-      e2 = e.exception(:message)
-      e2.should be_an_instance_of(RuntimeError)
-      e2.message.should == :message
-    end
-
-    it "returns an exception of the same class as self with the message given as argument, but without reinitializing" do
-      e = CustomArgumentError.new(:boom)
-      e2 = e.exception(:message)
-      e2.should be_an_instance_of(CustomArgumentError)
-      e2.val.should == :boom
-      e2.message.should == :message
-    end
-  end
-
-  ruby_version_is '1.9.3' do
-    it "returns an exception of the same class as self with the message given as argument" do
-      e = RuntimeError.new
-      e2 = e.exception(:message)
-      e2.should be_an_instance_of(RuntimeError)
-      e2.message.should == 'message'
-    end
-
-    it "returns an exception of the same class as self with the message given as argument, but without reinitializing" do
-      e = CustomArgumentError.new(:boom)
-      e2 = e.exception(:message)
-      e2.should be_an_instance_of(CustomArgumentError)
-      e2.val.should == :boom
-      e2.message.should == 'message'
-    end
+  it "returns an exception of the same class as self with the message given as argument, but without reinitializing" do
+    e = CustomArgumentError.new(:boom)
+    e2 = e.exception("message")
+    e2.should be_an_instance_of(CustomArgumentError)
+    e2.val.should == :boom
+    e2.message.should == "message"
   end
 end

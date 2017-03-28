@@ -1,4 +1,5 @@
-describe :string_succ, :shared => true do
+# -*- encoding: binary -*-
+describe :string_succ, shared: true do
   it "returns an empty string for empty strings" do
     "".send(@method).should == ""
   end
@@ -49,6 +50,7 @@ describe :string_succ, :shared => true do
     "9Z99z99Z".send(@method).should == "10A00a00A"
 
     "ZZZ9999".send(@method).should == "AAAA0000"
+    "/[]9999".send(@method).should == "/[]10000"
     "/[]ZZZ9999".send(@method).should == "/[]AAAA0000"
     "Z/[]ZZZ9999".send(@method).should == "AA/[]AAA0000"
 
@@ -58,9 +60,9 @@ describe :string_succ, :shared => true do
   end
 
   it "returns subclass instances when called on a subclass" do
-    StringSpecs::MyString.new("").send(@method).should be_kind_of(StringSpecs::MyString)
-    StringSpecs::MyString.new("a").send(@method).should be_kind_of(StringSpecs::MyString)
-    StringSpecs::MyString.new("z").send(@method).should be_kind_of(StringSpecs::MyString)
+    StringSpecs::MyString.new("").send(@method).should be_an_instance_of(StringSpecs::MyString)
+    StringSpecs::MyString.new("a").send(@method).should be_an_instance_of(StringSpecs::MyString)
+    StringSpecs::MyString.new("z").send(@method).should be_an_instance_of(StringSpecs::MyString)
   end
 
   it "taints the result if self is tainted" do
@@ -70,7 +72,7 @@ describe :string_succ, :shared => true do
   end
 end
 
-describe :string_succ_bang, :shared => true do
+describe :string_succ_bang, shared: true do
   it "is equivalent to succ, but modifies self in place (still returns self)" do
     ["", "abcd", "THX1138"].each do |s|
       r = s.dup.send(@method)
@@ -79,17 +81,8 @@ describe :string_succ_bang, :shared => true do
     end
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises a TypeError if self is frozen" do
-      lambda { "".freeze.send(@method)     }.should raise_error(TypeError)
-      lambda { "abcd".freeze.send(@method) }.should raise_error(TypeError)
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a RuntimeError if self is frozen" do
-      lambda { "".freeze.send(@method)     }.should raise_error(RuntimeError)
-      lambda { "abcd".freeze.send(@method) }.should raise_error(RuntimeError)
-    end
+  it "raises a RuntimeError if self is frozen" do
+    lambda { "".freeze.send(@method)     }.should raise_error(RuntimeError)
+    lambda { "abcd".freeze.send(@method) }.should raise_error(RuntimeError)
   end
 end

@@ -28,14 +28,14 @@ describe "REXML::Text.new" do
     t = REXML::Text.new("&lt;&amp;&gt;", false, nil, true)
     t.should == "&lt;&amp;&gt;"
 
-    #lambda{ REXML::Text.new("<&>", false, nil, true)}.should raise_error(Exception)
+    lambda{ REXML::Text.new("<&>", false, nil, true)}.should raise_error(Exception)
   end
 
   it "uses raw value of the parent if raw is nil" do
-    e1 = REXML::Element.new("root", nil, { :raw => :all})
-    #lambda {REXML::Text.new("<&>", false, e1)}.should raise_error(Exception)
+    e1 = REXML::Element.new("root", nil, { raw: :all})
+    lambda {REXML::Text.new("<&>", false, e1)}.should raise_error(Exception)
 
-    e2 = REXML::Element.new("root", nil, { :raw => []})
+    e2 = REXML::Element.new("root", nil, { raw: []})
     e2.raw.should be_false
     t1 = REXML::Text.new("<&>", false, e2)
     t1.should == "&lt;&amp;&gt;"

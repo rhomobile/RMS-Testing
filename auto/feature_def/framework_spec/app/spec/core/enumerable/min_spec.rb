@@ -3,8 +3,6 @@ require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "Enumerable#min" do
   before :each do
-    @a = EnumerableSpecs::EachDefiner.new( 2, 4, 6, 8, 10 )
-
     @e_strs = EnumerableSpecs::EachDefiner.new("333", "22", "666666", "1", "55555", "1010101010")
     @e_ints = EnumerableSpecs::EachDefiner.new( 333,   22,   666666,   55555, 1010101010)
   end
@@ -13,7 +11,7 @@ describe "Enumerable#min" do
     EnumerableSpecs::Numerous.new.min.should == 1
   end
 
-  it "return the minimun (basic cases)" do
+  it "returns the minimum (basic cases)" do
     EnumerableSpecs::EachDefiner.new(55).min.should == 55
 
     EnumerableSpecs::EachDefiner.new(11,99).min.should ==  11
@@ -33,24 +31,14 @@ describe "Enumerable#min" do
     @e_ints.min.should == 22
   end
 
-  it "returns nil for an empty Enumerable " do
+  it "returns nil for an empty Enumerable" do
     EnumerableSpecs::EachDefiner.new.min.should be_nil
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises a NoMethodError for elements without #<=>" do
-      lambda do
-        EnumerableSpecs::EachDefiner.new(Object.new, Object.new).min
-      end.should raise_error(NoMethodError)
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a NoMethodError for elements without #<=>" do
-      lambda do
-        EnumerableSpecs::EachDefiner.new(BasicObject.new, BasicObject.new).min
-      end.should raise_error(NoMethodError)
-    end
+  it "raises a NoMethodError for elements without #<=>" do
+    lambda do
+      EnumerableSpecs::EachDefiner.new(BasicObject.new, BasicObject.new).min
+    end.should raise_error(NoMethodError)
   end
 
   it "raises an ArgumentError for incomparable elements" do
@@ -62,7 +50,7 @@ describe "Enumerable#min" do
     end.should raise_error(ArgumentError)
   end
 
-  it "return the minimun when using a block rule" do
+  it "returns the minimum when using a block rule" do
     EnumerableSpecs::EachDefiner.new("2","33","4","11").min {|a,b| a <=> b }.should == "11"
     EnumerableSpecs::EachDefiner.new( 2 , 33 , 4 , 11 ).min {|a,b| a <=> b }.should == 2
 
@@ -91,5 +79,47 @@ describe "Enumerable#min" do
       y = b.nil? ? -1 : b ? 0 : 1
       x <=> y
     }.should == nil
+  end
+
+  it "gathers whole arrays as elements when each yields multiple" do
+    multi = EnumerableSpecs::YieldsMulti.new
+    multi.min.should == [1, 2]
+  end
+
+  ruby_version_is "2.2" do
+    context "when called with an argument n" do
+      context "without a block" do
+        it "returns an array containing the minimum n elements" do
+          result = @e_ints.min(2)
+          result.should == [22, 333]
+        end
+      end
+
+      context "with a block" do
+        it "returns an array containing the minimum n elements" do
+          result = @e_ints.min(2) { |a, b| a * 2 <=> b * 2 }
+          result.should == [22, 333]
+        end
+      end
+
+      context "on a enumerable of length x where x < n" do
+        it "returns an array containing the minimum n elements of length x" do
+          result = @e_ints.min(500)
+          result.length.should == 5
+        end
+      end
+
+      context "that is negative" do
+        it "raises an ArgumentError" do
+          lambda { @e_ints.min(-1) }.should raise_error(ArgumentError)
+        end
+      end
+    end
+
+    context "that is nil" do
+      it "returns the minimum element" do
+        @e_ints.min(nil).should == 22
+      end
+    end
   end
 end

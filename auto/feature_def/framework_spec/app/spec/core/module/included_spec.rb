@@ -33,15 +33,12 @@ describe "Module#included" do
     c.test.should == :passed
   end
 
-  ruby_version_is ""..."1.9" do
-    it "is private in its default implementation" do
-      Module.new.private_methods.should include("included")
-    end
+  it "is private in its default implementation" do
+    Module.should have_private_instance_method(:included)
   end
 
-  ruby_version_is "1.9" do
-    it "is private in its default implementation" do
-      Module.new.private_methods.should include(:included)
-    end
+  it "works with super using a singleton class" do
+    ModuleSpecs::SingletonOnModuleCase::Bar.include ModuleSpecs::SingletonOnModuleCase::Foo
+    ModuleSpecs::SingletonOnModuleCase::Bar.included_called?.should == true
   end
 end

@@ -1,4 +1,5 @@
 require File.expand_path('../../spec_helper', __FILE__)
+require File.expand_path('../fixtures/def', __FILE__)
 
 # Language-level method behaviour
 describe "Redefining a method" do
@@ -8,6 +9,16 @@ describe "Redefining a method" do
 
     def barfoo; 200; end
     barfoo.should == 200
+  end
+end
+
+describe "Defining a method at the top-level" do
+  it "defines it on Object with private visibility by default" do
+    Object.should have_private_instance_method(:some_toplevel_method, false)
+  end
+
+  it "defines it on Object with public visibility after calling public" do
+    Object.should have_public_instance_method(:public_toplevel_method, false)
   end
 end
 
@@ -28,6 +39,43 @@ describe "Defining an 'initialize_copy' method" do
       end
     end
     DefInitializeCopySpec.should have_private_instance_method(:initialize_copy, false)
+  end
+end
+
+describe "Defining an 'initialize_dup' method" do
+  it "sets the method's visibility to private" do
+    class DefInitializeDupSpec
+      def initialize_dup
+      end
+    end
+    DefInitializeDupSpec.should have_private_instance_method(:initialize_dup, false)
+  end
+end
+
+describe "Defining an 'initialize_clone' method" do
+  it "sets the method's visibility to private" do
+    class DefInitializeCloneSpec
+      def initialize_clone
+      end
+    end
+    DefInitializeCloneSpec.should have_private_instance_method(:initialize_clone, false)
+  end
+end
+
+describe "Defining a 'respond_to_missing?' method" do
+  it "sets the method's visibility to private" do
+    class DefRespondToMissingPSpec
+      def respond_to_missing?
+      end
+    end
+    DefRespondToMissingPSpec.should have_private_instance_method(:respond_to_missing?, false)
+  end
+end
+
+describe "Defining a method" do
+  it "returns a symbol of the method name" do
+    method_name = def some_method; end
+    method_name.should == :some_method
   end
 end
 
@@ -116,11 +164,52 @@ describe "An instance method with a default argument" do
     end
     foo(2,3,3).should == [2,3,[3]]
   end
+
+  ruby_version_is ""..."2.2" do
+    it "calls a method with the same name as the local" do
+      def bar
+        1
+      end
+      def foo(bar = bar)
+        bar
+      end
+      foo.should == 1
+      foo(2).should == 2
+    end
+  end
+
+  ruby_version_is "2.2" do
+    it "shadows an existing method with the same name as the local" do
+      def bar
+        1
+      end
+      def foo(bar = bar)
+        bar
+      end
+      foo.should == nil
+      foo(2).should == 2
+    end
+
+    it "calls a method with the same name as the local when explicitly using ()" do
+      def bar
+        1
+      end
+      def foo(bar = bar())
+        bar
+      end
+      foo.should == 1
+      foo(2).should == 2
+    end
+  end
 end
 
 describe "A singleton method definition" do
+  after :all do
+    Object.__send__(:remove_class_variable, :@@a)
+  end
+
   it "can be declared for a local variable" do
-    a = "hi"
+    a = Object.new
     def a.foo
       5
     end
@@ -128,7 +217,7 @@ describe "A singleton method definition" do
   end
 
   it "can be declared for an instance variable" do
-    @a = "hi"
+    @a = Object.new
     def @a.foo
       6
     end
@@ -144,7 +233,7 @@ describe "A singleton method definition" do
   end
 
   it "can be declared for a class variable" do
-    @@a = "hi"
+    @@a = Object.new
     def @@a.foo
       8
     end
@@ -169,10 +258,16 @@ describe "A singleton method definition" do
     end
     (obj==2).should == 2
   end
+
+  it "raises RuntimeError if frozen" do
+    obj = Object.new
+    obj.freeze
+    lambda { def obj.foo; end }.should raise_error(RuntimeError)
+  end
 end
 
 describe "Redefining a singleton method" do
-  it "does not inherit a previously set visibility " do
+  it "does not inherit a previously set visibility" do
     o = Object.new
 
     class << o; private; def foo; end; end;
@@ -188,7 +283,7 @@ describe "Redefining a singleton method" do
 end
 
 describe "Redefining a singleton method" do
-  it "does not inherit a previously set visibility " do
+  it "does not inherit a previously set visibility" do
     o = Object.new
 
     class << o; private; def foo; end; end;
@@ -216,10 +311,14 @@ describe "A method defined with extreme default arguments" do
   end
 
   it "may use an fcall as a default" do
-    def foo(x = caller())
+    def bar
+      1
+    end
+    def foo(x = bar())
       x
     end
-    foo.shift.should be_kind_of(String)
+    foo.should == 1
+    foo(2).should == 2
   end
 
   it "evaluates the defaults in the method's scope" do
@@ -245,7 +344,7 @@ end
 
 describe "A singleton method defined with extreme default arguments" do
   it "may use a method definition as a default" do
-    $__a = "hi"
+    $__a = Object.new
     def $__a.foo(x = (def $__a.foo; "hello"; end;1));x;end
 
     $__a.foo(42).should == 42
@@ -254,22 +353,26 @@ describe "A singleton method defined with extreme default arguments" do
   end
 
   it "may use an fcall as a default" do
-    a = "hi"
-    def a.foo(x = caller())
+    a = Object.new
+    def a.bar
+      1
+    end
+    def a.foo(x = bar())
       x
     end
-    a.foo.shift.should be_kind_of(String)
+    a.foo.should == 1
+    a.foo(2).should == 2
   end
 
   it "evaluates the defaults in the singleton scope" do
-    a = "hi"
+    a = Object.new
     def a.foo(x = ($foo_self = self; nil)); 5 ;end
     a.foo
     $foo_self.should == a
   end
 
   it "may use preceding arguments as defaults" do
-    a = 'hi'
+    a = Object.new
     def a.foo(obj, width=obj.length)
       width
     end
@@ -277,7 +380,7 @@ describe "A singleton method defined with extreme default arguments" do
   end
 
   it "may use a lambda as a default" do
-    a = 'hi'
+    a = Object.new
     def a.foo(output = 'a', prc = lambda {|n| output * n})
       prc.call(5)
     end
@@ -306,6 +409,15 @@ describe "A method definition inside a metaclass scope" do
     obj.a_singleton_method.should == obj
     lambda { Object.new.a_singleton_method }.should raise_error(NoMethodError)
   end
+
+  it "raises RuntimeError if frozen" do
+    obj = Object.new
+    obj.freeze
+
+    class << obj
+      lambda { def foo; end }.should raise_error(RuntimeError)
+    end
+  end
 end
 
 describe "A nested method definition" do
@@ -330,6 +442,8 @@ describe "A nested method definition" do
   it "creates a class method when evaluated in a class method" do
     class DefSpecNested
       class << self
+        # cleanup
+        remove_method :a_class_method if method_defined? :a_class_method
         def create_class_method
           def a_class_method;self;end
           a_class_method
@@ -360,6 +474,57 @@ describe "A nested method definition" do
 
     other = DefSpecNested.new
     lambda { other.a_singleton_method }.should raise_error(NoMethodError)
+  end
+
+  it "creates a method in the surrounding context when evaluated in a def expr.method" do
+    class DefSpecNested
+      TARGET = Object.new
+      def TARGET.defs_method
+        def inherited_method;self;end
+      end
+    end
+
+    DefSpecNested::TARGET.defs_method
+    DefSpecNested.should have_instance_method :inherited_method
+    DefSpecNested::TARGET.should_not have_method :inherited_method
+
+    obj = DefSpecNested.new
+    obj.inherited_method.should == obj
+  end
+
+  # See http://yugui.jp/articles/846#label-3
+  it "inside an instance_eval creates a singleton method" do
+    class DefSpecNested
+      OBJ = Object.new
+      OBJ.instance_eval do
+        def create_method_in_instance_eval(a = (def arg_method; end))
+          def body_method; end
+        end
+      end
+    end
+
+    obj = DefSpecNested::OBJ
+    obj.create_method_in_instance_eval
+
+    obj.should have_method :arg_method
+    obj.should have_method :body_method
+
+    DefSpecNested.should_not have_instance_method :arg_method
+    DefSpecNested.should_not have_instance_method :body_method
+  end
+
+  it "defines methods as public by default" do
+    cls = Class.new do
+      def do_def
+        def new_def
+          1
+        end
+      end
+    end
+
+    obj = cls.new
+    obj.do_def
+    obj.new_def.should == 1
   end
 end
 
@@ -395,6 +560,73 @@ describe "A method definition inside an instance_eval" do
 
     DefSpecNested.an_instance_eval_class_method.should == DefSpecNested
     lambda { Object.an_instance_eval_class_method }.should raise_error(NoMethodError)
+  end
+
+  it "creates a class method when the receiver is an anonymous class" do
+    m = Class.new
+    m.instance_eval do
+      def klass_method
+        :test
+      end
+    end
+
+    m.klass_method.should == :test
+    lambda { Object.klass_method }.should raise_error(NoMethodError)
+  end
+
+  it "creates a class method when instance_eval is within class" do
+    m = Class.new do
+      instance_eval do
+        def klass_method
+          :test
+        end
+      end
+    end
+
+    m.klass_method.should == :test
+    lambda { Object.klass_method }.should raise_error(NoMethodError)
+  end
+end
+
+describe "A method definition inside an instance_exec" do
+  it "creates a class method when the receiver is a class" do
+    DefSpecNested.instance_exec(1) do |param|
+      @stuff = param
+
+      def an_instance_exec_class_method; @stuff; end
+    end
+
+    DefSpecNested.an_instance_exec_class_method.should == 1
+    lambda { Object.an_instance_exec_class_method }.should raise_error(NoMethodError)
+  end
+
+  it "creates a class method when the receiver is an anonymous class" do
+    m = Class.new
+    m.instance_exec(1) do |param|
+      @stuff = param
+
+      def klass_method
+        @stuff
+      end
+    end
+
+    m.klass_method.should == 1
+    lambda { Object.klass_method }.should raise_error(NoMethodError)
+  end
+
+  it "creates a class method when instance_exec is within class" do
+    m = Class.new do
+      instance_exec(2) do |param|
+        @stuff = param
+
+        def klass_method
+          @stuff
+        end
+      end
+    end
+
+    m.klass_method.should == 2
+    lambda { Object.klass_method }.should raise_error(NoMethodError)
   end
 end
 
@@ -469,8 +701,8 @@ describe "a method definition that sets more than one default parameter all to t
   end
 
   it "assigns the parameters different objects across different default calls" do
-    a, b, c = foo
-    d, e, f = foo
+    a, _b, _c = foo
+    d, _e, _f = foo
     a.should_not equal(d)
   end
 
@@ -505,5 +737,3 @@ describe "The def keyword" do
     end
   end
 end
-
-language_version __FILE__, "def"

@@ -1,80 +1,91 @@
 require File.expand_path('../../spec_helper', __FILE__)
+require File.expand_path('../fixtures/module', __FILE__)
 
-module LangModuleSpec
-  module Sub1; end
-end
+describe "The module keyword" do
+  it "creates a new module without semicolon" do
+    module ModuleSpecsKeywordWithoutSemicolon end
+    ModuleSpecsKeywordWithoutSemicolon.should be_an_instance_of(Module)
+  end
 
-module LangModuleSpecInObject
-  module LangModuleTop
+  it "creates a new module with a non-qualified constant name" do
+    module ModuleSpecsToplevel; end
+    ModuleSpecsToplevel.should be_an_instance_of(Module)
+  end
+
+  it "creates a new module with a qualified constant name" do
+    module ModuleSpecs::Nested; end
+    ModuleSpecs::Nested.should be_an_instance_of(Module)
+  end
+
+  it "creates a new module with a variable qualified constant name" do
+    m = Module.new
+    module m::N; end
+    m::N.should be_an_instance_of(Module)
+  end
+
+  it "reopens an existing module" do
+    module ModuleSpecs; Reopened = true; end
+    ModuleSpecs::Reopened.should be_true
+  end
+
+  it "reopens a module included in Object" do
+    module IncludedModuleSpecs; Reopened = true; end
+    ModuleSpecs::IncludedInObject::IncludedModuleSpecs::Reopened.should be_true
+  end
+
+  it "raises a TypeError if the constant is a Class" do
+    lambda do
+      module ModuleSpecs::Modules::Klass; end
+    end.should raise_error(TypeError)
+  end
+
+  it "raises a TypeError if the constant is a String" do
+    lambda { module ModuleSpecs::Modules::A; end }.should raise_error(TypeError)
+  end
+
+  it "raises a TypeError if the constant is a Fixnum" do
+    lambda { module ModuleSpecs::Modules::B; end }.should raise_error(TypeError)
+  end
+
+  it "raises a TypeError if the constant is nil" do
+    lambda { module ModuleSpecs::Modules::C; end }.should raise_error(TypeError)
+  end
+
+  it "raises a TypeError if the constant is true" do
+    lambda { module ModuleSpecs::Modules::D; end }.should raise_error(TypeError)
+  end
+
+  it "raises a TypeError if the constant is false" do
+    lambda { module ModuleSpecs::Modules::D; end }.should raise_error(TypeError)
   end
 end
 
-# Must be here, we have to include it into Object because thats
-# the case.
-include LangModuleSpecInObject
+describe "Assigning an anonymous module to a constant" do
+  it "sets the name of the module" do
+    mod = Module.new
+    mod.name.should be_nil
 
-module LangModuleSpec::Sub2; end
-
-describe "module" do
-  it "has the right name" do
-    LangModuleSpec::Sub1.name.should == "LangModuleSpec::Sub1"
-    LangModuleSpec::Sub2.name.should == "LangModuleSpec::Sub2"
+    ::ModuleSpecs_CS1 = mod
+    mod.name.should == "ModuleSpecs_CS1"
   end
 
-  it "gets a name when assigned to a constant" do
-    LangModuleSpec::Anon = Module.new
-    LangModuleSpec::Anon.name.should == "LangModuleSpec::Anon"
+  it "does not set the name of a module scoped by an anonymous module" do
+    a, b = Module.new, Module.new
+    a::B = b
+    b.name.should be_nil
   end
 
-  it "raises a TypeError if the constant is a class" do
-    class LangModuleSpec::C1; end
+  it "sets the name of contained modules when assigning a toplevel anonymous module" do
+    a, b, c, d = Module.new, Module.new, Module.new, Module.new
+    a::B = b
+    a::B::C = c
+    a::B::C::E = c
+    a::D = d
 
-    lambda {
-      module LangModuleSpec::C1; end
-    }.should raise_error(TypeError)
-  end
-
-  it "raises a TypeError if the constant is not a module" do
-    module LangModuleSpec
-      C2 = 2
-    end
-
-    lambda {
-      module LangModuleSpec::C2; end
-    }.should raise_error(TypeError)
-  end
-
-  it "allows for reopening a module subclass" do
-    class ModuleSubClass < Module; end
-    LangModuleSpec::C3 = ModuleSubClass.new
-
-    module LangModuleSpec::C3
-      C4 = 4
-    end
-
-    LangModuleSpec::C3::C4.should == 4
-  end
-
-  it "reopens a module included into Object" do
-    module LangModuleTop
-    end
-
-    LangModuleTop.should == LangModuleSpecInObject::LangModuleTop
-  end
-end
-
-describe "An anonymous module" do
-  ruby_version_is "" ... "1.9" do
-    it "returns an empty string for its name" do
-      m = Module.new
-      m.name.should == ""
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "returns nil for its name" do
-      m = Module.new
-      m.name.should == nil
-    end
+    ::ModuleSpecs_CS2 = a
+    a.name.should == "ModuleSpecs_CS2"
+    b.name.should == "ModuleSpecs_CS2::B"
+    c.name.should == "ModuleSpecs_CS2::B::C"
+    d.name.should == "ModuleSpecs_CS2::D"
   end
 end

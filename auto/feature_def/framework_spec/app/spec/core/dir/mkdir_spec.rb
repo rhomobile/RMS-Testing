@@ -42,24 +42,12 @@ describe "Dir.mkdir" do
     end
   end
 
-  ruby_version_is "1.9" do
-    it "calls #to_path on non-String arguments" do
-      DirSpecs.clear_dirs
-      p = mock('path')
-      p.should_receive(:to_path).and_return('nonexisting')
-      Dir.mkdir(p)
-      DirSpecs.clear_dirs
-    end
-  end
-
-  ruby_version_is ""..."1.9" do
-    it "call #to_str on non-String arguments" do
-      DirSpecs.clear_dirs
-      p = mock('path')
-      p.should_receive(:to_str).and_return('nonexisting')
-      Dir.mkdir(p)
-      DirSpecs.clear_dirs
-    end
+  it "calls #to_path on non-String arguments" do
+    DirSpecs.clear_dirs
+    p = mock('path')
+    p.should_receive(:to_path).and_return('nonexisting')
+    Dir.mkdir(p)
+    DirSpecs.clear_dirs
   end
 
   it "raises a SystemCallError if any of the directories in the path before the last does not exist" do
@@ -70,13 +58,13 @@ describe "Dir.mkdir" do
     lambda { Dir.mkdir(File.dirname(__FILE__)) }.should raise_error(Errno::EEXIST)
   end
 
-  #it "raises Errno::EEXIST if the argument points to the existing file" do
-  #  lambda { Dir.mkdir(__FILE__) }.should raise_error(Errno::EEXIST)
-  #end
+  it "raises Errno::EEXIST if the argument points to the existing file" do
+    lambda { Dir.mkdir(__FILE__) }.should raise_error(Errno::EEXIST)
+  end
 end
 
 # The permissions flag are not supported on Windows as stated in documentation:
-# The permissions may be modified by the value of File::umask, and are ignored on NT.
+# The permissions may be modified by the value of File.umask, and are ignored on NT.
 platform_is_not :windows do
   describe "Dir.mkdir" do
     before :each do

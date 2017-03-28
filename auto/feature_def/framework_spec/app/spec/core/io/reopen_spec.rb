@@ -1,6 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
-=begin
+
 require 'fcntl'
 
 describe "IO#reopen" do
@@ -33,10 +33,10 @@ describe "IO#reopen" do
   it "raises an IOError if the object returned by #to_io is closed" do
     obj = mock("io")
     obj.should_receive(:to_io).and_return(IOSpecs.closed_io)
-    #lambda { @io.reopen obj }.should raise_error(IOError)
+    lambda { @io.reopen obj }.should raise_error(IOError)
   end
 
-  it "raises an TypeError if #to_io does not return an IO instance" do
+  it "raises a TypeError if #to_io does not return an IO instance" do
     obj = mock("io")
     obj.should_receive(:to_io).and_return("something else")
     lambda { @io.reopen obj }.should raise_error(TypeError)
@@ -98,22 +98,23 @@ describe "IO#reopen with a String" do
 
   platform_is_not :windows do
     it "passes all mode flags through" do
-      @io.reopen(@name, "ab")
+      @io.reopen(@tmp_file, "ab")
       (@io.fcntl(Fcntl::F_GETFL) & File::APPEND).should == File::APPEND
     end
   end
 
-  #it "effects exec/system/fork performed after it" do
-  #  ruby_exe fixture(__FILE__, "reopen_stdout.rb"), :args => @tmp_file
-  #  @tmp_file.should have_data("from system\nfrom exec", "r")
-  #end
-
-  ruby_version_is "1.9" do
-    it "calls #to_path on non-String arguments" do
-      obj = mock('path')
-      obj.should_receive(:to_path).and_return(@other_name)
-      @io.reopen(obj)
+  platform_is_not :windows do
+    # TODO Should this work on Windows?
+    it "affects exec/system/fork performed after it" do
+      ruby_exe fixture(__FILE__, "reopen_stdout.rb"), args: @tmp_file
+      File.read(@tmp_file).should == "from system\nfrom exec\n"
     end
+  end
+
+  it "calls #to_path on non-String arguments" do
+    obj = mock('path')
+    obj.should_receive(:to_path).and_return(@other_name)
+    @io.reopen(obj)
   end
 end
 
@@ -121,12 +122,14 @@ describe "IO#reopen with a String" do
   before :each do
     @name = tmp("io_reopen.txt")
     @other_name = tmp("io_reopen_other.txt")
+    @other_io = nil
 
     rm_r @other_name
   end
 
   after :each do
     @io.close unless @io.closed?
+    @other_io.close if @other_io and not @other_io.closed?
     rm_r @name, @other_name
   end
 
@@ -138,22 +141,35 @@ describe "IO#reopen with a String" do
     @io.print "new data"
     @io.flush
 
-    @name.should have_data("original data")
-    @other_name.should have_data("new data")
+    File.read(@name).should == "original data"
+    File.read(@other_name).should == "new data"
+  end
+
+  it "closes the file descriptor obtained by opening the new file" do
+    @io = new_io @name, "w"
+
+    @other_io = File.open @other_name, "w"
+    max = @other_io.fileno
+    @other_io.close
+
+    @io.reopen @other_name
+
+    @other_io = File.open @other_name, "w"
+    @other_io.fileno.should == max
   end
 
   it "creates the file if it doesn't exist if the IO is opened in write mode" do
     @io = new_io @name, "w"
 
     @io.reopen(@other_name)
-    File.exists?(@other_name).should be_true
+    File.exist?(@other_name).should be_true
   end
 
   it "creates the file if it doesn't exist if the IO is opened in write mode" do
     @io = new_io @name, "a"
 
     @io.reopen(@other_name)
-    File.exists?(@other_name).should be_true
+    File.exist?(@other_name).should be_true
   end
 end
 
@@ -167,14 +183,41 @@ describe "IO#reopen with a String" do
   end
 
   after :each do
-    # Do not close @io, the exception leaves MRI with an invalid
-    # IO and an Errno::EBADF will be raised on #close.
+    @io.close
     rm_r @name, @other_name
   end
 
   it "raises an Errno::ENOENT if the file does not exist and the IO is not opened in write mode" do
     @io = new_io @name, "r"
     lambda { @io.reopen(@other_name) }.should raise_error(Errno::ENOENT)
+  end
+end
+
+describe "IO#reopen with an IO at EOF" do
+  before :each do
+    @name = tmp("io_reopen.txt")
+    touch(@name) { |f| f.puts "a line" }
+    @other_name = tmp("io_reopen_other.txt")
+    touch(@other_name) do |f|
+      f.puts "Line 1"
+      f.puts "Line 2"
+    end
+
+    @io = new_io @name, "r"
+    @other_io = new_io @other_name, "r"
+    @io.read
+  end
+
+  after :each do
+    @io.close unless @io.closed?
+    @other_io.close unless @other_io.closed?
+    rm_r @name, @other_name
+  end
+
+  it "resets the EOF status to false" do
+    @io.eof?.should be_true
+    @io.reopen @other_io
+    @io.eof?.should be_false
   end
 end
 
@@ -239,12 +282,12 @@ describe "IO#reopen with an IO" do
   end
 
   it "associates the IO instance with the other IO's stream" do
-    @other_name.should have_data("")
+    File.read(@other_name).should == ""
     @io.reopen @other_io
     @io.print "io data"
     @io.flush
-    @name.should have_data("")
-    @other_name.should have_data("io data")
+    File.read(@name).should == ""
+    File.read(@other_name).should == "io data"
   end
 
   it "may change the class of the instance" do
@@ -257,4 +300,3 @@ describe "IO#reopen with an IO" do
     @io.path.should == @other_io.path
   end
 end
-=end

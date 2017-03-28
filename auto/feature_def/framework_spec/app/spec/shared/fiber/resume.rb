@@ -1,7 +1,17 @@
-describe :fiber_resume, :shared => :true do
+describe :fiber_resume, shared: true do
   it "can be invoked from the root Fiber" do
    fiber = Fiber.new { :fiber }
    fiber.send(@method).should == :fiber
+  end
+
+  it "raises a FiberError if invoked from a different Thread" do
+    fiber = Fiber.new { }
+    lambda do
+      Thread.new do
+        fiber.resume
+      end.join
+    end.should raise_error(FiberError)
+    fiber.resume
   end
 
   it "passes control to the beginning of the block on first invocation" do
@@ -12,16 +22,18 @@ describe :fiber_resume, :shared => :true do
   end
 
   it "returns the last value encountered on first invocation" do
-    fiber = Fiber.new { false; true }
+    fiber = Fiber.new { 1+1; true }
     fiber.send(@method).should be_true
   end
 
-  it "runs until the end of the block or Fiber.yield on first invocation" do
+  it "runs until the end of the block" do
     obj = mock('obj')
     obj.should_receive(:do).once
     fiber = Fiber.new { 1 + 2; a = "glark"; obj.do }
     fiber.send(@method)
+  end
 
+  it "runs until Fiber.yield" do
     obj = mock('obj')
     obj.should_not_receive(:do)
     fiber = Fiber.new { 1 + 2; Fiber.yield; obj.do }

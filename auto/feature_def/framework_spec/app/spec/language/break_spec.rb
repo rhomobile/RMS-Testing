@@ -16,6 +16,14 @@ describe "The break statement in a block" do
     @program.break_value
     ScratchPad.recorded.should == [:a, :aa, :b, :break, :d]
   end
+
+  describe "yielded inside a while" do
+    it "breaks out of the block" do
+      value = @program.break_in_block_in_while
+      ScratchPad.recorded.should == [:aa, :break]
+      value.should == :value
+    end
+  end
 end
 
 describe "The break statement in a captured block" do
@@ -25,38 +33,19 @@ describe "The break statement in a captured block" do
   end
 
   describe "when the invocation of the scope creating the block is still active" do
-    deviates_on :rubinius do
-      it "returns a value to the invoking scope when invoking the block from the scope creating the block" do
-        @program.break_in_method
-        ScratchPad.recorded.should == [:a, :xa, :d, :b, :break, :e]
-      end
-
-      it "returns a value to the scope invoking the method when invoking the block from a method" do
-        @program.break_in_nested_method
-        ScratchPad.recorded.should == [:a, :xa, :c, :aa, :b, :break, :d]
-      end
-
-      it "returns a value to the scope calling the yielding scope when yielding to the block" do
-        @program.break_in_yielding_method
-        ScratchPad.recorded.should == [:a, :xa, :c, :aa, :b, :break, :d]
-      end
+    it "raises a LocalJumpError when invoking the block from the scope creating the block" do
+      lambda { @program.break_in_method }.should raise_error(LocalJumpError)
+      ScratchPad.recorded.should == [:a, :xa, :d, :b]
     end
 
-    not_compliant_on :rubinius do
-      it "raises a LocalJumpError when invoking the block from the scope creating the block" do
-        lambda { @program.break_in_method }.should raise_error(LocalJumpError)
-        ScratchPad.recorded.should == [:a, :xa, :d, :b]
-      end
+    it "raises a LocalJumpError when invoking the block from a method" do
+      lambda { @program.break_in_nested_method }.should raise_error(LocalJumpError)
+      ScratchPad.recorded.should == [:a, :xa, :c, :aa, :b]
+    end
 
-      it "raises a LocalJumpError when invoking the block from a method" do
-        lambda { @program.break_in_nested_method }.should raise_error(LocalJumpError)
-        ScratchPad.recorded.should == [:a, :xa, :c, :aa, :b]
-      end
-
-      it "raises a LocalJumpError when yielding to the block" do
-        lambda { @program.break_in_yielding_method }.should raise_error(LocalJumpError)
-        ScratchPad.recorded.should == [:a, :xa, :c, :aa, :b]
-      end
+    it "raises a LocalJumpError when yielding to the block" do
+      lambda { @program.break_in_yielding_method }.should raise_error(LocalJumpError)
+      ScratchPad.recorded.should == [:a, :xa, :c, :aa, :b]
     end
   end
 
@@ -77,6 +66,37 @@ describe "The break statement in a lambda" do
   before :each do
     ScratchPad.record []
     @program = BreakSpecs::Lambda.new
+  end
+
+  it "returns from the lambda" do
+    l = lambda {
+      ScratchPad << :before
+      break :foo
+      ScratchPad << :after
+    }
+    l.call.should == :foo
+    ScratchPad.recorded.should == [:before]
+  end
+
+  it "returns from the call site if the lambda is passed as a block" do
+    def mid(&b)
+      lambda {
+        ScratchPad << :before
+        b.call
+        ScratchPad << :unreachable1
+      }.call
+      ScratchPad << :unreachable2
+    end
+
+    result = [1].each do |e|
+      mid {
+        break # This breaks from mid
+        ScratchPad << :unreachable3
+      }
+      ScratchPad << :after
+    end
+    result.should == [1]
+    ScratchPad.recorded.should == [:before, :after]
   end
 
   describe "when the invocation of the scope creating the lambda is still active" do
@@ -100,23 +120,13 @@ describe "The break statement in a lambda" do
       ScratchPad.recorded.should == [:a, :d, :aa, :aaa, :bb, :b, :break, :cc, :bbb, :dd, :e]
     end
 
-    deviates_on :rubinius do
-      it "returns a value when yielding to a lambda passed as a block argument" do
-        @program.break_in_nested_scope_yield
-        ScratchPad.recorded.should == [:a, :d, :aaa, :b, :break, :e]
-      end
-    end
-
-    not_compliant_on :rubinius do
-      it "raises a LocalJumpError when yielding to a lambda passed as a block argument" do
-        lambda { @program.break_in_nested_scope_yield }.should raise_error(LocalJumpError)
-        ScratchPad.recorded.should == [:a, :d, :aaa, :b]
-      end
+    it "returns from the lambda" do
+      @program.break_in_nested_scope_yield
+      ScratchPad.recorded.should == [:a, :d, :aaa, :b, :bbb, :e]
     end
   end
 
   describe "created at the toplevel" do
-=begin  
     it "returns a value when invoking from the toplevel" do
       code = fixture __FILE__, "break_lambda_toplevel.rb"
       ruby_exe(code).chomp.should == "a,b,break,d"
@@ -131,7 +141,6 @@ describe "The break statement in a lambda" do
       code = fixture __FILE__, "break_lambda_toplevel_block.rb"
       ruby_exe(code).chomp.should == "a,d,f,b,break,g,e,h"
     end
-=end    
   end
 
   describe "from a scope that has returned" do
@@ -150,8 +159,8 @@ describe "The break statement in a lambda" do
     # has returned. This is a subtle and confusing semantic where a block pass
     # is removing the lambda-ness of a lambda.
     it "raises a LocalJumpError when yielding to a lambda passed as a block argument" do
-      lambda { @program.break_in_method_yield }.should raise_error(LocalJumpError)
-      ScratchPad.recorded.should == [:a, :la, :ld, :aaa, :lb]
+      @program.break_in_method_yield
+      ScratchPad.recorded.should == [:a, :la, :ld, :aaa, :lb, :bbb, :b]
     end
   end
 end
@@ -165,6 +174,11 @@ describe "Break inside a while loop" do
       a = while true; break []; end;       a.should == []
       a = while true; break [1]; end;      a.should == [1]
     end
+
+    it "passes the value returned by a method with omitted parenthesis and passed block" do
+      obj = BreakSpecs::Block.new
+      lambda { break obj.method :value do |x| x end }.call.should == :value
+    end
   end
 
   describe "with a splat" do
@@ -172,31 +186,19 @@ describe "Break inside a while loop" do
       a = while true; break *[1,2]; end;    a.should == [1,2]
     end
 
-    ruby_version_is "" ... "1.9" do
-      it "unwraps the value if there is only one value" do
-        a = while true; break *1; end;      a.should == 1
-      end
-
-      it "makes the value nil if the splat is empty" do
-        a = while true; break *[]; end;     a.should == nil
-      end
+    it "treats nil as an empty array" do
+      a = while true; break *nil; end;      a.should == []
     end
 
-    ruby_version_is "1.9" do
-      it "treats nil as an empty array" do
-        a = while true; break *nil; end;      a.should == []
-      end
+    it "preserves an array as is" do
+      a = while true; break *[]; end;       a.should == []
+      a = while true; break *[1,2]; end;    a.should == [1,2]
+      a = while true; break *[nil]; end;    a.should == [nil]
+      a = while true; break *[[]]; end;     a.should == [[]]
+    end
 
-      it "preserves an array as is" do
-        a = while true; break *[]; end;       a.should == []
-        a = while true; break *[1,2]; end;    a.should == [1,2]
-        a = while true; break *[nil]; end;    a.should == [nil]
-        a = while true; break *[[]]; end;     a.should == [[]]
-      end
-
-      it "wraps a non-Array in an Array" do
-        a = while true; break *1; end;        a.should == [1]
-      end
+    it "wraps a non-Array in an Array" do
+      a = while true; break *1; end;        a.should == [1]
     end
   end
 
@@ -307,6 +309,21 @@ describe "Executing break from within a block" do
     ScratchPad.recorded.should == [:two_ensure]
   end
 
+  it "runs ensures when breaking from a loop" do
+    ScratchPad.record []
+
+    while true
+      begin
+        ScratchPad << :begin
+        break if true
+      ensure
+        ScratchPad << :ensure
+      end
+    end
+
+    ScratchPad.recorded.should == [:begin, :ensure]
+  end
+
   it "doesn't run ensures in the destination method" do
     ScratchPad.record []
 
@@ -315,5 +332,3 @@ describe "Executing break from within a block" do
     ScratchPad.recorded.should == [:two_ensure, :three_post, :three_ensure]
   end
 end
-
-language_version __FILE__, "break"

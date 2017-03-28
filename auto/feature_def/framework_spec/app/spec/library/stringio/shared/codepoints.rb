@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
-describe :stringio_codepoints, :shared => true do
-  before(:each) do
+describe :stringio_codepoints, shared: true do
+  before :each do
     @io = StringIO.new("∂φ/∂x = gaîté")
     @enum = @io.send(@method)
   end
 
   it "returns an Enumerator" do
-    @enum.should be_an_instance_of(enumerator_class)
+    @enum.should be_an_instance_of(Enumerator)
   end
 
   it "yields each codepoint code in turn" do

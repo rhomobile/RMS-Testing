@@ -1,5 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
-require File.expand_path('../fixtures/classes.rb', __FILE__)
+require File.expand_path('../fixtures/classes', __FILE__)
+require File.expand_path('../shared/concat', __FILE__)
 
 describe "String#+" do
   it "returns a new string containing the given string concatenated to self" do
@@ -22,13 +23,13 @@ describe "String#+" do
   end
 
   it "doesn't return subclass instances" do
-    (StringSpecs::MyString.new("hello") + "").should be_kind_of(String)
-    (StringSpecs::MyString.new("hello") + "foo").should be_kind_of(String)
-    (StringSpecs::MyString.new("hello") + StringSpecs::MyString.new("foo")).should be_kind_of(String)
-    (StringSpecs::MyString.new("hello") + StringSpecs::MyString.new("")).should be_kind_of(String)
-    (StringSpecs::MyString.new("") + StringSpecs::MyString.new("")).should be_kind_of(String)
-    ("hello" + StringSpecs::MyString.new("foo")).should be_kind_of(String)
-    ("hello" + StringSpecs::MyString.new("")).should be_kind_of(String)
+    (StringSpecs::MyString.new("hello") + "").should be_an_instance_of(String)
+    (StringSpecs::MyString.new("hello") + "foo").should be_an_instance_of(String)
+    (StringSpecs::MyString.new("hello") + StringSpecs::MyString.new("foo")).should be_an_instance_of(String)
+    (StringSpecs::MyString.new("hello") + StringSpecs::MyString.new("")).should be_an_instance_of(String)
+    (StringSpecs::MyString.new("") + StringSpecs::MyString.new("")).should be_an_instance_of(String)
+    ("hello" + StringSpecs::MyString.new("foo")).should be_an_instance_of(String)
+    ("hello" + StringSpecs::MyString.new("")).should be_an_instance_of(String)
   end
 
   it "taints the result when self or other is tainted" do
@@ -41,4 +42,6 @@ describe "String#+" do
       end
     end
   end
+
+  it_behaves_like :string_concat_encoding, :+
 end

@@ -1,3 +1,4 @@
+# -*- encoding: binary -*-
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../../fixtures/classes', __FILE__)
 
@@ -36,7 +37,7 @@ describe "Regexps with escape characters" do
     /\$/.match("$").to_a.should == ["$"]
   end
 
-  it "allow any character to be escaped" do
+  it "allows any character to be escaped" do
     /\y/.match("y").to_a.should == ["y"]
   end
 

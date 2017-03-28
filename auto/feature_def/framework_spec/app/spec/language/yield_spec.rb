@@ -15,27 +15,75 @@ describe "The yield call" do
     it "raises a LocalJumpError when the method is not passed a block" do
       lambda { @y.z }.should raise_error(LocalJumpError)
     end
+
+    it "ignores assignment to the explicit block argument and calls the passed block" do
+      @y.ze { 42 }.should == 42
+    end
   end
 
   describe "taking a single argument" do
-    it "raises a LocalJumpError when the method is not passed a block" do
-      lambda { @y.s(1) }.should raise_error(LocalJumpError)
+    describe "when no block is given" do
+      it "raises a LocalJumpError" do
+        lambda { @y.s(1) }.should raise_error(LocalJumpError)
+      end
     end
 
-    it "passes an empty Array when the argument is an empty Array" do
-      @y.s([]) { |*a| a }.should == [[]]
+    describe "yielding to a literal block" do
+      it "passes an empty Array when the argument is an empty Array" do
+        @y.s([]) { |*a| a }.should == [[]]
+      end
+
+      it "passes nil as a value" do
+        @y.s(nil) { |*a| a }.should == [nil]
+      end
+
+      it "passes a single value" do
+        @y.s(1) { |*a| a }.should == [1]
+      end
+
+      it "passes a single, multi-value Array" do
+        @y.s([1, 2, 3]) { |*a| a }.should == [[1, 2, 3]]
+      end
     end
 
-    it "passes nil as a value" do
-      @y.s(nil) { |*a| a }.should == [nil]
-    end
+    describe "yielding to a lambda" do
+      it "passes an empty Array when the argument is an empty Array" do
+        @y.s([], &lambda { |*a| a }).should == [[]]
+      end
 
-    it "passes a single value" do
-      @y.s(1) { |*a| a }.should == [1]
-    end
+      it "passes nil as a value" do
+        @y.s(nil, &lambda { |*a| a }).should == [nil]
+      end
 
-    it "passes a single, multi-value Array" do
-      @y.s([1, 2, 3]) { |*a| a }.should == [[1, 2, 3]]
+      it "passes a single value" do
+        @y.s(1, &lambda { |*a| a }).should == [1]
+      end
+
+      it "passes a single, multi-value Array" do
+        @y.s([1, 2, 3], &lambda { |*a| a }).should == [[1, 2, 3]]
+      end
+
+      it "raises an ArgumentError if too few arguments are passed" do
+        lambda {
+          @y.s(1, &lambda { |a,b| [a,b] })
+        }.should raise_error(ArgumentError)
+      end
+
+      ruby_bug "#12705", "2.5" do
+        it "should not destructure an Array into multiple arguments" do
+          lambda {
+            @y.s([1, 2], &lambda { |a,b| [a,b] })
+          }.should raise_error(ArgumentError)
+        end
+      end
+
+      ruby_version_is ""..."2.2" do # above is a regression since 2.2
+        it "should not destructure an Array into multiple arguments" do
+          lambda {
+            @y.s([1, 2], &lambda { |a,b| [a,b] })
+          }.should raise_error(ArgumentError)
+        end
+      end
     end
   end
 
@@ -46,6 +94,22 @@ describe "The yield call" do
 
     it "passes the arguments to the block" do
       @y.m(1, 2, 3) { |*a| a }.should == [1, 2, 3]
+    end
+
+    it "passes only the first argument if the block takes one parameter" do
+      @y.m(1, 2, 3) { |a| a }.should == 1
+    end
+
+    it "raises an ArgumentError if too many arguments are passed to a lambda" do
+      lambda {
+        @y.m(1, 2, 3, &lambda { |a| })
+      }.should raise_error(ArgumentError)
+    end
+
+    it "raises an ArgumentError if too few arguments are passed to a lambda" do
+      lambda {
+        @y.m(1, 2, 3, &lambda { |a,b,c,d| })
+      }.should raise_error(ArgumentError)
     end
   end
 
@@ -76,16 +140,8 @@ describe "The yield call" do
       @y.r([[]]) { |*a| a }.should == [[]]
     end
 
-    ruby_version_is ""..."1.9" do
-      it "passes nil as a value" do
-        @y.r(nil) { |*a| a }.should == [nil]
-      end
-    end
-
-    ruby_version_is "1.9" do
-      it "passes no values when give nil as an argument" do
-        @y.r(nil) { |*a| a }.should == []
-      end
+    it "passes no values when give nil as an argument" do
+      @y.r(nil) { |*a| a }.should == []
     end
   end
 
@@ -109,16 +165,23 @@ describe "The yield call" do
       @y.rs(1, 2, [3, 4, 5]) { |*a| a }.should == [1, 2, 3, 4, 5]
     end
 
-    ruby_version_is ""..."1.9" do
-      it "passes nil as the argument value if the splatted argument is nil" do
-        @y.rs(1, 2, nil) { |*a| a }.should == [1, 2, nil]
-      end
-    end
-
-    ruby_version_is "1.9" do
-      it "does not pass an argument value if the splatted argument is nil" do
-        @y.rs(1, 2, nil) { |*a| a }.should == [1, 2]
-      end
+    it "does not pass an argument value if the splatted argument is nil" do
+      @y.rs(1, 2, nil) { |*a| a }.should == [1, 2]
     end
   end
+
+  describe "taking matching arguments with splats and post args" do
+    it "raises a LocalJumpError when the method is not passed a block" do
+      lambda { @y.rs(1, 2, [3, 4]) }.should raise_error(LocalJumpError)
+    end
+
+    it "passes the arguments to the block" do
+      @y.rs([1, 2], 3, 4) { |(*a, b), c, d| [a, b, c, d] }.should == [[1], 2, 3, 4]
+    end
+  end
+
+  it "uses captured block of a block used in define_method" do
+    @y.deep(2).should == 4
+  end
+
 end

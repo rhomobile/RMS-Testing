@@ -12,6 +12,21 @@ describe "String#split with String" do
     $KCODE = @kcode
   end
 
+  with_feature :encoding do
+    it "throws an ArgumentError if the pattern is not a valid string" do
+      str = 'проверка'
+      broken_str = 'проверка'
+      broken_str.force_encoding('binary')
+      broken_str.chop!
+      broken_str.force_encoding('utf-8')
+      lambda { str.split(broken_str) }.should raise_error(ArgumentError)
+    end
+
+    it "splits on multibyte characters" do
+      "ありがりがとう".split("が").should == ["あり", "り", "とう"]
+    end
+  end
+
   it "returns an array of substrings based on splitting on the given string" do
     "mellow yellow".split("ello").should == ["m", "w y", "w"]
   end
@@ -34,6 +49,8 @@ describe "String#split with String" do
 
   it "returns at most limit fields when limit > 1" do
     "hai".split("hai", 2).should == ["", ""]
+
+    "1,2".split(",", 3).should == ["1", "2"]
 
     "1,2,,3,4,,".split(',', 2).should == ["1", "2,,3,4,,"]
     "1,2,,3,4,,".split(',', 3).should == ["1", "2", ",3,4,,"]
@@ -88,10 +105,21 @@ describe "String#split with String" do
     "a\x00a b".split(' ').should == ["a\x00a", "b"]
   end
 
+  describe "when limit is zero" do
+    it "ignores leading and continuous whitespace when string is a single space" do
+      " now's  the time  ".split(' ', 0).should == ["now's", "the", "time"]
+    end
+  end
+
   it "splits between characters when its argument is an empty string" do
     "hi!".split("").should == ["h", "i", "!"]
     "hi!".split("", -1).should == ["h", "i", "!", ""]
+    "hi!".split("", 0).should == ["h", "i", "!"]
+    "hi!".split("", 1).should == ["hi!"]
     "hi!".split("", 2).should == ["h", "i!"]
+    "hi!".split("", 3).should == ["h", "i", "!"]
+    "hi!".split("", 4).should == ["h", "i", "!", ""]
+    "hi!".split("", 5).should == ["h", "i", "!", ""]
   end
 
   it "tries converting its pattern argument to a string via to_str" do
@@ -114,16 +142,25 @@ describe "String#split with String" do
     $~.should == nil
   end
 
+  it "returns the original string if no matches are found" do
+    "foo".split("bar").should == ["foo"]
+    "foo".split("bar", -1).should == ["foo"]
+    "foo".split("bar", 0).should == ["foo"]
+    "foo".split("bar", 1).should == ["foo"]
+    "foo".split("bar", 2).should == ["foo"]
+    "foo".split("bar", 3).should == ["foo"]
+  end
+
   it "returns subclass instances based on self" do
     ["", "x.y.z.", "  x  y  "].each do |str|
       ["", ".", " "].each do |pat|
         [-1, 0, 1, 2].each do |limit|
           StringSpecs::MyString.new(str).split(pat, limit).each do |x|
-            x.should be_kind_of(StringSpecs::MyString)
+            x.should be_an_instance_of(StringSpecs::MyString)
           end
 
           str.split(StringSpecs::MyString.new(pat), limit).each do |x|
-            x.should be_kind_of(String)
+            x.should be_an_instance_of(String)
           end
         end
       end
@@ -138,21 +175,21 @@ describe "String#split with String" do
     s.split(':').first.should == 'silly'
   end
 
-  #it "taints the resulting strings if self is tainted" do
-  #  ["", "x.y.z.", "  x  y  "].each do |str|
-  #    ["", ".", " "].each do |pat|
-  #      [-1, 0, 1, 2].each do |limit|
-  #        str.dup.taint.split(pat).each do |x|
-  #          x.tainted?.should == true
-  #        end
-  #
-  #        str.split(pat.dup.taint).each do |x|
-  #          x.tainted?.should == false
-  #        end
-  #      end
-  #    end
-  #  end
-  #end
+  it "taints the resulting strings if self is tainted" do
+    ["", "x.y.z.", "  x  y  "].each do |str|
+      ["", ".", " "].each do |pat|
+        [-1, 0, 1, 2].each do |limit|
+          str.dup.taint.split(pat).each do |x|
+            x.tainted?.should == true
+          end
+
+          str.split(pat.dup.taint).each do |x|
+            x.tainted?.should == false
+          end
+        end
+      end
+    end
+  end
 end
 
 describe "String#split with Regexp" do
@@ -185,6 +222,8 @@ describe "String#split with Regexp" do
 
   it "returns at most limit fields when limit > 1" do
     "hai".split(/hai/, 2).should == ["", ""]
+
+    "1,2".split(/,/, 3).should == ["1", "2"]
 
     "1,2,,3,4,,".split(/,/, 2).should == ["1", "2,,3,4,,"]
     "1,2,,3,4,,".split(/,/, 3).should == ["1", "2", ",3,4,,"]
@@ -233,9 +272,18 @@ describe "String#split with Regexp" do
   it "splits between characters when regexp matches a zero-length string" do
     "hello".split(//).should == ["h", "e", "l", "l", "o"]
     "hello".split(//, -1).should == ["h", "e", "l", "l", "o", ""]
+    "hello".split(//, 0).should == ["h", "e", "l", "l", "o"]
+    "hello".split(//, 1).should == ["hello"]
     "hello".split(//, 2).should == ["h", "ello"]
+    "hello".split(//, 5).should == ["h", "e", "l", "l", "o"]
+    "hello".split(//, 6).should == ["h", "e", "l", "l", "o", ""]
+    "hello".split(//, 7).should == ["h", "e", "l", "l", "o", ""]
 
     "hi mom".split(/\s*/).should == ["h", "i", "m", "o", "m"]
+
+    "AABCCBAA".split(/(?=B)/).should == ["AA", "BCC", "BAA"]
+    "AABCCBAA".split(/(?=B)/, -1).should == ["AA", "BCC", "BAA"]
+    "AABCCBAA".split(/(?=B)/, 2).should == ["AA", "BCCBAA"]
   end
 
   it "respects $KCODE when splitting between characters" do
@@ -289,7 +337,12 @@ describe "String#split with Regexp" do
   end
 
   it "returns the original string if no matches are found" do
-    "foo".split("\n").should == ["foo"]
+    "foo".split(/bar/).should == ["foo"]
+    "foo".split(/bar/, -1).should == ["foo"]
+    "foo".split(/bar/, 0).should == ["foo"]
+    "foo".split(/bar/, 1).should == ["foo"]
+    "foo".split(/bar/, 2).should == ["foo"]
+    "foo".split(/bar/, 3).should == ["foo"]
   end
 
   it "returns subclass instances based on self" do
@@ -297,7 +350,7 @@ describe "String#split with Regexp" do
       [//, /:/, /\s+/].each do |pat|
         [-1, 0, 1, 2].each do |limit|
           StringSpecs::MyString.new(str).split(pat, limit).each do |x|
-            x.should be_kind_of(StringSpecs::MyString)
+            x.should be_an_instance_of(StringSpecs::MyString)
           end
         end
       end
@@ -325,24 +378,38 @@ describe "String#split with Regexp" do
     end
   end
 
-  # When split is called with a limit of -1, empty fields are not suppressed
-  # and a final empty field is *alawys* created (who knows why). This empty
-  # string is not tainted (again, who knows why) on 1.8 but is on 1.9.
-  ruby_bug "#", "1.8" do
-    it "taints an empty string if self is tainted" do
-      ":".taint.split(//, -1).last.tainted?.should be_true
+  it "taints an empty string if self is tainted" do
+    ":".taint.split(//, -1).last.tainted?.should be_true
+  end
+
+  it "doesn't taints the resulting strings if the Regexp is tainted" do
+    ["", "x:y:z:", "  x  y  "].each do |str|
+      [//, /:/, /\s+/].each do |pat|
+        [-1, 0, 1, 2].each do |limit|
+          str.split(pat.dup.taint, limit).each do |x|
+            x.tainted?.should be_false
+          end
+        end
+      end
     end
   end
 
-  #it "doesn't taints the resulting strings if the Regexp is tainted" do
-  #  ["", "x:y:z:", "  x  y  "].each do |str|
-  #    [//, /:/, /\s+/].each do |pat|
-  #      [-1, 0, 1, 2].each do |limit|
-  #        str.split(pat.dup.taint, limit).each do |x|
-  #          x.tainted?.should be_false
-  #        end
-  #      end
-  #    end
-  #  end
-  #end
+  it "retains the encoding of the source string" do
+    ary = "а б в".split
+    encodings = ary.map { |s| s.encoding }
+    encodings.should == [Encoding::UTF_8, Encoding::UTF_8, Encoding::UTF_8]
+  end
+
+
+  it "splits a string on each character for a multibyte encoding and empty split" do
+    "That's why eﬃciency could not be helped".split("").size.should == 39
+  end
+
+  it "returns an ArgumentError if an invalid UTF-8 string is supplied" do
+    broken_str = 'проверка' # in russian, means "test"
+    broken_str.force_encoding('binary')
+    broken_str.chop!
+    broken_str.force_encoding('utf-8')
+    lambda{ broken_str.split(/\r\n|\r|\n/) }.should raise_error(ArgumentError)
+  end
 end

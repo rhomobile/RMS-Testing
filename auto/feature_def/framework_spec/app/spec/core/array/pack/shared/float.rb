@@ -1,6 +1,6 @@
 # -*- encoding: ascii-8bit -*-
 
-describe :array_pack_float_le, :shared => true do
+describe :array_pack_float_le, shared: true do
   it "encodes a positive Float" do
     [1.42].pack(pack_format).should == "\x8f\xc2\xb5?"
   end
@@ -13,23 +13,8 @@ describe :array_pack_float_le, :shared => true do
     [8].pack(pack_format).should == "\x00\x00\x00A"
   end
 
-  ruby_version_is ""..."1.9" do
-    it "converts a String representation of a floating point number to a Float" do
-      ["13"].pack(pack_format).should == "\x00\x00PA"
-    end
-
-    it "calls #to_f to convert an object to a float" do
-      obj = mock("pack float")
-      obj.should_receive(:to_f).and_return(7.2)
-
-      [obj].pack(pack_format).should == "ff\xe6@"
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a TypeError if passed a String representation of a floating point number" do
-      lambda { ["13"].pack(pack_format) }.should raise_error(TypeError)
-    end
+  it "raises a TypeError if passed a String representation of a floating point number" do
+    lambda { ["13"].pack(pack_format) }.should raise_error(TypeError)
   end
 
   it "encodes the number of array elements specified by the count modifier" do
@@ -55,11 +40,19 @@ describe :array_pack_float_le, :shared => true do
   it "encodes negative Infinity" do
     [-infinity_value].pack(pack_format).should == "\x00\x00\x80\xff"
   end
-if ( System.get_property('platform') != 'ANDROID' && System.get_property('platform') != 'APPLE')
-  it "encodes NaN" do
-    [nan_value].pack(pack_format).should == "\x00\x00\xc0\xff"
+
+  platform_is "86" do # x86 / x86_64
+    it "encodes NaN" do
+      [nan_value].pack(pack_format).should == "\x00\x00\xc0\xff"
+    end
   end
-end
+
+  platform_is "powerpc64" do
+    it "encodes NaN" do
+      [nan_value].pack(pack_format).should == "\x00\x00\xc0\x7f"
+    end
+  end
+
   it "encodes a positive Float outside the range of a single precision float" do
     [1e150].pack(pack_format).should == "\x00\x00\x80\x7f"
   end
@@ -69,7 +62,7 @@ end
   end
 end
 
-describe :array_pack_float_be, :shared => true do
+describe :array_pack_float_be, shared: true do
   it "encodes a positive Float" do
     [1.42].pack(pack_format).should == "?\xb5\xc2\x8f"
   end
@@ -82,23 +75,8 @@ describe :array_pack_float_be, :shared => true do
     [8].pack(pack_format).should == "A\x00\x00\x00"
   end
 
-  ruby_version_is ""..."1.9" do
-    it "converts a String representation of a floating point number to a Float" do
-      ["13"].pack(pack_format).should == "AP\x00\x00"
-    end
-
-    it "calls #to_f to convert an object to a float" do
-      obj = mock("pack float")
-      obj.should_receive(:to_f).and_return(7.2)
-
-      [obj].pack(pack_format).should == "@\xe6ff"
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a TypeError if passed a String representation of a floating point number" do
-      lambda { ["13"].pack(pack_format) }.should raise_error(TypeError)
-    end
+  it "raises a TypeError if passed a String representation of a floating point number" do
+    lambda { ["13"].pack(pack_format) }.should raise_error(TypeError)
   end
 
   it "encodes the number of array elements specified by the count modifier" do
@@ -124,11 +102,19 @@ describe :array_pack_float_be, :shared => true do
   it "encodes negative Infinity" do
     [-infinity_value].pack(pack_format).should == "\xff\x80\x00\x00"
   end
-if ( System.get_property('platform') != 'ANDROID' && System.get_property('platform') != 'APPLE')
-  it "encodes NaN" do
-    [nan_value].pack(pack_format).should == "\xff\xc0\x00\x00"
+
+  platform_is "86" do # x86 / x86_64
+    it "encodes NaN" do
+      [nan_value].pack(pack_format).should == "\xff\xc0\x00\x00"
+    end
   end
-end
+
+  platform_is "powerpc64" do
+    it "encodes NaN" do
+      [nan_value].pack(pack_format).should == "\x7f\xc0\x00\x00"
+    end
+  end
+
   it "encodes a positive Float outside the range of a single precision float" do
     [1e150].pack(pack_format).should == "\x7f\x80\x00\x00"
   end
@@ -138,7 +124,7 @@ end
   end
 end
 
-describe :array_pack_double_le, :shared => true do
+describe :array_pack_double_le, shared: true do
   it "encodes a positive Float" do
     [1.42].pack(pack_format).should == "\xb8\x1e\x85\xebQ\xb8\xf6?"
   end
@@ -151,23 +137,8 @@ describe :array_pack_double_le, :shared => true do
     [8].pack(pack_format).should == "\x00\x00\x00\x00\x00\x00\x20@"
   end
 
-  ruby_version_is ""..."1.9" do
-    it "converts a String representation of a floating point number to a Float" do
-      ["13"].pack(pack_format).should == "\x00\x00\x00\x00\x00\x00\x2a@"
-    end
-
-    it "calls #to_f to convert an object to a float" do
-      obj = mock("pack float")
-      obj.should_receive(:to_f).and_return(7.2)
-
-      [obj].pack(pack_format).should == "\xcd\xcc\xcc\xcc\xcc\xcc\x1c@"
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a TypeError if passed a String representation of a floating point number" do
-      lambda { ["13"].pack(pack_format) }.should raise_error(TypeError)
-    end
+  it "raises a TypeError if passed a String representation of a floating point number" do
+    lambda { ["13"].pack(pack_format) }.should raise_error(TypeError)
   end
 
   it "encodes the number of array elements specified by the count modifier" do
@@ -193,11 +164,19 @@ describe :array_pack_double_le, :shared => true do
   it "encodes negative Infinity" do
     [-infinity_value].pack(pack_format).should == "\x00\x00\x00\x00\x00\x00\xf0\xff"
   end
-if ( System.get_property('platform') != 'ANDROID' && System.get_property('platform') != 'APPLE')
-  it "encodes NaN" do
-    [nan_value].pack(pack_format).should == "\x00\x00\x00\x00\x00\x00\xf8\xff"
+
+  platform_is "86" do # x86 / x86_64
+    it "encodes NaN" do
+      [nan_value].pack(pack_format).should == "\x00\x00\x00\x00\x00\x00\xf8\xff"
+    end
   end
-end
+
+  platform_is "powerpc64" do
+    it "encodes NaN" do
+      [nan_value].pack(pack_format).should == "\x00\x00\x00\x00\x00\x00\xf8\x7f"
+    end
+  end
+
   it "encodes a positive Float outside the range of a single precision float" do
     [1e150].pack(pack_format).should == "\xaf\x96P\x2e5\x8d\x13_"
   end
@@ -207,7 +186,7 @@ end
   end
 end
 
-describe :array_pack_double_be, :shared => true do
+describe :array_pack_double_be, shared: true do
   it "encodes a positive Float" do
     [1.42].pack(pack_format).should == "?\xf6\xb8Q\xeb\x85\x1e\xb8"
   end
@@ -220,23 +199,8 @@ describe :array_pack_double_be, :shared => true do
     [8].pack(pack_format).should == "@\x20\x00\x00\x00\x00\x00\x00"
   end
 
-  ruby_version_is ""..."1.9" do
-    it "converts a String representation of a floating point number to a Float" do
-      ["13"].pack(pack_format).should == "@\x2a\x00\x00\x00\x00\x00\x00"
-    end
-
-    it "calls #to_f to convert an object to a float" do
-      obj = mock("pack float")
-      obj.should_receive(:to_f).and_return(7.2)
-
-      [obj].pack(pack_format).should == "@\x1c\xcc\xcc\xcc\xcc\xcc\xcd"
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a TypeError if passed a String representation of a floating point number" do
-      lambda { ["13"].pack(pack_format) }.should raise_error(TypeError)
-    end
+  it "raises a TypeError if passed a String representation of a floating point number" do
+    lambda { ["13"].pack(pack_format) }.should raise_error(TypeError)
   end
 
   it "encodes the number of array elements specified by the count modifier" do
@@ -262,11 +226,19 @@ describe :array_pack_double_be, :shared => true do
   it "encodes negative Infinity" do
     [-infinity_value].pack(pack_format).should == "\xff\xf0\x00\x00\x00\x00\x00\x00"
   end
-if ( System.get_property('platform') != 'ANDROID' && System.get_property('platform') != 'APPLE' )
-  it "encodes NaN" do
-    [nan_value].pack(pack_format).should == "\xff\xf8\x00\x00\x00\x00\x00\x00"
+
+  platform_is "86" do # x86 / x86_64
+    it "encodes NaN" do
+      [nan_value].pack(pack_format).should == "\xff\xf8\x00\x00\x00\x00\x00\x00"
+    end
   end
-end
+
+  platform_is "powerpc64" do
+    it "encodes NaN" do
+      [nan_value].pack(pack_format).should == "\x7f\xf8\x00\x00\x00\x00\x00\x00"
+    end
+  end
+
   it "encodes a positive Float outside the range of a single precision float" do
     [1e150].pack(pack_format).should == "_\x13\x8d5\x2eP\x96\xaf"
   end

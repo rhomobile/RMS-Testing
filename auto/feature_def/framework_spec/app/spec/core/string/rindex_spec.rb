@@ -1,10 +1,13 @@
+# -*- encoding: utf-8 -*-
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes.rb', __FILE__)
 require File.expand_path('../fixtures/utf-8-encoding.rb', __FILE__)
 
 describe "String#rindex with object" do
   it "raises a TypeError if obj isn't a String, Fixnum or Regexp" do
-    lambda { "hello".rindex(:sym)      }.should raise_error(TypeError)
+    not_supported_on :opal do
+      lambda { "hello".rindex(:sym) }.should raise_error(TypeError)
+    end
     lambda { "hello".rindex(mock('x')) }.should raise_error(TypeError)
   end
 
@@ -14,146 +17,45 @@ describe "String#rindex with object" do
     lambda { "hello".rindex(obj) }.should raise_error(TypeError)
   end
 
-  ruby_bug "#", "1.8.6" do # Fixed at MRI 1.8.7
-    it "tries to convert obj to a string via to_str" do
-      obj = mock('lo')
-      def obj.to_str() "lo" end
-      "hello".rindex(obj).should == "hello".rindex("lo")
+  it "tries to convert obj to a string via to_str" do
+    obj = mock('lo')
+    def obj.to_str() "lo" end
+    "hello".rindex(obj).should == "hello".rindex("lo")
 
-      obj = mock('o')
-      def obj.respond_to?(arg, *) true end
-      def obj.method_missing(*args) "o" end
-      "hello".rindex(obj).should == "hello".rindex("o")
-    end
-  end
-end
-
-# Ruby 1.9 doesn't support the String#rindex(Fixnum) invocation. However,
-# confusingly, many of the tests in this block pass because it also changes
-# the semantics of ?l, where _l_ is a character, to return the character
-# corresponding to _l_; not the Fixnum. Regardless, it doesn't make sense to
-# have a describe block for "String#rindex with Fixnum" on 1.9 when 1.9
-# doesn't support that invocation. The other tests in this file exercise
-# String#rindex(?l) on 1.9 inadvertently because they test for
-# String#rindex(str).
-ruby_version_is ""..."1.9" do
-  describe "String#rindex with Fixnum" do
-    it "returns the index of the last occurrence of the given character" do
-      "hello".rindex(?e).should == 1
-      "hello".rindex(?l).should == 3
-    end
-
-    it "doesn't use fixnum % 256" do
-      "hello".rindex(?e + 256 * 3).should == nil
-      "hello".rindex(-(256 - ?e)).should == nil
-    end
-
-    it "starts the search at the given offset" do
-      "blablabla".rindex(?b, 0).should == 0
-      "blablabla".rindex(?b, 1).should == 0
-      "blablabla".rindex(?b, 2).should == 0
-      "blablabla".rindex(?b, 3).should == 3
-      "blablabla".rindex(?b, 4).should == 3
-      "blablabla".rindex(?b, 5).should == 3
-      "blablabla".rindex(?b, 6).should == 6
-      "blablabla".rindex(?b, 7).should == 6
-      "blablabla".rindex(?b, 8).should == 6
-      "blablabla".rindex(?b, 9).should == 6
-      "blablabla".rindex(?b, 10).should == 6
-
-      "blablabla".rindex(?a, 2).should == 2
-      "blablabla".rindex(?a, 3).should == 2
-      "blablabla".rindex(?a, 4).should == 2
-      "blablabla".rindex(?a, 5).should == 5
-      "blablabla".rindex(?a, 6).should == 5
-      "blablabla".rindex(?a, 7).should == 5
-      "blablabla".rindex(?a, 8).should == 8
-      "blablabla".rindex(?a, 9).should == 8
-      "blablabla".rindex(?a, 10).should == 8
-    end
-
-    it "starts the search at offset + self.length if offset is negative" do
-      str = "blablabla"
-
-      [?a, ?b].each do |needle|
-        (-str.length .. -1).each do |offset|
-          str.rindex(needle, offset).should ==
-          str.rindex(needle, offset + str.length)
-        end
-      end
-    end
-
-    it "returns nil if the character isn't found" do
-      "hello".rindex(0).should == nil
-
-      "hello".rindex(?H).should == nil
-      "hello".rindex(?z).should == nil
-      "hello".rindex(?o, 2).should == nil
-
-      "blablabla".rindex(?a, 0).should == nil
-      "blablabla".rindex(?a, 1).should == nil
-
-      "blablabla".rindex(?a, -8).should == nil
-      "blablabla".rindex(?a, -9).should == nil
-
-      "blablabla".rindex(?b, -10).should == nil
-      "blablabla".rindex(?b, -20).should == nil
-    end
-
-    it "tries to convert start_offset to an integer via to_int" do
-      obj = mock('5')
-      def obj.to_int() 5 end
-      "str".rindex(?s, obj).should == 0
-
-      obj = mock('5')
-      def obj.respond_to?(arg, *) true end
-      def obj.method_missing(*args); 5; end
-      "str".rindex(?s, obj).should == 0
-    end
-
-    it "raises a TypeError when given offset is nil" do
-      lambda { "str".rindex(?s, nil) }.should raise_error(TypeError)
-      lambda { "str".rindex(?t, nil) }.should raise_error(TypeError)
-    end
+    obj = mock('o')
+    def obj.respond_to?(arg, *) true end
+    def obj.method_missing(*args) "o" end
+    "hello".rindex(obj).should == "hello".rindex("o")
   end
 end
 
 describe "String#rindex with String" do
   it "behaves the same as String#rindex(char) for one-character strings" do
-    ["blablabla", "hello cruel world...!"].each do |str|
-      str.split("").uniq.each do |str|
-        chr = str[0]
-        str.rindex(str).should == str.rindex(chr)
+    "blablabla hello cruel world...!".split("").uniq.each do |str|
+      chr = str[0]
+      str.rindex(str).should == str.rindex(chr)
 
-        0.upto(str.size + 1) do |start|
-          str.rindex(str, start).should == str.rindex(chr, start)
-        end
+      0.upto(str.size + 1) do |start|
+        str.rindex(str, start).should == str.rindex(chr, start)
+      end
 
-        (-str.size - 1).upto(-1) do |start|
-          str.rindex(str, start).should == str.rindex(chr, start)
-        end
+      (-str.size - 1).upto(-1) do |start|
+        str.rindex(str, start).should == str.rindex(chr, start)
       end
     end
   end
 
-  # On 1.9 ?chr, where _chr_ is a character returns the character as a string.
-  # The test below repeats the one above but uses the ?l notation for single
-  # characters instead.
-  ruby_version_is "1.9" do
-    it "behaves the same as String#rindex(?char) for one-character strings" do
-      ["blablabla", "hello cruel world...!"].each do |str|
-        str.split("").uniq.each do |str|
-          chr = str[0] =~ / / ? str[0] : eval("?#{str[0]}")
-          str.rindex(str).should == str.rindex(chr)
+  it "behaves the same as String#rindex(?char) for one-character strings" do
+    "blablabla hello cruel world...!".split("").uniq.each do |str|
+      chr = str[0] =~ / / ? str[0] : eval("?#{str[0]}")
+      str.rindex(str).should == str.rindex(chr)
 
-          0.upto(str.size + 1) do |start|
-            str.rindex(str, start).should == str.rindex(chr, start)
-          end
+      0.upto(str.size + 1) do |start|
+        str.rindex(str, start).should == str.rindex(chr, start)
+      end
 
-          (-str.size - 1).upto(-1) do |start|
-            str.rindex(str, start).should == str.rindex(chr, start)
-          end
-        end
+      (-str.size - 1).upto(-1) do |start|
+        str.rindex(str, start).should == str.rindex(chr, start)
       end
     end
   end
@@ -325,15 +227,19 @@ describe "String#rindex with Regexp" do
 
     "blablabla".rindex(/bla|a/).should == 8
 
-    "blablabla".rindex(/\A/).should == 0
-    "blablabla".rindex(/\Z/).should == 9
-    "blablabla".rindex(/\z/).should == 9
-    "blablabla\n".rindex(/\Z/).should == 10
-    "blablabla\n".rindex(/\z/).should == 10
+    not_supported_on :opal do
+      "blablabla".rindex(/\A/).should == 0
+      "blablabla".rindex(/\Z/).should == 9
+      "blablabla".rindex(/\z/).should == 9
+      "blablabla\n".rindex(/\Z/).should == 10
+      "blablabla\n".rindex(/\z/).should == 10
+    end
 
     "blablabla".rindex(/^/).should == 0
-    "\nblablabla".rindex(/^/).should == 1
-    "b\nlablabla".rindex(/^/).should == 2
+    not_supported_on :opal do
+      "\nblablabla".rindex(/^/).should == 1
+      "b\nlablabla".rindex(/^/).should == 2
+    end
     "blablabla".rindex(/$/).should == 9
 
     "blablabla".rindex(/.l./).should == 6
@@ -374,7 +280,9 @@ describe "String#rindex with Regexp" do
     "blablablax".rindex(/..x/, 8).should == 7
     "blablablax".rindex(/..x/, 7).should == 7
 
-    "blablabla\n".rindex(/\Z/, 9).should == 9
+    not_supported_on :opal do
+      "blablabla\n".rindex(/\Z/, 9).should == 9
+    end
   end
 
   it "starts the search at offset + self.length if offset is negative" do
@@ -394,29 +302,33 @@ describe "String#rindex with Regexp" do
     "blablablax".rindex(/.x/, 7).should == nil
     "blablablax".rindex(/..x/, 6).should == nil
 
-    "blablabla".rindex(/\Z/, 5).should == nil
-    "blablabla".rindex(/\z/, 5).should == nil
-    "blablabla\n".rindex(/\z/, 9).should == nil
+    not_supported_on :opal do
+      "blablabla".rindex(/\Z/, 5).should == nil
+      "blablabla".rindex(/\z/, 5).should == nil
+      "blablabla\n".rindex(/\z/, 9).should == nil
+    end
   end
 
-  it "supports \\G which matches at the given start offset" do
-    "helloYOU.".rindex(/YOU\G/, 8).should == 5
-    "helloYOU.".rindex(/YOU\G/).should == nil
+  not_supported_on :opal do
+    it "supports \\G which matches at the given start offset" do
+      "helloYOU.".rindex(/YOU\G/, 8).should == 5
+      "helloYOU.".rindex(/YOU\G/).should == nil
 
-    idx = "helloYOUall!".index("YOU")
-    re = /YOU.+\G.+/
-    # The # marks where \G will match.
-    [
-      ["helloYOU#all.", nil],
-      ["helloYOUa#ll.", idx],
-      ["helloYOUal#l.", idx],
-      ["helloYOUall#.", idx],
-      ["helloYOUall.#", nil]
-    ].each do |i|
-      start = i[0].index("#")
-      str = i[0].delete("#")
+      idx = "helloYOUall!".index("YOU")
+      re = /YOU.+\G.+/
+      # The # marks where \G will match.
+      [
+        ["helloYOU#all.", nil],
+        ["helloYOUa#ll.", idx],
+        ["helloYOUal#l.", idx],
+        ["helloYOUall#.", idx],
+        ["helloYOUall.#", nil]
+      ].each do |i|
+        start = i[0].index("#")
+        str = i[0].delete("#")
 
-      str.rindex(re, start).should == i[1]
+        str.rindex(re, start).should == i[1]
+      end
     end
   end
 
@@ -435,9 +347,22 @@ describe "String#rindex with Regexp" do
     lambda { "str".rindex(/../, nil) }.should raise_error(TypeError)
   end
 
-  ruby_version_is "1.9.2" do
-    it "reverse matches multibyte UTF-8 chars" do
-      StringSpecs::UTF8Encoding.egrave.rindex(/[\w\W]/).should == 0
+  with_feature :encoding do
+    it "returns the reverse character index of a multibyte character" do
+      "ありがりがとう".rindex("が").should == 4
+      "ありがりがとう".rindex(/が/).should == 4
+    end
+
+    it "returns the character index before the finish" do
+       "ありがりがとう".rindex("が", 3).should == 2
+       "ありがりがとう".rindex(/が/, 3).should == 2
+    end
+
+    it "raises an Encoding::CompatibilityError if the encodings are incompatible" do
+      re = Regexp.new "れ".encode(Encoding::EUC_JP)
+      lambda do
+        "あれ".rindex re
+      end.should raise_error(Encoding::CompatibilityError)
     end
   end
 end

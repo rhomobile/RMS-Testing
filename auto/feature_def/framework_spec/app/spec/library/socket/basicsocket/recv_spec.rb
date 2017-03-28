@@ -1,5 +1,6 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+# -*- encoding: binary -*-
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "BasicSocket#recv" do
 
@@ -13,7 +14,7 @@ describe "BasicSocket#recv" do
     ScratchPad.clear
   end
 
-  it "receives a specified number of bytes of a message from another socket----VT-034"  do
+  it "receives a specified number of bytes of a message from another socket"  do
     t = Thread.new do
       client = @server.accept
       ScratchPad.record client.recv(10)
@@ -31,29 +32,31 @@ describe "BasicSocket#recv" do
     ScratchPad.recorded.should == 'hello'
   end
 
-  it "accepts flags to specify unusual receiving behaviour----VT-035" do
-    t = Thread.new do
-      client = @server.accept
+  platform_is_not :solaris do
+    it "accepts flags to specify unusual receiving behaviour" do
+      t = Thread.new do
+        client = @server.accept
 
-      # in-band data (TCP), doesn't receive the flag.
-      ScratchPad.record client.recv(10)
+        # in-band data (TCP), doesn't receive the flag.
+        ScratchPad.record client.recv(10)
 
-      # this recv is important (TODO: explain)
-      client.recv(10)
-      client.close
+        # this recv is important (TODO: explain)
+        client.recv(10)
+        client.close
+      end
+      Thread.pass while t.status and t.status != "sleep"
+      t.status.should_not be_nil
+
+      socket = TCPSocket.new('127.0.0.1', SocketSpecs.port)
+      socket.send('helloU', Socket::MSG_OOB)
+      socket.shutdown(1)
+      t.join
+      socket.close
+      ScratchPad.recorded.should == 'hello'
     end
-    Thread.pass while t.status and t.status != "sleep"
-    t.status.should_not be_nil
-
-    socket = TCPSocket.new('127.0.0.1', SocketSpecs.port)
-    socket.send('helloU', Socket::MSG_OOB)
-    socket.shutdown(1)
-    t.join
-    socket.close
-    ScratchPad.recorded.should == 'hello'
   end
 
-  it "gets lines delimited with a custom separator----VT-036"  do
+  it "gets lines delimited with a custom separator"  do
     t = Thread.new do
       client = @server.accept
       ScratchPad.record client.gets("\377")
@@ -73,4 +76,18 @@ describe "BasicSocket#recv" do
     ScratchPad.recorded.should == "firstline\377"
   end
 
+  ruby_version_is "2.3" do
+    it "allows an output buffer as third argument" do
+      socket = TCPSocket.new('127.0.0.1', SocketSpecs.port)
+      socket.write("data")
+
+      client = @server.accept
+      buf = "foo"
+      client.recv(4, 0, buf)
+      client.close
+      buf.should == "data"
+
+      socket.close
+    end
+  end
 end

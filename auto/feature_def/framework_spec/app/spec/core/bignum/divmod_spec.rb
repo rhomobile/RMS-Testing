@@ -1,7 +1,7 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 
 describe "Bignum#divmod" do
-  before(:each) do
+  before :each do
     @bignum = bignum_value(55)
   end
 
@@ -14,10 +14,15 @@ describe "Bignum#divmod" do
     @bignum.divmod(4).should == [2305843009213693965, 3]
     @bignum.divmod(13).should == [709490156681136604, 11]
 
-    @bignum.divmod(4.0).should == [2305843009213693952, 0.0]
-    @bignum.divmod(13.0).should == [709490156681136640, 8.0]
+    @bignum.divmod(4.5).should == [2049638230412172288, 3.5]
 
-    @bignum.divmod(2.0).should == [4611686018427387904, 0.0]
+    not_supported_on :opal do
+      @bignum.divmod(4.0).should == [2305843009213693952, 0.0]
+      @bignum.divmod(13.0).should == [709490156681136640, 8.0]
+
+      @bignum.divmod(2.0).should == [4611686018427387904, 0.0]
+    end
+
     @bignum.divmod(bignum_value).should == [1, 55]
 
     (-(10**50)).divmod(-(10**40 + 1)).should == [9999999999, -9999999999999999999999999999990000000001]
@@ -63,18 +68,9 @@ describe "Bignum#divmod" do
     lambda { @bignum.divmod(nan_value) }.should raise_error(FloatDomainError)
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises a FloatDomainError when the given argument is 0 and a Float" do
-      lambda { @bignum.divmod(0.0) }.should raise_error(FloatDomainError)
-      lambda { (-@bignum).divmod(0.0) }.should raise_error(FloatDomainError)
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a ZeroDivisionError when the given argument is 0 and a Float" do
-      lambda { @bignum.divmod(0.0) }.should raise_error(ZeroDivisionError)
-      lambda { (-@bignum).divmod(0.0) }.should raise_error(ZeroDivisionError)
-    end
+  it "raises a ZeroDivisionError when the given argument is 0 and a Float" do
+    lambda { @bignum.divmod(0.0) }.should raise_error(ZeroDivisionError)
+    lambda { (-@bignum).divmod(0.0) }.should raise_error(ZeroDivisionError)
   end
 
   it "raises a TypeError when the given argument is not an Integer" do

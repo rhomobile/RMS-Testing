@@ -1,8 +1,8 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "TCPServer.new" do
-  after(:each) do
+  after :each do
     @server.close if @server && !@server.closed?
   end
 
@@ -83,5 +83,15 @@ describe "TCPServer.new" do
       @server = TCPServer.new('127.0.0.1', SocketSpecs.port)
       @server = TCPServer.new('127.0.0.1', SocketSpecs.port)
     }.should raise_error(Errno::EADDRINUSE)
+  end
+
+  platform_is_not :windows, :aix do
+    # A known bug in AIX.  getsockopt(2) does not properly set
+    # the fifth argument for SO_REUSEADDR.
+    it "sets SO_REUSEADDR on the resulting server" do
+      @server = TCPServer.new('127.0.0.1', SocketSpecs.port)
+      @server.getsockopt(:SOCKET, :REUSEADDR).data.should_not == "\x00\x00\x00\x00"
+      @server.getsockopt(:SOCKET, :REUSEADDR).int.should_not == 0
+    end
   end
 end

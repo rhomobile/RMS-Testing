@@ -1,14 +1,13 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
-if System.get_property('platform') != 'ANDROID'      
 describe "IO#lineno" do
   before :each do
     @io = IOSpecs.io_fixture "lines.txt"
   end
 
   after :each do
-    @io.close unless @io.closed?
+    @io.close if @io
   end
 
   it "raises an IOError on a closed stream" do
@@ -34,7 +33,7 @@ describe "IO#lineno=" do
   end
 
   after :each do
-    @io.close unless @io.closed?
+    @io.close if @io
   end
 
   it "raises an IOError on a closed stream" do
@@ -93,5 +92,4 @@ describe "IO#lineno=" do
       $..should == count += 1
     end
   end
-end
 end

@@ -1,22 +1,12 @@
-describe :thread_start, :shared => true do
-  before(:each) do
+describe :thread_start, shared: true do
+  before :each do
     ScratchPad.clear
   end
 
-  ruby_version_is '' ... '1.9' do
-    it "raises a ThreadError if not passed a block" do
-      lambda {
-        Thread.send(@method)
-      }.should raise_error(ThreadError)
-    end
-  end
-
-  ruby_version_is '1.9' do
-    it "raises a ArgumentError if not passed a block" do
-      lambda {
-        Thread.send(@method)
-      }.should raise_error(ArgumentError)
-    end
+  it "raises an ArgumentError if not passed a block" do
+    lambda {
+      Thread.send(@method)
+    }.should raise_error(ArgumentError)
   end
 
   it "spawns a new Thread running the block" do

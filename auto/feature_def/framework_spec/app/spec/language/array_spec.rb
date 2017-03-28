@@ -21,7 +21,20 @@ describe "Array literals" do
   end
 
   it "[] accepts a literal hash without curly braces as its only parameter" do
-    ["foo" => :bar, :baz => 42].should == [{"foo" => :bar, :baz => 42}]
+    ["foo" => :bar, baz: 42].should == [{"foo" => :bar, baz: 42}]
+  end
+
+  it "[] accepts a literal hash without curly braces as its last parameter" do
+    ["foo", "bar" => :baz].should == ["foo", {"bar" => :baz}]
+    [1, 2, 3 => 6, 4 => 24].should == [1, 2, {3 => 6, 4 => 24}]
+  end
+
+  it "[] treats splatted nil as no element" do
+    [*nil].should == []
+    [1, *nil].should == [1]
+    [1, 2, *nil].should == [1, 2]
+    [1, *nil, 3].should == [1, 3]
+    [*nil, *nil, *nil].should == []
   end
 end
 
@@ -66,9 +79,10 @@ describe "The unpacking splat operator (*)" do
     [1, 2, *splatted_array].should == [1, 2, 3, 4, 5]
   end
 
-  it "when applied to a value with no other items in the containing array, coerces the passed value to an array and returns it unchanged" do
+  it "returns a new array containing the same values when applied to an array inside an empty array" do
     splatted_array = [3, 4, 5]
-    [*splatted_array].should equal(splatted_array)
+    [*splatted_array].should == splatted_array
+    [*splatted_array].should_not equal(splatted_array)
   end
 
   it "unpacks the start and count arguments in an array slice assignment" do
@@ -105,10 +119,37 @@ describe "The unpacking splat operator (*)" do
     tester.unpack_3args(*args).should == [1, 2, 3]
     tester.unpack_4args(0, *args).should == [0, 1, 2, 3]
   end
+
+  it "when applied to a non-Array value attempts to coerce it to Array if the object respond_to?(:to_a)" do
+    obj = mock("pseudo-array")
+    obj.should_receive(:to_a).and_return([2, 3, 4])
+    [1, *obj].should == [1, 2, 3, 4]
+  end
+
+  it "when applied to a non-Array value uses it unchanged if it does not respond_to?(:to_a)" do
+    obj = Object.new
+    obj.should_not respond_to(:to_a)
+    [1, *obj].should == [1, obj]
+  end
+
+  it "when applied to a BasicObject coerces it to Array if it respond_to?(:to_a)" do
+    obj = BasicObject.new
+    def obj.to_a; [2, 3, 4]; end
+    [1, *obj].should == [1, 2, 3, 4]
+  end
+
+  it "can be used before other non-splat elements" do
+    a = [1, 2]
+    [0, *a, 3].should == [0, 1, 2, 3]
+  end
+
+  it "can be used multiple times in the same containing array" do
+    a = [1, 2]
+    b = [1, 0]
+    [*a, 3, *a, *b].should == [1, 2, 3, 1, 2, 1, 0]
+  end
 end
 
 describe "The packing splat operator (*)" do
 
 end
-
-language_version __FILE__, "array"

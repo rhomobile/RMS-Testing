@@ -1,11 +1,11 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
-require 'net/ftp'
+require File.expand_path('../spec_helper', __FILE__)
 require File.expand_path('../fixtures/server', __FILE__)
 require File.expand_path('../shared/puttextfile', __FILE__)
 require File.expand_path('../shared/putbinaryfile', __FILE__)
 
 describe "Net::FTP#put (binary mode)" do
-  before(:each) do
+  before :each do
     @binary_mode = true
   end
 
@@ -13,7 +13,7 @@ describe "Net::FTP#put (binary mode)" do
 end
 
 describe "Net::FTP#put (text mode)" do
-  before(:each) do
+  before :each do
     @binary_mode = false
   end
 

@@ -1,7 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
-if System.get_property('platform') != 'ANDROID'  
 describe "IO#closed?" do
   before :each do
     @io = IOSpecs.io_fixture "lines.txt"
@@ -18,5 +17,4 @@ describe "IO#closed?" do
   it "returns false on open stream" do
     @io.closed?.should be_false
   end
-end
 end

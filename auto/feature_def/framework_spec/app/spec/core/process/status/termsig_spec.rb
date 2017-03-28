@@ -1,6 +1,5 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
 
-=begin
 describe "Process::Status#termsig" do
 
   describe "for a child that exited normally" do
@@ -38,4 +37,3 @@ describe "Process::Status#termsig" do
 
   end
 end
-=end

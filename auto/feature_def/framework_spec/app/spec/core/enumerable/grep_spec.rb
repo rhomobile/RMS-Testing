@@ -2,7 +2,7 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "Enumerable#grep" do
-  before(:each) do
+  before :each do
     @a = EnumerableSpecs::EachDefiner.new( 2, 4, 6, 8, 10)
   end
 
@@ -27,5 +27,26 @@ describe "Enumerable#grep" do
   it "can use $~ in the block when used with a Regexp" do
     ary = ["aba", "aba"]
     ary.grep(/a(b)a/) { $1 }.should == ["b", "b"]
+  end
+
+  describe "with a block" do
+    before :each do
+      @numerous = EnumerableSpecs::Numerous.new(*(0..9).to_a)
+      def (@odd_matcher = BasicObject.new).===(obj)
+        obj.odd?
+      end
+    end
+
+    it "returns an Array of matched elements that mapped by the block" do
+      @numerous.grep(@odd_matcher) { |n| n * 2 }.should == [2, 6, 10, 14, 18]
+    end
+
+    it "calls the block with gathered array when yielded with multiple arguments" do
+      EnumerableSpecs::YieldsMixed2.new.grep(Object){ |e| e }.should == EnumerableSpecs::YieldsMixed2.gathered_yields
+    end
+
+    it "raises an ArgumentError when not given a pattern" do
+      -> { @numerous.grep { |e| e } }.should raise_error(ArgumentError)
+    end
   end
 end

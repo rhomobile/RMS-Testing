@@ -1,7 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
-require 'rational'
 
-describe :rational_modulo, :shared => true do
+describe :rational_modulo, shared: true do
   it "returns the remainder when this value is divided by other" do
     Rational(2, 3).send(@method, Rational(2, 3)).should == Rational(0, 1)
     Rational(4, 3).send(@method, Rational(2, 3)).should == Rational(0, 1)
@@ -36,17 +35,9 @@ describe :rational_modulo, :shared => true do
     }.should raise_error(ZeroDivisionError)
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises FloatDomainError when the argument is 0.0" do
-      lambda { Rational(3, 5) % 0.0 }.should raise_error(FloatDomainError)
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a ZeroDivisionError when the argument is 0.0" do
-      lambda {
-        Rational(3, 5).send(@method, 0.0)
-      }.should raise_error(ZeroDivisionError)
-    end
+  it "raises a ZeroDivisionError when the argument is 0.0" do
+    lambda {
+      Rational(3, 5).send(@method, 0.0)
+    }.should raise_error(ZeroDivisionError)
   end
 end

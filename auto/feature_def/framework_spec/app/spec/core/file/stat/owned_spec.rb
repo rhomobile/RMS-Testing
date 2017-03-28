@@ -7,12 +7,12 @@ describe "File::Stat#owned?" do
 end
 
 describe "File::Stat#owned?" do
-  before(:each) do
+  before :each do
     @file = tmp("i_exist")
     touch(@file)
   end
 
-  after(:each) do
+  after :each do
     rm_r @file
   end
 
@@ -21,11 +21,11 @@ describe "File::Stat#owned?" do
     st.owned?.should == true
   end
 
-  #platform_is_not :windows do
-  #  it "returns false if the file is not owned by the user" do
-  #   system_file = '/etc/passwd'
-  #   st = File.stat(system_file)
-  #    st.owned?.should == false
-  #  end
-  #end
+  platform_is_not :windows do
+    it "returns false if the file is not owned by the user" do
+      system_file = '/etc/passwd'
+      st = File.stat(system_file)
+      st.owned?.should == false
+    end
+  end
 end

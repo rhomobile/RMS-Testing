@@ -1,6 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
-=begin
+
 # These specs only illustrate the basic autoload cases
 # and where toplevel autoload behaves differently from
 # Module#autoload. See those specs for more examples.
@@ -55,6 +55,12 @@ describe "Kernel#autoload" do
       KSAutoloadD.loaded.should == :ksautoload_d
     end
   end
+
+  describe "when Object is frozen" do
+    it "raises a RuntimeError before defining the constant" do
+      ruby_exe(fixture(__FILE__, "autoload_frozen.rb")).should == "RuntimeError - nil"
+    end
+  end
 end
 
 describe "Kernel#autoload?" do
@@ -93,24 +99,14 @@ describe "Kernel.autoload" do
     Kernel.autoload?(:KSAutoloadAA).should == @non_existent
   end
 
-  ruby_version_is "" ... "1.9" do
-    it "sets the autoload constant in Object's constant table" do
-      Object.should have_constant(:KSAutoloadBB)
-    end
+  it "sets the autoload constant in Object's constant table" do
+    Object.should have_constant(:KSAutoloadBB)
   end
 
-  ruby_version_is "1.9" do
-    it "sets the autoload constant in Object's metaclass's constant table" do
-      class << Object
-        should have_constant(:KSAutoloadBB)
-      end
-    end
-
-    it "calls #to_path on non-String filenames" do
-      p = mock('path')
-      p.should_receive(:to_path).and_return @non_existent
-      Kernel.autoload :KSAutoloadAA, p
-    end
+  it "calls #to_path on non-String filenames" do
+    p = mock('path')
+    p.should_receive(:to_path).and_return @non_existent
+    Kernel.autoload :KSAutoloadAA, p
   end
 end
 
@@ -124,4 +120,3 @@ describe "Kernel.autoload?" do
     Kernel.autoload?(:Manualload).should be_nil
   end
 end
-=end

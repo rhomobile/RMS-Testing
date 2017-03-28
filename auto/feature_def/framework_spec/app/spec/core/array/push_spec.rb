@@ -8,6 +8,10 @@ describe "Array#push" do
     a.push().should == ["a", "b", "c", "d", "e", "f"]
     a.push(5)
     a.should == ["a", "b", "c", "d", "e", "f", 5]
+
+    a = [0, 1]
+    a.push(2)
+    a.should == [0, 1, 2]
   end
 
   it "isn't confused by previous shift" do
@@ -25,20 +29,8 @@ describe "Array#push" do
     array.push(:last).should == [1, 'two', 3.0, array, array, array, array, array, :last]
   end
 
-  ruby_version_is "" ... "1.9" do
-    it "raises a TypeError on a frozen array if modification takes place" do
-      lambda { ArraySpecs.frozen_array.push(1) }.should raise_error(TypeError)
-    end
-
-    it "does not raise on a frozen array if no modification is made" do
-      ArraySpecs.frozen_array.push.should == [1, 2, 3]
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a RuntimeError on a frozen array" do
-      lambda { ArraySpecs.frozen_array.push(1) }.should raise_error(RuntimeError)
-      lambda { ArraySpecs.frozen_array.push }.should raise_error(RuntimeError)
-    end
+  it "raises a RuntimeError on a frozen array" do
+    lambda { ArraySpecs.frozen_array.push(1) }.should raise_error(RuntimeError)
+    lambda { ArraySpecs.frozen_array.push }.should raise_error(RuntimeError)
   end
 end

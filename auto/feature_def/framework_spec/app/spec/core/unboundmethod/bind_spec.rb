@@ -17,15 +17,11 @@ describe "UnboundMethod#bind" do
     @normal_um.bind(UnboundMethodSpecs::Methods.new).should be_kind_of(Method)
   end
 
-  deviates_on :rubinius do
-    it "returns Method for any object kind_of? the Module the method is defined in" do
-      @parent_um.bind(UnboundMethodSpecs::Child1.new).should be_kind_of(Method)
-      @child1_um.bind(UnboundMethodSpecs::Parent.new).should be_kind_of(Method)
-      @child2_um.bind(UnboundMethodSpecs::Child1.new).should be_kind_of(Method)
-    end
+  it "returns Method on any object when UnboundMethod is unbound from a module" do
+    UnboundMethodSpecs::Mod.instance_method(:from_mod).bind(Object.new).should be_kind_of(Method)
   end
 
-  it "Method returned for obj is equal to one directly returned by obj.method" do
+  it "returns Method returned for obj is equal to one directly returned by obj.method" do
     obj = UnboundMethodSpecs::Methods.new
     @normal_um.bind(obj).should == obj.method(:foo)
   end
@@ -35,23 +31,21 @@ describe "UnboundMethod#bind" do
     @normal_um.bind(obj).call.should == obj.foo
   end
 
-  ruby_bug "redmine:2117", "1.8.7" do
-    it "binds a Parent's class method to any Child's class methods" do
-      m = UnboundMethodSpecs::Parent.method(:class_method).unbind.bind(UnboundMethodSpecs::Child1)
-      m.should be_an_instance_of(Method)
-      m.call.should == "I am UnboundMethodSpecs::Child1"
-    end
+  it "binds a Parent's class method to any Child's class methods" do
+    m = UnboundMethodSpecs::Parent.method(:class_method).unbind.bind(UnboundMethodSpecs::Child1)
+    m.should be_an_instance_of(Method)
+    m.call.should == "I am UnboundMethodSpecs::Child1"
+  end
 
-    it "will raise when binding a an object singleton's method to another object" do
-      other = UnboundMethodSpecs::Parent.new
-      p = UnboundMethodSpecs::Parent.new
-      class << p
-        def singleton_method
-          :single
-        end
+  it "will raise when binding a an object singleton's method to another object" do
+    other = UnboundMethodSpecs::Parent.new
+    p = UnboundMethodSpecs::Parent.new
+    class << p
+      def singleton_method
+        :single
       end
-      um = p.method(:singleton_method).unbind
-      lambda{ um.bind(other) }.should raise_error(TypeError)
     end
+    um = p.method(:singleton_method).unbind
+    lambda{ um.bind(other) }.should raise_error(TypeError)
   end
 end

@@ -56,20 +56,24 @@ describe "Integer#times" do
     b.should == 3
   end
 
-  ruby_version_is "" ... "1.8.7" do
-    it "raises a LocalJumpError when no block given" do
-      lambda { 3.times }.should raise_error(LocalJumpError)
-    end
+  it "returns an Enumerator" do
+    result = []
+
+    enum = 3.times
+    enum.each { |i| result << i }
+
+    result.should == [0, 1, 2]
   end
 
-  ruby_version_is "1.8.7" do
-    it "returns an Enumerator" do
-      result = []
-
-      enum = 3.times
-      enum.each { |i| result << i }
-
-      result.should == [0, 1, 2]
+  describe "when no block is given" do
+    describe "returned Enumerator" do
+      describe "size" do
+        it "returns self" do
+          5.times.size.should == 5
+          10.times.size.should == 10
+          0.times.size.should == 0
+        end
+      end
     end
   end
 end

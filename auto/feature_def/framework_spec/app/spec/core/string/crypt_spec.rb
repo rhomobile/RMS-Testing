@@ -28,49 +28,14 @@ describe "String#crypt" do
     "hello world".crypt("aabc").should == "aayPz4hyPS1wI"
   end
 
-  platform_is :java do
-    it "returns NULL bytes prepended to the string when the salt contains NULL bytes" do
-      "hello".crypt("\x00\x00").should == "\x00\x00dR0/E99ehpU"
-      "hello".crypt("\x00a").should == "\x00aeipc4xPxhGY"
-      "hello".crypt("a\x00").should == "a\x00GJVggM8eWwo"
-    end
-  end
-
-  platform_is_not :java do
-    platform_is :darwin, :netbsd, :openbsd do
-      it "returns '.' prepended to the string for each NULL byte the salt contains" do
-        "hello".crypt("\x00\x00").should == "..dR0/E99ehpU"
-        "hello".crypt("\x00a").should == ".aeipc4xPxhGY"
-        "hello".crypt("a\x00").should == "a.GJVggM8eWwo"
-      end
-    end
-
-    platform_is :freebsd do
-      it "returns an empty string when the salt starts with NULL bytes" do
-        "hello".crypt("\x00\x00").should == ""
-        "hello".crypt("\x00a").should == ""
-      end
-
-      it "ignores trailing NULL bytes in the salt but counts them for the 2 character minimum" do
-        "hello".crypt("a\x00").should == "aaGJVggM8eWwo"
-      end
-    end
-
-    platform_is :linux do
-      #it "returns an empty string when the salt starts with NULL bytes" do
-      #  "hello".crypt("\x00\x00").should == ""
-      #  "hello".crypt("\x00a").should == ""
-      #end
-
-      #it "ignores trailing NULL bytes in the salt but counts them for the 2 character minimum" do
-      #  "hello".crypt("a\x00").should == "aa1dYAU.hgL3A"
-      #end
-    end
-  end
-
   it "raises an ArgumentError when the salt is shorter than two characters" do
     lambda { "hello".crypt("")  }.should raise_error(ArgumentError)
     lambda { "hello".crypt("f") }.should raise_error(ArgumentError)
+    ruby_version_is "2.2" do
+      lambda { "hello".crypt("\x00\x00") }.should raise_error(ArgumentError)
+      lambda { "hello".crypt("\x00a") }.should raise_error(ArgumentError)
+      lambda { "hello".crypt("a\x00") }.should raise_error(ArgumentError)
+    end
   end
 
   it "calls #to_str to converts the salt arg to a String" do
@@ -92,15 +57,15 @@ describe "String#crypt" do
     tainted_salt.taint
     tainted_str.taint
 
-    #"hello".crypt("aa").tainted?.should == false
-    #tainted_str.crypt("aa").tainted?.should == true
-    #"hello".crypt(tainted_salt).tainted?.should == true
-    #tainted_str.crypt(tainted_salt).tainted?.should == true
+    "hello".crypt("aa").tainted?.should == false
+    tainted_str.crypt("aa").tainted?.should == true
+    "hello".crypt(tainted_salt).tainted?.should == true
+    tainted_str.crypt(tainted_salt).tainted?.should == true
   end
 
   it "doesn't return subclass instances" do
-    StringSpecs::MyString.new("hello").crypt("aa").should be_kind_of(String)
-    "hello".crypt(StringSpecs::MyString.new("aa")).should be_kind_of(String)
-    StringSpecs::MyString.new("hello").crypt(StringSpecs::MyString.new("aa")).should be_kind_of(String)
+    StringSpecs::MyString.new("hello").crypt("aa").should be_an_instance_of(String)
+    "hello".crypt(StringSpecs::MyString.new("aa")).should be_an_instance_of(String)
+    StringSpecs::MyString.new("hello").crypt(StringSpecs::MyString.new("aa")).should be_an_instance_of(String)
   end
 end

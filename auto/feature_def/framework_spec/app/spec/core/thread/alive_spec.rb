@@ -38,13 +38,13 @@ describe "Thread#alive?" do
     ThreadSpecs.status_of_dying_sleeping_thread.alive?.should == true
   end
 
-  it "return true for a killed but still running thread" do
+  it "returns true for a killed but still running thread" do
     exit = false
     t = Thread.new do
       begin
         sleep
       ensure
-        true while !exit # spin until told to exit
+        Thread.pass until exit
       end
     end
 

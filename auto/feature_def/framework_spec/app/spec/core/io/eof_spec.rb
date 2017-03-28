@@ -22,7 +22,6 @@ describe "IO#eof?" do
   end
 end
 
-if System.get_property('platform') != 'ANDROID'  
 describe "IO#eof?" do
   before :each do
     @name = fixture __FILE__, "lines.txt"
@@ -30,7 +29,7 @@ describe "IO#eof?" do
   end
 
   after :each do
-    @io.close unless @io.closed?
+    @io.close if @io && !@io.closed?
   end
 
   it "returns false when not at end of file" do
@@ -62,18 +61,9 @@ describe "IO#eof?" do
     @io.eof?.should == false
   end
 
-  ruby_version_is ""..."1.9" do
-    it "does not consume the data from the stream" do
-      @io.eof?.should == false
-      @io.getc.should == 86
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "does not consume the data from the stream" do
-      @io.eof?.should == false
-      @io.getc.should == 'V'
-    end
+  it "does not consume the data from the stream" do
+    @io.eof?.should == false
+    @io.getc.should == 'V'
   end
 
   it "raises IOError on closed stream" do
@@ -85,29 +75,33 @@ describe "IO#eof?" do
     lambda { @io.eof? }.should raise_error(IOError)
   end
 
-  #it "returns true on one-byte stream after single-byte read" do
-  #  File.open(File.dirname(__FILE__) + '/fixtures/one_byte.txt') { |one_byte|
-  #    one_byte.read(1)
-  #    one_byte.eof?.should == true
-  #  }
-  #end
+  it "returns true on one-byte stream after single-byte read" do
+    File.open(File.dirname(__FILE__) + '/fixtures/one_byte.txt') { |one_byte|
+      one_byte.read(1)
+      one_byte.eof?.should == true
+    }
+  end
+end
+
+describe "IO#eof?" do
+  after :each do
+    @r.close if @r && !@r.closed?
+    @w.close if @w && !@w.closed?
+  end
 
   it "returns true on receiving side of Pipe when writing side is closed" do
-    r, w = IO.pipe
-    w.close
-    r.eof?.should == true
-    r.close
+    @r, @w = IO.pipe
+    @w.close
+    @r.eof?.should == true
   end
 
   it "returns false on receiving side of Pipe when writing side wrote some data" do
-    r, w = IO.pipe
-    w.puts "hello"
-    r.eof?.should == false
-    w.close
-    r.eof?.should == false
-    r.read
-    r.eof?.should == true
-    r.close
+    @r, @w = IO.pipe
+    @w.puts "hello"
+    @r.eof?.should == false
+    @w.close
+    @r.eof?.should == false
+    @r.read
+    @r.eof?.should == true
   end
-end
 end

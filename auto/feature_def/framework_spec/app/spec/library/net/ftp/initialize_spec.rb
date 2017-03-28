@@ -1,8 +1,8 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
-require 'net/ftp'
+require File.expand_path('../spec_helper', __FILE__)
 
 describe "Net::FTP#initialize" do
-  before(:each) do
+  before :each do
     @ftp = Net::FTP.allocate
     @ftp.stub!(:connect)
   end
@@ -44,44 +44,44 @@ describe "Net::FTP#initialize" do
 
   describe "when passed host" do
     it "tries to connect to the passed host" do
-      @ftp.should_receive(:connect).with("127.0.0.1")
-      @ftp.send(:initialize, "127.0.0.1")
+      @ftp.should_receive(:connect).with("localhost")
+      @ftp.send(:initialize, "localhost")
     end
   end
 
   describe "when passed host, user" do
     it "tries to connect to the passed host" do
-      @ftp.should_receive(:connect).with("127.0.0.1")
-      @ftp.send(:initialize, "127.0.0.1")
+      @ftp.should_receive(:connect).with("localhost")
+      @ftp.send(:initialize, "localhost")
     end
 
     it "tries to login with the passed username" do
       @ftp.should_receive(:login).with("rubyspec", nil, nil)
-      @ftp.send(:initialize, "127.0.0.1", "rubyspec")
+      @ftp.send(:initialize, "localhost", "rubyspec")
     end
   end
 
   describe "when passed host, user, password" do
     it "tries to connect to the passed host" do
-      @ftp.should_receive(:connect).with("127.0.0.1")
-      @ftp.send(:initialize, "127.0.0.1")
+      @ftp.should_receive(:connect).with("localhost")
+      @ftp.send(:initialize, "localhost")
     end
 
     it "tries to login with the passed username and password" do
       @ftp.should_receive(:login).with("rubyspec", "rocks", nil)
-      @ftp.send(:initialize, "127.0.0.1", "rubyspec", "rocks")
+      @ftp.send(:initialize, "localhost", "rubyspec", "rocks")
     end
   end
 
   describe "when passed host, user" do
     it "tries to connect to the passed host" do
-      @ftp.should_receive(:connect).with("127.0.0.1")
-      @ftp.send(:initialize, "127.0.0.1")
+      @ftp.should_receive(:connect).with("localhost")
+      @ftp.send(:initialize, "localhost")
     end
 
     it "tries to login with the passed username, password and account" do
       @ftp.should_receive(:login).with("rubyspec", "rocks", "account")
-      @ftp.send(:initialize, "127.0.0.1", "rubyspec", "rocks", "account")
+      @ftp.send(:initialize, "localhost", "rubyspec", "rocks", "account")
     end
   end
 end

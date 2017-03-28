@@ -1,4 +1,4 @@
-describe :dir_pos, :shared => true do
+describe :dir_pos, shared: true do
   before :each do
     @dir = Dir.open DirSpecs.mock_dir
   end
@@ -25,12 +25,12 @@ describe :dir_pos, :shared => true do
   end
 end
 
-describe :dir_pos_set, :shared => true do
-  before(:each) do
+describe :dir_pos_set, shared: true do
+  before :each do
     @dir = Dir.open DirSpecs.mock_dir
   end
 
-  after(:each) do
+  after :each do
     @dir.close
   end
 
@@ -41,11 +41,11 @@ describe :dir_pos_set, :shared => true do
     pos = @dir.pos
     a   = @dir.read
     b   = @dir.read
-    ret = @dir.send @method, pos
+    @dir.send @method, pos
     c   = @dir.read
 
     a.should_not == b
     b.should_not == c
-    c.should     == a
+    c.should == a
   end
 end

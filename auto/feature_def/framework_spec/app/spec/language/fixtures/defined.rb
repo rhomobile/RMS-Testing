@@ -33,8 +33,29 @@ module DefinedSpecs
     end
     protected :protected_method
 
+    def private_method
+    end
+    private :private_method
+
+    def private_method_defined
+      defined? private_method
+    end
+
+    def private_predicate?
+    end
+    private :private_predicate?
+
+    def private_predicate_defined
+      defined? private_predicate?
+    end
+
     def local_variable_defined
       x = 2
+      defined? x
+    end
+
+    def local_variable_defined_nil
+      x = nil
       defined? x
     end
 
@@ -50,6 +71,11 @@ module DefinedSpecs
     def instance_variable_defined
       @instance_variable_defined = 1
       defined? @instance_variable_defined
+    end
+
+    def instance_variable_defined_nil
+      @instance_variable_defined_nil = nil
+      defined? @instance_variable_defined_nil
     end
 
     def global_variable_undefined

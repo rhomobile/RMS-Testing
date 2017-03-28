@@ -19,8 +19,12 @@ module KernelSpecs::M
 end
 
 describe "Kernel#extend" do
-  before(:each) do
+  before :each do
     ScratchPad.record []
+  end
+
+  it "requires multiple arguments" do
+    Object.new.method(:extend).arity.should < 0
   end
 
   it "calls extend_object on argument" do
@@ -48,25 +52,28 @@ describe "Kernel#extend" do
     (C.kind_of? KernelSpecs::M).should == true
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises a TypeError if self is frozen" do
-      module KernelSpecs::Mod; end
-      o = mock('o')
-      o.freeze
-      lambda { o.extend KernelSpecs::Mod }.should raise_error(TypeError)
-    end
+  it "raises an ArgumentError when no arguments given" do
+    lambda { Object.new.extend }.should raise_error(ArgumentError)
   end
 
-  ruby_version_is "1.9" do
-    it "raises a RuntimeError if self is frozen" do
-      module KernelSpecs::Mod; end
-      o = mock('o')
-      o.freeze
-      lambda { o.extend KernelSpecs::Mod }.should raise_error(RuntimeError)
+  it "raises a TypeError when the argument is not a Module" do
+    o = mock('o')
+    klass = Class.new
+    lambda { o.extend(klass) }.should raise_error(TypeError)
+  end
+
+  describe "on frozen instance" do
+    before :each do
+      @frozen = Object.new.freeze
+      @module = KernelSpecs::M
+    end
+
+    it "raises an ArgumentError when no arguments given" do
+      lambda { @frozen.extend }.should raise_error(ArgumentError)
+    end
+
+    it "raises a RuntimeError" do
+      lambda { @frozen.extend @module }.should raise_error(RuntimeError)
     end
   end
-end
-
-describe "Kernel#extend" do
-  it "needs to be reviewed for spec completeness"
 end

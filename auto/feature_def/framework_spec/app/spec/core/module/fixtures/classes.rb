@@ -1,5 +1,16 @@
 module ModuleSpecs
+  def self.without_test_modules(modules)
+    ignore = %w[MSpecRSpecAdapter PP::ObjectMixin ModuleSpecs::IncludedInObject MainSpecs::Module ConstantSpecs::ModuleA]
+    modules.reject { |k| ignore.include?(k.name) }
+  end
+
   CONST = :plain_constant
+
+  module PrivConstModule
+    PRIVATE_CONSTANT = 1
+    private_constant :PRIVATE_CONSTANT
+    PUBLIC_CONSTANT = 2
+  end
 
   class Subclass < Module
   end
@@ -91,8 +102,6 @@ module ModuleSpecs
       include Internal
     end
     attr_accessor :accessor_method
-
-    def undefed_child() end
 
     def public_child() end
 
@@ -202,6 +211,46 @@ module ModuleSpecs
     def protected_one; 1; end
   end
 
+  class AliasingSubclass < Aliasing
+  end
+
+  module AliasingSuper
+
+    module Parent
+      def super_call(arg)
+        arg
+      end
+    end
+
+    module Child
+      include Parent
+      def super_call(arg)
+        super(arg)
+      end
+    end
+
+    class Target
+      include Child
+      alias_method :alias_super_call, :super_call
+      alias_method :super_call, :alias_super_call
+    end
+
+    class RedefineAfterAlias
+      include Parent
+
+      def super_call(arg)
+        super(arg)
+      end
+
+      alias_method :alias_super_call, :super_call
+
+      def super_call(arg)
+        :wrong
+      end
+    end
+  end
+
+
   module ReopeningModule
     def foo; true; end
     module_function :foo
@@ -281,11 +330,14 @@ module ModuleSpecs
   class CVars
     @@cls = :class
 
+    # Singleton class lexical scopes are ignored for class variables
     class << self
       def cls
+        # This looks in the parent lexical scope, class CVars
         @@cls
       end
-      @@meta = :meta
+      # This actually adds it to the parent lexical scope, class CVars
+      @@meta = :metainfo
     end
 
     def self.meta
@@ -333,12 +385,28 @@ module ModuleSpecs
         return :good
       end
     end
+
+    module FromThread
+      module A
+        autoload :B, fixture(__FILE__, "autoload_empty.rb")
+
+        class B
+          autoload :C, fixture(__FILE__, "autoload_abc.rb")
+
+          def self.foo
+            C.foo
+          end
+        end
+      end
+
+      class D < A::B; end
+    end
   end
 
-  # This class isn't inherited from or included in anywhere. It exists to test
-  # 1.9's constant scoping rules
+  # This class isn't inherited from or included in anywhere.
+  # It exists to test the constant scoping rules.
   class Detached
-    DETATCHED_CONSTANT = :d
+    DETACHED_CONSTANT = :d
   end
 
   class ParentPrivateMethodRedef
@@ -365,6 +433,9 @@ module ModuleSpecs
     include CyclicAppendA
   end
 
+  module CyclicPrepend
+  end
+
   module ExtendObject
     C = :test
     def test_method
@@ -380,6 +451,129 @@ module ModuleSpecs
       private :extend_object
     end
   end
+
+  class CyclicBarrier
+    def initialize(count = 1)
+      @count = count
+      @state = 0
+      @mutex = Mutex.new
+      @cond  = ConditionVariable.new
+    end
+
+    def await
+      @mutex.synchronize do
+        @state += 1
+        if @state >= @count
+          @state = 0
+          @cond.broadcast
+          true
+        else
+          @cond.wait @mutex
+          false
+        end
+      end
+    end
+
+    def enabled?
+      @mutex.synchronize { @count != -1 }
+    end
+
+    def disable!
+      @mutex.synchronize do
+        @count = -1
+        @cond.broadcast
+      end
+    end
+  end
+
+  class ThreadSafeCounter
+    def initialize(value = 0)
+      @value = 0
+      @mutex = Mutex.new
+    end
+
+    def get
+      @mutex.synchronize { @value }
+    end
+
+    def increment_and_get
+      @mutex.synchronize do
+        prev_value = @value
+        @value += 1
+        prev_value
+      end
+    end
+  end
+
+  module ShadowingOuter
+    module M
+      SHADOW = 123
+    end
+
+    module N
+      SHADOW = 456
+    end
+  end
+
+  module UnboundMethodTest
+    def foo
+      'bar'
+    end
+  end
+
+  module ClassEvalTest
+    def self.get_constant_from_scope
+      module_eval("Lookup")
+    end
+
+    def self.get_constant_from_scope_with_send(method)
+      send(method, "Lookup")
+    end
+  end
+
+  class RecordIncludedModules
+    def self.inherited(base)
+      ScratchPad.record base
+    end
+  end
+
+  module SingletonOnModuleCase
+    module Foo
+      class << Foo
+        def included(base)
+          base.included_called
+          super
+        end
+      end
+    end
+
+    class Bar
+      @included_called = false
+
+      class << self
+        def included_called
+          @included_called = true
+        end
+
+        def included_called?
+          @included_called
+        end
+      end
+    end
+  end
+
+  module CaseCompareOnSingleton
+    def self.===(*)
+      raise 'method contents are irrelevant to test'
+    end
+  end
+
+  m = Module.new do
+    def foo
+    end
+    private :foo
+  end
+  EmptyFooMethod = m.instance_method(:foo)
 end
 
 class Object

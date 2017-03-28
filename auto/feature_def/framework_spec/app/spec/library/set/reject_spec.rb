@@ -2,7 +2,7 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require 'set'
 
 describe "Set#reject!" do
-  before(:each) do
+  before :each do
     @set = Set["one", "two", "three"]
   end
 
@@ -29,22 +29,14 @@ describe "Set#reject!" do
     @set.reject! { |x| false }.should be_nil
   end
 
-  ruby_version_is "" ... "1.8.8" do
-    it "raises a LocalJumpError when passed no block" do
-      lambda { @set.reject! }.should raise_error(LocalJumpError)
-    end
-  end
+  it "returns an Enumerator when passed no block" do
+    enum = @set.reject!
+    enum.should be_an_instance_of(Enumerator)
 
-  ruby_version_is "1.8.8" do
-    it "returns an Enumerator when passed no block" do
-      enum = @set.reject!
-      enum.should be_an_instance_of(enumerator_class)
+    enum.each { |x| x.size == 3 }
 
-      enum.each { |x| x.size == 3 }
-
-      @set.should_not include("one")
-      @set.should_not include("two")
-      @set.should include("three")
-    end
+    @set.should_not include("one")
+    @set.should_not include("two")
+    @set.should include("three")
   end
 end

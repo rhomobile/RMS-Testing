@@ -13,10 +13,10 @@ describe "Module#class_variable_get" do
     c.send(:class_variable_get, "@@mvar").should == :mvar
   end
 
-  it "allows '@@' to be a valid class variable name" do
-    c = Class.new { class_variable_set '@@', :foo }
-    c.send(:class_variable_get, "@@").should == :foo
-    c.send(:class_variable_get, :"@@").should == :foo
+  it "raises a NameError for a class variable named '@@'" do
+    c = Class.new
+    lambda { c.send(:class_variable_get, "@@") }.should raise_error(NameError)
+    lambda { c.send(:class_variable_get, :"@@") }.should raise_error(NameError)
   end
 
   it "raises a NameError for a class variables with the given name defined in an extended module" do
@@ -32,11 +32,11 @@ describe "Module#class_variable_get" do
   end
 
   it "returns class variables defined in the metaclass and accessed by class methods" do
-    ModuleSpecs::CVars.meta.should == :meta
+    ModuleSpecs::CVars.meta.should == :metainfo
   end
 
   it "returns class variables defined in the metaclass and accessed by instance methods" do
-    ModuleSpecs::CVars.new.meta.should == :meta
+    ModuleSpecs::CVars.new.meta.should == :metainfo
   end
 
   it "returns a class variable defined in a metaclass" do
@@ -44,22 +44,6 @@ describe "Module#class_variable_get" do
     meta = obj.singleton_class
     meta.send :class_variable_set, :@@var, :cvar_value
     meta.send(:class_variable_get, :@@var).should == :cvar_value
-  end
-
-  ruby_version_is ""..."1.9" do
-    not_compliant_on :rubinius do
-      it "accepts Fixnums for class variables" do
-        c = Class.new { class_variable_set :@@class_var, "test" }
-        c.send(:class_variable_get, :@@class_var.to_i).should == "test"
-      end
-
-      it "raises a NameError when a Fixnum for an uninitialized class variable is given" do
-        c = Class.new
-        lambda {
-          c.send :class_variable_get, :@@no_class_var.to_i
-        }.should raise_error(NameError)
-      end
-    end
   end
 
   it "raises a NameError when an uninitialized class variable is accessed" do

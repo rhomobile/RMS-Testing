@@ -1,7 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
-if ( System.get_property('platform') != 'APPLE') && ( System.get_property('platform') != 'WINDOWS_DESKTOP' )
 describe "IO#close_read" do
 
   before :each do
@@ -11,6 +10,7 @@ describe "IO#close_read" do
 
   after :each do
     @io.close unless @io.closed?
+    rm_r @path
   end
 
   it "closes the read end of a duplex I/O stream" do
@@ -19,10 +19,20 @@ describe "IO#close_read" do
     lambda { @io.read }.should raise_error(IOError)
   end
 
-  it "raises an IOError on subsequent invocations" do
-    @io.close_read
+  ruby_version_is ''...'2.3' do
+    it "raises an IOError on subsequent invocations" do
+      @io.close_read
 
-    lambda { @io.close_read }.should raise_error(IOError)
+      lambda { @io.close_read }.should raise_error(IOError)
+    end
+  end
+
+  ruby_version_is '2.3' do
+    it "does nothing on subsequent invocations" do
+      @io.close_read
+
+      @io.close_read.should be_nil
+    end
   end
 
   it "allows subsequent invocation of close" do
@@ -39,7 +49,6 @@ describe "IO#close_read" do
     ensure
       io.close unless io.closed?
     end
-    File.unlink(@path)
   end
 
   it "closes the stream if it is neither writable nor duplexed" do
@@ -51,15 +60,21 @@ describe "IO#close_read" do
     io.close_read
 
     io.closed?.should == true
-    File.unlink(@path)
   end
 
-  #it "raises IOError on closed stream" do
-  #  @io.close
+  ruby_version_is ''...'2.3' do
+    it "raises IOError on closed stream" do
+      @io.close
 
-  #  lambda { @io.close_read }.should raise_error(IOError)
-  #end
+      lambda { @io.close_read }.should raise_error(IOError)
+    end
+  end
 
+  ruby_version_is '2.3' do
+    it "does nothing on closed stream" do
+      @io.close
+
+      @io.close_read.should be_nil
+    end
+  end
 end
-end
-

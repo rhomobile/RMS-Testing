@@ -3,14 +3,14 @@ require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "Array.new" do
   it "returns an instance of Array" do
-    Array.new.should be_kind_of(Array)
+    Array.new.should be_an_instance_of(Array)
   end
 
   it "returns an instance of a subclass" do
     ArraySpecs::MyArray.new(1, 2).should be_an_instance_of(ArraySpecs::MyArray)
   end
 
-  it "raise an ArgumentError if passed 3 or more arguments" do
+  it "raises an ArgumentError if passed 3 or more arguments" do
     lambda do
       [1, 2].send :initialize, 1, 'x', true
     end.should raise_error(ArgumentError)
@@ -65,6 +65,8 @@ describe "Array.new with (size, object=nil)" do
     a.should == [obj, obj]
     a[0].should equal(obj)
     a[1].should equal(obj)
+
+    Array.new(3, 14).should == [14, 14, 14]
   end
 
   it "returns an array of size filled with nil when object is omitted" do
@@ -76,18 +78,8 @@ describe "Array.new with (size, object=nil)" do
     lambda { Array.new(-1) }.should raise_error(ArgumentError)
   end
 
-  platform_is :wordsize => 32 do
-    it "raises an ArgumentError if size is too large" do
-      max_size = ArraySpecs.max_32bit_size
-      lambda { Array.new(max_size + 1) }.should raise_error(ArgumentError)
-    end
-  end
-
-  platform_is :wordsize => 64 do
-    it "raises an ArgumentError if size is too large" do
-      max_size = ArraySpecs.max_64bit_size
-      lambda { Array.new(max_size + 1) }.should raise_error(ArgumentError)
-    end
+  it "raises an ArgumentError if size is too large" do
+    lambda { Array.new(fixnum_max+1) }.should raise_error(ArgumentError)
   end
 
   it "calls #to_int to convert the size argument to an Integer when object is given" do

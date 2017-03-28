@@ -3,18 +3,16 @@ require 'net/http'
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "Net::HTTPHeader#content_range" do
-  before(:each) do
+  before :each do
     @headers = NetHTTPHeaderSpecs::Example.new
   end
 
-  ruby_bug "[ruby-dev:40295]", "1.8.8" do
-    it "returns a Range object that represents the 'Content-Range' header entry" do
-      @headers["Content-Range"] = "bytes 0-499/1234"
-      @headers.content_range.should == (0..499)
+  it "returns a Range object that represents the 'Content-Range' header entry" do
+    @headers["Content-Range"] = "bytes 0-499/1234"
+    @headers.content_range.should == (0..499)
 
-      @headers["Content-Range"] = "bytes 500-1233/1234"
-      @headers.content_range.should == (500..1233)
-    end
+    @headers["Content-Range"] = "bytes 500-1233/1234"
+    @headers.content_range.should == (500..1233)
   end
 
   it "returns nil when there is no 'Content-Range' header entry" do

@@ -6,12 +6,12 @@ describe "File.setuid?" do
 end
 
 describe "File.setuid?" do
-  before(:each) do
+  before :each do
     @name = tmp('test.txt')
     touch @name
   end
 
-  after(:each) do
+  after :each do
     rm_r @name
   end
 
@@ -24,11 +24,15 @@ describe "File.setuid?" do
     File.setuid?(@name).should == false
   end
 
-  #platform_is_not :windows do
-  #  it "returns true when the gid bit is set" do
-  #    system "chmod u+s #{@name}"
-  #
-  #    File.setuid?(@name).should == true
-  #  end
-  #end
+  platform_is_not :windows do
+    it "returns true when the gid bit is set" do
+      platform_is :solaris do
+        # Solaris requires execute bit before setting suid
+        system "chmod u+x #{@name}"
+      end
+      system "chmod u+s #{@name}"
+
+      File.setuid?(@name).should == true
+    end
+  end
 end

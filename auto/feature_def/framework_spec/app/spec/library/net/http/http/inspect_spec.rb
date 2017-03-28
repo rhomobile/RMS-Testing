@@ -3,24 +3,22 @@ require 'net/http'
 require File.expand_path('../fixtures/http_server', __FILE__)
 
 describe "Net::HTTP#inspect" do
-  before(:all) do
+  before :each do
     NetHTTPSpecs.start_server
+    @port = NetHTTPSpecs.port
+    @http = Net::HTTP.new("localhost", @port)
   end
 
-  after(:all) do
+  after :each do
+    @http.finish if @http.started?
     NetHTTPSpecs.stop_server
   end
 
-  before(:each) do
-    @net = Net::HTTP.new("127.0.0.1", NetHTTPSpecs.server_port)
-  end
-
   it "returns a String representation of self" do
-    net = Net::HTTP.new("127.0.0.1", NetHTTPSpecs.server_port)
-    net.inspect.should be_kind_of(String)
-    net.inspect.should == "#<Net::HTTP 127.0.0.1:#{NetHTTPSpecs.server_port} open=false>"
+    @http.inspect.should be_kind_of(String)
+    @http.inspect.should == "#<Net::HTTP localhost:#{@port} open=false>"
 
-    net.start
-    net.inspect.should == "#<Net::HTTP 127.0.0.1:#{NetHTTPSpecs.server_port} open=true>"
+    @http.start
+    @http.inspect.should == "#<Net::HTTP localhost:#{@port} open=true>"
   end
 end

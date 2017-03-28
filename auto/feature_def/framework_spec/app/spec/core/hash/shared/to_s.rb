@@ -1,10 +1,10 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
 require File.expand_path('../../fixtures/classes', __FILE__)
 
-describe :to_s, :shared => true do
+describe :hash_to_s, shared: true do
 
   it "returns a string representation with same order as each()" do
-    h = new_hash(:a => [1, 2], :b => -2, :d => -6, nil => nil)
+    h = { a: [1, 2], b: -2, d: -6, nil => nil }
 
     pairs = []
     h.each do |key, value|
@@ -21,47 +21,49 @@ describe :to_s, :shared => true do
     key.should_receive(:inspect).and_return('key')
     val.should_receive(:inspect).and_return('val')
 
-    new_hash(key => val).send(@method).should == '{key=>val}'
+    { key => val }.send(@method).should == '{key=>val}'
   end
 
   it "handles hashes with recursive values" do
-    x = new_hash
+    x = {}
     x[0] = x
     x.send(@method).should == '{0=>{...}}'
 
-    x = new_hash
-    y = new_hash
+    x = {}
+    y = {}
     x[0] = y
     y[1] = x
     x.send(@method).should == "{0=>{1=>{...}}}"
     y.send(@method).should == "{1=>{0=>{...}}}"
   end
 
-  # Recursive hash keys are disallowed on 1.9
-  ruby_version_is ""..."1.9" do
-    it "handles hashes with recursive keys" do
-      x = new_hash
-      x[x] = 0
-      x.send(@method).should == '{{...}=>0}'
+  it "returns a tainted string if self is tainted and not empty" do
+    {}.taint.send(@method).tainted?.should be_false
+    { nil => nil }.taint.send(@method).tainted?.should be_true
+  end
 
-      x = new_hash
-      x[x] = x
-      x.send(@method).should == '{{...}=>{...}}'
+  it "returns an untrusted string if self is untrusted and not empty" do
+    {}.untrust.send(@method).untrusted?.should be_false
+    { nil => nil }.untrust.send(@method).untrusted?.should be_true
+  end
 
+  ruby_version_is ''...'2.3' do
+    it "raises if inspected result is not default external encoding" do
+      utf_16be = mock("utf_16be")
+      utf_16be.should_receive(:inspect).and_return(%<"utf_16be \u3042">.encode!(Encoding::UTF_16BE))
 
-      x = new_hash
-      y = new_hash
-      x[y] = 0
-      y[x] = 1
-      x.send(@method).should == "{{{...}=>1}=>0}"
-      y.send(@method).should == "{{{...}=>0}=>1}"
+      lambda {
+        {a: utf_16be}.send(@method)
+      }.should raise_error(Encoding::CompatibilityError)
+    end
+  end
 
-      x = new_hash
-      y = new_hash
-      x[y] = x
-      y[x] = y
-      x.send(@method).should == "{{{...}=>{...}}=>{...}}"
-      y.send(@method).should == "{{{...}=>{...}}=>{...}}"
+  ruby_version_is '2.3' do
+    it "does not raise if inspected result is not default external encoding" do
+      utf_16be = mock("utf_16be")
+      utf_16be.should_receive(:inspect).and_return(%<"utf_16be \u3042">.encode!(Encoding::UTF_16BE))
+
+      {a: utf_16be}.send(@method).should == '{:a=>"utf_16be \u3042"}'
     end
   end
 end

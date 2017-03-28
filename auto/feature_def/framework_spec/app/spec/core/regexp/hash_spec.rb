@@ -6,9 +6,15 @@ describe "Regexp#hash" do
   end
 
   it "is based on the text and options of Regexp" do
-    (/cat/ix.hash == /cat/ixn.hash).should == true
-    (/dog/m.hash  == /dog/m.hash).should == true
-    (/cat/.hash   == /cat/ix.hash).should == false
     (/cat/.hash   == /dog/.hash).should == false
+    (/dog/m.hash  == /dog/m.hash).should == true
+    not_supported_on :opal do
+      (/cat/ix.hash == /cat/ixn.hash).should == true
+      (/cat/.hash   == /cat/ix.hash).should == false
+    end
+  end
+
+  it "returns the same value for two Regexps differing only in the /n option" do
+    (//.hash == //n.hash).should == true
   end
 end

@@ -4,7 +4,16 @@ with_feature :fiber do
   describe "Fiber.new" do
     it "creates a fiber from the given block" do
       fiber = Fiber.new {}
+      fiber.resume
       fiber.should be_an_instance_of(Fiber)
+    end
+
+    it "creates a fiber from a subclass" do
+      class MyFiber < Fiber
+      end
+      fiber = MyFiber.new {}
+      fiber.resume
+      fiber.should be_an_instance_of(MyFiber)
     end
 
     it "raises an ArgumentError if called without a block" do
@@ -15,6 +24,7 @@ with_feature :fiber do
       invoked = false
       fiber = Fiber.new { invoked = true }
       invoked.should be_false
+      fiber.resume
     end
 
     it "closes over lexical environments" do
@@ -26,23 +36,6 @@ with_feature :fiber do
         a
       end
       o.f.should == 2
-    end
-
-    it "escapes an inner ensure block" do
-      f = Fiber.new do
-        begin
-          :begin
-        rescue
-          :rescue
-        ensure
-          :ensure
-        end
-      end
-      f.resume.should == :begin
-    end
-
-    it "raises a SyntaxError when the block contains a retry statement" do
-      lambda { eval 'Fiber.new { retry; }' }.should raise_error(SyntaxError)
     end
   end
 end

@@ -143,6 +143,47 @@ describe "The 'case'-construct" do
     end.should == "foo"
   end
 
+  it "takes an expanded array before additional listed values" do
+    case 'f'
+      when *['a', 'b', 'c', 'd'], 'f'
+        "foo"
+      when *['x', 'y', 'z']
+        "bar"
+    end.should == 'foo'
+  end
+
+  it "expands arrays from variables before additional listed values" do
+    a = ['a', 'b', 'c']
+    case 'a'
+      when *a, 'd', 'e'
+        "foo"
+      when 'x'
+        "bar"
+    end.should == "foo"
+  end
+
+  it "expands arrays from variables before a single additional listed value" do
+    a = ['a', 'b', 'c']
+    case 'a'
+      when *a, 'd'
+        "foo"
+      when 'x'
+        "bar"
+    end.should == "foo"
+  end
+
+  it "expands multiple arrays from variables before additional listed values" do
+    a = ['a', 'b', 'c']
+    b = ['d', 'e', 'f']
+
+    case 'f'
+      when *a, *b, 'g', 'h'
+        "foo"
+      when 'x'
+        "bar"
+    end.should == "foo"
+  end
+
   # MR: critical
   it "concats arrays before expanding them" do
     a = ['a', 'b', 'c', 'd']
@@ -305,6 +346,37 @@ describe "The 'case'-construct with no target expression" do
     when 'foo'; 'good'
     end.should == 'good'
   end
-end
 
-language_version __FILE__, "case"
+  it "takes multiple expanded arrays" do
+    a1 = ['f', 'o', 'o']
+    a2 = ['b', 'a', 'r']
+
+    case 'f'
+      when *a1, *['x', 'y', 'z']
+        "foo"
+      when *a2, *['x', 'y', 'z']
+        "bar"
+    end.should == "foo"
+
+    case 'b'
+      when *a1, *['x', 'y', 'z']
+        "foo"
+      when *a2, *['x', 'y', 'z']
+        "bar"
+    end.should == "bar"
+  end
+
+  it "calls === even when private" do
+    klass = Class.new do
+      def ===(o)
+        true
+      end
+      private :===
+    end
+
+    case 1
+    when klass.new
+      :called
+    end.should == :called
+  end
+end

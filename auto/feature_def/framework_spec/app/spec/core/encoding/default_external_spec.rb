@@ -2,11 +2,11 @@ require File.expand_path('../../../spec_helper', __FILE__)
 
 with_feature :encoding do
   describe "Encoding.default_external" do
-    before(:all) do
+    before :each do
       @original_encoding = Encoding.default_external
     end
 
-    after(:all) do
+    after :each do
       Encoding.default_external = @original_encoding
     end
 
@@ -18,14 +18,31 @@ with_feature :encoding do
       Encoding.default_external = Encoding::UTF_8
       Encoding.default_external.should == Encoding::UTF_8
     end
+
+    describe "with command line options" do
+      it "is not changed by the -U option" do
+        result = ruby_exe("print Encoding.default_external", options: '-U')
+        result.should == Encoding.default_external.name
+      end
+
+      it "returns the encoding specified by '-E external'" do
+        result = ruby_exe("print Encoding.default_external", options: '-E euc-jp')
+        result.should == "EUC-JP"
+      end
+
+      it "returns the encoding specified by '-E external:'" do
+        result = ruby_exe("print Encoding.default_external", options: '-E Shift_JIS:')
+        result.should == "Shift_JIS"
+      end
+    end
   end
 
   describe "Encoding.default_external=" do
-    before(:all) do
+    before :each do
       @original_encoding = Encoding.default_external
     end
 
-    after(:all) do
+    after :each do
       Encoding.default_external = @original_encoding
     end
 
@@ -41,7 +58,7 @@ with_feature :encoding do
 
     it "calls #to_s on arguments that are neither Strings nor Encodings" do
       string = mock('string')
-      string.should_receive(:to_str).twice.and_return('US-ASCII')
+      string.should_receive(:to_str).at_least(1).and_return('US-ASCII')
       Encoding.default_external = string
       Encoding.default_external.should == Encoding::ASCII
     end

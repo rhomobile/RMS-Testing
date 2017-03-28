@@ -1,5 +1,5 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 
 describe "TCPServer#accept" do
@@ -57,5 +57,10 @@ describe "TCPServer#accept" do
     ex = Exception.new
     t.raise ex
     lambda { t.join }.should raise_error(Exception)
+  end
+
+  it "raises an IOError if the socket is closed" do
+    @server.close
+    lambda { @server.accept }.should raise_error(IOError)
   end
 end

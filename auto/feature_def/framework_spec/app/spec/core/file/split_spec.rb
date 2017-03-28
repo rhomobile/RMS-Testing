@@ -20,30 +20,20 @@ describe "File.split" do
     File.split("").should == [".", ""]
   end
 
-  #it "collapses multiple '/' characters and strips trailing ones" do
-  #  File.split("//foo////").should == ["/", "foo"]
-  #end
-=begin
-  platform_is_not :os => :windows do
-    not_compliant_on :jruby do
-      it "does not split a string that contains '\\'" do
-        File.split(@backslash).should == [".", "C:\\foo\\bar\\baz"]
-        File.split(@backslash_ext).should ==  [".", "C:\\foo\\bar\\baz.rb"]
-      end
-    end
-
-    deviates_on :jruby do
-      it "splits the string at the last '\\' when the last component does not have an extension" do
-        File.split(@backslash).should == ["C:\\foo\\bar", "baz"]
-      end
-
-      it "splits the string at the last '\\' when the last component has an extension" do
-        File.split(@backslash_ext).should ==  ["C:\\foo\\bar", "baz.rb"]
-      end
+  platform_is_not :windows do
+    it "collapses multiple '/' characters and strips trailing ones" do
+      File.split("//foo////").should == ["/", "foo"]
     end
   end
 
-  platform_is :os => :windows do
+  platform_is_not os: :windows do
+    it "does not split a string that contains '\\'" do
+      File.split(@backslash).should == [".", "C:\\foo\\bar\\baz"]
+      File.split(@backslash_ext).should ==  [".", "C:\\foo\\bar\\baz.rb"]
+    end
+  end
+
+  platform_is os: :windows do
     it "splits the string at the last '\\' when the last component does not have an extension" do
       File.split(@backslash).should == ["C:\\foo\\bar", "baz"]
     end
@@ -52,7 +42,7 @@ describe "File.split" do
       File.split(@backslash_ext).should ==  ["C:\\foo\\bar", "baz.rb"]
     end
   end
-=end
+
   it "raises an ArgumentError when not passed a single argument" do
     lambda { File.split }.should raise_error(ArgumentError)
     lambda { File.split('string', 'another string') }.should raise_error(ArgumentError)
@@ -67,9 +57,7 @@ describe "File.split" do
     File.split(C.new).should == ["/rubinius/better/than", "ruby"]
   end
 
-  ruby_version_is "1.9" do
-    it "accepts an object that has a #to_path method" do
-      File.split(mock_to_path("")).should == [".", ""]
-    end
+  it "accepts an object that has a #to_path method" do
+    File.split(mock_to_path("")).should == [".", ""]
   end
 end

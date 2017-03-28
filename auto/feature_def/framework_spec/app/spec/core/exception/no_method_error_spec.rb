@@ -5,6 +5,10 @@ describe "NoMethodError.new" do
   it "allows passing method args" do
     NoMethodError.new("msg","name","args").args.should == "args"
   end
+
+  it "does not require a name" do
+    NoMethodError.new("msg").message.should == "msg"
+  end
 end
 
 describe "NoMethodError#args" do
@@ -44,14 +48,12 @@ describe "NoMethodError#message" do
     end
   end
 
-  not_compliant_on :rubinius do
-    it "for private method match /private method/" do
-      begin
-        NoMethodErrorSpecs::NoMethodErrorC.new.a_private_method
-      rescue Exception => e
-        e.should be_kind_of(NoMethodError)
-        e.message.match(/private method/).should_not == nil
-      end
+  it "for private method match /private method/" do
+    begin
+      NoMethodErrorSpecs::NoMethodErrorC.new.a_private_method
+    rescue Exception => e
+      e.should be_kind_of(NoMethodError)
+      e.message.match(/private method/).should_not == nil
     end
   end
 end

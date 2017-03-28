@@ -134,16 +134,8 @@ describe "StringIO.open when passed [Object, mode]" do
     io.closed_write?.should be_false
   end
 
-  ruby_version_is "" ... "1.9" do
-    it "raises a TypeError when passed a frozen String in truncate mode as StringIO backend" do
-      lambda { StringIO.open("example".freeze, IO::TRUNC) }.should raise_error(TypeError)
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a RuntimeError when passed a frozen String in truncate mode as StringIO backend" do
-      lambda { StringIO.open("example".freeze, IO::TRUNC) }.should raise_error(RuntimeError)
-    end
+  it "raises a RuntimeError when passed a frozen String in truncate mode as StringIO backend" do
+    lambda { StringIO.open("example".freeze, IO::TRUNC) }.should raise_error(RuntimeError)
   end
 
   it "tries to convert the passed mode to a String using #to_str" do
@@ -157,9 +149,9 @@ describe "StringIO.open when passed [Object, mode]" do
 
   it "raises an Errno::EACCES error when passed a frozen string with a write-mode" do
     (str = "example").freeze
-    lambda { io = StringIO.open(str, "r+") }.should raise_error(Errno::EACCES)
-    lambda { io = StringIO.open(str, "w") }.should raise_error(Errno::EACCES)
-    lambda { io = StringIO.open(str, "a") }.should raise_error(Errno::EACCES)
+    lambda { StringIO.open(str, "r+") }.should raise_error(Errno::EACCES)
+    lambda { StringIO.open(str, "w") }.should raise_error(Errno::EACCES)
+    lambda { StringIO.open(str, "a") }.should raise_error(Errno::EACCES)
   end
 end
 

@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-describe :array_pack_unicode, :shared => true do
+describe :array_pack_unicode, shared: true do
   it "encodes ASCII values as a Unicode codepoint" do
     [ [[0],   "\x00"],
       [[1],   "\x01"],
@@ -23,18 +23,25 @@ describe :array_pack_unicode, :shared => true do
     ].should be_computed_by(:pack, "U")
   end
 
+  it "constructs strings with valid encodings" do
+    str = [0x85].pack("U*")
+    str.should == "\xc2\x85"
+    str.valid_encoding?.should be_true
+  end
+
+  it "encodes values larger than UTF-8 max codepoints" do
+    [
+      [[0x00110000], [244, 144, 128, 128].pack('C*').force_encoding('utf-8')],
+      [[0x04000000], [252, 132, 128, 128, 128, 128].pack('C*').force_encoding('utf-8')],
+      [[0x7FFFFFFF], [253, 191, 191, 191, 191, 191].pack('C*').force_encoding('utf-8')]
+    ].should be_computed_by(:pack, "U")
+  end
+
   it "encodes UTF-8 max codepoints" do
     [ [[0x10000],   "\xf0\x90\x80\x80"],
       [[0xfffff],   "\xf3\xbf\xbf\xbf"],
       [[0x100000],  "\xf4\x80\x80\x80"],
       [[0x10ffff],  "\xf4\x8f\xbf\xbf"]
-    ].should be_computed_by(:pack, "U")
-  end
-
-  it "encodes values larger than UTF-8 max codepoints" do
-    [ [[0x00110000], "\xf4\x90\x80\x80"],
-      [[0x04000000], "\xfc\x84\x80\x80\x80\x80"],
-      [[0x7FFFFFFF], "\xfd\xbf\xbf\xbf\xbf\xbf"]
     ].should be_computed_by(:pack, "U")
   end
 
@@ -76,14 +83,12 @@ describe :array_pack_unicode, :shared => true do
     lambda { [2**32].pack("U") }.should raise_error(RangeError)
   end
 
-  ruby_version_is "1.9" do
-    it "sets the output string to UTF-8 encoding" do
-      [ [[0x00].pack("U"),     Encoding::UTF_8],
-        [[0x41].pack("U"),     Encoding::UTF_8],
-        [[0x7F].pack("U"),     Encoding::UTF_8],
-        [[0x80].pack("U"),     Encoding::UTF_8],
-        [[0x10FFFF].pack("U"), Encoding::UTF_8]
-      ].should be_computed_by(:encoding)
-    end
+  it "sets the output string to UTF-8 encoding" do
+    [ [[0x00].pack("U"),     Encoding::UTF_8],
+      [[0x41].pack("U"),     Encoding::UTF_8],
+      [[0x7F].pack("U"),     Encoding::UTF_8],
+      [[0x80].pack("U"),     Encoding::UTF_8],
+      [[0x10FFFF].pack("U"), Encoding::UTF_8]
+    ].should be_computed_by(:encoding)
   end
 end

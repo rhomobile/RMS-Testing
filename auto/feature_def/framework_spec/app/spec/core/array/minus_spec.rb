@@ -12,16 +12,14 @@ describe "Array#-" do
     ([1, 1, 2, 2, 3, 3, 4, 5] - [1, 2, 4]).should == [3, 3, 5]
   end
 
-  ruby_bug "#", "1.8.6.277" do
-    it "properly handles recursive arrays" do
-      empty = ArraySpecs.empty_recursive_array
-      (empty - empty).should == []
+  it "properly handles recursive arrays" do
+    empty = ArraySpecs.empty_recursive_array
+    (empty - empty).should == []
 
-      ([] - ArraySpecs.recursive_array).should == []
+    ([] - ArraySpecs.recursive_array).should == []
 
-      array = ArraySpecs.recursive_array
-      (array - array).should == []
-    end
+    array = ArraySpecs.recursive_array
+    (array - array).should == []
   end
 
   it "tries to convert the passed arguments to Arrays using #to_ary" do
@@ -36,34 +34,43 @@ describe "Array#-" do
   end
 
   it "does not return subclass instance for Array subclasses" do
-    (ArraySpecs::MyArray[1, 2, 3] - []).should be_kind_of(Array)
-    (ArraySpecs::MyArray[1, 2, 3] - ArraySpecs::MyArray[]).should be_kind_of(Array)
-    ([1, 2, 3] - ArraySpecs::MyArray[]).should be_kind_of(Array)
+    (ArraySpecs::MyArray[1, 2, 3] - []).should be_an_instance_of(Array)
+    (ArraySpecs::MyArray[1, 2, 3] - ArraySpecs::MyArray[]).should be_an_instance_of(Array)
+    ([1, 2, 3] - ArraySpecs::MyArray[]).should be_an_instance_of(Array)
   end
 
   it "does not call to_ary on array subclasses" do
     ([5, 6, 7] - ArraySpecs::ToAryArray[7]).should == [5, 6]
   end
 
-  # MRI follows hashing semantics here, so doesn't actually call eql?/hash for Fixnum/Symbol
-  it "acts as if using an  intermediate hash to collect values" do
-    ([5.0, 4.0] - [5, 4]).should == [5.0, 4.0]
-    str = "x"
-    ([str] - [str.dup]).should == []
-
+  it "removes an item identified as equivalent via #hash and #eql?" do
     obj1 = mock('1')
     obj2 = mock('2')
-    def obj1.hash; 0; end
-    def obj2.hash; 0; end
-    def obj1.eql? a; true; end
-    def obj2.eql? a; true; end
+    obj1.should_receive(:hash).at_least(1).and_return(0)
+    obj2.should_receive(:hash).at_least(1).and_return(0)
+    obj1.should_receive(:eql?).at_least(1).and_return(true)
 
     ([obj1] - [obj2]).should == []
+    ([obj1, obj1, obj2, obj2] - [obj2]).should == []
+  end
 
-    def obj1.eql? a; false; end
-    def obj2.eql? a; false; end
+  it "doesn't remove an item with the same hash but not #eql?" do
+    obj1 = mock('1')
+    obj2 = mock('2')
+    obj1.should_receive(:hash).at_least(1).and_return(0)
+    obj2.should_receive(:hash).at_least(1).and_return(0)
+    obj1.should_receive(:eql?).at_least(1).and_return(false)
 
     ([obj1] - [obj2]).should == [obj1]
+    ([obj1, obj1, obj2, obj2] - [obj2]).should == [obj1, obj1]
+  end
+
+  it "removes an identical item even when its #eql? isn't reflexive" do
+    x = mock('x')
+    x.should_receive(:hash).at_least(1).and_return(42)
+    x.stub!(:eql?).and_return(false) # Stubbed for clarity and latitude in implementation; not actually sent by MRI.
+
+    ([x] - [x]).should == []
   end
 
   it "is not destructive" do

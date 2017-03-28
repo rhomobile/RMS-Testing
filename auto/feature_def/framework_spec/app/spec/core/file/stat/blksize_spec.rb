@@ -9,11 +9,19 @@ describe "File::Stat#blksize" do
   after :each do
     rm_r @file
   end
-if ( System.get_property('platform') != 'WINDOWS' ) && ( System.get_property('platform') != 'WINDOWS_DESKTOP' )
-  it "returns the blksize of a File::Stat object" do
-    st = File.stat(@file)
-    st.blksize.is_a?(Integer).should == true
-    st.blksize.should > 0
+
+  platform_is_not :windows do
+    it "returns the blksize of a File::Stat object" do
+      st = File.stat(@file)
+      st.blksize.is_a?(Integer).should == true
+      st.blksize.should > 0
+    end
   end
-end  
+
+  platform_is :windows do
+    it "returns nil" do
+      st = File.stat(@file)
+      st.blksize.should == nil
+    end
+  end
 end

@@ -5,7 +5,7 @@ require File.expand_path('../../fixtures/classes', __FILE__)
 require File.expand_path('../shared/basic', __FILE__)
 require File.expand_path('../shared/numeric_basic', __FILE__)
 
-describe :array_pack_8bit, :shared => true do
+describe :array_pack_8bit, shared: true do
   it "encodes the least significant eight bits of a positive number" do
     [ [[49],           "1"],
       [[0b11111111],   "\xFF"],
@@ -33,14 +33,6 @@ describe :array_pack_8bit, :shared => true do
     obj = mock('to_int')
     obj.should_receive(:to_int).and_return(5)
     [obj].pack(pack_format).should == "\x05"
-  end
-
-  not_compliant_on :rubinius do
-    ruby_version_is '' ... '1.9' do
-      it "accepts a Symbol as a pack argument because it responds to #to_int" do
-        [:hello].pack(pack_format).should == [:hello.to_i].pack('C')
-      end
-    end
   end
 
   it "encodes the number of array elements specified by the count modifier" do

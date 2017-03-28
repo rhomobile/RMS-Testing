@@ -6,7 +6,6 @@ require 'strscan'
 describe "StringScanner#getbyte" do
   it_behaves_like :strscan_get_byte, :getbyte
 
-=begin
   it "warns in verbose mode that the method is obsolete" do
     s = StringScanner.new("abc")
     begin
@@ -24,6 +23,6 @@ describe "StringScanner#getbyte" do
       $VERBOSE = old
     end
   end
-=end
+
   it_behaves_like :extract_range, :getbyte
 end

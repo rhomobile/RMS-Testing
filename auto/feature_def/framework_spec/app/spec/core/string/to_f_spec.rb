@@ -50,6 +50,10 @@ describe "String#to_f" do
     "0xx5".to_f.should == 0
   end
 
+  it "returns 0 for strings with leading underscores" do
+    "_9".to_f.should == 0
+  end
+
   it "takes an optional sign" do
     "-45.67 degrees".to_f.should == -45.67
     "+45.67 degrees".to_f.should == 45.67

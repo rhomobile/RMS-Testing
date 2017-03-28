@@ -1,5 +1,5 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
-=begin
+
 describe "Process::Status#signaled?" do
 
   describe "for a cleanly exited child" do
@@ -33,4 +33,3 @@ describe "Process::Status#signaled?" do
 
   end
 end
-=end

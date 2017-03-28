@@ -1,8 +1,5 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
-
-if System::get_property('platform') != 'WINDOWS' && 
-   System.get_property('platform') != 'WINDOWS_DESKTOP'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "UDPSocket.send" do
   before :each do
@@ -13,7 +10,7 @@ describe "UDPSocket.send" do
       @ready = true
       begin
         @msg = @server.recvfrom_nonblock(64)
-      rescue Errno::EAGAIN
+      rescue IO::WaitReadable
         IO.select([@server])
         retry
       end
@@ -58,6 +55,4 @@ describe "UDPSocket.send" do
     @msg[1][1].should be_kind_of(Fixnum)
     @msg[1][3].should == "127.0.0.1"
   end
-end
-
 end

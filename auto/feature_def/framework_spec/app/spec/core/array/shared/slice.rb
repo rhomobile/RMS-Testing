@@ -1,4 +1,4 @@
-describe :array_slice, :shared => true do
+describe :array_slice, shared: true do
   it "returns the element at index with [index]" do
     [ "a", "b", "c", "d", "e" ].send(@method, 1).should == "b"
 
@@ -29,7 +29,7 @@ describe :array_slice, :shared => true do
     a.should == [1, 2, 3, 4]
   end
 
-  it "return count elements starting from index with [index, count]" do
+  it "returns count elements starting from index with [index, count]" do
     [ "a", "b", "c", "d", "e" ].send(@method, 2, 3).should == ["c", "d", "e"]
 
     a = [1, 2, 3, 4]
@@ -266,10 +266,10 @@ describe :array_slice, :shared => true do
     a.send(@method, 1..0).should == []
     a.send(@method, 1...0).should == []
 
-    lambda { a.slice("a" .. "b") }.should raise_error(TypeError)
-    lambda { a.slice("a" ... "b") }.should raise_error(TypeError)
-    lambda { a.slice(from .. "b") }.should raise_error(TypeError)
-    lambda { a.slice(from ... "b") }.should raise_error(TypeError)
+    lambda { a.send(@method, "a" .. "b") }.should raise_error(TypeError)
+    lambda { a.send(@method, "a" ... "b") }.should raise_error(TypeError)
+    lambda { a.send(@method, from .. "b") }.should raise_error(TypeError)
+    lambda { a.send(@method, from ... "b") }.should raise_error(TypeError)
   end
 
   it "returns the same elements as [m..n] and [m...n] with Range subclasses" do
@@ -277,8 +277,8 @@ describe :array_slice, :shared => true do
     range_incl = ArraySpecs::MyRange.new(1, 2)
     range_excl = ArraySpecs::MyRange.new(-3, -1, true)
 
-    a[range_incl].should == [2, 3]
-    a[range_excl].should == [2, 3]
+    a.send(@method, range_incl).should == [2, 3]
+    a.send(@method, range_excl).should == [2, 3]
   end
 
   it "returns nil for a requested index not in the array with [index]" do
@@ -437,47 +437,23 @@ describe :array_slice, :shared => true do
     end
   end
 
-  not_compliant_on :rubinius do
-    it "raises a RangeError when the start index is out of range of Fixnum" do
-      array = [1, 2, 3, 4, 5, 6]
-      obj = mock('large value')
-      obj.should_receive(:to_int).and_return(0x8000_0000_0000_0000_0000)
-      lambda { array.send(@method, obj) }.should raise_error(RangeError)
+  it "raises a RangeError when the start index is out of range of Fixnum" do
+    array = [1, 2, 3, 4, 5, 6]
+    obj = mock('large value')
+    obj.should_receive(:to_int).and_return(0x8000_0000_0000_0000_0000)
+    lambda { array.send(@method, obj) }.should raise_error(RangeError)
 
-      obj = 8e19
-      lambda { array.send(@method, obj) }.should raise_error(RangeError)
-    end
-
-    it "raises a RangeError when the length is out of range of Fixnum" do
-      array = [1, 2, 3, 4, 5, 6]
-      obj = mock('large value')
-      obj.should_receive(:to_int).and_return(0x8000_0000_0000_0000_0000)
-      lambda { array.send(@method, 1, obj) }.should raise_error(RangeError)
-
-      obj = 8e19
-      lambda { array.send(@method, 1, obj) }.should raise_error(RangeError)
-    end
+    obj = 8e19
+    lambda { array.send(@method, obj) }.should raise_error(RangeError)
   end
 
-  deviates_on :rubinius do
-    it "raises a TypeError when the start index is out of range of Fixnum" do
-      array = [1, 2, 3, 4, 5, 6]
-      obj = mock('large value')
-      obj.should_receive(:to_int).and_return(0x8000_0000_0000_0000_0000)
-      lambda { array.send(@method, obj) }.should raise_error(TypeError)
+  it "raises a RangeError when the length is out of range of Fixnum" do
+    array = [1, 2, 3, 4, 5, 6]
+    obj = mock('large value')
+    obj.should_receive(:to_int).and_return(0x8000_0000_0000_0000_0000)
+    lambda { array.send(@method, 1, obj) }.should raise_error(RangeError)
 
-      obj = 8e19
-      lambda { array.send(@method, obj) }.should raise_error(TypeError)
-    end
-
-    it "raises a TypeError when the length is out of range of Fixnum" do
-      array = [1, 2, 3, 4, 5, 6]
-      obj = mock('large value')
-      obj.should_receive(:to_int).and_return(0x8000_0000_0000_0000_0000)
-      lambda { array.send(@method, 1, obj) }.should raise_error(TypeError)
-
-      obj = 8e19
-      lambda { array.send(@method, 1, obj) }.should raise_error(TypeError)
-    end
+    obj = 8e19
+    lambda { array.send(@method, 1, obj) }.should raise_error(RangeError)
   end
 end

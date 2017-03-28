@@ -1,7 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
-if ( System.get_property('platform') != 'APPLE') && ( System.get_property('platform') != 'WINDOWS_DESKTOP' )
 describe "IO#close_write" do
   before :each do
     @io = IO.popen 'cat', 'r+'
@@ -10,6 +9,7 @@ describe "IO#close_write" do
 
   after :each do
     @io.close unless @io.closed?
+    rm_r @path
   end
 
   it "closes the write end of a duplex I/O stream" do
@@ -18,10 +18,20 @@ describe "IO#close_write" do
     lambda { @io.write "attempt to write" }.should raise_error(IOError)
   end
 
-  it "raises an IOError on subsequent invocations" do
-    @io.close_write
+  ruby_version_is ''...'2.3' do
+    it "raises an IOError on subsequent invocations" do
+      @io.close_write
 
-    lambda { @io.close_write }.should raise_error(IOError)
+      lambda { @io.close_write }.should raise_error(IOError)
+    end
+  end
+
+  ruby_version_is '2.3' do
+    it "does nothing on subsequent invocations" do
+      @io.close_write
+
+      @io.close_write.should be_nil
+    end
   end
 
   it "allows subsequent invocation of close" do
@@ -38,7 +48,6 @@ describe "IO#close_write" do
     ensure
       io.close unless io.closed?
     end
-    File.unlink(@path)
   end
 
   it "closes the stream if it is neither readable nor duplexed" do
@@ -47,21 +56,29 @@ describe "IO#close_write" do
     io.close_write
 
     io.closed?.should == true
-    File.unlink @path
   end
 
-  #it "flushes and closes the write stream" do
-  #  @io.puts '12345'
+  it "flushes and closes the write stream" do
+    @io.puts '12345'
 
-  #  @io.close_write
+    @io.close_write
 
-  # @io.read.should == "12345\n"
-  #end
+    @io.read.should == "12345\n"
+  end
 
-  #it "raises IOError on closed stream" do
-  #  @io.close
+  ruby_version_is ''...'2.3' do
+    it "raises IOError on closed stream" do
+      @io.close
 
-  #  lambda { @io.close_write }.should raise_error(IOError)
-  #end
-end
+      lambda { @io.close_write }.should raise_error(IOError)
+    end
+  end
+
+  ruby_version_is '2.3' do
+    it "does nothing on closed stream" do
+      @io.close
+
+      @io.close_write.should be_nil
+    end
+  end
 end

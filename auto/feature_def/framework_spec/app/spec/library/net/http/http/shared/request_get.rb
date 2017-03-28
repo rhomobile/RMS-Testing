@@ -1,14 +1,12 @@
-describe :net_ftp_request_get, :shared => true do
-  before(:all) do
+describe :net_ftp_request_get, shared: true do
+  before :each do
     NetHTTPSpecs.start_server
+    @http = Net::HTTP.start("localhost", NetHTTPSpecs.port)
   end
 
-  after(:all) do
+  after :each do
+    @http.finish if @http.started?
     NetHTTPSpecs.stop_server
-  end
-
-  before(:each) do
-    @http = Net::HTTP.start("127.0.0.1", NetHTTPSpecs.server_port)
   end
 
   describe "when passed no block" do
@@ -30,11 +28,9 @@ describe :net_ftp_request_get, :shared => true do
     end
 
     it "yields the response to the passed block" do
-      yielded = false
       @http.send(@method, "/request") do |response|
         response.body.should == "Request type: GET"
       end
-      yielded = true
     end
 
     it "returns a Net::HTTPResponse object" do

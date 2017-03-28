@@ -11,9 +11,9 @@ describe "IO#fsync" do
     rm_r @name
   end
 
-  #it "raises an IOError on closed stream" do
-  #  lambda { IOSpecs.closed_io.fsync }.should raise_error(IOError)
-  #end
+  it "raises an IOError on closed stream" do
+    lambda { IOSpecs.closed_io.fsync }.should raise_error(IOError)
+  end
 
   it "writes the buffered data to permanent storage" do
     File.open(@name, "w") do |f|

@@ -1,10 +1,9 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 
-if System.get_property('platform') != 'APPLE'
 # TODO: put these in the right files.
 describe "Process.setpgrp and Process.getpgrp" do
   platform_is_not :windows do
-    it "set and get the process group ID of the calling process" do
+    it "sets and gets the process group ID of the calling process" do
       # there are two synchronization points here:
       # One for the child to let the parent know that it has finished
       #   setting its process group;
@@ -26,20 +25,13 @@ describe "Process.setpgrp and Process.getpgrp" do
       pgid = read1.read # wait for child to change process groups
       read1.close
 
-      Process.getpgid(pid).should == pgid.to_i
-
-      write2 << "!"
-      write2.close
-    end
-
-  end
-
-  describe "Process.setpgrp" do
-    platform_is_not :windows do
-      it "returns zero" do
-        Process.setpgrp.should == 0
+      begin
+        Process.getpgid(pid).should == pgid.to_i
+      ensure
+        write2 << "!"
+        write2.close
+        Process.wait pid
       end
     end
   end
-end
 end

@@ -1,6 +1,6 @@
 # -*- encoding: ascii-8bit -*-
 
-describe :string_unpack_16bit_le, :shared => true do
+describe :string_unpack_16bit_le, shared: true do
   it "decodes one short for a single format character" do
     "ab".unpack(unpack_format).should == [25185]
   end
@@ -41,19 +41,19 @@ describe :string_unpack_16bit_le, :shared => true do
   end
 end
 
-describe :string_unpack_16bit_le_signed, :shared => true do
+describe :string_unpack_16bit_le_signed, shared: true do
   it "decodes a short with most significant bit set as a negative number" do
     "\x00\xff".unpack(unpack_format()).should == [-256]
   end
 end
 
-describe :string_unpack_16bit_le_unsigned, :shared => true do
+describe :string_unpack_16bit_le_unsigned, shared: true do
   it "decodes a short with most significant bit set as a positive number" do
     "\x00\xff".unpack(unpack_format()).should == [65280]
   end
 end
 
-describe :string_unpack_16bit_be, :shared => true do
+describe :string_unpack_16bit_be, shared: true do
   it "decodes one short for a single format character" do
     "ba".unpack(unpack_format).should == [25185]
   end
@@ -94,19 +94,19 @@ describe :string_unpack_16bit_be, :shared => true do
   end
 end
 
-describe :string_unpack_16bit_be_signed, :shared => true do
+describe :string_unpack_16bit_be_signed, shared: true do
   it "decodes a short with most significant bit set as a negative number" do
     "\xff\x00".unpack(unpack_format()).should == [-256]
   end
 end
 
-describe :string_unpack_16bit_be_unsigned, :shared => true do
+describe :string_unpack_16bit_be_unsigned, shared: true do
   it "decodes a short with most significant bit set as a positive number" do
     "\xff\x00".unpack(unpack_format()).should == [65280]
   end
 end
 
-describe :string_unpack_32bit_le, :shared => true do
+describe :string_unpack_32bit_le, shared: true do
   it "decodes one int for a single format character" do
     "abcd".unpack(unpack_format).should == [1684234849]
   end
@@ -148,19 +148,19 @@ describe :string_unpack_32bit_le, :shared => true do
   end
 end
 
-describe :string_unpack_32bit_le_signed, :shared => true do
+describe :string_unpack_32bit_le_signed, shared: true do
   it "decodes an int with most significant bit set as a negative number" do
     "\x00\xaa\x00\xff".unpack(unpack_format()).should == [-16733696]
   end
 end
 
-describe :string_unpack_32bit_le_unsigned, :shared => true do
+describe :string_unpack_32bit_le_unsigned, shared: true do
   it "decodes an int with most significant bit set as a positive number" do
     "\x00\xaa\x00\xff".unpack(unpack_format()).should == [4278233600]
   end
 end
 
-describe :string_unpack_32bit_be, :shared => true do
+describe :string_unpack_32bit_be, shared: true do
   it "decodes one int for a single format character" do
     "dcba".unpack(unpack_format).should == [1684234849]
   end
@@ -202,19 +202,19 @@ describe :string_unpack_32bit_be, :shared => true do
   end
 end
 
-describe :string_unpack_32bit_be_signed, :shared => true do
+describe :string_unpack_32bit_be_signed, shared: true do
   it "decodes an int with most significant bit set as a negative number" do
     "\xff\x00\xaa\x00".unpack(unpack_format()).should == [-16733696]
   end
 end
 
-describe :string_unpack_32bit_be_unsigned, :shared => true do
+describe :string_unpack_32bit_be_unsigned, shared: true do
   it "decodes an int with most significant bit set as a positive number" do
     "\xff\x00\xaa\x00".unpack(unpack_format()).should == [4278233600]
   end
 end
 
-describe :string_unpack_64bit_le, :shared => true do
+describe :string_unpack_64bit_le, shared: true do
   it "decodes one long for a single format character" do
     "abcdefgh".unpack(unpack_format).should == [7523094288207667809]
   end
@@ -254,31 +254,29 @@ describe :string_unpack_64bit_le, :shared => true do
   end
 end
 
-describe :string_unpack_64bit_le_extra, :shared => true do
-  ruby_bug "#", "1.8.7" do
-    it "adds nil for each element requested beyond the end of the String" do
-      [ ["",                  [nil, nil, nil]],
-        ["abcdefgh",          [7523094288207667809, nil, nil]],
-        ["abcdefghcdefab",    [7523094288207667809, nil, nil]],
-        ["abcdefghcdefabde",  [7523094288207667809, 7306072665971057763, nil]]
-      ].should be_computed_by(:unpack, unpack_format(3))
-    end
+describe :string_unpack_64bit_le_extra, shared: true do
+  it "adds nil for each element requested beyond the end of the String" do
+    [ ["",                  [nil, nil, nil]],
+      ["abcdefgh",          [7523094288207667809, nil, nil]],
+      ["abcdefghcdefab",    [7523094288207667809, nil, nil]],
+      ["abcdefghcdefabde",  [7523094288207667809, 7306072665971057763, nil]]
+    ].should be_computed_by(:unpack, unpack_format(3))
   end
 end
 
-describe :string_unpack_64bit_le_signed, :shared => true do
+describe :string_unpack_64bit_le_signed, shared: true do
   it "decodes a long with most significant bit set as a negative number" do
     "\x00\xcc\x00\xbb\x00\xaa\x00\xff".unpack(unpack_format()).should == [-71870673923814400]
   end
 end
 
-describe :string_unpack_64bit_le_unsigned, :shared => true do
+describe :string_unpack_64bit_le_unsigned, shared: true do
   it "decodes a long with most significant bit set as a positive number" do
     "\x00\xcc\x00\xbb\x00\xaa\x00\xff".unpack(unpack_format()).should == [18374873399785737216]
   end
 end
 
-describe :string_unpack_64bit_be, :shared => true do
+describe :string_unpack_64bit_be, shared: true do
   it "decodes one long for a single format character" do
     "hgfedcba".unpack(unpack_format).should == [7523094288207667809]
   end
@@ -318,25 +316,23 @@ describe :string_unpack_64bit_be, :shared => true do
   end
 end
 
-describe :string_unpack_64bit_be_extra, :shared => true do
-  ruby_bug "#", "1.8.7" do
-    it "adds nil for each element requested beyond the end of the String" do
-      [ ["",                  [nil, nil, nil]],
-        ["hgfedcba",          [7523094288207667809, nil, nil]],
-        ["hgfedcbacdefab",    [7523094288207667809, nil, nil]],
-        ["hgfedcbadeabfedc",  [7523094288207667809, 7306072665971057763, nil]]
-      ].should be_computed_by(:unpack, unpack_format(3))
-    end
+describe :string_unpack_64bit_be_extra, shared: true do
+  it "adds nil for each element requested beyond the end of the String" do
+    [ ["",                  [nil, nil, nil]],
+      ["hgfedcba",          [7523094288207667809, nil, nil]],
+      ["hgfedcbacdefab",    [7523094288207667809, nil, nil]],
+      ["hgfedcbaedbafedc",  [7523094288207667809, 7306072665971057763, nil]]
+    ].should be_computed_by(:unpack, unpack_format(3))
   end
 end
 
-describe :string_unpack_64bit_be_signed, :shared => true do
+describe :string_unpack_64bit_be_signed, shared: true do
   it "decodes a long with most significant bit set as a negative number" do
     "\xff\x00\xaa\x00\xbb\x00\xcc\x00".unpack(unpack_format()).should == [-71870673923814400]
   end
 end
 
-describe :string_unpack_64bit_be_unsigned, :shared => true do
+describe :string_unpack_64bit_be_unsigned, shared: true do
   it "decodes a long with most significant bit set as a positive number" do
     "\xff\x00\xaa\x00\xbb\x00\xcc\x00".unpack(unpack_format()).should == [18374873399785737216]
   end

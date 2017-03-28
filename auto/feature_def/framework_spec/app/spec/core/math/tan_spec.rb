@@ -14,20 +14,16 @@ describe "Math.tan" do
   end
 
   it "returns NaN if called with +-Infinitty" do
-    Math.tan(1.0/0.0).nan?.should == true
-    Math.tan(1.0/-0.0).nan?.should == true
+    Math.tan(infinity_value).nan?.should == true
+    Math.tan(-infinity_value).nan?.should == true
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises an ArgumentError if the argument cannot be coerced with Float()" do
-      lambda { Math.tan("test") }.should raise_error(ArgumentError)
-    end
+  it "raises a TypeError if the argument cannot be coerced with Float()" do
+    lambda { Math.tan("test") }.should raise_error(TypeError)
   end
 
-  ruby_version_is "1.9" do
-    it "raises a TypeError if the argument cannot be coerced with Float()" do
-      lambda { Math.tan("test") }.should raise_error(TypeError)
-    end
+  it "returns NaN given NaN" do
+    Math.tan(nan_value).nan?.should be_true
   end
 
   it "raises a TypeError if the argument is nil" do

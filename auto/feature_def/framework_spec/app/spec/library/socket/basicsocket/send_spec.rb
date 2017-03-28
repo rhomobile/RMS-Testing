@@ -1,5 +1,5 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "BasicSocket#send" do
   before :each do
@@ -15,7 +15,7 @@ describe "BasicSocket#send" do
     @socket.close
   end
 
-   it "sends a message to another socket and returns the number of bytes sent----VT-037" do
+   it "sends a message to another socket and returns the number of bytes sent" do
      data = ""
      t = Thread.new do
        client = @server.accept
@@ -37,32 +37,30 @@ describe "BasicSocket#send" do
      data.should == 'hello'
    end
 
-if System::get_property('platform') != 'WINDOWS' && 
-   System.get_property('platform') != 'WINDOWS_DESKTOP' 
+  platform_is_not :solaris, :windows do
+    it "accepts flags to specify unusual sending behaviour" do
+      data = nil
+      peek_data = nil
+      t = Thread.new do
+        client = @server.accept
+        peek_data = client.recv(6, Socket::MSG_PEEK)
+        data = client.recv(6)
+        client.recv(10) # this recv is important
+        client.close
+      end
+      Thread.pass while t.status and t.status != "sleep"
+      t.status.should_not be_nil
 
-   it "accepts flags to specify unusual sending behaviour----VT-038" do
-     data = nil
-     peek_data = nil
-     t = Thread.new do
-       client = @server.accept
-       peek_data = client.recv(6, Socket::MSG_PEEK)
-       data = client.recv(6)
-       client.recv(10) # this recv is important
-       client.close
-     end
-     Thread.pass while t.status and t.status != "sleep"
-     t.status.should_not be_nil
+      @socket.send('helloU', Socket::MSG_PEEK | Socket::MSG_OOB).should == 6
+      @socket.shutdown # indicate, that we are done sending
 
-     @socket.send('helloU', Socket::MSG_PEEK | Socket::MSG_OOB).should == 6
-     @socket.shutdown # indicate, that we are done sending
+      t.join
+      peek_data.should == "hello"
+      data.should == 'hello'
+    end
+  end
 
-     t.join
-     peek_data.should == "hello"
-     data.should == 'hello'
-   end
-end
-
-  it "accepts a sockaddr as recipient address----VT-039" do
+  it "accepts a sockaddr as recipient address" do
      data = ""
      t = Thread.new do
        client = @server.accept

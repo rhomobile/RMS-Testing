@@ -1,5 +1,5 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "Socket" do
   it "inherits from BasicSocket and IO" do
@@ -20,28 +20,19 @@ describe "The socket class hierarchy" do
     UDPSocket.superclass.should == IPSocket
   end
 
-  if System::get_property('platform') != 'WINDOWS' && 
-     System.get_property('platform') != 'WINDOWS_DESKTOP' 
-
-  not_supported_on :jruby, :windows do
+  platform_is_not :windows do
     it "has a UNIXSocket in parallel to Socket" do
       Socket.ancestors.include?(UNIXSocket).should == false
       UNIXSocket.ancestors.include?(Socket).should == false
       UNIXSocket.superclass.should == BasicSocket
     end
   end
-  end
 end
 
-if System::get_property('platform') != 'WINDOWS' && 
-   System.get_property('platform') != 'WINDOWS_DESKTOP' 
-
-not_supported_on :jruby, :windows do
+platform_is_not :windows do
   describe "Server class hierarchy" do
     it "contains UNIXServer" do
       UNIXServer.superclass.should == UNIXSocket
     end
   end
-end
-
 end

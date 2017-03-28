@@ -19,7 +19,7 @@ describe "Module#attr" do
       o.respond_to?("#{a}=").should == false
     end
 
-    o.attr.should  == "test"
+    o.attr.should == "test"
     o.attr3.should == "test3"
     o.send(:attr).should == "test"
     o.send(:attr3).should == "test3"
@@ -85,37 +85,35 @@ describe "Module#attr" do
     lambda { c.new.foo=1 }.should raise_error(NoMethodError)
   end
 
-  ruby_version_is "1.9" do
-    it "creates a getter but no setter for all given attribute names" do
-      c = Class.new do
-        attr :attr, "attr2", "attr3"
+  it "creates a getter but no setter for all given attribute names" do
+    c = Class.new do
+      attr :attr, "attr2", "attr3"
 
-        def initialize
-          @attr, @attr2, @attr3 = "test", "test2", "test3"
-        end
+      def initialize
+        @attr, @attr2, @attr3 = "test", "test2", "test3"
       end
-
-      o = c.new
-
-      %w{attr attr2 attr3}.each do |a|
-        o.respond_to?(a).should == true
-        o.respond_to?("#{a}=").should == false
-      end
-
-      o.attr.should  == "test"
-      o.attr2.should == "test2"
-      o.attr3.should == "test3"
     end
 
-    it "applies current visibility to methods created" do
-      c = Class.new do
-        protected
-        attr :foo, :bar
-      end
+    o = c.new
 
-      lambda { c.new.foo }.should raise_error(NoMethodError)
-      lambda { c.new.bar }.should raise_error(NoMethodError)
+    %w{attr attr2 attr3}.each do |a|
+      o.respond_to?(a).should == true
+      o.respond_to?("#{a}=").should == false
     end
+
+    o.attr.should == "test"
+    o.attr2.should == "test2"
+    o.attr3.should == "test3"
+  end
+
+  it "applies current visibility to methods created" do
+    c = Class.new do
+      protected
+      attr :foo, :bar
+    end
+
+    lambda { c.new.foo }.should raise_error(NoMethodError)
+    lambda { c.new.bar }.should raise_error(NoMethodError)
   end
 
   it "converts non string/symbol/fixnum names to strings using to_str" do
@@ -128,5 +126,9 @@ describe "Module#attr" do
     lambda { Class.new { attr o } }.should raise_error(TypeError)
     (o = mock('123')).should_receive(:to_str).and_return(123)
     lambda { Class.new { attr o } }.should raise_error(TypeError)
+  end
+
+  it "is a private method" do
+    lambda { Class.new.attr(:foo) }.should raise_error(NoMethodError)
   end
 end

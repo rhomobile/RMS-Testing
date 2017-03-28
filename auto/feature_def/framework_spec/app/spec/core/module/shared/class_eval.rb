@@ -1,4 +1,4 @@
-describe :module_class_eval, :shared => true do
+describe :module_class_eval, shared: true do
   # TODO: This should probably be replaced with a "should behave like" that uses
   # the many scoping/binding specs from kernel/eval_spec, since most of those
   # behaviors are the same for instance_eval. See also module_eval/class_eval.
@@ -9,7 +9,7 @@ describe :module_class_eval, :shared => true do
   end
 
   it "does not add defined methods to other classes" do
-    FalseClass.class_eval do
+    FalseClass.send(@method) do
       def foo
         'foo'
       end
@@ -17,14 +17,35 @@ describe :module_class_eval, :shared => true do
     lambda {42.foo}.should raise_error(NoMethodError)
   end
 
+  it "resolves constants in the caller scope" do
+    ModuleSpecs::ClassEvalTest.get_constant_from_scope.should == ModuleSpecs::Lookup
+  end
+
+  it "resolves constants in the caller scope ignoring send" do
+    ModuleSpecs::ClassEvalTest.get_constant_from_scope_with_send(@method).should == ModuleSpecs::Lookup
+  end
+
+  it "resolves constants in the receiver's scope" do
+    ModuleSpecs.send(@method, "Lookup").should == ModuleSpecs::Lookup
+    ModuleSpecs.send(@method, "Lookup::LOOKIE").should == ModuleSpecs::Lookup::LOOKIE
+  end
+
   it "defines constants in the receiver's scope" do
     ModuleSpecs.send(@method, "module NewEvaluatedModule;end")
-    ModuleSpecs.const_defined?(:NewEvaluatedModule).should == true
+    ModuleSpecs.const_defined?(:NewEvaluatedModule, false).should == true
   end
 
   it "evaluates a given block in the context of self" do
     ModuleSpecs.send(@method) { self }.should == ModuleSpecs
     ModuleSpecs.send(@method) { 1 + 1 }.should == 2
+  end
+
+  it "passes the module as the first argument of the block" do
+    given = nil
+    ModuleSpecs.send(@method) do |block_parameter|
+      given = block_parameter
+    end
+    given.should equal ModuleSpecs
   end
 
   it "uses the optional filename and lineno parameters for error messages" do
@@ -73,7 +94,7 @@ describe :module_class_eval, :shared => true do
   # This case was found because Rubinius was caching the compiled
   # version of the string and not duping the methods within the
   # eval, causing the method addition to change the static scope
-  # of the shared CompiledMethod.
+  # of the shared CompiledCode.
   it "adds methods respecting the lexical constant scope" do
     code = "def self.attribute; C; end"
 
@@ -85,8 +106,8 @@ describe :module_class_eval, :shared => true do
       self::C = "B"
     end
 
-    a.class_eval code
-    b.class_eval code
+    a.send @method, code
+    b.send @method, code
 
     a.attribute.should == "A"
     b.attribute.should == "B"

@@ -1,5 +1,5 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 require 'socket'
 
@@ -8,38 +8,17 @@ describe "Socket#connect_nonblock" do
     @hostname = "127.0.0.1"
     @addr = Socket.sockaddr_in(SocketSpecs.port, @hostname)
     @socket = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
+    @thread = nil
   end
 
   after :each do
     @socket.close
+    @thread.join if @thread
   end
 
-  platform_is_not :freebsd do
-    it "takes an encoded socket address and starts the connection to it----VT-095" do
-      lambda {
-        @socket.connect_nonblock(@addr)
-      }.should raise_error(Errno::EINPROGRESS)
-    end
-  end
-
-  platform_is :freebsd do
-    it "takes an encoded socket address and starts the connection to it----VT-096" do
-      lambda {
-        begin
-          @socket.connect_nonblock(@addr)
-        rescue Errno::EINPROGRESS
-          r = @socket.getsockopt(Socket::SOL_SOCKET, Socket::SO_ERROR)
-          if r.int == Errno::ECONNREFUSED::Errno
-            raise Errno::ECONNREFUSED.new
-          end
-        end
-      }.should raise_error(Errno::ECONNREFUSED)
-    end
-  end
-
-  it "connects the socket to the remote side----VT-097" do
+  it "connects the socket to the remote side" do
     ready = false
-    thread = Thread.new do
+    @thread = Thread.new do
       server = TCPServer.new(@hostname, SocketSpecs.port)
       ready = true
       conn = server.accept
@@ -48,7 +27,7 @@ describe "Socket#connect_nonblock" do
       server.close
     end
 
-    Thread.pass while (thread.status and thread.status != 'sleep') or !ready
+    Thread.pass while (@thread.status and @thread.status != 'sleep') or !ready
 
     begin
       @socket.connect_nonblock(@addr)
@@ -64,5 +43,25 @@ describe "Socket#connect_nonblock" do
     end
 
     @socket.read(6).should == "hello!"
+  end
+
+  platform_is_not :freebsd, :solaris, :aix do
+    it "raises Errno::EINPROGRESS when the connect would block" do
+      lambda do
+        @socket.connect_nonblock(@addr)
+      end.should raise_error(Errno::EINPROGRESS)
+    end
+
+    it "raises Errno::EINPROGRESS with IO::WaitWritable mixed in when the connect would block" do
+      lambda do
+        @socket.connect_nonblock(@addr)
+      end.should raise_error(IO::WaitWritable)
+    end
+
+    ruby_version_is "2.3" do
+      it "returns :wait_writable in exceptionless mode when the connect would block" do
+        @socket.connect_nonblock(@addr, exception: false).should == :wait_writable
+      end
+    end
   end
 end

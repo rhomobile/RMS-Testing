@@ -1,5 +1,5 @@
-describe :stringio_read, :shared => true do
-  before(:each) do
+describe :stringio_read, shared: true do
+  before :each do
     @io = StringIO.new("example")
   end
 
@@ -27,21 +27,13 @@ describe :stringio_read, :shared => true do
     lambda { @io.send(@method, 7, Object.new) }.should raise_error(TypeError)
   end
 
-  ruby_version_is "" ... "1.9" do
-    it "raises an error when passed a frozen String as buffer" do
-      lambda { @io.send(@method, 7, "".freeze) }.should raise_error(TypeError)
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises an error when passed a frozen String as buffer" do
-      lambda { @io.send(@method, 7, "".freeze) }.should raise_error(RuntimeError)
-    end
+  it "raises an error when passed a frozen String as buffer" do
+    lambda { @io.send(@method, 7, "".freeze) }.should raise_error(RuntimeError)
   end
 end
 
-describe :stringio_read_length, :shared => true do
-  before(:each) do
+describe :stringio_read_length, shared: true do
+  before :each do
     @io = StringIO.new("example")
   end
 
@@ -75,10 +67,14 @@ describe :stringio_read_length, :shared => true do
   it "raises a TypeError when the passed length is negative" do
     lambda { @io.send(@method, -2) }.should raise_error(ArgumentError)
   end
+
+  it "returns a binary String" do
+    @io.send(@method, 4).encoding.should == Encoding::ASCII_8BIT
+  end
 end
 
-describe :stringio_read_no_arguments, :shared => true do
-  before(:each) do
+describe :stringio_read_no_arguments, shared: true do
+  before :each do
     @io = StringIO.new("example")
   end
 
@@ -95,7 +91,7 @@ describe :stringio_read_no_arguments, :shared => true do
   end
 end
 
-describe :stringio_read_nil, :shared => true do
+describe :stringio_read_nil, shared: true do
   before :each do
     @io = StringIO.new("example")
   end
@@ -113,7 +109,7 @@ describe :stringio_read_nil, :shared => true do
   end
 end
 
-describe :stringio_read_not_readable, :shared => true do
+describe :stringio_read_not_readable, shared: true do
   it "raises an IOError" do
     io = StringIO.new("test", "w")
     lambda { io.send(@method) }.should raise_error(IOError)

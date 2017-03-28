@@ -4,7 +4,7 @@ require 'strscan'
 
 describe "StringScanner#peep" do
   it_behaves_like(:strscan_peek, :peep)
-=begin
+
   it "warns in verbose mode that the method is obsolete" do
     s = StringScanner.new("abc")
     begin
@@ -22,5 +22,4 @@ describe "StringScanner#peep" do
       $VERBOSE = old
     end
   end
-=end  
 end

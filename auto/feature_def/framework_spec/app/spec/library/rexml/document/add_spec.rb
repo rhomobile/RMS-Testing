@@ -3,7 +3,7 @@ require File.expand_path('../../../../spec_helper', __FILE__)
 
 # This spec defines Document#add and Document#<<
 
-describe :rexml_document_add, :shared => true do
+describe :rexml_document_add, shared: true do
   before :each do
     @doc  = REXML::Document.new("<root/>")
     @decl = REXML::XMLDecl.new("1.0")
@@ -30,14 +30,10 @@ describe :rexml_document_add, :shared => true do
     @doc.doctype.name.should == "transitional"
   end
 
-  ruby_bug "#19058", "1.8" do
-    # MRI 1.8.x and 1.9 bug. A patch has been submitted.
-    # http://rubyforge.org/tracker/index.php?func=detail&aid=19058&group_id=426&atid=1698
-    it "overwrites existing DocType" do
-      @doc.send(@method, REXML::DocType.new("transitional"))
-      @doc.send(@method, REXML::DocType.new("strict"))
-      @doc.doctype.name.should == "strict"
-    end
+  it "overwrites existing DocType" do
+    @doc.send(@method, REXML::DocType.new("transitional"))
+    @doc.send(@method, REXML::DocType.new("strict"))
+    @doc.doctype.name.should == "strict"
   end
 
   it "adds root node unless it exists" do

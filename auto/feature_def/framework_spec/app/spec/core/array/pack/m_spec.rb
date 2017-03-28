@@ -145,7 +145,7 @@ describe "Array#pack with format 'M'" do
 
   it "encodes a recursive array" do
     empty = ArraySpecs.empty_recursive_array
-    empty.pack('M').should be_kind_of(String)
+    empty.pack('M').should be_an_instance_of(String)
 
     array = ArraySpecs.recursive_array
     array.pack('M').should == "1=\n"
@@ -179,33 +179,12 @@ describe "Array#pack with format 'M'" do
     [1.0].pack("M").should == "1.0=\n"
   end
 
-  ruby_bug "#3273", "1.8.7" do
-    it "converts Floats to the minimum unique representation" do
-      [1.0 / 3.0].pack("M").should == "0.3333333333333333=\n"
-    end
+  it "converts Floats to the minimum unique representation" do
+    [1.0 / 3.0].pack("M").should == "0.3333333333333333=\n"
   end
 
-  ruby_version_is "".."1.9" do
-    describe "with a multibyte $KCODE" do
-      before :each do
-        @kcode = $KCODE
-      end
-
-      after :each do
-        $KCODE = @kcode
-      end
-
-      it "encodes multibyte characters" do
-        $KCODE = "UTF8"
-        ["あ"].pack("M").should == "=E3=81=82=\n"
-      end
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "sets the output string to US-ASCII encoding" do
-      ["abcd"].pack("M").encoding.should == Encoding::US_ASCII
-    end
+  it "sets the output string to US-ASCII encoding" do
+    ["abcd"].pack("M").encoding.should == Encoding::US_ASCII
   end
 end
 
@@ -315,23 +294,13 @@ describe "Array#pack with format 'm'" do
     lambda { [bignum_value].pack("m") }.should raise_error(TypeError)
   end
 
-  ruby_version_is ""..."1.9" do
-    it "emits a newline after 45 characters if passed zero as the count modifier" do
-      s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-      r = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFh\nYWFhYWE=\n"
-      [s].pack("m0").should == r
-    end
+  it "does not emit a newline if passed zero as the count modifier" do
+    s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    r = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE="
+    [s].pack("m0").should == r
   end
 
-  ruby_version_is "1.9" do
-    it "does not emit a newline if passed zero as the count modifier" do
-      s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-      r = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE="
-      [s].pack("m0").should == r
-    end
-
-    it "sets the output string to US-ASCII encoding" do
-      ["abcd"].pack("m").encoding.should == Encoding::US_ASCII
-    end
+  it "sets the output string to US-ASCII encoding" do
+    ["abcd"].pack("m").encoding.should == Encoding::US_ASCII
   end
 end

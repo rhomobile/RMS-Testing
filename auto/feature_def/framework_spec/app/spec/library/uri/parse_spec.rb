@@ -10,35 +10,35 @@ describe "URI.parse" do
   it "populates the components of a parsed URI::HTTP, setting the port to 80 by default" do
     # general case
     URISpec.components(URI.parse("http://user:pass@example.com/path/?query=val&q2=val2#fragment")).should == {
-      :scheme => "http",
-      :userinfo => "user:pass",
-      :host => "example.com",
-      :port => 80,
-      :path => "/path/",
-      :query => "query=val&q2=val2",
-      :fragment => "fragment"
+      scheme: "http",
+      userinfo: "user:pass",
+      host: "example.com",
+      port: 80,
+      path: "/path/",
+      query: "query=val&q2=val2",
+      fragment: "fragment"
     }
 
     # multiple paths
     URISpec.components(URI.parse("http://a/b/c/d;p?q")).should == {
-      :scheme => "http",
-      :userinfo => nil,
-      :host => "a",
-      :port => 80,
-      :path => "/b/c/d;p",
-      :query => "q",
-      :fragment => nil
+      scheme: "http",
+      userinfo: nil,
+      host: "a",
+      port: 80,
+      path: "/b/c/d;p",
+      query: "q",
+      fragment: nil
     }
 
     # multi-level domain
     URISpec.components(URI.parse('http://www.math.uio.no/faq/compression-faq/part1.html')).should == {
-      :scheme => "http",
-      :userinfo => nil,
-      :host => "www.math.uio.no",
-      :port => 80,
-      :path => "/faq/compression-faq/part1.html",
-      :query => nil,
-      :fragment => nil
+      scheme: "http",
+      userinfo: nil,
+      host: "www.math.uio.no",
+      port: 80,
+      path: "/faq/compression-faq/part1.html",
+      query: nil,
+      fragment: nil
     }
   end
 
@@ -54,90 +54,44 @@ describe "URI.parse" do
     URI.parse("https://example.com/").port.should == 443
   end
 
-  ruby_version_is "".."1.8.6" do
-    it "populates the components of a parsed URI::FTP object" do
-      # generic, empty password.
-      url = URI.parse("ftp://anonymous@ruby-lang.org/pub/ruby/1.8/ruby-1.8.6.tar.bz2;type=i")
-      url.should be_kind_of(URI::FTP)
-      URISpec.components(url).should == {
-        :scheme => "ftp",
-        :userinfo => "anonymous",
-        :host => "ruby-lang.org",
-        :port => 21,
-        :path => "pub/ruby/1.8/ruby-1.8.6.tar.bz2",
-        :typecode => "i"
-      }
+  it "populates the components of a parsed URI::FTP object" do
+    # generic, empty password.
+    url = URI.parse("ftp://anonymous@ruby-lang.org/pub/ruby/1.8/ruby-1.8.6.tar.bz2;type=i")
+    url.should be_kind_of(URI::FTP)
+    URISpec.components(url).should == {
+      scheme: "ftp",
+      userinfo: "anonymous",
+      host: "ruby-lang.org",
+      port: 21,
+      path: "pub/ruby/1.8/ruby-1.8.6.tar.bz2",
+      typecode: "i"
+    }
 
-      # multidomain, no user or password
-      url = URI.parse('ftp://ftp.is.co.za/rfc/rfc1808.txt')
-      url.should be_kind_of(URI::FTP)
-      URISpec.components(url).should == {
-        :scheme => "ftp",
-        :userinfo => nil,
-        :host => "ftp.is.co.za",
-        :port => 21,
-        :path => "rfc/rfc1808.txt",
-        :typecode => nil
-      }
+    # multidomain, no user or password
+    url = URI.parse('ftp://ftp.is.co.za/rfc/rfc1808.txt')
+    url.should be_kind_of(URI::FTP)
+    URISpec.components(url).should == {
+      scheme: "ftp",
+      userinfo: nil,
+      host: "ftp.is.co.za",
+      port: 21,
+      path: "rfc/rfc1808.txt",
+      typecode: nil
+    }
 
-      # empty user
-      url = URI.parse('ftp://:pass@localhost/')
-      url.should be_kind_of(URI::FTP)
-      URISpec.components(url).should == {
-        :scheme => "ftp",
-        :userinfo => ":pass",
-        :host => "localhost",
-        :port => 21,
-        :path => "/",
-        :typecode => nil
-      }
-      url.password.should == "pass"
-
-    end
+    # empty user
+    url = URI.parse('ftp://:pass@localhost/')
+    url.should be_kind_of(URI::FTP)
+    URISpec.components(url).should == {
+      scheme: "ftp",
+      userinfo: ":pass",
+      host: "localhost",
+      port: 21,
+      path: "",
+      typecode: nil
+    }
+    url.password.should == "pass"
   end
-
-  ruby_version_is "1.8.7".."" do
-    it "populates the components of a parsed URI::FTP object" do
-      # generic, empty password.
-      url = URI.parse("ftp://anonymous@ruby-lang.org/pub/ruby/1.8/ruby-1.8.6.tar.bz2;type=i")
-      url.should be_kind_of(URI::FTP)
-      URISpec.components(url).should == {
-        :scheme => "ftp",
-        :userinfo => "anonymous",
-        :host => "ruby-lang.org",
-        :port => 21,
-        :path => "/pub/ruby/1.8/ruby-1.8.6.tar.bz2",
-        :typecode => "i"
-      }
-
-      # multidomain, no user or password
-      url = URI.parse('ftp://ftp.is.co.za/rfc/rfc1808.txt')
-      url.should be_kind_of(URI::FTP)
-      URISpec.components(url).should == {
-        :scheme => "ftp",
-        :userinfo => nil,
-        :host => "ftp.is.co.za",
-        :port => 21,
-        :path => "/rfc/rfc1808.txt",
-        :typecode => nil
-      }
-
-      # empty user
-      url = URI.parse('ftp://:pass@localhost/')
-      url.should be_kind_of(URI::FTP)
-      URISpec.components(url).should == {
-        :scheme => "ftp",
-        :userinfo => ":pass",
-        :host => "localhost",
-        :port => 21,
-        :path => "/",
-        :typecode => nil
-      }
-      url.password.should == "pass"
-
-    end
-  end
-
 
   it "returns a URI::LDAP object when parsing an LDAP URI" do
     #taken from http://www.faqs.org/rfcs/rfc2255.html 'cause I don't really know what an LDAP url looks like
@@ -149,14 +103,14 @@ describe "URI.parse" do
 
   it "populates the components of a parsed URI::LDAP object" do
     URISpec.components(URI.parse("ldap://ldap.itd.umich.edu/o=University%20of%20Michigan,c=US?postalAddress?scope?filter?extensions")).should == {
-      :scheme => "ldap",
-      :host => "ldap.itd.umich.edu",
-      :port => 389,
-      :dn => "o=University%20of%20Michigan,c=US",
-      :attributes => "postalAddress",
-      :scope => "scope",
-      :filter => "filter",
-      :extensions => "extensions"
+      scheme: "ldap",
+      host: "ldap.itd.umich.edu",
+      port: 389,
+      dn: "o=University%20of%20Michigan,c=US",
+      attributes: "postalAddress",
+      scope: "scope",
+      filter: "filter",
+      extensions: "extensions"
     }
   end
 
@@ -166,9 +120,9 @@ describe "URI.parse" do
 
   it "populates the components of a parsed URI::MailTo object" do
     URISpec.components(URI.parse("mailto:spam@mailinator.com?subject=Discounts%20On%20Imported%20methods!!!&body=Exciting%20offer")).should == {
-      :scheme => "mailto",
-      :to => "spam@mailinator.com",
-      :headers => [["subject","Discounts%20On%20Imported%20methods!!!"],
+      scheme: "mailto",
+      to: "spam@mailinator.com",
+      headers: [["subject","Discounts%20On%20Imported%20methods!!!"],
                    ["body", "Exciting%20offer"]]
     }
   end
@@ -178,15 +132,15 @@ describe "URI.parse" do
   it "does its best to extract components from URI::Generic objects" do
     # generic
     URISpec.components(URI("scheme://userinfo@host/path?query#fragment")).should == {
-      :scheme => "scheme",
-      :userinfo => "userinfo",
-      :host => "host",
-      :port => nil,
-      :path => "/path",
-      :query => "query",
-      :fragment => "fragment",
-      :registry => nil,
-      :opaque => nil
+      scheme: "scheme",
+      userinfo: "userinfo",
+      host: "host",
+      port: nil,
+      path: "/path",
+      query: "query",
+      fragment: "fragment",
+      registry: nil,
+      opaque: nil
     }
 
     # gopher
@@ -194,45 +148,45 @@ describe "URI.parse" do
     gopher.should be_kind_of(URI::Generic)
 
     URISpec.components(gopher).should == {
-      :scheme => "gopher",
-      :userinfo => nil,
-      :host => "spinaltap.micro.umn.edu",
-      :port => nil,
-      :path => "/00/Weather/California/Los%20Angeles",
-      :query => nil,
-      :fragment => nil,
-      :registry => nil,
-      :opaque => nil
+      scheme: "gopher",
+      userinfo: nil,
+      host: "spinaltap.micro.umn.edu",
+      port: nil,
+      path: "/00/Weather/California/Los%20Angeles",
+      query: nil,
+      fragment: nil,
+      registry: nil,
+      opaque: nil
     }
 
     # news
     news = URI.parse('news:comp.infosystems.www.servers.unix')
     news.should be_kind_of(URI::Generic)
     URISpec.components(news).should == {
-      :scheme => "news",
-      :userinfo => nil,
-      :host => nil,
-      :port => nil,
-      :path => nil,
-      :query => nil,
-      :fragment => nil,
-      :registry => nil,
-      :opaque => "comp.infosystems.www.servers.unix"
+      scheme: "news",
+      userinfo: nil,
+      host: nil,
+      port: nil,
+      path: nil,
+      query: nil,
+      fragment: nil,
+      registry: nil,
+      opaque: "comp.infosystems.www.servers.unix"
     }
 
     # telnet
     telnet = URI.parse('telnet://melvyl.ucop.edu/')
     telnet.should be_kind_of(URI::Generic)
     URISpec.components(telnet).should == {
-      :scheme => "telnet",
-      :userinfo => nil,
-      :host => "melvyl.ucop.edu",
-      :port => nil,
-      :path => "/",
-      :query => nil,
-      :fragment => nil,
-      :registry => nil,
-      :opaque => nil
+      scheme: "telnet",
+      userinfo: nil,
+      host: "melvyl.ucop.edu",
+      port: nil,
+      path: "/",
+      query: nil,
+      fragment: nil,
+      registry: nil,
+      opaque: nil
     }
 
     # files
@@ -242,8 +196,17 @@ describe "URI.parse" do
     file.should be_kind_of(URI::Generic)
   end
 
-  it "raises errors on malformed URIs" do
-    lambda { URI.parse('http://a_b:80/') }.should raise_error(URI::InvalidURIError)
-    lambda { URI.parse('http://a_b/') }.should raise_error(URI::InvalidURIError)
+  ruby_version_is ''...'2.2' do
+    it "raises errors on URIs which has underscore in reg_name" do
+      lambda { URI.parse('http://a_b:80/') }.should raise_error(URI::InvalidURIError)
+      lambda { URI.parse('http://a_b/') }.should raise_error(URI::InvalidURIError)
+    end
+  end
+
+  ruby_version_is '2.2' do
+    it "doesn't raise errors on URIs which has underscore in reg_name" do
+      URI.parse('http://a_b:80/').host.should == "a_b"
+      URI.parse('http://a_b/').host.should == "a_b"
+    end
   end
 end

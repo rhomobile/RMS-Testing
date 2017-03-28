@@ -1,4 +1,4 @@
-describe :file_grpowned, :shared => true do
+describe :file_grpowned, shared: true do
   before :each do
     @file = tmp('i_exist')
     touch(@file) { |f| f.puts "file_content" }
@@ -14,9 +14,20 @@ describe :file_grpowned, :shared => true do
       @object.send(@method, @file).should be_true
     end
 
-    ruby_version_is "1.9" do
-      it "accepts an object that has a #to_path method" do
-        @object.send(@method, mock_to_path(@file)).should be_true
+    it "accepts an object that has a #to_path method" do
+      @object.send(@method, mock_to_path(@file)).should be_true
+    end
+
+    it 'takes non primary groups into account' do
+      group = (Process.groups - [Process.egid]).first
+
+      if group
+        File.chown(nil, group, @file)
+
+        @object.send(@method, @file).should == true
+      else
+        # No supplementary groups
+        1.should == 1
       end
     end
   end

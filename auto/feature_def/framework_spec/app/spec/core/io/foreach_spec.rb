@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
+require File.expand_path('../shared/readlines', __FILE__)
 
 describe "IO.foreach" do
   before :each do
@@ -9,160 +10,72 @@ describe "IO.foreach" do
     ScratchPad.record []
   end
 
-  ruby_version_is "1.9" do
-    before :each do
-      Encoding.default_external = Encoding::UTF_8
-      @orig_exteenc = Encoding.default_external
-    end
-
-    after :each do
-      Encoding.default_external = @orig_exteenc
-    end
-  end
-
-  it "raises TypeError if the first parameter is nil" do
-    lambda { IO.foreach(nil) {} }.should raise_error(TypeError)
-  end
-
-  it "raises Errno::ENOENT if the file does not exist" do
-    lambda { IO.foreach(tmp("nonexistent.txt")) {} }.should raise_error(Errno::ENOENT)
-  end
-
-  it "converts first parameter to string and uses as file name" do
-    obj = mock('lines.txt fixture')
-    obj.should_receive(:to_str).and_return(@name)
-    IO.foreach(obj) { |l| ScratchPad << l }
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-    ScratchPad.recorded.should == IOSpecs.lines
-end    
-  end
-
-  ruby_version_is "1.8.7" do
-    it "returns an Enumerator when called without a block" do
-      IO.foreach(@name).should be_an_instance_of(enumerator_class)
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-      IO.foreach(@name).to_a.should == IOSpecs.lines
-end      
-    end
-  end
-
-  describe "with no separator argument" do
-    it "yields a sequence of Strings that were separated by $/" do
-      IO.foreach(@name) { |l| ScratchPad << l }
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-      ScratchPad.recorded.should == IOSpecs.lines
-end      
-    end
-
-    it "updates $. with each yield" do
-      IO.foreach(@name) { $..should == @count += 1 }
-    end
-  end
-
-  ruby_version_is "1.9.2" do
-    it "accepts an optional options argument" do
-      IO.foreach(@name, :mode => 'r') {|l| ScratchPad << l}
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-      ScratchPad.recorded.should == IOSpecs.lines
-end      
-    end
-  end
-
-  describe "with nil as the separator argument" do
-    it "yields a single string with entire content" do
-      IO.foreach(@name, nil) { |l| ScratchPad << l }
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-      ScratchPad.recorded.should == [IOSpecs.lines.join]
-end      
-    end
-
-    it "updates $. with each yield" do
-      IO.foreach(@name, nil) { $..should == @count += 1 }
-    end
-  end
-
-  describe "with an empty String as the separator argument" do
-    it "yields a sequence of paragraphs when the separator is an empty string" do
-      IO.foreach(@name, "") { |l| ScratchPad << l }
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-      ScratchPad.recorded.should == IOSpecs.lines_empty_separator
-end      
-    end
-
-    it "updates $. with each yield" do
-      IO.foreach(@name, "") { $..should == @count += 1 }
-    end
-  end
-
-  describe "with an arbitrary String as the separator argument" do
-    it "yields a sequence of Strings that were separated by r" do
-      IO.foreach(@name, "r") { |l| ScratchPad << l }
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-      ScratchPad.recorded.should == IOSpecs.lines_r_separator
-end      
-    end
-
-    it "updates $. with each yield" do
-      IO.foreach(@name, "la") { $..should == @count += 1 }
-    end
-
-if System.get_property('platform') != 'ANDROID'
-    it "accepts non-ASCII data as separator" do
-      IO.foreach(@name, "\303\250") { |l| ScratchPad << l }
-      ScratchPad.recorded.should == IOSpecs.lines_arbitrary_separator
-    end
-end
-  end
-
-  describe "with an object as the separator argument" do
-    ruby_version_is "" ... "1.9" do
-      it "calls #to_str once to convert it to a String" do
-        obj = mock("IO.foreach separator 'r'")
-        obj.should_receive(:to_str).once.and_return("r")
-        IO.foreach(@name, obj) { |l| ScratchPad << l }
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-        ScratchPad.recorded.should == IOSpecs.lines_r_separator
-end        
-      end
-    end
-
-    ruby_version_is "1.9" do
-if System.get_property('platform') != 'ANDROID'    
-      it "calls #to_str once for each line read to convert it to a String" do
-        obj = mock("IO.foreach separator 'r'")
-        obj.should_receive(:to_str).exactly(6).times.and_return("r")
-        IO.foreach(@name, obj) { |l| ScratchPad << l }
-        ScratchPad.recorded.should == IOSpecs.lines_r_separator
-      end
-
-      it "calls #to_path on non-String arguments" do
-        path = mock("IO.foreach path")
-        path.should_receive(:to_path).and_return(@name)
-        IO.foreach(path).to_a.should == IOSpecs.lines
-      end
-end      
-    end
+  it "updates $. with each yield" do
+    IO.foreach(@name) { $..should == @count += 1 }
   end
 
   describe "when the filename starts with |" do
-    #it "gets data from the standard out of the subprocess" do
-    #  IO.foreach("|sh -c 'echo hello;echo line2'") { |l| ScratchPad << l }
-    #  ScratchPad.recorded.should == ["hello\n", "line2\n"]
-    #end
+    it "gets data from the standard out of the subprocess" do
+      cmd = "|sh -c 'echo hello;echo line2'"
+      platform_is :windows do
+        cmd = "|cmd.exe /C echo hello&echo line2"
+      end
+      IO.foreach(cmd) { |l| ScratchPad << l }
+      ScratchPad.recorded.should == ["hello\n", "line2\n"]
+    end
 
-    #it "gets data from a fork when passed -" do
-    #  parent_pid = $$
-    #
-    #  ret = IO.foreach("|-") { |l| ScratchPad << l; true }
-    #
-    #  if $$ == parent_pid
-    #    ScratchPad.recorded.should == ["hello\n", "from a fork\n"]
-    #  else # child
-    #    puts "hello"
-    #    puts "from a fork"
-    #    exit!
-    #  end
-    #end
+    with_feature :fork do
+      it "gets data from a fork when passed -" do
+        parent_pid = $$
+
+        IO.foreach("|-") { |l| ScratchPad << l }
+
+        if $$ == parent_pid
+          ScratchPad.recorded.should == ["hello\n", "from a fork\n"]
+        else # child
+          puts "hello"
+          puts "from a fork"
+          exit!
+        end
+      end
+    end
+  end
+end
+
+describe "IO.foreach" do
+  before :each do
+    @external = Encoding.default_external
+    Encoding.default_external = Encoding::UTF_8
+
+    @name = fixture __FILE__, "lines.txt"
+    ScratchPad.record []
   end
 
+  after :each do
+    Encoding.default_external = @external
+  end
+
+  it "sets $_ to nil" do
+    $_ = "test"
+    IO.foreach(@name) { }
+    $_.should be_nil
+  end
+
+  describe "when no block is given" do
+    it "returns an Enumerator" do
+      IO.foreach(@name).should be_an_instance_of(Enumerator)
+      IO.foreach(@name).to_a.should == IOSpecs.lines
+    end
+
+    describe "returned Enumerator" do
+      describe "size" do
+        it "should return nil" do
+          IO.foreach(@name).size.should == nil
+        end
+      end
+    end
+  end
+
+  it_behaves_like :io_readlines, :foreach, IOSpecs.collector
+  it_behaves_like :io_readlines_options_19, :foreach, IOSpecs.collector
 end
