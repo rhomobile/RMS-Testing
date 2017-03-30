@@ -206,7 +206,7 @@ describe("Log JS API", function () {
 		it("VT290-329 : Set Log filepath |", function() {
 			runs(function(){
 				var info = "Log file path changed to file://\\Program Files\\Log.txt ";
-				Rho.Log.info(info, "VT290-328");
+				Rho.Log.info(info, "VT290-329");
 				var defaultPath = "file://\\Program Files\\Log.txt";
                 Rho.Log.filePath = defaultPath;
 				expect(Rho.Log.filePath).toEqual(defaultPath);
