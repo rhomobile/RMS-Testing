@@ -32,4 +32,4 @@ wm:
   extensions: ["barcode", "screenorientation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle", "mediacapture"]
 #capabilities:
 
-extensions: ["genPropBag", "logCapture"]
+extensions: ["genPropBag", "logCapture", "signature"]
