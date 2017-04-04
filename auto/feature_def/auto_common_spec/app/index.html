@@ -1,93 +1,103 @@
-<script type="text/javascript" charset="utf-8" src="../public/api/rhoapi-modules.js"></script>
+<html>
+<head>
+    <title>KitchensinkJS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <script type="text/javascript" src="/public/api/rhoapi-modules.js"></script>
+</head>
+
+<body>
+
 
 <ul id="mainmenu">
 </ul>
 
-	<script type="text/javascript" id="runnerList">    
+<script type="text/javascript" id="runnerList">
 
     //base set of specs
     var tests = {
-      "Application"         :"/app/ApplicationTest/specRunner.html",
-      "AudioCapture"        :"/app/AudioCaptureTest/specRunner.html",
-      "Barcode"             :"/app/BarcodeTest/specRunner.html",
-      "CardReader"          :"/app/CardReaderTest/specRunner.html",
-      "Constants"           :"/app/Constants/specRunner.html",
-      "Camera"              :"/app/CameraTest/specRunner.html",      
-      "Config"              :"/app/ConfigTest/specRunner.html",
-      "Database"            :"/app/DatabaseTest/specRunner.html",
-      "File"                :"/app/FileTest/specRunner.html",
-      "Intent"              :"/app/intent/specRunner.html",
-      "KeyCapture"          :"/app/KeyCaptureTest/specRunner.html",
-      "Log"                 :"/app/LogTest/specRunner.html",
-      "Network"             :"/app/NetworkTest/specRunner.html",
-      "NFC"                 :"/app/NearFieldCommunications/specRunner.html",
-      "Orm"                 :"/app/OrmTest/specRunner.html",
-      "Signature"           :"/app/SignatureTest/specRunner.html",
-      "SimulScan"           :"/app/SimulScanTest/specRunner.html",
-      "ScreenOrientation"   :"/app/ScreenOrientationTest/specRunner.html",
-      "System"              :"/app/SystemRE1Test/specRunner.html",
-      "Sensors"             :"/app/SensorsTest/specRunner.html",
-      "Timer"               :"/app/TimerTest/specRunner.html",
+        "Application": "/app/ApplicationTest/specRunner.html",
+        "AudioCapture": "/app/AudioCaptureTest/specRunner.html",
+        "Barcode": "/app/BarcodeTest/specRunner.html",
+        "CardReader": "/app/CardReaderTest/specRunner.html",
+        "Constants": "/app/Constants/specRunner.html",
+        "Camera": "/app/CameraTest/specRunner.html",
+        "Config": "/app/ConfigTest/specRunner.html",
+        "Database": "/app/DatabaseTest/specRunner.html",
+        "File": "/app/FileTest/specRunner.html",
+        "Intent": "/app/intent/specRunner.html",
+        "KeyCapture": "/app/KeyCaptureTest/specRunner.html",
+        "Log": "/app/LogTest/specRunner.html",
+        "Network": "/app/NetworkTest/specRunner.html",
+        "NFC": "/app/NearFieldCommunications/specRunner.html",
+        "Orm": "/app/OrmTest/specRunner.html",
+        "Signature": "/app/SignatureTest/specRunner.html",
+        "SimulScan": "/app/SimulScanTest/specRunner.html",
+        "ScreenOrientation": "/app/ScreenOrientationTest/specRunner.html",
+        "System": "/app/SystemRE1Test/specRunner.html",
+        "Sensors": "/app/SensorsTest/specRunner.html",
+        "Timer": "/app/TimerTest/specRunner.html",
 
-      //not verified
-      "Callback"            :"/app/CallbackTest/specRunner.html",
-      "Generator"           :"/app/GeneratorTest/specRunner.html",
-      "KeyCapture"          :"/app/KeyCaptureTest/specRunner.html",      
-      "Indicators"          :"/app/IndicatorsTest/specRunner.html",
-      "WebView"             :"/app/WebViewTest/specRunner.html",
-      "Videocapture"        :"/app/VideoCaptureTest/specRunner.html",
-      "Smart cradle"        :"/app/SmartCradle/specRunner.html",
-      "Rho API"             :"/app/RhoapiTest/specRunner.html",
-      "Printing"            :"/app/Printing/specRunner.html",
-      "Printing Zebra"      :"/app/PrinterZebra/specRunner.html",
-      "New ORM"             :"/app/NewORM/specRunner.html"
+        //not verified
+        "Callback": "/app/CallbackTest/specRunner.html",
+        "Generator": "/app/GeneratorTest/specRunner.html",
+        "KeyCapture": "/app/KeyCaptureTest/specRunner.html",
+        "Indicators": "/app/IndicatorsTest/specRunner.html",
+        "WebView": "/app/WebViewTest/specRunner.html",
+        "Videocapture": "/app/VideoCaptureTest/specRunner.html",
+        "Smart cradle": "/app/SmartCradle/specRunner.html",
+        "Rho API": "/app/RhoapiTest/specRunner.html",
+        "Printing": "/app/Printing/specRunner.html",
+        "Printing Zebra": "/app/PrinterZebra/specRunner.html",
+        "New ORM": "/app/NewORM/specRunner.html"
     }
 
     var platformSpecificTests = {};
 
-    switch(Rho.System.platform) {
-      case Rho.System.PLATFORM_WP8:
-        platformSpecificTests = {
-          "WP Camera"              :"/app/CameraTest/wpindex.html"
-        };
-      break;
+    switch (Rho.System.platform) {
+        case Rho.System.PLATFORM_WP8:
+            platformSpecificTests = {
+                "WP Camera": "/app/CameraTest/wpindex.html"
+            };
+            break;
 
-      case Rho.System.PLATFORM_ANDROID:
-        platformSpecificTests = {
-          "Websocket"              :"/app/WebsocketTest/specRunner.html",
-          "Eventsource"            :"/app/EventSourceTest/specRunner.html",
-        };
+        case Rho.System.PLATFORM_ANDROID:
+            platformSpecificTests = {
+                "Websocket": "/app/WebsocketTest/specRunner.html",
+                "Eventsource": "/app/EventSourceTest/specRunner.html",
+            };
 
-      break;
+            break;
     }
 
-    var addli = function( text, href ) {
-      var li = document.createElement('li');
+    var addli = function (text, href) {
+        var li = document.createElement('li');
 
-      if ( href ) {
-        var a = document.createElement('a');        
-        a.href = href;
-        a.innerText = text;
-        li.appendChild(a);
-      } else {
-        li.innerText = text;
-      }
-      
-      var br = document.createElement('br');
-      
-      mainmenu.appendChild(li);
-      mainmenu.appendChild(br);
-    }   
+        if (href) {
+            var a = document.createElement('a');
+            a.href = href;
+            a.innerText = text;
+            li.appendChild(a);
+        } else {
+            li.innerText = text;
+        }
 
-    addli("Common tests",null);
+        var br = document.createElement('br');
 
-    for ( var test in tests ) {
-      addli( test, tests[test] );
+        mainmenu.appendChild(li);
+        mainmenu.appendChild(br);
     }
 
-    addli("Platform specifc tests for: " + Rho.System.platform, null );
+    addli("Common tests", null);
 
-    for ( var test in platformSpecificTests ) {
-      addli( test, platformSpecificTests[test] );
-    }		
-	</script>
+    for (var test in tests) {
+        addli(test, tests[test]);
+    }
+
+    addli("Platform specifc tests for: " + Rho.System.platform, null);
+
+    for (var test in platformSpecificTests) {
+        addli(test, platformSpecificTests[test]);
+    }
+</script>
+</body>
+</html>
