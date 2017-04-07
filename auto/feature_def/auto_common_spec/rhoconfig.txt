@@ -15,7 +15,7 @@ rhobundle_zip_pwd = nil
 # log level
 # 0-trace, 1-info(app level), 3-warnings, 4-errors
 # for production set to 3
-MinSeverity  = 1
+MinSeverity  = 0
 
 # enable copy log messages to standard output, useful for debugging
 LogToOutput = 1
@@ -30,17 +30,17 @@ ExcludeLogCategories =
 MaxLogFileSize=5000000
 
 # turn on local http server traces, off by default
-#net_trace = 0
+net_trace = 1
 
 # timeout of network requests in seconds (30 by default)
 #net_timeout = 60
 
 # where log will be posted by RhoConf.send_log or from the log menu  
 # source is also open and up on http://github.com/rhomobile/rhologs, so you can deploy your own logserver
-logserver = 'http://rhologs.heroku.com' 
+logserver = 'http://taulogservice.herokuapp.com' 
 
 # log file prefix - contain human-readable text
-logname='api_generator_spec'
+logname='auto_common_spec'
 
 # Keep track of the last visited page
 KeepTrackOfLastVisitedPage = 0 
