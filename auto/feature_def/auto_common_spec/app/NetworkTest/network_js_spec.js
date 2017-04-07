@@ -1257,6 +1257,71 @@ describe('Network JS API', function() {
 
     
     });
+
+    it ('Waits more than TO value if part of data received', function() {
+        var get_props = {
+            url : srvURL + "/stream?chunks=10&to=5",
+       };
+
+       var callbackCalled = false;
+       var status = '';
+
+       var get_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+
+        runs( function() {
+                Rho.Network.get(get_props, get_callback);
+            }
+        );
+
+        waitsFor(function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+
+        runs(function() {
+                expect(status).toEqual('ok');
+            }
+        );
+
+    });
+
+    it ('Fails in TO value if no data received', function() {
+        var get_props = {
+            url : srvURL + "/stream?chunks=1&to=40",
+       };
+
+       var callbackCalled = false;
+       var status = '';
+
+       var get_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+
+        runs( function() {
+                Rho.Network.get(get_props, get_callback);
+            }
+        );
+
+        waitsFor(function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+
+        runs(function() {
+                expect(status).toEqual('error');
+            }
+        );
+    });
     
     }
 });

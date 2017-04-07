@@ -67,6 +67,7 @@ module WEBrick
         @body.call(socket)   # TODO: StreamWrapper which supports offset, size
         @sent_size = size
       end
+      socket.flush
     end
 
     class ChunkedWrapper
@@ -168,6 +169,29 @@ $local_server.mount_proc '/slow_get' do |req,res|
   res.content_length = res.body.length
   res.status = 200
 end
+
+$local_server.mount_proc '/stream' do |req,res|
+
+  chunks = req.query['chunks'].to_i
+  to = req.query['to'].to_i
+
+  data = 'stream'
+
+  if chunks.between?(1,10) and to.between?(1,10)
+    res.body = proc { |w|
+      chunks.times do |i|
+        sleep(to)
+        w << data
+      end
+    }
+
+    res.status = 200
+    res.content_length = 6*chunks
+  else
+    res.status = 500    
+  end
+end
+
 
 $local_server.mount_proc '/binary' do |req,res|
   puts "Received #{req.body} with length #{req.body.length}"
