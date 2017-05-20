@@ -4,7 +4,76 @@ describe("Smart Cradle API", function() {
 		{
 			enableflag = false;
 		});
-				
+		
+
+		describe("Read Properties default values of Smart Cradle ", function() {
+
+			beforeEach(function() 
+			{
+			});
+
+			var deviceType = getDeviceType();
+			var isSupported = false;
+			isSupported = (deviceType.toLowerCase().indexOf("mc18") != -1);		
+
+			it("get default value of rowId ", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.rowId;
+				expect(readValue).toBe(0);
+			});
+
+			it("get default value of columnId ", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.columnId;
+				expect(readValue).toBe(0);
+			});
+
+			it("get default value of wallId ", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.wallId;
+				expect(readValue).toBe(0);
+			});
+
+			it("get default value of ledOnDuration ", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.ledOnDuration;
+				expect(readValue).toBe(0);
+			});
+
+			it("get default value of ledOffDuration ", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.ledOffDuration;
+				expect(readValue).toBe(0);
+			});
+
+			it("get default value of timeout ", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.timeout;
+				expect(readValue).toBe(10);
+			});
+
+			it("get default value of chargeState ", function() 
+			{
+				if (!isSupported) return;
+
+				var readValue = Rho.SmartCradle.chargeState;
+				expect(readValue).toBe("fast");
+			});
+
+
+		});	
 		
 		describe("Read / Write Properties of the Smart Cradle (via Accessors)", function() {
 
@@ -241,6 +310,7 @@ describe("Smart Cradle API", function() {
 			});
 			
 		});
+
 		
 		describe("Read / Write Properties of the Smart Cradle (via Get / Set Property)", function() {
 
