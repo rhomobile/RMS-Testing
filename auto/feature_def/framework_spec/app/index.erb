@@ -1,19 +1,71 @@
-<script language="JavaScript">
-
-#window.location = '/app/SpecRunner';
-
-#if (location.search =='?settings=true') {
-#    window.location ='/app/Settings';
-#}
-
-</script>
-
 <div class="toolbar">
-	<h1 id="pageTitle">
-		RhodesTest
-	</h1>
+  <h1 id="pageTitle">
+    RhodesTest
+  </h1>
 </div>
 
-<ul id="home" selected="true" title="RhodesSpecs">
-	<li><a href="SpecRunner">Run Specs!</a></li>
-</ul>
+<button class="runSpec button">Run Specs!</button>
+
+<div id="specTree"></div>
+
+<script>
+
+    var renameMe = function RenameMe(aNode) {
+        aNode.children = [];
+        var filenames = Rho.RhoFile.listDir(aNode.path);
+        filenames.splice(0, 2);
+        for (var i = 0; i < filenames.length; i++) {
+            var path = Rho.RhoFile.join(aNode.path, filenames[i]);
+            if (Rho.RhoFile.isDir(path)) {
+                if (filenames[i] !== "fixtures") {
+                    var newNode = {};
+                    newNode.text = filenames[i];
+                    newNode.path = path;
+                    newNode.icon = "folder";
+                    renameMe(newNode);
+                    aNode.children.push(newNode);
+                }
+            } else {
+                aNode.children.push({text: filenames[i], path: path, icon: "tree"});
+            }
+        }
+
+    };
+
+    var getNodes = function (obj, cb) {
+        var data = [
+            {text: "core", path: Rho.RhoFile.join(Rho.Application.appBundleFolder, "spec/core")},
+            {text: "language", path: Rho.RhoFile.join(Rho.Application.appBundleFolder, "spec/language")},
+            {text: "library", path: Rho.RhoFile.join(Rho.Application.appBundleFolder, "spec/library")},
+            {text: "rhomobile", path: Rho.RhoFile.join(Rho.Application.appBundleFolder, "spec/rhomobile")}
+        ];
+        for (var i = 0; i < data.length; i++) {
+            renameMe(data[i]);
+        }
+        cb.call(this, data);
+    };
+
+    $("#specTree").jstree({
+        "plugins": ["checkbox"],
+        "checkbox": {
+            "keep_selected_style": false
+        },
+        "multiple": true,
+        "core": {
+            "data": getNodes
+        }
+    });
+
+    $(".runSpec").on("click", function () {
+        var selectedNodes = $('#specTree').jstree(true).get_selected(true);
+        var data = {specs:[]};
+        for (var i = 0; i < selectedNodes.length; i++) {
+            if (selectedNodes[i].children.length === 0) {
+                data.specs.push(selectedNodes[i].original.path)
+            }
+        }
+        console.log(data);
+        $.post( "<%= url_for(action: 'run_selected_specs', controller: 'SpecRunner')  %>", data );
+    });
+
+</script>
