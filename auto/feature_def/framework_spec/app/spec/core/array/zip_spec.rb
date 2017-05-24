@@ -28,16 +28,26 @@ describe "Array#zip" do
     [1, 2].zip(obj).should == [[1, 3], [2, 4]]
   end
 
-  ruby_version_is "1.9.2" do
-    it "uses #each to extract arguments' elements when #to_ary fails" do
-      obj = Class.new do
-        def each(&b)
-          [3,4].each(&b)
-        end
-      end.new
-      
-      [1, 2].zip(obj).should == [[1, 3], [2, 4]]
+  it "uses #each to extract arguments' elements when #to_ary fails" do
+    obj = Class.new do
+      def each(&b)
+        [3,4].each(&b)
+      end
+    end.new
+
+    [1, 2].zip(obj).should == [[1, 3], [2, 4]]
+  end
+
+  it "stops at own size when given an infinite enumerator" do
+    [1, 2].zip(10.upto(Float::INFINITY)).should == [[1, 10], [2, 11]]
+  end
+
+  it "fills nil when the given enumereator is shorter than self" do
+    obj = Object.new
+    def obj.each
+      yield 10
     end
+    [1, 2].zip(obj).should == [[1, 10], [2, nil]]
   end
 
   it "calls block if supplied" do
@@ -50,6 +60,6 @@ describe "Array#zip" do
   end
 
   it "does not return subclass instance on Array subclasses" do
-    ArraySpecs::MyArray[1, 2, 3].zip(["a", "b"]).should be_kind_of(Array)
+    ArraySpecs::MyArray[1, 2, 3].zip(["a", "b"]).should be_an_instance_of(Array)
   end
 end

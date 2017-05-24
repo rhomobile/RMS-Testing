@@ -1,11 +1,11 @@
-describe :strscan_pos, :shared => true do
+describe :strscan_pos, shared: true do
   before :each do
     @s = StringScanner.new("This is a test")
   end
 
   it "returns the position of the scan pointer" do
     @s.send(@method).should == 0
-    @s.scan_until /This is/
+    @s.scan_until(/This is/)
     @s.send(@method).should == 7
     @s.get_byte
     @s.send(@method).should == 8
@@ -24,7 +24,7 @@ describe :strscan_pos, :shared => true do
   end
 end
 
-describe :strscan_pos_set, :shared => true do
+describe :strscan_pos_set, shared: true do
   before :each do
     @s = StringScanner.new("This is a test")
   end

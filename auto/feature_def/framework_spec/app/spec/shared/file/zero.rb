@@ -1,16 +1,17 @@
-describe :file_zero, :shared => true do
+describe :file_zero, shared: true do
   before :each do
     @zero_file    = tmp("test.txt")
     @nonzero_file = tmp("test2.txt")
+    @dir = tmp("dir")
 
-    @dir = tmp("")
-
+    Dir.mkdir @dir
     touch @zero_file
     touch(@nonzero_file) { |f| f.puts "hello" }
   end
 
   after :each do
     rm_r @zero_file, @nonzero_file
+    rm_r @dir
   end
 
   it "returns true if the file is empty" do
@@ -21,10 +22,8 @@ describe :file_zero, :shared => true do
     @object.send(@method, @nonzero_file).should == false
   end
 
-  ruby_version_is "1.9" do
-    it "accepts an object that has a #to_path method" do
-      @object.send(@method, mock_to_path(@zero_file)).should == true
-    end
+  it "accepts an object that has a #to_path method" do
+    @object.send(@method, mock_to_path(@zero_file)).should == true
   end
 
   platform_is :windows do
@@ -36,7 +35,7 @@ describe :file_zero, :shared => true do
 
   platform_is_not :windows do
     it "returns true for /dev/null" do
-      @object.send(@method, '/dev/null').should == true
+      @object.send(@method, File.realpath('/dev/null')).should == true
     end
   end
 
@@ -70,7 +69,7 @@ describe :file_zero, :shared => true do
   end
 end
 
-describe :file_zero_missing, :shared => true do
+describe :file_zero_missing, shared: true do
   it "returns false if the file does not exist" do
     @object.send(@method, 'fake_file').should == false
   end

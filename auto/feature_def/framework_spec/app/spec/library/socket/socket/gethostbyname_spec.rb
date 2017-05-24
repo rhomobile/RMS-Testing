@@ -1,5 +1,6 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+# -*- encoding: binary -*-
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 require 'socket'
 

@@ -1,6 +1,7 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
+# NOTE: This is actually implemented by Module#initialize_copy
 describe "Class#dup" do
   it "duplicates both the class and the singleton class" do
     klass = Class.new do
@@ -50,18 +51,9 @@ describe "Class#dup" do
     klass_dup.message.should == "text"
   end
 
-  ruby_version_is ""..."1.9" do
-    it "sets the name from the class to \"\" if not assigned to a constant" do
-      copy = CoreClassSpecs::Record.dup
-      copy.name.should == ""
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "sets the name from the class to nil if not assigned to a constant" do
-      copy = CoreClassSpecs::Record.dup
-      copy.name.should be_nil
-    end
+  it "sets the name from the class to nil if not assigned to a constant" do
+    copy = CoreClassSpecs::Record.dup
+    copy.name.should be_nil
   end
 
   it "stores the new name if assigned to a constant" do

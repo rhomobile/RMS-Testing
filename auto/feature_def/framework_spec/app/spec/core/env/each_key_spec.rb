@@ -1,4 +1,5 @@
 require File.expand_path('../../../spec_helper', __FILE__)
+require File.expand_path('../../enumerable/shared/enumeratorized', __FILE__)
 
 describe "ENV.each_key" do
 
@@ -17,23 +18,15 @@ describe "ENV.each_key" do
     end
   end
 
-  ruby_version_is "" ... "1.8.7" do
-    it "raises LocalJumpError if no block given" do
-      lambda { ENV.each_key }.should raise_error(LocalJumpError)
+  it "returns an Enumerator if called without a block" do
+    ENV.each_key.should be_an_instance_of(Enumerator)
+  end
+
+  it "returns keys in the locale encoding" do
+    ENV.each_key do |key|
+      key.encoding.should == Encoding.find('locale')
     end
   end
 
-  ruby_version_is "1.8.7" do
-    it "returns an Enumerator if called without a block" do
-      ENV.each_key.should be_an_instance_of(enumerator_class)
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "returns keys in the locale encoding" do
-      ENV.each_key do |key|
-        key.encoding.should == Encoding.find('locale')
-      end
-    end
-  end
+  it_behaves_like :enumeratorized_with_origin_size, :each_key, ENV
 end

@@ -24,29 +24,24 @@ describe "Module#attr_writer" do
     o.instance_variable_get(:@test2).should == "test_2 updated"
   end
 
-  it "allows for adding an attr_writer to an immediate" do
-    class Integer
-      attr_writer :spec_attr_writer
-    end
+  ruby_version_is ''...'2.2' do
+    it "allows for adding an attr_writer to an immediate" do
+      class TrueClass
+        attr_writer :spec_attr_writer
+      end
 
-    1.spec_attr_writer = "a"
-    1.instance_variable_get("@spec_attr_writer").should == "a"
+      true.spec_attr_writer = "a"
+      true.instance_variable_get("@spec_attr_writer").should == "a"
+    end
   end
 
-  ruby_version_is ""..."1.9" do
-    not_compliant_on :rubinius do
-      it "creates a setter for an attribute name given as a Fixnum" do
-        c = Class.new do
-          attr_writer :test1.to_i
-        end
-
-        o = c.new
-        o.respond_to?("test1").should == false
-        o.respond_to?("test1=").should == true
-
-        o.test1 = "test_1"
-        o.instance_variable_get(:@test1).should == "test_1"
+  ruby_version_is '2.2' do
+    it "not allows for adding an attr_writer to an immediate" do
+      class TrueClass
+        attr_writer :spec_attr_writer
       end
+
+      lambda { true.spec_attr_writer = "a" }.should raise_error(RuntimeError)
     end
   end
 
@@ -74,5 +69,9 @@ describe "Module#attr_writer" do
     end
 
     lambda { c.new.foo=1 }.should raise_error(NoMethodError)
+  end
+
+  it "is a private method" do
+    lambda { Class.new.attr_writer(:foo) }.should raise_error(NoMethodError)
   end
 end

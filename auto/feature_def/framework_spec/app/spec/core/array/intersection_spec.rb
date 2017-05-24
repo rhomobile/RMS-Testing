@@ -23,16 +23,14 @@ describe "Array#&" do
     a.should == [1, 1, 3, 5]
   end
 
-  ruby_bug "ruby-core #1448", "1.9.1" do
-    it "properly handles recursive arrays" do
-      empty = ArraySpecs.empty_recursive_array
-      (empty & empty).should == empty
+  it "properly handles recursive arrays" do
+    empty = ArraySpecs.empty_recursive_array
+    (empty & empty).should == empty
 
-      (ArraySpecs.recursive_array & []).should == []
-      ([] & ArraySpecs.recursive_array).should == []
+    (ArraySpecs.recursive_array & []).should == []
+    ([] & ArraySpecs.recursive_array).should == []
 
-      (ArraySpecs.recursive_array & ArraySpecs.recursive_array).should == [1, 'two', 3.0, ArraySpecs.recursive_array]
-    end
+    (ArraySpecs.recursive_array & ArraySpecs.recursive_array).should == [1, 'two', 3.0, ArraySpecs.recursive_array]
   end
 
   it "tries to convert the passed argument to an Array using #to_ary" do
@@ -42,32 +40,47 @@ describe "Array#&" do
   end
 
   it "determines equivalence between elements in the sense of eql?" do
-    ([5.0, 4.0] & [5, 4]).should == []
+    not_supported_on :opal do
+      ([5.0, 4.0] & [5, 4]).should == []
+    end
+
     str = "x"
     ([str] & [str.dup]).should == [str]
 
     obj1 = mock('1')
     obj2 = mock('2')
-    def obj1.hash; 0; end
-    def obj2.hash; 0; end
-    def obj1.eql? a; true; end
-    def obj2.eql? a; true; end
+    obj1.should_receive(:hash).at_least(1).and_return(0)
+    obj2.should_receive(:hash).at_least(1).and_return(0)
+    obj1.should_receive(:eql?).at_least(1).and_return(true)
 
     ([obj1] & [obj2]).should == [obj1]
+    ([obj1, obj1, obj2, obj2] & [obj2]).should == [obj1]
 
-    def obj1.eql? a; false; end
-    def obj2.eql? a; false; end
+    obj1 = mock('3')
+    obj2 = mock('4')
+    obj1.should_receive(:hash).at_least(1).and_return(0)
+    obj2.should_receive(:hash).at_least(1).and_return(0)
+    obj1.should_receive(:eql?).at_least(1).and_return(false)
 
     ([obj1] & [obj2]).should == []
+    ([obj1, obj1, obj2, obj2] & [obj2]).should == [obj2]
   end
 
   it "does return subclass instances for Array subclasses" do
-    (ArraySpecs::MyArray[1, 2, 3] & []).should be_kind_of(Array)
-    (ArraySpecs::MyArray[1, 2, 3] & ArraySpecs::MyArray[1, 2, 3]).should be_kind_of(Array)
-    ([] & ArraySpecs::MyArray[1, 2, 3]).should be_kind_of(Array)
+    (ArraySpecs::MyArray[1, 2, 3] & []).should be_an_instance_of(Array)
+    (ArraySpecs::MyArray[1, 2, 3] & ArraySpecs::MyArray[1, 2, 3]).should be_an_instance_of(Array)
+    ([] & ArraySpecs::MyArray[1, 2, 3]).should be_an_instance_of(Array)
   end
 
   it "does not call to_ary on array subclasses" do
     ([5, 6] & ArraySpecs::ToAryArray[1, 2, 5, 6]).should == [5, 6]
+  end
+
+  it "properly handles an identical item even when its #eql? isn't reflexive" do
+    x = mock('x')
+    x.should_receive(:hash).at_least(1).and_return(42)
+    x.stub!(:eql?).and_return(false) # Stubbed for clarity and latitude in implementation; not actually sent by MRI.
+
+    ([x] & [x]).should == [x]
   end
 end

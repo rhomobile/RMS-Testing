@@ -1,14 +1,14 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
 
-describe :numeric_real, :shared => true do
-  before(:each) do
+describe :numeric_real, shared: true do
+  before :each do
     @numbers = [
       20,             # Integer
       398.72,         # Float
       Rational(3, 4), # Rational
       bignum_value, # Bignum
-      Float::MAX * 2, # Infinity
-      0/0.0           # NaN
+      infinity_value,
+      nan_value
     ].map{|n| [n,-n]}.flatten
   end
 

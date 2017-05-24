@@ -1,4 +1,4 @@
-describe :file_writable_real, :shared => true do
+describe :file_writable_real, shared: true do
   before :each do
     @file = tmp('i_exist')
   end
@@ -11,10 +11,8 @@ describe :file_writable_real, :shared => true do
     File.open(@file,'w') { @object.send(@method, @file).should == true }
   end
 
-  ruby_version_is "1.9" do
-    it "accepts an object that has a #to_path method" do
-      File.open(@file,'w') { @object.send(@method, mock_to_path(@file)).should == true }
-    end
+  it "accepts an object that has a #to_path method" do
+    File.open(@file,'w') { @object.send(@method, mock_to_path(@file)).should == true }
   end
 
   it "raises an ArgumentError if not passed one argument" do
@@ -28,7 +26,7 @@ describe :file_writable_real, :shared => true do
   end
 end
 
-describe :file_writable_real_missing, :shared => true do
+describe :file_writable_real_missing, shared: true do
   it "returns false if the file does not exist" do
     @object.send(@method, 'fake_file').should == false
   end

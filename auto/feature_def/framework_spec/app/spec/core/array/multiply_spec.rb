@@ -88,19 +88,10 @@ describe "Array#* with an integer" do
     end
   end
 
-  ruby_version_is '' ... '1.8' do
-    it "does not copy the taint status of the original array if the passed count is 0" do
-      ary = [1, 2, 3]
-      ary.taint
-      (ary * 0).tainted?.should == false
-    end
-  end
-  ruby_version_is '1.9' do
-    it "copies the taint status of the original array even if the passed count is 0" do
-      ary = [1, 2, 3]
-      ary.taint
-      (ary * 0).tainted?.should == true
-    end
+  it "copies the taint status of the original array even if the passed count is 0" do
+    ary = [1, 2, 3]
+    ary.taint
+    (ary * 0).tainted?.should == true
   end
 
   it "copies the taint status of the original array even if the array is empty" do
@@ -116,28 +107,26 @@ describe "Array#* with an integer" do
     (ary * 2).tainted?.should == true
   end
 
-  ruby_version_is '1.9' do
-    it "copies the untrusted status of the original array even if the passed count is 0" do
-      ary = [1, 2, 3]
-      ary.untrust
-      (ary * 0).untrusted?.should == true
-    end
+  it "copies the untrusted status of the original array even if the passed count is 0" do
+    ary = [1, 2, 3]
+    ary.untrust
+    (ary * 0).untrusted?.should == true
+  end
 
-    it "copies the untrusted status of the original array even if the array is empty" do
-      ary = []
-      ary.untrust
-      (ary * 3).untrusted?.should == true
-    end
+  it "copies the untrusted status of the original array even if the array is empty" do
+    ary = []
+    ary.untrust
+    (ary * 3).untrusted?.should == true
+  end
 
-    it "copies the untrusted status of the original array if the passed count is not 0" do
-      ary = [1, 2, 3]
-      ary.untrust
-      (ary * 1).untrusted?.should == true
-      (ary * 2).untrusted?.should == true
-    end
+  it "copies the untrusted status of the original array if the passed count is not 0" do
+    ary = [1, 2, 3]
+    ary.untrust
+    (ary * 1).untrusted?.should == true
+    (ary * 2).untrusted?.should == true
   end
 end
 
 describe "Array#* with a string" do
-  it_behaves_like :array_join, :*, ArraySpecs::NewArray
+  it_behaves_like :array_join_with_string_separator, :*
 end

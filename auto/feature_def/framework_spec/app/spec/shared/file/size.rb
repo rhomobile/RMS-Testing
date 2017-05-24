@@ -1,4 +1,4 @@
-describe :file_size, :shared => true do
+describe :file_size, shared: true do
   before :each do
     @exists = tmp('i_exist')
     touch(@exists) { |f| f.write 'rubinius' }
@@ -19,14 +19,12 @@ describe :file_size, :shared => true do
     @object.send(@method, obj).should == 8
   end
 
-  ruby_version_is "1.9" do
-    it "accepts an object that has a #to_path method" do
-      @object.send(@method, mock_to_path(@exists)).should == 8
-    end
+  it "accepts an object that has a #to_path method" do
+    @object.send(@method, mock_to_path(@exists)).should == 8
   end
 end
 
-describe :file_size_to_io, :shared => true do
+describe :file_size_to_io, shared: true do
   before :each do
     @exists = tmp('i_exist')
     touch(@exists) { |f| f.write 'rubinius' }
@@ -46,7 +44,7 @@ describe :file_size_to_io, :shared => true do
   end
 end
 
-describe :file_size_raise_when_missing, :shared => true do
+describe :file_size_raise_when_missing, shared: true do
   before :each do
     # TODO: missing_file
     @missing = tmp("i_dont_exist")
@@ -62,7 +60,7 @@ describe :file_size_raise_when_missing, :shared => true do
   end
 end
 
-describe :file_size_nil_when_missing, :shared => true do
+describe :file_size_nil_when_missing, shared: true do
   before :each do
     # TODO: missing_file
     @missing = tmp("i_dont_exist")
@@ -78,7 +76,7 @@ describe :file_size_nil_when_missing, :shared => true do
   end
 end
 
-describe :file_size_0_when_empty, :shared => true do
+describe :file_size_0_when_empty, shared: true do
   before :each do
     @empty = tmp("i_am_empty")
     touch @empty
@@ -93,7 +91,7 @@ describe :file_size_0_when_empty, :shared => true do
   end
 end
 
-describe :file_size_nil_when_empty, :shared => true do
+describe :file_size_nil_when_empty, shared: true do
   before :each do
     @empty = tmp("i_am_empt")
     touch @empty
@@ -108,7 +106,7 @@ describe :file_size_nil_when_empty, :shared => true do
   end
 end
 
-describe :file_size_with_file_argument, :shared => true do
+describe :file_size_with_file_argument, shared: true do
   before :each do
     @exists = tmp('i_exist')
     touch(@exists) { |f| f.write 'rubinius' }

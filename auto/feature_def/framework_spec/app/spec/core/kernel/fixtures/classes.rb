@@ -1,5 +1,3 @@
-require File.expand_path('../caller_fixture1', __FILE__)
-
 module KernelSpecs
   def self.Array_function(arg)
     Array(arg)
@@ -7,6 +5,22 @@ module KernelSpecs
 
   def self.Array_method(arg)
     Kernel.Array(arg)
+  end
+
+  def self.Hash_function(arg)
+    Hash(arg)
+  end
+
+  def self.Hash_method(arg)
+    Kernel.Hash(arg)
+  end
+
+  def self.Integer_function(arg)
+    Integer(arg)
+  end
+
+  def self.Integer_method(arg)
+    Kernel.Integer(arg)
   end
 
   def self.putc_function(arg)
@@ -17,10 +31,53 @@ module KernelSpecs
     Kernel.putc arg
   end
 
-  class Method
-    def abort(*msg)
-      super
+  def self.has_private_method(name)
+    cmd = %[| #{RUBY_EXE} -n -e "print Kernel.private_method_defined?('#{name}')"]
+    ruby_exe("puts", args: cmd) == "true"
+  end
+
+  def self.chop(str, method)
+    cmd = "| #{RUBY_EXE} -n -e '$_ = #{str.inspect}; #{method}; print $_'"
+    ruby_exe "puts", args: cmd
+  end
+
+  def self.encoded_chop(file)
+    ruby_exe "puts", args: "| #{RUBY_EXE} -n #{file}"
+  end
+
+  def self.chomp(str, method, sep="\n")
+    cmd = "| #{RUBY_EXE} -n -e '$_ = #{str.inspect}; $/ = #{sep.inspect}; #{method}; print $_'"
+    ruby_exe "puts", args: cmd
+  end
+
+  def self.encoded_chomp(file)
+    ruby_exe "puts", args: "| #{RUBY_EXE} -n #{file}"
+  end
+
+  # kind_of?, is_a?, instance_of?
+  module SomeOtherModule; end
+  module AncestorModule; end
+  module MyModule; end
+  module MyExtensionModule; end
+
+  class AncestorClass < String
+    include AncestorModule
+  end
+
+  class InstanceClass < AncestorClass
+    include MyModule
+  end
+
+  class KindaClass < AncestorClass
+    include MyModule
+    def initialize
+      self.extend MyExtensionModule
     end
+  end
+
+  class Method
+    public :abort, :exec, :exit, :exit!, :fork, :system
+    public :spawn if respond_to?(:spawn, true)
   end
 
   class Methods
@@ -91,7 +148,7 @@ module KernelSpecs
   end
 
   class A
-    # 1.9 as Kernel#public_method, so we don't want this one to clash:
+    # There is Kernel#public_method, so we don't want this one to clash
     def pub_method; :public_method; end
 
     def undefed_method; :undefed_method; end
@@ -109,6 +166,12 @@ module KernelSpecs
 
   class B < A
     alias aliased_pub_method pub_method
+  end
+
+  class VisibilityChange
+    class << self
+      private :new
+    end
   end
 
   class Binding
@@ -199,38 +262,6 @@ module KernelSpecs
     end
   end
 
-  class IVars
-    def initialize
-      @secret = 99
-    end
-  end
-
-  module InstEvalCVar
-    instance_eval { @@count = 2 }
-  end
-
-  module InstEval
-    def self.included(base)
-      base.instance_eval { @@count = 2 }
-    end
-  end
-
-  class IncludesInstEval
-    include InstEval
-  end
-
-  class InstEvalConst
-    INST_EVAL_CONST_X = 2
-  end
-
-  module InstEvalOuter
-    module Inner
-      obj = InstEvalConst.new
-      X_BY_STR = obj.instance_eval("INST_EVAL_CONST_X") rescue nil
-      X_BY_BLOCK = obj.instance_eval { INST_EVAL_CONST_X } rescue nil
-    end
-  end
-
   class EvalTest
     def self.eval_yield_with_binding
       eval("yield", binding)
@@ -238,10 +269,6 @@ module KernelSpecs
     def self.call_yield
       yield
     end
-  end
-
-  def self.helper_script
-    File.dirname(__FILE__) + '/check_expansion.rb'
   end
 
   module DuplicateM
@@ -263,6 +290,18 @@ module KernelSpecs
     end
   end
 
+  class Clone
+    def initialize_clone(other)
+      ScratchPad.record other.object_id
+    end
+  end
+
+  class Dup
+    def initialize_dup(other)
+      ScratchPad.record other.object_id
+    end
+  end
+
   module ParentMixin
     def parent_mixin_method; end
   end
@@ -275,11 +314,6 @@ module KernelSpecs
   end
 
   class Child < Parent
-    # In case this trips anybody up: This fixtures file must only be loaded
-    # once for the Kernel specs. If it's loaded multiple times the following
-    # line raises a NameError. This is a problem if you require it from a
-    # location outside of core/kernel on 1.8.6, because 1.8.6 doesn't
-    # normalise paths...
     undef_method :parent_method
   end
 
@@ -289,16 +323,16 @@ module KernelSpecs
 
   # for testing lambda
   class Lambda
-    def outer(meth)
-      inner(meth)
+    def outer
+      inner
     end
 
     def mp(&b); b; end
 
-    def inner(meth)
+    def inner
       b = mp { return :good }
 
-      pr = send(meth) { |x| x.call }
+      pr = lambda { |x| x.call }
 
       pr.call(b)
 
@@ -326,9 +360,35 @@ module KernelSpecs
     end
   end
 
-  class Ivar
+  class InstanceVariable
     def initialize
       @greeting = "hello"
+    end
+  end
+
+  class PrivateToAry
+    private
+
+    def to_ary
+      [1, 2]
+    end
+
+    def to_a
+      [3, 4]
+    end
+  end
+
+  class PrivateToA
+    private
+
+    def to_a
+      [3, 4]
+    end
+  end
+
+  class NotMatch
+    def !~(obj)
+      :foo
     end
   end
 end
@@ -341,6 +401,16 @@ class EvalSpecs
     end
   end
 
+  class CoercedObject
+    def to_str
+      '2 + 3'
+    end
+
+    def hash
+      nil
+    end
+  end
+
   def f
     yield
   end
@@ -349,13 +419,6 @@ class EvalSpecs
     f = __FILE__
     eval "true", binding, "(eval)", 1
     return f
-  end
-end
-
-module CallerSpecs
-  def self.recurse(n)
-    return caller if n <= 0
-    recurse(n-1)
   end
 end
 

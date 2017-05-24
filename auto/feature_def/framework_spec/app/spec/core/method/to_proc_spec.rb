@@ -2,7 +2,7 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "Method#to_proc" do
-  before(:each) do
+  before :each do
     ScratchPad.record []
 
     @m = MethodSpecs::Methods.new
@@ -13,7 +13,12 @@ describe "Method#to_proc" do
     @meth.to_proc.kind_of?(Proc).should == true
   end
 
-  it "Proc object should have the correct arity" do
+  it "returns a Proc which does not depends on the value of self" do
+    3.instance_exec(4, &5.method(:+)).should == 9
+  end
+
+
+  it "returns a Proc object with the correct arity" do
     # This may seem redundant but this bug has cropped up in jruby, mri and yarv.
     # http://jira.codehaus.org/browse/JRUBY-124
     [ :zero, :one_req, :two_req,
@@ -50,19 +55,35 @@ describe "Method#to_proc" do
     x.baz(1,2,3,&m).should == [1,2,3]
   end
 
-  ruby_version_is ""..."1.9" do
-    it "returns a proc that accepts passed arguments like a block would" do
-      obj = MethodSpecs::ToProc.new
+  # #5926
+  it "returns a proc that can receive a block" do
+    x = Object.new
+    def x.foo; yield 'bar'; end
 
-      array = [["text", :comment], ["space", :chunk]]
-      array.each(&obj)
-
-      ScratchPad.recorded.should == array = [["text", :comment], ["space", :chunk]]
-    end
+    m = x.method :foo
+    result = nil
+    m.to_proc.call {|val| result = val}
+    result.should == 'bar'
   end
 
   it "can be called directly and not unwrap arguments like a block" do
     obj = MethodSpecs::ToProcBeta.new
     obj.to_proc.call([1]).should == [1]
+  end
+
+  it "should correct handle arguments (unwrap)" do
+    obj = MethodSpecs::ToProcBeta.new
+
+    array = [[1]]
+    array.each(&obj)
+    ScratchPad.recorded.should == [[1]]
+  end
+
+  it "executes method with whole array (one argument)" do
+    obj = MethodSpecs::ToProcBeta.new
+
+    array = [[1, 2]]
+    array.each(&obj)
+    ScratchPad.recorded.should == [[1, 2]]
   end
 end

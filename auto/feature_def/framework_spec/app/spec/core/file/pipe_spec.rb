@@ -19,14 +19,14 @@ describe "File.pipe?" do
     rm_r filename
   end
 
-  #platform_is_not :windows do
-  #  it "returns true if the file is a pipe" do
-  #    filename = tmp("i_am_a_pipe")
-  #    system "mkfifo #{filename}"
-  #
-  #    File.pipe?(filename).should == true
-  #
-  #    rm_r filename
-  #  end
-  #end
+  platform_is_not :windows do
+    it "returns true if the file is a pipe" do
+      filename = tmp("i_am_a_pipe")
+      system "mkfifo #{filename}"
+
+      File.pipe?(filename).should == true
+
+      rm_r filename
+    end
+  end
 end

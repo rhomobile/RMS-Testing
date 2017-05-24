@@ -1,3 +1,5 @@
+# -*- encoding: binary -*-
+
 require 'digest/sha2'
 
 module SHA512Constants

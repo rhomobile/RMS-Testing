@@ -9,10 +9,14 @@ describe "Range#to_a" do
     lambda { (0.5..2.4).to_a }.should raise_error(TypeError)
   end
 
-  ruby_version_is "1.9" do
-    # This crashed on 1.9 prior to r24573
-    it "works with Ranges of Symbols" do
-      (:A..:z).to_a.size.should == 58
-    end
+  it "returns empty array for descending-ordered" do
+    (5..-5).to_a.should == []
+    ('D'..'A').to_a.should == []
+    ('D'...'A').to_a.should == []
+    (0xffff...0xfffd).to_a.should == []
+  end
+
+  it "works with Ranges of Symbols" do
+    (:A..:z).to_a.size.should == 58
   end
 end

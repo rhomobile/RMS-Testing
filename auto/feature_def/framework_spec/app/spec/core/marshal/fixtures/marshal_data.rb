@@ -1,5 +1,5 @@
+# -*- encoding: binary -*-
 class UserDefined
-
   class Nested
     def ==(other)
       other.kind_of? self.class
@@ -14,7 +14,7 @@ class UserDefined
   end
 
   def _dump(depth)
-    Marshal.dump [@a, @b]
+    Marshal.dump [:stuff, :stuff]
   end
 
   def self._load(data)
@@ -32,7 +32,6 @@ class UserDefined
     @a == other.a and
     @b == other.b
   end
-
 end
 
 class UserDefinedWithIvar
@@ -46,7 +45,7 @@ class UserDefinedWithIvar
   end
 
   def _dump(depth)
-    Marshal.dump [@a, @b, @c]
+    Marshal.dump [:stuff, :more, :more]
   end
 
   def self._load(data)
@@ -69,13 +68,27 @@ class UserDefinedWithIvar
   end
 end
 
+class UserDefinedImmediate
+  def _dump(depth)
+    ''
+  end
+
+  def self._load(data)
+    nil
+  end
+end
+
+class UserPreviouslyDefinedWithInitializedIvar
+  attr_accessor :field1, :field2
+end
+
 class UserMarshal
   attr_reader :data
 
   def initialize
     @data = 'stuff'
   end
-  def marshal_dump() @data end
+  def marshal_dump() :data end
   def marshal_load(data) @data = data end
   def ==(other) self.class === other and @data == other.data end
 end
@@ -94,7 +107,7 @@ class UserMarshalWithIvar
   end
 
   def marshal_dump
-    [@data]
+    [:data]
   end
 
   def marshal_load(o)
@@ -127,23 +140,11 @@ end
 
 class UserString < String
 end
-=begin
-require 'openssl'
 
-class UserData < OpenSSL::X509::Name
-  alias _dump_data to_a
-
-  def _load_data entries
-    entries.each do |entry|
-      add_entry(*entry)
-    end
+class UserCustomConstructorString < String
+  def initialize(arg1, arg2)
   end
 end
-
-class UserDataUnloadable < UserData
-  undef _load_data
-end
-=end
 
 module Meths
   def meths_method() end
@@ -157,22 +158,18 @@ Struct.new "Pyramid"
 Struct.new "Useful", :a, :b
 
 module MarshalSpec
-  class Bad_Dump
-    def _dump(depth); 10; end
-  end
-
-  class BasicObjectSubWithRespondToFalse
-    def respond_to?(a)
-      false
-    end
-  end
-  
   class StructWithUserInitialize < Struct.new(:a)
     THREADLOCAL_KEY = :marshal_load_struct_args
     def initialize(*args)
       # using thread-local to avoid ivar marshaling
       Thread.current[THREADLOCAL_KEY] = args
       super(*args)
+    end
+  end
+
+  class BasicObjectSubWithRespondToFalse < BasicObject
+    def respond_to?(method_name, include_all=false)
+      false
     end
   end
 
@@ -185,17 +182,27 @@ module MarshalSpec
     ["Error when building Random marshal data #{e}", ""]
   end
 
+  SwappedClass = nil
+  def self.set_swapped_class(cls)
+    remove_const(:SwappedClass)
+    const_set(:SwappedClass, cls)
+  end
+
+  def self.reset_swapped_class
+    set_swapped_class(nil)
+  end
+
   DATA = {
     "nil" => [nil, "\004\b0"],
     "1..2" => [(1..2),
                "\004\bo:\nRange\b:\nbegini\006:\texclF:\bendi\a",
-               { :begin => 1, :end => 2, :exclude_end? => false }],
+               { begin: 1, end: 2, :exclude_end? => false }],
     "1...2" => [(1...2),
                 "\004\bo:\nRange\b:\nbegini\006:\texclT:\bendi\a",
-               { :begin => 1, :end => 2, :exclude_end? => true }],
+               { begin: 1, end: 2, :exclude_end? => true }],
     "'a'..'b'" => [('a'..'b'),
                    "\004\bo:\nRange\b:\nbegin\"\006a:\texclF:\bend\"\006b",
-                   { :begin => 'a', :end => 'b', :exclude_end? => false }],
+                   { begin: 'a', end: 'b', :exclude_end? => false }],
     "Struct" => [Struct::Useful.new(1, 2),
                  "\004\bS:\023Struct::Useful\a:\006ai\006:\006bi\a"],
     "Symbol" => [:symbol,
@@ -289,20 +296,20 @@ module MarshalSpec
                 "\004\b[\000"],
     "Array subclass" => [UserArray.new,
                      "\004\bC:\016UserArray[\000"],
-    "Struct" => [Struct::Pyramid.new,
+    "Struct Pyramid" => [Struct::Pyramid.new,
                  "\004\bS:\024Struct::Pyramid\000"],
   }
   DATA_19 = {
     "nil" => [nil, "\004\b0"],
     "1..2" => [(1..2),
                "\004\bo:\nRange\b:\nbegini\006:\texclF:\bendi\a",
-               { :begin => 1, :end => 2, :exclude_end? => false }],
+               { begin: 1, end: 2, :exclude_end? => false }],
     "1...2" => [(1...2),
                 "\004\bo:\nRange\b:\nbegini\006:\texclT:\bendi\a",
-               { :begin => 1, :end => 2, :exclude_end? => true }],
+               { begin: 1, end: 2, :exclude_end? => true }],
     "'a'..'b'" => [('a'..'b'),
                    "\004\bo:\nRange\b:\nbegin\"\006a:\texclF:\bend\"\006b",
-                   { :begin => 'a', :end => 'b', :exclude_end? => false }],
+                   { begin: 'a', end: 'b', :exclude_end? => false }],
     "Struct" => [Struct::Useful.new(1, 2),
                  "\004\bS:\023Struct::Useful\a:\006ai\006:\006bi\a"],
     "Symbol" => [:symbol,
@@ -387,7 +394,7 @@ module MarshalSpec
                 "\004\b[\000"],
     "Array subclass" => [UserArray.new,
                      "\004\bC:\016UserArray[\000"],
-    "Struct" => [Struct::Pyramid.new,
+    "Struct Pyramid" => [Struct::Pyramid.new,
                  "\004\bS:\024Struct::Pyramid\000"],
     "Random" => random_data,
   }
@@ -399,3 +406,15 @@ class ArraySub < Array
   end
 end
 
+class ArraySubPush < Array
+  def << value
+    raise 'broken'
+  end
+  alias_method :push, :<<
+end
+
+class SameName
+end
+
+module NamespaceTest
+end

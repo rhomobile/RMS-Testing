@@ -1,8 +1,8 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
-require 'net/ftp'
+require File.expand_path('../spec_helper', __FILE__)
 
 describe "Net::FTP#return_code" do
-  before(:each) do
+  before :each do
     @ftp = Net::FTP.new
   end
 
@@ -14,7 +14,7 @@ describe "Net::FTP#return_code" do
 end
 
 describe "Net::FTP#return_code=" do
-  before(:each) do
+  before :each do
     @ftp = Net::FTP.new
   end
 

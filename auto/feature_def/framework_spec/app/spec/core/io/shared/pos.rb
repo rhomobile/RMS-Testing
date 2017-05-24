@@ -1,11 +1,11 @@
-describe :io_pos, :shared => true do
+describe :io_pos, shared: true do
   before :each do
     @fname = tmp('test.txt')
-    File.open @fname, 'w' do |f| f.write "123" end
+    File.open(@fname, 'w') { |f| f.write "123" }
   end
 
   after :each do
-    File.unlink @fname
+    rm_r @fname
   end
 
   it "gets the offset" do
@@ -18,9 +18,9 @@ describe :io_pos, :shared => true do
     end
   end
 
-  #it "raises IOError on closed stream" do
-  #  lambda { IOSpecs.closed_io.send(@method) }.should raise_error(IOError)
-  #end
+  it "raises IOError on closed stream" do
+    lambda { IOSpecs.closed_io.send(@method) }.should raise_error(IOError)
+  end
 
   it "resets #eof?" do
     open @fname do |io|
@@ -32,14 +32,14 @@ describe :io_pos, :shared => true do
   end
 end
 
-describe :io_set_pos, :shared => true do
+describe :io_set_pos, shared: true do
   before :each do
     @fname = tmp('test.txt')
-    File.open @fname, 'w' do |f| f.write "123" end
+    File.open(@fname, 'w') { |f| f.write "123" }
   end
 
   after :each do
-    File.unlink @fname
+    rm_r @fname
   end
 
   it "sets the offset" do
@@ -66,7 +66,7 @@ describe :io_set_pos, :shared => true do
     end
   end
 
-  #it "raises IOError on closed stream" do
-  #  lambda { IOSpecs.closed_io.send @method, 0 }.should raise_error(IOError)
-  #end
+  it "raises IOError on closed stream" do
+    lambda { IOSpecs.closed_io.send @method, 0 }.should raise_error(IOError)
+  end
 end

@@ -1,9 +1,9 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 
-describe :enum_rewind, :shared => true do
+describe :enum_rewind, shared: true do
 
-  before(:each) do
-    @enum = enumerator_class.new(1, :upto, 3)
+  before :each do
+    @enum = Enumerator.new(1, :upto, 3)
   end
 
   it "resets the enumerator to its initial state" do
@@ -29,4 +29,11 @@ describe :enum_rewind, :shared => true do
     @enum.next.should == 1
   end
 
+  it "works with peek to reset the position" do
+    @enum.next
+    @enum.next
+    @enum.rewind
+    @enum.next
+    @enum.peek.should == 2
+  end
 end

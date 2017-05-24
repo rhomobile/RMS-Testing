@@ -1,10 +1,19 @@
 module ProcSpecs
+  class ToAryAsNil
+    def to_ary
+      nil
+    end
+  end
   def self.new_proc_in_method
     Proc.new
   end
 
   def self.new_proc_from_amp(&block)
     block
+  end
+
+  def self.proc_for_1
+    proc { 1 }
   end
 
   class ProcSubclass < Proc

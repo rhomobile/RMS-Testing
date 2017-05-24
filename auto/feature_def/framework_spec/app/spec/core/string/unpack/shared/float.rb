@@ -1,6 +1,6 @@
 # -*- encoding: ascii-8bit -*-
 
-describe :string_unpack_float_le, :shared => true do
+describe :string_unpack_float_le, shared: true do
   it "decodes one float for a single format character" do
     "\x8f\xc2\xb5?".unpack(unpack_format).should == [1.4199999570846558]
   end
@@ -52,7 +52,8 @@ describe :string_unpack_float_le, :shared => true do
   end
 
   it "decodes NaN" do
-    "\x00\x00\xc0\xff".unpack(unpack_format).first.nan?.should be_true
+    # mumble mumble NaN mumble https://bugs.ruby-lang.org/issues/5884
+    [nan_value].pack(unpack_format).unpack(unpack_format).first.nan?.should be_true
   end
 
   it "ignores NULL bytes between directives" do
@@ -66,7 +67,7 @@ describe :string_unpack_float_le, :shared => true do
   end
 end
 
-describe :string_unpack_float_be, :shared => true do
+describe :string_unpack_float_be, shared: true do
   it "decodes one float for a single format character" do
     "?\xb5\xc2\x8f".unpack(unpack_format).should == [1.4199999570846558]
   end
@@ -118,7 +119,8 @@ describe :string_unpack_float_be, :shared => true do
   end
 
   it "decodes NaN" do
-    "\xff\xc0\x00\x00".unpack(unpack_format).first.nan?.should be_true
+    # mumble mumble NaN mumble https://bugs.ruby-lang.org/issues/5884
+    [nan_value].pack(unpack_format).unpack(unpack_format).first.nan?.should be_true
   end
 
   it "ignores NULL bytes between directives" do
@@ -132,7 +134,7 @@ describe :string_unpack_float_be, :shared => true do
   end
 end
 
-describe :string_unpack_double_le, :shared => true do
+describe :string_unpack_double_le, shared: true do
   it "decodes one double for a single format character" do
     "\xb8\x1e\x85\xebQ\xb8\xf6?".unpack(unpack_format).should == [1.42]
   end
@@ -187,7 +189,8 @@ describe :string_unpack_double_le, :shared => true do
   end
 
   it "decodes NaN" do
-    "\x00\x00\x00\x00\x00\x00\xf8\xff".unpack(unpack_format).first.nan?.should be_true
+    # mumble mumble NaN mumble https://bugs.ruby-lang.org/issues/5884
+    [nan_value].pack(unpack_format).unpack(unpack_format).first.nan?.should be_true
   end
 
   it "ignores NULL bytes between directives" do
@@ -199,7 +202,7 @@ describe :string_unpack_double_le, :shared => true do
   end
 end
 
-describe :string_unpack_double_be, :shared => true do
+describe :string_unpack_double_be, shared: true do
   it "decodes one double for a single format character" do
     "?\xf6\xb8Q\xeb\x85\x1e\xb8".unpack(unpack_format).should == [1.42]
   end
@@ -254,7 +257,8 @@ describe :string_unpack_double_be, :shared => true do
   end
 
   it "decodes NaN" do
-    "\xff\xf8\x00\x00\x00\x00\x00\x00".unpack(unpack_format).first.nan?.should be_true
+    # mumble mumble NaN mumble https://bugs.ruby-lang.org/issues/5884
+    [nan_value].pack(unpack_format).unpack(unpack_format).first.nan?.should be_true
   end
 
   it "ignores NULL bytes between directives" do

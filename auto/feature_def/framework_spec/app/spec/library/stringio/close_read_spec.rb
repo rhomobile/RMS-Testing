@@ -2,7 +2,7 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "StringIO#close_read" do
-  before(:each) do
+  before :each do
     @io = StringIO.new("example")
   end
 
@@ -26,6 +26,11 @@ describe "StringIO#close_read" do
 
     io = StringIO.new("example")
     io.close_read
-    lambda { io.close_read }.should raise_error(IOError)
+    ruby_version_is ''...'2.3' do
+      lambda { io.close_read }.should raise_error(IOError)
+    end
+    ruby_version_is '2.3' do
+      io.close_read.should == nil
+    end
   end
 end

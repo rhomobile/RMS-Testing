@@ -1,6 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
-require 'enumerator'
+require File.expand_path('../shared/enumeratorized', __FILE__)
 
 describe "Enumerable#each_slice" do
   before :each do
@@ -14,11 +14,15 @@ describe "Enumerable#each_slice" do
     acc.should == @sliced
   end
 
-  it "raises an Argument Error if there is not a single parameter > 0" do
+  it "raises an ArgumentError if there is not a single parameter > 0" do
     lambda{ @enum.each_slice(0){}    }.should raise_error(ArgumentError)
     lambda{ @enum.each_slice(-2){}   }.should raise_error(ArgumentError)
     lambda{ @enum.each_slice{}       }.should raise_error(ArgumentError)
     lambda{ @enum.each_slice(2,2){}  }.should raise_error(ArgumentError)
+    lambda{ @enum.each_slice(0)      }.should raise_error(ArgumentError)
+    lambda{ @enum.each_slice(-2)     }.should raise_error(ArgumentError)
+    lambda{ @enum.each_slice         }.should raise_error(ArgumentError)
+    lambda{ @enum.each_slice(2,2)    }.should raise_error(ArgumentError)
   end
 
   it "tries to convert n to an Integer using #to_int" do
@@ -47,11 +51,51 @@ describe "Enumerable#each_slice" do
     cnt.times_yielded.should == 4
   end
 
-  ruby_version_is '1.8.7' do
-    it "returns an enumerator if no block" do
+  it "returns an enumerator if no block" do
+    e = @enum.each_slice(3)
+    e.should be_an_instance_of(Enumerator)
+    e.to_a.should == @sliced
+  end
+
+  it "gathers whole arrays as elements when each yields multiple" do
+    multi = EnumerableSpecs::YieldsMulti.new
+    multi.each_slice(2).to_a.should == [[[1, 2], [3, 4, 5]], [[6, 7, 8, 9]]]
+  end
+
+  describe "when no block is given" do
+    it "returns an enumerator" do
       e = @enum.each_slice(3)
-      e.should be_an_instance_of(enumerator_class)
+      e.should be_an_instance_of(Enumerator)
       e.to_a.should == @sliced
     end
+
+    describe "Enumerable with size" do
+      describe "returned Enumerator" do
+        describe "size" do
+          it "returns the ceil of Enumerable size divided by the argument value" do
+            enum = EnumerableSpecs::NumerousWithSize.new(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+            enum.each_slice(10).size.should == 1
+            enum.each_slice(9).size.should == 2
+            enum.each_slice(3).size.should == 4
+            enum.each_slice(2).size.should == 5
+            enum.each_slice(1).size.should == 10
+          end
+
+          it "returns 0 when the Enumerable is empty" do
+            enum = EnumerableSpecs::EmptyWithSize.new
+            enum.each_slice(10).size.should == 0
+          end
+        end
+      end
+    end
+
+    describe "Enumerable with no size" do
+      before :all do
+        @object = EnumerableSpecs::Numerous.new(1, 2, 3, 4)
+        @method = [:each_slice, 8]
+      end
+      it_should_behave_like :enumeratorized_with_unknown_size
+    end
   end
+
 end

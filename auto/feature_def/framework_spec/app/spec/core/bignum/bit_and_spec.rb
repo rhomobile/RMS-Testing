@@ -1,7 +1,7 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 
 describe "Bignum#&" do
-  before(:each) do
+  before :each do
     @bignum = bignum_value(5)
   end
 
@@ -29,32 +29,22 @@ describe "Bignum#&" do
     (-@bignum & -0x4000000000000000).should == -13835058055282163712
   end
 
-  ruby_version_is ""..."1.9" do
-    it "coerces Float arguments into Integers" do
-      (@bignum & 3.4).should == 1
-      (bignum_value & bignum_value(0xffff).to_f).should == 9223372036854775808
-    end
+  it "returns self bitwise AND other when both are negative and a multiple in bitsize of Fixnum::MIN" do
+    val = - ((1 << 93) - 1)
+    (val & val).should == val
+
+    val = - ((1 << 126) - 1)
+    (val & val).should == val
   end
 
-  ruby_version_is "1.9" do
-    it "raises a TypeError when passed a Float" do
-      lambda { (@bignum & 3.4) }.should raise_error(TypeError)
-      lambda {
-        (bignum_value & bignum_value(0xffff).to_f)
-      }.should raise_error(TypeError)
-    end
+  it "raises a TypeError when passed a Float" do
+    lambda { (@bignum & 3.4) }.should raise_error(TypeError)
   end
 
-  it "tries to convert the given argument to an Integer using to_int" do
-    (obj = mock('3')).should_receive(:to_int).and_return(3)
-    (@bignum & obj).should == 1
-  end
+  it "raises a TypeError and does not call #to_int when defined on an object" do
+    obj = mock("bignum bit and")
+    obj.should_not_receive(:to_int)
 
-  it "raises a TypeError when the given argument can't be converted to Integer" do
-    obj = mock('asdf')
-    lambda { @bignum & obj }.should raise_error(TypeError)
-
-    obj.should_receive(:to_int).and_return("asdf")
     lambda { @bignum & obj }.should raise_error(TypeError)
   end
 end

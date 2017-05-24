@@ -37,13 +37,25 @@ describe "StringScanner#[]" do
     lambda { @s[nil]}.should raise_error(TypeError)
   end
 
-  it "raises a TypeError when a String is as argument" do
-    @s.scan(/(\w+) (\w+) (\d+) /)
-    lambda { @s["Fri"]}.should raise_error(TypeError)
-  end
-
   it "raises a TypeError when a Range is as argument" do
     @s.scan(/(\w+) (\w+) (\d+) /)
     lambda { @s[0..2]}.should raise_error(TypeError)
   end
+
+  it "raises a IndexError when there's no named capture" do
+    @s.scan(/(\w+) (\w+) (\d+) /)
+    lambda { @s["wday"]}.should raise_error(IndexError)
+    lambda { @s[:wday]}.should raise_error(IndexError)
+  end
+
+  it "returns named capture" do
+    @s.scan(/(?<wday>\w+) (?<month>\w+) (?<day>\d+) /)
+    @s["wday"].should == "Fri"
+    @s["month"].should == "Jun"
+    @s["day"].should == "13"
+    @s[:wday].should == "Fri"
+    @s[:month].should == "Jun"
+    @s[:day].should == "13"
+  end
 end
+

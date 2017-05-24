@@ -1,17 +1,17 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
-require 'net/ftp'
+require File.expand_path('../spec_helper', __FILE__)
 require File.expand_path('../fixtures/server', __FILE__)
 
 describe "Net::FTP#login" do
-  before(:each) do
+  before :each do
     @server = NetFTPSpecs::DummyFTP.new
     @server.serve_once
 
     @ftp = Net::FTP.new
-    @ftp.connect("127.0.0.1", 9876)
+    @ftp.connect(@server.hostname, @server.server_port)
   end
 
-  after(:each) do
+  after :each do
     @ftp.quit rescue nil
     @ftp.close
     @server.stop
@@ -23,33 +23,16 @@ describe "Net::FTP#login" do
       @server.login_user.should == "anonymous"
     end
 
-    ruby_version_is "" ... "1.9" do
-      it "sends the current username + hostname as a password when required" do
-	passhost = Socket.gethostname
-	if not passhost.index(".")
-	  passhost = Socket.gethostbyname(passhost)[0]
-	end
-	pass = ENV["USER"] + "@" + passhost
-	@server.should_receive(:user).and_respond("331 User name okay, need password.")
-	@ftp.login
-	@server.login_pass.should == pass
-      end
+    it "sends 'anonymous@' as a password when required" do
+      @server.should_receive(:user).and_respond("331 User name okay, need password.")
+      @ftp.login
+      @server.login_pass.should == "anonymous@"
     end
 
-    ruby_version_is "1.9" do
-      it "sends 'anonymous@' as a password when required" do
-	@server.should_receive(:user).and_respond("331 User name okay, need password.")
-	@ftp.login
-	@server.login_pass.should == "anonymous@"
-      end
-    end
-
-    ruby_bug "http://redmine.ruby-lang.org/issues/show/385", "1.8.7" do
-      it "raises a Net::FTPReplyError when the server requests an account" do
-        @server.should_receive(:user).and_respond("331 User name okay, need password.")
-        @server.should_receive(:pass).and_respond("332 Need account for login.")
-        lambda { @ftp.login }.should raise_error(Net::FTPReplyError)
-      end
+    it "raises a Net::FTPReplyError when the server requests an account" do
+      @server.should_receive(:user).and_respond("331 User name okay, need password.")
+      @server.should_receive(:pass).and_respond("332 Need account for login.")
+      lambda { @ftp.login }.should raise_error(Net::FTPReplyError)
     end
   end
 
@@ -59,17 +42,15 @@ describe "Net::FTP#login" do
       @server.login_user.should == "rubyspec"
     end
 
-    ruby_bug "http://redmine.ruby-lang.org/issues/show/385", "1.8.7" do
-      it "raises a Net::FTPReplyError when the server requests a password, but none was given" do
-        @server.should_receive(:user).and_respond("331 User name okay, need password.")
-        lambda { @ftp.login("rubyspec") }.should raise_error(Net::FTPReplyError)
-      end
+    it "raises a Net::FTPReplyError when the server requests a password, but none was given" do
+      @server.should_receive(:user).and_respond("331 User name okay, need password.")
+      lambda { @ftp.login("rubyspec") }.should raise_error(Net::FTPReplyError)
+    end
 
-      it "raises a Net::FTPReplyError when the server requests an account, but none was given" do
-        @server.should_receive(:user).and_respond("331 User name okay, need password.")
-        @server.should_receive(:pass).and_respond("332 Need account for login.")
-        lambda { @ftp.login("rubyspec") }.should raise_error(Net::FTPReplyError)
-      end
+    it "raises a Net::FTPReplyError when the server requests an account, but none was given" do
+      @server.should_receive(:user).and_respond("331 User name okay, need password.")
+      @server.should_receive(:pass).and_respond("332 Need account for login.")
+      lambda { @ftp.login("rubyspec") }.should raise_error(Net::FTPReplyError)
     end
   end
 
@@ -85,12 +66,10 @@ describe "Net::FTP#login" do
       @server.login_pass.should == "rocks"
     end
 
-    ruby_bug "http://redmine.ruby-lang.org/issues/show/385", "1.8.7" do
-      it "raises a Net::FTPReplyError when the server requests an account" do
-        @server.should_receive(:user).and_respond("331 User name okay, need password.")
-        @server.should_receive(:pass).and_respond("332 Need account for login.")
-        lambda { @ftp.login("rubyspec", "rocks") }.should raise_error(Net::FTPReplyError)
-      end
+    it "raises a Net::FTPReplyError when the server requests an account" do
+      @server.should_receive(:user).and_respond("331 User name okay, need password.")
+      @server.should_receive(:pass).and_respond("332 Need account for login.")
+      lambda { @ftp.login("rubyspec", "rocks") }.should raise_error(Net::FTPReplyError)
     end
   end
 
@@ -142,7 +121,7 @@ describe "Net::FTP#login" do
   end
 
   describe "when the PASS command fails" do
-    before(:each) do
+    before :each do
       @server.should_receive(:user).and_respond("331 User name okay, need password.")
     end
 
@@ -178,7 +157,7 @@ describe "Net::FTP#login" do
   end
 
   describe "when the ACCT command fails" do
-    before(:each) do
+    before :each do
       @server.should_receive(:user).and_respond("331 User name okay, need password.")
       @server.should_receive(:pass).and_respond("332 Need account for login.")
     end

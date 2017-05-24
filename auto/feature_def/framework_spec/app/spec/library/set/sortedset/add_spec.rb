@@ -4,15 +4,12 @@ require File.expand_path('../shared/add', __FILE__)
 
 describe "SortedSet#add" do
   it_behaves_like :sorted_set_add, :add
-=begin
-  ruby_bug "redmine #118", "1.9.1" do
-    it "takes only values which responds <=>" do
-      obj = mock('no_comparison_operator')
-      obj.should_receive(:respond_to?).with(:<=>).and_return(false)
-      lambda { SortedSet["hello"].add(obj) }.should raise_error(NoMethodError)
-    end
+
+  it "takes only values which responds <=>" do
+    obj = mock('no_comparison_operator')
+    obj.should_receive(:respond_to?).with(:<=>).and_return(false)
+    lambda { SortedSet["hello"].add(obj) }.should raise_error(ArgumentError)
   end
-=end  
 end
 
 describe "SortedSet#add?" do

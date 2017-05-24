@@ -1,6 +1,6 @@
-describe :module_class_exec, :shared => true do
+describe :module_class_exec, shared: true do
   it "does not add defined methods to other classes" do
-    FalseClass.class_exec do
+    FalseClass.send(@method) do
       def foo
         'foo'
       end
@@ -18,7 +18,12 @@ describe :module_class_exec, :shared => true do
     ModuleSpecs::Subclass.new.send(@method) { 1 + 1 }.should == 2
   end
 
-  it "raises an LocalJumpError when no block is given" do
+  it "raises a LocalJumpError when no block is given" do
     lambda { ModuleSpecs::Subclass.send(@method) }.should raise_error(LocalJumpError)
+  end
+
+  it "passes arguments to the block" do
+    a = ModuleSpecs::Subclass
+    a.send(@method, 1) { |b| b }.should equal(1)
   end
 end

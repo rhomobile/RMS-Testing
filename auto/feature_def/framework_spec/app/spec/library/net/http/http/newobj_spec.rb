@@ -2,8 +2,8 @@ require File.expand_path('../../../../../spec_helper', __FILE__)
 require 'net/http'
 
 describe "Net::HTTP.newobj" do
-  before(:each) do
-    @net = Net::HTTP.newobj("127.0.0.1")
+  before :each do
+    @net = Net::HTTP.newobj("localhost")
   end
 
   describe "when passed address" do
@@ -12,7 +12,7 @@ describe "Net::HTTP.newobj" do
     end
 
     it "sets the new Net::HTTP instance's address to the passed address" do
-      @net.address.should == "127.0.0.1"
+      @net.address.should == "localhost"
     end
 
     it "sets the new Net::HTTP instance's port to the default HTTP port" do
@@ -25,8 +25,8 @@ describe "Net::HTTP.newobj" do
   end
 
   describe "when passed address, port" do
-    before(:each) do
-      @net = Net::HTTP.newobj("127.0.0.1", NetHTTPSpecs.server_port)
+    before :each do
+      @net = Net::HTTP.newobj("localhost", 3333)
     end
 
     it "returns a new Net::HTTP instance" do
@@ -34,11 +34,11 @@ describe "Net::HTTP.newobj" do
     end
 
     it "sets the new Net::HTTP instance's address to the passed address" do
-      @net.address.should == "127.0.0.1"
+      @net.address.should == "localhost"
     end
 
     it "sets the new Net::HTTP instance's port to the passed port" do
-      @net.port.should eql(NetHTTPSpecs.server_port)
+      @net.port.should eql(3333)
     end
 
     it "does not start the new Net::HTTP instance" do

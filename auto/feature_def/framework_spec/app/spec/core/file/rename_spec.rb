@@ -13,12 +13,12 @@ describe "File.rename" do
     rm_r @old, @new
   end
 
-  it "renames a file " do
-    File.exists?(@old).should == true
-    File.exists?(@new).should == false
+  it "renames a file" do
+    File.exist?(@old).should == true
+    File.exist?(@new).should == false
     File.rename(@old, @new)
-    File.exists?(@old).should == false
-    File.exists?(@new).should == true
+    File.exist?(@old).should == false
+    File.exist?(@new).should == true
   end
 
   it "raises an Errno::ENOENT if the source does not exist" do

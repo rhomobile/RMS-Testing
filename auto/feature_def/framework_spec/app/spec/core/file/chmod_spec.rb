@@ -15,7 +15,7 @@ describe "File#chmod" do
     @file.chmod(0755).should == 0
   end
 
-  platform_is_not :freebsd do
+  platform_is_not :freebsd, :netbsd, :openbsd do
     it "always succeeds with any numeric values" do
       vals = [-2**30, -2**16, -2**8, -2, -1,
         -0.5, 0, 1, 2, 5.555575, 16, 32, 64, 2**8, 2**16, 2**30]
@@ -26,7 +26,8 @@ describe "File#chmod" do
   end
 
   # -256, -2 and -1 raise Errno::E079 on FreeBSD
-  platform_is :freebsd do
+  # -256, -2 and -1 raise Errno::EFTYPE on NetBSD
+  platform_is :freebsd, :netbsd do
     it "always succeeds with any numeric values" do
       vals = [-2**30, -2**16, #-2**8, -2, -1,
         -0.5, 0, 1, 2, 5.555575, 16, 32, 64, 2**8, 2**16, 2**30]
@@ -36,6 +37,16 @@ describe "File#chmod" do
     end
   end
 
+  # -256, -2 and -1 raise Errno::EINVAL on OpenBSD
+  platform_is :openbsd do
+    it "always succeeds with any numeric values" do
+      vals = [#-2**30, -2**16, -2**8, -2, -1,
+        -0.5, 0, 1, 2, 5.555575, 16, 32, 64, 2**8]#, 2**16, 2**30
+      vals.each { |v|
+        lambda { @file.chmod(v) }.should_not raise_error
+      }
+    end
+  end
   it "invokes to_int on non-integer argument" do
     mode = File.stat(@filename).mode
     (obj = mock('mode')).should_receive(:to_int).and_return(mode)
@@ -110,7 +121,7 @@ describe "File.chmod" do
     @count.should == 1
   end
 
-  platform_is_not :freebsd do
+  platform_is_not :freebsd, :netbsd, :openbsd do
     it "always succeeds with any numeric values" do
       vals = [-2**30, -2**16, -2**8, -2, -1,
         -0.5, 0, 1, 2, 5.555575, 16, 32, 64, 2**8, 2**16, 2**30]
@@ -121,7 +132,8 @@ describe "File.chmod" do
   end
 
   # -256, -2 and -1 raise Errno::E079 on FreeBSD
-  platform_is :freebsd do
+  # -256, -2 and -1 raise Errno::EFTYPE on NetBSD
+  platform_is :freebsd, :netbsd do
     it "always succeeds with any numeric values" do
       vals = [-2**30, -2**16, #-2**8, -2, -1,
         -0.5, 0, 1, 2, 5.555575, 16, 32, 64, 2**8, 2**16, 2**30]
@@ -131,14 +143,34 @@ describe "File.chmod" do
     end
   end
 
-  ruby_version_is "1.9" do
-    it "accepts an object that has a #to_path method" do
-      File.chmod(0, mock_to_path(@file))
+  platform_is :openbsd do
+    it "succeeds with valid values" do
+      vals = [-0.5, 0, 1, 2, 5.555575, 16, 32, 64, 2**8]
+      vals.each { |v|
+        lambda { File.chmod(v, @file) }.should_not raise_error
+      }
     end
+
+    it "fails with invalid values" do
+      vals = [-2**30, -2**16, -2**8, -2, -1, 2**16, 2**30]
+      vals.each { |v|
+        lambda { File.chmod(v, @file) }.should raise_error(Errno::EINVAL)
+      }
+    end
+  end
+
+  it "accepts an object that has a #to_path method" do
+    File.chmod(0, mock_to_path(@file))
   end
 
   it "throws a TypeError if the given path is not coercable into a string" do
     lambda { File.chmod(0, []) }.should raise_error(TypeError)
+  end
+
+  it "raises an error for a non existent path" do
+    lambda {
+      File.chmod(0644, "#{@file}.not.existing")
+    }.should raise_error(Errno::ENOENT)
   end
 
   it "invokes to_int on non-integer argument" do

@@ -1,4 +1,4 @@
-describe :file_executable_real, :shared => true do
+describe :file_executable_real, shared: true do
   before :each do
     @file1 = tmp('temp1.txt.exe')
     @file2 = tmp('temp2.txt')
@@ -13,22 +13,17 @@ describe :file_executable_real, :shared => true do
     rm_r @file1, @file2
   end
 
-if System.get_property('platform') != 'APPLE'    
   platform_is_not :windows do
     it "returns true if the file its an executable" do
       @object.send(@method, @file1).should == true
       @object.send(@method, @file2).should == false
     end
 
-    ruby_version_is "1.9" do
-      it "accepts an object that has a #to_path method" do
-        @object.send(@method, mock_to_path(@file1)).should == true
-      end
+    it "accepts an object that has a #to_path method" do
+      @object.send(@method, mock_to_path(@file1)).should == true
     end
   end
-end
-    
-if ( System.get_property('platform') != 'WINDOWS' && System.get_property('platform') != 'WINDOWS_DESKTOP' && System.get_property('platform') != 'APPLE')
+
   it "returns true if named file is readable by the real user id of the process, otherwise false" do
     @object.send(@method, @file1).should == true
   end
@@ -36,7 +31,6 @@ if ( System.get_property('platform') != 'WINDOWS' && System.get_property('platfo
   it "raises an ArgumentError if not passed one argument" do
     lambda { @object.send(@method) }.should raise_error(ArgumentError)
   end
-end
 
   it "raises a TypeError if not passed a String type" do
     lambda { @object.send(@method, 1)     }.should raise_error(TypeError)
@@ -45,7 +39,7 @@ end
   end
 end
 
-describe :file_executable_real_missing, :shared => true do
+describe :file_executable_real_missing, shared: true do
   it "returns false if the file does not exist" do
     @object.send(@method, 'fake_file').should == false
   end

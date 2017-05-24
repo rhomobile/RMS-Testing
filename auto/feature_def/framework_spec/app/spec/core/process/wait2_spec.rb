@@ -5,11 +5,12 @@ describe "Process.wait2" do
     # HACK: this kludge is temporarily necessary because some
     # misbehaving spec somewhere else does not clear processes
     begin
-      Process.waitall
+      leaked = Process.waitall
+      puts "leaked before wait2 specs: #{leaked}" unless leaked.empty?
     rescue NotImplementedError
     end
   end
-if System.get_property('platform') != 'APPLE'
+
   platform_is_not :windows do
     it "returns the pid and status of child process" do
       pidf = Process.fork { Process.exit! 99 }
@@ -20,7 +21,7 @@ if System.get_property('platform') != 'APPLE'
       status.exitstatus.should == 99
     end
   end
-end
+
   it "raises a StandardError if no child processes exist" do
     lambda { Process.wait2 }.should raise_error(Errno::ECHILD)
     lambda { Process.wait2 }.should raise_error(StandardError)

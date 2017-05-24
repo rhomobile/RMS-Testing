@@ -1,7 +1,7 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
 
 describe "Process::Status#pid" do
-=begin
+
   before :each do
     @pid = ruby_exe("print $$").to_i
   end
@@ -9,5 +9,5 @@ describe "Process::Status#pid" do
   it "returns the pid of the process" do
     $?.pid.should == @pid
   end
-=end
+
 end

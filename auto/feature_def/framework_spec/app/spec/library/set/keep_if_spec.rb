@@ -1,41 +1,38 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require 'set'
-=begin
-ruby_version_is "1.9" do
-  describe "Set#keep_if" do
-    before(:each) do
-      @set = Set["one", "two", "three"]
-    end
 
-    it "yields every element of self" do
-      ret = []
-      @set.keep_if { |x| ret << x }
-      ret.sort.should == ["one", "two", "three"].sort
-    end
+describe "Set#keep_if" do
+  before :each do
+    @set = Set["one", "two", "three"]
+  end
 
-    it "keeps every element from self for which the passed block returns true" do
-      @set.keep_if { |x| x.size != 3 }
-      @set.size.should eql(1)
+  it "yields every element of self" do
+    ret = []
+    @set.keep_if { |x| ret << x }
+    ret.sort.should == ["one", "two", "three"].sort
+  end
 
-      @set.should_not include("one")
-      @set.should_not include("two")
-      @set.should include("three")
-    end
+  it "keeps every element from self for which the passed block returns true" do
+    @set.keep_if { |x| x.size != 3 }
+    @set.size.should eql(1)
 
-    it "returns self" do
-      @set.keep_if {}.should equal(@set)
-    end
+    @set.should_not include("one")
+    @set.should_not include("two")
+    @set.should include("three")
+  end
 
-    it "returns an Enumerator when passed no block" do
-      enum = @set.keep_if
-      enum.should be_an_instance_of(enumerator_class)
+  it "returns self" do
+    @set.keep_if {}.should equal(@set)
+  end
 
-      enum.each { |x| x.size != 3 }
+  it "returns an Enumerator when passed no block" do
+    enum = @set.keep_if
+    enum.should be_an_instance_of(Enumerator)
 
-      @set.should_not include("one")
-      @set.should_not include("two")
-      @set.should include("three")
-    end
+    enum.each { |x| x.size != 3 }
+
+    @set.should_not include("one")
+    @set.should_not include("two")
+    @set.should include("three")
   end
 end
-=end

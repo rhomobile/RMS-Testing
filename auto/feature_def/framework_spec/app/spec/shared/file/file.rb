@@ -1,4 +1,4 @@
-describe :file_file, :shared => true do
+describe :file_file, shared: true do
   before :each do
     platform_is :windows do
       @null = "NUL"
@@ -20,20 +20,15 @@ describe :file_file, :shared => true do
 
   it "returns true if the named file exists and is a regular file." do
     @object.send(@method, @file).should == true
-if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
     @object.send(@method, @dir).should == false
-end    
   end
 
-  ruby_version_is "1.9" do
-    it "accepts an object that has a #to_path method" do
+  it "accepts an object that has a #to_path method" do
     @object.send(@method, mock_to_path(@file)).should == true
-    end
   end
-
 
   platform_is_not :windows do
-    it "return true if the null device exists and is a regular file." do
+    it "returns true if the null device exists and is a regular file." do
       @object.send(@method, @null).should == false # May fail on MS Windows
     end
   end

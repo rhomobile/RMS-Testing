@@ -20,6 +20,7 @@ describe "Thread#raise on a sleeping thread" do
 
   after :each do
     @thr.kill
+    @thr.join
   end
 
   it "raises a RuntimeError if no exception class is given" do
@@ -41,6 +42,13 @@ describe "Thread#raise on a sleeping thread" do
     ScratchPad.recorded.message.should == "get to work"
   end
 
+  it "raises the given exception and the backtrace is the one of the interrupted thread" do
+    @thr.raise Exception
+    Thread.pass while @thr.status
+    ScratchPad.recorded.should be_kind_of(Exception)
+    ScratchPad.recorded.backtrace[0].should include("sleep")
+  end
+
   it "is captured and raised by Thread#value" do
     t = Thread.new do
       sleep
@@ -52,27 +60,24 @@ describe "Thread#raise on a sleeping thread" do
     lambda { t.value }.should raise_error(RuntimeError)
   end
 
-  ruby_version_is "1.9" do
-    it "raises a RuntimeError when called with no arguments" do
-      t = Thread.new do
-        begin
-          1/0
-        rescue ZeroDivisionError
-          sleep 3
-        end
-      end
+  it "raises a RuntimeError when called with no arguments inside rescue" do
+    t = Thread.new do
       begin
-        raise RangeError
-      rescue
-        ThreadSpecs.spin_until_sleeping(t)
-        t.raise
+        1/0
+      rescue ZeroDivisionError
+        sleep
       end
-      lambda {t.value}.should raise_error(RuntimeError)
-      t.kill
     end
+    begin
+      raise RangeError
+    rescue
+      ThreadSpecs.spin_until_sleeping(t)
+      t.raise
+    end
+    lambda {t.value}.should raise_error(RuntimeError)
   end
 end
-=begin
+
 describe "Thread#raise on a running thread" do
   before :each do
     ScratchPad.clear
@@ -84,6 +89,7 @@ describe "Thread#raise on a running thread" do
 
   after :each do
     @thr.kill
+    @thr.join
   end
 
   it "raises a RuntimeError if no exception class is given" do
@@ -107,14 +113,33 @@ describe "Thread#raise on a running thread" do
 
   it "can go unhandled" do
     t = Thread.new do
-      loop {}
+      loop { Thread.pass }
     end
 
     t.raise
     lambda {t.value}.should raise_error(RuntimeError)
   end
 
-  it "raise the given argument even when there is an active exception" do
+  it "raises the given argument even when there is an active exception" do
+    raised = false
+    t = Thread.new do
+      begin
+        1/0
+      rescue ZeroDivisionError
+        raised = true
+        loop { Thread.pass }
+      end
+    end
+    begin
+      raise "Create an active exception for the current thread too"
+    rescue
+      Thread.pass until raised
+      t.raise RangeError
+      lambda {t.value}.should raise_error(RangeError)
+    end
+  end
+
+  it "raises a RuntimeError when called with no arguments inside rescue" do
     raised = false
     t = Thread.new do
       begin
@@ -125,17 +150,26 @@ describe "Thread#raise on a running thread" do
       end
     end
     begin
-      raise "Create an active exception for the current thread too"
+      raise RangeError
     rescue
-      Thread.pass until raised || !t.alive?
-      t.raise RangeError
-      lambda {t.value}.should raise_error(RangeError)
+      Thread.pass until raised
+      t.raise
     end
+    lambda {t.value}.should raise_error(RuntimeError)
   end
-
 end
-=end
 
 describe "Thread#raise on same thread" do
   it_behaves_like :kernel_raise, :raise, Thread.current
+
+  it "raises a RuntimeError when called with no arguments inside rescue" do
+    t = Thread.new do
+      begin
+        1/0
+      rescue ZeroDivisionError
+        Thread.current.raise
+      end
+    end
+    lambda {t.value}.should raise_error(RuntimeError)
+  end
 end

@@ -22,10 +22,10 @@ describe IO, "#print" do
     IO.read(@name).should == "mockmockmock#{$\}"
 
     # Set $_ to something known
-    #string = File.open(__FILE__) {|f| f.gets }
+    string = File.open(__FILE__) {|f| f.gets }
 
-    #touch(@name) { |f| f.print }
-    #IO.read(@name).should == "#{string}#{$\}"
+    touch(@name) { |f| f.print }
+    IO.read(@name).should == "#{string}#{$\}"
   end
 
   it "calls obj.to_s and not obj.to_str then writes the record separator" do
@@ -47,10 +47,8 @@ describe IO, "#print" do
     IO.read(@name).should == "#{o.to_s}#{o2.to_s}#{$\}"
   end
 
-if System.get_property('platform') != 'ANDROID'      
   it "raises IOError on closed stream" do
     lambda { IOSpecs.closed_io.print("stuff") }.should raise_error(IOError)
   end
-end  
 end
 

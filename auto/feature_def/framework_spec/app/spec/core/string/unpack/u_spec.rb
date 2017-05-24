@@ -8,6 +8,14 @@ describe "String#unpack with format 'U'" do
   it_behaves_like :string_unpack_basic, 'U'
   it_behaves_like :string_unpack_no_platform, 'U'
   it_behaves_like :string_unpack_unicode, 'U'
+
+  it "raises ArgumentError on a malformed byte sequence" do
+    lambda { "\xE3".unpack('U') }.should raise_error(ArgumentError)
+  end
+
+  it "raises ArgumentError on a malformed byte sequence and doesn't continue when used with the * modifier" do
+    lambda { "\xE3".unpack('U*') }.should raise_error(ArgumentError)
+  end
 end
 
 describe "String#unpack with format 'u'" do
@@ -16,6 +24,14 @@ describe "String#unpack with format 'u'" do
 
   it "decodes an empty string as an empty string" do
     "".unpack("u").should == [""]
+  end
+
+  it "decodes into raw (ascii) string values" do
+    str = "".unpack("u")[0]
+    str.encoding.name.should == 'ASCII-8BIT'
+
+    str = "1".force_encoding('UTF-8').unpack("u")[0]
+    str.encoding.name.should == 'ASCII-8BIT'
   end
 
   it "decodes the complete string ignoring newlines when given a single directive" do

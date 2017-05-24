@@ -10,11 +10,8 @@ describe "IO.select" do
     @wr.close unless @wr.closed?
   end
 
-  it "blocks for duration of timeout if there are no objects ready for I/O" do
-    timeout = 0.5
-    start = Time.now
-    IO.select [@rd], nil, nil, timeout
-    (Time.now - start).should be_close(timeout, 2.0)
+  it "blocks for duration of timeout and returns nil if there are no objects ready for I/O" do
+    IO.select([@rd], nil, nil, 0.001).should == nil
   end
 
   it "returns immediately all objects that are ready for I/O when timeout is 0" do
@@ -29,18 +26,31 @@ describe "IO.select" do
   end
 
   it "returns supplied objects when they are ready for I/O" do
-    t = Thread.new { sleep 0.5; @wr.write "be ready" }
-    t.abort_on_exception = true
+    main = Thread.current
+    t = Thread.new {
+      Thread.pass until main.status == "sleep"
+      @wr.write "be ready"
+    }
     result = IO.select [@rd], nil, nil, nil
     result.should == [[@rd], [], []]
+    t.join
   end
 
   it "leaves out IO objects for which there is no I/O ready" do
     @wr.write "be ready"
-    # Order matters here. We want to see that @wr doesn't expand the size
-    # of the returned array, so it must be 1st.
-    result = IO.select [@wr, @rd], nil, nil, nil
-    result.should == [[@rd], [], []]
+    platform_is :aix do
+      # In AIX, when a pipe is readable, select(2) returns the write side
+      # of the pipe as "readable", even though you cannot actually read
+      # anything from the write side.
+      result = IO.select [@wr, @rd], nil, nil, nil
+      result.should == [[@wr, @rd], [], []]
+    end
+    platform_is_not :aix do
+      # Order matters here. We want to see that @wr doesn't expand the size
+      # of the returned array, so it must be 1st.
+      result = IO.select [@wr, @rd], nil, nil, nil
+      result.should == [[@rd], [], []]
+    end
   end
 
   it "returns supplied objects correctly even when monitoring the same object in different arrays" do
@@ -76,7 +86,7 @@ describe "IO.select" do
     lambda { IO.select(nil, [obj]) }.should raise_error(TypeError)
   end
 
-  it "raises TypeError if the specified timeout value is not Numeric" do
+  it "raises a TypeError if the specified timeout value is not Numeric" do
     lambda { IO.select([@rd], nil, nil, Object.new) }.should raise_error(TypeError)
   end
 
@@ -86,29 +96,20 @@ describe "IO.select" do
     lambda { IO.select(nil, nil, Object.new)}.should raise_error(TypeError)
   end
 
-  it "sleeps the specified timeout if all streams are nil" do
-    start = Time.now
-    IO.select(nil, nil, nil, 0.1)
-    (Time.now - start).should >= 0.1
-  end
-
-  it "does not accept negative timeouts" do
+  it "raises an ArgumentError when passed a negative timeout" do
     lambda { IO.select(nil, nil, nil, -5)}.should raise_error(ArgumentError)
   end
-  
-  it "sleeps forever for nil timeout" do
-    started = false
-    finished = false
+end
+
+describe "IO.select when passed nil for timeout" do
+  it "sleeps forever and sets the thread status to 'sleep'" do
     t = Thread.new do
-      started = true
       IO.select(nil, nil, nil, nil)
-      finished = false
     end
-    
-    Thread.pass until t.status == "sleep"
-    started.should == true
+
+    Thread.pass while t.status && t.status != "sleep"
+    t.status.should == "sleep"
     t.kill
     t.join
-    finished.should == false
   end
 end

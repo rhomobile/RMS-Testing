@@ -1,8 +1,9 @@
-describe :file_identical, :shared => true do
+describe :file_identical, shared: true do
   before :each do
     @file1 = tmp('file_identical.txt')
     @file2 = tmp('file_identical2.txt')
     @link  = tmp('file_identical.lnk')
+    @non_exist = 'non_exist'
 
     touch(@file1) { |f| f.puts "file1" }
     touch(@file2) { |f| f.puts "file2" }
@@ -19,12 +20,15 @@ describe :file_identical, :shared => true do
     @object.send(@method, @file1, @link).should == true
   end
 
-  ruby_version_is "1.9" do
-    it "accepts an object that has a #to_path method" do
-      @object.send(@method, mock_to_path(@file1), mock_to_path(@link)).should == true
-    end
+  it "returns false if any of the files doesn't exist" do
+    @object.send(@method, @file1, @non_exist).should be_false
+    @object.send(@method, @non_exist, @file1).should be_false
+    @object.send(@method, @non_exist, @non_exist).should be_false
   end
 
+  it "accepts an object that has a #to_path method" do
+    @object.send(@method, mock_to_path(@file1), mock_to_path(@link)).should == true
+  end
 
   it "raises an ArgumentError if not passed two arguments" do
     lambda { @object.send(@method, @file1, @file2, @link) }.should raise_error(ArgumentError)

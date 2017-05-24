@@ -1,13 +1,17 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 require File.expand_path('../shared/enumeratorize', __FILE__)
+require File.expand_path('../shared/delete_if', __FILE__)
+require File.expand_path('../../enumerable/shared/enumeratorized', __FILE__)
 
 describe "Array#reject" do
   it "returns a new array without elements for which block is true" do
     ary = [1, 2, 3, 4, 5]
     ary.reject { true }.should == []
     ary.reject { false }.should == ary
+    ary.reject { false }.object_id.should_not == ary.object_id
     ary.reject { nil }.should == ary
+    ary.reject { nil }.object_id.should_not == ary.object_id
     ary.reject { 5 }.should == []
     ary.reject { |i| i < 3 }.should == [3, 4, 5]
     ary.reject { |i| i % 2 == 0 }.should == [1, 3, 5]
@@ -29,33 +33,18 @@ describe "Array#reject" do
     array.reject { true }.should == []
   end
 
-  ruby_version_is "" ... "1.9.3" do
-    not_compliant_on :ironruby do
-      it "returns subclass instance on Array subclasses" do
-        ArraySpecs::MyArray[1, 2, 3].reject { |x| x % 2 == 0 }.should be_kind_of(ArraySpecs::MyArray)
-      end
-    end
-
-    deviates_on :ironruby do
-      it "does not return subclass instance on Array subclasses" do
-        ArraySpecs::MyArray[1, 2, 3].reject { |x| x % 2 == 0 }.should be_kind_of(Array)
-      end
-    end
+  it "does not return subclass instance on Array subclasses" do
+    ArraySpecs::MyArray[1, 2, 3].reject { |x| x % 2 == 0 }.should be_an_instance_of(Array)
   end
 
-  ruby_version_is "1.9.3" do
-    it "does not return subclass instance on Array subclasses" do
-      ArraySpecs::MyArray[1, 2, 3].reject { |x| x % 2 == 0 }.should be_kind_of(Array)
-    end
-
-    it "does not retain instance variables" do
-      array = []
-      array.instance_variable_set("@variable", "value")
-      array.reject { false }.instance_variable_get("@variable").should == nil
-    end
+  it "does not retain instance variables" do
+    array = []
+    array.instance_variable_set("@variable", "value")
+    array.reject { false }.instance_variable_get("@variable").should == nil
   end
 
   it_behaves_like :enumeratorize, :reject
+  it_behaves_like :enumeratorized_with_origin_size, :reject, [1,2,3]
 end
 
 describe "Array#reject!" do
@@ -110,23 +99,19 @@ describe "Array#reject!" do
     a.reject! { true }.should == nil
   end
 
-  ruby_version_is "" ... "1.9" do
-    it "raises a TypeError on a frozen array" do
-      lambda { ArraySpecs.frozen_array.reject! {} }.should raise_error(TypeError)
-    end
-    it "raises a TypeError on an empty frozen array" do
-      lambda { ArraySpecs.empty_frozen_array.reject! {} }.should raise_error(TypeError)
-    end
+  it "returns an Enumerator if no block given, and the array is frozen" do
+    ArraySpecs.frozen_array.reject!.should be_an_instance_of(Enumerator)
   end
 
-  ruby_version_is "1.9" do
-    it "raises a RuntimeError on a frozen array" do
-      lambda { ArraySpecs.frozen_array.reject! {} }.should raise_error(RuntimeError)
-    end
-    it "raises a RuntimeError on an empty frozen array" do
-      lambda { ArraySpecs.empty_frozen_array.reject! {} }.should raise_error(RuntimeError)
-    end
+  it "raises a RuntimeError on a frozen array" do
+    lambda { ArraySpecs.frozen_array.reject! {} }.should raise_error(RuntimeError)
+  end
+
+  it "raises a RuntimeError on an empty frozen array" do
+    lambda { ArraySpecs.empty_frozen_array.reject! {} }.should raise_error(RuntimeError)
   end
 
   it_behaves_like :enumeratorize, :reject!
+  it_behaves_like :enumeratorized_with_origin_size, :reject!, [1,2,3]
+  it_behaves_like :delete_if, :reject!
 end

@@ -7,25 +7,19 @@ describe "File.sticky?" do
 end
 
 describe "File.sticky?" do
-  it "returns false if file does not exist" do
-    if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-        File.sticky?("I_am_a_bogus_file").should == nil
-    else
-        File.sticky?("I_am_a_bogus_file").should == false
-    end    
-  end
+  platform_is_not :windows do
+    it "returns false if file does not exist" do
+      File.sticky?("I_am_a_bogus_file").should == false
+    end
 
-  it "returns false if the file has not sticky bit set" do
-    filename = tmp("i_exist")
-    touch(filename)
+    it "returns false if the file has not sticky bit set" do
+      filename = tmp("i_exist")
+      touch(filename)
 
-    if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-        File.sticky?(filename).should == nil
-    else
-        File.sticky?(filename).should == false
-    end        
-    
-    rm_r filename
+      File.sticky?(filename).should == false
+
+      rm_r filename
+    end
   end
 
   platform_is :linux, :darwin do
@@ -33,8 +27,8 @@ describe "File.sticky?" do
       filename = tmp("i_exist")
       touch(filename)
       system "chmod +t #{filename}"
-    
-      File.sticky?(filename).should == false
+
+      File.sticky?(filename).should == true
 
       rm_r filename
     end

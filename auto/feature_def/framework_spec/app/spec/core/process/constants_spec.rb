@@ -1,6 +1,6 @@
 
 describe "Process::Constants" do
-  platform_is :os => [:darwin, :netbsd, :freebsd] do
+  platform_is os: [:darwin, :netbsd, :freebsd] do
     it "has the correct constant values on BSD-like systems" do
       Process::WNOHANG.should == 1
       Process::WUNTRACED.should == 2
@@ -20,7 +20,7 @@ describe "Process::Constants" do
     end
   end
 
-  platform_is :os => [:darwin] do
+  platform_is os: [:darwin] do
     it "has the correct constant values on Darwin" do
       Process::RLIM_SAVED_MAX.should == 9223372036854775807
       Process::RLIM_SAVED_CUR.should == 9223372036854775807
@@ -28,7 +28,7 @@ describe "Process::Constants" do
     end
   end
 
-  platform_is :os => [:linux] do
+  platform_is os: [:linux] do
     it "has the correct constant values on Linux" do
       Process::WNOHANG.should == 1
       Process::WUNTRACED.should == 2
@@ -47,14 +47,14 @@ describe "Process::Constants" do
       Process::RLIMIT_AS.should == 9
 
       # These values appear to change according to the platform.
-      values = [9223372036854775807, 18446744073709551615]
-      #values.include?(Process::RLIM_INFINITY).should be_true
-      #values.include?(Process::RLIM_SAVED_MAX).should be_true
-      #values.include?(Process::RLIM_SAVED_CUR).should be_true
+      values = [4294967295, 9223372036854775807, 18446744073709551615]
+      values.include?(Process::RLIM_INFINITY).should be_true
+      values.include?(Process::RLIM_SAVED_MAX).should be_true
+      values.include?(Process::RLIM_SAVED_CUR).should be_true
     end
   end
 
-  platform_is :os => [:netbsd, :freebsd] do
+  platform_is os: [:netbsd, :freebsd] do
     it "Process::RLIMIT_SBSIZE" do
       Process::RLIMIT_SBSIZE.should == 9 # FIXME: what's it equal?
       Process::RLIMIT_AS.should == 10

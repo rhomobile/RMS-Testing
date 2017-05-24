@@ -7,7 +7,6 @@ describe "IO#sysseek" do
   it_behaves_like :io_set_pos, :seek
 end
 
-if System.get_property('platform') != 'ANDROID'      
 describe "IO#sysseek" do
   before :each do
     @io = IOSpecs.io_fixture "lines.txt"
@@ -27,10 +26,10 @@ describe "IO#sysseek" do
     lambda { @io.sysseek(-5, IO::SEEK_CUR) }.should raise_error(IOError)
   end
 
-  #it "moves the read position relative to the start with SEEK_SET" do
-  #  @io.sysseek(43, IO::SEEK_SET)
-  #  @io.readline.should == "Aquí está la línea tres.\n"
-  #end
+  it "moves the read position relative to the start with SEEK_SET" do
+    @io.sysseek(43, IO::SEEK_SET)
+    @io.readline.should == "Aquí está la línea tres.\n"
+  end
 
   it "moves the read position relative to the end with SEEK_END" do
     @io.sysseek(1, IO::SEEK_END)
@@ -40,7 +39,6 @@ describe "IO#sysseek" do
     lambda { @io.sysread(1) }.should raise_error(EOFError)
 
     @io.sysseek(-25, IO::SEEK_END)
-    #@io.sysread(7).should == "cinco.\n"
+    @io.sysread(7).should == "cinco.\n"
   end
-end
 end

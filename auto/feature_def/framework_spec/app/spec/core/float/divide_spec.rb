@@ -12,23 +12,25 @@ describe "Float#/" do
     (5.0 / FloatSpecs::CanCoerce.new(5)).should be_close(0, TOLERANCE)
   end
 
-#  it "properly handles BigDecimal argument" do
-#    require 'bigdecimal'
-#    (2.0 / BigDecimal.new('5.0')).should be_close(0.4, TOLERANCE)
-#    (2.0 / BigDecimal.new('Infinity')).should == 0
-#    (2.0 / BigDecimal.new('-Infinity')).should == 0
-#    (2.0 / BigDecimal.new('0.0')).infinite?.should == 1
-#    (2.0 / BigDecimal.new('-0.0')).infinite?.should == -1
-#    (2.0 / BigDecimal.new('NaN')).nan?.should == true
-#  end
+  it "returns +Infinity when dividing non-zero by zero of the same sign" do
+    (1.0 / 0.0).should be_positive_infinity
+    (-1.0 / -0.0).should be_positive_infinity
+  end
 
-  it "does NOT raise ZeroDivisionError if other is zero" do
-    (1.0 / 0.0).to_s.should == 'Infinity'
-    (-1.0 / 0.0).to_s.should == '-Infinity'
-    (1.0 / -0.0).to_s.should == '-Infinity'
-    (-1.0 / -0.0).to_s.should == 'Infinity'
-    (0.0 / 0.0).to_s.should == 'NaN'
-    (-0.0 / 0.0).to_s.should == 'NaN'
-    (-0.0 / -0.0).to_s.should == 'NaN'
+  it "returns -Infinity when dividing non-zero by zero of opposite sign" do
+    (-1.0 / 0.0).should be_negative_infinity
+    (1.0 / -0.0).should be_negative_infinity
+  end
+
+  it "returns NaN when dividing zero by zero" do
+    (0.0 / 0.0).should be_nan
+    (-0.0 / 0.0).should be_nan
+    (0.0 / -0.0).should be_nan
+    (-0.0 / -0.0).should be_nan
+  end
+
+  it "raises a TypeError when given a non-Numeric" do
+    lambda { 13.0 / "10"    }.should raise_error(TypeError)
+    lambda { 13.0 / :symbol }.should raise_error(TypeError)
   end
 end

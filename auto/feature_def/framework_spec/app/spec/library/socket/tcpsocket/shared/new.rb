@@ -1,28 +1,21 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../../spec_helper', __FILE__)
+require File.expand_path('../../../fixtures/classes', __FILE__)
 
-describe :tcpsocket_new, :shared => true do
-  before :all do
-    SocketSpecs::SpecTCPServer.start
-  end
-
-  before :each do
-    @hostname = SocketSpecs::SpecTCPServer.get.hostname
-  end
-
+describe :tcpsocket_new, shared: true do
   it "requires a hostname and a port as arguments" do
     lambda { TCPSocket.send(@method) }.should raise_error(ArgumentError)
   end
 
   it "refuses the connection when there is no server to connect to" do
     lambda do
-      TCPSocket.send(@method, @hostname, SocketSpecs.local_port)
+      TCPSocket.send(@method, SocketSpecs.hostname, SocketSpecs.local_port)
     end.should raise_error(Errno::ECONNREFUSED)
   end
 
   describe "with a running server" do
     before :each do
-      @socket = nil
+      @server = SocketSpecs::SpecTCPServer.new
+      @hostname = @server.hostname
     end
 
     after :each do
@@ -30,6 +23,12 @@ describe :tcpsocket_new, :shared => true do
         @socket.write "QUIT"
         @socket.close
       end
+      @server.shutdown
+    end
+
+    it "silently ignores 'nil' as the third parameter" do
+      @socket = TCPSocket.send(@method, @hostname, SocketSpecs.port, nil)
+      @socket.should be_an_instance_of(TCPSocket)
     end
 
     it "connects to a listening server with host and port" do

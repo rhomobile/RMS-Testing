@@ -1,7 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
-if System.get_property('platform') != 'ANDROID'      
 describe "IO#to_io" do
   before :each do
     @io = IOSpecs.io_fixture "lines.txt"
@@ -19,5 +18,4 @@ describe "IO#to_io" do
     io = IOSpecs.closed_io
     io.to_io.should equal(io)
   end
-end
 end

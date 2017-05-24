@@ -53,6 +53,9 @@ describe "File.dirname" do
     it "returns all the components of filename except the last one (edge cases on non-windows)" do
       File.dirname('/////').should == '/'
       File.dirname("//foo//").should == "/"
+      File.dirname('foo\bar').should == '.'
+      File.dirname('/foo\bar').should == '/'
+      File.dirname('foo/bar\baz').should == 'foo'
     end
   end
 
@@ -64,10 +67,8 @@ describe "File.dirname" do
     end
   end
 
-  ruby_version_is "1.9" do
-    it "accepts an object that has a #to_path method" do
-      File.dirname(mock_to_path("/")).should == "/"
-    end
+  it "accepts an object that has a #to_path method" do
+    File.dirname(mock_to_path("/")).should == "/"
   end
 
   it "raises a TypeError if not passed a String type" do
@@ -92,6 +93,8 @@ describe "File.dirname" do
       File.dirname("\\\\foo\\bar\\baz").should == "\\\\foo\\bar"
       File.dirname("\\\\foo").should =="\\\\foo"
       File.dirname("\\\\foo\\bar").should =="\\\\foo\\bar"
+      File.dirname("\\\\\\foo\\bar").should =="\\\\foo\\bar"
+      File.dirname("\\\\\\foo").should =="\\\\foo"
     end
 
     it "returns the return all the components of filename except the last one (forward_slash)" do

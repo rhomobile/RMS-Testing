@@ -2,7 +2,7 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "StringIO#readlines when passed [separator]" do
-  before(:each) do
+  before :each do
     @io = StringIO.new("this>is>an>example")
   end
 
@@ -26,11 +26,9 @@ describe "StringIO#readlines when passed [separator]" do
     $_.should == "test"
   end
 
-  ruby_bug "", "1.8.8" do
-    it "returns an Array containing all paragraphs when the passed separator is an empty String" do
-      io = StringIO.new("this is\n\nan example")
-      io.readlines("").should == ["this is\n\n", "an example"]
-    end
+  it "returns an Array containing all paragraphs when the passed separator is an empty String" do
+    io = StringIO.new("this is\n\nan example")
+    io.readlines("").should == ["this is\n\n", "an example"]
   end
 
   it "returns the remaining content as one line starting at the current position when passed nil" do
@@ -47,7 +45,7 @@ describe "StringIO#readlines when passed [separator]" do
 end
 
 describe "StringIO#readlines when passed no argument" do
-  before(:each) do
+  before :each do
     @io = StringIO.new("this is\nan example\nfor StringIO#readlines")
   end
 

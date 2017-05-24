@@ -1,7 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
-require 'rational'
 
-describe :rational_multiply_rat, :shared => true do
+describe :rational_multiply_rat, shared: true do
   it "returns self divided by other as a Rational" do
     (Rational(3, 4) * Rational(3, 4)).should eql(Rational(9, 16))
     (Rational(2, 4) * Rational(1, 4)).should eql(Rational(1, 8))
@@ -10,7 +9,7 @@ describe :rational_multiply_rat, :shared => true do
   end
 end
 
-describe :rational_multiply_int, :shared => true do
+describe :rational_multiply_int, shared: true do
   it "returns self divided by other as a Rational" do
     (Rational(3, 4) * 2).should eql(Rational(3, 2))
     (Rational(2, 4) * 2).should eql(Rational(1, 1))
@@ -20,7 +19,7 @@ describe :rational_multiply_int, :shared => true do
   end
 end
 
-describe :rational_multiply_float, :shared => true do
+describe :rational_multiply_float, shared: true do
   it "returns self divided by other as a Float" do
     (Rational(3, 4) * 0.75).should eql(0.5625)
     (Rational(3, 4) * 0.25).should eql(0.1875)
@@ -38,7 +37,7 @@ describe :rational_multiply_float, :shared => true do
   end
 end
 
-describe :rational_multiply, :shared => true do
+describe :rational_multiply, shared: true do
   it "calls #coerce on the passed argument with self" do
     rational = Rational(3, 4)
     obj = mock("Object")

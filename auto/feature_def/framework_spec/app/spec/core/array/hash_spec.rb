@@ -7,54 +7,47 @@ describe "Array#hash" do
 
     [[], [1, 2, 3]].each do |ary|
       ary.hash.should == ary.dup.hash
-      ary.hash.should be_kind_of(Fixnum)
+      ary.hash.should be_an_instance_of(Fixnum)
     end
   end
 
-  ruby_bug "#", "1.8.6.277" do
-    it "properly handles recursive arrays" do
-      empty = ArraySpecs.empty_recursive_array
-      empty.hash.should be_kind_of(Integer)
+  it "properly handles recursive arrays" do
+    empty = ArraySpecs.empty_recursive_array
+    lambda { empty.hash }.should_not raise_error
 
-      array = ArraySpecs.recursive_array
-      array.hash.should be_kind_of(Integer)
-    end
+    array = ArraySpecs.recursive_array
+    lambda { array.hash }.should_not raise_error
   end
 
-  ruby_bug "redmine #1852", "1.9.1" do
-    it "returns the same hash for equal recursive arrays" do
-      rec = []; rec << rec
-      rec.hash.should == [rec].hash
-      rec.hash.should == [[rec]].hash
-      # This is because rec.eql?([[rec]])
-      # Remember that if two objects are eql?
-      # then the need to have the same hash
-      # Check the Array#eql? specs!
-    end
+  it "returns the same hash for equal recursive arrays" do
+    rec = []; rec << rec
+    rec.hash.should == [rec].hash
+    rec.hash.should == [[rec]].hash
+    # This is because rec.eql?([[rec]])
+    # Remember that if two objects are eql?
+    # then the need to have the same hash
+    # Check the Array#eql? specs!
+  end
 
-    it "returns the same hash for equal recursive arrays through hashes" do
-      h = {} ; rec = [h] ; h[:x] = rec
-      rec.hash.should == [h].hash
-      rec.hash.should == [{:x => rec}].hash
-      # Like above, this is because rec.eql?([{:x => rec}])
-    end
+  it "returns the same hash for equal recursive arrays through hashes" do
+    h = {} ; rec = [h] ; h[:x] = rec
+    rec.hash.should == [h].hash
+    rec.hash.should == [{x: rec}].hash
+    # Like above, this is because rec.eql?([{x: rec}])
   end
 
   #  Too much of an implementation detail? -rue
-  not_compliant_on :rubinius do
+  not_supported_on :rubinius, :opal do
     it "calls to_int on result of calling hash on each element" do
       ary = Array.new(5) do
-        # Can't use should_receive here because it calls hash()
         obj = mock('0')
-        def obj.hash()
-          def self.to_int() freeze; 0 end
-          return self
-        end
+        obj.should_receive(:hash).and_return(obj)
+        obj.should_receive(:to_int).and_return(0)
         obj
       end
 
       ary.hash
-      ary.each { |obj| obj.frozen?.should == true }
+
 
       hash = mock('1')
       hash.should_receive(:to_int).and_return(1.hash)
@@ -85,5 +78,9 @@ describe "Array#hash" do
     b = %w|a a a a|
     a.hash.should == b.hash
     a.should eql(b)
+  end
+
+  it "produces different hashes for nested arrays with different values and empty terminator" do
+    [1, [1, []]].hash.should_not == [2, [2, []]].hash
   end
 end

@@ -17,16 +17,16 @@ describe "File::Stat#pipe?" do
     rm_r filename
   end
 
-  #platform_is_not :windows do
-  #  it "returns true if the file is a pipe" do
-  #    filename = tmp("i_am_a_pipe")
-  #    system "mkfifo #{filename}"
-  #
-  #    st = File.stat(filename)
-  #    st.pipe?.should == true
-  #
-  #    rm_r filename
-  #  end
-  #end
+  platform_is_not :windows do
+    it "returns true if the file is a pipe" do
+      filename = tmp("i_am_a_pipe")
+      system "mkfifo #{filename}"
+
+      st = File.stat(filename)
+      st.pipe?.should == true
+
+      rm_r filename
+    end
+  end
 
 end

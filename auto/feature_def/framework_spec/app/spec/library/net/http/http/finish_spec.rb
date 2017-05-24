@@ -3,16 +3,14 @@ require 'net/http'
 require File.expand_path('../fixtures/http_server', __FILE__)
 
 describe "Net::HTTP#finish" do
-  before(:all) do
+  before :each do
     NetHTTPSpecs.start_server
+    @http = Net::HTTP.new("localhost", NetHTTPSpecs.port)
   end
 
-  after(:all) do
+  after :each do
+    @http.finish if @http.started?
     NetHTTPSpecs.stop_server
-  end
-
-  before(:each) do
-    @http = Net::HTTP.new("127.0.0.1", NetHTTPSpecs.server_port)
   end
 
   describe "when self has been started" do

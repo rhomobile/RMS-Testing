@@ -36,20 +36,12 @@ describe "Array#delete" do
     a.delete(nil).should == nil
   end
 
-  ruby_version_is '' ... '1.9' do
-    it "raises a TypeError on a frozen array if a modification would take place" do
-      lambda { [1, 2, 3].freeze.delete(1) }.should raise_error(TypeError)
-    end
-
-    it "returns false on a frozen array if a modification does not take place" do
-      [1, 2, 3].freeze.delete(0).should == nil
-    end
+  it "returns nil on a frozen array if a modification does not take place" do
+    [1, 2, 3].freeze.delete(0).should == nil
   end
 
-  ruby_version_is '1.9' do
-    it "raises a RuntimeError on a frozen array" do
-      lambda { [1, 2, 3].freeze.delete(1) }.should raise_error(RuntimeError)
-    end
+  it "raises a RuntimeError on a frozen array" do
+    lambda { [1, 2, 3].freeze.delete(1) }.should raise_error(RuntimeError)
   end
 
   it "keeps tainted status" do
@@ -62,15 +54,13 @@ describe "Array#delete" do
     a.tainted?.should be_true
   end
 
-  ruby_version_is '1.9' do
-    it "keeps untrusted status" do
-      a = [1, 2]
-      a.untrust
-      a.untrusted?.should be_true
-      a.delete(2)
-      a.untrusted?.should be_true
-      a.delete(1) # now empty
-      a.untrusted?.should be_true
-    end
+  it "keeps untrusted status" do
+    a = [1, 2]
+    a.untrust
+    a.untrusted?.should be_true
+    a.delete(2)
+    a.untrusted?.should be_true
+    a.delete(1) # now empty
+    a.untrusted?.should be_true
   end
 end

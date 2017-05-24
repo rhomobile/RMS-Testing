@@ -31,16 +31,26 @@ describe "IO#close" do
     lambda { @io.write "data" }.should raise_error(IOError)
   end
 
-  #it "raises an IOError if closed" do
-  # @io.close
-  #  lambda { @io.close }.should raise_error(IOError)
-  #end
+  ruby_version_is ''...'2.3' do
+    it "raises an IOError if closed" do
+      @io.close
+      lambda { @io.close }.should raise_error(IOError)
+    end
+  end
+
+  ruby_version_is "2.3" do
+    it "does nothing if already closed" do
+      @io.close
+
+      @io.close.should be_nil
+    end
+  end
 end
-=begin
+
 describe "IO#close on an IO.popen stream" do
 
   it "clears #pid" do
-    io = IO.popen 'yes', 'r'
+    io = IO.popen ruby_cmd('r = loop{puts "y"; 0} rescue 1; exit r'), 'r'
 
     io.pid.should_not == 0
 
@@ -50,24 +60,23 @@ describe "IO#close on an IO.popen stream" do
   end
 
   it "sets $?" do
-    io = IO.popen 'true', 'r'
+    io = IO.popen ruby_cmd('exit 0'), 'r'
     io.close
 
     $?.exitstatus.should == 0
 
-    io = IO.popen 'false', 'r'
+    io = IO.popen ruby_cmd('exit 1'), 'r'
     io.close
 
     $?.exitstatus.should == 1
   end
 
   it "waits for the child to exit" do
-    io = IO.popen 'yes', 'r'
+    io = IO.popen ruby_cmd('r = loop{puts "y"; 0} rescue 1; exit r'), 'r'
     io.close
 
-    $?.exitstatus.should_not == 0 # SIGPIPE/EPIPE
+    $?.exitstatus.should_not == 0
   end
 
 end
 
-=end

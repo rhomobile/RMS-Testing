@@ -2,7 +2,7 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "StringIO#seek" do
-  before(:each) do
+  before :each do
     @io = StringIO.new("12345678")
   end
 
@@ -56,21 +56,12 @@ describe "StringIO#seek" do
 end
 
 describe "StringIO#seek when self is closed" do
-  before(:each) do
+  before :each do
     @io = StringIO.new("example")
     @io.close
   end
 
-  ruby_version_is "" ... "1.8.7" do
-    it "does not raise an IOError" do
-      @io.seek(5)
-      @io.pos.should eql(5)
-    end
-  end
-
-  ruby_version_is "1.8.7" do
-    it "raises an IOError" do
-      lambda { @io.seek(5) }.should raise_error(IOError)
-    end
+  it "raises an IOError" do
+    lambda { @io.seek(5) }.should raise_error(IOError)
   end
 end

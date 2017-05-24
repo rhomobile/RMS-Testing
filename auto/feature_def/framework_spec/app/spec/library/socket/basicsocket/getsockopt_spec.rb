@@ -1,8 +1,8 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "BasicSocket#getsockopt" do
-  before(:each) do
+  before :each do
     @sock = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
   end
 
@@ -11,17 +11,22 @@ describe "BasicSocket#getsockopt" do
     @sock.close
   end
 
-  it "gets a socket option Socket::SO_TYPE----VT-029" do
-    n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_TYPE).to_s
-    n.should == [Socket::SOCK_STREAM].pack("i")
+  platform_is_not :aix do
+    # A known bug in AIX.  getsockopt(2) does not properly set
+    # the fifth argument for SO_TYPE, SO_OOBINLINE, SO_BROADCAST, etc.
+
+    it "gets a socket option Socket::SO_TYPE" do
+      n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_TYPE).to_s
+      n.should == [Socket::SOCK_STREAM].pack("i")
+    end
+
+    it "gets a socket option Socket::SO_OOBINLINE" do
+      n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_OOBINLINE).to_s
+      n.should == [0].pack("i")
+    end
   end
 
-  it "gets a socket option Socket::SO_OOBINLINE----VT-030" do
-    n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_OOBINLINE).to_s
-    n.should == [0].pack("i")
-  end
-
-  it "gets a socket option Socket::SO_LINGER----VT-031" do
+  it "gets a socket option Socket::SO_LINGER" do
     n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_LINGER).to_s
     if (n.size == 8) # linger struct on some platforms, not just a value
       n.should == [0, 0].pack("ii")
@@ -30,12 +35,12 @@ describe "BasicSocket#getsockopt" do
     end
   end
 
-  it "gets a socket option Socket::SO_SNDBUF----VT-032" do
+  it "gets a socket option Socket::SO_SNDBUF" do
     n = @sock.getsockopt(Socket::SOL_SOCKET, Socket::SO_SNDBUF).to_s
     n.unpack('i')[0].should > 0
   end
 
-  it "raises a SystemCallError with an invalid socket option----VT-033" do
+  it "raises a SystemCallError with an invalid socket option" do
     lambda { @sock.getsockopt Socket::SOL_SOCKET, -1 }.should raise_error(Errno::ENOPROTOOPT)
   end
 end

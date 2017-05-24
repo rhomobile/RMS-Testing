@@ -1,5 +1,5 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "Socket::IPSocket#recvfrom" do
 
@@ -13,7 +13,7 @@ describe "Socket::IPSocket#recvfrom" do
     @client.close unless @client.closed?
   end
 
-  it "reads data from the connection----VT-068" do
+  it "reads data from the connection" do
     data = nil
     t = Thread.new do
       client = @server.accept
@@ -29,7 +29,7 @@ describe "Socket::IPSocket#recvfrom" do
     data.first.should == 'hello'
   end
 
-  it "reads up to len bytes----VT-069" do
+  it "reads up to len bytes" do
     data = nil
     t = Thread.new do
       client = @server.accept
@@ -44,7 +44,7 @@ describe "Socket::IPSocket#recvfrom" do
     data.first.should == 'hel'
   end
 
-  it "returns an array with the data and connection info----VT-070" do
+  it "returns an array with the data and connection info" do
     data = nil
     t = Thread.new do
       client = @server.accept

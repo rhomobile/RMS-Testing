@@ -6,7 +6,8 @@ describe "GzipReader#eof?" do
 
   before :each do
     @data = '{"a":1234}'
-    @zip = "\037\213\b\000\000\000\000\000\000\003\253VJT\2622426\251\005\000\304\024v\325\n\000\000\000"
+    @zip = [31, 139, 8, 0, 0, 0, 0, 0, 0, 3, 171, 86, 74, 84, 178, 50,
+            52, 50, 54, 169, 5, 0, 196, 20, 118, 213, 10, 0, 0, 0].pack('C*')
     @io = StringIO.new @zip
   end
 
@@ -33,7 +34,7 @@ describe "GzipReader#eof?" do
 
   it "returns false when at EOF when there's data left in the buffer to read" do
     gz = Zlib::GzipReader.new @io
-    data = gz.read(9)
+    gz.read(9)
     gz.eof?.should be_false
     gz.read
     gz.eof?.should be_true

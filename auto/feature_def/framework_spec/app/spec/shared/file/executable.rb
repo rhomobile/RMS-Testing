@@ -1,4 +1,4 @@
-describe :file_executable, :shared => true do
+describe :file_executable, shared: true do
   before :each do
     @file1 = tmp('temp1.txt')
     @file2 = tmp('temp2.txt')
@@ -15,20 +15,18 @@ describe :file_executable, :shared => true do
 
   platform_is_not :windows do
     it "returns true if named file is executable by the effective user id of the process, otherwise false" do
-      #@object.send(@method, '/etc/passwd').should == false
+      @object.send(@method, '/etc/passwd').should == false
       @object.send(@method, @file1).should == true
       @object.send(@method, @file2).should == false
     end
 
-    it "return true if the argument is an executable file" do
+    it "returns true if the argument is an executable file" do
       @object.send(@method, @file1).should == true
       @object.send(@method, @file2).should == false
     end
 
-    ruby_version_is "1.9" do
-      it "accepts an object that has a #to_path method" do
-        @object.send(@method, mock_to_path(@file1)).should == true
-      end
+    it "accepts an object that has a #to_path method" do
+      @object.send(@method, mock_to_path(@file1)).should == true
     end
   end
 
@@ -43,7 +41,7 @@ describe :file_executable, :shared => true do
   end
 end
 
-describe :file_executable_missing, :shared => true do
+describe :file_executable_missing, shared: true do
   it "returns false if the file does not exist" do
     @object.send(@method, 'fake_file').should == false
   end

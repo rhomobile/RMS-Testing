@@ -8,16 +8,13 @@ describe "Math.frexp" do
     exp.should == 7
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises an ArgumentError if the argument cannot be coerced with Float()" do
-      lambda { Math.frexp("test") }.should raise_error(ArgumentError)
-    end
+  it "raises a TypeError if the argument cannot be coerced with Float()" do
+    lambda { Math.frexp("test") }.should raise_error(TypeError)
   end
 
-  ruby_version_is "1.9" do
-    it "raises a TypeError if the argument cannot be coerced with Float()" do
-      lambda { Math.frexp("test") }.should raise_error(TypeError)
-    end
+  it "returns NaN given NaN" do
+    frac, _exp = Math.frexp(nan_value)
+    frac.nan?.should be_true
   end
 
   it "raises a TypeError if the argument is nil" do

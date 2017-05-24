@@ -1,21 +1,17 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
-if System.get_property('platform') != 'ANDROID'  
 describe "IO#each_byte" do
   before :each do
-    @io = IOSpecs.io_fixture "lines.txt"
     ScratchPad.record []
+    @io = IOSpecs.io_fixture "lines.txt"
   end
 
   after :each do
-    @io.close unless @io.closed?
+    @io.close if @io
   end
 
   it "raises IOError on closed stream" do
-    # each_byte must have a block in order to raise the Error.
-    # MRI 1.8.7 returns enumerator if block is not provided.
-    # See [ruby-core:16557].
     lambda { IOSpecs.closed_io.each_byte {} }.should raise_error(IOError)
   end
 
@@ -29,17 +25,19 @@ describe "IO#each_byte" do
     ScratchPad.recorded.should == [86, 111, 105, 99, 105]
   end
 
-  ruby_version_is "" ... "1.8.7" do
-    it "yields a LocalJumpError when passed no block" do
-      lambda { @io.each_byte }.should raise_error(LocalJumpError)
-    end
-  end
-
-  ruby_version_is "1.8.7" do
-    it "returns an Enumerator when passed no block" do
+  describe "when no block is given" do
+    it "returns an Enumerator" do
       enum = @io.each_byte
-      enum.should be_an_instance_of(enumerator_class)
-      enum.each.first(5).should == [86, 111, 105, 99, 105]
+      enum.should be_an_instance_of(Enumerator)
+      enum.first(5).should == [86, 111, 105, 99, 105]
+    end
+
+    describe "returned Enumerator" do
+      describe "size" do
+        it "should return nil" do
+          @io.each_byte.size.should == nil
+        end
+      end
     end
   end
 end
@@ -56,5 +54,4 @@ describe "IO#each_byte" do
   it "returns self on an empty stream" do
     @io.each_byte { |b| }.should equal(@io)
   end
-end
 end

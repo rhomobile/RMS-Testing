@@ -1,4 +1,5 @@
-describe :strscan_get_byte, :shared => true do
+# -*- encoding: binary -*-
+describe :strscan_get_byte, shared: true do
   it "scans one byte and returns it" do
     s = StringScanner.new('abc5.')
     s.send(@method).should == 'a'

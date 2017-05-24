@@ -8,16 +8,18 @@ describe "String#downcase" do
     "hello".downcase.should == "hello"
   end
 
-  it "is locale insensitive (only replaces A-Z)" do
-    "ÄÖÜ".downcase.should == "ÄÖÜ"
+  ruby_version_is ''...'2.4' do
+    it "is locale insensitive (only replaces A-Z)" do
+      "ÄÖÜ".downcase.should == "ÄÖÜ"
 
-    str = Array.new(256) { |c| c.chr }.join
-    expected = Array.new(256) do |i|
-      c = i.chr
-      c.between?("A", "Z") ? c.downcase : c
-    end.join
+      str = Array.new(256) { |c| c.chr }.join
+      expected = Array.new(256) do |i|
+        c = i.chr
+        c.between?("A", "Z") ? c.downcase : c
+      end.join
 
-    str.downcase.should == expected
+      str.downcase.should == expected
+    end
   end
 
   it "taints result when self is tainted" do
@@ -27,7 +29,7 @@ describe "String#downcase" do
   end
 
   it "returns a subclass instance for subclasses" do
-    StringSpecs::MyString.new("FOObar").downcase.should be_kind_of(StringSpecs::MyString)
+    StringSpecs::MyString.new("FOObar").downcase.should be_an_instance_of(StringSpecs::MyString)
   end
 end
 
@@ -44,17 +46,14 @@ describe "String#downcase!" do
     a.should == "hello"
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises a TypeError when self is frozen" do
-      lambda { "HeLlo".freeze.downcase! }.should raise_error(TypeError)
-      lambda { "hello".freeze.downcase! }.should raise_error(TypeError)
-    end
+  it "raises a RuntimeError when self is frozen" do
+    lambda { "HeLlo".freeze.downcase! }.should raise_error(RuntimeError)
+    lambda { "hello".freeze.downcase! }.should raise_error(RuntimeError)
   end
 
-  ruby_version_is "1.9" do
-    it "raises a RuntimeError when self is frozen" do
-      lambda { "HeLlo".freeze.downcase! }.should raise_error(RuntimeError)
-      lambda { "hello".freeze.downcase! }.should raise_error(RuntimeError)
+  with_feature :encoding do
+    it "sets the result String encoding to the source String encoding" do
+      "ABC".downcase.encoding.should equal(Encoding::UTF_8)
     end
   end
 end

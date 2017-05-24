@@ -6,12 +6,12 @@ describe "File.setgid?" do
 end
 
 describe "File.setgid?" do
-  before(:each) do
+  before :each do
     @name = tmp('test.txt')
     touch @name
   end
 
-  after(:each) do
+  after :each do
     rm_r @name
   end
 
@@ -24,11 +24,13 @@ describe "File.setgid?" do
     File.setgid?(@name).should == false
   end
 
-  #platform_is_not :windows do
-  #  it "returns true when the gid bit is set" do
-  #    system "chmod g+s #{@name}"
-  #
-  #    File.setgid?(@name).should == true
-  #  end
-  #end
+  as_superuser do
+    platform_is_not :windows do
+      it "returns true when the gid bit is set" do
+        system "chmod g+s #{@name}"
+
+        File.setgid?(@name).should == true
+      end
+    end
+  end
 end

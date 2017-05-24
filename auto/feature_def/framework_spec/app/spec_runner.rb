@@ -7,14 +7,15 @@ class SpecRunner < MSpecScript
     config[:files] = []
     
     # turn on exception backtrace
-    MSpec.backtrace = true
+#    MSpec.backtrace = true
 
     #MSpec.guard
     
     #LANGUAGE
+
     app_folder = Rho::RhoFSConnector.get_app_path('app')
     app_folder.gsub!(/\\/, '/')
-    
+
     specs =  app_folder + "spec/language/**/*_spec" + RHO_RB_EXT
     
     Dir.glob(specs) do |file|
@@ -31,7 +32,9 @@ class SpecRunner < MSpecScript
       end
       
       config[:files] << file
-    end
+ 
+   end
+
     # CORE
     core = []
 
@@ -88,10 +91,11 @@ class SpecRunner < MSpecScript
     core << 'true'
     core << 'unboundmethod'
     
-    core << 'thread'
+#    core << 'thread'
+
     core << 'threadgroup'
     core << 'fiber'
-    
+
     core.each do |folder|
       specs =  app_folder + "spec/core/#{folder}/**/*_spec" + RHO_RB_EXT
       Dir.glob(specs) do |file|
@@ -107,7 +111,8 @@ class SpecRunner < MSpecScript
         config[:files] << file
       end
     end
-    
+
+
     # LIBRARIES
     specs = app_folder + "spec/library/**/*_spec" + RHO_RB_EXT
     Dir.glob(specs) do |file|
@@ -134,7 +139,7 @@ class SpecRunner < MSpecScript
       end
       config[:files] << file
     end
-    
+
   end
 
   def run
@@ -142,11 +147,11 @@ class SpecRunner < MSpecScript
 
     file_name = File.join(Rho::RhoApplication.get_base_app_path(), 'framework_spec_results.xml' )
 
-    @@formatter = JUnitRhoLogFormatter.new( file_name )
-    @@formatter.register
+#    @@formatter = JUnitRhoLogFormatter.new( file_name )
+#    @@formatter.register
 
-    @@resulter = JasmineLikeFormatter.new()
-    @@resulter.register
+#    @@resulter = JasmineLikeFormatter.new()
+#    @@resulter.register
 
     MSpec.process
 

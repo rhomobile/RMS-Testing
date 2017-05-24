@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes.rb', __FILE__)
 
@@ -26,7 +27,6 @@ describe "String#delete" do
   end
 
   it "deletes all chars in a sequence" do
-    "hello".delete("\x00-\xFF").should == ""
     "hello".delete("ej-m").should == "ho"
     "hello".delete("e-h").should == "llo"
     "hel-lo".delete("e-").should == "hllo"
@@ -48,30 +48,31 @@ describe "String#delete" do
     "ABCabc[]".delete("A-a").should == "bc"
   end
 
+  it "deletes multibyte characters" do
+    "四月".delete("月").should == "四"
+    '哥哥我倒'.delete('哥').should == "我倒"
+  end
+
   it "respects backslash for escaping a -" do
     'Non-Authoritative Information'.delete(' \-\'').should ==
       'NonAuthoritativeInformation'
   end
 
-  ruby_version_is ""..."1.9" do
-    it "regards invalid ranges as nothing" do
-      "hello".delete("h-e").should == "hello"
-      "hello".delete("^h-e").should == ""
+  it "raises if the given ranges are invalid" do
+    not_supported_on :opal do
+      xFF = [0xFF].pack('C')
+      range = "\x00 - #{xFF}".force_encoding('utf-8')
+      lambda { "hello".delete(range).should == "" }.should raise_error(ArgumentError)
     end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises if the given ranges are invalid" do
-      lambda { "hello".delete("h-e") }.should raise_error(ArgumentError)
-      lambda { "hello".delete("^h-e") }.should raise_error(ArgumentError)
-    end
+    lambda { "hello".delete("h-e") }.should raise_error(ArgumentError)
+    lambda { "hello".delete("^h-e") }.should raise_error(ArgumentError)
   end
 
   it "taints result when self is tainted" do
     "hello".taint.delete("e").tainted?.should == true
     "hello".taint.delete("a-z").tainted?.should == true
 
-    #"hello".delete("e".taint).tainted?.should == false
+    "hello".delete("e".taint).tainted?.should == false
   end
 
   it "tries to convert each set arg to a string using to_str" do
@@ -91,7 +92,7 @@ describe "String#delete" do
   end
 
   it "returns subclass instances when called on a subclass" do
-    StringSpecs::MyString.new("oh no!!!").delete("!").should be_kind_of(StringSpecs::MyString)
+    StringSpecs::MyString.new("oh no!!!").delete("!").should be_an_instance_of(StringSpecs::MyString)
   end
 end
 
@@ -108,23 +109,11 @@ describe "String#delete!" do
     a.should == "hello"
   end
 
-  ruby_version_is ""..."1.9" do
-    it "raises a TypeError when self is frozen" do
-      a = "hello"
-      a.freeze
+  it "raises a RuntimeError when self is frozen" do
+    a = "hello"
+    a.freeze
 
-      lambda { a.delete!("")            }.should raise_error(TypeError)
-      lambda { a.delete!("aeiou", "^e") }.should raise_error(TypeError)
-    end
-  end
-
-  ruby_version_is "1.9" do
-    it "raises a RuntimeError when self is frozen" do
-      a = "hello"
-      a.freeze
-
-      lambda { a.delete!("")            }.should raise_error(RuntimeError)
-      lambda { a.delete!("aeiou", "^e") }.should raise_error(RuntimeError)
-    end
+    lambda { a.delete!("")            }.should raise_error(RuntimeError)
+    lambda { a.delete!("aeiou", "^e") }.should raise_error(RuntimeError)
   end
 end

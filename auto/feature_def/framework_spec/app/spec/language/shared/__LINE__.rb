@@ -1,5 +1,4 @@
-describe :language___LINE__, :shared => true do
-=begin
+describe :language___LINE__, shared: true do
   before :each do
     CodeLoadingSpecs.spec_setup
     @path = File.expand_path("line_fixture.rb", CODE_LOADING_DIR)
@@ -13,5 +12,4 @@ describe :language___LINE__, :shared => true do
     @object.send(@method, @path).should be_true
     ScratchPad.recorded.should == [1, 5]
   end
-=end  
 end

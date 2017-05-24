@@ -11,4 +11,20 @@ describe "Range#inspect" do
     (0xfff..0xfffff).inspect.should == "4095..1048575"
     (0.5..2.4).inspect.should == "0.5..2.4"
   end
+
+  it "returns a tainted string if either end is tainted" do
+    (("a".taint)..."c").inspect.tainted?.should be_true
+    ("a"...("c".taint)).inspect.tainted?.should be_true
+    ruby_bug("#11767", "2.2") do
+      ("a"..."c").taint.inspect.tainted?.should be_true
+    end
+  end
+
+  it "returns a untrusted string if either end is untrusted" do
+    (("a".untrust)..."c").inspect.untrusted?.should be_true
+    ("a"...("c".untrust)).inspect.untrusted?.should be_true
+    ruby_bug("#11767", "2.2") do
+      ("a"..."c").untrust.inspect.untrusted?.should be_true
+    end
+  end
 end

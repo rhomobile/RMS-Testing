@@ -1,7 +1,6 @@
 require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
-if System.get_property('platform') != 'ANDROID'      
 describe "IO#sync=" do
   before :each do
     @io = IOSpecs.io_fixture "lines.txt"
@@ -27,9 +26,9 @@ describe "IO#sync=" do
     @io.sync.should == true
   end
 
-  #it "raises an IOError on closed stream" do
-  #  lambda { IOSpecs.closed_io.sync = true }.should raise_error(IOError)
-  #end
+  it "raises an IOError on closed stream" do
+    lambda { IOSpecs.closed_io.sync = true }.should raise_error(IOError)
+  end
 end
 
 describe "IO#sync" do
@@ -45,8 +44,21 @@ describe "IO#sync" do
     @io.sync.should == false
   end
 
-  #it "raises an IOError on closed stream" do
-  #  lambda { IOSpecs.closed_io.sync }.should raise_error(IOError)
-  #end
+  it "raises an IOError on closed stream" do
+    lambda { IOSpecs.closed_io.sync }.should raise_error(IOError)
+  end
 end
+
+describe "IO#sync" do
+  it "is false by default for STDIN" do
+    STDIN.sync.should == false
+  end
+
+  it "is false by default for STDOUT" do
+    STDOUT.sync.should == false
+  end
+
+  it "is true by default for STDERR" do
+    STDERR.sync.should == true
+  end
 end

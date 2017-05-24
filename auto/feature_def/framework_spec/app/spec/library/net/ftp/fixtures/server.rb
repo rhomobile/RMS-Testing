@@ -3,8 +3,15 @@ module NetFTPSpecs
     attr_accessor :connect_message
     attr_reader :login_user, :login_pass, :login_acct
 
-    def initialize(port = 9876)
-      @server = TCPServer.new("127.0.0.1", port)
+    # hostname or IP address
+    attr_reader :hostname
+    # port number
+    attr_reader :server_port
+
+    def initialize(hostname = "localhost", server_port = 0)
+      @hostname = hostname
+      @server = TCPServer.new(@hostname, server_port)
+      @server_port = @server.addr[1]
 
       @handlers = {}
       @commands = []
@@ -14,8 +21,12 @@ module NetFTPSpecs
     def serve_once
       @thread = Thread.new do
         @socket = @server.accept
-        handle_request
-        @socket.close
+        @socket.setsockopt(Socket::SOL_SOCKET, Socket::SO_OOBINLINE, 1)
+        begin
+          handle_request
+        ensure
+          @socket.close
+        end
       end
     end
 
@@ -159,8 +170,15 @@ module NetFTPSpecs
     def port(arg)
       nums = arg.split(",")
 
-      port = nums[4].to_i * 256 + nums[5].to_i
-      host = nums[0..3].join(".")
+      if nums[0] == "::1"
+        # IPv6
+        port = nums[1].to_i * 256 + nums[2].to_i
+        host = nums[0]
+      else
+        # IPv4
+        port = nums[4].to_i * 256 + nums[5].to_i
+        host = nums[0..3].join(".")
+      end
 
       @datasocket = TCPSocket.new(host, port)
       self.response("200 port opened")

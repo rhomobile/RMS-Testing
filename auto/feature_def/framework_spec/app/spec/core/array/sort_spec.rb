@@ -8,6 +8,10 @@ describe "Array#sort" do
   end
 
   it "does not affect the original Array" do
+    a = [3, 1, 2]
+    a.sort.should == [1, 2, 3]
+    a.should == [3, 1, 2]
+
     a = [0, 15, 2, 3, 4, 6, 14, 5, 7, 12, 8, 9, 1, 10, 11, 13]
     b = a.sort
     a.should == [0, 15, 2, 3, 4, 6, 14, 5, 7, 12, 8, 9, 1, 10, 11, 13]
@@ -79,21 +83,21 @@ describe "Array#sort" do
     a = Array.new(25)
     (0...25).each {|i| a[i] = ArraySpecs::UFOSceptic.new }
 
-    a.sort { -1 }.should be_kind_of(Array)
+    a.sort { -1 }.should be_an_instance_of(Array)
   end
 
   it "does not call #<=> on elements when invoked with a block even if Array is large (Rubinius #412)" do
     a = Array.new(1500)
     (0...1500).each {|i| a[i] = ArraySpecs::UFOSceptic.new }
 
-    a.sort { -1 }.should be_kind_of(Array)
+    a.sort { -1 }.should be_an_instance_of(Array)
   end
 
   it "completes when supplied a block that always returns the same result" do
     a = [2, 3, 5, 1, 4]
-    a.sort {  1 }.should be_kind_of(Array)
-    a.sort {  0 }.should be_kind_of(Array)
-    a.sort { -1 }.should be_kind_of(Array)
+    a.sort {  1 }.should be_an_instance_of(Array)
+    a.sort {  0 }.should be_an_instance_of(Array)
+    a.sort { -1 }.should be_an_instance_of(Array)
   end
 
   it "does not freezes self during being sorted" do
@@ -133,6 +137,20 @@ describe "Array#sort" do
     }.should raise_error(ArgumentError)
   end
 
+  it "sorts an array that has a value shifted off without a block" do
+    a = Array.new(20, 1)
+    a.shift
+    a[0] = 2
+    a.sort.last.should == 2
+  end
+
+  it "sorts an array that has a value shifted off with a block" do
+    a = Array.new(20, 1)
+    a.shift
+    a[0] = 2
+    a.sort {|x, y| x <=> y }.last.should == 2
+  end
+
   it "raises an error if objects can't be compared" do
     a=[ArraySpecs::Uncomparable.new, ArraySpecs::Uncomparable.new]
     lambda {a.sort}.should raise_error(ArgumentError)
@@ -144,18 +162,9 @@ describe "Array#sort" do
     pruned.sort.should == ArraySpecs::LargeTestArraySorted
   end
 
-  ruby_version_is "" ... "1.9.3" do
-    it "returns subclass instance on Array subclasses" do
-      ary = ArraySpecs::MyArray[1, 2, 3]
-      ary.sort.should be_kind_of(ArraySpecs::MyArray)
-    end
-  end
-
-  ruby_version_is "1.9.3" do
-    it "does not return subclass instance on Array subclasses" do
-      ary = ArraySpecs::MyArray[1, 2, 3]
-      ary.sort.should be_kind_of(Array)
-    end
+  it "does not return subclass instance on Array subclasses" do
+    ary = ArraySpecs::MyArray[1, 2, 3]
+    ary.sort.should be_an_instance_of(Array)
   end
 end
 
@@ -205,51 +214,25 @@ describe "Array#sort!" do
     a = Array.new(25)
     (0...25).each {|i| a[i] = ArraySpecs::UFOSceptic.new }
 
-    a.sort! { -1 }.should be_kind_of(Array)
+    a.sort! { -1 }.should be_an_instance_of(Array)
   end
 
   it "does not call #<=> on elements when invoked with a block even if Array is large (Rubinius #412)" do
     a = Array.new(1500)
     (0...1500).each {|i| a[i] = ArraySpecs::UFOSceptic.new }
 
-    a.sort! { -1 }.should be_kind_of(Array)
+    a.sort! { -1 }.should be_an_instance_of(Array)
   end
 
   it "completes when supplied a block that always returns the same result" do
     a = [2, 3, 5, 1, 4]
-    a.sort!{  1 }.should be_kind_of(Array)
-    a.sort!{  0 }.should be_kind_of(Array)
-    a.sort!{ -1 }.should be_kind_of(Array)
+    a.sort!{  1 }.should be_an_instance_of(Array)
+    a.sort!{  0 }.should be_an_instance_of(Array)
+    a.sort!{ -1 }.should be_an_instance_of(Array)
   end
 
-  ruby_version_is '' ... '1.9' do
-    it "raises a TypeError on a frozen array" do
-      lambda { ArraySpecs.frozen_array.sort! }.should raise_error(TypeError)
-    end
-
-    not_compliant_on :rubinius do
-      it "temporarily freezes self and recovers after sorted" do
-        a = [1, 2, 3]
-        a.sort! { |x,y| a.frozen?.should == true; x <=> y }
-        a.frozen?.should == false
-      end
-    end
-  end
-
-  ruby_version_is '1.9' do
-    it "raises a RuntimeError on a frozen array" do
-      lambda { ArraySpecs.frozen_array.sort! }.should raise_error(RuntimeError)
-    end
-
-    it "ignores any changes of self which would take place during sort!ing" do
-      a = [3, 2, 1]
-      a.sort! {|x,y| a << 4; a.should include(4); x <=> y }
-      a.should == [1, 2, 3]
-
-      a = [3, 2, 1]
-      a.sort! {|x,y| a.replace([:a, :b, :c, :d, :e]); x <=> y}
-      a.should == [1, 2, 3]
-    end
+  it "raises a RuntimeError on a frozen array" do
+    lambda { ArraySpecs.frozen_array.sort! }.should raise_error(RuntimeError)
   end
 
   it "returns the specified value when it would break in the given block" do

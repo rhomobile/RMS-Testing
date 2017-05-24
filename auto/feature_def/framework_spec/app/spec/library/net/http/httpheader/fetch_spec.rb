@@ -3,7 +3,7 @@ require 'net/http'
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "Net::HTTPHeader#fetch" do
-  before(:each) do
+  before :each do
     @headers = NetHTTPHeaderSpecs::Example.new
   end
 
@@ -41,10 +41,8 @@ describe "Net::HTTPHeader#fetch" do
     end
 
     # TODO: This raises a NoMethodError: undefined method `join' for "bla":String
-    ruby_bug "http://redmine.ruby-lang.org/issues/show/445", "1.8.7" do
-      it "returns the default value when there is no entry for the passed key" do
-        @headers.fetch("My-Header", "bla").should == "bla"
-      end
+    it "returns the default value when there is no entry for the passed key" do
+      @headers.fetch("My-Header", "bla").should == "bla"
     end
   end
 
@@ -60,10 +58,8 @@ describe "Net::HTTPHeader#fetch" do
     end
 
     # TODO: This raises a NoMethodError: undefined method `join' for "redaeh-ym":String
-    ruby_bug "http://redmine.ruby-lang.org/issues/show/445", "1.8.7" do
-      it "yieldsand returns the block's return value when there is no entry for the passed key" do
-        @headers.fetch("My-Header") { |key| key.reverse }.should == "redaeh-ym"
-      end
+    it "yieldsand returns the block's return value when there is no entry for the passed key" do
+      @headers.fetch("My-Header") { |key| key.reverse }.should == "redaeh-ym"
     end
   end
 end

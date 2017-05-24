@@ -1,4 +1,5 @@
 require File.expand_path('../../spec_helper', __FILE__)
+require File.expand_path('../fixtures/precedence', __FILE__)
 
 # Specifying the behavior of operators in combination could
 # lead to combinatorial explosion. A better way seems to be
@@ -55,7 +56,7 @@ completeness.
 =end
 
 # -----------------------------------------------------------------------
-# It seems that this table is not correct as of MRI 1.8.6
+# It seems that this table is not correct anymore
 # The correct table derived from MRI's parse.y is as follows:
 #
 # Operator              Assoc    Description
@@ -101,20 +102,6 @@ describe "Operators" do
     (++2).should == 2
   end
 
-  ruby_version_is "" ... "1.9" do
-    it "! ~ + have a higher precedence than **" do
-      class FalseClass; def **(a); 1000; end; end
-      (!0**2).should == 1000
-      class FalseClass; undef_method :**; end
-
-      class UnaryPlusTest; def +@; 50; end; end
-      a = UnaryPlusTest.new
-      (+a**2).should == 2500
-
-      (~0**2).should == 1
-    end
-  end
-
   it "** is right-associative" do
     (2**2**3).should == 256
   end
@@ -136,8 +123,16 @@ describe "Operators" do
     (-b % 7).should == 1
   end
 
+  it "treats +/- as a regular send if the arguments are known locals or block locals" do
+    a = PrecedenceSpecs::NonUnaryOpTest.new
+    a.add_num(1).should == [3]
+    a.sub_num(1).should == [1]
+    a.add_str.should == ['11']
+    a.add_var.should == [2]
+  end
+
   it "* / % are left-associative" do
-    (2*1/2).should     == (2*1)/2
+    (2*1/2).should == (2*1)/2
     # Guard against the Mathn library
     # TODO: Make these specs not rely on specific behaviour / result values
     # by using mocks.
@@ -145,13 +140,13 @@ describe "Operators" do
       (2*1/2).should_not == 2*(1/2)
     end
 
-    (10/7/5).should     == (10/7)/5
+    (10/7/5).should == (10/7)/5
     (10/7/5).should_not == 10/(7/5)
 
-    (101 % 55 % 7).should     == (101 % 55) % 7
+    (101 % 55 % 7).should == (101 % 55) % 7
     (101 % 55 % 7).should_not == 101 % (55 % 7)
 
-    (50*20/7%42).should     == ((50*20)/7)%42
+    (50*20/7%42).should == ((50*20)/7)%42
     (50*20/7%42).should_not == 50*(20/(7%42))
   end
 
@@ -169,8 +164,13 @@ describe "Operators" do
     (2-3-4).should == -5
     (4-3+2).should == 3
 
-    class BinaryPlusTest < String; alias_method :plus, :+; def +(a); plus(a) + "!"; end; end
-    s = BinaryPlusTest.new("a")
+    binary_plus = Class.new(String) do
+      alias_method :plus, :+
+      def +(a)
+        plus(a) + "!"
+      end
+    end
+    s = binary_plus.new("a")
 
     (s+s+s).should == (s+s)+s
     (s+s+s).should_not == s+(s+s)
@@ -198,7 +198,7 @@ describe "Operators" do
     class BitwiseAndTest; def &(a); a+1; end; end
     c = BitwiseAndTest.new
 
-    (c & 5 & 2).should     == (c & 5) & 2
+    (c & 5 & 2).should == (c & 5) & 2
     (c & 5 & 2).should_not == c & (5 & 2)
   end
 
@@ -211,10 +211,10 @@ describe "Operators" do
     class OrAndXorTest; def ^(a); a+10; end; def |(a); a-10; end; end
     d = OrAndXorTest.new
 
-    (d ^ 13 ^ 16).should     == (d ^ 13) ^ 16
+    (d ^ 13 ^ 16).should == (d ^ 13) ^ 16
     (d ^ 13 ^ 16).should_not == d ^ (13 ^ 16)
 
-    (d | 13 | 4).should     == (d | 13) | 4
+    (d | 13 | 4).should == (d | 13) | 4
     (d | 13 | 4).should_not == d | (13 | 4)
   end
 
@@ -239,51 +239,17 @@ describe "Operators" do
 
     e = ComparisonTest.new
 
-    (e <= 0 <= 1).should     == (e <= 0) <= 1
+    (e <= 0 <= 1).should == (e <= 0) <= 1
     (e <= 0 <= 1).should_not == e <= (0 <= 1)
 
-    (e < 0 < 1).should     == (e < 0) < 1
+    (e < 0 < 1).should == (e < 0) < 1
     (e < 0 < 1).should_not == e < (0 < 1)
 
-    (e >= 0 >= 1).should     == (e >= 0) >= 1
+    (e >= 0 >= 1).should == (e >= 0) >= 1
     (e >= 0 >= 1).should_not == e >= (0 >= 1)
 
-    (e > 0 > 1).should     == (e > 0) > 1
+    (e > 0 > 1).should == (e > 0) > 1
     (e > 0 > 1).should_not == e > (0 > 1)
-  end
-
-  ruby_version_is "" ... "1.9" do
-    it "<= < > >= have higher precedence than <=> == === != =~ !~" do
-      (1 <=> 5 <  1).should == nil
-      (1 <=> 5 <= 1).should == nil
-      (1 <=> 5 >  1).should == nil
-      (1 <=> 5 >= 1).should == nil
-
-      (1 == 5 <  1).should == false
-      (1 == 5 <= 1).should == false
-      (1 == 5 >  1).should == false
-      (1 == 5 >= 1).should == false
-
-      (1 === 5 <  1).should == false
-      (1 === 5 <= 1).should == false
-      (1 === 5 >  1).should == false
-      (1 === 5 >= 1).should == false
-
-      (1 != 5 <  1).should == true
-      (1 != 5 <= 1).should == true
-      (1 != 5 >  1).should == true
-      (1 != 5 >= 1).should == true
-
-      (1 =~ 5 <  1).should == false
-      (1 =~ 5 <= 1).should == false
-      (1 =~ 5 >  1).should == false
-      (1 =~ 5 >= 1).should == false
-
-      (1 !~ 5 <  1).should == true
-      (1 !~ 5 <= 1).should == true
-      (1 !~ 5 >  1).should == true
-      (1 !~ 5 >= 1).should == true
-    end
   end
 
   it "<=> == === != =~ !~ are non-associative" do
@@ -302,7 +268,7 @@ describe "Operators" do
     (false && 3 != true).should == false
 
     class FalseClass; def =~(o); o == false; end; end
-    (false && true =~ false).should     == (false && (true =~ false))
+    (false && true =~ false).should == (false && (true =~ false))
     (false && true =~ false).should_not == ((false && true) =~ false)
     class FalseClass; undef_method :=~; end
 
@@ -347,7 +313,6 @@ describe "Operators" do
   def oops; raise end
 
   it "? : has higher precedence than rescue" do
-
     (true ? oops : 0 rescue 10).should == 10
   end
 

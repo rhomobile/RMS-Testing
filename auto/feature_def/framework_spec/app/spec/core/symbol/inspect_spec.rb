@@ -2,7 +2,7 @@ require File.expand_path('../../../spec_helper', __FILE__)
 
 describe "Symbol#inspect" do
   symbols = {
-    :fred      => ":fred",
+    fred:         ":fred",
     :fred?     => ":fred?",
     :fred!     => ":fred!",
     :$ruby     => ":$ruby",
@@ -96,21 +96,10 @@ describe "Symbol#inspect" do
     :" "       => ":\" \"",
   }
 
-  ruby_version_is ""..."1.9" do
-    symbols.each do |input, expected|
-      expected = expected[0] if expected.is_a?(Array)
-      it "returns self as a symbol literal for #{expected}" do
-        input.inspect.should   == expected
-      end
-    end
-  end
-
-  ruby_version_is "1.9" do
-    symbols.each do |input, expected|
-      expected = expected[1] if expected.is_a?(Array)
-      it "returns self as a symbol literal for #{expected}" do
-        input.inspect.should   == expected
-      end
+  symbols.each do |input, expected|
+    expected = expected[1] if expected.is_a?(Array)
+    it "returns self as a symbol literal for #{expected}" do
+      input.inspect.should == expected
     end
   end
 end

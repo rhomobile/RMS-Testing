@@ -1,16 +1,10 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
-if System.get_property('platform') != 'ANDROID' &&
-   System.get_property('platform') != 'WINDOWS' && 
-   System.get_property('platform') != 'WINDOWS_DESKTOP'
-
-  describe "Socket.gethostname" do
-    # This currently works in Unix and Windows. Feel free to add guards
-    # for other platforms.
-    it "returns the host name" do
-      Socket.gethostname.should == `hostname`.strip
-    end
+describe "Socket.gethostname" do
+  # This currently works in Unix and Windows. Edit the helper
+  # to add other platforms.
+  it "returns the host name" do
+    Socket.gethostname.should == hostname
   end
-
 end

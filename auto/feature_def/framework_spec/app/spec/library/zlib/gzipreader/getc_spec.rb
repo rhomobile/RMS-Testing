@@ -6,34 +6,20 @@ describe "GzipReader#getc" do
 
   before :each do
     @data = '12345abcde'
-    @zip = "\037\213\b\000,\334\321G\000\00334261MLJNI\005\000\235\005\000$\n\000\000\000"
+    @zip = [31, 139, 8, 0, 44, 220, 209, 71, 0, 3, 51, 52, 50, 54, 49, 77,
+            76, 74, 78, 73, 5, 0, 157, 5, 0, 36, 10, 0, 0, 0].pack('C*')
     @io = StringIO.new @zip
   end
 
-  ruby_version_is ''...'1.9' do
-    it "returns the next byte from the stream" do
-      gz = Zlib::GzipReader.new @io
-      gz.pos.should == 0
+  it "returns the next character from the stream" do
+    gz = Zlib::GzipReader.new @io
+    gz.pos.should == 0
 
-      gz.getc.should == ?1
-      gz.getc.should == ?2
-      gz.getc.should == ?3
-      gz.getc.should == ?4
-      gz.getc.should == ?5
-    end
-  end
-
-  ruby_version_is '1.9' do
-    it "returns the next character from the stream" do
-      gz = Zlib::GzipReader.new @io
-      gz.pos.should == 0
-
-      gz.getc.should == '1'
-      gz.getc.should == '2'
-      gz.getc.should == '3'
-      gz.getc.should == '4'
-      gz.getc.should == '5'
-    end
+    gz.getc.should == '1'
+    gz.getc.should == '2'
+    gz.getc.should == '3'
+    gz.getc.should == '4'
+    gz.getc.should == '5'
   end
 
   it "increments position" do

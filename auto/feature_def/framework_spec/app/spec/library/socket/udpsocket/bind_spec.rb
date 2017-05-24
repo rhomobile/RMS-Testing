@@ -1,5 +1,5 @@
-require 'spec/spec_helper'
-require 'spec/library/socket/fixtures/classes'
+require File.expand_path('../../../../spec_helper', __FILE__)
+require File.expand_path('../../fixtures/classes', __FILE__)
 
 describe "UDPSocket.bind" do
 
@@ -30,5 +30,6 @@ describe "UDPSocket.bind" do
     @socket.bind("", SocketSpecs.port)
     port, host = Socket.unpack_sockaddr_in(@socket.getsockname)
     host.should == "0.0.0.0"
+    port.should == SocketSpecs.port
   end
 end
