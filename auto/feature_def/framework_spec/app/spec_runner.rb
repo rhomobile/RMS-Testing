@@ -1,4 +1,21 @@
-require 'mspec'
+#require 'mspec'
+
+require 'mspec/matchers'
+require 'mspec/expectations'
+require 'mspec/mocks'
+require 'mspec/runner'
+require 'mspec/guards'
+require 'mspec/helpers'
+
+# If the implementation on which the specs are run cannot
+# load pp from the standard library, add a pp.rb file that
+# defines the #pretty_inspect method on Object or Kernel.
+#require 'mspec/pp'
+
+require 'mspec/utils/script'
+require 'mspec/version'
+
+
 require 'spec/spec_helper'
 
 class SpecRunner < MSpecScript
@@ -9,8 +26,11 @@ class SpecRunner < MSpecScript
     # turn on exception backtrace
 #    MSpec.backtrace = true
 
-    #MSpec.guard
-    
+    #MSpec.guard   
+
+  end
+
+  def set_default_files
     #LANGUAGE
 
     app_folder = Rho::RhoFSConnector.get_app_path('app')
@@ -142,10 +162,15 @@ class SpecRunner < MSpecScript
 
   end
 
-  def run
-    MSpec.register_files config[:files]
+  def run( files = nil )
 
-    file_name = File.join(Rho::RhoApplication.get_base_app_path(), 'framework_spec_results.xml' )
+    toRun = (files or config[:files])
+
+    puts "MSpecRunner.run: #{toRun}"
+
+    MSpec.register_files toRun
+
+#    file_name = File.join(Rho::RhoApplication.get_base_app_path(), 'framework_spec_results.xml' )
 
 #    @@formatter = JUnitRhoLogFormatter.new( file_name )
 #    @@formatter.register
@@ -156,7 +181,7 @@ class SpecRunner < MSpecScript
     MSpec.process
 
     # wait for complete output
-    sleep(10)
+#    sleep(10)
 
     MSpec.exit_code
 

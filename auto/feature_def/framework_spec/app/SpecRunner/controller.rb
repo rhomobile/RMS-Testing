@@ -13,6 +13,7 @@ class SpecRunnerController < Rho::RhoController
   def run_specs
     GC.enable()
     @runner = SpecRunner.new
+    @runner.set_default_files
     @code = @runner.run
     @exc_count = MSpec.exc_count
     @count = MSpec.count
@@ -29,7 +30,28 @@ class SpecRunnerController < Rho::RhoController
   end
 
   def run_selected_specs
-    puts "#{@params}"
+    GC.enable()
+    @runner = SpecRunner.new
+
+    files = []
+    @params['specs'].each do |f|
+      files << File.join(File.dirname(f),File.basename(f,'.*'))
+    end
+
+#    @runner.set_files( files )
+    @code = @runner.run files
+    @exc_count = MSpec.exc_count
+    @count = MSpec.count
+
+    total = @count.to_s
+    passed = (@count - @exc_count).to_s
+    failed = @exc_count.to_s
+
+    puts "***Total:  " + total
+    puts "***Passed: " + passed
+    puts "***Failed: " + failed
+
+    render(string: "{ total:#{total}, passed:#{passed}, failed:#{failed} }")
   end
 
 end
