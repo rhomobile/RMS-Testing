@@ -7,11 +7,11 @@ class SpecRunnerController < Rho::RhoController
   def index
     @msg = 'MSpec version: '+MSpec::VERSION
     @code = 0
-    render  
+    render
   end
 
   def run_specs
-    GC.enable()    
+    GC.enable()
     @runner = SpecRunner.new
     @code = @runner.run
     @exc_count = MSpec.exc_count
@@ -27,4 +27,9 @@ class SpecRunnerController < Rho::RhoController
 
     render(string: "{ total:#{total}, passed:#{passed}, failed:#{failed} }")
   end
+
+  def run_selected_specs
+    puts "#{@params}"
+  end
+
 end
