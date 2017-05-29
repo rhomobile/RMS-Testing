@@ -62,6 +62,7 @@
         for (var i = 0; i < filenames.length; i++) {
             var path = Rho.RhoFile.join(aNode.path, filenames[i]);
             if (Rho.RhoFile.isDir(path)) {
+
                 if (filenames[i] !== "fixtures") {
                     var newNode = {};
                     newNode.text = filenames[i];
@@ -71,7 +72,12 @@
                     aNode.children.push(newNode);
                 }
             } else {
-                aNode.children.push({text: filenames[i], path: path, icon: "tree"});
+              var f = filenames[i];
+              var re = /_spec\.(?:rb|iseq)$/;
+              if ( !f.match(re) ) {
+                continue;
+              }
+              aNode.children.push({text: filenames[i], path: path, icon: "tree"});
             }
         }
 

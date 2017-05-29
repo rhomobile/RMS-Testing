@@ -35,6 +35,7 @@ class SpecRunnerController < Rho::RhoController
 
     files = []
     @params['specs'].each do |f|
+      next if !Rho::RhoFile.isFile(f)
       files << File.join(File.dirname(f),File.basename(f,'.*'))
     end
 
