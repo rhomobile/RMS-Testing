@@ -26,7 +26,7 @@ class SpecRunnerController < Rho::RhoController
     puts "***Passed: " + passed
     puts "***Failed: " + failed
 
-    render(string: "{ total:#{total}, passed:#{passed}, failed:#{failed} }")
+    render(string: "{ \"total\":\"#{total}\", \"passed\":\"#{passed}\", \"failed\":\"#{failed}\" }")
   end
 
   def run_selected_specs
@@ -46,12 +46,21 @@ class SpecRunnerController < Rho::RhoController
     total = @count.to_s
     passed = (@count - @exc_count).to_s
     failed = @exc_count.to_s
+    locations = MSpec.exc_locations
 
     puts "***Total:  " + total
     puts "***Passed: " + passed
     puts "***Failed: " + failed
+    puts "***Locations:\n#{locations}"
 
-    render(string: "{ total:#{total}, passed:#{passed}, failed:#{failed} }")
+    result = {}
+    result['total'] = total
+    result['passed'] = passed
+    result['failed'] = failed
+    result['locations'] = locations
+
+    @response["headers"]["Content-Type"] = "application/json"
+    render(string: result.to_json)
   end
 
 end
