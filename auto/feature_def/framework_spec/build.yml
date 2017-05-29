@@ -1,5 +1,4 @@
 ---
-sdk: /Users/mva/projects/rhomobile/rhodes
 name: framework_spec
 bbver: 4.6
 applog: rholog.txt
