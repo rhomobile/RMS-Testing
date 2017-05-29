@@ -71,15 +71,15 @@ class SpecRunnerController < Rho::RhoController
       path = Rho::RhoFile.join(aNode[:path], each)
       if Rho::RhoFile.isDir(path)
         if each != 'fixtures'
-          folder_node = {text: each, path: path, icon: 'folder'}
+          folder_node = {text: each, path: path}
           process_node(folder_node)
           aNode[:children] << folder_node
         end
       else
         f = each
         re = /_spec\.(?:rb|iseq)$/
-        unless f.match(re)
-          aNode[:children] << {text: each, path: path, icon: 'tree'}
+        if f.match(re)
+          aNode[:children] << {text: each, path: path, icon: 'jstree-icon jstree-file'}
         end
       end
     }
