@@ -36,7 +36,7 @@ class SpecRunnerController < Rho::RhoController
     files = []
     @params['specs'].each do |f|
       next if !Rho::RhoFile.isFile(f)
-      files << File.join(File.dirname(f),File.basename(f,'.*'))
+      files << File.join(File.dirname(f), File.basename(f, '.*'))
     end
 
 #    @runner.set_files( files )
@@ -61,6 +61,41 @@ class SpecRunnerController < Rho::RhoController
 
     @response["headers"]["Content-Type"] = "application/json"
     render(string: result.to_json)
+  end
+
+  def process_node(aNode)
+    aNode[:children] = []
+    filenames = Rho::RhoFile.listDir(aNode[:path])
+    filenames.shift(2)
+    filenames.each { |each|
+      path = Rho::RhoFile.join(aNode[:path], each)
+      if Rho::RhoFile.isDir(path)
+        if each != 'fixtures'
+          folder_node = {text: each, path: path, icon: 'folder'}
+          process_node(folder_node)
+          aNode[:children] << folder_node
+        end
+      else
+        f = each
+        re = /_spec\.(?:rb|iseq)$/
+        unless f.match(re)
+          aNode[:children] << {text: each, path: path, icon: 'tree'}
+        end
+      end
+    }
+  end
+
+  def get_nodes
+    data = [
+        {text: 'core', path: Rho::RhoFile.join(Rho::Application.appBundleFolder, 'spec/core')},
+        {text: 'language', path: Rho::RhoFile.join(Rho::Application.appBundleFolder, 'spec/language')},
+        {text: 'library', path: Rho::RhoFile.join(Rho::Application.appBundleFolder, 'spec/library')},
+        {text: 'rhomobile', path: Rho::RhoFile.join(Rho::Application.appBundleFolder, 'spec/rhomobile')}
+    ]
+    data.each { |each| process_node(each) }
+
+    @response['headers']['Content-Type'] = 'application/json'
+    render(string: data.to_json)
   end
 
 end

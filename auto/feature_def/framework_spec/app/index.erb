@@ -1,4 +1,3 @@
-
 <div class="toolbar">
   <h1 id="pageTitle">
     RhodesTest
@@ -9,21 +8,21 @@
 
 <div>
 
-<!--
-<%@color = @code == 0 ? "#00ff00" : "#ff0000"%>
+  <!--
+<% @color = @code == 0 ? "#00ff00" : "#ff0000" %>
 
 <ul id="specrunner" title="SpecRunner" selected="true">
-    <li id="total" style="color:<%=@color%>">waiting results...</li>
-    <li id="passed" style="color:<%=@color%>">waiting results...</li>
-    <li id="failed" style="color:<%=@color%>">waiting results...</li>
+    <li id="total" style="color:<%= @color %>">waiting results...</li>
+    <li id="passed" style="color:<%= @color %>">waiting results...</li>
+    <li id="failed" style="color:<%= @color %>">waiting results...</li>
 </ul>
 -->
-<ul id="specrunner" title="SpecRunner" selected="true">
+  <ul id="specrunner" title="SpecRunner" selected="true">
     <li id="total"></li>
     <li id="passed"></li>
     <li id="failed"></li>
     <li id="specs"></li>
-</ul>
+  </ul>
 
 
 </div>
@@ -32,114 +31,72 @@
 
 <script>
 
-  var opts = {
-    lines: 13 // The number of lines to draw
-  , length: 28 // The length of each line
-  , width: 14 // The line thickness
-  , radius: 42 // The radius of the inner circle
-  , scale: 1 // Scales overall size of the spinner
-  , corners: 1 // Corner roundness (0..1)
-  , color: '#000' // #rgb or #rrggbb or array of colors
-  , opacity: 0.25 // Opacity of the lines
-  , rotate: 0 // The rotation offset
-  , direction: 1 // 1: clockwise, -1: counterclockwise
-  , speed: 1 // Rounds per second
-  , trail: 60 // Afterglow percentage
-  , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
-  , zIndex: 2e9 // The z-index (defaults to 2000000000)
-  , className: 'spinner' // The CSS class to assign to the spinner
-  , top: '50%' // Top position relative to parent
-  , left: '50%' // Left position relative to parent
-  , shadow: false // Whether to render a shadow
-  , hwaccel: false // Whether to use hardware acceleration
-  , position: 'absolute' // Element positioning
-  }
+    var opts = {
+        lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 1 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }
 
-    var renameMe = function RenameMe(aNode) {
-        aNode.children = [];
-        var filenames = Rho.RhoFile.listDir(aNode.path);
-        filenames.splice(0, 2);
-        for (var i = 0; i < filenames.length; i++) {
-            var path = Rho.RhoFile.join(aNode.path, filenames[i]);
-            if (Rho.RhoFile.isDir(path)) {
 
-                if (filenames[i] !== "fixtures") {
-                    var newNode = {};
-                    newNode.text = filenames[i];
-                    newNode.path = path;
-                    newNode.icon = "folder";
-                    renameMe(newNode);
-                    aNode.children.push(newNode);
+
+    $.get( "<%= url_for(action: 'get_nodes', controller: 'SpecRunner')  %>")
+        .done(function( data ) {
+            console.log(data);
+            $("#specTree").jstree({
+                "plugins": ["checkbox"],
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "multiple": true,
+                "core": {
+                    "data": data
                 }
-            } else {
-              var f = filenames[i];
-              var re = /_spec\.(?:rb|iseq)$/;
-              if ( !f.match(re) ) {
-                continue;
-              }
-              aNode.children.push({text: filenames[i], path: path, icon: "tree"});
-            }
-        }
-
-    };
-
-    var getNodes = function (obj, cb) {
-
-      try {
-
-        var data = [
-            {text: "core", path: Rho.RhoFile.join(Rho.Application.appBundleFolder, "spec/core")},
-            {text: "language", path: Rho.RhoFile.join(Rho.Application.appBundleFolder, "spec/language")},
-            {text: "library", path: Rho.RhoFile.join(Rho.Application.appBundleFolder, "spec/library")},
-            {text: "rhomobile", path: Rho.RhoFile.join(Rho.Application.appBundleFolder, "spec/rhomobile")}
-        ];
-        for (var i = 0; i < data.length; i++) {
-            renameMe(data[i]);
-        }
-        cb.call(this, data);
-
-      } catch ( err ) {
-        alert( "ERROR: " + err.toString() );
-      }
-    };
-
-    $("#specTree").jstree({
-        "plugins": ["checkbox"],
-        "checkbox": {
-            "keep_selected_style": false
-        },
-        "multiple": true,
-        "core": {
-            "data": getNodes
-        }
-    });
-
-    var createSpecInfo = function( root, info ) {
-
-      for ( var i = 0; i < info.length; ++i ) {
-        var d = $('<div class="foldable"></div>');
-	var specInfo = info[i];
-        d.text(specInfo.message);
-
-        for ( var j = 0; j < specInfo.backtrace.length; ++ j ) {
-          var line = specInfo.backtrace[j];
-          var btdiv = $('<div class="btline"></div>');
-          btdiv.text(line);
-          d.append(btdiv);
-        }
-
-        d.click(function(){
-          $(this).children('.btline').slideToggle('slow');
+            });
         });
 
-        root.append(d);
-      }
+    var createSpecInfo = function (root, info) {
+
+        for (var i = 0; i < info.length; ++i) {
+            var d = $('<div class="foldable"></div>');
+            var specInfo = info[i];
+            d.text(specInfo.message);
+
+            for (var j = 0; j < specInfo.backtrace.length; ++j) {
+                var line = specInfo.backtrace[j];
+                var btdiv = $('<div class="btline"></div>');
+                btdiv.text(line);
+                d.append(btdiv);
+            }
+
+            d.click(function () {
+                $(this).children('.btline').slideToggle('slow');
+            });
+
+            root.append(d);
+        }
 
     };
 
     $(".runSpec").on("click", function () {
         var selectedNodes = $('#specTree').jstree(true).get_selected(true);
-        var data = {specs:[]};
+        var data = {specs: []};
         for (var i = 0; i < selectedNodes.length; i++) {
             if (selectedNodes[i].children.length === 0) {
                 data.specs.push(selectedNodes[i].original.path)
@@ -156,52 +113,52 @@
         var target = document.getElementById('specrunner');
         var spinner = new Spinner(opts).spin(target);
 
-        $.post( {
-          url: "<%= url_for(action: 'run_selected_specs', controller: 'SpecRunner')  %>", 
-          data: data,
-          dataType: 'json',
-          timeout: -1
-        }).done(function(response) {
-            total.innerText =  "Total:  " + response.total;
+        $.post({
+            url: "<%= url_for(action: 'run_selected_specs', controller: 'SpecRunner')  %>",
+            data: data,
+            dataType: 'json',
+            timeout: -1
+        }).done(function (response) {
+            total.innerText = "Total:  " + response.total;
             passed.innerText = "Passed: " + response.passed;
             failed.innerText = "Failed: " + response.failed;
 
-            Object.keys(response.locations).forEach(function(key) {
+            Object.keys(response.locations).forEach(function (key) {
 
-              var info = response.locations[key];
-              var d = $('<div class="specinfo"></div>');
-              d.text(key);
-              
-              createSpecInfo(d,info);
+                var info = response.locations[key];
+                var d = $('<div class="specinfo"></div>');
+                d.text(key);
 
-              $("#specs").append(d);
+                createSpecInfo(d, info);
+
+                $("#specs").append(d);
             });
-/*
-            for( var i = 0; i < response.locations.length; ++i ) {
-              var loc = response.locations[i];
-              var d = $('<div class="foldable"></div>');
-              d.text(loc.message);
+          /*
+           for( var i = 0; i < response.locations.length; ++i ) {
+           var loc = response.locations[i];
+           var d = $('<div class="foldable"></div>');
+           d.text(loc.message);
 
-              for ( var j = 0; j < loc.backtrace.length; ++ j ) {
-                var line = loc.backtrace[j];
-                var btdiv = $('<div class="btline"></div>');
-                btdiv.text(line);
-                d.append(btdiv);
-              }
+           for ( var j = 0; j < loc.backtrace.length; ++ j ) {
+           var line = loc.backtrace[j];
+           var btdiv = $('<div class="btline"></div>');
+           btdiv.text(line);
+           d.append(btdiv);
+           }
 
-              d.click(function(){
-                $(this).children('.btline').slideToggle('slow');
-              });
+           d.click(function(){
+           $(this).children('.btline').slideToggle('slow');
+           });
 
-              $("#locations").append(d);
-            }
-*/
+           $("#locations").append(d);
+           }
+           */
 
-        }).fail(function(xhr, status, error) {
+        }).fail(function (xhr, status, error) {
             total.innerText = "Error";
             passed.innerText = status;
             failed.innerText = JSON.stringify(error);
-        }).always(function() {
+        }).always(function () {
             spinner.stop();
         });
     });
