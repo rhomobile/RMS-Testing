@@ -51,7 +51,6 @@ class SpecRunnerController < Rho::RhoController
     puts "***Total:  " + total
     puts "***Passed: " + passed
     puts "***Failed: " + failed
-    puts "***Locations:\n#{locations}"
 
     result = {}
     result['total'] = total

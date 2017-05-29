@@ -22,7 +22,7 @@
     <li id="total"></li>
     <li id="passed"></li>
     <li id="failed"></li>
-    <li id="locations"></li>
+    <li id="specs"></li>
 </ul>
 
 
@@ -108,6 +108,29 @@
         }
     });
 
+    var createSpecInfo = function( root, info ) {
+
+      for ( var i = 0; i < info.length; ++i ) {
+        var d = $('<div class="foldable"></div>');
+	var specInfo = info[i];
+        d.text(specInfo.message);
+
+        for ( var j = 0; j < specInfo.backtrace.length; ++ j ) {
+          var line = specInfo.backtrace[j];
+          var btdiv = $('<div class="btline"></div>');
+          btdiv.text(line);
+          d.append(btdiv);
+        }
+
+        d.click(function(){
+          $(this).children('.btline').slideToggle('slow');
+        });
+
+        root.append(d);
+      }
+
+    };
+
     $(".runSpec").on("click", function () {
         var selectedNodes = $('#specTree').jstree(true).get_selected(true);
         var data = {specs:[]};
@@ -119,7 +142,7 @@
         console.log(data);
 
 
-        locations.innerHTML = ""
+        specs.innerHTML = ""
         total.innerText = "";
         passed.innerText = "";
         failed.innerText = "";
@@ -137,6 +160,17 @@
             passed.innerText = "Passed: " + response.passed;
             failed.innerText = "Failed: " + response.failed;
 
+            Object.keys(response.locations).forEach(function(key) {
+
+              var info = response.locations[key];
+              var d = $('<div class="specinfo"></div>');
+              d.text(key);
+              
+              createSpecInfo(d,info);
+
+              $("#specs").append(d);
+            });
+/*
             for( var i = 0; i < response.locations.length; ++i ) {
               var loc = response.locations[i];
               var d = $('<div class="foldable"></div>');
@@ -155,6 +189,7 @@
 
               $("#locations").append(d);
             }
+*/
 
         }).fail(function(xhr, status, error) {
             total.innerText = "Error";

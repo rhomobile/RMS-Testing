@@ -1,8 +1,13 @@
 .foldable {
-  font-weight: bold;
+  color: grey;
 }
 
 .btline {
   display: none;
   color:red
+}
+
+.specinfo {
+  color: red;
+  font-weight: bold;
 }
