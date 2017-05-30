@@ -146,4 +146,18 @@ class SpecRunnerController < Rho::RhoController
     render(string: data.to_json)
   end
 
+  def do_eval
+    code = @params['code']
+    result = {}
+    begin
+      result[:result] = eval(code)
+    rescue Exception => e
+      result[:error] = e.to_s
+    end
+
+    puts ">>>>>EVAL RESULT: #{result}"
+    @response['headers']['Content-Type'] = 'application/json'
+    render(string: result.to_json)
+  end
+
 end

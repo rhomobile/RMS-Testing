@@ -4,6 +4,43 @@
   </h1>
 </div>
 
+<div>
+  <input type="button" id="eval" value="Eval"/>
+  <br>
+  <div>Enter Ruby code here</div>
+  <textarea id="ruby_code" rows="5" width="100%"></textarea>
+  <br>
+  <div>Ruby eval result</div>
+  <div id="ruby_result"></div>
+  <br>
+  <div>Ruby eval error</div>
+  <div id="ruby_error"></div>
+  <br>
+  <br>
+
+</div>
+
+<script>
+
+  $("#eval").click( function () {
+    try {
+      $.post({
+        url: "<%= url_for(action: 'do_eval', controller: 'SpecRunner')  %>",
+        data: { code: ruby_code.value },
+        timeout: 10000
+      }).done(function (response) {
+        ruby_result.innerText = response['result'];
+        ruby_error.innerText = response['error'];
+      }).fail(function( xhr, status, error) {
+        ruby_result.innerText = status;
+      });
+    } catch(e) {
+      ruby_result.innerText = e;
+    }
+  });
+
+</script>
+
 <button class="runSpec button">Run Specs!</button>
 
 <div>
