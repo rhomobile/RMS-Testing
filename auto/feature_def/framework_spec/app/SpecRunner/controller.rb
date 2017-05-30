@@ -73,15 +73,22 @@ class SpecRunnerController < Rho::RhoController
         if each != 'fixtures'
           folder_node = {text: each, path: path}
           process_node(folder_node)
-          aNode[:children] << folder_node
+          aNode[:children] << folder_node if (folder_node[:children].length>0)
         end
       else
         f = each
-        re = /_spec\.(?:rb|iseq)$/
+        re = /_spec#{RHO_RB_EXT}$/
         if f.match(re)
           aNode[:children] << {text: each, path: path, icon: 'jstree-icon jstree-file'}
         end
       end
+    }
+
+    aNode[:children].sort! { |a,b|
+      la = (a[:children] and a[:children].length>0)?0:1
+      lb = (b[:children] and b[:children].length>0)?0:1
+
+      [ la, a[:text] ] <=> [ lb, b[:text] ]
     }
   end
 
