@@ -176,6 +176,8 @@ class SpecRunner < MSpecScript
 
     puts "MSpecRunner.run: #{toRun}"
 
+    MSpec.enable_feature :encoding
+
     MSpec.register_files toRun
 
 #    file_name = File.join(Rho::RhoApplication.get_base_app_path(), 'framework_spec_results.xml' )
