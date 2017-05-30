@@ -59,6 +59,7 @@ class SpecRunnerController < Rho::RhoController
     result['passed'] = passed
     result['failed'] = failed
     result['locations'] = locations
+    result['not_supported'] = MSpec.not_supported_count
 
     @response["headers"]["Content-Type"] = "application/json"
     render(string: result.to_json)

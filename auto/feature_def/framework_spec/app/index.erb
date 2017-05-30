@@ -21,6 +21,7 @@
     <li id="total"></li>
     <li id="passed"></li>
     <li id="failed"></li>
+    <li id="not_supported"></li>
     <li id="specs"></li>
   </ul>
 
@@ -78,6 +79,11 @@
             var specInfo = info[i];
             d.text(specInfo.message);
 
+            if (specInfo.not_supported) {
+              d.addClass('rho_not_supported');
+              root.addClass('rho_partial_not_supported');
+            }
+
             for (var j = 0; j < specInfo.backtrace.length; ++j) {
                 var line = specInfo.backtrace[j];
                 var btdiv = $('<div class="btline"></div>');
@@ -109,6 +115,7 @@
         total.innerText = "";
         passed.innerText = "";
         failed.innerText = "";
+        not_supported.innerText = "";
 
         var target = document.getElementById('specrunner');
         var spinner = new Spinner(opts).spin(target);
@@ -122,6 +129,7 @@
             total.innerText = "Total:  " + response.total;
             passed.innerText = "Passed: " + response.passed;
             failed.innerText = "Failed: " + response.failed;
+            not_supported.innerText = "Not supported: " + response.not_supported;
 
             Object.keys(response.locations).forEach(function (key) {
 
