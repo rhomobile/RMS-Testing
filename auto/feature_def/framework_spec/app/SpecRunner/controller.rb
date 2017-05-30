@@ -1,5 +1,6 @@
 require 'rho/rhocontroller'
 require 'spec_runner'
+#require 'pathname'
 
 class SpecRunnerController < Rho::RhoController
 
@@ -62,8 +63,47 @@ class SpecRunnerController < Rho::RhoController
     @response["headers"]["Content-Type"] = "application/json"
     render(string: result.to_json)
   end
+=begin
+  def expand_children( hval )
+    n = {}   
+    hval.each do |k,v|
+     if k==:children
+       n[:children] = []   
+       hval[:children].each do |k,v|
+         n[:children] << expand_children(v)
+       end
+     else
+      n[k] = v
+     end
+    end
+    n
+  end
+=end
 
   def process_node(aNode)
+=begin
+    aNode[:children] = []
+
+    nodehash = {}
+    nodehash[:children] = {}
+
+    pathNode = Pathname.new(aNode)
+
+    Dir.glob( File.join(aNode,"**/*_spec.#{RHO_RB_EXT}") ) do |f|
+     pathFile = Pathname.new(f)
+     relpath = pathFile.relative_path_from( pathNode )
+     pathParts = relpath.each_filename.to_a
+     
+     node = nodehash
+     pathParts[0..-2].each do |part|
+       node[:children][part] = { text: part, path: '', :children => {} } unless node[:children][part]
+       node = node[:children][part]
+     end
+
+     node[:children][pathParts[-1]] = {text: pathParts[-1], path: path, icon: 'jstree-icon jstree-file'}
+    end
+=end
+
     aNode[:children] = []
     filenames = Rho::RhoFile.listDir(aNode[:path])
     filenames.shift(2)
