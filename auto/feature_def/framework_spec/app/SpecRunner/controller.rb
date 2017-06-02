@@ -58,10 +58,29 @@ class SpecRunnerController < Rho::RhoController
     result['total'] = total
     result['passed'] = passed
     result['failed'] = failed
-    result['locations'] = locations
+    result['locations'] = {}
     result['not_supported'] = MSpec.not_supported_count
 
     @response["headers"]["Content-Type"] = "application/json"
+
+    locations.each do |key,infos|
+      infos_array = []
+  
+      infos.each do |info|
+        modified_info = {}
+        info.each do |k,v|
+          if v.is_a?(String)
+            modified_info[k] = v.scrub
+          else
+            modified_info[k] = v
+          end
+        end
+
+        infos_array << modified_info
+      end
+      result['locations'][key] = infos_array
+    end
+
     render(string: result.to_json)
   end
 =begin
