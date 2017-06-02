@@ -1,9 +1,9 @@
-=begin
 use_realpath = File.respond_to?(:realpath)
 root = File.dirname(__FILE__)
 dir = "fixtures/code"
 CODE_LOADING_DIR = use_realpath ? File.realpath(dir, root) : File.expand_path(dir, root)
 
+=begin
 # Running directly with ruby some_spec.rb
 unless ENV['MSPEC_RUNNER']
   begin
