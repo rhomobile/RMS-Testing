@@ -1,3 +1,5 @@
+raise "RHO: not supported"
+
 describe :process_exec, shared: true do
   it "raises Errno::ENOENT for an empty string" do
     lambda { @object.exec "" }.should raise_error(Errno::ENOENT)

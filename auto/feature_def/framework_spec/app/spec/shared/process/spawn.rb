@@ -1,3 +1,5 @@
+raise "RHO: not supported"
+
 newline = "\n"
 platform_is :windows do
   newline = "\r\n"
