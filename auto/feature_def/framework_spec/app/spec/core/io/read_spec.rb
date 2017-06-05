@@ -105,6 +105,9 @@ describe "IO.read" do
 end
 
 describe "IO.read from a pipe" do
+
+  raise "RHO: not supported"
+
   it "runs the rest as a subprocess and returns the standard output" do
     cmd = "|sh -c 'echo hello'"
     platform_is :windows do
