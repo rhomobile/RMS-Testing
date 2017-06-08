@@ -2,7 +2,10 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../../../fixtures/code_loading', __FILE__)
 
 describe "Kernel#require_relative with a relative path" do
-  it "needs to be reviewed for spec completeness"
+
+  raise 'RHO: not supported'
+
+  it "needs to be reviewed for spec completeness"  
 
   before :each do
     CodeLoadingSpecs.spec_setup

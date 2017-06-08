@@ -1,4 +1,6 @@
 describe :kernel_load, shared: true do
+  raise "RHO: not supported"
+
   before :each do
     CodeLoadingSpecs.spec_setup
     @path = File.expand_path "load_fixture.rb", CODE_LOADING_DIR
@@ -129,6 +131,7 @@ describe :kernel_load, shared: true do
     end
 
     it "expands a tilde to the HOME environment variable as the path to load" do
+      raise 'RHO: not supported'
       @object.require("~/load_fixture.rb").should be_true
       ScratchPad.recorded.should == [:loaded]
     end

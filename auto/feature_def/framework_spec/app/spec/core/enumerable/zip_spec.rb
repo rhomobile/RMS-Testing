@@ -2,7 +2,6 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require File.expand_path('../fixtures/classes', __FILE__)
 
 describe "Enumerable#zip" do
-
   it "combines each element of the receiver with the element of the same index in arrays given as arguments" do
     EnumerableSpecs::Numerous.new(1,2,3).zip([4,5,6],[7,8,9]).should == [[1,4,7],[2,5,8],[3,6,9]]
     EnumerableSpecs::Numerous.new(1,2,3).zip.should == [[1],[2],[3]]
@@ -27,6 +26,8 @@ describe "Enumerable#zip" do
   end
 
   it "converts arguments to enums using #to_enum" do
+    #RHO crashes on android
+    raise "RHO: not supported"
     convertable = EnumerableSpecs::EnumConvertable.new(4..6)
     EnumerableSpecs::Numerous.new(1,2,3).zip(convertable).should == [[1,4],[2,5],[3,6]]
     convertable.called.should == :to_enum
@@ -34,9 +35,10 @@ describe "Enumerable#zip" do
   end
 
   it "gathers whole arrays as elements when each yields multiple" do
+    #RHO crashes on android
+    raise "RHO: not supported"
     multi = EnumerableSpecs::YieldsMulti.new
     multi.zip(multi).should == [[[1, 2], [1, 2]], [[3, 4, 5], [3, 4, 5]], [[6, 7, 8, 9], [6, 7, 8, 9]]]
   end
-
 end
 

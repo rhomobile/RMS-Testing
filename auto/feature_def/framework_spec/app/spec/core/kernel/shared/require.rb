@@ -1,4 +1,6 @@
 describe :kernel_require_basic, shared: true do
+  raise "RHO: not supported"
+
   describe "(path resolution)" do
     it "loads an absolute path" do
       path = File.expand_path "load_fixture.rb", CODE_LOADING_DIR
@@ -491,11 +493,14 @@ describe :kernel_require, shared: true do
 
     # "#3171"
     it "performs tilde expansion on a .rb file before storing paths in $LOADED_FEATURES" do
+      #RHO
+      raise 'RHO: not supported'
       @object.require("~/load_fixture.rb").should be_true
       $LOADED_FEATURES.should include(@path)
     end
 
     it "performs tilde expansion on a non-extensioned file before storing paths in $LOADED_FEATURES" do
+      raise 'RHO: not supported'
       @object.require("~/load_fixture").should be_true
       $LOADED_FEATURES.should include(@path)
     end
