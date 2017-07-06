@@ -8,7 +8,7 @@ require 'openssl'
 require 'net/http'
 require 'rexml/document'
 require 'json'
-
+require 'fileutils'
 
 
 
@@ -162,6 +162,23 @@ $secure_server_with_client_auth = WEBrick::HTTPServer.new(:Port => securePortWit
                                          :DocumentRoot => "Documents"
                                          )
 
+
+config = { :Realm => 'specs' }
+FileUtils.rm 'my_password_file'
+htpasswd = WEBrick::HTTPAuth::Htpasswd.new 'my_password_file'
+htpasswd.auth_type = WEBrick::HTTPAuth::DigestAuth
+htpasswd.set_passwd config[:Realm], 'specuser', 'specpassword'
+htpasswd.flush
+config[:UserDB] = htpasswd
+digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
+
+
+$local_server.mount_proc '/digest_auth_get' do |req,res|
+  digest_auth.authenticate req, res
+  res.body = "OK"
+  res.content_length = res.body.length
+  res.status = 200
+end
 
 $local_server.mount_proc '/slow_get' do |req,res|
   sleep(2)
@@ -468,6 +485,14 @@ $secure_server.mount_proc '/download_image' do |req,res|
     res["content-type"]="image/jpeg"
     res.status = 200
 end
+
+$secure_server.mount_proc '/digest_auth_get' do |req,res|
+  digest_auth.authenticate req, res
+  res.body = "OK"
+  res.content_length = res.body.length
+  res.status = 200
+end
+
 
 
 $secure_server_with_client_auth.mount_proc '/test_methods' do |req,res|

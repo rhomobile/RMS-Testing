@@ -1322,6 +1322,153 @@ describe('Network JS API', function() {
             }
         );
     });
+
+    it ('GET to insecure server with digest HTTP auth', function() {
+        var get_props = {
+            url : srvURL + "/digest_auth_get",
+            authType: Rho.Network.AUTH_DIGEST,
+            authUser: 'specuser',
+            authPassword: 'specpassword'
+       };
+
+       var callbackCalled = false;
+       var status = '';
+
+       var get_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+
+        runs( function() {
+                Rho.Network.get(get_props, get_callback);
+            }
+        );
+
+        waitsFor(function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+
+        runs(function() {
+                expect(status).toEqual('ok');
+                expect(body).toEqual('OK');
+            }
+        );
+    });
+
+    it ('GET to secure server with digest HTTP auth', function() {
+        var get_props = {
+            url : httpsSrvURL + "/digest_auth_get",
+            authType: Rho.Network.AUTH_DIGEST,
+            authUser: 'specuser',
+            authPassword: 'specpassword',
+            verifyPeerCertificate: false
+       };
+
+       var callbackCalled = false;
+       var status = '';
+
+       var get_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+
+        runs( function() {
+                Rho.Network.get(get_props, get_callback);
+            }
+        );
+
+        waitsFor(function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+
+        runs(function() {
+                expect(status).toEqual('ok');
+                expect(body).toEqual('OK');
+            }
+        );
+    });
+
+    it ('POST to insecure server with digest HTTP auth', function() {
+        var get_props = {
+            url : srvURL + "/digest_auth_get",
+            authType: Rho.Network.AUTH_DIGEST,
+            authUser: 'specuser',
+            authPassword: 'specpassword'
+       };
+
+       var callbackCalled = false;
+       var status = '';
+
+       var get_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+
+        runs( function() {
+                Rho.Network.post(get_props, get_callback);
+            }
+        );
+
+        waitsFor(function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+
+        runs(function() {
+                expect(status).toEqual('ok');
+                expect(body).toEqual('OK');
+            }
+        );
+    });
+
+    it ('POST to secure server with digest HTTP auth', function() {
+        var get_props = {
+            url : httpsSrvURL + "/digest_auth_get",
+            authType: Rho.Network.AUTH_DIGEST,
+            authUser: 'specuser',
+            authPassword: 'specpassword',
+            verifyPeerCertificate: false
+       };
+
+       var callbackCalled = false;
+       var status = '';
+
+       var get_callback = function(args) {
+            status = args['status'];
+            body = args['body'];
+            callbackCalled = true;
+       }
+
+        runs( function() {
+                Rho.Network.post(get_props, get_callback);
+            }
+        );
+
+        waitsFor(function() {
+                return callbackCalled;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+
+        runs(function() {
+                expect(status).toEqual('ok');
+                expect(body).toEqual('OK');
+            }
+        );
+    });
+
     
     }
 });
