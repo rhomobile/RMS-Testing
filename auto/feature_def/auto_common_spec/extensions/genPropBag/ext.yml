@@ -9,4 +9,4 @@ project_paths:
   wp8: ext/platform/wp8/GenPropBag.vcxproj
   wm: ext/platform/wm/GenPropBag.vcproj
   
-xml_api_paths: ext/GenPropBag.xml
+xml_api_paths: ext/genpropbag.xml
