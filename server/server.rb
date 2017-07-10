@@ -164,7 +164,8 @@ $secure_server_with_client_auth = WEBrick::HTTPServer.new(:Port => securePortWit
 
 
 config = { :Realm => 'specs' }
-FileUtils.rm 'my_password_file'
+pfile = 'my_password_file'
+FileUtils.rm pfile if File.exists?(pfile)
 htpasswd = WEBrick::HTTPAuth::Htpasswd.new 'my_password_file'
 htpasswd.auth_type = WEBrick::HTTPAuth::DigestAuth
 htpasswd.set_passwd config[:Realm], 'specuser', 'specpassword'
