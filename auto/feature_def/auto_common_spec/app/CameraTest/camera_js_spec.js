@@ -44,7 +44,7 @@ describe("Camera JS API Test", function() {
 					    if(isAndroidPlatform()){
 					    	expect(defaultobj.saveToDeviceGallery).toEqual(false);
 					    	expect(defaultobj.colorModel).toEqual('rgb');
-					    	expect(defaultobj.useSystemViewfinder).toEqual(false);
+					    	expect(defaultobj.useSystemViewfinder).toEqual(true);
 					    };
 					    //expect(defaultobj.flashMode).toEqual('off');
 						expect(defaultobj.compressionFormat).toEqual('jpg');

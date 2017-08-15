@@ -40,7 +40,9 @@ arrConstants['Rho.AudioCapture'] = [{
   constant: 'Rho.AudioCapture.MIC',
   value: 'mic',
   applicableto: 'js'
-}, {
+},
+/*
+{
   constant: 'Rho.AudioCapture.CAMCORDER',
   value: 'camcorder',
   applicableto: 'js'
@@ -60,11 +62,15 @@ arrConstants['Rho.AudioCapture'] = [{
   constant: 'Rho.AudioCapture.ENCODER_AAC_LC',
   value: 'AAC_LC',
   applicableto: 'js'
-}, {
+},
+*/
+ {
   constant: 'Rho.AudioCapture.ENCODER_AAC',
   value: 'AAC',
   applicableto: 'js'
-}, {
+},
+/*
+ {
   constant: 'Rho.AudioCapture.ENCODER_AAC_ELD',
   value: 'AAC_ELD',
   applicableto: 'js'
@@ -72,7 +78,9 @@ arrConstants['Rho.AudioCapture'] = [{
   constant: 'Rho.AudioCapture.ENCODER_AAC_HE',
   value: 'AAC_HE',
   applicableto: 'js'
-}, {
+},
+*/
+ {
   constant: 'Rho.AudioCapture.ENCODER_AMR_NB',
   value: 'AMR_NB',
   applicableto: 'js'
@@ -410,6 +418,7 @@ arrConstants['Rho.Barcode'] = [{
   value: 'onPowerOutOfRange',
   applicableto: 'js'
 }];
+if (Rho.System.isSymbolDevice) {
 arrConstants['Rho.CardReader'] = [{
   constant: 'Rho.CardReader.MSR9000',
   value: 'msr9000',
@@ -443,6 +452,7 @@ arrConstants['Rho.CardReader'] = [{
   value: 'msr3000',
   applicableto: 'js'
 }];
+}
 arrConstants['Rho.Camera'] = [{
   constant: 'Rho.Camera.CAMERA_TYPE_BACK',
   value: 'back',
@@ -533,6 +543,7 @@ arrConstants['Rho.Battery'] = [{
   value: 'down',
   applicableto: 'js'
 }];
+/*
 arrConstants['Rho.SimulScan'] = [{
   constant: 'Rho.SimulScan.FLASH_OFF',
   value: 'off',
@@ -636,6 +647,7 @@ arrConstants['Rho.Log'] = [{
   value: 'uri',
   applicableto: 'js'
 }];
+*/
 arrConstants['Rho.NativeTabbar'] = [];
 arrConstants['Rho.NativeToolbar'] = [];
 arrConstants['Rho.Network'] = [{
