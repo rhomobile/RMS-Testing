@@ -21,7 +21,22 @@ symbian:
   uid: '0xe1a1ef92'
 android:
   version: 4.4.2
-  extensions: ["nativeBridgeTest", "emdk3-manager", "barcode", "screenorientation", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation', "mediacapture","printing", "printing_zebra"]
+  extensions: 
+  - "nativeBridgeTest"
+  - "emdk3-manager"
+  - "barcode"
+  - "screenorientation"
+  - "indicators"
+  - "sensor"
+  - "websocket"
+  - "eventsource"
+  - "audiocapture"
+  - 'screenorientation'
+  - "mediacapture"
+  - "printing"
+  - "printing_zebra"
+  - "instrumentation"
+
   capabilities:
   - native_browser
 wm:
