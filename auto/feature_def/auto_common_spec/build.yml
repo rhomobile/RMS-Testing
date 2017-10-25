@@ -2,7 +2,7 @@ sdkversion: 5.5
 name: auto_common_spec
 version: 1.0
 vendor: rhomobile
-build: release
+build: debug
 bbver: 4.6
 applog: rholog.txt
 iphone:
@@ -20,6 +20,9 @@ wp8:
 symbian:
   uid: '0xe1a1ef92'
 android:
+  abis:
+  - arm
+  - x86
   version: 4.4.2
   extensions: 
   - "nativeBridgeTest"
