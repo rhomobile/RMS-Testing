@@ -22,7 +22,7 @@ symbian:
 android:
   abis:
   - arm
-  - x86
+#  - x86
   version: 4.4.2
   extensions: 
   - "nativeBridgeTest"
