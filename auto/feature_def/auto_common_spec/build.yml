@@ -1,5 +1,4 @@
 sdkversion: 5.5
-sdk: ../../../../rhodes/
 name: auto_common_spec
 version: 1.0
 vendor: rhomobile
