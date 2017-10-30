@@ -302,6 +302,8 @@ describe("Application JS API", function () {
 			//expect(path).toMatch(/auto_common_spec/);
             if(isApplePlatform())
                 expect(path).toMatch(/Library\/Caches\/Private Documents\/apps/);
+            else if (isUWPPlatform())
+                expect(path).toMatch(/LocalState/);
             else
                 expect(path).toMatch(/auto_common_spec/);
 			expect(Rho.RhoFile.isDir(path)).toBeTruthy();
@@ -356,6 +358,9 @@ describe("Application JS API", function () {
     		//expect(path).toMatch(/auto_common_spec/);
             if(isApplePlatform())
                 expect(path).toMatch(/Documents\/apps/);
+            else if (isUWPPlatform()){
+                expect(path).toMatch(/LocalState/);
+            }
             else
                 expect(path).toMatch(/auto_common_spec/);
     		expect(Rho.RhoFile.isDir(path)).toBeTruthy();
