@@ -7,7 +7,7 @@ bbver: 4.6
 applog: rholog.txt
 iphone:
   configuration: Release
-  sdk: iphonesimulator9.2
+  sdk: latest
   provisionprofile:
   codesignidentity: "iPhone Developer"
   entitlements:
