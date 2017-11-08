@@ -13,16 +13,20 @@ iphone:
   entitlements:
   BundleIdentifier: com.rhomobile.autocommonspec
   BundleURLScheme: autocommonspec
-  extensions: ["nativeBridgeTest", "barcode", "sensor", "screenorientation", "audiocapture", "mediacapture", "appEvents", "printing", "printing_zebra"]
+  extensions: ["nativeBridgeTest", "barcode", "sensor", "screenorientation", "audiocapture", "mediacapture", "appEvents", "printing", "printing_zebra", "signature", "genPropBag", "logCapture"]
 wp8:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
-  extensions: ["mediacapture"]
+  extensions: ["mediacapture", "signature", "genPropBag", "logCapture"]
 uwp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
   target: 'x86'
   extensions: 
     - "sensor"
     - "mediacapture"
+win32:
+  msvc: 2015
+  deployqt: 1
+  deploymsvc: 1
 symbian:
   uid: '0xe1a1ef92'
 android:
@@ -45,6 +49,9 @@ android:
   - "printing"
   - "printing_zebra"
   - "instrumentation"
+  - "signature"
+  - "genPropBag"
+  - "logCapture"
 
   capabilities:
   - native_browser
@@ -53,7 +60,6 @@ wm:
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
   #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-  extensions: ["barcode", "screenorientation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle", "mediacapture"]
+  extensions: ["barcode", "screenorientation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle", "mediacapture", "signature", "genPropBag", "logCapture"]
 #capabilities:
 
-extensions: ["genPropBag", "logCapture", "signature"]
