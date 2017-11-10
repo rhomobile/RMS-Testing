@@ -12,7 +12,10 @@ iphone:
   codesignidentity: ""
   configuration: Release
   #extensions: ["digest-sha1"]   
-
+uwp:
+  productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
+  target: 'x86'
+    
 android:
   version: 4.4.2
   
