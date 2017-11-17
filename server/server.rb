@@ -181,6 +181,27 @@ $local_server.mount_proc '/digest_auth_get' do |req,res|
   res.status = 200
 end
 
+$local_server.mount_proc '/get_session' do |req,res|
+  require 'securerandom'
+  session = SecureRandom.base64(64)
+  cookie = WEBrick::Cookie.new('session', session)
+  res.cookies.push cookie  
+  res.status = 200
+
+  res["Access-Control-Allow-Origin"] = req["Origin"]
+  res["Access-Control-Allow-Credentials"] = 'true'
+end
+
+$local_server.mount_proc '/return_session' do |req,res|
+  req.cookies.each { |c|
+    res.body = c.value if c.name=='session'
+  }  
+  res.status = 200
+
+  res["Access-Control-Allow-Origin"] = req["Origin"]
+  res["Access-Control-Allow-Credentials"] = 'true'
+end
+
 $local_server.mount_proc '/slow_get' do |req,res|
   sleep(2)
   res.body = "OK"
