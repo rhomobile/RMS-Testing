@@ -21,9 +21,9 @@ var parseCookie = function( cookie ) {
     c.name = parsed.name;
     c.value = parsed.value;
 
-    for ( var i = 1; i < pairs.size; ++i ) {
-        parsed = parsePair(pairs[i]);        
-        c[parsed.name] = parsed.value;
+    for ( var i = 1; i < pairs.length; ++i ) {
+        parsed = parsePair(pairs[i]);
+        c[parsed.name.toLowerCase().trim()] = parsed.value;
     }
 
     return c;
@@ -71,6 +71,8 @@ describe("WebView JS API", function () {
         expect(Rho.WebView.fullScreen).toEqual(false);
     });
 
+//FIXME: this should be called from main thread
+if (!isApplePlatform()) {
     it("Test fullScreen property", function () {
         Rho.WebView.fullScreen = true;
         expect(Rho.WebView.fullScreen).toEqual(true);
@@ -78,6 +80,7 @@ describe("WebView JS API", function () {
         Rho.WebView.fullScreen = false;
         expect(Rho.WebView.fullScreen).toEqual(false);
     });
+  }
 
     it("Test activeTab property", function () {
         expect(Rho.WebView.activeTab).toEqual(0);
@@ -129,23 +132,31 @@ describe("WebView JS API", function () {
         });
 
         it ( "Gets cookie with properties", function() {
-            var cookies = Rho.WebView.getCookies( "http://localhost" );
-            var cookie = cookies.specCookie;
-            expect( cookie ).isNotEmptyString();
+            var async_done = false;
 
-            var c = parseCookie( cookie );
+            runs( function() {
+              Rho.WebView.getCookies( "http://localhost", function(cookies) {
+                var cookie = cookies.specCookie;
+                expect( cookie ).isNotEmptyString();
 
-            expect(c.name).toEqual('specCookie');
-            expect(c.value).toEqual('cookieValue');
+                var c = parseCookie( cookie );
 
-            if ( !isAndroidPlatform() ) {
-                expect(c.path).toEqual('/');
-                expect(c.expires).isNotEmptyString();
-            }
+                expect(c.name).toEqual('specCookie');
+                expect(c.value).toEqual('cookieValue');
+
+                if ( !isAndroidPlatform() ) {
+                    expect(c.path).toEqual('/');
+                    expect(c.expires).isNotEmptyString();
+                }
+                async_done = true;
+              });
+            });
+            waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
         });
 
         it ( "Sets multiple cookies", function() {
 
+            var async_done = false;
             var expires = new Date(new Date().getTime() + 60 * 1000);
             var cookie1 = "specCookie1=cookieValue1; expires="+expires.toUTCString()+"; path=/";
             var cookie2 = "specCookie2=cookieValue2; expires="+expires.toUTCString()+"; path=/";
@@ -153,30 +164,36 @@ describe("WebView JS API", function () {
             Rho.WebView.setCookie("http://localhost", cookie1);
             Rho.WebView.setCookie("http://localhost", cookie2);
 
-            var cookies = Rho.WebView.getCookies( "http://localhost" );
-            cookie1 = cookies.specCookie1;
-            expect( cookie1 ).isNotEmptyString();
+            runs( function() {
+              Rho.WebView.getCookies( "http://localhost", function(cookies) {
+                cookie1 = cookies.specCookie1;
+                expect( cookie1 ).isNotEmptyString();
 
-            var c = parseCookie( cookie1 );
+                var c = parseCookie( cookie1 );
 
-            expect(c.name).toEqual('specCookie1');
-            expect(c.value).toEqual('cookieValue1');
-            if ( !isAndroidPlatform() ) {
-                expect(c.path).toEqual('/');
-                expect(c.expires).isNotEmptyString();
-            }
+                expect(c.name).toEqual('specCookie1');
+                expect(c.value).toEqual('cookieValue1');
+                if ( !isAndroidPlatform() ) {
+                    expect(c.path).toEqual('/');
+                    expect(c.expires).isNotEmptyString();
+                }
 
-            cookie2 = cookies.specCookie2;
-            expect( cookie2 ).isNotEmptyString();
+                cookie2 = cookies.specCookie2;
+                expect( cookie2 ).isNotEmptyString();
 
-            c = parseCookie( cookie2 );
+                c = parseCookie( cookie2 );
 
-            expect(c.name).toEqual('specCookie2');
-            expect(c.value).toEqual('cookieValue2');
-            if ( !isAndroidPlatform() ) {
-                expect(c.path).toEqual('/');
-                expect(c.expires).isNotEmptyString();
-            }
+                expect(c.name).toEqual('specCookie2');
+                expect(c.value).toEqual('cookieValue2');
+                if ( !isAndroidPlatform() ) {
+                    expect(c.path).toEqual('/');
+                    expect(c.expires).isNotEmptyString();
+                }
+
+                async_done = true;
+              });
+            });
+            waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
         });
     }
 
@@ -194,10 +211,14 @@ describe("WebView JS API", function () {
 
             //should receive session
             runs( function() {
-                var cookies = Rho.WebView.getCookies( server_url );
-                var cookie = cookies.session;
-                expect( cookie ).isNotEmptyString();
+                async_done = false;
+                Rho.WebView.getCookies( server_url, function(cookies) {
+                  var cookie = cookies.session;
+                  expect( cookie ).isNotEmptyString();
+                  async_done = true;
+                });
             });
+            waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
         });
 
         it ( "Sends session cookie", function() {
@@ -207,24 +228,27 @@ describe("WebView JS API", function () {
             var session;
 
             //get session from server
-            runs( function() {                
+            runs( function() {
                 $.ajax( { url: get_session_url, xhrFields: { withCredentials: true } } ).done( function(data) { async_done = true; } );
             });
             waitsFor( function() { return async_done; }, 'Ajax call not completed', 2000 );
 
             //should receive session, store it
             runs( function() {
-                var cookies = Rho.WebView.getCookies( server_url );
-                session = cookies.session;
-                expect( session ).isNotEmptyString();
+                async_done = false;
+                Rho.WebView.getCookies( server_url, function(cookies) {
+                  session = cookies.session;
+                  expect( session ).isNotEmptyString();
+                  async_done = true;
+                });
             });
-
+            waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
 
             //check webview sends valid session
             runs( function() {
                 async_done = false;
-                $.ajax( { url: return_session_url, xhrFields: { withCredentials: true } } ).done( function(data) { 
-                    async_done = true; 
+                $.ajax( { url: return_session_url, xhrFields: { withCredentials: true } } ).done( function(data) {
+                    async_done = true;
                     expect($.trim(data)).toEqual( parseCookie(session).value );
                 });
             });
@@ -238,37 +262,52 @@ describe("WebView JS API", function () {
             var session;
 
             //get session from server
-            runs( function() {                
+            runs( function() {
                 $.ajax( { url: get_session_url, xhrFields: { withCredentials: true } } ).done( function(data) { async_done = true; } );
             });
             waitsFor( function() { return async_done; }, 'Ajax call not completed', 2000 );
 
-            //should receive session, store it
             runs( function() {
-                var cookies = Rho.WebView.getCookies( server_url );
-                session = cookies.session;
-                expect( session ).isNotEmptyString();
-
-                Rho.WebView.removeCookie( server_url, 'session' );
-
-                cookies = Rho.WebView.getCookies( server_url );
-                session = cookies.session;
-
-                expect(session).toEqual(null);
+                async_done = false;
+                Rho.WebView.getCookies( server_url, function(cookies) {
+                  var cookie = cookies.session;
+                  expect( cookie ).isNotEmptyString();
+                  async_done = true;
+                });
             });
+            waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
 
+            runs( function() {
+                async_done = false;
+                Rho.WebView.removeCookie( server_url, 'session', function(data) {
+                  expect(data.removed_cookie).toEqual('session');
+                  async_done = true;
+                });
+            });
+            waitsFor( function() { return async_done; }, 'removeCookie not completed', 2000 );
+
+            runs( function() {
+                async_done = false;
+                Rho.WebView.getCookies( server_url, function(cookies) {
+                  session = cookies.session;
+                  expect(session).toEqual(null);
+                  async_done = true;
+                });
+            });
+            waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
 
             //check webview sends valid session
             runs( function() {
                 async_done = false;
-                $.ajax( { url: return_session_url, xhrFields: { withCredentials: true } } ).done( function(data) { 
-                    async_done = true; 
+                $.ajax( { url: return_session_url, xhrFields: { withCredentials: true } } ).done( function(data) {
+                    async_done = true;
                     expect($.trim(data)).toEqual('');
                 });
             });
             waitsFor( function() { return async_done; }, 'Ajax call not completed', 2000 );
         });
 
+if ( isAndroidPlatform() ) {
         it ( "Removes session cookie with expiry date", function() {
             var get_session_url = server_url + '/get_session';
             var return_session_url = server_url + '/return_session';
@@ -276,38 +315,46 @@ describe("WebView JS API", function () {
             var session;
 
             //get session from server
-            runs( function() {                
+            runs( function() {
                 $.ajax( { url: get_session_url, xhrFields: { withCredentials: true } } ).done( function(data) { async_done = true; } );
             });
             waitsFor( function() { return async_done; }, 'Ajax call not completed', 2000 );
 
-            //should receive session, store it
             runs( function() {
-                var cookies = Rho.WebView.getCookies( server_url );
-                session = cookies.session;
-                expect( session ).isNotEmptyString();
+                async_done = false;
+                Rho.WebView.getCookies( server_url, function(cookies) {
+                  expect( cookies.session ).isNotEmptyString();
 
-                var d = new Date(1970, 0, 1);            
-                Rho.WebView.setCookie( server_url, "session='';expires="+d.toUTCString()+";" );
+                  var d = new Date(1970, 0, 1);
+                  Rho.WebView.setCookie( server_url, "session='';expires="+d.toUTCString()+";" );
 
-                cookies = Rho.WebView.getCookies( server_url );
-                session = cookies.session;
-
-                expect(session).toEqual(null);
+                  async_done = true;
+                });
             });
+            waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
 
+            runs( function() {
+                async_done = false;
+                Rho.WebView.getCookies( server_url, function(cookies) {
+                  session = cookies.session;
+                  expect(session).toEqual(null);
+                  async_done = true;
+                });
+            });
+            waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
 
             //check webview sends valid session
             runs( function() {
                 async_done = false;
-                $.ajax( { url: return_session_url, xhrFields: { withCredentials: true } } ).done( function(data) { 
-                    async_done = true; 
+                $.ajax( { url: return_session_url, xhrFields: { withCredentials: true } } ).done( function(data) {
+                    async_done = true;
                     expect($.trim(data)).toEqual('');
                 });
             });
             waitsFor( function() { return async_done; }, 'Ajax call not completed', 2000 );
         });
     }
+}
 
     if (isAndroidPlatform()) {
         it("Test default value of enableCache property", function () {
