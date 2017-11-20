@@ -88,7 +88,7 @@ describe("Application JS API", function () {
 	        var result = Rho.Application.startURI;
 			Rho.Log.info(" Rho.Application.startURI = " + result, "App");
  			expect(result).toEqual('index.html');
-            Rho.Application.startURI = '/app/index.html';
+            Rho.Application.startURI = '/app/specRunner.html';
 	    });
 	
 	    it("Test settingsPageURI property", function () {
@@ -350,7 +350,7 @@ describe("Application JS API", function () {
 
     	it("Property \"startURI\"", function () {
     		var start_path = Rho.Application.startURI;
-    		expect(start_path).toMatch(/\/app\/ApplicationTest\/specRunner.html|\/app\/index.html/)
+    		expect(start_path).toMatch(/\/app\/ApplicationTest\/specRunner.html|\/app\/specRunner.html/)
     	});
 
     	it("Property \"userFolder\"", function () {

@@ -10,46 +10,58 @@
     
 	<script type="text/javascript" id="runnerList">
 		var listOfRunners = (Rho.System.platform == Rho.System.PLATFORM_WP8) ? [
-			"LogTest/specRunner.html",
-			"DatabaseTest/specRunner.html",
-			"FileTest/specRunner.html",
-			"GeneratorTest/specRunner.html",
-			"NetworkTest/specRunner.html",
-			"OrmTest/specRunner.html",
-			"Final/specRunner.html"
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP) ? [
-			"LogTest/specRunner.html",
-			"DatabaseTest/specRunner.html",
+		] : ( (Rho.System.platform == Rho.System.PLATFORM_IOS) ? [
+        			"ApplicationTest/specRunner.html",
 			"FileTest/specRunner.html",
-			"GeneratorTest/specRunner.html",
-			"NetworkTest/specRunner.html",
 			"OrmTest/specRunner.html",
-			"SystemRE1Test/specRunner.html",
-			"WebsocketTest/specRunner.html",
-			"Final/specRunner.html"
+			"DatabaseTest/specRunner.html",
+		] : ( (Rho.System.platform == Rho.System.PLATFORM_ANDROID) ? [
 		] : [
-			"BarcodeTest/specRunner.html",
-			"LogTest/specRunner.html",
-			"CardReaderTest/specRunner.html",
-			"DatabaseTest/specRunner.html",
-			"FileTest/specRunner.html",
-			"CallbackTest/specRunner.html",
-			"GeneratorTest/specRunner.html",
-			"KeyCaptureTest/specRunner.html",
-			"NetworkTest/specRunner.html",
-			"OrmTest/specRunner.html",
-			"ScreenOrientationTest/specRunner.html",
-			"SystemRE1Test/specRunner.html",
-			"SensorsTest/specRunner.html",
-			"WebsocketTest/specRunner.html",
-			"EventSourceTest/specRunner.html",
+        			//"ApplicationTest/specRunner.html",
+			//"LogTest/specRunner.html",
+			//"FileTest/specRunner.html",
+			//"GeneratorTest/specRunner.html",
+			//"CallbackTest/specRunner.html",
+			//"OrmTest/specRunner.html",
+        			//"Constants/specRunner.html",
+        			//"ConfigTest/specRunner.html",
+			//"DatabaseTest/specRunner.html",
+        			//"SignatureTest/specRunner.html",
+			//"SystemRE1Test/specRunner.html",
+        			//"RhoapiTest/specRunner.html",
+			//"BarcodeTest/specRunner.html",
+        			//"TimerTest/specRunner.html",
+        			//"WebViewTest/specRunner.html",
+			//"CardReaderTest/specRunner.html",
+			//"KeyCaptureTest/specRunner.html",
+			//"NetworkTest/specRunner.html",
+			//"ScreenOrientationTest/specRunner.html",
+			//"SensorsTest/specRunner.html",
+			//"WebsocketTest/specRunner.html",
+			//"EventSourceTest/specRunner.html",
+        			//"AudioCaptureTest/specRunner.html",
+        			//"CameraTest/specRunner.html",
+        			//"IndicatorsTest/specRunner.html",
+        			//"VideoCaptureTest/specRunner.html",
+        			//"SmartCradle/specRunner.html",
+        			//"Printing/specRunner.html",
+        			//"PrinterZebra/specRunner.html",
+        			//"NewORM/specRunner.html"
+/* TODO: make intents targetapp work
+			"intent/specRunner.html",
+*/
+/* TODO: make instrumentation work
+		        	"KeyCaptureTest/specRunner.html",
+*/
+/* TODO: make commonAPI
+		        	"NearFieldCommunications/specRunner.html",
+*/
+/* TODO
+        			"SimulScanTest/specRunner.html",
+*/
 			"Final/specRunner.html"
-
-			//"SignatureTest/specRunner.html", //Not released yet
-			//"ApplicationTest/specRunner.html", //Not ready, use manual
-			//"IndicatorsTest/specRunner.html", //Broken on WMCE
-			//"WebViewTest/specRunner.html" //Not Ready, use manual
-		]);
+		])));
 		
 	</script>
     <script type='text/javascript'>		
