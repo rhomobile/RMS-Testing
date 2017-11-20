@@ -199,6 +199,31 @@ if (!isApplePlatform()) {
 
     if( isAndroidOrApplePlatform() ) {
 
+        it ( "Removes all cookies", function() {
+          var async_done = false;
+          var expires = new Date(new Date().getTime() + 60 * 1000);
+          var cookie1 = "specCookie1=cookieValue1; expires="+expires.toUTCString()+"; path=/";
+          var cookie2 = "specCookie2=cookieValue2";
+
+          Rho.WebView.setCookie("http://localhost", cookie1);
+          Rho.WebView.setCookie("http://localhost", cookie2);
+
+          runs( function() {
+            Rho.WebView.removeAllCookies( function() {
+              async_done = true;
+            });
+          });
+          waitsFor( function() { return async_done; }, 'removeAllCookies not completed', 2000 );
+
+          runs( function() {
+            Rho.WebView.getCookies( "http://localhost", function(cookies) {
+              expect(Object.keys(cookies).length).toEqual(0);
+              async_done = true;
+            });
+          });
+          waitsFor( function() { return async_done; }, 'getCookies not completed', 2000 );
+        });
+
         it ( "Receives session cookie", function() {
             var url = server_url + '/get_session';
             var async_done = false;
