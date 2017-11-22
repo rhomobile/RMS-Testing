@@ -161,7 +161,7 @@ describe('Network JS API', function() {
        
     });
 
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
         it('VT293-0014 | detectConnection with wlan profile enabled', function () {
 
             runs(function () {
@@ -197,7 +197,7 @@ describe('Network JS API', function() {
 
         });
 
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
         it('VT293-0016 | detectConnection with ananymous callback', function () {
 
             runs(function () {
@@ -286,7 +286,7 @@ describe('Network JS API', function() {
 
         });
 
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
         it('VT293-0021 | detectConnection with pollinterval and dtectionTimeout', function () {
             var flag = false;
             runs(function () {
@@ -322,7 +322,7 @@ describe('Network JS API', function() {
         });
 
 
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
         it('VT293-0022 | stopDetectingConnection with wlan profile enabled', function () {
             var flag = false;
             runs(function () {
@@ -426,7 +426,7 @@ describe('Network JS API', function() {
                 });
             });
 
-        if (Rho.System.platform != "WP8") {
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8)) {
             it('VT293-0039 | verifyPeerCertificate with false', function () {
                 var data = '';
                 var callbackCalled = false;
@@ -823,7 +823,7 @@ describe('Network JS API', function() {
     });
 
 
-     if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+     if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
      {
      it('VT293-0051 | download file with overwrite true and createfolder true value with callback', function() {
        var flag = false;

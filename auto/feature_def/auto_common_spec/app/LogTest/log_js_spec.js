@@ -1121,7 +1121,7 @@ FIXME: not working 3 specs below
 		});
 		*/
 
-		if ((Rho.System.platform != Rho.System.PLATFORM_WP8) && (Rho.System.platform != Rho.System.PLATFORM_WINDOWS_DESKTOP)) {
+		if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8) && (Rho.System.platform != Rho.System.PLATFORM_WINDOWS_DESKTOP)) {
 
 			// Set Log Memory period to 2 seconds
 			it("VT290-355 : Set Log Memory period to 2 secs | 2000", function () {

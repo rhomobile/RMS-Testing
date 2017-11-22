@@ -770,6 +770,10 @@ arrConstants['Rho.System'] = [{
   value: 'WP8',
   applicableto: 'js'
 }, {
+  constant: 'Rho.System.PLATFORM_UWP',
+  value: 'UWP',
+  applicableto: 'js'
+}, {
   constant: 'Rho.System.PLATFORM_WINDOWS_DESKTOP',
   value: 'WINDOWS_DESKTOP',
   applicableto: 'js'

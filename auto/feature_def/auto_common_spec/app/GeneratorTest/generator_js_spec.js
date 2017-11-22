@@ -1,7 +1,7 @@
 describe('API Generator specs', function() {
     //'use strict';
 
-    if (Rho.System.platform != Rho.System.PLATFORM_WP8) {
+    if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8)) {
         describe('Common c++ bridge', function() {
 
             describe('loopback functions, common cases', function() {
@@ -577,7 +577,7 @@ describe('API Generator specs', function() {
     });
 
     describe('Test getProperties, getAllProperties', function() {
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
             it('Should return all properties', function() {
                 Rho.GenPropBag.floatProp = 3.14156;
                 Rho.GenPropBag.intProp = 999;
