@@ -14,20 +14,28 @@ class SpecRunnerController < Rho::RhoController
   def run_specs
     GC.enable()
     @runner = SpecRunner.new
-    @runner.set_default_files
+    @runner.set_default_files_for_auto_run
     @code = @runner.run
     @exc_count = MSpec.exc_count
+    @not_supported = MSpec.not_supported_count
     @count = MSpec.count
 
     total = @count.to_s
     passed = (@count - @exc_count).to_s
     failed = @exc_count.to_s
+    not_supported = @not_supported.to_s
 
     puts "***Total:  " + total
     puts "***Passed: " + passed
     puts "***Failed: " + failed
+    puts "***Not supported by Rhodes: " + not_supported
 
     render(string: "{ \"total\":\"#{total}\", \"passed\":\"#{passed}\", \"failed\":\"#{failed}\" }")
+  end
+
+  def run_all_specs
+      run_specs
+      puts "***Terminated"
   end
 
   def run_selected_specs
@@ -65,7 +73,7 @@ class SpecRunnerController < Rho::RhoController
 
     locations.each do |key,infos|
       infos_array = []
-  
+
       infos.each do |info|
         modified_info = {}
         info.each do |k,v|
@@ -85,10 +93,10 @@ class SpecRunnerController < Rho::RhoController
   end
 =begin
   def expand_children( hval )
-    n = {}   
+    n = {}
     hval.each do |k,v|
      if k==:children
-       n[:children] = []   
+       n[:children] = []
        hval[:children].each do |k,v|
          n[:children] << expand_children(v)
        end
@@ -113,7 +121,7 @@ class SpecRunnerController < Rho::RhoController
      pathFile = Pathname.new(f)
      relpath = pathFile.relative_path_from( pathNode )
      pathParts = relpath.each_filename.to_a
-     
+
      node = nodehash
      pathParts[0..-2].each do |part|
        node[:children][part] = { text: part, path: '', :children => {} } unless node[:children][part]
