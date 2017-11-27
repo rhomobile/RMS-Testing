@@ -23,10 +23,18 @@ uwp:
   extensions: 
     - "sensor"
     - "mediacapture"
+    - "openssl.so"
+    - "digest"
+    - "digest-md5"
+    - "digest-sha1"
+    - "openssl"
 win32:
   msvc: 2015
   deployqt: 1
   deploymsvc: 1
+  extensions:
+    - "openssl.so"
+    - "openssl"
 symbian:
   uid: '0xe1a1ef92'
 android:
