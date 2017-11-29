@@ -9,10 +9,14 @@
 	</script>
     
 	<script type="text/javascript" id="runnerList">
-		var listOfRunners = (Rho.System.platform == Rho.System.PLATFORM_WP8) ? [
+		var listOfRunners = (Rho.System.platform == Rho.System.PLATFORM_UWP) ? [
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP) ? [
+			"ApplicationTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"DatabaseTest/specRunner.html"
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_IOS) ? [
-        			"ApplicationTest/specRunner.html",
+        	"ApplicationTest/specRunner.html",
 			"FileTest/specRunner.html",
 			"OrmTest/specRunner.html",
 			"DatabaseTest/specRunner.html",

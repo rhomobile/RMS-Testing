@@ -257,7 +257,7 @@ describe('Network JS API', function() {
        });
 
    });*/
-
+        if (Rho.System.platform != Rho.System.PLATFORM_UWP)
         it('VT293-0020 | detectConnection with detectionTimeout', function () {
             var flag = false;
             runs(function () {
@@ -287,7 +287,7 @@ describe('Network JS API', function() {
         });
 
         if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
-        it('VT293-0021 | detectConnection with pollinterval and dtectionTimeout', function () {
+        it('VT293-0021 | detectConnection with pollinterval and detectionTimeout', function () {
             var flag = false;
             runs(function () {
 
@@ -317,7 +317,7 @@ describe('Network JS API', function() {
                 //           expect(callbackCount).toEqual(2);
                 expect(callbackCount).toEqual(1);
                 expect(connectionInfo).toEqual("Connected");
-            });
+            });//
 
         });
 
