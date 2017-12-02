@@ -87,7 +87,7 @@ class SpecRunner < MSpecScript
           core << 'complex'
           core << 'continuation'
           core << 'dir'
-          #core << 'encoding'
+          core << 'encoding'
           core << 'enumerable'
 
           #has multiple crashes
@@ -106,6 +106,7 @@ class SpecRunner < MSpecScript
           core << 'integer'
           core << 'io'
           core << 'kernel'
+          core << 'main'
           core << 'marshal'
           core << 'matchdata'
           core << 'math'
@@ -157,6 +158,42 @@ class SpecRunner < MSpecScript
               "spec/core/dir/pwd_spec",
               "spec/core/dir/rmdir_spec",
               "spec/core/dir/unlink_spec",
+
+
+              "spec/core/encoding/compatible_spec",
+              "spec/core/encoding/converter/asciicompat_encoding_spec",
+              "spec/core/encoding/converter/convert_spec",
+              "spec/core/encoding/converter/convpath_spec",
+              "spec/core/encoding/converter/destination_encoding_spec",
+              "spec/core/encoding/converter/finish_spec",
+              "spec/core/encoding/converter/last_error_spec",
+              "spec/core/encoding/converter/primitive_convert_spec",
+              "spec/core/encoding/converter/primitive_errinfo_spec",
+              "spec/core/encoding/converter/putback_spec",
+              "spec/core/encoding/converter/replacement_spec",
+              "spec/core/encoding/converter/search_convpath_spec",
+              "spec/core/encoding/converter/source_encoding_spec",
+              "spec/core/encoding/default_external_spec",
+              "spec/core/encoding/default_internal_spec",
+              "spec/core/encoding/find_spec",
+              "spec/core/encoding/inspect_spec",
+              "spec/core/encoding/invalid_byte_sequence_error/destination_encoding_name_spec",
+              "spec/core/encoding/invalid_byte_sequence_error/destination_encoding_spec",
+              "spec/core/encoding/invalid_byte_sequence_error/error_bytes_spec",
+              "spec/core/encoding/invalid_byte_sequence_error/incomplete_input_spec",
+              "spec/core/encoding/invalid_byte_sequence_error/readagain_bytes_spec",
+              "spec/core/encoding/invalid_byte_sequence_error/source_encoding_name_spec",
+              "spec/core/encoding/invalid_byte_sequence_error/source_encoding_spec",
+              "spec/core/encoding/list_spec",
+              "spec/core/encoding/locale_charmap_spec",
+              "spec/core/encoding/name_spec",
+              "spec/core/encoding/names_spec",
+              "spec/core/encoding/to_s_spec",
+              "spec/core/encoding/undefined_conversion_error/error_char_spec",
+              "spec/core/encoding/undefined_conversion_error/source_encoding_name_spec",
+              "spec/core/encoding/undefined_conversion_error/source_encoding_spec",
+
+
 
               "spec/core/enumerator/enum_for_spec", # crash
               "spec/core/enumerator/feed_spec", # crash
@@ -245,6 +282,8 @@ class SpecRunner < MSpecScript
               "spec/core/kernel/tap_spec",
               "spec/core/kernel/test_spec",
               "spec/core/kernel/trace_var_spec",
+
+              "spec/core/main/include_spec",
 
 
               "spec/core/marshal/dump_spec",
@@ -346,44 +385,38 @@ class SpecRunner < MSpecScript
               "spec/core/regexp/new_spec",
               "spec/core/regexp/union_spec",
 
-              "spec/core/string/append_spec",
-              "spec/core/string/ascii_only_spec",
               "spec/core/string/center_spec",
               "spec/core/string/chars_spec",
               "spec/core/string/chomp_spec",
               "spec/core/string/chop_spec",
               "spec/core/string/clear_spec",
               "spec/core/string/clone_spec",
-              "spec/core/string/concat_spec",
               "spec/core/string/crypt_spec",
               "spec/core/string/delete_spec",
               "spec/core/string/downcase_spec",
-              "spec/core/string/dump_spec",
               "spec/core/string/each_char_spec",
               "spec/core/string/each_line_spec",
               "spec/core/string/element_set_spec",
               "spec/core/string/encode_spec",
               "spec/core/string/encoding_spec",
               "spec/core/string/force_encoding_spec",
-              "spec/core/string/getbyte_spec",
               "spec/core/string/gsub_spec",
               "spec/core/string/index_spec",
               "spec/core/string/initialize_spec",
               "spec/core/string/insert_spec",
-              "spec/core/string/inspect_spec",
               "spec/core/string/length_spec",
               "spec/core/string/lines_spec",
               "spec/core/string/ljust_spec",
               "spec/core/string/lstrip_spec",
               "spec/core/string/modulo_spec",
               "spec/core/string/next_spec",
-              "spec/core/string/plus_spec",
               "spec/core/string/replace_spec",
               "spec/core/string/reverse_spec",
               "spec/core/string/rindex_spec",
               "spec/core/string/rjust_spec",
               "spec/core/string/rstrip_spec",
               "spec/core/string/scrub_spec",
+
               "spec/core/string/setbyte_spec",
               "spec/core/string/size_spec",
               "spec/core/string/slice_spec",
@@ -400,10 +433,6 @@ class SpecRunner < MSpecScript
               "spec/core/string/upcase_spec",
               "spec/core/string/uplus_spec",
               "spec/core/string/valid_encoding_spec",
-
-              "spec/core/time/getlocal_spec",
-              "spec/core/time/localtime_spec",
-              "spec/core/time/new_spec",
 
               "spec/core/thread/element_set_spec", # crash
               "spec/core/thread/key_spec", #crash
@@ -448,6 +477,7 @@ class SpecRunner < MSpecScript
               "spec/library/date/strftime_spec",
               "spec/library/date/strptime_spec",
               "spec/library/date/valid_jd_spec",
+
               "spec/library/datetime/hour_spec",
               "spec/library/datetime/min_spec",
               "spec/library/datetime/minute_spec",
@@ -456,6 +486,7 @@ class SpecRunner < MSpecScript
               "spec/library/datetime/sec_spec",
               "spec/library/datetime/second_spec",
               "spec/library/datetime/strftime_spec",
+
               "spec/library/delegate/delegate_class/instance_method_spec",
               "spec/library/delegate/delegate_class/instance_methods_spec",
               "spec/library/delegate/delegate_class/protected_instance_methods_spec",
@@ -471,13 +502,18 @@ class SpecRunner < MSpecScript
               "spec/library/delegate/delegator/protected_methods_spec",
               "spec/library/delegate/delegator/public_methods_spec",
               "spec/library/delegate/delegator/untaint_spec",
+
               "spec/library/digest/bubblebabble_spec",
+
               "spec/library/erb/new_spec",
               "spec/library/erb/util/h_spec",
               "spec/library/erb/util/html_escape_spec",
+
               "spec/library/expect/expect_spec",
+
               "spec/library/find/find_spec",
               "spec/library/find/prune_spec",
+
               "spec/library/ipaddr/hton_spec",
               "spec/library/ipaddr/ipv4_conversion_spec",
               "spec/library/ipaddr/new_spec",
@@ -978,70 +1014,16 @@ class SpecRunner < MSpecScript
               "spec/library/socket/unixsocket/recvfrom_spec",
               "spec/library/socket/unixsocket/send_io_spec",
 
-              "spec/library/stringio/append_spec",
-              "spec/library/stringio/binmode_spec",
-              "spec/library/stringio/bytes_spec",
-              "spec/library/stringio/chars_spec",
-              "spec/library/stringio/close_read_spec",
-              "spec/library/stringio/close_spec",
-              "spec/library/stringio/close_write_spec",
-              "spec/library/stringio/closed_read_spec",
-              "spec/library/stringio/closed_spec",
-              "spec/library/stringio/closed_write_spec",
-              "spec/library/stringio/codepoints_spec",
-              "spec/library/stringio/each_byte_spec",
-              "spec/library/stringio/each_char_spec",
-              "spec/library/stringio/each_codepoint_spec",
-              "spec/library/stringio/each_line_spec",
-              "spec/library/stringio/each_spec",
-              "spec/library/stringio/eof_spec",
               "spec/library/stringio/external_encoding_spec",
-              "spec/library/stringio/fcntl_spec",
-              "spec/library/stringio/fileno_spec",
-              "spec/library/stringio/flush_spec",
-              "spec/library/stringio/fsync_spec",
-              "spec/library/stringio/getbyte_spec",
-              "spec/library/stringio/getc_spec",
               "spec/library/stringio/getch_spec",
-              "spec/library/stringio/gets_spec",
               "spec/library/stringio/initialize_spec",
               "spec/library/stringio/internal_encoding_spec",
-              "spec/library/stringio/isatty_spec",
-              "spec/library/stringio/length_spec",
-              "spec/library/stringio/lineno_spec",
-              "spec/library/stringio/lines_spec",
               "spec/library/stringio/open_spec",
-              "spec/library/stringio/path_spec",
-              "spec/library/stringio/pid_spec",
-              "spec/library/stringio/pos_spec",
-              "spec/library/stringio/print_spec",
-              "spec/library/stringio/printf_spec",
-              "spec/library/stringio/putc_spec",
-              "spec/library/stringio/puts_spec",
               "spec/library/stringio/read_nonblock_spec",
               "spec/library/stringio/read_spec",
-              "spec/library/stringio/readbyte_spec",
-              "spec/library/stringio/readchar_spec",
-              "spec/library/stringio/readline_spec",
-              "spec/library/stringio/readlines_spec",
-              "spec/library/stringio/readpartial_spec",
               "spec/library/stringio/reopen_spec",
-              "spec/library/stringio/rewind_spec",
-              "spec/library/stringio/seek_spec",
               "spec/library/stringio/set_encoding_spec",
-              "spec/library/stringio/size_spec",
-              "spec/library/stringio/string_spec",
-              "spec/library/stringio/stringio_spec",
-              "spec/library/stringio/sync_spec",
               "spec/library/stringio/sysread_spec",
-              "spec/library/stringio/syswrite_spec",
-              "spec/library/stringio/tell_spec",
-              "spec/library/stringio/truncate_spec",
-              "spec/library/stringio/tty_spec",
-              "spec/library/stringio/ungetbyte_spec",
-              "spec/library/stringio/ungetc_spec",
-              "spec/library/stringio/write_nonblock_spec",
-              "spec/library/stringio/write_spec",
 
               "spec/library/syslog/alert_spec",
               "spec/library/syslog/close_spec",
