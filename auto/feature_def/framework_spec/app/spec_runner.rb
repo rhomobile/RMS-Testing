@@ -374,6 +374,7 @@ class SpecRunner < MSpecScript
               "spec/core/process/kill_spec",
               "spec/core/process/set_proctitle_spec",
               "spec/core/process/uid_spec",
+              "spec/core/process/wait_spec",
               "spec/core/process/waitpid_spec",
 
               "spec/core/range/inspect_spec",
