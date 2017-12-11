@@ -38,6 +38,34 @@ class SpecRunner < MSpecScript
 
   end
 
+  def set_default_files_for_auto_run_only_rhodes
+      config[:files] = []
+
+      app_folder = Rho::RhoFSConnector.get_app_path('app')
+      app_folder.gsub!(/\\/, '/')
+
+      failed_specs = [
+          "spec/rhomobile/NetHttp_spec"
+      ]
+
+      # RHOMOBILE
+      specs = app_folder + "spec/rhomobile/*_spec" + RHO_RB_EXT
+      Dir.glob(specs) do |file|
+        file.gsub!(app_folder,"")
+        if RHO_RB_EXT == '.rb'
+          file.gsub!(/\.rb/,"")
+        else
+          file.gsub!(/\.iseq/,"")
+        end
+        #remove failed specs:
+        next if failed_specs.include? file
+        config[:files] << file
+      end
+
+
+
+  end
+
   def set_default_files_for_auto_run
       config[:files] = []
 
