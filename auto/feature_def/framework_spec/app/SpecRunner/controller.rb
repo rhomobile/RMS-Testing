@@ -16,6 +16,8 @@ class SpecRunnerController < Rho::RhoController
   end
 
   def run_all_specs
+      puts "$$$ SpecRunner.run_all_specs() START"
+
       GC.enable()
       @runner = SpecRunner.new
       @runner.set_default_files_for_auto_run
@@ -64,6 +66,10 @@ class SpecRunnerController < Rho::RhoController
         result['locations'][key] = infos_array
       end
       puts "***Terminated"
+
+      puts "$$$ SpecRunner.run_all_specs() FINISH"
+
+
       render(string: result.to_json)
   end
 
