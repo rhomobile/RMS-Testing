@@ -7,20 +7,27 @@
 	<script charset='utf-8' src='../public/api/rhoapi-modules.js' type='text/javascript'>
 	//Kindly don't change to one line.
 	</script>
-    
+
 	<script type="text/javascript" id="runnerList">
 		var listOfRunners = (Rho.System.platform == Rho.System.PLATFORM_UWP) ? [
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP) ? [
 			"ApplicationTest/specRunner.html",
 			"FileTest/specRunner.html",
 			"OrmTest/specRunner.html",
-			"DatabaseTest/specRunner.html"
+			"DatabaseTest/specRunner.html",
+            "Final/specRunner.html"
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_IOS) ? [
         	"ApplicationTest/specRunner.html",
 			"FileTest/specRunner.html",
 			"OrmTest/specRunner.html",
 			"DatabaseTest/specRunner.html",
+            "Final/specRunner.html"
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_ANDROID) ? [
+            "ApplicationTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+            "Final/specRunner.html"
 		] : [
         			//"ApplicationTest/specRunner.html",
 			//"LogTest/specRunner.html",
@@ -66,9 +73,9 @@
 */
 			"Final/specRunner.html"
 		])));
-		
+
 	</script>
-    <script type='text/javascript'>		
+    <script type='text/javascript'>
 		function loadEvent()
 		{
 		    Rho.Application.nativeMenu = [ {'label':'Exit', 'action': 'exit'} ];

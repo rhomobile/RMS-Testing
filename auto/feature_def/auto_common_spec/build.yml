@@ -42,20 +42,19 @@ android:
   - arm
 #  - x86
 #  version: 4.4.2
-  extensions: 
+  extensions:
   - "nativeBridgeTest"
   - "emdk3-manager"
-  - "barcode"
+  #- "barcode"
   - "screenorientation"
-  - "indicators"
+  #- "indicators"
   - "sensor"
   - "websocket"
   - "eventsource"
   - "audiocapture"
-  - 'screenorientation'
   - "mediacapture"
-  - "printing"
-  - "printing_zebra"
+  #- "printing"
+  #- "printing_zebra"
   - "instrumentation"
   - "signature"
   - "genPropBag"
