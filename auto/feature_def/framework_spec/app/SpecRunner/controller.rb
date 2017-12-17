@@ -48,23 +48,23 @@ class SpecRunnerController < Rho::RhoController
 
       @response["headers"]["Content-Type"] = "application/json"
 
-      locations.each do |key,infos|
-        infos_array = []
-
-        infos.each do |info|
-          modified_info = {}
-          info.each do |k,v|
-            if v.is_a?(String)
-              modified_info[k] = v.scrub
-            else
-              modified_info[k] = v
-            end
-          end
-
-          infos_array << modified_info
-        end
-        result['locations'][key] = infos_array
-      end
+      # remove for performance
+      #locations.each do |key,infos|
+      #   infos_array = []
+      #
+      #   infos.each do |info|
+      #   modified_info = {}
+      #   info.each do |k,v|
+      #     if v.is_a?(String)
+      #        modified_info[k] = v.scrub
+      #     else
+      #       modified_info[k] = v
+      #     end
+      #   end
+      #      infos_array << modified_info
+      #    end
+      #    result['locations'][key] = infos_array
+      #end
       puts "***Terminated"
 
       puts "$$$ SpecRunner.run_all_specs() FINISH"

@@ -93,21 +93,21 @@
     }
 
 
-
-    $.get( "<%= url_for(action: 'get_nodes', controller: 'SpecRunner')  %>")
-        .done(function( data ) {
-            console.log(data);
-            $("#specTree").jstree({
-                "plugins": ["checkbox"],
-                "checkbox": {
-                    "keep_selected_style": false
-                },
-                "multiple": true,
-                "core": {
-                    "data": data
-                }
-            });
-        });
+    // remove for performance on Travis
+    //$.get( "<%= url_for(action: 'get_nodes', controller: 'SpecRunner')  %>")
+    //    .done(function( data ) {
+    //        console.log(data);
+    //        $("#specTree").jstree({
+    //            "plugins": ["checkbox"],
+    //            "checkbox": {
+    //                "keep_selected_style": false
+    //            },
+    //            "multiple": true,
+    //            "core": {
+    //                "data": data
+    //            }
+    //        });
+    //    });
 
     var createSpecInfo = function (root, info) {
 
