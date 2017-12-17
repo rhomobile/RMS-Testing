@@ -1504,6 +1504,10 @@ class SpecRunner < MSpecScript
           end
 
           # RHOMOBILE
+          if Rho::System.platform == Rho::System::PLATFORM_ANDROID
+              config[:files] = []
+          end
+
           specs = app_folder + "spec/rhomobile/*_spec" + RHO_RB_EXT
           Dir.glob(specs) do |file|
             file.gsub!(app_folder,"")
