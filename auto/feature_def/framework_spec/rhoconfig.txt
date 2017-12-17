@@ -11,12 +11,12 @@ rhobundle_zip_url = nil
 rhobundle_zip_pwd = nil
 
 # Rhodes runtime properties
-MinSeverity  = 0
-net_trace = 1
+MinSeverity  = 1
+net_trace = 0
 LogToOutput = 1
 LogCategories = *
 ExcludeLogCategories =
-KeepTrackOfLastVisitedPage = 0 
+KeepTrackOfLastVisitedPage = 0
 LastVisitedPage = ''
 MaxLogFileSize=0
 
