@@ -777,6 +777,8 @@ class SpecRunner < MSpecScript
               "spec/library/zlib/gzipreader/each_line_spec",
               "spec/library/zlib/gzipreader/each_spec",
 
+              "spec/library/cgi/out_spec",
+
               "spec/library/complex/math/acos_spec",
               "spec/library/complex/math/acosh_spec",
               "spec/library/complex/math/asin_spec",
@@ -1486,8 +1488,9 @@ class SpecRunner < MSpecScript
           end
 
           if Rho::System.platform == Rho::System::PLATFORM_ANDROID
-              config[:files] = []
+              #config[:files] = []
           end
+
           # LIBRARIES
           specs = app_folder + "spec/library/**/*_spec" + RHO_RB_EXT
           Dir.glob(specs) do |file|

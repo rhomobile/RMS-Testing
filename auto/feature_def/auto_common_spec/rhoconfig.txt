@@ -15,7 +15,7 @@ rhobundle_zip_pwd = nil
 # log level
 # 0-trace, 1-info(app level), 3-warnings, 4-errors
 # for production set to 3
-MinSeverity  = 0
+MinSeverity  = 1
 
 # enable copy log messages to standard output, useful for debugging
 LogToOutput = 1
@@ -30,7 +30,7 @@ ExcludeLogCategories =
 MaxLogFileSize=0
 
 # turn on local http server traces, off by default
-net_trace = 1
+net_trace = 0
 
 # timeout of network requests in seconds (30 by default)
 #net_timeout = 60
