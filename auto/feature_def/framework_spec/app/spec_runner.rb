@@ -1464,7 +1464,7 @@ class SpecRunner < MSpecScript
           end
 
           if Rho::System.platform == Rho::System::PLATFORM_ANDROID
-              failed_specs = failed_specs_Android + failed_specs_iOS
+              failed_specs = failed_specs + failed_specs_Android + failed_specs_iOS
           end
 
 
