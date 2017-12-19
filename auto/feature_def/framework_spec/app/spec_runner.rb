@@ -101,11 +101,16 @@ class SpecRunner < MSpecScript
 
          end
 
+         if Rho::System.platform == Rho::System::PLATFORM_ANDROID
+             config[:files] = []
+         end
+
+
           # CORE
           core = []
 
           core << 'argf' unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP' || Rho::System.platform == Rho::System::PLATFORM_ANDROID
-          core << 'array'
+          core << 'array' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'basicobject' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'bignum'
           core << 'binding' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
