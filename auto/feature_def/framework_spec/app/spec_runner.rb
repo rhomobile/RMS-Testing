@@ -110,7 +110,7 @@ class SpecRunner < MSpecScript
           core = []
 
           core << 'argf' unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP' || Rho::System.platform == Rho::System::PLATFORM_ANDROID
-          core << 'array' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'array'
           core << 'basicobject' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'bignum'
           core << 'binding' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
@@ -162,7 +162,7 @@ class SpecRunner < MSpecScript
           core << 'struct' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'symbol' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'systemexit' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
-          core << 'time'
+          core << 'time' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'true' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'unboundmethod' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'thread' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
