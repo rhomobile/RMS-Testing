@@ -104,65 +104,65 @@ class SpecRunner < MSpecScript
           # CORE
           core = []
 
-          core << 'argf' unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
+          core << 'argf' unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP' || Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'array'
-          core << 'basicobject'
+          core << 'basicobject' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'bignum'
-          core << 'binding'
-          core << 'builtin_constants'
+          core << 'binding' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'builtin_constants' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'class'
-          core << 'comparable'
-          core << 'complex'
-          core << 'continuation'
-          core << 'dir'
-          core << 'encoding'
+          core << 'comparable' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'complex' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'continuation' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'dir' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'encoding' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'enumerable'
 
           #has multiple crashes
           core << 'enumerator'
 
-          core << 'env' unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
+          core << 'env' unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP' || Rho::System.platform == Rho::System::PLATFORM_ANDROID
 
           core << 'exception'
           core << 'false'
-          core << 'file'
-          core << 'filetest'
-          core << 'fixnum'
-          core << 'float'
-          core << 'gc'
-          core << 'hash'
-          core << 'integer'
-          core << 'io'
+          core << 'file' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'filetest' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'fixnum' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'float' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'gc' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'hash' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'integer' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'io' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'kernel'
           core << 'main'
-          core << 'marshal'
-          core << 'matchdata'
-          core << 'math'
+          core << 'marshal' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'matchdata' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'math' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'method'
           core << 'module'
-          core << 'mutex'
-          core << 'nil'
-          core << 'numeric'
-          core << 'object'
-          core << 'objectspace'
-          core << 'precision'
-          core << 'proc'
+          core << 'mutex' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'nil' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'numeric' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'object' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'objectspace' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'precision' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'proc' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'process' unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
-          core << 'random'
-          core << 'range'
-          core << 'rational'
+          core << 'random' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'range' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'rational' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'regexp'
           core << 'signal'  unless System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
           core << 'string'
-          core << 'struct'
-          core << 'symbol'
-          core << 'systemexit'
+          core << 'struct' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'symbol' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'systemexit' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
           core << 'time'
-          core << 'true'
-          core << 'unboundmethod'
-          core << 'thread'
-          core << 'threadgroup'
-          core << 'fiber'
+          core << 'true' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'unboundmethod' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'thread' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'threadgroup' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
+          core << 'fiber' unless Rho::System.platform == Rho::System::PLATFORM_ANDROID
 
           # make core failed specs list :
 
