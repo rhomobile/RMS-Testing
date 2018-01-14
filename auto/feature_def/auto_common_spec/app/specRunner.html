@@ -13,19 +13,22 @@
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP) ? [
 			"ApplicationTest/specRunner.html",
 			"FileTest/specRunner.html",
+                        "NetworkTest/specRunner.html",
 			"OrmTest/specRunner.html",
 			"DatabaseTest/specRunner.html",
             "Final/specRunner.html"
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_IOS) ? [
         	"ApplicationTest/specRunner.html",
 			"FileTest/specRunner.html",
+                        "NetworkTest/specRunner.html",
 			"OrmTest/specRunner.html",
 			"DatabaseTest/specRunner.html",
             "Final/specRunner.html"
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_ANDROID) ? [
-            "ApplicationTest/specRunner.html",
-			"FileTest/specRunner.html",
-            "Final/specRunner.html"
+                 "ApplicationTest/specRunner.html",
+                 "FileTest/specRunner.html",
+                 "NetworkTest/specRunner.html",
+                 "Final/specRunner.html"
 		] : [
         			//"ApplicationTest/specRunner.html",
 			//"LogTest/specRunner.html",

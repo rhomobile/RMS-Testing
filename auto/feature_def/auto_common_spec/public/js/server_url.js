@@ -1,9 +1,9 @@
-SERVER_HOST='35.161.39.137';
+SERVER_HOST='ec2-35-161-39-137.us-west-2.compute.amazonaws.com';
 SERVER_PORT=8081;
-SECURE_HOST='35.161.39.137';
+SECURE_HOST='ec2-35-161-39-137.us-west-2.compute.amazonaws.com';
 SECURE_PORT=8082;
-SECURE_HOST_CA='35.161.39.137';
+SECURE_HOST_CA='ec2-35-161-39-137.us-west-2.compute.amazonaws.com';
 SECURE_PORT_CA=8083;
-WEBSOCKET_HOST='35.161.39.137';
+WEBSOCKET_HOST='ec2-35-161-39-137.us-west-2.compute.amazonaws.com';
 WEBSOCKET_PORT=8084;
-HOSTS=["35.161.39.137"];
+HOSTS=["ec2-35-161-39-137.us-west-2.compute.amazonaws.com"];
