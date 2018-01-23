@@ -1,3 +1,11 @@
+var rho_version_major;
+try {
+    var ver = Rho.Config.getPropertyString("rhodes_gem_version");
+    rho_version_major = ver.split('.')[0];
+} catch (e) {
+    rho_version_major = 5;
+}
+
 function sleep (msec)
 {
     var start = new Date().getTime();
@@ -994,48 +1002,48 @@ describe('Network JS API', function() {
         );
     });
     
-    
-    it( 'Receives non-UTF data in body', function() {
-    
-       var get_props = {
-            url : srvURL + "/get_non_utf_body",
-       };
-       
-       var callbackCalled = false;
-       var status = '';
-       var body = '';
-       
-       var get_callback = function(args) {
-            status = args['status'];
-            body = args['body'];
-            callbackCalled = true;
-       }
-       
-       runs( function() {
-                Rho.Network.get(get_props, get_callback);
-            }
-        );
-       
-       waitsFor(function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
-       
-       runs(function() {
-                expect(status).toEqual('ok');
-                expect(body.length).toEqual(256);
+    if (rho_version_major > 5){
+        it( 'Receives non-UTF data in body', function() {
+        
+           var get_props = {
+                url : srvURL + "/get_non_utf_body",
+           };
+           
+           var callbackCalled = false;
+           var status = '';
+           var body = '';
+           
+           var get_callback = function(args) {
+                status = args['status'];
+                body = args['body'];
+                callbackCalled = true;
+           }
+           
+           runs( function() {
+                    Rho.Network.get(get_props, get_callback);
+                }
+            );
+           
+           waitsFor(function() {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
+           
+           runs(function() {
+                    expect(status).toEqual('ok');
+                    expect(body.length).toEqual(256);
 
-                var array = new Uint8Array(256);
-                for ( var i = 0; i < 256; ++i ) { array[i] = i; }
-                var refData = String.fromCharCode.apply(null,array);
-                expect(body).toEqual(refData);
-            }
-        );
-
-    
-    });
+                    var array = new Uint8Array(256);
+                    for ( var i = 0; i < 256; ++i ) { array[i] = i; }
+                    var refData = String.fromCharCode.apply(null,array);
+                    expect(body).toEqual(refData);
+                }
+            );
+        
+        });
+    }
 
     it ('Waits more than TO value if part of data received', function() {
         var get_props = {
