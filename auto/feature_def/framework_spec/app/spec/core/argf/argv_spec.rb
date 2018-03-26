@@ -1,3 +1,5 @@
+raise "RHO: not supported"
+
 require File.expand_path('../../../spec_helper', __FILE__)
 
 describe "ARGF.argv" do
