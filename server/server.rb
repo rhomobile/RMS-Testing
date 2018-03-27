@@ -485,6 +485,13 @@ $local_server.mount_proc( '/get_non_utf_body' ) do |req,res|
 end
 
 
+$local_server.mount_proc( '/get_utf_body' ) do |req,res|
+  res.body = "$¢€𐍈"
+  res.content_type = 'text/utf-8'
+  res.status = 200
+end
+
+
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|
     if req.request_method == "GET" then

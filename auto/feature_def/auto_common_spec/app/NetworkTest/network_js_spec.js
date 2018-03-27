@@ -1043,6 +1043,46 @@ describe('Network JS API', function() {
             );
         
         });
+
+
+        it( 'Receives UTF data in body', function() {
+        
+           var get_props = {
+                url : srvURL + "/get_utf_body",
+           };
+           
+           var callbackCalled = false;
+           var status = '';
+           var body = '';
+           
+           var get_callback = function(args) {
+                status = args['status'];
+                body = args['body'];
+                callbackCalled = true;
+           }
+           
+           runs( function() {
+                    Rho.Network.get(get_props, get_callback);
+                }
+            );
+           
+           waitsFor(function() {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
+           
+           runs(function() {
+                    expect(status).toEqual('ok');
+                    var reference = decodeURIComponent(escape("\x24\xc2\xa2\xe2\x82\xac\xF0\x90\x8d\x88"));
+		    expect(body).toEqual( reference );
+                }
+            );
+        
+        });
+
+
     }
 
     it ('Waits more than TO value if part of data received', function() {
