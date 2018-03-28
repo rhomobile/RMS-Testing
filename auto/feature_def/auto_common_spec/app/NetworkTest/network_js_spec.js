@@ -1075,7 +1075,12 @@ describe('Network JS API', function() {
            
            runs(function() {
                     expect(status).toEqual('ok');
-                    var reference = decodeURIComponent(escape("\x24\xc2\xa2\xe2\x82\xac\xF0\x90\x8d\x88"));
+                    if ( isAndroidPlatform() ) {                       
+                      var reference = decodeURIComponent(escape("\x24\xc2\xa2\xe2\x82\xac"));
+                      reference += "\xF0\x90\x8d\x88"; //4-bytes UTF sequences won't get through JNI so expect them as escaped bytes
+                    } else {
+                      var reference = decodeURIComponent(escape("\x24\xc2\xa2\xe2\x82\xac\xF0\x90\x8d\x88"));
+                    }
 		    expect(body).toEqual( reference );
                 }
             );
