@@ -455,6 +455,8 @@ describe('Network JS API', function() {
         });
     });
 
+if ( isAndroidPlatform() ) {                       
+
     it('download file from http with additional progress callbacks', function() {
        var status = '';
        var fname = Rho.RhoFile.join(imagesDownloadFolder,"downloaded.file");
@@ -509,6 +511,8 @@ describe('Network JS API', function() {
             expect(gotData).toEqual(true);            
         });
     });
+
+}
 
     it('VT293-0047 | download file with overwrite default and callback event', function() {
        var flag = false;
