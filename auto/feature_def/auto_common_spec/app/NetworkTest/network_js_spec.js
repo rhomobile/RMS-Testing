@@ -457,7 +457,7 @@ describe('Network JS API', function() {
 
 if ( isAndroidPlatform() ) {                       
 
-    it('download file from http with additional progress callbacks', function() {
+    xit('download file from http with additional progress callbacks', function() {
        var status = '';
        var fname = Rho.RhoFile.join(imagesDownloadFolder,"downloaded.file");
        var callbackCount = 0;
