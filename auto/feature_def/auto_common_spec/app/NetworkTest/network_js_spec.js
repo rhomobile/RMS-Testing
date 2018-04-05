@@ -455,6 +455,61 @@ describe('Network JS API', function() {
         });
     });
 
+    it('download file from http with additional progress callbacks', function() {
+       var status = '';
+       var fname = Rho.RhoFile.join(imagesDownloadFolder,"downloaded.file");
+       var callbackCount = 0;
+
+       var gotHeaders = false;
+       var gotData = false;
+       var finished = false;
+
+       var download_file_callback = function (args){
+            status = args['status'];
+            callbackCount++;
+
+            if ( (status=='progress_headers') && (!gotData) ) {
+                gotHeaders = true;
+            } else if ( (status=='progress_data') && (gotHeaders) ) {
+                gotData = true;
+            } else {
+                finished = true;
+            }
+       }
+
+       runs( function() {
+            
+            if ( Rho.RhoFile.exists(fname) ) {
+                Rho.RhoFile.deleteFile(fname);
+            }
+
+            expect(Rho.RhoFile.exists(fname)).toEqual(false);
+
+            downloadfileProps = {
+                url: srvURL + "/video.3gp",
+                filename: fname,
+                wantReceiveProgressCallbacks: true
+
+            };
+
+            Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+
+        } );
+
+        waitsFor( function() {
+                return finished;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            expect(gotHeaders).toEqual(true);
+            expect(gotData).toEqual(true);            
+        });
+    });
+
     it('VT293-0047 | download file with overwrite default and callback event', function() {
        var flag = false;
        var callbackCalled = false;
