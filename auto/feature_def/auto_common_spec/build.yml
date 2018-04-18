@@ -1,10 +1,11 @@
-sdkversion: 5.5
+sdkversion: 6.0
 name: auto_common_spec
 version: 1.0
 vendor: rhomobile
 build: debug
 bbver: 4.6
 applog: rholog.txt
+#sdk: "../../../../rhodes"
 iphone:
   configuration: Release
   sdk: latest
@@ -38,6 +39,9 @@ win32:
   extensions:
     - "openssl.so"
     - "openssl"
+    - "digest"
+    - "digest-md5"
+    - "digest-sha1"
 symbian:
   uid: '0xe1a1ef92'
 android:

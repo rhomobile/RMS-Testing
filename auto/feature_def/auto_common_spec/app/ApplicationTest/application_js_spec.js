@@ -295,7 +295,7 @@ describe("Application JS API", function () {
 			expect(path).toMatch(/\/app/);
 			expect(Rho.RhoFile.isDir(path)).toBeTruthy();
     	});
-		
+		if (!isWindowsDesktopPlatform()){
 		it("Property 'appsBundleFolder'", function () {
 			var path = Rho.Application.appsBundleFolder
 			//TODO: Need to add a check auto_common_spec should be the last in the path
@@ -308,6 +308,7 @@ describe("Application JS API", function () {
                 expect(path).toMatch(/auto_common_spec/);
 			expect(Rho.RhoFile.isDir(path)).toBeTruthy();
     	});
+        }
 
     	if (isWindowsMobilePlatform()) {
 
@@ -352,7 +353,7 @@ describe("Application JS API", function () {
     		var start_path = Rho.Application.startURI;
     		expect(start_path).toMatch(/\/app\/ApplicationTest\/specRunner.html|\/app\/specRunner.html/)
     	});
-
+        if (!isWindowsDesktopPlatform()){
     	it("Property \"userFolder\"", function () {
     		var path = Rho.Application.userFolder;
     		//expect(path).toMatch(/auto_common_spec/);
@@ -365,6 +366,7 @@ describe("Application JS API", function () {
                 expect(path).toMatch(/auto_common_spec/);
     		expect(Rho.RhoFile.isDir(path)).toBeTruthy();
     	});
+        }
 
     	it("Property \"version\"", function () {
     		var version = Rho.Application.version;
