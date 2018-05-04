@@ -23,6 +23,16 @@ describe("System Module JS Test Starts Here", function() {
 			
 		});
 
+        if (isAndroidPlatform()) {
+            it("Test deviceOwnerEmail property", function () {
+                expect(Rho.System.deviceOwnerEmail).isNotEmptyString();
+            });
+
+            it("Test externalStorageDirectoryPath property", function () {
+                expect(Rho.System.externalStorageDirectoryPath).toEqual("/storage/emulated/0");
+            });
+        }
+
 		it("VT300-070 | call getAllProperties() | ", function() {
 			runs(function(){
 				var data =  Rho.System.getAllProperties();
