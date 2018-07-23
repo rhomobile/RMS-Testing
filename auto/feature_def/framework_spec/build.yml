@@ -17,7 +17,7 @@ uwp:
   target: 'x86'
     
 android:
-  version: 4.4.2
+  version: 7.0
   minSdkVer: 21
 win32:
   msvc: 2015
