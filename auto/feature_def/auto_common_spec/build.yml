@@ -48,7 +48,8 @@ android:
   abis:
   - arm
 #  - x86
-  version: 7.1.1
+  version: 6.0
+  minSdkVer: 21
   extensions:
   - "nativeBridgeTest"
   - "emdk3-manager"
