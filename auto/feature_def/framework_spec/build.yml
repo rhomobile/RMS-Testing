@@ -17,8 +17,8 @@ uwp:
   target: 'x86'
     
 android:
-  
-  #version: 4.4.2
+  version: 4.4.2
+  minSdkVer: 19
 win32:
   msvc: 2015
   deployqt: 1
