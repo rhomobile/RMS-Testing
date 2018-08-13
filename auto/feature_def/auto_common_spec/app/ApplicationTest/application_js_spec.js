@@ -148,7 +148,7 @@ describe("Application JS API", function () {
 
         //TODO: implement spec for getRhoPlatformVersion with callback
 
-        it('RhoPlatformVersion should return same version as installed gem', function () {
+        it('RhoPlatformVersion should return same version as installed gem ' + window.rhodesPlatformVersion, function () {
             expect(Rho.Application.rhoPlatformVersion).toEqual(window.rhodesPlatformVersion);
         });
 
