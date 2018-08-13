@@ -565,15 +565,6 @@ js_update_list.each do |path|
     end
 end
 
-
-path = '../auto/feature_def/auto_common_spec/app/ApplicationTest/rhodesPlatformVersion.js'
-rhodesPlatformVersion = `gem list rhodes | grep rhodes`[/(?<=\().*?(?=\))/]
-
-File.open(path,'w') do |f|
-  f.puts("window.rhodesPlatformVersion = '#{rhodesPlatformVersion}';")
-end
-
-
 #ruby_update_list = [
 #    '../auto/feature_def/phone_spec/app/test_server.rb'
 #]

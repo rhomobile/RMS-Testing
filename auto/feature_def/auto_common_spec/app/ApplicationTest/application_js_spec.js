@@ -148,8 +148,8 @@ describe("Application JS API", function () {
 
         //TODO: implement spec for getRhoPlatformVersion with callback
 
-        it('RhoPlatformVersion should return same version as installed gem ' + window.rhodesPlatformVersion, function () {
-            expect(Rho.Application.rhoPlatformVersion).toEqual(window.rhodesPlatformVersion);
+        it('RhoPlatformVersion should return value like X.XX..X(n).XX..X(n)', function () {
+            expect(Rho.Application.rhoPlatformVersion).toMatch(/^\d\.\d+.\d+$/);
         });
 
         if (isWindowsMobilePlatform()) {
