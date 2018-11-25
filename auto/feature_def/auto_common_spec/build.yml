@@ -47,9 +47,10 @@ symbian:
 android:
   abis:
   - arm
-#  - x86
-  version: 4.4.2
+  - x86
+  version: 7.0
   minSdkVer: 19
+  targetSdkVer: 24
   extensions:
   - "nativeBridgeTest"
   - "emdk3-manager"
