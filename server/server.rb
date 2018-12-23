@@ -173,6 +173,24 @@ htpasswd.flush
 config[:UserDB] = htpasswd
 digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 
+$local_server.mount_proc '/ping_fcm' do |req,res|
+    fcm_api_key = ENV['FCM_API_KEY']
+
+    device = req.query['device']
+    message = req.query['message']
+
+    url = 'https://fcm.googleapis.com/fcm/send'.freeze
+    uri = URI.parse(url)
+    http = Net::HTTP.new( uri.host, uri.port )
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(uri.path)
+    request['Authorization'] = "key=#{fcm_api_key}"
+    request['Content-Type'] = 'application/json'
+    request.body = { 'data': { 'message': message }, 'to': device }.to_json
+    response = http.request(request)
+end
+
 
 $local_server.mount_proc '/digest_auth_get' do |req,res|
   digest_auth.authenticate req, res
