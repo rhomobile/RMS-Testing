@@ -47,7 +47,7 @@ symbian:
 android:
   abis:
   - arm
-  #- x86
+  - x86
   version: 7.0
   minSdkVer: 19
   targetSdkVer: 24
