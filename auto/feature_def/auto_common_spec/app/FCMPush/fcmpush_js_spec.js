@@ -14,7 +14,7 @@ if (Rho.System.platform == Rho.System.PLATFORM_ANDROID ) {
 			Rho.Push.stopNotifications();
 		});
              
-        it('Pings app with FCM', function() {
+        xit('Pings app with FCM', function() {
           
 		  var pushReceived = false;
 		  var pushPayload = null;

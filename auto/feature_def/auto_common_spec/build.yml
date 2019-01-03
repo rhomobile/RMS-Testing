@@ -68,11 +68,11 @@ android:
   - "signature"
   - "genPropBag"
   - "logCapture"
-  - "fcm-push"
+  #- "fcm-push"
 
   capabilities:
   - native_browser
-  - push
+  #- push
 
   fcmSenderID: '922407546706'
   fcmAppID: '1:922407546706:android:a63c657ee02847f0'
