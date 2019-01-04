@@ -74,8 +74,8 @@ android:
   - native_browser
   #- push
 
-  fcmSenderID: '922407546706'
-  fcmAppID: '1:922407546706:android:a63c657ee02847f0'
+  #fcmSenderID: '922407546706'
+  #fcmAppID: '1:922407546706:android:a63c657ee02847f0'
 
 wm:
   #webkit_outprocess: 1
