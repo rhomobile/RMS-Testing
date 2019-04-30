@@ -222,6 +222,17 @@ $local_server.mount_proc '/get_session_with_exposed_cookies' do |req,res|
   res["Access-Control-Expose-Headers"] = "Set-Cookie"
 end
 
+$local_server.mount_proc '/get_session_with_x_session' do |req,res|
+  require 'securerandom'
+  session = SecureRandom.base64(64)
+  res.status = 200
+
+  res["Access-Control-Allow-Origin"] = req["Origin"]
+  res["Access-Control-Allow-Credentials"] = 'true'  
+  res["Access-Control-Expose-Headers"] = "X-Session"
+  res["X-Session"] = "session=#{session}"
+end
+
 $local_server.mount_proc '/return_session' do |req,res|
   req.cookies.each { |c|
     res.body = c.value if c.name=='session'
