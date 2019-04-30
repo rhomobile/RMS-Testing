@@ -207,7 +207,19 @@ $local_server.mount_proc '/get_session' do |req,res|
   res.status = 200
 
   res["Access-Control-Allow-Origin"] = req["Origin"]
-  res["Access-Control-Allow-Credentials"] = 'true'
+  res["Access-Control-Allow-Credentials"] = 'true'  
+end
+
+$local_server.mount_proc '/get_session_with_exposed_cookies' do |req,res|
+  require 'securerandom'
+  session = SecureRandom.base64(64)
+  cookie = WEBrick::Cookie.new('session', session)
+  res.cookies.push cookie
+  res.status = 200
+
+  res["Access-Control-Allow-Origin"] = req["Origin"]
+  res["Access-Control-Allow-Credentials"] = 'true'  
+  res["Access-Control-Expose-Headers"] = "Set-Cookie"
 end
 
 $local_server.mount_proc '/return_session' do |req,res|
