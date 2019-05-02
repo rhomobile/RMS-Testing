@@ -50,7 +50,7 @@ android:
   - x86
   version: 7.0
   minSdkVer: 19
-  targetSdkVer: 24
+  targetSdkVer: 26
   extensions:
   - "nativeBridgeTest"
   - "emdk3-manager"
