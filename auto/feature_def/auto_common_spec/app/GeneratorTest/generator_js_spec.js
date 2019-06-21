@@ -58,7 +58,7 @@ describe('API Generator specs', function() {
                     expect(Rho.NativeBridgeTest.testFloat(1.23e+32)).toEqual(1.23e+32);
                     expect(Rho.NativeBridgeTest.testFloat(-1.2356789e-300)).toEqual(-1.2356789e-300);
                     expect(Rho.NativeBridgeTest.testFloat(1.2356789e+300)).toEqual(1.2356789e+300);
-                    expect(Rho.NativeBridgeTest.testFloat(123456789012345.0)).toEqual(123456789012345.0);
+                    expect(Rho.NativeBridgeTest.testFloat(123456789012345.1)).toEqual(123456789012345.1);
                     expect(Rho.NativeBridgeTest.testFloat(0.123456789012345)).toEqual(0.123456789012345);
 
                 });
