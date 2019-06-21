@@ -161,9 +161,9 @@ describe("Timer JS API Test", function() {
 			var one = Rho.Timer.create();
 			var two = Rho.Timer.create();
 			var three = Rho.Timer.create();
-			one.start(250, one_callback);
-			two.start(300, two_callback);
-			three.start(350, three_callback);
+			one.start(2500, one_callback);
+			two.start(3000, two_callback);
+			three.start(3500, three_callback);
 			setTimeout(function() {
 					one.stop();
 					two.stop();
@@ -171,9 +171,9 @@ describe("Timer JS API Test", function() {
 					expect(one.isAlive()).toEqual(false);	
 					expect(two.isAlive()).toEqual(false);
 					expect(three.isAlive()).toEqual(false);
-				}, 160);
+				}, 1600);
 
-			waits(400);
+			waits(4000);
 			runs(function(){	
 			    expect(onecallbackFired).toEqual(false);
 			    expect(twocallbackFired).toEqual(false);
