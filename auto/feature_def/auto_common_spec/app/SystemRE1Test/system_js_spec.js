@@ -73,7 +73,7 @@ describe("System JS API", function () {
 
         if (isAndroidOrApplePlatform()) {
 
-            it("Test externalStorageDirectoryPath property", function () {
+            xit("Test externalStorageDirectoryPath property", function () {
                     expect(Rho.System.externalStorageDirectoryPath).toEqual("/storage/emulated/0");
             });
 
