@@ -27,7 +27,17 @@
 		] : ( (Rho.System.platform == Rho.System.PLATFORM_ANDROID) ? [
                  "ApplicationTest/specRunner.html",
                  "FileTest/specRunner.html",
-                 "NetworkTest/specRunner.html",
+				 "NetworkTest/specRunner.html",
+
+				 "OrmTest/specRunner.html",
+				 "DatabaseTest/specRunner.html",				 
+				 "SignatureTest/specRunner.html",
+				 "ScreenOrientationTest/specRunner.html",
+				 "SystemRE1Test/specRunner.html",
+				 //"SensorsTest/specRunner.html",
+				 "TimerTest/specRunner.html",
+				 "GeneratorTest/specRunner.html",
+				 "RhoapiTest/specRunner.html",
 				 //"FCMPush/specRunner.html",
                  "Final/specRunner.html"
 		] : [
@@ -47,7 +57,7 @@
         			//"TimerTest/specRunner.html",
         			//"WebViewTest/specRunner.html",
 			//"CardReaderTest/specRunner.html",
-			//"KeyCaptureTest/specRunner.html",
+			//"KeyCaptureTest/specRunner.html", //This will cause security exception on Android since Instrumentation requres INJECT_EVENTS permission
 			//"NetworkTest/specRunner.html",
 			//"ScreenOrientationTest/specRunner.html",
 			//"SensorsTest/specRunner.html",
