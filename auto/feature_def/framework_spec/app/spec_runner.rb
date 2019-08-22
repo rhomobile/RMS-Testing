@@ -1228,7 +1228,7 @@ class SpecRunner < MSpecScript
               "spec/library/resolv/get_names_spec",
 
               #"spec/library/rexml/text/inspect_spec",
-              #"spec/library/rexml/text/new_spec",
+              "spec/library/rexml/text/new_spec",
 
               "spec/library/scanf/io/block_scanf_spec",
               "spec/library/scanf/io/scanf_spec",
@@ -2110,7 +2110,7 @@ class SpecRunner < MSpecScript
               #"spec/library/rexml/attributes/add_spec",
               #"spec/library/rexml/attributes/length_spec",
               #"spec/library/rexml/cdata/to_s_spec",
-              #"spec/library/rexml/text/new_spec",
+              "spec/library/rexml/text/new_spec",
               "spec/library/scanf/io/block_scanf_spec",
               "spec/library/scanf/io/scanf_spec",
               "spec/library/scanf/string/block_scanf_spec",
