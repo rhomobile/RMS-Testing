@@ -5,4 +5,7 @@ describe("Final", function () {
     if ( Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP ){
     	Rho.Application.quit();
     }
+    if ( Rho.System.platform == Rho.System.PLATFORM_LINUX ){
+    	Rho.Application.quit();
+    }
 });

@@ -778,6 +778,10 @@ arrConstants['Rho.System'] = [{
   value: 'WINDOWS_DESKTOP',
   applicableto: 'js'
 }, {
+  constant: 'Rho.System.PLATFORM_LINUX',
+  value: 'LINUX',
+  applicableto: 'js'
+}, {
   constant: 'Rho.System.SCREEN_PORTRAIT',
   value: 'portrait',
   applicableto: 'js'

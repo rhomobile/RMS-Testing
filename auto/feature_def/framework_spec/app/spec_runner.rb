@@ -2471,6 +2471,8 @@ class SpecRunner < MSpecScript
 
           ]
 
+          failed_specs_linux = []
+
           if Rho::System.platform == Rho::System::PLATFORM_IOS
               failed_specs = failed_specs + failed_specs_iOS
           end
@@ -2481,6 +2483,10 @@ class SpecRunner < MSpecScript
 
           if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
               failed_specs = failed_specs + failed_specs_Windows
+          end
+
+          if Rho::System.platform == Rho::System::PLATFORM_LINUX
+              failed_specs = failed_specs + failed_specs_linux
           end
 
           core.each do |folder|

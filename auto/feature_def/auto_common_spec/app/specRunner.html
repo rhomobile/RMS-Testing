@@ -9,38 +9,51 @@
 	</script>
 
 	<script type="text/javascript" id="runnerList">
-		var listOfRunners = (Rho.System.platform == Rho.System.PLATFORM_UWP) ? [
-		] : ( (Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP) ? [
+		var listOfRunners = undefined;
+		if (Rho.System.platform == Rho.System.PLATFORM_UWP) {
+			listOfRunners = [];
+		} else if (Rho.System.platform == Rho.System.PLATFORM_WINDOWS_DESKTOP) {
+			listOfRunners = [
 			"ApplicationTest/specRunner.html",
 			"FileTest/specRunner.html",
-                        "NetworkTest/specRunner.html",
+            "NetworkTest/specRunner.html",
 			"OrmTest/specRunner.html",
 			"DatabaseTest/specRunner.html",
-            "Final/specRunner.html"
-		] : ( (Rho.System.platform == Rho.System.PLATFORM_IOS) ? [
+            "Final/specRunner.html"];
+        } else if (Rho.System.platform == Rho.System.PLATFORM_LINUX) {
+        	listOfRunners = [
+			"ApplicationTest/specRunner.html",
+			"FileTest/specRunner.html",
+            "NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"DatabaseTest/specRunner.html",
+            "Final/specRunner.html"];
+        } else if (Rho.System.platform == Rho.System.PLATFORM_IOS) {
+        	listOfRunners = [
         	"ApplicationTest/specRunner.html",
 			"FileTest/specRunner.html",
-                        "NetworkTest/specRunner.html",
+            "NetworkTest/specRunner.html",
 			"OrmTest/specRunner.html",
 			"DatabaseTest/specRunner.html",
-            "Final/specRunner.html"
-		] : ( (Rho.System.platform == Rho.System.PLATFORM_ANDROID) ? [
-                 "ApplicationTest/specRunner.html",
-                 "FileTest/specRunner.html",
-				 "NetworkTest/specRunner.html",
-
-				 "OrmTest/specRunner.html",
-				 "DatabaseTest/specRunner.html",				 
-				 "SignatureTest/specRunner.html",
-				 "ScreenOrientationTest/specRunner.html",
-				 "SystemRE1Test/specRunner.html",
-				 //"SensorsTest/specRunner.html",
-				 "TimerTest/specRunner.html",
-				 "GeneratorTest/specRunner.html",
-				 "RhoapiTest/specRunner.html",
-				 //"FCMPush/specRunner.html",
-                 "Final/specRunner.html"
-		] : [
+            "Final/specRunner.html"];
+        } else if (Rho.System.platform == Rho.System.PLATFORM_ANDROID) {
+        	listOfRunners = [
+			"ApplicationTest/specRunner.html",
+			"FileTest/specRunner.html",
+			"NetworkTest/specRunner.html",
+			"OrmTest/specRunner.html",
+			"DatabaseTest/specRunner.html",				 
+			"SignatureTest/specRunner.html",
+			"ScreenOrientationTest/specRunner.html",
+			"SystemRE1Test/specRunner.html",
+			//"SensorsTest/specRunner.html",
+			"TimerTest/specRunner.html",
+			"GeneratorTest/specRunner.html",
+			"RhoapiTest/specRunner.html",
+			//"FCMPush/specRunner.html",
+			"Final/specRunner.html"];
+        } else {
+        	listOfRunners = [
         			//"ApplicationTest/specRunner.html",
 			//"LogTest/specRunner.html",
 			//"FileTest/specRunner.html",
@@ -83,8 +96,8 @@
 /* TODO
         			"SimulScanTest/specRunner.html",
 */
-			"Final/specRunner.html"
-		])));
+			"Final/specRunner.html"];
+		}
 
 	</script>
     <script type='text/javascript'>
