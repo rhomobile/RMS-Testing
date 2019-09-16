@@ -2,7 +2,7 @@ sdkversion: 6.0
 name: auto_common_spec
 version: 1.0
 vendor: rhomobile
-build: release
+build: debug
 bbver: 4.6
 applog: rholog.txt
 #sdk: "../../../../rhodes"
