@@ -71,7 +71,7 @@ class SpecRunnerController < Rho::RhoController
 
 
       render(string: result.to_json)
-      if ( Rho::System.platform == "WINDOWS" || Rho::System.platform == "WINDOWS_DESKTOP" )
+      if ( Rho::System.platform == "WINDOWS" || Rho::System.platform == "WINDOWS_DESKTOP" || Rho::System.platform == "LINUX")
         Rho::Application.quit()
       end
   end
