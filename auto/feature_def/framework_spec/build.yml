@@ -1,4 +1,4 @@
-sdk: "../../../../rhodes"
+#sdk: "../../../../rhodes"
 name: framework_spec
 bbver: 4.6
 applog: rholog.txt
