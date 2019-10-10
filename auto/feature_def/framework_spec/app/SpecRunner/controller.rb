@@ -71,9 +71,9 @@ class SpecRunnerController < Rho::RhoController
 
 
       render(string: result.to_json)
-      #if ( Rho::System.platform == "WINDOWS" || Rho::System.platform == "WINDOWS_DESKTOP" || Rho::System.platform == "LINUX")
+      if ( Rho::System.platform == "WINDOWS" || Rho::System.platform == "WINDOWS_DESKTOP" || Rho::System.platform == "LINUX")
         Rho::Application.quit()
-      #end
+      end
   end
 
   def run_selected_specs
