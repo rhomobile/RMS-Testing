@@ -3266,9 +3266,13 @@ class SpecRunner < MSpecScript
           if System.get_property('platform') == 'WINDOWS' || System.get_property('platform') == 'WINDOWS_DESKTOP'
               failed_specs = failed_specs + failed_specs_Windows
           end
-
+          
+          begin
           if Rho::System.platform == Rho::System::PLATFORM_LINUX
               failed_specs = failed_specs + failed_specs_linux
+          end
+          rescue
+            puts 'Linux is not supported on this rhodes version'
           end
 
           core.each do |folder|
