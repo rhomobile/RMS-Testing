@@ -176,8 +176,8 @@ describe("Application JS API", function () {
     describe('Events specs', function () {
         if (isApplePlatform()) {
             beforeEach(function () {
-                Rho.AppEvents.simulateEvent(Rho.AppEvents.APP_EVENT_ACTIVATED);
-                Rho.AppEvents.simulateEvent(Rho.AppEvents.APP_EVENT_UICREATED);
+                //Rho.AppEvents.simulateEvent(Rho.AppEvents.APP_EVENT_ACTIVATED);
+                //Rho.AppEvents.simulateEvent(Rho.AppEvents.APP_EVENT_UICREATED);
                 appEventsTest.callbackFired = false;
                 appEventsTest.lastEvent = "";
                 appEventsTest.lastEventData = {};
@@ -202,7 +202,7 @@ describe("Application JS API", function () {
 
             it('Should fire callback not once', function () {
                 events = [
-                    Rho.AppEvents.APP_EVENT_DEACTIVATED,
+                    //Rho.AppEvents.APP_EVENT_DEACTIVATED,
                     Rho.AppEvents.APP_EVENT_UIDESTROYED,
                     Rho.AppEvents.APP_EVENT_UICREATED,
                     Rho.AppEvents.APP_EVENT_ACTIVATED
