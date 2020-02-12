@@ -244,7 +244,16 @@ $local_server.mount_proc '/return_session' do |req,res|
 end
 
 $local_server.mount_proc '/slow_get' do |req,res|
-  sleep(2)
+
+  to = 2
+  if req.query['to']
+    to = req.query['to'].to_f / 1000
+  end
+
+  puts "slow_get, to = #{to}. sleeping"
+  sleep(to)
+  puts "awaking"
+
   res.body = "OK"
   res.content_length = res.body.length
   res.status = 200
