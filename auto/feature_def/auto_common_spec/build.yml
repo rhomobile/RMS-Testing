@@ -33,7 +33,7 @@ uwp:
     - "digest-sha1"
     - "openssl"
 win32:
-  msvc: 2015
+  msvc: 2017
   deployqt: 1
   deploymsvc: 1
   extensions:
