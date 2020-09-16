@@ -93,21 +93,21 @@
     }
 
 
-
-    $.get( "<%= url_for(action: 'get_nodes', controller: 'SpecRunner')  %>")
-        .done(function( data ) {
-            console.log(data);
-            $("#specTree").jstree({
-                "plugins": ["checkbox"],
-                "checkbox": {
-                    "keep_selected_style": false
-                },
-                "multiple": true,
-                "core": {
-                    "data": data
-                }
-            });
-        });
+    // remove for performance on Travis
+    //$.get( "<%= url_for(action: 'get_nodes', controller: 'SpecRunner')  %>")
+    //    .done(function( data ) {
+    //        console.log(data);
+    //        $("#specTree").jstree({
+    //            "plugins": ["checkbox"],
+    //            "checkbox": {
+    //                "keep_selected_style": false
+    //            },
+    //            "multiple": true,
+    //            "core": {
+    //                "data": data
+    //            }
+    //        });
+    //    });
 
     var createSpecInfo = function (root, info) {
 
@@ -206,6 +206,56 @@
         }).always(function () {
             spinner.stop();
         });
+    });
+
+
+
+    function runAllSpecs() {
+        specs.innerHTML = ""
+        total.innerText = "";
+        passed.innerText = "";
+        failed.innerText = "";
+        not_supported.innerText = "";
+
+        var target = document.getElementById('specrunner');
+        var spinner = new Spinner(opts).spin(target);
+
+        $.post({
+            url: "<%= url_for(action: 'run_all_specs', controller: 'SpecRunner')  %>",
+            data: '{}',
+            dataType: 'json',
+            timeout: -1
+        }).done(function (response) {
+            total.innerText = "Total:  " + response.total;
+            passed.innerText = "Passed: " + response.passed;
+            failed.innerText = "Failed: " + response.failed;
+            not_supported.innerText = "Not supported: " + response.not_supported;
+
+            Object.keys(response.locations).forEach(function (key) {
+
+                var info = response.locations[key];
+                var d = $('<div class="specinfo"></div>');
+                d.text(key);
+
+                createSpecInfo(d, info);
+
+                $("#specs").append(d);
+            });
+        }).fail(function (xhr, status, error) {
+            total.innerText = "Error";
+            passed.innerText = status;
+            failed.innerText = JSON.stringify(error);
+        }).always(function () {
+            spinner.stop();
+        });
+
+    }
+
+
+    $(function() {
+     // auto start all specs
+     // comment it for manual mode
+     runAllSpecs();
     });
 
 </script>

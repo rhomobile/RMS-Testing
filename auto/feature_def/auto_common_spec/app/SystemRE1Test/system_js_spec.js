@@ -73,6 +73,10 @@ describe("System JS API", function () {
 
         if (isAndroidOrApplePlatform()) {
 
+            xit("Test externalStorageDirectoryPath property", function () {
+                    expect(Rho.System.externalStorageDirectoryPath).toEqual("/storage/emulated/0");
+            });
+
             it("VT300-046 | set screenAutoRotate as false, call getProperty with screenAutoRotate | false", function () {
 
                 Rho.System.screenAutoRotate = false;

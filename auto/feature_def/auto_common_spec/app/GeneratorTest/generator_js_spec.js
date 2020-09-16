@@ -1,7 +1,7 @@
 describe('API Generator specs', function() {
     //'use strict';
 
-    if (Rho.System.platform != Rho.System.PLATFORM_WP8) {
+    if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8)) {
         describe('Common c++ bridge', function() {
 
             describe('loopback functions, common cases', function() {
@@ -58,7 +58,7 @@ describe('API Generator specs', function() {
                     expect(Rho.NativeBridgeTest.testFloat(1.23e+32)).toEqual(1.23e+32);
                     expect(Rho.NativeBridgeTest.testFloat(-1.2356789e-300)).toEqual(-1.2356789e-300);
                     expect(Rho.NativeBridgeTest.testFloat(1.2356789e+300)).toEqual(1.2356789e+300);
-                    expect(Rho.NativeBridgeTest.testFloat(123456789012345.0)).toEqual(123456789012345.0);
+                    expect(Rho.NativeBridgeTest.testFloat(123456789012345.1)).toEqual(123456789012345.1);
                     expect(Rho.NativeBridgeTest.testFloat(0.123456789012345)).toEqual(0.123456789012345);
 
                 });
@@ -577,7 +577,7 @@ describe('API Generator specs', function() {
     });
 
     describe('Test getProperties, getAllProperties', function() {
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
             it('Should return all properties', function() {
                 Rho.GenPropBag.floatProp = 3.14156;
                 Rho.GenPropBag.intProp = 999;

@@ -1,4 +1,4 @@
----
+#sdk: "../../../../rhodes"
 name: framework_spec
 bbver: 4.6
 applog: rholog.txt
@@ -7,13 +7,26 @@ vendor: rhomobile
 sdkversion: 1.4
 #wmsdk: "Windows Mobile 6 Professional SDK (ARMV4I)"
 iphone: 
-  sdk: iphonesimulator9.2
+  sdk: latest
   entitlements: ""
   codesignidentity: ""
   configuration: Release
   #extensions: ["digest-sha1"]   
-
+  extensions: ["openssl.so", "openssl"]
+uwp:
+  productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
+  target: 'x86'
+  extensions: ["openssl.so", "openssl"]
+linux:
+    
 android:
   version: 4.4.2
+  minSdkVer: 19
+  extensions: ["openssl.so", "openssl"]
+win32:
+  msvc: 2017
+  deployqt: 1
+  deploymsvc: 1
+  extensions: ["openssl.so", "openssl"]
   
-extensions: ["mspec", "fileutils", "zlib", "hmac", "digest", "digest-md5", "digest-sha1", "digest-sha2", "test-libs", "set", "thread", "timeout", "uri", "net-http", "fcntl", "rexml", "zlib", "openssl.so", "openssl", "ezcrypto" ]
+extensions: ["mspec", "fileutils", "zlib", "hmac", "digest", "digest-md5", "digest-sha1", "digest-sha2", "test-libs", "set", "thread", "timeout", "uri", "net-http", "fcntl", "rexml", "zlib", "ezcrypto", "bigdecimal" ]

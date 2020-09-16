@@ -21,6 +21,9 @@ function isWindowsPhone8Platform() {
     return "WP8" == Rho.System.platform;
 }
 
+function isUWPPlatform() {
+    return "UWP" == Rho.System.platform;
+}
 /* Complex test methods */
 
 function isAnyWindowsFamilyPlatform() {

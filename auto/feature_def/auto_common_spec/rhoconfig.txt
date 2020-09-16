@@ -1,6 +1,6 @@
 # startup page for your application
-#start_path = 'file://%APP_PATH%/app/specRunner.html'
-start_path = '/app/index.html'
+start_path = '/app/specRunner.html'
+#start_path = '/app/index.html'
 
 # path to the options page (in this case handled by javascript)
 options_path = '/app/Settings'
@@ -15,7 +15,7 @@ rhobundle_zip_pwd = nil
 # log level
 # 0-trace, 1-info(app level), 3-warnings, 4-errors
 # for production set to 3
-MinSeverity  = 0
+MinSeverity  = 1
 
 # enable copy log messages to standard output, useful for debugging
 LogToOutput = 1
@@ -27,10 +27,10 @@ LogCategories = *
 ExcludeLogCategories = 
 
 # max log file size in Bytes, set 0 to unlimited size; when limit is reached, log wraps to beginning of file
-MaxLogFileSize=5000000
+MaxLogFileSize=0
 
 # turn on local http server traces, off by default
-net_trace = 1
+net_trace = 0
 
 # timeout of network requests in seconds (30 by default)
 #net_timeout = 60

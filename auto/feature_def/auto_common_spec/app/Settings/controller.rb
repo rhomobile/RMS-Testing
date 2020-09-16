@@ -5,12 +5,13 @@ require 'helpers/browser_helper'
 
 class SettingsController < Rho::RhoController
   include BrowserHelper
-  
+
   def quitApp
     sleep(2)
-    Rho::System.exit
+    # for auto running - should be stay after run. if not can be quit before log will be processed
+    #Rho::System.exit
   end
-  
+
   def index
     @msg = @params['msg']
     render

@@ -12,22 +12,68 @@ class SpecRunnerController < Rho::RhoController
   end
 
   def run_specs
-    GC.enable()
-    @runner = SpecRunner.new
-    @runner.set_default_files
-    @code = @runner.run
-    @exc_count = MSpec.exc_count
-    @count = MSpec.count
 
-    total = @count.to_s
-    passed = (@count - @exc_count).to_s
-    failed = @exc_count.to_s
+  end
 
-    puts "***Total:  " + total
-    puts "***Passed: " + passed
-    puts "***Failed: " + failed
+  def run_all_specs
+      puts "$$$ SpecRunner.run_all_specs() START"
 
-    render(string: "{ \"total\":\"#{total}\", \"passed\":\"#{passed}\", \"failed\":\"#{failed}\" }")
+      GC.enable()
+      @runner = SpecRunner.new
+      @runner.set_default_files_for_auto_run
+      @code = @runner.run
+      @exc_count = MSpec.exc_count
+      @not_supported = MSpec.not_supported_count
+      @count = MSpec.count
+      locations = MSpec.exc_locations
+
+
+      total = @count.to_s
+      passed = (@count - @exc_count).to_s
+      failed = @exc_count.to_s
+      not_supported = @not_supported.to_s
+
+      puts "***Total:  " + total
+      puts "***Passed: " + passed
+      puts "***Failed: " + failed
+      puts "***Not supported by Rhodes: " + not_supported
+
+      result = {}
+      result['total'] = total
+      result['passed'] = passed
+      result['failed'] = failed
+      result['locations'] = {}
+      result['not_supported'] = not_supported
+
+
+      @response["headers"]["Content-Type"] = "application/json"
+
+      # remove for performance
+      #locations.each do |key,infos|
+      #   infos_array = []
+      #
+      #   infos.each do |info|
+      #   modified_info = {}
+      #   info.each do |k,v|
+      #     if v.is_a?(String)
+      #        modified_info[k] = v.scrub
+      #     else
+      #       modified_info[k] = v
+      #     end
+      #   end
+      #      infos_array << modified_info
+      #    end
+      #    result['locations'][key] = infos_array
+      #end
+      puts "***Terminated"
+
+      puts "$$$ SpecRunner.run_all_specs() FINISH"
+
+
+      render(string: result.to_json)
+      #if ( Rho::System.platform == "WINDOWS" || Rho::System.platform == "WINDOWS_DESKTOP" || Rho::System.platform == "LINUX")
+        Rho::Application.quit()
+      #end
   end
 
   def run_selected_specs
@@ -65,7 +111,7 @@ class SpecRunnerController < Rho::RhoController
 
     locations.each do |key,infos|
       infos_array = []
-  
+
       infos.each do |info|
         modified_info = {}
         info.each do |k,v|
@@ -85,10 +131,10 @@ class SpecRunnerController < Rho::RhoController
   end
 =begin
   def expand_children( hval )
-    n = {}   
+    n = {}
     hval.each do |k,v|
      if k==:children
-       n[:children] = []   
+       n[:children] = []
        hval[:children].each do |k,v|
          n[:children] << expand_children(v)
        end
@@ -113,7 +159,7 @@ class SpecRunnerController < Rho::RhoController
      pathFile = Pathname.new(f)
      relpath = pathFile.relative_path_from( pathNode )
      pathParts = relpath.each_filename.to_a
-     
+
      node = nodehash
      pathParts[0..-2].each do |part|
        node[:children][part] = { text: part, path: '', :children => {} } unless node[:children][part]

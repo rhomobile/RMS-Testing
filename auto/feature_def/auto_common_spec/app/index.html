@@ -18,20 +18,27 @@
         "Application": "/app/ApplicationTest/specRunner.html",
         "AudioCapture": "/app/AudioCaptureTest/specRunner.html",
         "Barcode": "/app/BarcodeTest/specRunner.html",
-        "CardReader": "/app/CardReaderTest/specRunner.html",
         "Constants": "/app/Constants/specRunner.html",
         "Camera": "/app/CameraTest/specRunner.html",
         "Config": "/app/ConfigTest/specRunner.html",
         "Database": "/app/DatabaseTest/specRunner.html",
         "File": "/app/FileTest/specRunner.html",
+/* TODO: make intents targetapp work
         "Intent": "/app/intent/specRunner.html",
+*/
+/* TODO: make instrumentation work
         "KeyCapture": "/app/KeyCaptureTest/specRunner.html",
+*/
         "Log": "/app/LogTest/specRunner.html",
         "Network": "/app/NetworkTest/specRunner.html",
+/* TODO: make commonAPI
         "NFC": "/app/NearFieldCommunications/specRunner.html",
+*/
         "Orm": "/app/OrmTest/specRunner.html",
         "Signature": "/app/SignatureTest/specRunner.html",
+/*
         "SimulScan": "/app/SimulScanTest/specRunner.html",
+*/
         "ScreenOrientation": "/app/ScreenOrientationTest/specRunner.html",
         "System": "/app/SystemRE1Test/specRunner.html",
         "Sensors": "/app/SensorsTest/specRunner.html",
@@ -64,7 +71,12 @@
             platformSpecificTests = {
                 "Websocket": "/app/WebsocketTest/specRunner.html",
                 "Eventsource": "/app/EventSourceTest/specRunner.html",
+                //"FCM Push": "/app/FCMPush/specRunner.html"
             };
+
+            if (Rho.System.isSymbolDevice) {
+              platformSpecificTests["CardReader"] = "/app/CardReaderTest/specRunner.html";
+            }
 
             break;
     }

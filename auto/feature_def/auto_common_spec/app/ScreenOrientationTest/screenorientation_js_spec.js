@@ -49,7 +49,7 @@ describe("ScreenOrientation JS API Test", function () {
 		waitsFor(function()
 		{
 			return ( (callbackFired == true) && (orientationType == "rightHanded") )
-		}, 'The Screen Orientation should display', 10000);
+		}, 'The Screen Orientation should display', 30000);
 		});
 
         it("VT281-0906 | Test Screen Orientation leftHanded with callback |", function() {
@@ -63,7 +63,7 @@ describe("ScreenOrientation JS API Test", function () {
 		waitsFor(function()
 		{
 			return ( (callbackFired == true) && (orientationType == "leftHanded") )
-		}, 'The Screen Orientation should display', 10000);
+		}, 'The Screen Orientation should display', 30000);
 		});
 
         it("VT281-0907 | Test Screen Orientation upsideDown with callback |", function() {
@@ -77,7 +77,7 @@ describe("ScreenOrientation JS API Test", function () {
 		waitsFor(function()
 		{
 			return ( (callbackFired == true) && (orientationType == "upsideDown") )
-		}, 'The Screen Orientation should display', 10000);
+		}, 'The Screen Orientation should display', 30000);
 		});
 
         it("VT281-0908 | Test Screen Orientation normal with callback |", function() {
@@ -91,7 +91,7 @@ describe("ScreenOrientation JS API Test", function () {
 		waitsFor(function()
 		{
 			return ( (callbackFired == true) && (orientationType == "normal") )
-		}, 'The Screen Orientation should display', 10000);
+		}, 'The Screen Orientation should display', 30000);
 		});
 
         it("VT281-0910 | Set autoRotate as false and call righthand method |", function() {
@@ -107,7 +107,7 @@ describe("ScreenOrientation JS API Test", function () {
 		waitsFor(function()
 		{
 			return ( (callbackFired == true) && (orientationType == "rightHanded") )
-		}, 'The Screen Orientation should display', 10000);
+		}, 'The Screen Orientation should display', 30000);
 		});
 
         it("VT281-0912| Set autoRotate as true and call normal method |", function() {
@@ -122,7 +122,7 @@ describe("ScreenOrientation JS API Test", function () {
 		waitsFor(function()
 		{
 			return ( (callbackFired == true) && (orientationType == "normal") )
-		}, 'The Screen Orientation should display', 10000);
+		}, 'The Screen Orientation should display', 30000);
 		});
     }
 });

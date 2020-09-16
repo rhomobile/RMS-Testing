@@ -173,6 +173,24 @@ htpasswd.flush
 config[:UserDB] = htpasswd
 digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 
+$local_server.mount_proc '/ping_fcm' do |req,res|
+    fcm_api_key = ENV['FCM_API_KEY']
+
+    device = req.query['device']
+    message = req.query['message']
+
+    url = 'https://fcm.googleapis.com/fcm/send'.freeze
+    uri = URI.parse(url)
+    http = Net::HTTP.new( uri.host, uri.port )
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(uri.path)
+    request['Authorization'] = "key=#{fcm_api_key}"
+    request['Content-Type'] = 'application/json'
+    request.body = { 'data': { 'message': message }, 'to': device }.to_json
+    response = http.request(request)
+end
+
 
 $local_server.mount_proc '/digest_auth_get' do |req,res|
   digest_auth.authenticate req, res
@@ -181,8 +199,61 @@ $local_server.mount_proc '/digest_auth_get' do |req,res|
   res.status = 200
 end
 
+$local_server.mount_proc '/get_session' do |req,res|
+  require 'securerandom'
+  session = SecureRandom.base64(64)
+  cookie = WEBrick::Cookie.new('session', session)
+  res.cookies.push cookie
+  res.status = 200
+
+  res["Access-Control-Allow-Origin"] = req["Origin"]
+  res["Access-Control-Allow-Credentials"] = 'true'  
+end
+
+$local_server.mount_proc '/get_session_with_exposed_cookies' do |req,res|
+  require 'securerandom'
+  session = SecureRandom.base64(64)
+  cookie = WEBrick::Cookie.new('session', session)
+  res.cookies.push cookie
+  res.status = 200
+
+  res["Access-Control-Allow-Origin"] = req["Origin"]
+  res["Access-Control-Allow-Credentials"] = 'true'  
+  res["Access-Control-Expose-Headers"] = "Set-Cookie"
+end
+
+$local_server.mount_proc '/get_session_with_x_session' do |req,res|
+  require 'securerandom'
+  session = SecureRandom.base64(64)
+  res.status = 200
+
+  res["Access-Control-Allow-Origin"] = req["Origin"]
+  res["Access-Control-Allow-Credentials"] = 'true'  
+  res["Access-Control-Expose-Headers"] = "X-Session"
+  res["X-Session"] = "session=#{session}"
+end
+
+$local_server.mount_proc '/return_session' do |req,res|
+  req.cookies.each { |c|
+    res.body = c.value if c.name=='session'
+  }
+  res.status = 200
+
+  res["Access-Control-Allow-Origin"] = req["Origin"]
+  res["Access-Control-Allow-Credentials"] = 'true'
+end
+
 $local_server.mount_proc '/slow_get' do |req,res|
-  sleep(2)
+
+  to = 2
+  if req.query['to']
+    to = req.query['to'].to_f / 1000
+  end
+
+  puts "slow_get, to = #{to}. sleeping"
+  sleep(to)
+  puts "awaking"
+
   res.body = "OK"
   res.content_length = res.body.length
   res.status = 200
@@ -206,7 +277,7 @@ $local_server.mount_proc '/stream' do |req,res|
     res.status = 200
     res.content_length = 6*chunks
   else
-    res.status = 500    
+    res.status = 500
   end
 end
 
@@ -231,7 +302,7 @@ end
 
 $local_server.mount_proc '/timeout' do |req,res|
     sleep(60)
-    
+
     res.body = "OK"
     res.status = 200
     res.content_length = res.body.length
@@ -258,7 +329,7 @@ $local_server.mount_proc '/download_image_auth' do |req,res|
     WEBrick::HTTPAuth.basic_auth(req, res, "My Realm") {|user, pass|
         user == 'admin' && pass == 'admin'
     }
-    
+
     res.body = File.open( File.join( File.dirname(__FILE__),"test.jpg" ), "rb" )
     res["content-type"]="image/jpeg"
     res.status = 200
@@ -301,14 +372,14 @@ end
 $local_server.mount_proc '/download_app' do |req,res|
     device = req.query()["device"]
     device = device.downcase if device
-    
+
     filenames = {
         'wm' => 'TestAppWM6.5.cab',
         'ce' => 'TestAppCE.cab',
         'win32' => 'everywan.exe',
         'wp8' => 'everywan.exe'
     }
-    
+
     filename = filenames[device]
 
     if filename then
@@ -320,18 +391,18 @@ $local_server.mount_proc '/download_app' do |req,res|
         }
 
         contentType = extensions[File.extname(filename)]
-        
+
         if !contentType then
             contentType = "application/octet-stream"
         end
-        
+
         res['content-type'] = contentType
 
         res.status = 200
     else
         res.status = 404
     end
-    
+
 end
 
 lastLogData = ""
@@ -345,30 +416,30 @@ end
 $local_server.mount_proc '/get_last_log' do |req,res|
     res.body = lastLogData
     #puts "res.body: #{res.body}"
-    
+
     res.status = 200
 end
 
 $local_server.mount_proc '/post_gzip' do |req,res|
     puts "GZIP request is: \n[START]\n #{req.inspect}\n[END]"
-    
+
     enc = req['Content-Encoding']
-    
+
     body = nil
-    
+
     if enc =='gzip' then
         begin
-            
+
             f = open('post_gzip_body.dat','w')
             f.puts(req.body);
-            f.close()            
-            
+            f.close()
+
             io = StringIO.new(req.body, "r")
             reader = Zlib::GzipReader.new(io)
             body = reader.read
-        
+
             puts "Body is: #{body.inspect}"
-        
+
             if body == "GZipped test body" then
                 res.status = 200
             else
@@ -385,26 +456,26 @@ end
 
 $local_server.mount_proc '/get_gzip' do |req,res|
     puts "request is: \n[START]\n #{req.inspect}\n[END]"
-    
+
     res['Content-Encoding'] = 'gzip'
-    
+
     data = "GZipped test body"
-    
+
     io = StringIO.new("","w")
     gz = Zlib::GzipWriter.new( io )
     gz.write data
     gz.close
-    
+
     res.body = io.string
     res.content_length = res.body.length
-    res.status = 200    
+    res.status = 200
 end
 
 $local_server.mount_proc( '/time_stream' ) do |req, res|
   res.content_type = 'text/event-stream'
   res.chunked = true
   res['Access-Control-Allow-Origin'] = "*"
-  
+
   res.body = proc { |w|
       2.times do
         w << 'data: ' + "server time:" + Time.now.to_s + "\x0D\x0A"
@@ -464,6 +535,13 @@ $local_server.mount_proc( '/get_non_utf_body' ) do |req,res|
 end
 
 
+$local_server.mount_proc( '/get_utf_body' ) do |req,res|
+  res.body = "$¢€𐍈"
+  res.content_type = 'text/utf-8'
+  res.status = 200
+end
+
+
 #Secure server mount points
 $secure_server.mount_proc '/test_methods' do |req,res|
     if req.request_method == "GET" then
@@ -497,12 +575,12 @@ end
 
 
 $secure_server_with_client_auth.mount_proc '/test_methods' do |req,res|
-    
+
     client_cert = req.client_cert
-    
-    puts "SSL Client certificate:\n======================\n#{client_cert}\n==========================="    
-    
-    
+
+    puts "SSL Client certificate:\n======================\n#{client_cert}\n==========================="
+
+
     if req.request_method == "GET" then
         res.status = 200
         res.body = "initial GET request is: #{req.query['data1']} and #{req.query['data2']}"
@@ -533,7 +611,7 @@ js_update_list.each do |path|
       f.puts("SECURE_PORT_CA=#{securePortWithClientAuth};");
       f.puts("WEBSOCKET_HOST='#{host}';");
       f.puts("WEBSOCKET_PORT=#{webSocketPort};");
-      f.puts("HOSTS=#{JSON.generate(hosts)};")     
+      f.puts("HOSTS=#{JSON.generate(hosts)};")
     end
 end
 

@@ -4,7 +4,7 @@ require File.expand_path('../../fixtures/classes', __FILE__)
 require 'socket'
 
 describe "Socket#connect_nonblock" do
-  raise 'RHO: not supported'
+#  raise 'RHO: not supported'
 
   before :each do
     @hostname = "127.0.0.1"

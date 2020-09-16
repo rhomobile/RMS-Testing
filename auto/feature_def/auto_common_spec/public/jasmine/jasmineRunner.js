@@ -76,7 +76,7 @@ function quit()
                     Rho.Log.info('***Terminated','APP');
 					setTimeout(function() {
 						// give some time app to put all the log
-						Rho.Application.quit();
+						// Rho.Application.quit();
 					}, 5000);
                     return;
 				}

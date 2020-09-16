@@ -1,3 +1,11 @@
+var rho_version_major;
+try {
+    var ver = Rho.Config.getPropertyString("rhodes_gem_version");
+    rho_version_major = ver.split('.')[0];
+} catch (e) {
+    rho_version_major = 5;
+}
+
 function sleep (msec)
 {
     var start = new Date().getTime();
@@ -97,7 +105,7 @@ describe('Network JS API', function() {
         var netCB = function(){
             console.log("Network callback");
         };
-        //Rho.Network.stopDetectingConnection(netCB);
+        Rho.Network.stopDetectingConnection(netCB);
     });
 
     it('check available hosts', function(){
@@ -138,232 +146,7 @@ describe('Network JS API', function() {
                 expect(accepted_url.length).toBeGreaterThan(0);
             }
         });
-    });
-
-    it('VT293-0013 | cancel with wan/mguest connection', function() {
-
-       var getCallback = function(args) {
-            callbackCount += 1;
-       }
-       
-       runs( function() {
-            getProps = {
-                url:  srvURL + "/slow_get"
-            };
-            Rho.Network.get(getProps, getCallback);
-            sleep(1000);
-            Rho.Network.cancel();
-        } );
-       
-        runs(function() {
-            expect(callbackCount).toEqual(0);
-        });
-       
-    });
-
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
-        it('VT293-0014 | detectConnection with wlan profile enabled', function () {
-
-            runs(function () {
-                detectconnectionProps = {
-                    host: srvHost,
-                    port: srvPort
-                };
-                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-            });
-
-            waitsFor(function () {
-                return callbackCount == 1;
-            },
-                 "Callback never called",
-                 5100
-             );
-
-            runs(function () {
-                expect(callbackCount).toEqual(1);
-                expect(connectionInfo).toEqual("Connected");
-            });
-        });
-
-        it('VT293-0015 | detectConnection with sync', function () {
-
-            detectconnectionProps = {
-                host: srvHost,
-                port: srvPort
-            };
-
-            var data = Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-            expect(JSON.stringify(data)).toEqual("null");
-
-        });
-
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
-        it('VT293-0016 | detectConnection with ananymous callback', function () {
-
-            runs(function () {
-                detectconnectionProps = {
-                    host: srvHost,
-                    port: srvPort
-                };
-
-                Rho.Network.detectConnection(detectconnectionProps, function(params){
-                    connectionInfo = params.connectionInformation;
-                    callbackCount = 1;
-                });
-            });
-
-            waitsFor(function () {
-                return callbackCount == 1;
-            },
-                 "Callback never called",
-                 5100
-             );
-
-            runs(function () {
-                var stopCB = function(){
-                    console.log("null");
-                }
-                expect(callbackCount).toEqual(1);
-                expect(connectionInfo).toEqual("Connected");
-                Rho.Network.stopDetectingConnection(stopCB);
-            });
-        });
-
-        /*
-   it('VT293-0019 | detectConnection with exteranl profile disabled with pollinterval', function() {
-      var flag = false;
-       runs( function() {
-
-           detectconnectionProps = {
-               host: 'http://www.google.com',
-               port: 80,
-               pollInterval: 6000
-           };
-           
-           Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-
-       } );
-      
-      waitsFor( function() {
-               return callbackCount==1;
-           },
-           "Callback never called",
-           6100
-       );
-      
-       runs(function() {
-           expect(callbackCount).toEqual(1);
-           expect(connectionInfo).toEqual("Connected");
-       });
-
-   });*/
-
-        it('VT293-0020 | detectConnection with detectionTimeout', function () {
-            var flag = false;
-            runs(function () {
-
-                detectconnectionProps = {
-                    host: 'http://any.unavailable.address',
-                    port: 80,
-                    detectionTimeout: 1000
-                };
-
-                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-
-            });
-
-            waitsFor(function () {
-                return callbackCount == 1;
-            },
-                 "Callback never called",
-                 waitTimeout
-             );
-
-            runs(function () {
-                expect(callbackCount).toEqual(1);
-                expect(failureMsg).toMatch("Attempted to resolve hostname to connect to but did not succeed");
-            });
-
-        });
-
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
-        it('VT293-0021 | detectConnection with pollinterval and dtectionTimeout', function () {
-            var flag = false;
-            runs(function () {
-
-                detectconnectionProps = {
-                    host: srvHost,
-                    port: srvPort,
-                    pollInterval: 6000,
-                    detectionTimeout: 5000
-                };
-
-                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-
-                //            setTimeout(function() {
-                //                flag = true;
-                //            }, 12000);
-            });
-
-            waitsFor(function () {
-                //return flag;
-                return callbackCount == 1;
-            },
-                 "Callback never called",
-                 13000
-             );
-
-            runs(function () {
-                //           expect(callbackCount).toEqual(2);
-                expect(callbackCount).toEqual(1);
-                expect(connectionInfo).toEqual("Connected");
-            });
-
-        });
-
-
-        if (Rho.System.platform != Rho.System.PLATFORM_WP8)
-        it('VT293-0022 | stopDetectingConnection with wlan profile enabled', function () {
-            var flag = false;
-            runs(function () {
-
-                detectconnectionProps = {
-                    host: srvHost,
-                    port: srvPort
-                };
-
-                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
-
-            });
-
-            waitsFor(function () {
-                return callbackCount == 1;
-            },
-                "Callback never called",
-                5100
-            );
-
-            runs(function () {
-                Rho.Network.stopDetectingConnection(detectConnectionCallback);
-                setTimeout(function () {
-                    flag = true;
-                }, 6000);
-            });
-
-            waitsFor(function () {
-                return flag;
-            },
-                "Callback never called",
-                7000
-            );
-
-            runs(function () {
-                //After 12 sec of wait the count should not get increased to 2 as poll interval got stopped
-                expect(callbackCount).toEqual(1);
-                expect(connectionInfo).toEqual("Connected");
-            });
-
-        });
+    });           
 
             it('VT293-0037 | verifyPeerCertificate with default value', function () {
                 var status = '';
@@ -426,7 +209,7 @@ describe('Network JS API', function() {
                 });
             });
 
-        if (Rho.System.platform != "WP8") {
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8)) {
             it('VT293-0039 | verifyPeerCertificate with false', function () {
                 var data = '';
                 var callbackCalled = false;
@@ -563,7 +346,7 @@ describe('Network JS API', function() {
         });
     });
 
-    /*it('VT293-0044 | get with valid url', function() {
+    /*xit('VT293-0044 | get with valid url', function() {
        var fullURL = srvURL + "/download";
        var content = "";
        var errCode = -1;
@@ -671,6 +454,65 @@ describe('Network JS API', function() {
             //TODO: Need to add Code for File exist.
         });
     });
+
+if ( isAndroidPlatform() ) {                       
+
+    xit('download file from http with additional progress callbacks', function() {
+       var status = '';
+       var fname = Rho.RhoFile.join(imagesDownloadFolder,"downloaded.file");
+       var callbackCount = 0;
+
+       var gotHeaders = false;
+       var gotData = false;
+       var finished = false;
+
+       var download_file_callback = function (args){
+            status = args['status'];
+            callbackCount++;
+
+            if ( (status=='progress_headers') && (!gotData) ) {
+                gotHeaders = true;
+            } else if ( (status=='progress_data') && (gotHeaders) ) {
+                gotData = true;
+            } else {
+                finished = true;
+            }
+       }
+
+       runs( function() {
+            
+            if ( Rho.RhoFile.exists(fname) ) {
+                Rho.RhoFile.deleteFile(fname);
+            }
+
+            expect(Rho.RhoFile.exists(fname)).toEqual(false);
+
+            downloadfileProps = {
+                url: srvURL + "/video.3gp",
+                filename: fname,
+                wantReceiveProgressCallbacks: true
+
+            };
+
+            Rho.Network.downloadFile(downloadfileProps, download_file_callback);
+
+        } );
+
+        waitsFor( function() {
+                return finished;
+            },
+            "Callback never called",
+            waitTimeout
+        );
+
+        runs(function() {
+            expect(status).toEqual('ok');
+            expect(gotHeaders).toEqual(true);
+            expect(gotData).toEqual(true);            
+        });
+    });
+
+}
 
     it('VT293-0047 | download file with overwrite default and callback event', function() {
        var flag = false;
@@ -823,7 +665,7 @@ describe('Network JS API', function() {
     });
 
 
-     if (Rho.System.platform != Rho.System.PLATFORM_WP8)
+     if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
      {
      it('VT293-0051 | download file with overwrite true and createfolder true value with callback', function() {
        var flag = false;
@@ -1219,44 +1061,93 @@ describe('Network JS API', function() {
         );
     });
     
-    
-    //TODO: JS callback invoke throws exception on binary data receved, spec fails due to cb timeout
-    xit( 'Receives non-UTF data in body', function() {
-    
-       var get_props = {
-            url : srvURL + "/get_non_utf_body",
-       };
-       
-       var callbackCalled = false;
-       var status = '';
-       var body = '';
-       
-       var get_callback = function(args) {
-            status = args['status'];
-            body = args['body'];
-            callbackCalled = true;
-       }
-       
-       runs( function() {
-                Rho.Network.get(get_props, get_callback);
-            }
-        );
-       
-       waitsFor(function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
-       
-       runs(function() {
-                expect(status).toEqual('ok');
-                expect(body.length).toEqual(256);
-            }
-        );
+    if (rho_version_major > 5){
+        it( 'Receives non-UTF data in body', function() {
+        
+           var get_props = {
+                url : srvURL + "/get_non_utf_body",
+           };
+           
+           var callbackCalled = false;
+           var status = '';
+           var body = '';
+           
+           var get_callback = function(args) {
+                status = args['status'];
+                body = args['body'];
+                callbackCalled = true;
+           }
+           
+           runs( function() {
+                    Rho.Network.get(get_props, get_callback);
+                }
+            );
+           
+           waitsFor(function() {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
+           
+           runs(function() {
+                    expect(status).toEqual('ok');
+                    expect(body.length).toEqual(256);
 
-    
-    });
+                    var array = new Uint8Array(256);
+                    for ( var i = 0; i < 256; ++i ) { array[i] = i; }
+                    var refData = String.fromCharCode.apply(null,array);
+                    expect(body).toEqual(refData);
+                }
+            );
+        
+        });
+
+
+        it( 'Receives UTF data in body', function() {
+        
+           var get_props = {
+                url : srvURL + "/get_utf_body",
+           };
+           
+           var callbackCalled = false;
+           var status = '';
+           var body = '';
+           
+           var get_callback = function(args) {
+                status = args['status'];
+                body = args['body'];
+                callbackCalled = true;
+           }
+           
+           runs( function() {
+                    Rho.Network.get(get_props, get_callback);
+                }
+            );
+           
+           waitsFor(function() {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
+           
+           runs(function() {
+                    expect(status).toEqual('ok');
+                    if ( isAndroidPlatform() ) {                       
+                      var reference = decodeURIComponent(escape("\x24\xc2\xa2\xe2\x82\xac"));
+                      reference += "\xF0\x90\x8d\x88"; //4-bytes UTF sequences won't get through JNI so expect them as escaped bytes
+                    } else {
+                      var reference = decodeURIComponent(escape("\x24\xc2\xa2\xe2\x82\xac\xF0\x90\x8d\x88"));
+                    }
+		    expect(body).toEqual( reference );
+                }
+            );
+        
+        });
+
+
+    }
 
     it ('Waits more than TO value if part of data received', function() {
         var get_props = {
@@ -1290,8 +1181,7 @@ describe('Network JS API', function() {
         );
 
     });
-
-    it ('Fails in TO value if no data received', function() {
+it('Fails in TO value if no data received', function() {
         var get_props = {
             url : srvURL + "/stream?chunks=1&to=40",
        };
@@ -1322,153 +1212,372 @@ describe('Network JS API', function() {
             }
         );
     });
+if (!isWindowsDesktopPlatform()){
+    it('GET to insecure server with digest HTTP auth', function() {
+            var get_props = {
+                url : srvURL + "/digest_auth_get",
+                authType: Rho.Network.AUTH_DIGEST,
+                authUser: 'specuser',
+                authPassword: 'specpassword'
+           };
 
-    it ('GET to insecure server with digest HTTP auth', function() {
-        var get_props = {
-            url : srvURL + "/digest_auth_get",
-            authType: Rho.Network.AUTH_DIGEST,
-            authUser: 'specuser',
-            authPassword: 'specpassword'
-       };
+           var callbackCalled = false;
+           var status = '';
 
-       var callbackCalled = false;
-       var status = '';
+           var get_callback = function(args) {
+                status = args['status'];
+                body = args['body'];
+                callbackCalled = true;
+           }
 
-       var get_callback = function(args) {
-            status = args['status'];
-            body = args['body'];
-            callbackCalled = true;
-       }
+            runs( function() {
+                    Rho.Network.get(get_props, get_callback);
+                }
+            );
 
-        runs( function() {
-                Rho.Network.get(get_props, get_callback);
-            }
-        );
+            waitsFor(function() {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
 
-        waitsFor(function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
+            runs(function() {
+                    expect(status).toEqual('ok');
+                    expect(body).toEqual('OK');
+                }
+            );
+        });
+    it('GET to secure server with digest HTTP auth', function() {
+            var get_props = {
+                url : httpsSrvURL + "/digest_auth_get",
+                authType: Rho.Network.AUTH_DIGEST,
+                authUser: 'specuser',
+                authPassword: 'specpassword',
+                verifyPeerCertificate: false
+           };
 
-        runs(function() {
-                expect(status).toEqual('ok');
-                expect(body).toEqual('OK');
-            }
-        );
-    });
+           var callbackCalled = false;
+           var status = '';
 
-    it ('GET to secure server with digest HTTP auth', function() {
-        var get_props = {
-            url : httpsSrvURL + "/digest_auth_get",
-            authType: Rho.Network.AUTH_DIGEST,
-            authUser: 'specuser',
-            authPassword: 'specpassword',
-            verifyPeerCertificate: false
-       };
+           var get_callback = function(args) {
+                status = args['status'];
+                body = args['body'];
+                callbackCalled = true;
+           }
 
-       var callbackCalled = false;
-       var status = '';
+            runs( function() {
+                    Rho.Network.get(get_props, get_callback);
+                }
+            );
 
-       var get_callback = function(args) {
-            status = args['status'];
-            body = args['body'];
-            callbackCalled = true;
-       }
+            waitsFor(function() {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
 
-        runs( function() {
-                Rho.Network.get(get_props, get_callback);
-            }
-        );
+            runs(function() {
+                    expect(status).toEqual('ok');
+                    expect(body).toEqual('OK');
+                }
+            );
+        });
+    it('POST to insecure server with digest HTTP auth', function() {
+            var get_props = {
+                url : srvURL + "/digest_auth_get",
+                authType: Rho.Network.AUTH_DIGEST,
+                authUser: 'specuser',
+                authPassword: 'specpassword'
+           };
 
-        waitsFor(function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
+           var callbackCalled = false;
+           var status = '';
 
-        runs(function() {
-                expect(status).toEqual('ok');
-                expect(body).toEqual('OK');
-            }
-        );
-    });
+           var get_callback = function(args) {
+                status = args['status'];
+                body = args['body'];
+                callbackCalled = true;
+           }
 
-    it ('POST to insecure server with digest HTTP auth', function() {
-        var get_props = {
-            url : srvURL + "/digest_auth_get",
-            authType: Rho.Network.AUTH_DIGEST,
-            authUser: 'specuser',
-            authPassword: 'specpassword'
-       };
+            runs( function() {
+                    Rho.Network.post(get_props, get_callback);
+                }
+            );
 
-       var callbackCalled = false;
-       var status = '';
+            waitsFor(function() {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
 
-       var get_callback = function(args) {
-            status = args['status'];
-            body = args['body'];
-            callbackCalled = true;
-       }
+            runs(function() {
+                    expect(status).toEqual('ok');
+                    expect(body).toEqual('OK');
+                }
+            );
+        });
+    it('POST to secure server with digest HTTP auth', function() {
+            var get_props = {
+                url : httpsSrvURL + "/digest_auth_get",
+                authType: Rho.Network.AUTH_DIGEST,
+                authUser: 'specuser',
+                authPassword: 'specpassword',
+                verifyPeerCertificate: false
+           };
 
-        runs( function() {
-                Rho.Network.post(get_props, get_callback);
-            }
-        );
+           var callbackCalled = false;
+           var status = '';
 
-        waitsFor(function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
+           var get_callback = function(args) {
+                status = args['status'];
+                body = args['body'];
+                callbackCalled = true;
+           }
 
-        runs(function() {
-                expect(status).toEqual('ok');
-                expect(body).toEqual('OK');
-            }
-        );
-    });
+            runs( function() {
+                    Rho.Network.post(get_props, get_callback);
+                }
+            );
 
-    it ('POST to secure server with digest HTTP auth', function() {
-        var get_props = {
-            url : httpsSrvURL + "/digest_auth_get",
-            authType: Rho.Network.AUTH_DIGEST,
-            authUser: 'specuser',
-            authPassword: 'specpassword',
-            verifyPeerCertificate: false
-       };
+            waitsFor(function() {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
 
-       var callbackCalled = false;
-       var status = '';
+            runs(function() {
+                    expect(status).toEqual('ok');
+                    expect(body).toEqual('OK');
+                }
+            );
+        });
 
-       var get_callback = function(args) {
-            status = args['status'];
-            body = args['body'];
-            callbackCalled = true;
-       }
-
-        runs( function() {
-                Rho.Network.post(get_props, get_callback);
-            }
-        );
-
-        waitsFor(function() {
-                return callbackCalled;
-            },
-            "Callback never called",
-            waitTimeout
-        );
-
-        runs(function() {
-                expect(status).toEqual('ok');
-                expect(body).toEqual('OK');
-            }
-        );
-    });
-
-    
+        
     }
+}
+it('VT293-0013 | cancel with wan/mguest connection', function() {
+
+       var getCallback = function(args) {
+            callbackCount += 1;
+       }
+       
+       runs( function() {
+            getProps = {
+                url:  srvURL + "/slow_get"
+            };
+            Rho.Network.get(getProps, getCallback);
+            sleep(1000);
+            Rho.Network.cancel();
+        } );
+       
+        runs(function() {
+            expect(callbackCount).toEqual(0);
+        });
+       
+    });
+
+
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
+        it('VT293-0014 | detectConnection with wlan profile enabled', function () {
+
+            runs(function () {
+                detectconnectionProps = {
+                    host: srvHost,
+                    port: srvPort
+                };
+                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+            });
+
+            waitsFor(function () {
+                return callbackCount >= 1;
+            },
+                 "Callback never called",
+                 5100
+             );
+
+            runs(function () {
+                expect(callbackCount).toEqual(1);
+                expect(connectionInfo).toEqual("Connected");
+            });
+        });
+/*
+        it('VT293-0015 | detectConnection with sync', function () {
+
+            detectconnectionProps = {
+                host: srvHost,
+                port: srvPort
+            };
+
+            var data = Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+            Rho.Network.stopDetectingConnection(detectConnectionCallback);
+            expect(JSON.stringify(data)).toEqual("null");
+
+        });
+*/
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
+        it('VT293-0016 | detectConnection with ananymous callback', function () {
+
+            runs(function () {
+                detectconnectionProps = {
+                    host: srvHost,
+                    port: srvPort
+                };
+
+                Rho.Network.detectConnection(detectconnectionProps, function(params){
+                    connectionInfo = params.connectionInformation;
+                    callbackCount = 1;
+                });
+            });
+
+            waitsFor(function () {
+                return callbackCount >= 1;
+            },
+                 "Callback never called",
+                 5100
+             );
+
+            runs(function () {                
+                Rho.Network.stopDetectingConnection(function(){});
+                expect(callbackCount).toEqual(1);
+                expect(connectionInfo).toEqual("Connected");
+                
+            });
+        });
+
+        
+
+    /*
+   xit('VT293-0019 | detectConnection with exteranl profile disabled with pollinterval', function() {
+      var flag = false;
+       runs( function() {
+
+           detectconnectionProps = {
+               host: 'http://www.google.com',
+               port: 80,
+               pollInterval: 6000
+           };
+           
+           Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+
+       } );
+      
+      waitsFor( function() {
+               return callbackCount==1;
+           },
+           "Callback never called",
+           6100
+       );
+      
+       runs(function() {
+           expect(callbackCount).toEqual(1);
+           expect(connectionInfo).toEqual("Connected");
+       });
+
+   });*/
+
+        if (Rho.System.platform != Rho.System.PLATFORM_UWP)
+        it('VT293-0020 | detectConnection with detectionTimeout', function () {
+            var flag = false;
+            runs(function () {
+
+                detectconnectionProps = {
+                    host: 'http://any.unavailable.address',
+                    port: 80,
+                    detectionTimeout: 1000
+                };
+
+                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+
+            });
+
+            waitsFor(function () {
+                return callbackCount >= 1;
+            },
+                 "Callback never called",
+                 waitTimeout
+             );
+
+            runs(function () {
+                expect(callbackCount).toEqual(1);
+                expect(failureMsg).toMatch("Attempted to resolve hostname to connect to but did not succeed");
+            });
+
+        });
+
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
+        it('VT293-0021 | detectConnection with pollinterval and detectionTimeout', function () {
+            var flag = false;
+            runs(function () {
+
+                detectconnectionProps = {
+                    host: srvHost,
+                    port: srvPort,
+                    pollInterval: 6000,
+                    detectionTimeout: 5000
+                };
+
+                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+            });
+
+            waitsFor(function () {
+                return callbackCount >= 1;
+            },
+                 "Callback never called",
+                 13000
+             );
+
+            runs(function () {
+                expect(callbackCount).toEqual(1);
+                expect(connectionInfo).toEqual("Connected");
+            });
+        });
+
+
+        if ((Rho.System.platform != Rho.System.PLATFORM_UWP) && (Rho.System.platform != Rho.System.PLATFORM_WP8))
+        it('VT293-0022 | stopDetectingConnection with wlan profile enabled', function () {
+            var flag = false;
+            runs(function () {
+
+                detectconnectionProps = {
+                    host: srvHost,
+                    port: srvPort
+                };
+
+                Rho.Network.detectConnection(detectconnectionProps, detectConnectionCallback);
+
+            });
+
+            waitsFor(function () {
+                return callbackCount == 1;
+            },
+                "Callback never called",
+                5100
+            );
+
+            runs(function () {
+                Rho.Network.stopDetectingConnection(detectConnectionCallback);
+                setTimeout(function () {
+                    flag = true;
+                }, 6000);
+            });
+
+            waitsFor(function () {
+                return flag;
+            },
+                "Callback never called",
+                7000
+            );
+
+            runs(function () {
+                //After 12 sec of wait the count should not get increased to 2 as poll interval got stopped
+                expect(callbackCount).toEqual(1);
+                expect(connectionInfo).toEqual("Connected");
+            });
+
+        });
+
 });
