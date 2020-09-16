@@ -1,35 +1,89 @@
-sdkversion: 5.5
+sdkversion: 6.0
 name: auto_common_spec
 version: 1.0
 vendor: rhomobile
-build: release
+build: debug
 bbver: 4.6
 applog: rholog.txt
+#sdk: "../../../../rhodes"
 iphone:
   configuration: Release
-  sdk: iphonesimulator9.2
+  sdk: latest
   provisionprofile:
   codesignidentity: "iPhone Developer"
   entitlements:
   BundleIdentifier: com.rhomobile.autocommonspec
   BundleURLScheme: autocommonspec
-  extensions: ["nativeBridgeTest", "barcode", "sensor", "screenorientation", "audiocapture", "mediacapture", "appEvents", "printing", "printing_zebra", "signature"]
-uvp:
+  info_plist_data:
+    NSAppTransportSecurity:
+      NSAllowsArbitraryLoads: true
+  extensions: ["nativeBridgeTest", "barcode", "sensor", "screenorientation", "audiocapture", "mediacapture", "appEvents", "printing", "printing_zebra", "signature", "genPropBag", "logCapture"]
+wp8:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
-  extensions: ["mediacapture", "signature"]
+  extensions: ["mediacapture", "signature", "genPropBag", "logCapture"]
+uwp:
+  productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
+  target: 'x86'
+  extensions: 
+    - "sensor"
+    - "mediacapture"
+    - "openssl.so"
+    - "digest"
+    - "digest-md5"
+    - "digest-sha1"
+    - "openssl"
+win32:
+  msvc: 2017
+  deployqt: 1
+  deploymsvc: 1
+  extensions:
+    - "openssl.so"
+    - "openssl"
+    - "digest"
+    - "digest-md5"
+    - "digest-sha1"
 symbian:
   uid: '0xe1a1ef92'
+linux:
+  name: autocommonspec
 android:
-  version: 4.4.2
-  extensions: ["nativeBridgeTest", "emdk3-manager", "barcode", "screenorientation", "indicators", "sensor", "websocket", "eventsource", "audiocapture", 'screenorientation', "mediacapture","printing", "printing_zebra", "signature"]
+  abis:
+  - arm
+  - x86
+  version: 7.0
+  minSdkVer: 19
+  targetSdkVer: 26
+  extensions:
+  - "nativeBridgeTest"
+  - "emdk3-manager"
+  #- "barcode"
+  - "screenorientation"
+  #- "indicators"
+  - "sensor"
+  - "websocket"
+  - "eventsource"
+  - "audiocapture"
+  - "mediacapture"
+  #- "printing"
+  #- "printing_zebra"
+  - "instrumentation"
+  - "signature"
+  - "genPropBag"
+  - "logCapture"
+  #- "fcm-push"
+
   capabilities:
   - native_browser
+  #- push
+
+  #fcmSenderID: '922407546706'
+  #fcmAppID: '1:922407546706:android:a63c657ee02847f0'
+
 wm:
   #webkit_outprocess: 1
   #use_shared_runtime: yes
   #sdk: MC3000c50b (ARMV4I)
   #sdk: "Windows Mobile 6.5.3 Professional DTK (ARMV4I)"
-  extensions: ["barcode", "screenorientation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle", "mediacapture", "signature"]
+  extensions: ["barcode", "screenorientation", "cardreader", "indicators", "sensor", "audiocapture", "smartCradle", "mediacapture", "signature", "genPropBag", "logCapture"]
 #capabilities:
 
-extensions: ["genPropBag", "logCapture"]
