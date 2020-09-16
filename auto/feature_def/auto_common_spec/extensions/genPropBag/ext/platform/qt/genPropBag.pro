@@ -1,5 +1,20 @@
 QT -= core
 
+equals(QT_MAJOR_VERSION, 5) {
+    lessThan(QT_MINOR_VERSION, 6): {
+        DEFINES += RHODES_VERSION_1
+    }
+    equals(QT_MINOR_VERSION, 6): {
+        DEFINES += OS_SAILFISH OS_LINUX
+        CONFIG += sailfishapp c++14 sailfishapp_i18n
+    }
+    greaterThan(QT_MINOR_VERSION, 7): {
+        CONFIG += c++14
+        DEFINES += CPP_ELEVEN RHODES_VERSION_2
+    }
+}
+
+
 TARGET = genPropBag
 TEMPLATE = lib
 
@@ -25,7 +40,7 @@ macx {
 win32 {
   DESTDIR = $$RHODES_ROOT/platform/win32/bin/extensions
   OBJECTS_DIR = $$RHODES_ROOT/platform/win32/bin/extensions/genPropBag
-  DEFINES += WIN32 _WINDOWS _LIB _UNICODE UNICODE
+  DEFINES += WIN32 _WINDOWS _LIB _UNICODE UNICODE _WINSOCKAPI_
   debug {
     DEFINES += _DEBUG DEBUG
   }
@@ -34,6 +49,7 @@ win32 {
   }
   INCLUDEPATH += $$RHODES_ROOT/platform/shared/ruby/win32
 }
+
 
 DEFINES += RHODES_QT_PLATFORM _XOPEN_SOURCE _DARWIN_C_SOURCE
 
@@ -52,6 +68,7 @@ win32 {
   QMAKE_CXXFLAGS_WARN_ON += /wd4996 /wd4100 /wd4005
   QMAKE_CFLAGS_RELEASE += /O2
   QMAKE_CXXFLAGS_RELEASE += /O2
+  QMAKE_CFLAGS_DEBUG += /Zi /MDd
 }
 
 HEADERS += \
