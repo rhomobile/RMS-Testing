@@ -35,7 +35,7 @@ describe("ScreenOrientation JS API Test", function () {
     });
 
 
-    if (isAnyButApplePlatform()) {
+    if (isAnyButApplePlatform() && !isAndroidPlatform()) {
 
         it("VT281-0905 | Test Screen Orientation rightHanded with callback |", function() {
 
