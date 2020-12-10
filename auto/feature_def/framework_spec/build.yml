@@ -13,6 +13,9 @@ iphone:
   configuration: Release
   #extensions: ["digest-sha1"]   
   extensions: ["openssl.so", "openssl"]
+  ARCHS_simulator : ["x86_64"]
+  ARCHS_device : ["arm64"]
+  enable_bitcode: false 
 uwp:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
   target: 'x86'
