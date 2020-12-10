@@ -12,7 +12,7 @@ iphone:
   codesignidentity: ""
   configuration: Release
   #extensions: ["digest-sha1"]   
-  extensions: ["openssl.so", "openssl"]
+  #extensions: ["openssl.so", "openssl"]
   ARCHS_simulator : ["x86_64"]
   ARCHS_device : ["arm64"]
   enable_bitcode: false 
@@ -32,4 +32,4 @@ win32:
   deploymsvc: 1
   extensions: ["openssl.so", "openssl"]
   
-extensions: ["mspec", "fileutils", "zlib", "hmac", "digest", "digest-md5", "digest-sha1", "digest-sha2", "test-libs", "set", "thread", "timeout", "uri", "net-http", "fcntl", "rexml", "zlib", "ezcrypto", "bigdecimal" ]
+#extensions: ["mspec", "fileutils", "zlib", "hmac", "digest", "digest-md5", "digest-sha1", "digest-sha2", "test-libs", "set", "thread", "timeout", "uri", "net-http", "fcntl", "rexml", "zlib", "ezcrypto", "bigdecimal" ]
