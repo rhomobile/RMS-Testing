@@ -317,6 +317,43 @@ describe('Network JS API', function () {
             });
         });
 
+        it('VT293-0042-1 | get check cookie', function () {
+            var flag = false;
+            var callbackCalled = false;
+            var cookieExposed = false;
+
+            var get_callback = function (args) {
+                const cookiesString = args['cookies'];
+                const cookiesArr = cookiesString.split(';');
+                const cookies = {};
+                cookiesArr.forEach((each) => {
+                    const t = each.split('=');
+                    cookies[t[0]] = t[1];
+                })
+                cookieExposed = cookies.session != null;
+                callbackCalled = true;
+            }
+
+            runs(function () {
+
+                getProps = {
+                    url: srvURL + '/get_session_with_exposed_cookies',
+                };
+
+                Rho.Network.get(getProps, get_callback);
+            });
+
+            waitsFor(function () {
+                    return callbackCalled;
+                },
+                "Callback never called",
+                waitTimeout
+            );
+
+            runs(function () {
+                expect(cookieExposed).toEqual(true);
+            });
+        });
 
         it('VT293-0043 | get with callback', function () {
             var flag = false;
