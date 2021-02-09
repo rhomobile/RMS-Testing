@@ -27,7 +27,7 @@ android:
   minSdkVer: 19
   extensions: ["openssl.so", "openssl"]
 win32:
-  msvc: 2017
+  #msvc: 2017
   deployqt: 1
   deploymsvc: 1
   extensions: ["openssl.so", "openssl"]
