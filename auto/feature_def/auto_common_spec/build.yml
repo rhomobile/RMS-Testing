@@ -17,7 +17,8 @@ iphone:
   info_plist_data:
     NSAppTransportSecurity:
       NSAllowsArbitraryLoads: true
-  extensions: ["nativeBridgeTest", "barcode", "sensor", "screenorientation", "audiocapture", "mediacapture", "appEvents", "printing", "printing_zebra", "signature", "genPropBag", "logCapture"]
+  extensions: ["nativeBridgeTest", "barcode", "sensor", "screenorientation", "audiocapture", "mediacapture", "appEvents", "printing", "printing_zebra", "signature", "genPropBag", "logCapture",
+  "digest", "digest-md5", "digest-sha1", "pdf-writer", "thread", "digest-sha2", "openssl.so", "openssl", "ezcrypto", "rawsensors", "videocapture"]
 wp8:
   productid: 'b6479381-42a8-0130-78de-3caec51bd50e'
   extensions: ["mediacapture", "signature", "genPropBag", "logCapture"]
@@ -56,7 +57,7 @@ android:
   extensions:
   - "nativeBridgeTest"
   - "emdk3-manager"
-  #- "barcode"
+  - "barcode"
   - "screenorientation"
   #- "indicators"
   - "sensor"
@@ -71,7 +72,18 @@ android:
   - "genPropBag"
   - "logCapture"
   #- "fcm-push"
-
+  - "bluetooth"
+  - "nfc"
+  - "digest"
+  - "digest-md5"
+  - "digest-sha1"
+  - "pdf-writer"
+  - "thread"
+  - "digest-sha2"
+  - "openssl.so"
+  - "openssl"
+  - "ezcrypto" 
+  - "gmaps"
   capabilities:
   - native_browser
   #- push
